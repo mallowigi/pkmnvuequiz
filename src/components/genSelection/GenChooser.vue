@@ -2,23 +2,26 @@
 import { useState } from '@/stores/state.js';
 import { gens } from '@/data/gens.js';
 import CyclingSprite from '@/components/genSelection/CyclingSprite.vue';
+import CyclingType from '@/components/genSelection/CyclingType.vue';
 
 const { setGen, state } = useState();
 </script>
 
 <template>
-  <h2>Gen: {{ state.gen }}</h2>
-
   <div class='playtext' id='playtext'>
     <div class='gens-grid'>
+
+      <!-- Full quiz-->
       <div></div>
       <div class='padfull'>
         <div class='pad rad-bl-tr green'
-             @click='setGen("full")'>Full quiz
+             @click='setGen("full")'>
+          Full quiz
         </div>
       </div>
       <div></div>
 
+      <!-- Gens -->
       <div class='pad rad-bl green'
            v-for='(gen, i) in gens'
            :class='{ "rad-bl": i % 3 === 0, "rad": i % 3 === 1, "rad-tr": i % 3 === 2 }'
@@ -30,12 +33,10 @@ const { setGen, state } = useState();
         <CyclingSprite :gen='gen' :start='i % 3' />
       </div>
 
+      <!-- Types -->
       <div></div>
       <div>
-        <div class='pad rad-bl-tr green'
-             @click='setGen("types")'>
-          Types <img alt='Start' src='@/assets/types/ICE.svg' class='inverted-symbol'>
-        </div>
+        <CyclingType />
       </div>
       <div></div>
 
@@ -70,9 +71,4 @@ const { setGen, state } = useState();
   min-width: 80px;
 }
 
-.inverted-symbol {
-  width: 42px;
-  margin: -5px -12px -15px 8px;
-  filter: brightness(0) invert(1);
-}
 </style>

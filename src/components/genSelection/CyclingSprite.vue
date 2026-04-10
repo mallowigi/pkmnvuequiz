@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { usePkmnData } from '@/stores/pkmnStore.js';
 
 const props = defineProps({
@@ -28,18 +28,28 @@ const sprite = computed(() => sprites.value[currentIndex.value]);
 // Run interval
 let interval;
 
-onMounted(() => {
-  if (sprites.value.length === 0) {
+const startCycle = () => {
+  if (interval || sprites.value.length === 0) {
     return;
   }
 
   interval = setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % sprites.value.length;
   }, 3000);
+};
+
+// Watch until the data is available and restart the interval
+watch(sprites, () => {
+  startCycle();
+}, { immediate: true });
+
+onMounted(() => {
+  startCycle();
 });
 
 onUnmounted(() => {
   clearInterval(interval);
+  interval = null;
 });
 
 </script>
