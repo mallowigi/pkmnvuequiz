@@ -1,15 +1,25 @@
 <script setup>
+import { usePkmnData } from '@/stores/pkmnStore';
+import { onMounted } from 'vue';
+
+const { pkmnData, loadPkmnData } = usePkmnData();
+
+onMounted(() => {
+  loadPkmnData();
+});
 </script>
 
 <template>
-  <div class='loader' id='loader'>
-    <h2>Loading Quiz</h2>
-  </div>
-  <div class='lds-ellipsis' id='spinner'>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+  <div v-if='!pkmnData.isLoaded'>
+    <div class='loader' id='loader'>
+      <h2>Loading Quiz</h2>
+    </div>
+    <div class='lds-ellipsis' id='spinner'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 
