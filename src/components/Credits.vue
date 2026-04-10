@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class='popuptext roundedc notxt' id='credits'>
+  <div class='popuptext rad notxt' id='credits'>
     <div class='p3 pointer' onclick='creditspopup()'>Artist and quality control credits for custom sprites:
       <div class='close'>🞬</div>
     </div>
@@ -529,7 +529,7 @@
   cursor: default;
 }
 
-.roundedc {
+.rad {
   border-radius: 3px;
 }
 

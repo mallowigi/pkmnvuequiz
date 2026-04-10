@@ -27,3 +27,59 @@ h2 {
   font-weight: normal;
   margin-bottom: 5px;
 }
+
+hh {
+  font-size: 23px;
+  line-height: 40px;
+}
+
+p {
+  font-size: 1em;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+
+.welldone {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.p1 {
+  font-size: 1.15em;
+  display: inline-block;
+}
+
+.p3 {
+  font-size: 1.15em;
+  padding-bottom: 10px;
+}
+
+pp {
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+ppp {
+  line-height: 30px;
+}
+
+.p2 {
+  font-size: 1em;
+  text-align: center;
+  padding: 20px 0px 10px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+ol {
+  list-style-type: square;
+  list-style-position: inside;
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 0;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
+}
