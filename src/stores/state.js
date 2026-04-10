@@ -1,12 +1,16 @@
 import { reactive, readonly } from 'vue';
 
 const state = reactive({
-  data: null,
+  gen: null,
 });
+
+export const setGen = (id) => {
+  state.gen = id;
+};
 
 export const useState = () => {
   return {
     state: readonly(state),
-
+    setGen,
   };
 };
