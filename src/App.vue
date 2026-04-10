@@ -1,7 +1,7 @@
 <script setup>
-import Background from '@/components/Background.vue';
-import Credits from '@/components/Credits.vue';
-import GenSelection from '@/components/GenSelection.vue';
+import Background from '@/components/background/Background.vue';
+import Credits from '@/components/background/Credits.vue';
+import GenSelection from '@/components/genSelection/GenSelection.vue';
 </script>
 
 <template>

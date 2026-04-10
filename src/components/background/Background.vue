@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <img alt='pattern1' src='../assets/types/ICE.svg' id='bgpattern' class='bgpattern'>
-  <img alt='pattern2' src='../assets/types/ICE.svg' id='bgpattern2' class='bgpattern2'>
+  <img alt='pattern1' src='@/assets/types/ICE.svg' id='bgpattern' class='bgpattern'>
+  <img alt='pattern2' src='@/assets/types/ICE.svg' id='bgpattern2' class='bgpattern2'>
 </template>
 
 <style scoped>

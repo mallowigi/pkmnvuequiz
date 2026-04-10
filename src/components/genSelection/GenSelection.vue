@@ -1,15 +1,15 @@
 <script setup>
 
-import Overlay from '@/components/Overlay.vue';
+import Overlay from '@/components/common/Overlay.vue';
 import Loading from '@/components/Loading.vue';
-import GenChooser from '@/components/GenChooser.vue';
+import GenChooser from '@/components/genSelection/GenChooser.vue';
 </script>
 
 <template>
   <Overlay>
     <div class='prompt'>
       <div id='loadbox'>
-        <img src='@/assets/logo.gif' class='titlecard' alt='titlecard'>
+        <img src='../../assets/logo.gif' class='titlecard' alt='titlecard'>
 
         <Loading />
       </div>
