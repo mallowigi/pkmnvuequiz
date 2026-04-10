@@ -3,7 +3,6 @@ import { usePkmnData } from '@/stores/pkmnStore';
 import { onMounted } from 'vue';
 
 const {
-
         pkmnData,
         setLoaded,
         setError,

@@ -1,6 +1,7 @@
 <script setup>
 import { useState } from '@/stores/state.js';
 import { gens } from '@/data/gens.js';
+import CyclingSprite from '@/components/genSelection/CyclingSprite.vue';
 
 const { setGen, state } = useState();
 </script>
@@ -25,9 +26,8 @@ const { setGen, state } = useState();
            :key='gen.id'>
         <div class='hidden'>{{ gen.id }}</div>
         <div class='inline-block'>{{ gen.name }}</div>
-        <img :alt='gen.name'
-             :src='gen.sprite'
-             class='sprite cropped'>
+
+        <CyclingSprite :gen='gen' :start='i % 3' />
       </div>
 
       <div></div>
@@ -68,19 +68,6 @@ const { setGen, state } = useState();
   line-height: 30px;
   font-size: 18px;
   min-width: 80px;
-}
-
-.sprite {
-  margin: -3px -10px 0 0;
-  padding-right: 2px;
-  float: right;
-}
-
-.cropped {
-  width: 30px;
-  height: 30px;
-  object-fit: none;
-  object-position: 50% 100%;
 }
 
 .inverted-symbol {
