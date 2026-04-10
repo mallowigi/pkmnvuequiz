@@ -12,15 +12,18 @@ const { setGen, state } = useState();
     <div class='gens-grid'>
       <div></div>
       <div class='padfull'>
-        <div class='pad rad-bl-tr green' id='gen0'>Full quiz</div>
+        <div class='pad rad-bl-tr green'
+             @click='setGen("full")'>Full quiz
+        </div>
       </div>
       <div></div>
 
       <div class='pad rad-bl green'
            v-for='(gen, i) in gens'
            :class='{ "rad-bl": i % 3 === 0, "rad": i % 3 === 1, "rad-tr": i % 3 === 2 }'
-           :key='gen.genId'>
-        <div class='hidden'>{{ gen.genId }}</div>
+           @click='setGen(gen.id)'
+           :key='gen.id'>
+        <div class='hidden'>{{ gen.id }}</div>
         <div class='inline-block'>{{ gen.name }}</div>
         <img :alt='gen.name'
              :src='gen.sprite'
@@ -29,7 +32,8 @@ const { setGen, state } = useState();
 
       <div></div>
       <div>
-        <div class='pad rad-bl-tr green' @click='setGen("types")'>
+        <div class='pad rad-bl-tr green'
+             @click='setGen("types")'>
           Types <img alt='Start' src='@/assets/types/ICE.svg' class='inverted-symbol'>
         </div>
       </div>

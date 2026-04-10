@@ -8,7 +8,7 @@
       <div class='close'>🞬</div>
     </div>
     <div data-nosnippet='data-nosnippet' class='popupscrl'>
-      <pp>
+      <div>
         <table id='creditstable'>
 
           <tbody>
@@ -504,7 +504,7 @@
           </tr>
           </tbody>
         </table>
-      </pp>
+      </div>
     </div>
   </div>
 </template>

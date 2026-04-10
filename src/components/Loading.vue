@@ -2,10 +2,34 @@
 import { usePkmnData } from '@/stores/pkmnStore';
 import { onMounted } from 'vue';
 
-const { pkmnData, loadPkmnData } = usePkmnData();
+const {
+
+        pkmnData,
+        setLoaded,
+        setError,
+        loadPokemons,
+        loadEncodings,
+        loadNamings,
+        loadSpriteCycles,
+        loadTranslations,
+      } = usePkmnData();
 
 onMounted(() => {
-  loadPkmnData();
+  Promise.all([
+    loadEncodings(),
+    loadPokemons(),
+    loadEncodings(),
+    loadSpriteCycles(),
+    loadTranslations(),
+    loadNamings(),
+  ])
+      .then(() => {
+        setLoaded(true);
+      })
+      .catch((error) => {
+        console.error('Error loading data:', error);
+        setError('Error loading data:', error);
+      });
 });
 </script>
 
