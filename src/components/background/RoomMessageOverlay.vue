@@ -20,16 +20,7 @@ defineProps(['message']);
 
 <style scoped>
 .full-overlay {
-  background-color: var(--full-black);
+  z-index: 9;
+  --overlay-bg: var(--full-black);
 }
-
-.prompt {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -70%);
-  text-align: center;
-  color: white;
-}
-
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class='overlay'>
+  <div :class='["overlay", $attrs.class]'>
     <slot />
   </div>
 </template>
@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(16, 17, 14, 0.8);
+  background-color: var(--overlay-bg, rgba(16, 17, 14, 0.8));
   z-index: 4;
 }
 </style>

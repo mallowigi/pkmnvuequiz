@@ -1,46 +1,38 @@
 <script setup>
 
 defineProps({
-  text: String,
   onClick: Function,
-  primary: Boolean,
 });
 
 </script>
 
 <template>
-  <div class='button rad-bl-tr transition-element'
-       :class='{ "primary": primary }'
+  <div class='button rad-br-tl transition-element'
        @click='onClick'>
-    {{ text }}
+    <slot />
   </div>
 </template>
 
 <style scoped>
 
 .button {
-  border: 2px solid var(--primary);
-  background: var(--dark);
-  color: white;
-  padding: 9px 8px 8px;
+  background: var(--secondary);
+  border: 2px solid var(--secondary);
+  color: var(--dark);
   text-align: center;
   text-decoration: none;
   display: inline-block;
   margin: 10px 0 0 10px;
   cursor: pointer;
-  min-width: 100px;
   min-height: 30px;
   line-height: 30px;
   font-size: 16px;
-
-  &.primary {
-    background: var(--primary);
-    border: 2px solid var(--primary);
-  }
+  min-width: 1px;
+  padding: 9px 14px 2px;
 
   &:hover {
-    background: var(--gray);
-    border: 2px solid var(--gray);
+    background: var(--primary);
+    border: 2px solid var(--primary);
   }
 }
 </style>

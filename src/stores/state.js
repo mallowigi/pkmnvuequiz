@@ -4,6 +4,7 @@ const state = reactive({
   gen: null,
   isStarted: true,
   isEnded: false,
+  isPaused: true,
   showCredits: false,
   roomMessage: null,
 });
@@ -20,6 +21,10 @@ export const setEnded = (isEnded) => {
   state.isEnded = isEnded;
 };
 
+export const setPaused = (isPaused) => {
+  state.isPaused = isPaused;
+};
+
 export const setRoomMessage = (message) => {
   state.roomMessage = message;
 };
@@ -34,6 +39,7 @@ export const useState = () => {
     setGen,
     setStarted,
     setEnded,
+    setPaused,
     setRoomMessage,
     setShowCredits,
   };
