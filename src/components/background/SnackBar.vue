@@ -5,13 +5,13 @@ import { onMounted } from 'vue';
 const { state, showUserMessage } = useMessages();
 
 onMounted(() => {
-  showUserMessage('Welcome to the Pokémon Quiz! Click the "Start" button to begin.');
+  showUserMessage('Welcome to the Pokémon Quiz! Select a generation to begin.');
 });
 </script>
 
 <template>
   <div class='snackbar-container'>
-    <TransitionGroup name='fade'>
+    <TransitionGroup>
       <div v-for='message in state.messages'
            class='snackbar rad-br-tl'
            :key='message'>
@@ -39,13 +39,16 @@ onMounted(() => {
   min-width: 250px;
   padding: 16px;
   opacity: 1;
+  margin-bottom: 16px;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: all 0.3s ease;
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.fade-enter-from, .fade-leave-to {
+.v-enter-from,
+.v-leave-to {
   opacity: 0;
   transform: translateY(-20px);
 }

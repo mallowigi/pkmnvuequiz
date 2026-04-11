@@ -3,18 +3,25 @@
 import Overlay from '@/components/common/Overlay.vue';
 import Loading from '@/components/Loading.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
+import { usePkmnData } from '@/stores/pkmnStore.js';
+import FadeTransition from '@/components/common/FadeTransition.vue';
+
+const { state } = usePkmnData();
+
 </script>
 
 <template>
   <Overlay>
     <div class='prompt'>
       <div id='loadbox'>
-        <img src='../../assets/logo.gif' class='titlecard' alt='titlecard'>
+        <img src='@/assets/logo.gif' class='titlecard' alt='Logo'>
 
         <Loading />
       </div>
 
-      <GenChooser />
+      <FadeTransition>
+        <GenChooser v-if='state.isLoaded' />
+      </FadeTransition>
     </div>
   </Overlay>
 </template>

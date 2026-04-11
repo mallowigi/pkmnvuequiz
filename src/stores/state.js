@@ -4,7 +4,7 @@ const state = reactive({
   gen: null,
   isStarted: true,
   isEnded: false,
-  isPaused: true,
+  isPaused: false,
   showCredits: false,
   roomMessage: null,
 });

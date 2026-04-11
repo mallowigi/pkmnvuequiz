@@ -9,7 +9,7 @@ export const showUserMessage = (message) => {
 
   setTimeout(() => {
     state.messages.shift();
-  }, 50000);
+  }, 5000);
 };
 
 export const clearMessages = () => {
