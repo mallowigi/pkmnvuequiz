@@ -1,6 +1,9 @@
 @import './base.css';
 
 :root {
+  --full-black: rgba(16, 17, 14, 1);
+  --dark: #111111;
+  --gray: #666666;
   --primary: #8cc63f;
 }
 
