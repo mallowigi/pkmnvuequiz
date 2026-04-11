@@ -9,9 +9,10 @@ import FadeTransition from '@/components/common/FadeTransition.vue';
 import { useState } from '@/stores/state.js';
 import TypeSelection from '@/components/typeSelection/TypeSelection.vue';
 import { useRoomMessages } from '@/stores/roomMessages.js';
+import Dialogs from '@/components/background/Dialogs.vue';
 
 const { state } = useState();
-const { state: roomMessages } = useRoomMessages();
+const { roomState } = useRoomMessages();
 
 </script>
 
@@ -22,7 +23,7 @@ const { state: roomMessages } = useRoomMessages();
     <Credits v-if='state.showCredits' />
   </FadeTransition>
 
-  <RoomMessageOverlay v-if='roomMessages.roomMessage !== null' />
+  <RoomMessageOverlay v-if='roomState.roomMessage !== null' />
 
   <PauseOverlay v-if='state.isPaused' />
 
@@ -34,7 +35,7 @@ const { state: roomMessages } = useRoomMessages();
     <TypeSelection v-if='state.gen === "types"' />
   </FadeTransition>
 
-  <ChaosOverlay v-if='state.prompt === "chaos"' />
+  <Dialogs />
 
   <SnackBar />
 </template>

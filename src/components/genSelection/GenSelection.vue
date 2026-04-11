@@ -6,7 +6,7 @@ import GenChooser from '@/components/genSelection/GenChooser.vue';
 import { usePkmnData } from '@/stores/pkmnStore.js';
 import FadeTransition from '@/components/common/FadeTransition.vue';
 
-const { state } = usePkmnData();
+const { data } = usePkmnData();
 
 </script>
 
@@ -20,7 +20,7 @@ const { state } = usePkmnData();
       </div>
 
       <FadeTransition>
-        <GenChooser v-if='state.isLoaded' />
+        <GenChooser v-if='data.isLoaded' />
       </FadeTransition>
     </div>
   </Overlay>

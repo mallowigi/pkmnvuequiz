@@ -12,10 +12,10 @@ const props = defineProps({
 });
 
 // Load data
-const { state } = usePkmnData();
+const { data } = usePkmnData();
 
 const sprites = computed(() => {
-  const encodings = state.sprites;
+  const encodings = data.sprites;
   if (!encodings?.sprite) {
     return [];
   }

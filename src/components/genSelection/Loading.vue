@@ -3,11 +3,10 @@ import { usePkmnData } from '@/stores/pkmnStore.js';
 import { onMounted } from 'vue';
 
 const {
-        state,
+        data,
         setLoaded,
-        setError,
         loadPokemons,
-        loadEncodings,
+        loadSprites,
         loadNamings,
         loadSpriteCycles,
         loadTranslations,
@@ -15,9 +14,8 @@ const {
 
 onMounted(() => {
   Promise.all([
-    loadEncodings(),
     loadPokemons(),
-    loadEncodings(),
+    loadSprites(),
     loadSpriteCycles(),
     loadTranslations(),
     loadNamings(),
@@ -33,7 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if='!state.isLoaded'>
+  <div v-if='!data.isLoaded'>
     <div class='loader' id='loader'>
       <h2>Loading Quiz</h2>
     </div>

@@ -1,7 +1,7 @@
 <script setup>
-import { useState } from '@/stores/state.js';
+import { useCredits } from '@/stores/credits.js';
 
-const { setShowCredits } = useState();
+const { setShowCredits } = useCredits();
 </script>
 
 <template>

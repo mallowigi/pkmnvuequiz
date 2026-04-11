@@ -2467,7 +2467,7 @@ async function loadData() {
       _0x26ade1 = _0x246bf7['encoded_images'],
       quiz['loadData'](_0x246bf7, enabledLanguages, function () {
         null !== socket && isSocketHost && socket['emit'](_0x4b417b['LjcaI'], {
-          'state': _0x3a2342(),
+          'flashState': _0x3a2342(),
         }),
           timerObj = {
             'type': 'none',
@@ -2495,7 +2495,7 @@ async function loadData() {
 
   function _0x4f10() {
     null !== socket && isSocketHost && socket['emit'](_0x4b417b['HbuZJ'], {
-      'state': _0x4b417b['uPlGb'](_0x3a2342),
+      'flashState': _0x4b417b['uPlGb'](_0x3a2342),
     });
   }
 
@@ -4780,7 +4780,7 @@ let animationCanvasWidth, imageRain                                             
         }
         , _0x27e3f4);
     }, animationCanvas = null, animationCanvasTimeout = null, animationCanvasInterval = null, animationCanvasDuration = 0x1676, animationWidth = 0xcc,
-    animationHeight                                                                                                                            = 0xa8, ongoingAnimations                                                                                                  = [], refreshAnimationCanvas                                                                     = function () {
+    animationHeight                                                                                                                            = 0xa8, ongoingAnimations                                                                                                  = [], refreshAnimationCanvas = function () {
       const _0x386188 = {
         'LNRSv': function (_0x3cb4fe, _0x784b83) {
           return _0x3cb4fe < _0x784b83;
