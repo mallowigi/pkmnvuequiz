@@ -1,7 +1,7 @@
 <script setup>
 
 import Overlay from '@/components/common/Overlay.vue';
-import Loading from '@/components/Loading.vue';
+import Loading from '@/components/genSelection/Loading.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
 import { usePkmnData } from '@/stores/pkmnStore.js';
 import FadeTransition from '@/components/common/FadeTransition.vue';

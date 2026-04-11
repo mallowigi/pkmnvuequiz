@@ -34,7 +34,7 @@ const { state: roomMessages } = useRoomMessages();
     <TypeSelection v-if='state.gen === "types"' />
   </FadeTransition>
 
-  <!--<ChaosOverlay v-if='state.prompt === "chaos"' />-->
+  <ChaosOverlay v-if='state.prompt === "chaos"' />
 
   <SnackBar />
 </template>

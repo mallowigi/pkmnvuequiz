@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { usePkmnData } from '@/stores/pkmnStore.js';
-import CyclingSprite from '@/components/genSelection/CyclingSprite.vue';
+import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
 const props = defineProps({
   gen: {
