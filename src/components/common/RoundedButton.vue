@@ -8,7 +8,6 @@ export default {
 
 defineProps({
   text: String,
-  onClick: Function,
   primary: Boolean,
 });
 
@@ -17,8 +16,7 @@ defineProps({
 <template>
   <div class='button rad-bl-tr transition-element'
        :class='{ "primary": primary }'
-       v-bind='$attrs'
-       @click='onClick'>
+       v-bind='$attrs'>
     <slot />
   </div>
 </template>

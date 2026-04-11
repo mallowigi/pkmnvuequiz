@@ -2,8 +2,13 @@
 
 import ChaosDialog from '@/components/dialogs/ChaosDialog.vue';
 import { useDialogs } from '@/stores/dialogs.js';
+import { onMounted } from 'vue';
 
-const { dialogs } = useDialogs();
+const { dialogs, toggleShowChaos } = useDialogs();
+
+onMounted(() => {
+  toggleShowChaos();
+});
 
 </script>
 
