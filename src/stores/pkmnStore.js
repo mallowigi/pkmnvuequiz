@@ -45,7 +45,7 @@ export async function setError(error) {
 
 export const usePkmnData = () => {
   return {
-    pkmnData: readonly(state),
+    state: readonly(state),
     loadPokemons,
     loadNamings,
     loadSpriteCycles,
