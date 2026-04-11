@@ -9,9 +9,15 @@ import FadeTransition from '@/components/common/FadeTransition.vue';
 import { useState } from '@/stores/state.js';
 import TypeSelection from '@/components/typeSelection/TypeSelection.vue';
 import { useRoomMessages } from '@/stores/roomMessages.js';
+import { onMounted } from 'vue';
 
-const { state } = useState();
+const { state, setGen } = useState();
 const { state: roomMessages } = useRoomMessages();
+
+onMounted(() => {
+  setGen('types');
+});
+
 </script>
 
 <template>

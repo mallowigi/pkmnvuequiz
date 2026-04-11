@@ -13,7 +13,9 @@ defineProps(['message']);
   <Overlay class='full-overlay'>
     <div class='prompt'>
       <h2>{{ message }}</h2>
-      <RoundedButton :text='"Exit"' @click='setRoomMessage(null)' />
+      <RoundedButton @click='setRoomMessage(null)'>
+        Exit
+      </RoundedButton>
     </div>
   </Overlay>
 </template>

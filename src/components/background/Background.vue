@@ -1,17 +1,12 @@
 <script setup>
 import { useState } from '@/stores/state.js';
 import { types } from '@/data/types.js';
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
-const { state, setCurrentType, setDarkMode } = useState();
+const { state } = useState();
 
 const currentType = computed(() => {
   return types.find(type => type.id === state.currentType);
-});
-
-onMounted(() => {
-  setDarkMode(true);
-  setCurrentType('ice');
 });
 
 </script>
@@ -20,16 +15,18 @@ onMounted(() => {
   <div class='background'
        :class='{ typed: currentType, dark: state.isDark }'
        :style='`background-color: ${currentType?.bgColor}`'>
-    <div v-if='currentType'>
-      <img :alt='currentType?.name'
-           :src='`/src/assets/types/${currentType?.icon}.svg`'
-           id='bgpattern'
-           class='bgpattern'>
-      <img :alt='currentType?.name'
-           :src='`/src/assets/types/${currentType?.icon}.svg`'
-           id='bgpattern2'
-           class='bgpattern2'>
-    </div>
+    <Transition name='fade' mode='out-in'>
+      <div v-if='currentType' :key='currentType.id'>
+        <img :alt='currentType?.name'
+             :src='`/src/assets/types/${currentType?.icon}.svg`'
+             id='bgpattern'
+             class='bgpattern'>
+        <img :alt='currentType?.name'
+             :src='`/src/assets/types/${currentType?.icon}.svg`'
+             id='bgpattern2'
+             class='bgpattern2'>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -46,6 +43,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   z-index: -1;
+  transition: background-color 0.2s ease-in-out;
 
   &.dark {
     background-image: url(@/assets/background-dark.svg);
@@ -76,6 +74,16 @@ onMounted(() => {
   width: 33%;
   opacity: 0.2;
   z-index: -2;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 </style>

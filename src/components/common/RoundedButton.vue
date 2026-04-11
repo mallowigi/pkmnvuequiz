@@ -1,3 +1,9 @@
+<script>
+export default {
+  inheritAttrs: false,
+};
+</script>
+
 <script setup>
 
 defineProps({
@@ -11,8 +17,9 @@ defineProps({
 <template>
   <div class='button rad-bl-tr transition-element'
        :class='{ "primary": primary }'
+       v-bind='$attrs'
        @click='onClick'>
-    {{ text }}
+    <slot />
   </div>
 </template>
 

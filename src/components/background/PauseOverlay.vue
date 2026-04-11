@@ -78,10 +78,9 @@ const loadState = (e) => {
     <div class='prompt'>
       <h2 class='left-margin'>Paused</h2>
 
-      <RoundedButton :text='"Resume"'
-                     :primary='true'
+      <RoundedButton :primary='true'
                      @click='setPaused(false)'>
-
+        Resume
       </RoundedButton>
 
       <div class='top-margin'>
