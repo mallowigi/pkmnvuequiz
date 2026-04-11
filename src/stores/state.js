@@ -5,6 +5,7 @@ const state = reactive({
   isStarted: true,
   isEnded: false,
   showCredits: false,
+  roomMessage: null,
 });
 
 export const setGen = (id) => {
@@ -19,6 +20,10 @@ export const setEnded = (isEnded) => {
   state.isEnded = isEnded;
 };
 
+export const setRoomMessage = (message) => {
+  state.roomMessage = message;
+};
+
 export const setShowCredits = (showCredits) => {
   state.showCredits = showCredits;
 };
@@ -29,6 +34,7 @@ export const useState = () => {
     setGen,
     setStarted,
     setEnded,
+    setRoomMessage,
     setShowCredits,
   };
 };

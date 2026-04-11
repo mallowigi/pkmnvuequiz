@@ -3,15 +3,17 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/state.js';
 
-const { setPause } = useState();
+const { setRoomMessage } = useState();
+
+defineProps(['message']);
 
 </script>
 
 <template>
   <Overlay class='full-overlay'>
     <div class='prompt'>
-      <h2 id='return-message'></h2>
-      <RoundedButton :text='"Exit"' @click='setPause(false)' />
+      <h2>{{ message }}</h2>
+      <RoundedButton :text='"Exit"' @click='setRoomMessage(null)' />
     </div>
   </Overlay>
 </template>

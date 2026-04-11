@@ -1,16 +1,19 @@
 <script setup>
+import { useState } from '@/stores/state.js';
 
+const { setShowCredits } = useState();
 </script>
 
 <template>
-  <div class='popuptext rad notxt' id='credits'>
-    <div class='p3 pointer' onclick='creditspopup()'>Artist and quality control credits for custom sprites:
-      <div class='close'>🞬</div>
+  <div class='popuptext rad notxt'>
+    <div class='paragraph pointer' @click='setShowCredits(false)'>
+      Artist and quality control credits for custom sprites:
+      <div class='close pointer'>🞬</div>
     </div>
-    <div data-nosnippet='data-nosnippet' class='popupscrl'>
-      <div>
-        <table id='creditstable'>
 
+    <div class='popupscrl'>
+      <div>
+        <table>
           <tbody>
           <tr>
             <td>Alolan Dugtrio<br>Alolan
@@ -511,41 +514,27 @@
 
 <style scoped>
 .popuptext {
-  visibility: hidden;
   min-width: 500px;
   height: 70%;
   contain: content;
   background-color: rgba(255, 255, 255, 0.9);
-  color: #333;
+  color: var(--text);
   padding: 10px 10px;
   position: fixed;
-  z-index: 3;
+  z-index: 10;
   left: calc(50% - 300px);
   top: 10%;
-  border: #8cc63f solid 2px;
+  border: var(--primary) solid 2px;
 }
 
-.notxt {
-  cursor: default;
-}
-
-.rad {
-  border-radius: 3px;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.p3 {
+.paragraph {
   font-size: 1.15em;
   padding-bottom: 10px;
 }
 
 .close {
   text-align: right;
-  color: #8cc63f;
-  cursor: pointer;
+  color: var(--primary);
   float: right;
   font-size: 1.5em;
   line-height: 22px;
@@ -554,5 +543,31 @@
 .popupscrl {
   overflow: auto;
   height: 95.5%;
+
+  & > div {
+    font-size: 0.9em;
+    display: inline-block;
+  }
+
+  & table {
+    width: 100%;
+  }
+
+  & td {
+    border-top: 2px dotted var(--primary);
+    padding-bottom: 5px;
+  }
+
+  & td:nth-child(odd) {
+    border-right: 2px dotted #dcdcdc;
+    padding-right: 1px;
+    padding-top: 5px;
+  }
+
+  & td:nth-child(even) {
+    padding-left: 5px;
+    padding-top: 5px;
+    vertical-align: baseline;
+  }
 }
 </style>
