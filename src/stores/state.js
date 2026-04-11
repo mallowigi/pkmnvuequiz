@@ -33,6 +33,10 @@ export const setShowCredits = (showCredits) => {
   state.showCredits = showCredits;
 };
 
+export const setState = (newState) => {
+  Object.assign(state, newState);
+};
+
 export const useState = () => {
   return {
     state: readonly(state),
@@ -42,5 +46,6 @@ export const useState = () => {
     setPaused,
     setRoomMessage,
     setShowCredits,
+    setState,
   };
 };
