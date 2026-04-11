@@ -14,10 +14,7 @@ html {
 }
 
 body {
-  background-image: url(./background-50.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: #333;
