@@ -8,31 +8,45 @@ import { useState } from '@/stores/state.js';
 const { toggleShowChaos } = useDialogs();
 const { state, setMode } = useState();
 
-const enableChaosMode = (e) => {
+const props = defineProps({
+  caption: {
+    type: String,
+    required: true,
+  },
+  mode: {
+    type: String,
+    required: true,
+  },
+  toggleFunction: {
+    type: Function,
+    required: true,
+  },
+});
+
+const enableMode = (e) => {
   e.stopPropagation();
-  toggleShowChaos();
-  setMode('chaos');
+  props.toggleFunction();
+  setMode(props.mode);
 };
 
-const disableChaosMode = (e) => {
+const disableMode = (e) => {
   e.stopPropagation();
-  toggleShowChaos();
-  setMode('normal');
+  props.toggleFunction();
 };
 
 </script>
 
 <template>
-  <Overlay class='overlay' @click='toggleShowChaos()'>
+  <Overlay class='overlay' @click='props.toggleFunction()'>
     <div class='prompt'>
-      <h2>Enable guessing without predetermined placements</h2>
+      <h2>{{ props.caption }}</h2>
       <p class='desc'>Quiz and timer will reset</p>
 
-      <RoundedButton @click='enableChaosMode'>
+      <RoundedButton @click='enableMode'>
         Enable
       </RoundedButton>
 
-      <RoundedButton @click='disableChaosMode'>
+      <RoundedButton @click='disableMode'>
         Cancel
       </RoundedButton>
     </div>

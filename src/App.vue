@@ -9,7 +9,7 @@ import FadeTransition from '@/components/common/FadeTransition.vue';
 import { useState } from '@/stores/state.js';
 import TypeSelection from '@/components/typeSelection/TypeSelection.vue';
 import { useRoomMessages } from '@/stores/roomMessages.js';
-import Dialogs from '@/components/background/Dialogs.vue';
+import Dialogs from '@/components/dialogs/Dialogs.vue';
 
 const { state } = useState();
 const { roomState } = useRoomMessages();
