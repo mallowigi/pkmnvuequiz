@@ -2,19 +2,24 @@ import { reactive, readonly } from 'vue';
 
 const state = reactive({
   gen: null,
+  currentType: null,
+  isDark: false,
   isStarted: true,
   isEnded: false,
   isPaused: false,
   showCredits: false,
-  roomMessage: null,
 });
 
 export const setGen = (id) => {
   state.gen = id;
 };
 
-export const setStarted = (isStarted) => {
-  state.isStarted = isStarted;
+export const setCurrentType = (type) => {
+  state.currentType = type;
+};
+
+export const setDarkMode = (isDark) => {
+  state.isDark = isDark;
 };
 
 export const setEnded = (isEnded) => {
@@ -23,10 +28,6 @@ export const setEnded = (isEnded) => {
 
 export const setPaused = (isPaused) => {
   state.isPaused = isPaused;
-};
-
-export const setRoomMessage = (message) => {
-  state.roomMessage = message;
 };
 
 export const setShowCredits = (showCredits) => {
@@ -41,10 +42,10 @@ export const useState = () => {
   return {
     state: readonly(state),
     setGen,
-    setStarted,
+    setCurrentType,
+    setDarkMode,
     setEnded,
     setPaused,
-    setRoomMessage,
     setShowCredits,
     setState,
   };
