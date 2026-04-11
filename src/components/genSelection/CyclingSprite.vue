@@ -1,45 +1,33 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import { usePkmnData } from '@/stores/pkmnStore.js';
 
 const props = defineProps({
-  gen: {
-    type: Object,
+  sprites: {
+    type: Array,
     required: true,
   },
   start: Number,
 });
 
-// Load data
-const { state } = usePkmnData();
-
-const sprites = computed(() => {
-  const encodings = state.sprites;
-  if (!encodings?.sprite) {
-    return [];
-  }
-  return props.gen.sprites.map(sprite => encodings.sprite[sprite]);
-});
-
 // Keep state of the cycle
 const currentIndex = ref(props.start ?? 0);
-const sprite = computed(() => sprites.value[currentIndex.value]);
+const sprite = computed(() => props.sprites[currentIndex.value]);
 
 // Run interval
 let interval;
 
 const startCycle = () => {
-  if (interval || sprites.value.length === 0) {
+  if (interval || props.sprites.length === 0) {
     return;
   }
 
   interval = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % sprites.value.length;
+    currentIndex.value = (currentIndex.value + 1) % props.sprites.length;
   }, 3000);
 };
 
 // Watch until the data is available and restart the interval
-watch(sprites, () => {
+watch(() => props.sprites, () => {
   startCycle();
 }, { immediate: true });
 
@@ -55,7 +43,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <img :alt='gen.name'
+  <img alt='Sprite'
        :hidden='sprites.length === 0'
        :src='sprite'
        class='sprite cropped'>

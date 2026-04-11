@@ -9,14 +9,9 @@ import FadeTransition from '@/components/common/FadeTransition.vue';
 import { useState } from '@/stores/state.js';
 import TypeSelection from '@/components/typeSelection/TypeSelection.vue';
 import { useRoomMessages } from '@/stores/roomMessages.js';
-import { onMounted } from 'vue';
 
-const { state, setGen } = useState();
+const { state } = useState();
 const { state: roomMessages } = useRoomMessages();
-
-onMounted(() => {
-  setGen('types');
-});
 
 </script>
 
@@ -38,6 +33,8 @@ onMounted(() => {
   <FadeTransition>
     <TypeSelection v-if='state.gen === "types"' />
   </FadeTransition>
+
+  <!--<ChaosOverlay v-if='state.prompt === "chaos"' />-->
 
   <SnackBar />
 </template>

@@ -1,10 +1,10 @@
 <script setup>
 import { useState } from '@/stores/state.js';
 import { gens } from '@/data/gens.js';
-import CyclingSprite from '@/components/genSelection/CyclingSprite.vue';
 import CyclingType from '@/components/genSelection/CyclingType.vue';
+import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
 
-const { setGen, state } = useState();
+const { setGen } = useState();
 </script>
 
 <template>
@@ -27,10 +27,10 @@ const { setGen, state } = useState();
            :class='{ "rad-bl": i % 3 === 0, "rad": i % 3 === 1, "rad-tr": i % 3 === 2 }'
            @click='setGen(gen.id)'
            :key='gen.id'>
-        <div class='hidden'>{{ gen.id }}</div>
+        <div hidden>{{ gen.id }}</div>
         <div class='inline-block'>{{ gen.name }}</div>
 
-        <CyclingSprite :gen='gen' :start='i % 3' />
+        <CyclingStarters :gen='gen' :start='i % 3' />
       </div>
 
       <!-- Types -->
