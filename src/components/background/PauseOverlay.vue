@@ -4,8 +4,10 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import IconButton from '@/components/common/IconButton.vue';
 import { setState, useState } from '@/stores/state.js';
+import { useMessages } from '@/stores/messages.js';
 
 const { state, setPaused } = useState();
+const { showUserMessage } = useMessages();
 
 const saveState = () => {
   const savedState = {
@@ -46,17 +48,17 @@ const loadState = (e) => {
       const loadedState = JSON.parse(e.target.result);
       if (loadedState.version !== 1) {
         console.error('Unsupported save version.');
-        // showUserMessage('Unsupported save version.');
+        showUserMessage('Unsupported save version.');
         return;
       }
 
-      // showUserMessage('Successfully loaded quiz!');
+      showUserMessage('Successfully loaded quiz!');
 
       setState(loadedState);
       setPaused(false);
     } catch (error) {
       console.error('Failed to load state: Invalid file format.', error);
-      // showUserMessage('Failed to load quiz: Invalid file format.');
+      showUserMessage('Failed to load quiz: Invalid file format.');
     }
   };
   reader.readAsText(file);
