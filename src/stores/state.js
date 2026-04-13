@@ -99,8 +99,8 @@ export const setStartTime = () => {
   state.timer.startTime = Date.now();
 };
 
-export const setEndTime = () => {
-  state.timer.endTime = Date.now();
+export const setEndTime = (minutes) => {
+  state.timer.endTime = minutes * 60;
 };
 
 export const addSecond = () => {
