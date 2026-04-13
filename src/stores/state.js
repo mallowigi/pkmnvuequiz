@@ -3,7 +3,6 @@ import { reactive, readonly } from 'vue';
 const state = reactive({
   gen: null,
   mode: 'normal',
-  currentType: null,
   isDark: false,
   isStarted: false,
   isEnded: false,
@@ -33,10 +32,6 @@ export const setGen = (id) => {
 
 export const setMode = (mode) => {
   state.mode = mode;
-};
-
-export const setCurrentType = (type) => {
-  state.currentType = type;
 };
 
 export const toggleDarkMode = () => {
@@ -99,7 +94,7 @@ export const setStartTime = () => {
   state.timer.startTime = Date.now();
 };
 
-export const setEndTime = (minutes) => {
+export const setEndTime = (minutes = 0) => {
   state.timer.endTime = minutes * 60;
 };
 
@@ -115,7 +110,6 @@ export const resetState = () => {
   Object.assign(state, {
     gen: null,
     mode: 'normal',
-    currentType: null,
     isDark: false,
     isStarted: false,
     isEnded: false,
@@ -144,7 +138,6 @@ export const useState = () => {
     state: readonly(state),
     setGen,
     setMode,
-    setCurrentType,
     toggleDarkMode,
     setStarted,
     setEnded,

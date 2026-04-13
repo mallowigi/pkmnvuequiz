@@ -11,7 +11,7 @@ const currentType = computed(() => {
   const type = types[currentIndex.value];
   return {
     ...type,
-    iconUrl: new URL(`../../assets/types/${type.icon}.svg`, import.meta.url).href,
+    iconUrl: new URL(`/src/assets/types/${type.icon}.svg`, import.meta.url).href,
   };
 });
 

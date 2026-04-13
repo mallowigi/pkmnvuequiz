@@ -1,13 +1,12 @@
 <script setup>
 import { useState } from '@/stores/state.js';
-import { types } from '@/data/types.js';
+import { useCurrentType } from '@/stores/currentType.js';
 import { computed } from 'vue';
 
 const { state } = useState();
+const { getCurrentType } = useCurrentType();
 
-const currentType = computed(() => {
-  return types.find(type => type.id === state.currentType);
-});
+const currentType = computed(() => getCurrentType());
 
 </script>
 

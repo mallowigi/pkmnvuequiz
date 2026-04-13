@@ -9,16 +9,17 @@ export default {
 import { useState } from '@/stores/state.js';
 import { computed, onMounted } from 'vue';
 import { types } from '@/data/types.js';
+import { useCurrentType } from '@/stores/currentType.js';
 
 const props = defineProps({
   text: String,
   primary: Boolean,
 });
 
-const { state, setCurrentType } = useState();
+const { getCurrentType } = useCurrentType();
 
 const buttonStyles = computed(() => {
-  const type = types.find(t => t.id === state.currentType);
+  const type = getCurrentType(); //types.find(t => t.id === state.currentType);
   const color = type?.buttonColor;
   const bgColor = type?.bgColor;
   return {

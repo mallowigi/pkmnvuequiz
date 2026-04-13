@@ -1,7 +1,6 @@
 <script setup>
 import BackgroundSwitcher from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
-import GenSelection from '@/components/genSelection/GenSelection.vue';
 import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import PauseOverlay from '@/components/background/PauseOverlay.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
@@ -10,9 +9,16 @@ import { useState } from '@/stores/state.js';
 import TypeSelection from '@/components/typeSelection/TypeSelection.vue';
 import { useRoomMessages } from '@/stores/roomMessages.js';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
+import { onMounted } from 'vue';
+import EndOverlay from '@/components/background/EndOverlay.vue';
+import GameStart from '@/components/genSelection/GameStart.vue';
 
-const { state } = useState();
+const { state, setEnded } = useState();
 const { roomState } = useRoomMessages();
+
+onMounted(() => {
+  // setEnded(true);
+});
 
 </script>
 
@@ -28,7 +34,7 @@ const { roomState } = useRoomMessages();
   <PauseOverlay v-if='state.isPaused' />
 
   <FadeTransition>
-    <GenSelection v-if='state.gen === null' />
+    <GameStart v-if='state.gen === null' />
   </FadeTransition>
 
   <FadeTransition>
@@ -36,6 +42,8 @@ const { roomState } = useRoomMessages();
   </FadeTransition>
 
   <Dialogs />
+
+  <EndOverlay v-if='state.isEnded' />
 
   <SnackBar />
 </template>

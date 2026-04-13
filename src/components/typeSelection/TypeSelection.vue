@@ -3,25 +3,33 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { types } from '@/data/types.js';
+import { useCurrentType } from '@/stores/currentType.js';
 import { useState } from '@/stores/state.js';
 
-const { setCurrentType } = useState();
+const { setCurrentType } = useCurrentType();
+const { setGen } = useState();
+
+const selectType = (type) => {
+  setGen(type);
+  setCurrentType(type);
+};
+
 </script>
 
 <template>
   <Overlay>
     <div class='prompt type-grid'>
       <RoundedButton
-          v-for='type in types'
+          v-for='typeMeta in types'
           class='button-type'
-          @click='setCurrentType(type.id)'
-          :style='{ backgroundColor: typeData.bgColor, color: typeData.fgColor }'
+          @click='() => selectType(typeMeta.id)'
+          :style='{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }'
       >
-        <img :src='`/src/assets/types/${type.icon}.svg`'
-             :alt='type.name'
+        <img :src='`/src/assets/types/${typeMeta.icon}.svg`'
+             :alt='typeMeta.name'
              class='symbol'>
-        <div hidden>{{ type.symbol }}</div>
-        <div class='type-name'>{{ type.name }}</div>
+        <div hidden>{{ typeMeta.symbol }}</div>
+        <div class='type-name'>{{ typeMeta.name }}</div>
       </RoundedButton>
     </div>
   </Overlay>
