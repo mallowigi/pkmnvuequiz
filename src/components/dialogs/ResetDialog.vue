@@ -35,11 +35,11 @@ const cancel = (e) => {
       <h2>Reset?</h2>
       <p class='desc'>Are you sure you want to reset?</p>
 
-      <RoundedButton @click='reset'>
+      <RoundedButton @click='reset' primary>
         Reset
       </RoundedButton>
 
-      <RoundedButton @click='cancel'>
+      <RoundedButton @click='cancel' primary>
         Cancel
       </RoundedButton>
     </div>

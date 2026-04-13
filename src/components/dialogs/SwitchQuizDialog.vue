@@ -36,11 +36,11 @@ const cancel = (e) => {
       <h2>Switch Quiz?</h2>
       <p class='desc'>Quiz and timer will reset</p>
 
-      <RoundedButton @click='switchQuiz'>
+      <RoundedButton @click='switchQuiz' primary>
         Switch
       </RoundedButton>
 
-      <RoundedButton @click='cancel'>
+      <RoundedButton @click='cancel' primary>
         Cancel
       </RoundedButton>
     </div>

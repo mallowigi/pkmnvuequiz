@@ -32,11 +32,11 @@ const cancel = (e) => {
       <h2>Reveal Shadows?</h2>
       <p class='desc'>Cannot be undone without reset</p>
 
-      <RoundedButton @click='enableReveal'>
+      <RoundedButton @click='enableReveal' primary>
         Reveal
       </RoundedButton>
 
-      <RoundedButton @click='cancel'>
+      <RoundedButton @click='cancel' primary>
         Cancel
       </RoundedButton>
     </div>

@@ -6,9 +6,25 @@ export default {
 
 <script setup>
 
-defineProps({
+import { useState } from '@/stores/state.js';
+import { computed, onMounted } from 'vue';
+import { types } from '@/data/types.js';
+
+const props = defineProps({
   text: String,
   primary: Boolean,
+});
+
+const { state, setCurrentType } = useState();
+
+const buttonStyles = computed(() => {
+  const type = types.find(t => t.id === state.currentType);
+  const color = type?.buttonColor;
+  const bgColor = type?.bgColor;
+  return {
+    '--btn-color': color,
+    '--bg-color': bgColor,
+  };
 });
 
 </script>
@@ -16,6 +32,7 @@ defineProps({
 <template>
   <div class='button rad-bl-tr transition-element'
        :class='{ "primary": primary }'
+       :style='buttonStyles'
        v-bind='$attrs'>
     <slot />
   </div>
@@ -24,7 +41,7 @@ defineProps({
 <style scoped>
 
 .button {
-  border: 2px solid var(--primary);
+  border: 2px solid var(--btn-color, var(--primary));
   background: var(--dark);
   color: white;
   padding: 9px 8px 8px;
@@ -39,8 +56,8 @@ defineProps({
   font-size: 16px;
 
   &.primary {
-    background: var(--primary);
-    border: 2px solid var(--primary);
+    background: var(--bg-color, var(--primary));
+    border: 2px solid var(--btn-color, var(--primary));
   }
 
   &:hover {

@@ -33,11 +33,11 @@ const cancel = (e) => {
       <h2>Give Up?</h2>
       <p class='desc'>Are you sure you want to give up?</p>
 
-      <RoundedButton @click='giveUp'>
+      <RoundedButton @click='giveUp' primary>
         Give Up
       </RoundedButton>
 
-      <RoundedButton @click='cancel'>
+      <RoundedButton @click='cancel' primary>
         Cancel
       </RoundedButton>
     </div>

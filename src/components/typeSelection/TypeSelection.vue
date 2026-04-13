@@ -15,7 +15,7 @@ const { setCurrentType } = useState();
           v-for='type in types'
           class='button-type'
           @click='setCurrentType(type.id)'
-          :style='{ backgroundColor: type.bgColor, color: type.fgColor }'
+          :style='{ backgroundColor: typeData.bgColor, color: typeData.fgColor }'
       >
         <img :src='`/src/assets/types/${type.icon}.svg`'
              :alt='type.name'

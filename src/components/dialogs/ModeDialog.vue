@@ -40,11 +40,11 @@ const disableMode = (e) => {
       <h2>{{ props.caption }}</h2>
       <p class='desc'>Quiz and timer will reset</p>
 
-      <RoundedButton @click='enableMode'>
+      <RoundedButton @click='enableMode' primary>
         Enable
       </RoundedButton>
 
-      <RoundedButton @click='disableMode'>
+      <RoundedButton @click='disableMode' primary>
         Cancel
       </RoundedButton>
     </div>
