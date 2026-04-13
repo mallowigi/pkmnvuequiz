@@ -4,14 +4,10 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/state.js';
 
-const { setMode } = useState();
+const { setGen } = useState();
 
 const props = defineProps({
-  caption: {
-    type: String,
-    required: true,
-  },
-  mode: {
+  gen: {
     type: String,
     required: true,
   },
@@ -21,13 +17,13 @@ const props = defineProps({
   },
 });
 
-const enableMode = (e) => {
+const switchQuiz = (e) => {
   e.stopPropagation();
   props.toggleFunction();
-  setMode(props.mode);
+  setGen(props.gen);
 };
 
-const disableMode = (e) => {
+const cancel = (e) => {
   e.stopPropagation();
   props.toggleFunction();
 };
@@ -37,14 +33,14 @@ const disableMode = (e) => {
 <template>
   <Overlay class='overlay' @click='props.toggleFunction()'>
     <div class='prompt'>
-      <h2>{{ props.caption }}</h2>
+      <h2>Switch Quiz?</h2>
       <p class='desc'>Quiz and timer will reset</p>
 
-      <RoundedButton @click='enableMode'>
-        Enable
+      <RoundedButton @click='switchQuiz'>
+        Switch
       </RoundedButton>
 
-      <RoundedButton @click='disableMode'>
+      <RoundedButton @click='cancel'>
         Cancel
       </RoundedButton>
     </div>

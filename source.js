@@ -1465,7 +1465,7 @@ class Quiz {
     this['revealTimeouts'] = [];
   }
 
-  ['giveUp']() {
+  ['reset']() {
     const _0x5944ef = {
       'qeItO': 'revealed',
       'MsddB': function (_0x4abc84, _0x4a4f57, _0x4df3a5) {
@@ -4780,7 +4780,7 @@ let animationCanvasWidth, imageRain                                             
         }
         , _0x27e3f4);
     }, animationCanvas = null, animationCanvasTimeout = null, animationCanvasInterval = null, animationCanvasDuration = 0x1676, animationWidth = 0xcc,
-    animationHeight                                                                                                                            = 0xa8, ongoingAnimations                                                                                                  = [], refreshAnimationCanvas = function () {
+    animationHeight                                                                                                                            = 0xa8, ongoingAnimations = [], refreshAnimationCanvas                                                                     = function () {
       const _0x386188 = {
         'LNRSv': function (_0x3cb4fe, _0x784b83) {
           return _0x3cb4fe < _0x784b83;

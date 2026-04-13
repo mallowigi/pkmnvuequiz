@@ -111,6 +111,34 @@ export const setState = (newState) => {
   Object.assign(state, newState);
 };
 
+export const resetState = () => {
+  Object.assign(state, {
+    gen: null,
+    mode: 'normal',
+    currentType: null,
+    isDark: false,
+    isStarted: false,
+    isEnded: false,
+    isPaused: false,
+    showCredits: false,
+    withTypeShuffle: false,
+    withShinies: false,
+    withShadows: false,
+    withSpelling: false,
+    withShadowHelper: false,
+    withCycleSprites: true,
+    withSound: true,
+
+    languages: new Set(['en', 'ko', 'jp', 'zh', 'cn']),
+    timer: {
+      startTime: null,
+      endTime: null,
+      savedAt: null,
+      elapsed: 0,
+    },
+  });
+};
+
 export const useState = () => {
   return {
     state: readonly(state),
@@ -134,5 +162,6 @@ export const useState = () => {
     setEndTime,
     addSecond,
     setState,
+    resetState,
   };
 };

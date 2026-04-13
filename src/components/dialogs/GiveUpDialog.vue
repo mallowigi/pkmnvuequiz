@@ -4,30 +4,23 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/state.js';
 
-const { setMode } = useState();
+const { setEnded } = useState();
 
 const props = defineProps({
-  caption: {
-    type: String,
-    required: true,
-  },
-  mode: {
-    type: String,
-    required: true,
-  },
   toggleFunction: {
     type: Function,
     required: true,
   },
 });
 
-const enableMode = (e) => {
+const giveUp = (e) => {
   e.stopPropagation();
   props.toggleFunction();
-  setMode(props.mode);
+  setEnded(true);
+  // TODO show all missing shadows
 };
 
-const disableMode = (e) => {
+const cancel = (e) => {
   e.stopPropagation();
   props.toggleFunction();
 };
@@ -37,14 +30,14 @@ const disableMode = (e) => {
 <template>
   <Overlay class='overlay' @click='props.toggleFunction()'>
     <div class='prompt'>
-      <h2>{{ props.caption }}</h2>
-      <p class='desc'>Quiz and timer will reset</p>
+      <h2>Give Up?</h2>
+      <p class='desc'>Are you sure you want to give up?</p>
 
-      <RoundedButton @click='enableMode'>
-        Enable
+      <RoundedButton @click='giveUp'>
+        Give Up
       </RoundedButton>
 
-      <RoundedButton @click='disableMode'>
+      <RoundedButton @click='cancel'>
         Cancel
       </RoundedButton>
     </div>
