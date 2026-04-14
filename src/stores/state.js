@@ -41,6 +41,10 @@ export const toggleDarkMode = () => {
   state.isDark = !state.isDark;
 };
 
+export const setDarkMode = (isDark) => {
+  state.isDark = isDark;
+};
+
 export const setStarted = (isStarted) => {
   state.isStarted = isStarted;
 };
@@ -150,6 +154,7 @@ export const useState = () => {
     setGen,
     setMode,
     toggleDarkMode,
+    setDarkMode,
     setStarted,
     setEnded,
     setPaused,

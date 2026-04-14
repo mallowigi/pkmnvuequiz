@@ -12,9 +12,30 @@ import Dialogs from '@/components/dialogs/Dialogs.vue';
 import EndOverlay from '@/components/background/EndOverlay.vue';
 import GameStart from '@/components/genSelection/GameStart.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
+import { onMounted, onUnmounted } from 'vue';
 
-const { state } = useState();
+const { state, setDarkMode } = useState();
 const { roomState } = useRoomMessages();
+
+onMounted(() => {
+  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // 1. Initial sync (handles BOTH true and false)
+  setDarkMode(darkModeMediaQuery.matches);
+
+  // 2. Define the listener function
+  const handleDarkModeChange = (e) => {
+    setDarkMode(e.matches);
+  };
+
+  // 3. Attach listener with compatibility fallback
+  darkModeMediaQuery.addEventListener('change', handleDarkModeChange);
+
+  // 4. Clean up to prevent memory leaks or duplicate listeners
+  onUnmounted(() => {
+    darkModeMediaQuery.removeEventListener('change', handleDarkModeChange);
+  });
+});
 
 </script>
 
