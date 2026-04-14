@@ -17,6 +17,9 @@ const state = reactive({
   withCycleSprites: true,
   withSound: true,
 
+  numShadows: 0,
+  numFound: 0,
+
   languages: new Set(['en', 'ko', 'jp', 'zh', 'cn']),
   timer: {
     startTime: null,
@@ -90,6 +93,14 @@ export const toggleLanguage = (language) => {
   state.languages.add(language);
 };
 
+export const addShadow = () => {
+  state.numShadows++;
+};
+
+export const addFound = () => {
+  state.numFound++;
+};
+
 export const setStartTime = () => {
   state.timer.startTime = Date.now();
 };
@@ -153,6 +164,8 @@ export const useState = () => {
     toggleLanguage,
     setStartTime,
     setEndTime,
+    addShadow,
+    addFound,
     addSecond,
     setState,
     resetState,

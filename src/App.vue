@@ -17,7 +17,7 @@ const { state, setEnded } = useState();
 const { roomState } = useRoomMessages();
 
 onMounted(() => {
-  // setEnded(true);
+  setEnded(true);
 });
 
 </script>
