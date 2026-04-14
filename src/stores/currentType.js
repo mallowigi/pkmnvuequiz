@@ -2,7 +2,7 @@ import { reactive, readonly } from 'vue';
 import { types } from '@/data/types.js';
 
 const typeState = reactive({
-  currentType: 'ice',
+  currentType: null,
 });
 
 const setCurrentType = (type) => {

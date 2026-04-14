@@ -56,7 +56,7 @@
 }
 
 .full-overlay {
-  --overlay-bg: var(--full-black);
+  --overlay-bg: var(--full-overlay);
 }
 
 .prompt {

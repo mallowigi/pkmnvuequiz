@@ -2,8 +2,18 @@
 
 import { useState } from '@/stores/state.js';
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { computed } from 'vue';
 
 const { state, toggleDarkMode } = useState();
+
+const unknownSprite = computed(() => {
+  switch (state.isDark) {
+    case true:
+      return '/src/assets/sprites/unknown-2.png';
+    case false:
+      return '/src/assets/sprites/unknown.png';
+  }
+});
 
 </script>
 
@@ -24,24 +34,24 @@ const { state, toggleDarkMode } = useState();
       <div class='inputbar rad-bl-tr shake' id='inputbox'>
         <p>Name all Pokémon:</p>
         <input type='text' class='input-name' maxlength='13' autocomplete='off'>
-        <img class='recent-sprite' src='@/assets/sprites/unknown-2.png' alt='Recent sprite'>
+        <img class='recent-sprite' :src='unknownSprite' alt='Recent sprite'>
       </div>
 
-      <div>
-        <div class='column smoler count'>
-          <div class='box roundedb padded lime notxt transition-element boxdark'>
-            <b>
-              <div id='counter' class='highlight'>0</div>
-            </b>/
-            <div id='total'>1025</div>
-          </div>
-        </div>
-        <div class='column smol'>
-          <div class='box roundedb padded lime notxt transition-element boxdark'> Timer:
-            <div class='highlight' id='timer'>00:00:00</div>
-          </div>
-        </div>
-      </div>
+      <!--<div>-->
+      <!--  <div class='column smoler count'>-->
+      <!--    <div class='box roundedb padded lime notxt transition-element boxdark'>-->
+      <!--      <b>-->
+      <!--        <div id='counter' class='highlight'>0</div>-->
+      <!--      </b>/-->
+      <!--      <div id='total'>1025</div>-->
+      <!--    </div>-->
+      <!--  </div>-->
+      <!--  <div class='column smol'>-->
+      <!--    <div class='box roundedb padded lime notxt transition-element boxdark'> Timer:-->
+      <!--      <div class='highlight' id='timer'>00:00:00</div>-->
+      <!--    </div>-->
+      <!--  </div>-->
+      <!--</div>-->
     </section>
 
     <div class='url'>pkmnquiz.com</div>
@@ -159,5 +169,6 @@ const { state, toggleDarkMode } = useState();
   z-index: 10;
   padding: 4px 0 10px 40px;
   border-top: 3px dotted var(--primary);
+  color: var(--text);
 }
 </style>

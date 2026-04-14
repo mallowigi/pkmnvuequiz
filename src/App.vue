@@ -13,35 +13,54 @@ import EndOverlay from '@/components/background/EndOverlay.vue';
 import GameStart from '@/components/genSelection/GameStart.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
 
-const { state, setEnded } = useState();
+const { state } = useState();
 const { roomState } = useRoomMessages();
 
 </script>
 
 <template>
-  <Background />
+  <main :class='{ dark: state.isDark }'>
+    <Background />
 
-  <GameHeader />
+    <GameHeader />
 
-  <FadeTransition>
-    <Credits v-if='state.showCredits' />
-  </FadeTransition>
+    <FadeTransition>
+      <Credits v-if='state.showCredits' />
+    </FadeTransition>
 
-  <RoomMessageOverlay v-if='roomState.roomMessage !== null' />
+    <RoomMessageOverlay v-if='roomState.roomMessage !== null' />
 
-  <PauseOverlay v-if='state.isPaused' />
+    <PauseOverlay v-if='state.isPaused' />
 
-  <FadeTransition>
-    <GameStart v-if='state.gen === null' />
-  </FadeTransition>
+    <FadeTransition>
+      <GameStart v-if='state.gen === null' />
+    </FadeTransition>
 
-  <FadeTransition>
-    <TypeSelection v-if='state.gen === "types"' />
-  </FadeTransition>
+    <FadeTransition>
+      <TypeSelection v-if='state.gen === "types"' />
+    </FadeTransition>
 
-  <Dialogs />
+    <Dialogs />
 
-  <EndOverlay v-if='state.isEnded' />
+    <EndOverlay v-if='state.isEnded' />
 
-  <SnackBar />
+    <SnackBar />
+  </main>
 </template>
+
+<style global>
+:root {
+  --text: #333;
+  --full-overlay: rgba(16, 17, 14, 1);
+  --button: white;
+  --button-hover: #666666;
+  --primary: #8cc63f;
+  --secondary: rgba(255, 255, 255, 0.85);
+}
+
+.dark {
+  --text: #eee;
+  --button: #111;
+  --button-hover: #444444;
+}
+</style>

@@ -43,8 +43,8 @@ const buttonStyles = computed(() => {
 
 .button {
   border: 2px solid var(--btn-color, var(--primary));
-  background: var(--dark);
-  color: white;
+  background: var(--button);
+  color: var(--text);
   padding: 9px 8px 8px;
   text-align: center;
   text-decoration: none;
@@ -62,8 +62,8 @@ const buttonStyles = computed(() => {
   }
 
   &:hover {
-    background: var(--gray);
-    border: 2px solid var(--gray);
+    background: var(--button-hover);
+    border: 2px solid var(--button-hover);
   }
 }
 </style>

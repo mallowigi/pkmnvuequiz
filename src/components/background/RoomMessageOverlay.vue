@@ -23,6 +23,6 @@ defineProps(['message']);
 <style scoped>
 .full-overlay {
   z-index: 9;
-  --overlay-bg: var(--full-black);
+  --overlay-bg: var(--full-overlay);
 }
 </style>

@@ -103,7 +103,7 @@ const loadState = (e) => {
 <style scoped>
 .full-overlay {
   z-index: 10;
-  --overlay-bg: var(--full-black);
+  --overlay-bg: var(--full-overlay);
 }
 
 .left-margin {
