@@ -42,7 +42,7 @@ const currentType = computed(() => getCurrentType());
   width: 100%;
   height: 100%;
   z-index: -1;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &.dark {
     background-image: url(@/assets/background-dark.svg);
