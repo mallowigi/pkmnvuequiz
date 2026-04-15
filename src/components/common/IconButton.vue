@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div class='button rad-br-tl transition-element'
+  <div class='cell rad-br-tl transition-element'
        @click='onClick'>
     <slot />
   </div>
@@ -15,7 +15,7 @@ defineProps({
 
 <style scoped>
 
-.button {
+.cell {
   background: var(--secondary);
   border: 2px solid var(--secondary);
   color: var(--dark);

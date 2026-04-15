@@ -38,8 +38,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class='pad rad-bl-tr green'
-       :style='{
+  <div :style='{
          backgroundColor: currentType.bgColor,
          border: `2px solid ${currentType.bgColor}`,
          color: currentType.fgColor
@@ -54,21 +53,8 @@ onUnmounted(() => {
 
 <style scoped>
 
-.pad {
-  color: white;
-  padding: 14px 20px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  min-height: 30px;
-  line-height: 30px;
-  font-size: 18px;
-  min-width: 80px;
-}
-
 .inverted-symbol {
   width: 42px;
-  margin: -5px -12px -15px 8px;
   filter: brightness(0) invert(1);
 }
 </style>

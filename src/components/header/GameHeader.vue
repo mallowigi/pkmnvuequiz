@@ -37,12 +37,12 @@ const elapsed = computed(() => {
 <template>
   <header class='header'>
     <section class='controls'>
-      <RoundedButton class='button moon'
+      <RoundedButton class='cell moon'
                      v-if='!state.isDark'
                      @click='toggleDarkMode'>
         <img src='@/assets/moon.svg' class='icon' alt='Dark mode'>
       </RoundedButton>
-      <RoundedButton class='button sun'
+      <RoundedButton class='cell sun'
                      v-else
                      @click='toggleDarkMode'>
         <img src='@/assets/sun.svg' class='icon' alt='Light mode'>
@@ -108,7 +108,7 @@ const elapsed = computed(() => {
   gap: 10px;
 }
 
-.button {
+.cell {
   height: 51px;
   width: 38px;
   min-width: 38px;

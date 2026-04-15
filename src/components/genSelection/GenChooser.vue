@@ -16,13 +16,13 @@ const setGen = (gen) => {
 </script>
 
 <template>
-  <div class='playtext' id='playtext'>
+  <div class='container'>
     <div class='gens-grid'>
 
       <!-- Full quiz-->
       <div></div>
-      <div class='padfull'>
-        <div class='pad rad-bl-tr green'
+      <div class='cell-full'>
+        <div class='cell rad-bl-tr'
              @click='setGameMode("full")'>
           Full quiz
         </div>
@@ -30,13 +30,13 @@ const setGen = (gen) => {
       <div></div>
 
       <!-- Gens -->
-      <div class='pad rad-bl green'
+      <div class='cell rad-bl'
            v-for='(gen, i) in gens'
            :class='{ "rad-bl": i % 3 === 0, "rad": i % 3 === 1, "rad-tr": i % 3 === 2 }'
            @click='setGen(gen.id)'
            :key='gen.id'>
         <div hidden>{{ gen.id }}</div>
-        <div class='inline-block'>{{ gen.name }}</div>
+        <div class='gen-name'>{{ gen.name }}</div>
 
         <CyclingStarters :gen='gen' :start='i % 3' />
       </div>
@@ -44,7 +44,17 @@ const setGen = (gen) => {
       <!-- Types -->
       <div></div>
       <div>
-        <CyclingType />
+        <CyclingType class='cell cell-type rad-bl-tr ' />
+      </div>
+      <div></div>
+
+      <div></div>
+      <div class='cell rad-bl-tr'
+           @click='setGameMode("special")'>
+        Special
+        <img alt='Special'
+             src='/src/assets/special.png'
+             class='inverted-symbol'>
       </div>
       <div></div>
 
@@ -53,23 +63,24 @@ const setGen = (gen) => {
 </template>
 
 <style scoped>
-.playtext {
-  opacity: 1;
+
+.container {
   display: flex;
   justify-content: center;
 }
 
 .gens-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
   gap: 6px;
   margin: 3px;
   text-align: center;
 }
 
-.pad {
+.cell {
+  background: var(--primary);
   color: white;
-  padding: 14px 20px;
+  padding: 16px 20px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -77,6 +88,32 @@ const setGen = (gen) => {
   line-height: 30px;
   font-size: 18px;
   min-width: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.cell-full {
+  padding: 16px 0 8px;
+}
+
+.cell-type {
+  padding: 10px 20px;
+}
+
+.inverted-symbol {
+  width: 30px;
+  filter: brightness(0) invert(1);
+}
+
+.gen-name {
+  display: inline-block;
 }
 
 </style>

@@ -29,7 +29,7 @@ const buttonStyles = computed(() => {
 </script>
 
 <template>
-  <div class='button rad-bl-tr transition-element'
+  <div class='cell rad-bl-tr transition-element'
        :class='{ "primary": primary }'
        :style='buttonStyles'
        v-bind='$attrs'>
@@ -39,7 +39,7 @@ const buttonStyles = computed(() => {
 
 <style scoped>
 
-.button {
+.cell {
   border: 2px solid var(--btn-color, var(--primary));
   background: var(--button);
   color: var(--text);
