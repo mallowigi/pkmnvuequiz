@@ -2,6 +2,7 @@ import { reactive, readonly } from 'vue';
 
 const state = reactive({
   gen: null,
+  gameMode: null,
   mode: 'normal',
   currentType: null,
   isDark: false,
@@ -32,6 +33,10 @@ const state = reactive({
 
 export const setGen = (id) => {
   state.gen = id;
+};
+
+export const setGameMode = (mode) => {
+  state.gameMode = mode;
 };
 
 export const setMode = (mode) => {
@@ -157,6 +162,7 @@ export const useState = () => {
   return {
     state: readonly(state),
     setGen,
+    setGameMode,
     setMode,
     setCurrentType,
     toggleDarkMode,

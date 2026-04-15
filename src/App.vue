@@ -54,11 +54,11 @@ onMounted(() => {
     <PauseOverlay v-if='state.isPaused' />
 
     <FadeTransition>
-      <GameStart v-if='state.gen === null' />
+      <GameStart v-if='state.gameMode === null' />
     </FadeTransition>
 
     <FadeTransition>
-      <TypeSelection v-if='state.gen === "types"' />
+      <TypeSelection v-if='state.gameMode === "types"' />
     </FadeTransition>
 
     <Dialogs />
