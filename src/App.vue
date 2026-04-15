@@ -58,7 +58,7 @@ onMounted(() => {
     </FadeTransition>
 
     <FadeTransition>
-      <TypeSelection v-if='state.gameMode === "types"' />
+      <TypeSelection v-if='state.gameMode === "types" && state.currentType === null' />
     </FadeTransition>
 
     <Dialogs />

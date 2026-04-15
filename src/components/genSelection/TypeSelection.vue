@@ -4,15 +4,8 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { types } from '@/data/types.js';
 import { useCurrentType } from '@/stores/currentType.js';
-import { useState } from '@/stores/state.js';
 
 const { setCurrentType } = useCurrentType();
-const { setGen } = useState();
-
-const selectType = (type) => {
-  setGen(type);
-  setCurrentType(type);
-};
 
 </script>
 
@@ -23,7 +16,7 @@ const selectType = (type) => {
           v-for='typeMeta in types'
           :key='typeMeta.id'
           class='button-type'
-          @click='() => selectType(typeMeta.id)'
+          @click='setCurrentType(typeMeta.id)'
           :style='{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }'
       >
         <img :src='`/src/assets/types/${typeMeta.icon}.svg`'

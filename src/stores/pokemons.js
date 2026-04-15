@@ -3,6 +3,18 @@ import { usePkmnData } from '@/stores/pkmnStore.js';
 import { useCurrentGen } from '@/stores/gen.js';
 import { useCurrentType } from '@/stores/currentType.js';
 
+const removeDuplicates = (pokemons) => {
+  const seen = new Set();
+
+  return pokemons.filter((pok) => {
+    if (seen.has(pok.baseName)) {
+      return false;
+    }
+    seen.add(pok.baseName);
+    return true;
+  });
+};
+
 export const usePokemons = () => {
   const { state } = useState();
   const { getCurrentGen } = useCurrentGen();
@@ -20,7 +32,8 @@ export const usePokemons = () => {
       return [];
     }
 
-    return data.pokemon.filter(pok => boxes.includes(pok.box));
+    const filtered = data.pokemon.filter(pok => boxes.includes(pok.box));
+    return removeDuplicates(filtered);
   };
 
   const getCurrentTypePokemon = () => {
@@ -33,10 +46,25 @@ export const usePokemons = () => {
       return [];
     }
 
-    return data.pokemon.filter(pok => {
-      const types = [pok.baseType, pok.secondaryType].filter(Boolean);
+    const filtered = data.pokemon.filter(pok => {
+      const types = [pok.primaryType, pok.secondaryType].filter(Boolean);
       return types.includes(currentType.id);
     });
+
+    return removeDuplicates(filtered);
+  };
+
+  const getSpecialTypePokemon = () => {
+    if (!data || !data.pokemon) {
+      return [];
+    }
+
+    const filtered = data.pokemon.filter(pok => {
+      const types = ['legendary', 'sub-legendary', 'mythical'].filter(Boolean);
+      return types.includes(pok.specialType);
+    });
+
+    return removeDuplicates(filtered);
   };
 
   const getTotalPokemon = () => {
@@ -44,7 +72,7 @@ export const usePokemons = () => {
       return [];
     }
 
-    return data.pokemon;
+    return removeDuplicates(data.pokemon);
   };
 
   const getPokemon = () => {
@@ -54,6 +82,8 @@ export const usePokemons = () => {
         return getCurrentGenPokemon();
       case 'types':
         return getCurrentTypePokemon();
+      case 'special':
+        return getSpecialTypePokemon();
       case 'full':
         return getTotalPokemon();
       default:
