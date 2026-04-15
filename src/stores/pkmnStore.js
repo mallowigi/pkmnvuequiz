@@ -12,7 +12,7 @@ const data = reactive({
 
 export async function loadPokemons() {
   const module = await import('@/data/pokemon.json');
-  data.pokemon = module.default;
+  data.pokemon = module.default.pokemon;
 }
 
 export async function loadNamings() {

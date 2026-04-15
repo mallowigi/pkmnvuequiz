@@ -3,7 +3,7 @@ import { useState } from '@/stores/state.js';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { types } from '@/data/types.js';
 
-const { setGen } = useState();
+const { setGameMode } = useState();
 
 const currentIndex = ref(0);
 
@@ -44,7 +44,7 @@ onUnmounted(() => {
          border: `2px solid ${currentType.bgColor}`,
          color: currentType.fgColor
        }'
-       @click='setGen("types")'>
+       @click='setGameMode("types")'>
     Types
     <img :alt='currentType.name'
          :src='currentType.iconUrl'
