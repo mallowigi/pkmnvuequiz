@@ -6,7 +6,7 @@ import PauseOverlay from '@/components/background/PauseOverlay.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
 import FadeTransition from '@/components/common/FadeTransition.vue';
 import { useState } from '@/stores/state.js';
-import TypeSelection from '@/components/typeSelection/TypeSelection.vue';
+import TypeSelection from '@/components/genSelection/TypeSelection.vue';
 import { useRoomMessages } from '@/stores/roomMessages.js';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
 import EndOverlay from '@/components/background/EndOverlay.vue';

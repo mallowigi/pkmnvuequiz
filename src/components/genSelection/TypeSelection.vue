@@ -48,9 +48,13 @@ const selectType = (type) => {
   border: 2px solid #333;
   border-radius: 35px 5px 15px 35px;
   padding: 14px 20px;
-  margin: 3px 1px;
   font-size: 18px;
   min-width: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
 
   &:hover {
     border-color: white;
@@ -60,14 +64,11 @@ const selectType = (type) => {
 .symbol {
   filter: brightness(0) invert(1);
   width: 42px;
-  margin: 0 -5px -10px -5px;
 }
 
 .type-name {
   display: inline-block;
   min-width: 65px;
-  padding: 5px 0 5px 15px;
-  margin: 0 -5px 0 0;
   vertical-align: top;
 }
 </style>
