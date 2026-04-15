@@ -4,9 +4,13 @@ import { useState } from '@/stores/state.js';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { computed } from 'vue';
 import { usePokemons } from '@/stores/pokemons.js';
+import { useCurrentRegion } from '@/stores/regions.js';
+import { useCurrentType } from '@/stores/currentType.js';
 
 const { state, toggleDarkMode } = useState();
 const { getPokemon } = usePokemons();
+const { getCurrentRegion } = useCurrentRegion();
+const { getCurrentType } = useCurrentType();
 
 const unknownSprite = computed(() => {
   switch (state.isDark) {
@@ -15,6 +19,24 @@ const unknownSprite = computed(() => {
     case false:
       return '/src/assets/sprites/unknown.png';
   }
+});
+
+const regionOrType = computed(() => {
+  const gameMode = state.gameMode;
+
+  switch (gameMode) {
+    case 'gen':
+      const currentRegion = getCurrentRegion();
+      return currentRegion?.name ?? '';
+    case 'types':
+      const currentType = getCurrentType();
+      return currentType?.name ?? '';
+    case 'special':
+      return 'Special';
+    default:
+      return '';
+  }
+
 });
 
 const total = computed(() => {
@@ -32,11 +54,19 @@ const elapsed = computed(() => {
   return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
 });
 
+const boxStyles = computed(() => {
+  const currentType = getCurrentType();
+  return {
+    '--bg-color': currentType?.bgColor,
+    '--text': currentType?.fgColor,
+  };
+});
+
 </script>
 
 <template>
   <header class='header'>
-    <section class='controls'>
+    <section class='controls' :style='boxStyles'>
       <RoundedButton class='cell moon'
                      v-if='!state.isDark'
                      @click='toggleDarkMode'>
@@ -48,8 +78,8 @@ const elapsed = computed(() => {
         <img src='@/assets/sun.svg' class='icon' alt='Light mode'>
       </RoundedButton>
 
-      <div class='box rad-bl-tr shake' id='inputbox'>
-        <p>Name all Pokémon:</p>
+      <div class='box rad-bl-tr shake'>
+        <p>Name all {{ regionOrType }} Pokémon:</p>
         <input type='text' class='input-name' maxlength='13' autocomplete='off'>
         <img class='recent-sprite' :src='unknownSprite' alt='Recent sprite'>
       </div>
@@ -137,7 +167,7 @@ const elapsed = computed(() => {
 }
 
 .box {
-  background: var(--primary);
+  background: var(--bg-color, var(--primary));
   color: white;
   min-height: 30px;
   line-height: 30px;
@@ -177,7 +207,7 @@ const elapsed = computed(() => {
   font-size: 20px;
   z-index: 10;
   padding: 4px 0 10px 40px;
-  border-top: 3px dotted var(--primary);
+  border-top: 3px dotted var(--bg-color, var(--primary));
   color: var(--text);
 }
 
@@ -188,5 +218,6 @@ const elapsed = computed(() => {
 
 .highlight {
   color: var(--text-inverted);
+  text-shadow: 0 0 5px white;
 }
 </style>
