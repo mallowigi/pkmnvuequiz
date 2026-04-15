@@ -47,17 +47,6 @@ const setGen = (gen) => {
         <CyclingType class='cell cell-type rad-bl-tr ' />
       </div>
       <div></div>
-
-      <div></div>
-      <div class='cell rad-bl-tr'
-           @click='setGameMode("special")'>
-        Special
-        <img alt='Special'
-             src='/src/assets/special.png'
-             class='inverted-symbol'>
-      </div>
-      <div></div>
-
     </div>
   </div>
 </template>
@@ -105,11 +94,6 @@ const setGen = (gen) => {
 
 .cell-type {
   padding: 10px 20px;
-}
-
-.inverted-symbol {
-  width: 30px;
-  filter: brightness(0) invert(1);
 }
 
 .gen-name {

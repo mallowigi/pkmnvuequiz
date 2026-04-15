@@ -233,4 +233,17 @@ export const types = [
     buttonColor: '#d9538a',
     darkBgColor: '#b53473',
   },
+  {
+    id: 'special',
+    name: 'Special',
+    icon: 'SPECIAL',
+    symbol: 'SPC',
+    bgColor: '#ffbb11',
+    fgColor: '#ffffff',
+    inlineColor: '#ffcd50',
+    lightBgColor: '#ffbf1e',
+    lightFgColor: '#111111',
+    buttonColor: '#c99000',
+    darkBgColor: '#ac7b00',
+  },
 ];

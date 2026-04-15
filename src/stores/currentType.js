@@ -15,9 +15,26 @@ export const useCurrentType = () => {
     return foundType ?? null;
   };
 
+  const getSpecialType = () => {
+    const foundType = types.find(type => type.id === 'special');
+    return foundType ?? null;
+  };
+
+  const getCurrentTypeOrSpecial = () => {
+    const gameMode = state.gameMode;
+    switch (gameMode) {
+      case 'special':
+        return getSpecialType();
+      default:
+        return getCurrentType();
+    }
+  };
+
   return {
     currentType: state.currentType,
     setCurrentType,
     getCurrentType,
+    getSpecialType,
+    getCurrentTypeOrSpecial,
   };
 };

@@ -4,8 +4,20 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { types } from '@/data/types.js';
 import { useCurrentType } from '@/stores/currentType.js';
+import { useState } from '@/stores/state.js';
 
+const { setGameMode } = useState();
 const { setCurrentType } = useCurrentType();
+
+const setTypeOrSpecial = (type) => {
+  switch (type) {
+    case 'special':
+      setGameMode('special');
+      break;
+    default:
+      setCurrentType(type);
+  }
+};
 
 </script>
 
@@ -16,7 +28,7 @@ const { setCurrentType } = useCurrentType();
           v-for='typeMeta in types'
           :key='typeMeta.id'
           class='button-type'
-          @click='setCurrentType(typeMeta.id)'
+          @click='setTypeOrSpecial(typeMeta.id)'
           :style='{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }'
       >
         <img :src='`/src/assets/types/${typeMeta.icon}.svg`'

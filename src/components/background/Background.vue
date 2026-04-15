@@ -4,9 +4,11 @@ import { useCurrentType } from '@/stores/currentType.js';
 import { computed } from 'vue';
 
 const { state } = useState();
-const { getCurrentType } = useCurrentType();
+const { getCurrentTypeOrSpecial } = useCurrentType();
 
-const currentType = computed(() => getCurrentType());
+const currentType = computed(() => {
+  return getCurrentTypeOrSpecial();
+});
 
 </script>
 
