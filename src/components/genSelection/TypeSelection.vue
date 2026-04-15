@@ -19,6 +19,8 @@ const setTypeOrSpecial = (type) => {
   }
 };
 
+const goBack = () => setGameMode(null);
+
 </script>
 
 <template>
@@ -37,7 +39,18 @@ const setTypeOrSpecial = (type) => {
         <div hidden>{{ typeMeta.symbol }}</div>
         <div class='type-name'>{{ typeMeta.name }}</div>
       </RoundedButton>
+
+      <div></div>
+
+      <RoundedButton
+          class='button-type button-back'
+          @click='goBack'
+      >
+        <div class='type-name'>Back</div>
+      </RoundedButton>
     </div>
+
+
   </Overlay>
 </template>
 
@@ -57,7 +70,7 @@ const setTypeOrSpecial = (type) => {
   min-width: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 4px;
 
