@@ -3,8 +3,10 @@
 import { useState } from '@/stores/state.js';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { computed } from 'vue';
+import { usePokemons } from '@/stores/pokemons.js';
 
 const { state, toggleDarkMode } = useState();
+const { getPokemon } = usePokemons();
 
 const unknownSprite = computed(() => {
   switch (state.isDark) {
@@ -15,10 +17,14 @@ const unknownSprite = computed(() => {
   }
 });
 
-const total = 1025;
+const total = computed(() => {
+  const pokemons = getPokemon();
+  return pokemons.length ?? 0;
+});
 
+// todo move to hook
 const elapsed = computed(() => {
-  const total = state.elapsedTime ?? 0;
+  const total = state.timer.elapsed ?? 0;
   const hours = String(Math.floor(total / 3600));
   const minutes = String(Math.floor(total / 60));
   const seconds = String(total % 60);
