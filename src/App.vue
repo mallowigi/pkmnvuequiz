@@ -13,8 +13,11 @@ import EndOverlay from '@/components/background/EndOverlay.vue';
 import GameStart from '@/components/genSelection/GameStart.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
 import { onMounted, onUnmounted } from 'vue';
+import GameFooter from '@/components/footer/GameFooter.vue';
+import { useCredits } from '@/stores/useCredits.js';
 
 const { state, setDarkMode } = useState();
+const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 
 onMounted(() => {
@@ -40,13 +43,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <main :class='{ dark: state.isDark }'>
+  <main class='main' :class='{ dark: state.isDark }'>
     <Background />
 
     <GameHeader />
 
+    <div style='flex: 1'>
+      foo
+    </div>
+
+    <GameFooter />
+
     <FadeTransition>
-      <Credits v-if='state.showCredits' />
+      <Credits v-if='credits.showCredits' />
     </FadeTransition>
 
     <RoomMessageOverlay v-if='roomState.roomMessage !== null' />
@@ -85,5 +94,14 @@ onMounted(() => {
   --text-inverted: #333;
   --button: #111;
   --button-hover: #444444;
+}
+</style>
+
+<style scoped>
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

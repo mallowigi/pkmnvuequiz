@@ -1,12 +1,12 @@
 <script setup>
 import { useCredits } from '@/stores/useCredits.js';
 
-const { setShowCredits } = useCredits();
+const { toggleShowCredits } = useCredits();
 </script>
 
 <template>
   <div class='popuptext rad notxt'>
-    <div class='paragraph pointer' @click='setShowCredits(false)'>
+    <div class='paragraph pointer' @click='toggleShowCredits()'>
       Artist and quality control credits for custom sprites:
       <div class='close pointer'>🞬</div>
     </div>
@@ -518,7 +518,7 @@ const { setShowCredits } = useCredits();
   height: 70%;
   contain: content;
   background-color: rgba(255, 255, 255, 0.9);
-  color: var(--text);
+  color: #222;
   padding: 10px 10px;
   position: fixed;
   z-index: 10;
