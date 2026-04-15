@@ -1,7 +1,7 @@
-import { useState } from '@/stores/state.js';
-import { usePkmnData } from '@/stores/pkmnStore.js';
-import { useCurrentGen } from '@/stores/gen.js';
-import { useCurrentType } from '@/stores/currentType.js';
+import { useState } from '@/stores/useState.js';
+import { usePkmnData } from '@/stores/usePkmnStore.js';
+import { useCurrentGen } from '@/stores/useCurrentGen.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
 
 const removeDuplicates = (pokemons) => {
   const seen = new Set();

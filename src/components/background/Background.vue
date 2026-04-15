@@ -1,6 +1,6 @@
 <script setup>
-import { useState } from '@/stores/state.js';
-import { useCurrentType } from '@/stores/currentType.js';
+import { useState } from '@/stores/useState.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
 import { computed } from 'vue';
 
 const { state } = useState();

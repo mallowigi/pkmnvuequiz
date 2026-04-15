@@ -1,5 +1,5 @@
 <script setup>
-import { useMessages } from '@/stores/messages.js';
+import { useMessages } from '@/stores/useMessages.js';
 import { onMounted } from 'vue';
 
 const { state, showUserMessage } = useMessages();

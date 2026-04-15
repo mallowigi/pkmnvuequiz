@@ -1,8 +1,8 @@
 <script setup>
-import { useCurrentType } from '@/stores/currentType.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
 import { computed } from 'vue';
 import { donors } from '@/data/donors.js';
-import { useState } from '@/stores/state.js';
+import { useState } from '@/stores/useState.js';
 
 const { getCurrentType } = useCurrentType();
 const { state } = useState();

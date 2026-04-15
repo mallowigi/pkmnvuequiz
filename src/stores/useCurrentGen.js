@@ -1,5 +1,5 @@
 import { gens } from '@/data/gens.js';
-import { useState } from '@/stores/state.js';
+import { useState } from '@/stores/useState.js';
 
 export const useCurrentGen = () => {
   const { state, setGen } = useState();

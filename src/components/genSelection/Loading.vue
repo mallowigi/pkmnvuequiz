@@ -1,5 +1,5 @@
 <script setup>
-import { usePkmnData } from '@/stores/pkmnStore.js';
+import { usePkmnData } from '@/stores/usePkmnStore.js';
 import { onMounted } from 'vue';
 
 const {

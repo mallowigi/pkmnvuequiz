@@ -2,8 +2,8 @@
 import { gens } from '@/data/gens.js';
 import CyclingType from '@/components/genSelection/CyclingType.vue';
 import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
-import { useCurrentGen } from '@/stores/gen.js';
-import { useState } from '@/stores/state.js';
+import { useCurrentGen } from '@/stores/useCurrentGen.js';
+import { useState } from '@/stores/useState.js';
 
 const { setGameMode } = useState();
 const { setCurrentGen } = useCurrentGen();

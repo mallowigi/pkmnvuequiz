@@ -1,5 +1,5 @@
 <script setup>
-import { useCredits } from '@/stores/credits.js';
+import { useCredits } from '@/stores/useCredits.js';
 
 const { setShowCredits } = useCredits();
 </script>

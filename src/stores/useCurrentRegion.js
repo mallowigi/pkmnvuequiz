@@ -1,4 +1,4 @@
-import { useCurrentGen } from '@/stores/gen.js';
+import { useCurrentGen } from '@/stores/useCurrentGen.js';
 import { regions } from '@/data/regions.js';
 
 export const useCurrentRegion = () => {

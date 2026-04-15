@@ -1,7 +1,7 @@
 <script setup>
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/state.js';
+import { useState } from '@/stores/useState.js';
 
 const { setRoomMessage } = useState();
 

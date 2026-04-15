@@ -1,11 +1,11 @@
 <script setup>
 
-import { useState } from '@/stores/state.js';
+import { useState } from '@/stores/useState.js';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { computed } from 'vue';
-import { usePokemons } from '@/stores/pokemons.js';
-import { useCurrentRegion } from '@/stores/regions.js';
-import { useCurrentType } from '@/stores/currentType.js';
+import { usePokemons } from '@/stores/usePokemons.js';
+import { useCurrentRegion } from '@/stores/useCurrentRegion.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
 
 const { state, toggleDarkMode } = useState();
 const { getPokemon } = usePokemons();

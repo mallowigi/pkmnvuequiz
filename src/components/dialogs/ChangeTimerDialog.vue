@@ -2,7 +2,7 @@
 
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { setStartTime, useState } from '@/stores/state.js';
+import { setStartTime, useState } from '@/stores/useState.js';
 
 const { setEndTime } = useState();
 

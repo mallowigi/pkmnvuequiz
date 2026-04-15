@@ -7,7 +7,7 @@ export default {
 <script setup>
 
 import { computed } from 'vue';
-import { useCurrentType } from '@/stores/currentType.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
 
 const props = defineProps({
   text: String,

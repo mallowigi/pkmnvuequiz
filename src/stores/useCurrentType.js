@@ -1,5 +1,5 @@
 import { types } from '@/data/types.js';
-import { useState } from '@/stores/state.js';
+import { useState } from '@/stores/useState.js';
 
 export const useCurrentType = () => {
   const { state, setCurrentType: setStateType } = useState();

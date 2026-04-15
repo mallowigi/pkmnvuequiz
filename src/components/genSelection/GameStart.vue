@@ -3,7 +3,7 @@
 import Overlay from '@/components/common/Overlay.vue';
 import Loading from '@/components/genSelection/Loading.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
-import { usePkmnData } from '@/stores/pkmnStore.js';
+import { usePkmnData } from '@/stores/usePkmnStore.js';
 import FadeTransition from '@/components/common/FadeTransition.vue';
 
 const { data } = usePkmnData();

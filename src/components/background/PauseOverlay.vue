@@ -3,8 +3,8 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import IconButton from '@/components/common/IconButton.vue';
-import { setState, useState } from '@/stores/state.js';
-import { useMessages } from '@/stores/messages.js';
+import { setState, useState } from '@/stores/useState.js';
+import { useMessages } from '@/stores/useMessages.js';
 
 const { state, setPaused } = useState();
 const { showUserMessage } = useMessages();

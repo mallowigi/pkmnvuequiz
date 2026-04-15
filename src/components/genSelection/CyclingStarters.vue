@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { usePkmnData } from '@/stores/pkmnStore.js';
+import { usePkmnData } from '@/stores/usePkmnStore.js';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
 const props = defineProps({

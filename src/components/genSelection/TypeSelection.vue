@@ -3,8 +3,8 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { types } from '@/data/types.js';
-import { useCurrentType } from '@/stores/currentType.js';
-import { useState } from '@/stores/state.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
+import { useState } from '@/stores/useState.js';
 
 const { setGameMode } = useState();
 const { setCurrentType } = useCurrentType();

@@ -1,6 +1,6 @@
 <script setup>
 
-import { useDialogs } from '@/stores/dialogs.js';
+import { useDialogs } from '@/stores/useDialogs.js';
 import ModeDialog from '@/components/dialogs/ModeDialog.vue';
 import ShadowsDialog from '@/components/dialogs/ShadowsDialog.vue';
 import SwitchQuizDialog from '@/components/dialogs/SwitchQuizDialog.vue';

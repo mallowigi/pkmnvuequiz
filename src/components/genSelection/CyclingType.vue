@@ -1,5 +1,5 @@
 <script setup>
-import { useState } from '@/stores/state.js';
+import { useState } from '@/stores/useState.js';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { types } from '@/data/types.js';
 
