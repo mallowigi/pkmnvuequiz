@@ -15,6 +15,17 @@ const unknownSprite = computed(() => {
   }
 });
 
+const total = 1025;
+
+const elapsed = computed(() => {
+  const total = state.elapsedTime ?? 0;
+  const hours = String(Math.floor(total / 3600));
+  const minutes = String(Math.floor(total / 60));
+  const seconds = String(total % 60);
+
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+});
+
 </script>
 
 <template>
@@ -31,27 +42,19 @@ const unknownSprite = computed(() => {
         <img src='@/assets/sun.svg' class='icon' alt='Light mode'>
       </RoundedButton>
 
-      <div class='inputbar rad-bl-tr shake' id='inputbox'>
+      <div class='box rad-bl-tr shake' id='inputbox'>
         <p>Name all Pokémon:</p>
         <input type='text' class='input-name' maxlength='13' autocomplete='off'>
         <img class='recent-sprite' :src='unknownSprite' alt='Recent sprite'>
       </div>
 
-      <!--<div>-->
-      <!--  <div class='column smoler count'>-->
-      <!--    <div class='box roundedb padded lime notxt transition-element boxdark'>-->
-      <!--      <b>-->
-      <!--        <div id='counter' class='highlight'>0</div>-->
-      <!--      </b>/-->
-      <!--      <div id='total'>1025</div>-->
-      <!--    </div>-->
-      <!--  </div>-->
-      <!--  <div class='column smol'>-->
-      <!--    <div class='box roundedb padded lime notxt transition-element boxdark'> Timer:-->
-      <!--      <div class='highlight' id='timer'>00:00:00</div>-->
-      <!--    </div>-->
-      <!--  </div>-->
-      <!--</div>-->
+      <div class='box rad-bl-tr counter'>
+        <span class='highlight'>{{ state.numFound }}</span> / {{ total }}
+      </div>
+
+      <div class='box rad-bl-tr'>
+        Timer: <span class='highlight'>{{ elapsed }}</span>
+      </div>
     </section>
 
     <div class='url'>pkmnquiz.com</div>
@@ -127,7 +130,7 @@ const unknownSprite = computed(() => {
   }
 }
 
-.inputbar {
+.box {
   background: var(--primary);
   color: white;
   min-height: 30px;
@@ -170,5 +173,14 @@ const unknownSprite = computed(() => {
   padding: 4px 0 10px 40px;
   border-top: 3px dotted var(--primary);
   color: var(--text);
+}
+
+.counter {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.highlight {
+  color: var(--text-inverted);
 }
 </style>

@@ -6,9 +6,7 @@ export default {
 
 <script setup>
 
-import { useState } from '@/stores/state.js';
-import { computed, onMounted } from 'vue';
-import { types } from '@/data/types.js';
+import { computed } from 'vue';
 import { useCurrentType } from '@/stores/currentType.js';
 
 const props = defineProps({

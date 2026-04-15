@@ -72,6 +72,7 @@ onMounted(() => {
 <style global>
 :root {
   --text: #333;
+  --text-inverted: #eee;
   --full-overlay: rgba(16, 17, 14, 1);
   --button: white;
   --button-hover: #666666;
@@ -81,6 +82,7 @@ onMounted(() => {
 
 .dark {
   --text: #eee;
+  --text-inverted: #333;
   --button: #111;
   --button-hover: #444444;
 }

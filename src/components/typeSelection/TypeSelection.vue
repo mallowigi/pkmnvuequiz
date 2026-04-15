@@ -21,6 +21,7 @@ const selectType = (type) => {
     <div class='prompt type-grid'>
       <RoundedButton
           v-for='typeMeta in types'
+          :key='typeMeta.id'
           class='button-type'
           @click='() => selectType(typeMeta.id)'
           :style='{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }'
@@ -44,7 +45,7 @@ const selectType = (type) => {
 }
 
 .button-type {
-  border: 2px solid var(--text);
+  border: 2px solid #333;
   border-radius: 35px 5px 15px 35px;
   padding: 14px 20px;
   margin: 3px 1px;
