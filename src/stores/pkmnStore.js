@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue';
 
 const data = reactive({
-  pokemons: null,
+  pokemon: null,
   namings: null,
   spriteCycles: null,
   translations: null,
@@ -12,7 +12,7 @@ const data = reactive({
 
 export async function loadPokemons() {
   const module = await import('@/data/pokemon.json');
-  data.pokemons = module.default;
+  data.pokemon = module.default;
 }
 
 export async function loadNamings() {

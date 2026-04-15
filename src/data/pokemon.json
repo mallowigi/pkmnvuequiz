@@ -7269,7 +7269,7 @@
       "baseName": "meltan",
       "primaryType": "steel",
       "secondaryType": null,
-      "box": "unknown",
+      "box": "pokemongo",
       "legendary": "mythical"
     },
     {
@@ -7277,7 +7277,7 @@
       "baseName": "melmetal",
       "primaryType": "steel",
       "secondaryType": null,
-      "box": "unknown",
+      "box": "pokemongo",
       "legendary": "mythical"
     },
     {
@@ -9357,7 +9357,7 @@
       "baseName": "walkingwake",
       "primaryType": "water",
       "secondaryType": "dragon",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "paradox"
     },
     {
@@ -9365,7 +9365,7 @@
       "baseName": "ironleaves",
       "primaryType": "grass",
       "secondaryType": "psychic",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "paradox"
     },
     {
@@ -9373,7 +9373,7 @@
       "baseName": "dipplin",
       "primaryType": "grass",
       "secondaryType": "dragon",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "no"
     },
     {
@@ -9381,7 +9381,7 @@
       "baseName": "poltchageist",
       "primaryType": "grass",
       "secondaryType": "ghost",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "no"
     },
     {
@@ -9389,7 +9389,7 @@
       "baseName": "sinistcha",
       "primaryType": "grass",
       "secondaryType": "ghost",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "no"
     },
     {
@@ -9397,7 +9397,7 @@
       "baseName": "ursaluna",
       "primaryType": "ground",
       "secondaryType": "normal",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "no"
     },
     {
@@ -9405,7 +9405,7 @@
       "baseName": "okidogi",
       "primaryType": "poison",
       "secondaryType": "fighting",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9413,7 +9413,7 @@
       "baseName": "munkidori",
       "primaryType": "poison",
       "secondaryType": "psychic",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9421,7 +9421,7 @@
       "baseName": "fezandipiti",
       "primaryType": "poison",
       "secondaryType": "fairy",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9429,7 +9429,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": null,
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9437,7 +9437,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": null,
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9445,7 +9445,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": "water",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9453,7 +9453,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": "water",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9461,7 +9461,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": "fire",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9469,7 +9469,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": "fire",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9477,7 +9477,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": "rock",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9485,7 +9485,7 @@
       "baseName": "ogerpon",
       "primaryType": "grass",
       "secondaryType": "rock",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "sub-legendary"
     },
     {
@@ -9493,7 +9493,7 @@
       "baseName": "archaludon",
       "primaryType": "steel",
       "secondaryType": "dragon",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "no"
     },
     {
@@ -9501,7 +9501,7 @@
       "baseName": "hydrapple",
       "primaryType": "grass",
       "secondaryType": "dragon",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "no"
     },
     {
@@ -9509,7 +9509,7 @@
       "baseName": "gougingfire",
       "primaryType": "fire",
       "secondaryType": "dragon",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "paradox"
     },
     {
@@ -9517,7 +9517,7 @@
       "baseName": "ragingbolt",
       "primaryType": "electric",
       "secondaryType": "dragon",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "paradox"
     },
     {
@@ -9525,7 +9525,7 @@
       "baseName": "ironboulder",
       "primaryType": "rock",
       "secondaryType": "psychic",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "paradox"
     },
     {
@@ -9533,7 +9533,7 @@
       "baseName": "ironcrown",
       "primaryType": "steel",
       "secondaryType": "psychic",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "paradox"
     },
     {
@@ -9541,7 +9541,7 @@
       "baseName": "terapagos",
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "legendary"
     },
     {
@@ -9549,7 +9549,7 @@
       "baseName": "terapagos",
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "legendary"
     },
     {
@@ -9557,7 +9557,7 @@
       "baseName": "terapagos",
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "legendary"
     },
     {
@@ -9565,7 +9565,7 @@
       "baseName": "pecharunt",
       "primaryType": "poison",
       "secondaryType": "ghost",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "mythical"
     },
     {
@@ -9573,7 +9573,7 @@
       "baseName": "pecharunt",
       "primaryType": "poison",
       "secondaryType": "ghost",
-      "box": "paldeadlc",
+      "box": "areazero",
       "legendary": "mythical"
     },
     {
@@ -9581,7 +9581,7 @@
       "baseName": "venusaur",
       "primaryType": "grass",
       "secondaryType": "poison",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9589,7 +9589,7 @@
       "baseName": "charizard",
       "primaryType": "fire",
       "secondaryType": "dragon",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9597,7 +9597,7 @@
       "baseName": "charizard",
       "primaryType": "fire",
       "secondaryType": "flying",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9605,7 +9605,7 @@
       "baseName": "blastoise",
       "primaryType": "water",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9613,7 +9613,7 @@
       "baseName": "beedrill",
       "primaryType": "bug",
       "secondaryType": "poison",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9621,7 +9621,7 @@
       "baseName": "pidgeot",
       "primaryType": "normal",
       "secondaryType": "flying",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9629,7 +9629,7 @@
       "baseName": "alakazam",
       "primaryType": "psychic",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9637,7 +9637,7 @@
       "baseName": "slowbro",
       "primaryType": "water",
       "secondaryType": "psychic",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9645,7 +9645,7 @@
       "baseName": "gengar",
       "primaryType": "ghost",
       "secondaryType": "poison",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9653,7 +9653,7 @@
       "baseName": "kangaskhan",
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9661,7 +9661,7 @@
       "baseName": "pinsir",
       "primaryType": "bug",
       "secondaryType": "flying",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9669,7 +9669,7 @@
       "baseName": "gyarados",
       "primaryType": "water",
       "secondaryType": "dark",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9677,7 +9677,7 @@
       "baseName": "aerodactyl",
       "primaryType": "rock",
       "secondaryType": "flying",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9685,7 +9685,7 @@
       "baseName": "mewtwo",
       "primaryType": "psychic",
       "secondaryType": "fighting",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "legendary"
     },
     {
@@ -9693,7 +9693,7 @@
       "baseName": "mewtwo",
       "primaryType": "psychic",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "legendary"
     },
     {
@@ -9701,7 +9701,7 @@
       "baseName": "ampharos",
       "primaryType": "electric",
       "secondaryType": "dragon",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9709,7 +9709,7 @@
       "baseName": "steelix",
       "primaryType": "steel",
       "secondaryType": "ground",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9717,7 +9717,7 @@
       "baseName": "scizor",
       "primaryType": "bug",
       "secondaryType": "steel",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9725,7 +9725,7 @@
       "baseName": "heracross",
       "primaryType": "bug",
       "secondaryType": "fighting",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9733,7 +9733,7 @@
       "baseName": "houndoom",
       "primaryType": "dark",
       "secondaryType": "fire",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9741,7 +9741,7 @@
       "baseName": "tyranitar",
       "primaryType": "rock",
       "secondaryType": "dark",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9749,7 +9749,7 @@
       "baseName": "sceptile",
       "primaryType": "grass",
       "secondaryType": "dragon",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9757,7 +9757,7 @@
       "baseName": "blaziken",
       "primaryType": "fire",
       "secondaryType": "fighting",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9765,7 +9765,7 @@
       "baseName": "swampert",
       "primaryType": "water",
       "secondaryType": "ground",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9773,7 +9773,7 @@
       "baseName": "gardevoir",
       "primaryType": "psychic",
       "secondaryType": "fairy",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9781,7 +9781,7 @@
       "baseName": "sableye",
       "primaryType": "dark",
       "secondaryType": "ghost",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9789,7 +9789,7 @@
       "baseName": "mawile",
       "primaryType": "steel",
       "secondaryType": "fairy",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9797,7 +9797,7 @@
       "baseName": "aggron",
       "primaryType": "steel",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9805,7 +9805,7 @@
       "baseName": "medicham",
       "primaryType": "fighting",
       "secondaryType": "psychic",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9813,7 +9813,7 @@
       "baseName": "manectric",
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9821,7 +9821,7 @@
       "baseName": "sharpedo",
       "primaryType": "water",
       "secondaryType": "dark",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9829,7 +9829,7 @@
       "baseName": "camerupt",
       "primaryType": "fire",
       "secondaryType": "ground",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9837,7 +9837,7 @@
       "baseName": "altaria",
       "primaryType": "dragon",
       "secondaryType": "fairy",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9845,7 +9845,7 @@
       "baseName": "banette",
       "primaryType": "ghost",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9853,7 +9853,7 @@
       "baseName": "absol",
       "primaryType": "dark",
       "secondaryType": null,
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9861,7 +9861,7 @@
       "baseName": "glalie",
       "primaryType": "ice",
       "secondaryType": null,
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9869,7 +9869,7 @@
       "baseName": "salamence",
       "primaryType": "dragon",
       "secondaryType": "flying",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9877,7 +9877,7 @@
       "baseName": "metagross",
       "primaryType": "steel",
       "secondaryType": "psychic",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9885,7 +9885,7 @@
       "baseName": "latias",
       "primaryType": "dragon",
       "secondaryType": "psychic",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "sub-legendary"
     },
     {
@@ -9893,7 +9893,7 @@
       "baseName": "latios",
       "primaryType": "dragon",
       "secondaryType": "psychic",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "sub-legendary"
     },
     {
@@ -9901,7 +9901,7 @@
       "baseName": "kyogre",
       "primaryType": "water",
       "secondaryType": null,
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "legendary"
     },
     {
@@ -9909,7 +9909,7 @@
       "baseName": "groudon",
       "primaryType": "ground",
       "secondaryType": "fire",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "legendary"
     },
     {
@@ -9917,7 +9917,7 @@
       "baseName": "rayquaza",
       "primaryType": "dragon",
       "secondaryType": "flying",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "legendary"
     },
     {
@@ -9925,7 +9925,7 @@
       "baseName": "lopunny",
       "primaryType": "normal",
       "secondaryType": "fighting",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9933,7 +9933,7 @@
       "baseName": "garchomp",
       "primaryType": "dragon",
       "secondaryType": "ground",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9941,7 +9941,7 @@
       "baseName": "lucario",
       "primaryType": "fighting",
       "secondaryType": "steel",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9949,7 +9949,7 @@
       "baseName": "abomasnow",
       "primaryType": "grass",
       "secondaryType": "ice",
-      "box": "megakalos",
+      "box": "kalosmega",
       "legendary": "no"
     },
     {
@@ -9957,7 +9957,7 @@
       "baseName": "gallade",
       "primaryType": "psychic",
       "secondaryType": "fighting",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9965,7 +9965,7 @@
       "baseName": "audino",
       "primaryType": "normal",
       "secondaryType": "fairy",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "no"
     },
     {
@@ -9973,7 +9973,7 @@
       "baseName": "diancie",
       "primaryType": "rock",
       "secondaryType": "fairy",
-      "box": "megahoenn",
+      "box": "hoennmega",
       "legendary": "mythical"
     },
     {
@@ -10253,7 +10253,7 @@
       "baseName": "clefable",
       "primaryType": "fairy",
       "secondaryType": "flying",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10261,7 +10261,7 @@
       "baseName": "victreebel",
       "primaryType": "grass",
       "secondaryType": "poison",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10269,7 +10269,7 @@
       "baseName": "starmie",
       "primaryType": "water",
       "secondaryType": "psychic",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10277,7 +10277,7 @@
       "baseName": "dragonite",
       "primaryType": "dragon",
       "secondaryType": "flying",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10285,7 +10285,7 @@
       "baseName": "meganium",
       "primaryType": "grass",
       "secondaryType": "fairy",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10293,7 +10293,7 @@
       "baseName": "feraligatr",
       "primaryType": "water",
       "secondaryType": "dragon",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10301,7 +10301,7 @@
       "baseName": "skarmory",
       "primaryType": "steel",
       "secondaryType": "flying",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10309,7 +10309,7 @@
       "baseName": "froslass",
       "primaryType": "ice",
       "secondaryType": "ghost",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10317,7 +10317,7 @@
       "baseName": "emboar",
       "primaryType": "fire",
       "secondaryType": "fighting",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10325,7 +10325,7 @@
       "baseName": "excadrill",
       "primaryType": "ground",
       "secondaryType": "steel",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10333,7 +10333,7 @@
       "baseName": "scolipede",
       "primaryType": "bug",
       "secondaryType": "poison",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10341,7 +10341,7 @@
       "baseName": "scrafty",
       "primaryType": "dark",
       "secondaryType": "fighting",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10349,7 +10349,7 @@
       "baseName": "eelektross",
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10357,7 +10357,7 @@
       "baseName": "chandelure",
       "primaryType": "ghost",
       "secondaryType": "fire",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10365,7 +10365,7 @@
       "baseName": "chesnaught",
       "primaryType": "grass",
       "secondaryType": "fighting",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10373,7 +10373,7 @@
       "baseName": "delphox",
       "primaryType": "fire",
       "secondaryType": "psychic",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10381,7 +10381,7 @@
       "baseName": "greninja",
       "primaryType": "water",
       "secondaryType": "dark",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10389,7 +10389,7 @@
       "baseName": "pyroar",
       "primaryType": "fire",
       "secondaryType": "normal",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10397,7 +10397,7 @@
       "baseName": "floette",
       "primaryType": "fairy",
       "secondaryType": null,
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10405,7 +10405,7 @@
       "baseName": "malamar",
       "primaryType": "dark",
       "secondaryType": "psychic",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10413,7 +10413,7 @@
       "baseName": "barbaracle",
       "primaryType": "rock",
       "secondaryType": "fighting",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10421,7 +10421,7 @@
       "baseName": "dragalge",
       "primaryType": "poison",
       "secondaryType": "dragon",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10429,7 +10429,7 @@
       "baseName": "hawlucha",
       "primaryType": "fighting",
       "secondaryType": "flying",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10437,7 +10437,7 @@
       "baseName": "zygarde",
       "primaryType": "dragon",
       "secondaryType": "ground",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "legendary"
     },
     {
@@ -10445,7 +10445,7 @@
       "baseName": "drampa",
       "primaryType": "normal",
       "secondaryType": "dragon",
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10453,7 +10453,7 @@
       "baseName": "falinks",
       "primaryType": "fighting",
       "secondaryType": null,
-      "box": "megalumiose",
+      "box": "lumiose",
       "legendary": "no"
     },
     {
@@ -10461,7 +10461,7 @@
       "baseName": "raichu",
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10469,7 +10469,7 @@
       "baseName": "raichu",
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10477,7 +10477,7 @@
       "baseName": "chimecho",
       "primaryType": "psychic",
       "secondaryType": "steel",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10485,7 +10485,7 @@
       "baseName": "absol",
       "primaryType": "dark",
       "secondaryType": "ghost",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10493,7 +10493,7 @@
       "baseName": "staraptor",
       "primaryType": "fighting",
       "secondaryType": "flying",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10501,7 +10501,7 @@
       "baseName": "garchomp",
       "primaryType": "dragon",
       "secondaryType": null,
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10509,7 +10509,7 @@
       "baseName": "lucario",
       "primaryType": "fighting",
       "secondaryType": "steel",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10517,7 +10517,7 @@
       "baseName": "heatran",
       "primaryType": "fire",
       "secondaryType": "steel",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "sub-legendary"
     },
     {
@@ -10525,7 +10525,7 @@
       "baseName": "darkrai",
       "primaryType": "dark",
       "secondaryType": null,
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "mythical"
     },
     {
@@ -10533,7 +10533,7 @@
       "baseName": "golurk",
       "primaryType": "ground",
       "secondaryType": "ghost",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10541,7 +10541,7 @@
       "baseName": "meowstic",
       "primaryType": "psychic",
       "secondaryType": null,
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10549,7 +10549,7 @@
       "baseName": "crabominable",
       "primaryType": "fighting",
       "secondaryType": "ice",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10557,7 +10557,7 @@
       "baseName": "golisopod",
       "primaryType": "bug",
       "secondaryType": "steel",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10565,7 +10565,7 @@
       "baseName": "magearna",
       "primaryType": "steel",
       "secondaryType": "fairy",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "mythical"
     },
     {
@@ -10573,7 +10573,7 @@
       "baseName": "zeraora",
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "mythical"
     },
     {
@@ -10581,7 +10581,7 @@
       "baseName": "scovillain",
       "primaryType": "grass",
       "secondaryType": "fire",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10589,7 +10589,7 @@
       "baseName": "glimmora",
       "primaryType": "rock",
       "secondaryType": "poison",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10597,7 +10597,7 @@
       "baseName": "tatsugiri",
       "primaryType": "dragon",
       "secondaryType": "water",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     },
     {
@@ -10605,7 +10605,7 @@
       "baseName": "baxcalibur",
       "primaryType": "dragon",
       "secondaryType": "ice",
-      "box": "megahyperspace",
+      "box": "hyperspace",
       "legendary": "no"
     }
   ]
