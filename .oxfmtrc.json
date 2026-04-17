@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 120,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "sortImports": true,
+  "jsdoc": true,
+  "singleAttributePerLine": true,
+  "ignorePatterns": ["dist/**", "*.min.js"]
+}
