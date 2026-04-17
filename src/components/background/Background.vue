@@ -1,7 +1,8 @@
 <script setup>
-import { useState } from '@/stores/useState.js';
-import { useCurrentType } from '@/stores/useCurrentType.js';
 import { computed } from 'vue';
+
+import { useCurrentType } from '@/stores/useCurrentType.js';
+import { useState } from '@/stores/useState.js';
 
 const { state } = useState();
 const { getCurrentTypeOrSpecial } = useCurrentType();
@@ -17,8 +18,14 @@ const currentType = computed(() => {
     :class="{ typed: currentType, dark: state.isDark }"
     :style="`background-color: ${currentType?.bgColor}`"
   >
-    <Transition name="fade" mode="out-in">
-      <div v-if="currentType" :key="currentType.id">
+    <Transition
+      name="fade"
+      mode="out-in"
+    >
+      <div
+        v-if="currentType"
+        :key="currentType.id"
+      >
         <img
           :alt="currentType?.name"
           :src="`/src/assets/types/${currentType?.icon}.svg`"

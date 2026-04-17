@@ -7,16 +7,16 @@ const { setMode } = useState();
 
 const props = defineProps({
   caption: {
-    type: String,
     required: true,
+    type: String,
   },
   mode: {
-    type: String,
     required: true,
+    type: String,
   },
   toggleFunction: {
-    type: Function,
     required: true,
+    type: Function,
   },
 });
 
@@ -33,14 +33,27 @@ const disableMode = (e) => {
 </script>
 
 <template>
-  <Overlay class="overlay" @click="props.toggleFunction()">
+  <Overlay
+    class="overlay"
+    @click="props.toggleFunction()"
+  >
     <div class="prompt">
       <h2>{{ props.caption }}</h2>
       <p class="desc">Quiz and timer will reset</p>
 
-      <RoundedButton @click="enableMode" primary> Enable </RoundedButton>
+      <RoundedButton
+        @click="enableMode"
+        primary
+      >
+        Enable
+      </RoundedButton>
 
-      <RoundedButton @click="disableMode" primary> Cancel </RoundedButton>
+      <RoundedButton
+        @click="disableMode"
+        primary
+      >
+        Cancel
+      </RoundedButton>
     </div>
   </Overlay>
 </template>

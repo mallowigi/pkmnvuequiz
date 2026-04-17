@@ -6,15 +6,22 @@ const { toggleShowCredits } = useCredits();
 </script>
 
 <template>
-  <div class="popuptext rad notxt">
-    <div class="paragraph pointer" @click="toggleShowCredits()">
+  <div class="popuptext rad">
+    <div
+      class="paragraph pointer"
+      @click="toggleShowCredits()"
+    >
       Artist and quality control credits for custom sprites:
       <div class="close pointer">🞬</div>
     </div>
 
     <div class="credits-popup">
       <div class="credits-list">
-        <div v-for="(credit, index) in credits" :key="index" class="credit-item">
+        <div
+          v-for="(credit, index) in credits"
+          :key="index"
+          class="credit-item"
+        >
           <div class="sprites">
             {{ credit.sprites.join(', ') }}
           </div>
@@ -56,33 +63,37 @@ const { toggleShowCredits } = useCredits();
   line-height: 22px;
 }
 
+.paragraph {
+  font-size: 1.15em;
+  padding-bottom: 10px;
+}
+
 .credits-popup {
   overflow: auto;
   height: 95.5%;
+}
+.credits-list {
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-  .credits-list {
-    font-size: 0.9em;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
+.credit-item {
+  display: flex;
+  border-top: 2px dotted var(--primary);
+  padding: 5px 0;
+}
 
-  .credit-item {
-    display: flex;
-    border-top: 2px dotted var(--primary);
-    padding: 5px 0;
-  }
+.sprites {
+  flex: 1;
+  border-right: 2px dotted #dcdcdc;
+  padding-right: 5px;
+}
 
-  .sprites {
-    flex: 1;
-    border-right: 2px dotted #dcdcdc;
-    padding-right: 5px;
-  }
-
-  .author {
-    width: 200px;
-    padding-left: 5px;
-    vertical-align: baseline;
-  }
+.author {
+  width: 200px;
+  padding-left: 5px;
+  vertical-align: baseline;
 }
 </style>

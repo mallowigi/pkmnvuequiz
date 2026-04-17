@@ -63,18 +63,46 @@ const boxStyles = computed(() => {
 
 <template>
   <header class="header">
-    <section class="controls" :style="boxStyles">
-      <RoundedButton class="cell moon" v-if="!state.isDark" @click="toggleDarkMode">
-        <img src="@/assets/moon.svg" class="icon" alt="Dark mode" />
+    <section
+      class="controls"
+      :style="boxStyles"
+    >
+      <RoundedButton
+        class="cell moon"
+        v-if="!state.isDark"
+        @click="toggleDarkMode"
+      >
+        <img
+          src="@/assets/moon.svg"
+          class="icon"
+          alt="Dark mode"
+        />
       </RoundedButton>
-      <RoundedButton class="cell sun" v-else @click="toggleDarkMode">
-        <img src="@/assets/sun.svg" class="icon" alt="Light mode" />
+      <RoundedButton
+        class="cell sun"
+        v-else
+        @click="toggleDarkMode"
+      >
+        <img
+          src="@/assets/sun.svg"
+          class="icon"
+          alt="Light mode"
+        />
       </RoundedButton>
 
       <div class="box rad-bl-tr shake">
         <p>Name all {{ regionOrType }} Pokémon:</p>
-        <input type="text" class="input-name" maxlength="13" autocomplete="off" />
-        <img class="recent-sprite" :src="unknownSprite" alt="Recent sprite" />
+        <input
+          type="text"
+          class="input-name"
+          maxlength="13"
+          autocomplete="off"
+        />
+        <img
+          class="recent-sprite"
+          :src="unknownSprite"
+          alt="Recent sprite"
+        />
       </div>
 
       <div class="box rad-bl-tr counter">

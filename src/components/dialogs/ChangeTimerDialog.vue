@@ -7,12 +7,12 @@ const { setEndTime } = useState();
 
 const props = defineProps({
   timer: {
-    type: Number,
     required: true,
+    type: Number,
   },
   toggleFunction: {
-    type: Function,
     required: true,
+    type: Function,
   },
 });
 
@@ -30,14 +30,27 @@ const cancel = (e) => {
 </script>
 
 <template>
-  <Overlay class="overlay" @click="props.toggleFunction()">
+  <Overlay
+    class="overlay"
+    @click="props.toggleFunction()"
+  >
     <div class="prompt">
       <h2>Change timer?</h2>
       <p class="desc">Quiz and timer will reset</p>
 
-      <RoundedButton @click="switchTimer" primary> Switch </RoundedButton>
+      <RoundedButton
+        @click="switchTimer"
+        primary
+      >
+        Switch
+      </RoundedButton>
 
-      <RoundedButton @click="cancel" primary> Cancel </RoundedButton>
+      <RoundedButton
+        @click="cancel"
+        primary
+      >
+        Cancel
+      </RoundedButton>
     </div>
   </Overlay>
 </template>

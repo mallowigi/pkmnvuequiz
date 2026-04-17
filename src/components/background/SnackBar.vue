@@ -12,7 +12,11 @@ onMounted(() => {
 <template>
   <div class="snackbar-container">
     <TransitionGroup>
-      <div v-for="message in state.messages" class="snackbar rad-br-tl" :key="message">
+      <div
+        v-for="message in state.messages"
+        class="snackbar rad-br-tl"
+        :key="message"
+      >
         {{ message }}
       </div>
     </TransitionGroup>

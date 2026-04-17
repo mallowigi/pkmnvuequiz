@@ -7,8 +7,8 @@ const { setEnded } = useState();
 
 const props = defineProps({
   toggleFunction: {
-    type: Function,
     required: true,
+    type: Function,
   },
 });
 
@@ -26,14 +26,27 @@ const cancel = (e) => {
 </script>
 
 <template>
-  <Overlay class="overlay" @click="props.toggleFunction()">
+  <Overlay
+    class="overlay"
+    @click="props.toggleFunction()"
+  >
     <div class="prompt">
       <h2>Give Up?</h2>
       <p class="desc">Are you sure you want to give up?</p>
 
-      <RoundedButton @click="giveUp" primary> Give Up </RoundedButton>
+      <RoundedButton
+        @click="giveUp"
+        primary
+      >
+        Give Up
+      </RoundedButton>
 
-      <RoundedButton @click="cancel" primary> Cancel </RoundedButton>
+      <RoundedButton
+        @click="cancel"
+        primary
+      >
+        Cancel
+      </RoundedButton>
     </div>
   </Overlay>
 </template>

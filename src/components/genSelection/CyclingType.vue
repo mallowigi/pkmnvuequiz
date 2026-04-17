@@ -46,7 +46,11 @@ onUnmounted(() => {
     @click="setGameMode('types')"
   >
     Types
-    <img :alt="currentType.name" :src="currentType.iconUrl" class="inverted-symbol" />
+    <img
+      :alt="currentType.name"
+      :src="currentType.iconUrl"
+      class="inverted-symbol"
+    />
   </div>
 </template>
 

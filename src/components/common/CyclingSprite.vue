@@ -3,8 +3,8 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const props = defineProps({
   sprites: {
-    type: Array,
     required: true,
+    type: Array,
   },
   start: Number,
 });
@@ -46,7 +46,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <img alt="Sprite" :hidden="sprites.length === 0" :src="sprite" class="sprite cropped" />
+  <img
+    alt="Sprite"
+    :hidden="sprites.length === 0"
+    :src="sprite"
+    class="sprite cropped"
+  />
 </template>
 
 <style scoped>

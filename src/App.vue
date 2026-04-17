@@ -1,20 +1,21 @@
 <script setup>
+import { onMounted, onUnmounted } from 'vue';
+
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
-import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
+import EndOverlay from '@/components/background/EndOverlay.vue';
 import PauseOverlay from '@/components/background/PauseOverlay.vue';
+import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
 import FadeTransition from '@/components/common/FadeTransition.vue';
-import { useState } from '@/stores/useState.js';
-import TypeSelection from '@/components/genSelection/TypeSelection.vue';
-import { useRoomMessages } from '@/stores/useRoomMessages.js';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
-import EndOverlay from '@/components/background/EndOverlay.vue';
-import GameStart from '@/components/genSelection/GameStart.vue';
-import GameHeader from '@/components/header/GameHeader.vue';
-import { onMounted, onUnmounted } from 'vue';
 import GameFooter from '@/components/footer/GameFooter.vue';
+import GameStart from '@/components/genSelection/GameStart.vue';
+import TypeSelection from '@/components/genSelection/TypeSelection.vue';
+import GameHeader from '@/components/header/GameHeader.vue';
 import { useCredits } from '@/stores/useCredits.js';
+import { useRoomMessages } from '@/stores/useRoomMessages.js';
+import { useState } from '@/stores/useState.js';
 
 const { state, setDarkMode } = useState();
 const { credits } = useCredits();
@@ -42,7 +43,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="main" :class="{ dark: state.isDark }">
+  <main
+    class="main"
+    :class="{ dark: state.isDark }"
+  >
     <Background />
 
     <GameHeader />
@@ -97,6 +101,8 @@ onMounted(() => {
 <style scoped>
 .main {
   min-height: 100vh;
+  max-width: 1600px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

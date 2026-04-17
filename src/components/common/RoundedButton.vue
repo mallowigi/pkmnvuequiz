@@ -6,11 +6,12 @@ export default {
 
 <script setup>
 import { computed } from 'vue';
+
 import { useCurrentType } from '@/stores/useCurrentType.js';
 
 const props = defineProps({
-  text: String,
   primary: Boolean,
+  text: String,
 });
 
 const { getCurrentType } = useCurrentType();
@@ -20,14 +21,19 @@ const buttonStyles = computed(() => {
   const color = type?.buttonColor;
   const bgColor = type?.bgColor;
   return {
-    '--btn-color': color,
     '--bg-color': bgColor,
+    '--btn-color': color,
   };
 });
 </script>
 
 <template>
-  <div class="cell rad-bl-tr transition-element" :class="{ primary: primary }" :style="buttonStyles" v-bind="$attrs">
+  <div
+    class="cell rad-bl-tr transition-element"
+    :class="{ primary: primary }"
+    :style="buttonStyles"
+    v-bind="$attrs"
+  >
     <slot />
   </div>
 </template>

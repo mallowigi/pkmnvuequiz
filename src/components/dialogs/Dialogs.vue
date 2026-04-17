@@ -34,15 +34,32 @@ const closeDialog = () => setDialog(null);
     v-if="dialogs.dialog === 'normal'"
   />
 
-  <ShadowsDialog :toggle-function="closeDialog" v-if="dialogs.dialog === 'shadows'" />
+  <ShadowsDialog
+    :toggle-function="closeDialog"
+    v-if="dialogs.dialog === 'shadows'"
+  />
 
-  <SwitchQuizDialog :toggle-function="closeDialog" :gen="data" v-if="dialogs.dialog === 'switchQuiz'" />
+  <SwitchQuizDialog
+    :toggle-function="closeDialog"
+    :gen="data"
+    v-if="dialogs.dialog === 'switchQuiz'"
+  />
 
-  <ChangeTimerDialog :toggle-function="closeDialog" :timer="data" v-if="dialogs.dialog === 'timer'" />
+  <ChangeTimerDialog
+    :toggle-function="closeDialog"
+    :timer="data"
+    v-if="dialogs.dialog === 'timer'"
+  />
 
-  <GiveUpDialog :toggle-function="closeDialog" v-if="dialogs.dialog === 'giveup'" />
+  <GiveUpDialog
+    :toggle-function="closeDialog"
+    v-if="dialogs.dialog === 'giveup'"
+  />
 
-  <ResetDialog :toggle-function="closeDialog" v-if="dialogs.dialog === 'reset'" />
+  <ResetDialog
+    :toggle-function="closeDialog"
+    v-if="dialogs.dialog === 'reset'"
+  />
 </template>
 
 <style scoped></style>

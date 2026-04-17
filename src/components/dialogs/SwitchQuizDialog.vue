@@ -7,12 +7,12 @@ const { setGen } = useState();
 
 const props = defineProps({
   gen: {
-    type: String,
     required: true,
+    type: String,
   },
   toggleFunction: {
-    type: Function,
     required: true,
+    type: Function,
   },
 });
 
@@ -29,14 +29,27 @@ const cancel = (e) => {
 </script>
 
 <template>
-  <Overlay class="overlay" @click="props.toggleFunction()">
+  <Overlay
+    class="overlay"
+    @click="props.toggleFunction()"
+  >
     <div class="prompt">
       <h2>Switch Quiz?</h2>
       <p class="desc">Quiz and timer will reset</p>
 
-      <RoundedButton @click="switchQuiz" primary> Switch </RoundedButton>
+      <RoundedButton
+        @click="switchQuiz"
+        primary
+      >
+        Switch
+      </RoundedButton>
 
-      <RoundedButton @click="cancel" primary> Cancel </RoundedButton>
+      <RoundedButton
+        @click="cancel"
+        primary
+      >
+        Cancel
+      </RoundedButton>
     </div>
   </Overlay>
 </template>

@@ -1,13 +1,13 @@
 import { reactive, readonly } from 'vue';
 
 const data = reactive({
-  pokemon: null,
-  namings: null,
-  spriteCycles: null,
-  translations: null,
-  sprites: null,
-  isLoaded: false,
   error: null,
+  isLoaded: false,
+  namings: null,
+  pokemon: null,
+  spriteCycles: null,
+  sprites: null,
+  translations: null,
 });
 
 export async function loadPokemons() {
@@ -46,11 +46,12 @@ export async function setError(error) {
 export const usePkmnData = () => {
   return {
     data: readonly(data),
-    loadPokemons,
     loadNamings,
+    loadPokemons,
     loadSpriteCycles,
-    loadTranslations,
     loadSprites,
+    loadTranslations,
+    setError,
     setLoaded,
   };
 };

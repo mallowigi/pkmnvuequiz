@@ -8,22 +8,48 @@ const { toggleShowCredits } = useCredits();
   <footer class="footer rad transition-element">
     <div class="row">
       <p class="p1">
-        Project by <a href="https://linktr.ee/adeptcharon" target="_blank">Charon</a>.&emsp; Rewritten in Vue by
-        <a href="https://github.com/mallowigi" target="_blank">Mallowigi</a>.
+        Project by
+        <a
+          href="https://linktr.ee/adeptcharon"
+          target="_blank"
+          >Charon</a
+        >.&emsp; Rewritten in Vue by
+        <a
+          href="https://github.com/mallowigi"
+          target="_blank"
+          >Mallowigi</a
+        >.
       </p>
     </div>
 
     <div class="row">
-      <p>
-        Original Project found at <a href="https://pkmnquiz.com/" target="_blank">https://pkmnquiz.com/</a>.
+      <p class="p2">
+        Original Project found at
+        <a
+          href="https://pkmnquiz.com/"
+          target="_blank"
+          >https://pkmnquiz.com/</a
+        >.
 
-        <a href="https://ko-fi.com/pkmnquiz" target="_blank">
-          <img class="kofi" src="@/assets/kofi-tag.webp" alt="Ko-fi donation button" />
+        <a
+          href="https://ko-fi.com/pkmnquiz"
+          target="_blank"
+        >
+          <img
+            class="kofi"
+            src="@/assets/kofi-tag.webp"
+            alt="Ko-fi donation button"
+          />
         </a>
       </p>
 
-      <p>
-        Custom &amp; modified sprites made by <span class="link" @click="toggleShowCredits()">various artists ≡</span>
+      <p class="p2">
+        Custom &amp; modified sprites made by
+        <span
+          class="link"
+          @click="toggleShowCredits()"
+          >various artists ≡</span
+        >
         as part of the
         <a
           href="https://www.deviantart.com/pikafan2000/art/National-Pokedex-Version-Delta-Icon-Dex-824897934"
@@ -32,13 +58,21 @@ const { toggleShowCredits } = useCredits();
         >.
       </p>
 
-      <p>
-        Resource for data: <a href="https://github.com/PokeAPI/" target="_blank">PokéAPI</a>.&emsp; Resource for
-        sprites:
-        <a href="https://msikma.github.io/pokesprite/overview/dex-gen8.html" target="_blank">Pokésprite Database</a>.
+      <p class="p2">
+        Resource for data:
+        <a
+          href="https://github.com/PokeAPI/"
+          target="_blank"
+          >PokéAPI</a
+        >.&emsp; Resource for sprites:
+        <a
+          href="https://msikma.github.io/pokesprite/overview/dex-gen8.html"
+          target="_blank"
+          >Pokésprite Database</a
+        >.
       </p>
 
-      <p>
+      <p class="p2">
         This project is an unofficial derivative work based on Pokémon. Official sprites belong to © Nintendo/Creatures
         Inc./GAME FREAK Inc.
       </p>
@@ -54,12 +88,17 @@ const { toggleShowCredits } = useCredits();
   padding: 11px 14px;
 }
 
+.p1 {
+  font-size: 1.15em;
+  display: inline-block;
+}
+
+.p2 {
+  font-size: 0.9em;
+}
+
 .row {
   line-height: 30px;
-
-  & p {
-    font-size: 0.9em;
-  }
 }
 
 .link {

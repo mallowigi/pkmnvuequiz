@@ -20,7 +20,12 @@ const setGen = (gen) => {
       <!-- Full quiz-->
       <div></div>
       <div class="cell-full">
-        <div class="cell rad-bl-tr" @click="setGameMode('full')">Full quiz</div>
+        <div
+          class="cell rad-bl-tr"
+          @click="setGameMode('full')"
+        >
+          Full quiz
+        </div>
       </div>
       <div></div>
 
@@ -35,7 +40,10 @@ const setGen = (gen) => {
         <div hidden>{{ gen.id }}</div>
         <div class="gen-name">{{ gen.name }}</div>
 
-        <CyclingStarters :gen="gen" :start="i % 3" />
+        <CyclingStarters
+          :gen="gen"
+          :start="i % 3"
+        />
       </div>
 
       <!-- Types -->

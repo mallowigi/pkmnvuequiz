@@ -5,8 +5,8 @@ import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
 const props = defineProps({
   gen: {
-    type: Object,
     required: true,
+    type: Object,
   },
   start: Number,
 });
@@ -24,5 +24,8 @@ const sprites = computed(() => {
 </script>
 
 <template>
-  <CyclingSprite :sprites="sprites" :start="start" />
+  <CyclingSprite
+    :sprites="sprites"
+    :start="start"
+  />
 </template>

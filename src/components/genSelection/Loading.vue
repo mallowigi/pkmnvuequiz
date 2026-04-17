@@ -1,17 +1,11 @@
 <script setup>
-import { usePkmnData } from '@/stores/usePkmnStore.js';
+import { setError, usePkmnData } from '@/stores/usePkmnStore.js';
 import { onMounted } from 'vue';
 
 const { data, setLoaded, loadPokemons, loadSprites, loadNamings, loadSpriteCycles, loadTranslations } = usePkmnData();
 
 onMounted(() => {
-  Promise.all([
-    loadPokemons(),
-    loadSprites(),
-    loadSpriteCycles(),
-    loadTranslations(),
-    loadNamings(),
-  ])
+  Promise.all([loadPokemons(), loadSprites(), loadSpriteCycles(), loadTranslations(), loadNamings()])
     .then(() => {
       setLoaded(true);
     })
@@ -24,10 +18,16 @@ onMounted(() => {
 
 <template>
   <div v-if="!data.isLoaded">
-    <div class="loader" id="loader">
+    <div
+      class="loader"
+      id="loader"
+    >
       <h2>Loading Quiz</h2>
     </div>
-    <div class="lds-ellipsis" id="spinner">
+    <div
+      class="lds-ellipsis"
+      id="spinner"
+    >
       <div></div>
       <div></div>
       <div></div>

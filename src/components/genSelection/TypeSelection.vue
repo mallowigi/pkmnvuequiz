@@ -31,14 +31,21 @@ const goBack = () => setGameMode(null);
         @click="setTypeOrSpecial(typeMeta.id)"
         :style="{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }"
       >
-        <img :src="`/src/assets/types/${typeMeta.icon}.svg`" :alt="typeMeta.name" class="symbol" />
+        <img
+          :src="`/src/assets/types/${typeMeta.icon}.svg`"
+          :alt="typeMeta.name"
+          class="symbol"
+        />
         <div hidden>{{ typeMeta.symbol }}</div>
         <div class="type-name">{{ typeMeta.name }}</div>
       </RoundedButton>
 
       <div></div>
 
-      <RoundedButton class="button-type button-back" @click="goBack">
+      <RoundedButton
+        class="button-type button-back"
+        @click="goBack"
+      >
         <div class="type-name">Back</div>
       </RoundedButton>
     </div>

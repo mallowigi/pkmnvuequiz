@@ -1,7 +1,8 @@
 <script setup>
-import { useCurrentType } from '@/stores/useCurrentType.js';
 import { computed } from 'vue';
+
 import { donors } from '@/data/donors.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
 import { useState } from '@/stores/useState.js';
 
 const { getCurrentType } = useCurrentType();
@@ -17,7 +18,10 @@ const sidebarStyles = computed(() => {
 
 <template>
   <div class="overlay">
-    <div class="sidepanel" :style="sidebarStyles">
+    <div
+      class="sidepanel"
+      :style="sidebarStyles"
+    >
       <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
 
@@ -36,15 +40,25 @@ const sidebarStyles = computed(() => {
         </p>
 
         <p>
-          <a href="https://ko-fi.com/pkmnquiz" target="_blank">
-            <img class="kofi2" src="@/assets/kofi-tag.webp" alt="Ko-Fi" />
+          <a
+            href="https://ko-fi.com/pkmnquiz"
+            target="_blank"
+          >
+            <img
+              class="kofi2"
+              src="@/assets/kofi-tag.webp"
+              alt="Ko-Fi"
+            />
           </a>
         </p>
 
         <h2>Supporters:</h2>
         <div class="scrollbox">
           <ol>
-            <li v-for="donor in donors" :key="donor">
+            <li
+              v-for="donor in donors"
+              :key="donor"
+            >
               {{ donor }}
             </li>
           </ol>

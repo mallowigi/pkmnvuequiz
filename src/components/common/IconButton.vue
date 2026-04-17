@@ -5,7 +5,10 @@ defineProps({
 </script>
 
 <template>
-  <div class="cell rad-br-tl transition-element" @click="onClick">
+  <div
+    class="cell rad-br-tl transition-element"
+    @click="onClick"
+  >
     <slot />
   </div>
 </template>
@@ -14,7 +17,7 @@ defineProps({
 .cell {
   background: var(--secondary);
   border: 2px solid var(--secondary);
-  color: var(--dark);
+  color: #222;
   text-align: center;
   text-decoration: none;
   display: inline-block;

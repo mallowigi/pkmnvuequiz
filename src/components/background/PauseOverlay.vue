@@ -23,10 +23,7 @@ const saveState = () => {
   const link = document.createElement('a');
   link.href = url;
 
-  const [
-    date,
-    time,
-  ] = new Date().toISOString().split('T');
+  const [date, time] = new Date().toISOString().split('T');
   const formatDate = date.replace(/-/g, '_');
   const formatTime = time.replace(/:/g, '_').split('.')[0];
   link.download = `pkmn_quiz_state_${formatDate}_${formatTime}.json`;
@@ -69,23 +66,40 @@ const loadState = (e) => {
 
 <template>
   <Overlay class="full-overlay">
-    <input type="file" id="file-input" @change="loadState" hidden accept="application/json" />
+    <input
+      type="file"
+      id="file-input"
+      @change="loadState"
+      hidden
+      accept="application/json"
+    />
 
     <div class="prompt">
       <h2 class="left-margin">Paused</h2>
 
-      <RoundedButton :primary="true" @click="setPaused(false)"> Resume </RoundedButton>
+      <RoundedButton
+        :primary="true"
+        @click="setPaused(false)"
+      >
+        Resume
+      </RoundedButton>
 
       <div class="top-margin">
         <p class="left-margin">Save/Load Quiz State:</p>
 
         <IconButton @click="saveState">
-          <img src="@/assets/download.png" alt="Download" />
+          <img
+            src="@/assets/download.png"
+            alt="Download"
+          />
         </IconButton>
 
         <label for="file-input">
           <IconButton>
-            <img src="@/assets/upload.png" alt="Upload" />
+            <img
+              src="@/assets/upload.png"
+              alt="Upload"
+            />
           </IconButton>
         </label>
       </div>
