@@ -34,25 +34,23 @@ onUnmounted(() => {
   clearInterval(interval);
   interval = null;
 });
-
 </script>
 
 <template>
-  <div :style='{
-         backgroundColor: currentType.bgColor,
-         border: `2px solid ${currentType.bgColor}`,
-         color: currentType.fgColor
-       }'
-       @click='setGameMode("types")'>
+  <div
+    :style="{
+      backgroundColor: currentType.bgColor,
+      border: `2px solid ${currentType.bgColor}`,
+      color: currentType.fgColor,
+    }"
+    @click="setGameMode('types')"
+  >
     Types
-    <img :alt='currentType.name'
-         :src='currentType.iconUrl'
-         class='inverted-symbol'>
+    <img :alt="currentType.name" :src="currentType.iconUrl" class="inverted-symbol" />
   </div>
 </template>
 
 <style scoped>
-
 .inverted-symbol {
   width: 42px;
   filter: brightness(0) invert(1);

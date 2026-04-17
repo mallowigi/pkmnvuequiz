@@ -5,7 +5,6 @@ export default {
 </script>
 
 <script setup>
-
 import { computed } from 'vue';
 import { useCurrentType } from '@/stores/useCurrentType.js';
 
@@ -25,20 +24,15 @@ const buttonStyles = computed(() => {
     '--bg-color': bgColor,
   };
 });
-
 </script>
 
 <template>
-  <div class='cell rad-bl-tr transition-element'
-       :class='{ "primary": primary }'
-       :style='buttonStyles'
-       v-bind='$attrs'>
+  <div class="cell rad-bl-tr transition-element" :class="{ primary: primary }" :style="buttonStyles" v-bind="$attrs">
     <slot />
   </div>
 </template>
 
 <style scoped>
-
 .cell {
   border: 2px solid var(--btn-color, var(--primary));
   background: var(--button);

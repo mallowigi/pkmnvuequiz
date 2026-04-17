@@ -32,7 +32,7 @@ export const usePokemons = () => {
       return [];
     }
 
-    const filtered = data.pokemon.filter(pok => boxes.includes(pok.box));
+    const filtered = data.pokemon.filter((pok) => boxes.includes(pok.box));
     return removeDuplicates(filtered);
   };
 
@@ -46,8 +46,11 @@ export const usePokemons = () => {
       return [];
     }
 
-    const filtered = data.pokemon.filter(pok => {
-      const types = [pok.primaryType, pok.secondaryType].filter(Boolean);
+    const filtered = data.pokemon.filter((pok) => {
+      const types = [
+        pok.primaryType,
+        pok.secondaryType,
+      ].filter(Boolean);
       return types.includes(currentType.id);
     });
 
@@ -59,8 +62,12 @@ export const usePokemons = () => {
       return [];
     }
 
-    const filtered = data.pokemon.filter(pok => {
-      const types = ['legendary', 'sub-legendary', 'mythical'].filter(Boolean);
+    const filtered = data.pokemon.filter((pok) => {
+      const types = [
+        'legendary',
+        'sub-legendary',
+        'mythical',
+      ].filter(Boolean);
       return types.includes(pok.specialType);
     });
 

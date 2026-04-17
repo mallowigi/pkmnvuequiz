@@ -27,9 +27,13 @@ const startCycle = () => {
 };
 
 // Watch until the data is available and restart the interval
-watch(() => props.sprites, () => {
-  startCycle();
-}, { immediate: true });
+watch(
+  () => props.sprites,
+  () => {
+    startCycle();
+  },
+  { immediate: true },
+);
 
 onMounted(() => {
   startCycle();
@@ -39,18 +43,13 @@ onUnmounted(() => {
   clearInterval(interval);
   interval = null;
 });
-
 </script>
 
 <template>
-  <img alt='Sprite'
-       :hidden='sprites.length === 0'
-       :src='sprite'
-       class='sprite cropped'>
+  <img alt="Sprite" :hidden="sprites.length === 0" :src="sprite" class="sprite cropped" />
 </template>
 
 <style scoped>
-
 .sprite {
   margin: -3px -10px 0 0;
   padding-right: 2px;
@@ -63,5 +62,4 @@ onUnmounted(() => {
   object-fit: none;
   object-position: 50% 100%;
 }
-
 </style>

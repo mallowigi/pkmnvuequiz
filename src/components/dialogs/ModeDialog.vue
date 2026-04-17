@@ -1,5 +1,4 @@
 <script setup>
-
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState.js';
@@ -31,22 +30,17 @@ const disableMode = (e) => {
   e.stopPropagation();
   props.toggleFunction();
 };
-
 </script>
 
 <template>
-  <Overlay class='overlay' @click='props.toggleFunction()'>
-    <div class='prompt'>
+  <Overlay class="overlay" @click="props.toggleFunction()">
+    <div class="prompt">
       <h2>{{ props.caption }}</h2>
-      <p class='desc'>Quiz and timer will reset</p>
+      <p class="desc">Quiz and timer will reset</p>
 
-      <RoundedButton @click='enableMode' primary>
-        Enable
-      </RoundedButton>
+      <RoundedButton @click="enableMode" primary> Enable </RoundedButton>
 
-      <RoundedButton @click='disableMode' primary>
-        Cancel
-      </RoundedButton>
+      <RoundedButton @click="disableMode" primary> Cancel </RoundedButton>
     </div>
   </Overlay>
 </template>
@@ -59,5 +53,4 @@ const disableMode = (e) => {
 .desc {
   margin-bottom: 10px;
 }
-
 </style>

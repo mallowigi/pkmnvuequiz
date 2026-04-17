@@ -1,5 +1,4 @@
 <script setup>
-
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { types } from '@/data/types.js';
@@ -20,37 +19,29 @@ const setTypeOrSpecial = (type) => {
 };
 
 const goBack = () => setGameMode(null);
-
 </script>
 
 <template>
   <Overlay>
-    <div class='prompt type-grid'>
+    <div class="prompt type-grid">
       <RoundedButton
-          v-for='typeMeta in types'
-          :key='typeMeta.id'
-          class='button-type'
-          @click='setTypeOrSpecial(typeMeta.id)'
-          :style='{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }'
+        v-for="typeMeta in types"
+        :key="typeMeta.id"
+        class="button-type"
+        @click="setTypeOrSpecial(typeMeta.id)"
+        :style="{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }"
       >
-        <img :src='`/src/assets/types/${typeMeta.icon}.svg`'
-             :alt='typeMeta.name'
-             class='symbol'>
+        <img :src="`/src/assets/types/${typeMeta.icon}.svg`" :alt="typeMeta.name" class="symbol" />
         <div hidden>{{ typeMeta.symbol }}</div>
-        <div class='type-name'>{{ typeMeta.name }}</div>
+        <div class="type-name">{{ typeMeta.name }}</div>
       </RoundedButton>
 
       <div></div>
 
-      <RoundedButton
-          class='button-type button-back'
-          @click='goBack'
-      >
-        <div class='type-name'>Back</div>
+      <RoundedButton class="button-type button-back" @click="goBack">
+        <div class="type-name">Back</div>
       </RoundedButton>
     </div>
-
-
   </Overlay>
 </template>
 

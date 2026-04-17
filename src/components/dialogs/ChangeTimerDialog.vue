@@ -1,5 +1,4 @@
 <script setup>
-
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { setStartTime, useState } from '@/stores/useState.js';
@@ -28,22 +27,17 @@ const cancel = (e) => {
   e.stopPropagation();
   props.toggleFunction();
 };
-
 </script>
 
 <template>
-  <Overlay class='overlay' @click='props.toggleFunction()'>
-    <div class='prompt'>
+  <Overlay class="overlay" @click="props.toggleFunction()">
+    <div class="prompt">
       <h2>Change timer?</h2>
-      <p class='desc'>Quiz and timer will reset</p>
+      <p class="desc">Quiz and timer will reset</p>
 
-      <RoundedButton @click='switchTimer' primary>
-        Switch
-      </RoundedButton>
+      <RoundedButton @click="switchTimer" primary> Switch </RoundedButton>
 
-      <RoundedButton @click='cancel' primary>
-        Cancel
-      </RoundedButton>
+      <RoundedButton @click="cancel" primary> Cancel </RoundedButton>
     </div>
   </Overlay>
 </template>
@@ -56,5 +50,4 @@ const cancel = (e) => {
 .desc {
   margin-bottom: 10px;
 }
-
 </style>

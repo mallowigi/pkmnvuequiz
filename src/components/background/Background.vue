@@ -9,23 +9,28 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const currentType = computed(() => {
   return getCurrentTypeOrSpecial();
 });
-
 </script>
 
 <template>
-  <div class='background'
-       :class='{ typed: currentType, dark: state.isDark }'
-       :style='`background-color: ${currentType?.bgColor}`'>
-    <Transition name='fade' mode='out-in'>
-      <div v-if='currentType' :key='currentType.id'>
-        <img :alt='currentType?.name'
-             :src='`/src/assets/types/${currentType?.icon}.svg`'
-             id='bgpattern'
-             class='bgpattern'>
-        <img :alt='currentType?.name'
-             :src='`/src/assets/types/${currentType?.icon}.svg`'
-             id='bgpattern2'
-             class='bgpattern2'>
+  <div
+    class="background"
+    :class="{ typed: currentType, dark: state.isDark }"
+    :style="`background-color: ${currentType?.bgColor}`"
+  >
+    <Transition name="fade" mode="out-in">
+      <div v-if="currentType" :key="currentType.id">
+        <img
+          :alt="currentType?.name"
+          :src="`/src/assets/types/${currentType?.icon}.svg`"
+          id="bgpattern"
+          class="bgpattern"
+        />
+        <img
+          :alt="currentType?.name"
+          :src="`/src/assets/types/${currentType?.icon}.svg`"
+          id="bgpattern2"
+          class="bgpattern2"
+        />
       </div>
     </Transition>
   </div>
@@ -86,5 +91,4 @@ const currentType = computed(() => {
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>

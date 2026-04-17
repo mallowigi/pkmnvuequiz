@@ -13,49 +13,47 @@ const sidebarStyles = computed(() => {
     '--bg-color': type?.bgColor,
   };
 });
-
 </script>
 
 <template>
-  <div class='overlay'>
-    <div class='sidepanel' :style='sidebarStyles'>
-      <div class='section rad-bl-tr welldone'>
+  <div class="overlay">
+    <div class="sidepanel" :style="sidebarStyles">
+      <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
 
         <h2>
           You named {{ state.numFound }} {{ state.gen }} Pokémon in {{ state.timer.elapsed }} seconds in Pokédex order!
         </h2>
 
-        <p>
-          Challenge yourself further, try naming them without shadows. <br>({{ state.numShadows }} shadows used)
-        </p>
+        <p>Challenge yourself further, try naming them without shadows. <br />({{ state.numShadows }} shadows used)</p>
       </div>
 
-      <div class='section rad-bl-tr supporters'>
-        <p class='small'>
-          Project developed/maintained for free.<br> We want to keep it alive and ad-free.<br>
+      <div class="section rad-bl-tr supporters">
+        <p class="small">
+          Project developed/maintained for free.<br />
+          We want to keep it alive and ad-free.<br />
           If you enjoy playing and want to support it, you can do so via Ko-Fi:
         </p>
 
         <p>
-          <a href='https://ko-fi.com/pkmnquiz' target='_blank'>
-            <img class='kofi2' src='@/assets/kofi-tag.webp' alt='Ko-Fi' />
+          <a href="https://ko-fi.com/pkmnquiz" target="_blank">
+            <img class="kofi2" src="@/assets/kofi-tag.webp" alt="Ko-Fi" />
           </a>
         </p>
 
         <h2>Supporters:</h2>
-        <div class='scrollbox'>
+        <div class="scrollbox">
           <ol>
-            <li v-for='donor in donors' :key='donor'>
+            <li v-for="donor in donors" :key="donor">
               {{ donor }}
             </li>
           </ol>
         </div>
 
-        <p class='small'>We appreciate every bit of support.</p>
+        <p class="small">We appreciate every bit of support.</p>
       </div>
 
-      <p class='small'>Click anywhere to close</p>
+      <p class="small">Click anywhere to close</p>
     </div>
   </div>
 </template>
@@ -71,7 +69,13 @@ const sidebarStyles = computed(() => {
   bottom: 0;
   z-index: 6;
   cursor: pointer;
-  background: linear-gradient(90deg, rgb(0 0 0 / 0%) 0%, rgb(16 17 14 / 10%) 20%, rgb(16 17 14 / 30%) 50%, rgba(16, 17, 14, 0.8015581232492998) 100%);
+  background: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 0%) 0%,
+    rgb(16 17 14 / 10%) 20%,
+    rgb(16 17 14 / 30%) 50%,
+    rgba(16, 17, 14, 0.8015581232492998) 100%
+  );
 }
 
 .sidepanel {
@@ -131,5 +135,4 @@ h2 {
 li {
   list-style-type: none;
 }
-
 </style>

@@ -2,15 +2,7 @@
 import { usePkmnData } from '@/stores/usePkmnStore.js';
 import { onMounted } from 'vue';
 
-const {
-        data,
-        setLoaded,
-        loadPokemons,
-        loadSprites,
-        loadNamings,
-        loadSpriteCycles,
-        loadTranslations,
-      } = usePkmnData();
+const { data, setLoaded, loadPokemons, loadSprites, loadNamings, loadSpriteCycles, loadTranslations } = usePkmnData();
 
 onMounted(() => {
   Promise.all([
@@ -20,22 +12,22 @@ onMounted(() => {
     loadTranslations(),
     loadNamings(),
   ])
-      .then(() => {
-        setLoaded(true);
-      })
-      .catch((error) => {
-        console.error('Error loading data:', error);
-        setError('Error loading data:', error);
-      });
+    .then(() => {
+      setLoaded(true);
+    })
+    .catch((error) => {
+      console.error('Error loading data:', error);
+      setError('Error loading data:', error);
+    });
 });
 </script>
 
 <template>
-  <div v-if='!data.isLoaded'>
-    <div class='loader' id='loader'>
+  <div v-if="!data.isLoaded">
+    <div class="loader" id="loader">
       <h2>Loading Quiz</h2>
     </div>
-    <div class='lds-ellipsis' id='spinner'>
+    <div class="lds-ellipsis" id="spinner">
       <div></div>
       <div></div>
       <div></div>
@@ -45,7 +37,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 @keyframes lds-ellipsis1 {
   0% {
     transform: scale(0);

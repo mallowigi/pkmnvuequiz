@@ -1,9 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div :class='["overlay", $attrs.class]'>
+  <div :class="['overlay', $attrs.class]">
     <slot />
   </div>
 </template>

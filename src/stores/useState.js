@@ -22,7 +22,13 @@ const state = reactive({
   numShadows: 0,
   numFound: 0,
 
-  languages: new Set(['en', 'ko', 'jp', 'zh', 'cn']),
+  languages: new Set([
+    'en',
+    'ko',
+    'jp',
+    'zh',
+    'cn',
+  ]),
   timer: {
     startTime: null,
     endTime: null,
@@ -148,7 +154,13 @@ export const resetState = () => {
     withCycleSprites: true,
     withSound: true,
 
-    languages: new Set(['en', 'ko', 'jp', 'zh', 'cn']),
+    languages: new Set([
+      'en',
+      'ko',
+      'jp',
+      'zh',
+      'cn',
+    ]),
     timer: {
       startTime: null,
       endTime: null,

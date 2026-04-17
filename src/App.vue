@@ -39,40 +39,37 @@ onMounted(() => {
     darkModeMediaQuery.removeEventListener('change', handleDarkModeChange);
   });
 });
-
 </script>
 
 <template>
-  <main class='main' :class='{ dark: state.isDark }'>
+  <main class="main" :class="{ dark: state.isDark }">
     <Background />
 
     <GameHeader />
 
-    <div style='flex: 1'>
-      foo
-    </div>
+    <div style="flex: 1">foo</div>
 
     <GameFooter />
 
     <FadeTransition>
-      <Credits v-if='credits.showCredits' />
+      <Credits v-if="credits.showCredits" />
     </FadeTransition>
 
-    <RoomMessageOverlay v-if='roomState.roomMessage !== null' />
+    <RoomMessageOverlay v-if="roomState.roomMessage !== null" />
 
-    <PauseOverlay v-if='state.isPaused' />
+    <PauseOverlay v-if="state.isPaused" />
 
     <FadeTransition>
-      <GameStart v-if='state.gameMode === null' />
+      <GameStart v-if="state.gameMode === null" />
     </FadeTransition>
 
     <FadeTransition>
-      <TypeSelection v-if='state.gameMode === "types" && state.currentType === null' />
+      <TypeSelection v-if="state.gameMode === 'types' && state.currentType === null" />
     </FadeTransition>
 
     <Dialogs />
 
-    <EndOverlay v-if='state.isEnded' />
+    <EndOverlay v-if="state.isEnded" />
 
     <SnackBar />
   </main>

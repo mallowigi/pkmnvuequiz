@@ -1,5 +1,4 @@
 <script setup>
-
 import Overlay from '@/components/common/Overlay.vue';
 import Loading from '@/components/genSelection/Loading.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
@@ -7,20 +6,19 @@ import { usePkmnData } from '@/stores/usePkmnStore.js';
 import FadeTransition from '@/components/common/FadeTransition.vue';
 
 const { data } = usePkmnData();
-
 </script>
 
 <template>
   <Overlay>
-    <div class='prompt'>
-      <div id='loadbox'>
-        <img src='@/assets/logo.gif' class='titlecard' alt='Logo'>
+    <div class="prompt">
+      <div id="loadbox">
+        <img src="@/assets/logo.gif" class="titlecard" alt="Logo" />
 
         <Loading />
       </div>
 
       <FadeTransition>
-        <GenChooser v-if='data.isLoaded' />
+        <GenChooser v-if="data.isLoaded" />
       </FadeTransition>
     </div>
   </Overlay>
@@ -43,5 +41,4 @@ const { data } = usePkmnData();
   padding-top: 30%;
   max-width: 600px;
 }
-
 </style>

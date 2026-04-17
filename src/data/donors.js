@@ -50,7 +50,7 @@ export const donors = [
   'aBBy513',
   'Limo2077',
   'Ilaria',
-  'Mega Garchomp Z\'s Biggest Hater',
+  "Mega Garchomp Z's Biggest Hater",
   'Angelos',
   'Petrachor',
   'gabe',

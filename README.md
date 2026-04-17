@@ -23,6 +23,7 @@ through various game modes and generations.
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd pkmnquiz

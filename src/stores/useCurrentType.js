@@ -11,12 +11,12 @@ export const useCurrentType = () => {
   const getCurrentType = () => {
     const currentType = state.currentType;
 
-    const foundType = types.find(type => type.id === currentType);
+    const foundType = types.find((type) => type.id === currentType);
     return foundType ?? null;
   };
 
   const getSpecialType = () => {
-    const foundType = types.find(type => type.id === 'special');
+    const foundType = types.find((type) => type.id === 'special');
     return foundType ?? null;
   };
 

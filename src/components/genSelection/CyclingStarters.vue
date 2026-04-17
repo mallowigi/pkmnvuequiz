@@ -19,11 +19,10 @@ const sprites = computed(() => {
   if (!encodings?.sprite) {
     return [];
   }
-  return props.gen.sprites.map(sprite => encodings.sprite[sprite]);
+  return props.gen.sprites.map((sprite) => encodings.sprite[sprite]);
 });
-
 </script>
 
 <template>
-  <CyclingSprite :sprites='sprites' :start='start' />
+  <CyclingSprite :sprites="sprites" :start="start" />
 </template>

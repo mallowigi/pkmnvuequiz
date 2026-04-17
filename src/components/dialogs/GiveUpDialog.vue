@@ -1,5 +1,4 @@
 <script setup>
-
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState.js';
@@ -24,22 +23,17 @@ const cancel = (e) => {
   e.stopPropagation();
   props.toggleFunction();
 };
-
 </script>
 
 <template>
-  <Overlay class='overlay' @click='props.toggleFunction()'>
-    <div class='prompt'>
+  <Overlay class="overlay" @click="props.toggleFunction()">
+    <div class="prompt">
       <h2>Give Up?</h2>
-      <p class='desc'>Are you sure you want to give up?</p>
+      <p class="desc">Are you sure you want to give up?</p>
 
-      <RoundedButton @click='giveUp' primary>
-        Give Up
-      </RoundedButton>
+      <RoundedButton @click="giveUp" primary> Give Up </RoundedButton>
 
-      <RoundedButton @click='cancel' primary>
-        Cancel
-      </RoundedButton>
+      <RoundedButton @click="cancel" primary> Cancel </RoundedButton>
     </div>
   </Overlay>
 </template>
@@ -52,5 +46,4 @@ const cancel = (e) => {
 .desc {
   margin-bottom: 10px;
 }
-
 </style>

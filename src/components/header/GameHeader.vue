@@ -1,5 +1,4 @@
 <script setup>
-
 import { useState } from '@/stores/useState.js';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { computed } from 'vue';
@@ -36,7 +35,6 @@ const regionOrType = computed(() => {
     default:
       return '';
   }
-
 });
 
 const total = computed(() => {
@@ -61,56 +59,72 @@ const boxStyles = computed(() => {
     '--text': currentType?.fgColor,
   };
 });
-
 </script>
 
 <template>
-  <header class='header'>
-    <section class='controls' :style='boxStyles'>
-      <RoundedButton class='cell moon'
-                     v-if='!state.isDark'
-                     @click='toggleDarkMode'>
-        <img src='@/assets/moon.svg' class='icon' alt='Dark mode'>
+  <header class="header">
+    <section class="controls" :style="boxStyles">
+      <RoundedButton class="cell moon" v-if="!state.isDark" @click="toggleDarkMode">
+        <img src="@/assets/moon.svg" class="icon" alt="Dark mode" />
       </RoundedButton>
-      <RoundedButton class='cell sun'
-                     v-else
-                     @click='toggleDarkMode'>
-        <img src='@/assets/sun.svg' class='icon' alt='Light mode'>
+      <RoundedButton class="cell sun" v-else @click="toggleDarkMode">
+        <img src="@/assets/sun.svg" class="icon" alt="Light mode" />
       </RoundedButton>
 
-      <div class='box rad-bl-tr shake'>
+      <div class="box rad-bl-tr shake">
         <p>Name all {{ regionOrType }} Pokémon:</p>
-        <input type='text' class='input-name' maxlength='13' autocomplete='off'>
-        <img class='recent-sprite' :src='unknownSprite' alt='Recent sprite'>
+        <input type="text" class="input-name" maxlength="13" autocomplete="off" />
+        <img class="recent-sprite" :src="unknownSprite" alt="Recent sprite" />
       </div>
 
-      <div class='box rad-bl-tr counter'>
-        <span class='highlight'>{{ state.numFound }}</span> / {{ total }}
+      <div class="box rad-bl-tr counter">
+        <span class="highlight">{{ state.numFound }}</span> / {{ total }}
       </div>
 
-      <div class='box rad-bl-tr'>
-        Timer: <span class='highlight'>{{ elapsed }}</span>
+      <div class="box rad-bl-tr">
+        Timer: <span class="highlight">{{ elapsed }}</span>
       </div>
     </section>
 
-    <div class='url'>pkmnquiz.com</div>
+    <div class="url">pkmnquiz.com</div>
   </header>
 </template>
 
 <style scoped>
-
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 .shake {

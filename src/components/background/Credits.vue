@@ -7,21 +7,14 @@ const { toggleShowCredits } = useCredits();
 
 <template>
   <div class="popuptext rad notxt">
-    <div
-      class="paragraph pointer"
-      @click="toggleShowCredits()"
-    >
+    <div class="paragraph pointer" @click="toggleShowCredits()">
       Artist and quality control credits for custom sprites:
       <div class="close pointer">🞬</div>
     </div>
 
     <div class="credits-popup">
       <div class="credits-list">
-        <div
-          v-for="(credit, index) in credits"
-          :key="index"
-          class="credit-item"
-        >
+        <div v-for="(credit, index) in credits" :key="index" class="credit-item">
           <div class="sprites">
             {{ credit.sprites.join(', ') }}
           </div>

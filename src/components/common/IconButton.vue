@@ -1,20 +1,16 @@
 <script setup>
-
 defineProps({
   onClick: Function,
 });
-
 </script>
 
 <template>
-  <div class='cell rad-br-tl transition-element'
-       @click='onClick'>
+  <div class="cell rad-br-tl transition-element" @click="onClick">
     <slot />
   </div>
 </template>
 
 <style scoped>
-
 .cell {
   background: var(--secondary);
   border: 2px solid var(--secondary);

@@ -6,16 +6,13 @@ import { useState } from '@/stores/useState.js';
 const { setRoomMessage } = useState();
 
 defineProps(['message']);
-
 </script>
 
 <template>
-  <Overlay class='full-overlay'>
-    <div class='prompt'>
+  <Overlay class="full-overlay">
+    <div class="prompt">
       <h2>{{ message }}</h2>
-      <RoundedButton @click='setRoomMessage(null)'>
-        Exit
-      </RoundedButton>
+      <RoundedButton @click="setRoomMessage(null)"> Exit </RoundedButton>
     </div>
   </Overlay>
 </template>

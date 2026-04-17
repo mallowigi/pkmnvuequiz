@@ -6,5 +6,8 @@
   "sortImports": true,
   "jsdoc": true,
   "singleAttributePerLine": true,
-  "ignorePatterns": ["dist/**", "*.min.js"]
+  "ignorePatterns": [
+    "dist/**",
+    "*.min.js"
+  ]
 }

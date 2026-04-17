@@ -12,39 +12,36 @@ const setGen = (gen) => {
   setGameMode('gen');
   setCurrentGen(gen);
 };
-
 </script>
 
 <template>
-  <div class='container'>
-    <div class='gens-grid'>
-
+  <div class="container">
+    <div class="gens-grid">
       <!-- Full quiz-->
       <div></div>
-      <div class='cell-full'>
-        <div class='cell rad-bl-tr'
-             @click='setGameMode("full")'>
-          Full quiz
-        </div>
+      <div class="cell-full">
+        <div class="cell rad-bl-tr" @click="setGameMode('full')">Full quiz</div>
       </div>
       <div></div>
 
       <!-- Gens -->
-      <div class='cell rad-bl'
-           v-for='(gen, i) in gens'
-           :class='{ "rad-bl": i % 3 === 0, "rad": i % 3 === 1, "rad-tr": i % 3 === 2 }'
-           @click='setGen(gen.id)'
-           :key='gen.id'>
+      <div
+        class="cell rad-bl"
+        v-for="(gen, i) in gens"
+        :class="{ 'rad-bl': i % 3 === 0, rad: i % 3 === 1, 'rad-tr': i % 3 === 2 }"
+        @click="setGen(gen.id)"
+        :key="gen.id"
+      >
         <div hidden>{{ gen.id }}</div>
-        <div class='gen-name'>{{ gen.name }}</div>
+        <div class="gen-name">{{ gen.name }}</div>
 
-        <CyclingStarters :gen='gen' :start='i % 3' />
+        <CyclingStarters :gen="gen" :start="i % 3" />
       </div>
 
       <!-- Types -->
       <div></div>
       <div>
-        <CyclingType class='cell cell-type rad-bl-tr ' />
+        <CyclingType class="cell cell-type rad-bl-tr" />
       </div>
       <div></div>
     </div>
@@ -52,7 +49,6 @@ const setGen = (gen) => {
 </template>
 
 <style scoped>
-
 .container {
   display: flex;
   justify-content: center;
@@ -99,5 +95,4 @@ const setGen = (gen) => {
 .gen-name {
   display: inline-block;
 }
-
 </style>
