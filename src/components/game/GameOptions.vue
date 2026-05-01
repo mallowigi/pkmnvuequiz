@@ -1,10 +1,8 @@
 <script setup>
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
-import { useState } from '@/stores/useState.js';
 
 const { setDialog } = useDialogs();
-const { state } = useState();
 
 const giveUp = () => {
   setDialog('giveup');
@@ -16,10 +14,7 @@ const resetGame = () => {
 </script>
 
 <template>
-  <div
-    class="row"
-    v-if="state.gameMode !== null && !state.isEnded"
-  >
+  <div class="row">
     <RoundedButton
       class="rad-br-tl"
       @click="giveUp()"

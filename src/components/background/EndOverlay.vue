@@ -6,7 +6,7 @@ import { useCurrentType } from '@/stores/useCurrentType.js';
 import { useState } from '@/stores/useState.js';
 
 const { getCurrentType } = useCurrentType();
-const { state } = useState();
+const { state, setEnded } = useState();
 
 const sidebarStyles = computed(() => {
   const type = getCurrentType();
@@ -14,10 +14,17 @@ const sidebarStyles = computed(() => {
     '--bg-color': type?.bgColor,
   };
 });
+
+const closeOverlay = () => {
+  setEnded(false);
+};
 </script>
 
 <template>
-  <div class="overlay">
+  <div
+    class="overlay"
+    @click="closeOverlay()"
+  >
     <div
       class="sidepanel"
       :style="sidebarStyles"
