@@ -1,8 +1,8 @@
 import { reactive, readonly } from 'vue';
 
 const dialogs = reactive({
-  dialog: null,
   data: null,
+  dialog: null,
 });
 
 export const setDialog = (dialog) => {
@@ -16,7 +16,7 @@ export const setData = (data) => {
 export const useDialogs = () => {
   return {
     dialogs: readonly(dialogs),
-    setDialog,
     setData,
+    setDialog,
   };
 };

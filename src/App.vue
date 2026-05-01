@@ -16,6 +16,7 @@ import GameHeader from '@/components/header/GameHeader.vue';
 import { useCredits } from '@/stores/useCredits.js';
 import { useRoomMessages } from '@/stores/useRoomMessages.js';
 import { useState } from '@/stores/useState.js';
+import Game from '@/components/game/Game.vue';
 
 const { state, setDarkMode } = useState();
 const { credits } = useCredits();
@@ -51,7 +52,7 @@ onMounted(() => {
 
     <GameHeader />
 
-    <div style="flex: 1">foo</div>
+    <Game class="game" />
 
     <GameFooter />
 
