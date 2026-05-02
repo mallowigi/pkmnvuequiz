@@ -1,5 +1,5 @@
-<script setup>
-import { setError, usePkmnData } from '@/stores/usePkmnStore.js';
+<script setup lang="ts">
+import { setError, usePkmnData } from '@/stores/usePkmnStore';
 import { onMounted } from 'vue';
 
 const { data, setLoaded, loadPokemons, loadSprites, loadNamings, loadSpriteCycles, loadTranslations } = usePkmnData();
@@ -7,11 +7,11 @@ const { data, setLoaded, loadPokemons, loadSprites, loadNamings, loadSpriteCycle
 onMounted(() => {
   Promise.all([loadPokemons(), loadSprites(), loadSpriteCycles(), loadTranslations(), loadNamings()])
     .then(() => {
-      setLoaded(true);
+      setLoaded();
     })
     .catch((error) => {
       console.error('Error loading data:', error);
-      setError('Error loading data:', error);
+      setError(error);
     });
 });
 </script>

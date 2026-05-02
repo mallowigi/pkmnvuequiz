@@ -1,5 +1,5 @@
-import { useCurrentGen } from '@/stores/useCurrentGen.js';
-import { regions } from '@/data/regions.js';
+import { useCurrentGen } from '@/stores/useCurrentGen';
+import { regions } from '@/data/regions';
 
 export const useCurrentRegion = () => {
   const { getCurrentGen } = useCurrentGen();
