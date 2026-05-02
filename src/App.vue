@@ -88,6 +88,7 @@ onMounted(() => {
   --button: white;
   --button-hover: #666666;
   --primary: #8cc63f;
+  --danger: #d00;
   --secondary: rgba(255, 255, 255, 0.85);
 }
 

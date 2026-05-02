@@ -30,14 +30,14 @@ const resetGame = () => {
 <template>
   <div class="row">
     <RoundedButton
-      class="rad-br-tl"
+      class="rad-br-tl danger-btn"
       @click="giveUp()"
     >
       Give Up
     </RoundedButton>
 
     <RoundedButton
-      class="rad-br-tl"
+      class="rad-br-tl danger-btn"
       @click="resetGame()"
     >
       Reset
@@ -94,9 +94,14 @@ const resetGame = () => {
   margin: 10px 0 0 10px;
 }
 
+.danger-btn:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
 .cell-btn {
   margin: 0;
-  border-left: 2px solid transparent;
+  border-left: none;
   border-right-style: dotted;
   display: flex;
   align-items: center;
@@ -106,6 +111,11 @@ const resetGame = () => {
   &:hover {
     background-color: var(--btn-color, var(--primary));
     border-color: var(--btn-color, var(--primary));
+    border-left: none;
+  }
+
+  &:first-child {
+    border-left: 2px solid var(--btn-color, var(--primary));
   }
 
   &:last-child {
