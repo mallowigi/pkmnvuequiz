@@ -1,4 +1,9 @@
-export const credits = [
+type Credit = {
+  author: string;
+  sprites: string[];
+};
+
+export const credits: Credit[] = [
   {
     author: 'MBCMechachu',
     sprites: [
@@ -465,142 +470,71 @@ export const credits = [
   },
   {
     author: 'FlorianDX, QC - MBCMechachu',
-    sprites: [
-      'Carnivine',
-      'Crabominable',
-      'Hisuian Decidueye',
-      'Mega Kangaskhan',
-      'Skuntank',
-      'Swellow',
-      'Toucannon',
-    ],
+    sprites: ['Carnivine', 'Crabominable', 'Hisuian Decidueye', 'Mega Kangaskhan', 'Skuntank', 'Swellow', 'Toucannon'],
   },
   {
     author: 'JadedArts',
-    sprites: [
-      'Bulbasaur',
-      'Farigiraf',
-      'Nidoran F',
-      'Phanpy',
-      'Sandshrew',
-      'Squirtle',
-      'Toedscool',
-    ],
+    sprites: ['Bulbasaur', 'Farigiraf', 'Nidoran F', 'Phanpy', 'Sandshrew', 'Squirtle', 'Toedscool'],
   },
   {
     author: 'MBCMechachu, QC - MultiDiegoDani, leParagon',
-    sprites: [
-      'Forretress',
-      'Murkrow',
-      'Togetic',
-      'Zangoose',
-    ],
+    sprites: ['Forretress', 'Murkrow', 'Togetic', 'Zangoose'],
   },
   {
     author: 'RadicalCharizard, QC - leParagon',
-    sprites: [
-      'Alolan Raticate',
-      'Ditto',
-      'Mega Alakazam',
-      'Raticate',
-    ],
+    sprites: ['Alolan Raticate', 'Ditto', 'Mega Alakazam', 'Raticate'],
   },
   {
     author: 'MBCMechachu, Acpeters',
-    sprites: [
-      'Iron Leaves',
-      'Iron Crown',
-      'Iron Boulder',
-      'Mismagius',
-    ],
+    sprites: ['Iron Leaves', 'Iron Crown', 'Iron Boulder', 'Mismagius'],
   },
   {
     author: 'FlorianDX',
-    sprites: [
-      'Kecleon',
-      'Mega Crabominable',
-      'Mega Lucario Z',
-      'Torterra',
-    ],
+    sprites: ['Kecleon', 'Mega Crabominable', 'Mega Lucario Z', 'Torterra'],
   },
   {
     author: 'MBCMechachu, QC - MultiDiegoDani',
-    sprites: [
-      'Ambipom',
-      'Hoopa Confined',
-      'Piloswine',
-    ],
+    sprites: ['Ambipom', 'Hoopa Confined', 'Piloswine'],
   },
   {
     author: 'CarmaNekko',
-    sprites: [
-      'Fidough',
-      'Wiglett',
-      'Fraxure',
-    ],
+    sprites: ['Fidough', 'Wiglett', 'Fraxure'],
   },
   {
     author: 'MultiDiegoDani, CarmaNekko, QC - MBCMechachu',
-    sprites: [
-      'Pawmo',
-      'Pawmot',
-    ],
+    sprites: ['Pawmo', 'Pawmot'],
   },
   {
     author: 'FlorianDX, QC - MultiDiegoDani, MBCMechachu',
-    sprites: [
-      'Meganium',
-      'Tropius',
-    ],
+    sprites: ['Meganium', 'Tropius'],
   },
   {
     author: 'FlorianDX, QC - MultiDiegoDani, leParagon',
-    sprites: [
-      'Seviper',
-      'Gumshoos',
-    ],
+    sprites: ['Seviper', 'Gumshoos'],
   },
   {
     author: 'FlorainDX, QC - leParagon',
-    sprites: [
-      'Camerupt',
-      'Mega Steelix',
-    ],
+    sprites: ['Camerupt', 'Mega Steelix'],
   },
   {
     author: 'MBCMechachu, QC - Banana Toast',
-    sprites: [
-      'Iron Jugulis',
-      'Gholdengo',
-    ],
+    sprites: ['Iron Jugulis', 'Gholdengo'],
   },
   {
     author: 'Sphexadecimal, QC - MBCMechachu',
-    sprites: [
-      'Frigibax',
-      'Iron Valiant',
-    ],
+    sprites: ['Frigibax', 'Iron Valiant'],
   },
   {
     author: 'Banana Toast, QC - MBCMechachu',
-    sprites: [
-      'Koraidon',
-      'Miraidon (Low-Power)',
-    ],
+    sprites: ['Koraidon', 'Miraidon (Low-Power)'],
   },
   {
     author: 'Zerudez',
-    sprites: [
-      'Lechonk',
-      'Houndstone',
-    ],
+    sprites: ['Lechonk', 'Houndstone'],
   },
   {
     author: 'Sphexadecimal',
-    sprites: [
-      'Arctibax',
-      'Chien-Pao',
-    ],
+    sprites: ['Arctibax', 'Chien-Pao'],
   },
   {
     author: 'MultiDiegoDani, QC - MBCMechachu, Acpeters',
