@@ -1,14 +1,14 @@
 <script setup>
 import { useState } from '@/stores/useState.js';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { types } from '@/data/types.js';
+import { typesList } from '@/data/types.js';
 
 const { setGameMode } = useState();
 
 const currentIndex = ref(0);
 
 const currentType = computed(() => {
-  const type = types[currentIndex.value];
+  const type = typesList[currentIndex.value];
   return {
     ...type,
     iconUrl: new URL(`/src/assets/types/${type.icon}.svg`, import.meta.url).href,
@@ -22,7 +22,7 @@ const startCycle = () => {
     return;
   }
   interval = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % types.length;
+    currentIndex.value = (currentIndex.value + 1) % typesList.length;
   }, 3000);
 };
 

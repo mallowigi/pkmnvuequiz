@@ -1,7 +1,7 @@
 <script setup>
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { types } from '@/data/types.js';
+import { typesList } from '@/data/types.js';
 import { useCurrentType } from '@/stores/useCurrentType.js';
 import { useState } from '@/stores/useState.js';
 
@@ -25,7 +25,7 @@ const goBack = () => setGameMode(null);
   <Overlay>
     <div class="prompt type-grid">
       <RoundedButton
-        v-for="typeMeta in types"
+        v-for="typeMeta in typesList"
         :key="typeMeta.id"
         class="button-type"
         @click="setTypeOrSpecial(typeMeta.id)"
