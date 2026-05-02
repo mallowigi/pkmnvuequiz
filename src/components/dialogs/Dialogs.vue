@@ -1,5 +1,5 @@
-<script setup>
-import { useDialogs } from '@/stores/useDialogs.js';
+<script setup lang="ts">
+import { useDialogs } from '@/stores/useDialogs';
 import ModeDialog from '@/components/dialogs/ModeDialog.vue';
 import ShadowsDialog from '@/components/dialogs/ShadowsDialog.vue';
 import SwitchQuizDialog from '@/components/dialogs/SwitchQuizDialog.vue';
@@ -7,7 +7,7 @@ import GiveUpDialog from '@/components/dialogs/GiveUpDialog.vue';
 import ChangeTimerDialog from '@/components/dialogs/ChangeTimerDialog.vue';
 import ResetDialog from '@/components/dialogs/ResetDialog.vue';
 
-const { dialogs, setDialog, data } = useDialogs();
+const { dialogs, setDialog } = useDialogs();
 
 const closeDialog = () => setDialog(null);
 </script>
@@ -41,13 +41,13 @@ const closeDialog = () => setDialog(null);
 
   <SwitchQuizDialog
     :toggle-function="closeDialog"
-    :gen="data"
+    :gen="dialogs.data"
     v-if="dialogs.dialog === 'switchQuiz'"
   />
 
   <ChangeTimerDialog
     :toggle-function="closeDialog"
-    :timer="data"
+    :timer="dialogs.data"
     v-if="dialogs.dialog === 'timer'"
   />
 
