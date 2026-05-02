@@ -1,4 +1,11 @@
-export const gameModes = {
+type GameMode = 'full' | 'gen' | 'special' | 'type';
+
+type GameModeInfo = {
+  id: GameMode;
+  name: string;
+};
+
+export const gameModes: Record<GameMode, GameModeInfo> = {
   full: {
     id: 'full',
     name: 'Full',
