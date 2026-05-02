@@ -5,6 +5,13 @@ export type GameModeInfo = {
   name: string;
 };
 
+export type Mode = 'chaos' | 'normal' | 'order';
+
+export interface ModeInfo {
+  id: Mode;
+  name: string;
+}
+
 export interface Region {
   id: string;
   name: string;
@@ -60,7 +67,7 @@ export interface State {
   isPaused: boolean;
   isStarted: boolean;
   languages: Set<Language>;
-  mode: string;
+  mode: Mode;
   numFound: number;
   numShadows: number;
   showCredits: boolean;
