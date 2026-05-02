@@ -1,6 +1,7 @@
 import { reactive, readonly } from 'vue';
+import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
 
-const state = reactive({
+const state: State = reactive({
   currentType: null,
   gameMode: null,
   gen: null,
@@ -8,7 +9,7 @@ const state = reactive({
   isEnded: false,
   isPaused: false,
   isStarted: false,
-  languages: new Set(['en', 'ko', 'jp', 'zh', 'cn']),
+  languages: new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']),
   mode: 'normal',
   numFound: 0,
   numShadows: 0,
@@ -28,19 +29,19 @@ const state = reactive({
   withTypeShuffle: false,
 });
 
-export const setGen = (id) => {
+export const setGen = (id: Gen | null) => {
   state.gen = id;
 };
 
-export const setGameMode = (mode) => {
+export const setGameMode = (mode: GameMode | null) => {
   state.gameMode = mode;
 };
 
-export const setMode = (mode) => {
+export const setMode = (mode: Mode) => {
   state.mode = mode;
 };
 
-export const setCurrentType = (type) => {
+export const setCurrentType = (type: Type | null) => {
   state.currentType = type;
 };
 
@@ -48,23 +49,23 @@ export const toggleDarkMode = () => {
   state.isDark = !state.isDark;
 };
 
-export const setDarkMode = (isDark) => {
+export const setDarkMode = (isDark: boolean) => {
   state.isDark = isDark;
 };
 
-export const setStarted = (isStarted) => {
+export const setStarted = (isStarted: boolean) => {
   state.isStarted = isStarted;
 };
 
-export const setEnded = (isEnded) => {
+export const setEnded = (isEnded: boolean) => {
   state.isEnded = isEnded;
 };
 
-export const setPaused = (isPaused) => {
+export const setPaused = (isPaused: boolean) => {
   state.isPaused = isPaused;
 };
 
-export const setShowCredits = (showCredits) => {
+export const setShowCredits = (showCredits: boolean) => {
   state.showCredits = showCredits;
 };
 
@@ -96,7 +97,7 @@ export const toggleSound = () => {
   state.withSound = !state.withSound;
 };
 
-export const toggleLanguage = (language) => {
+export const toggleLanguage = (language: Language) => {
   if (state.languages.has(language)) {
     state.languages.delete(language);
     return;
@@ -116,7 +117,7 @@ export const setStartTime = () => {
   state.timer.startTime = Date.now();
 };
 
-export const setEndTime = (minutes = 0) => {
+export const setEndTime = (minutes: number = 0) => {
   state.timer.endTime = minutes * 60;
 };
 
@@ -124,7 +125,7 @@ export const addSecond = () => {
   state.timer.elapsed += 1;
 };
 
-export const setState = (newState) => {
+export const setState = (newState: Partial<State>) => {
   Object.assign(state, newState);
 };
 
