@@ -1,15 +1,18 @@
-import { gens } from '@/data/gens.js';
-import { useState } from '@/stores/useState.js';
+import { gens } from '@/data/gens';
+import { useState } from '@/stores/useState';
+import type { Gen } from '@/types.ts';
 
 export const useCurrentGen = () => {
   const { state, setGen } = useState();
 
-  const setCurrentGen = (gen) => {
+  const setCurrentGen = (gen: Gen | null) => {
     setGen(gen);
   };
 
   const getCurrentGen = () => {
     const currentGen = state.gen;
+    if (!currentGen) return null;
+
     return gens[currentGen];
   };
 
