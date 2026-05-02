@@ -1,20 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
-const props = defineProps({
-  sprites: {
-    required: true,
-    type: Array,
-  },
-  start: Number,
-});
+const props = defineProps<{
+  sprites: string[];
+  start?: number;
+}>();
 
 // Keep state of the cycle
 const currentIndex = ref(props.start ?? 0);
 const sprite = computed(() => props.sprites[currentIndex.value]);
 
 // Run interval
-let interval;
+let interval: ReturnType<typeof setInterval> | null = null;
 
 const startCycle = () => {
   if (interval || props.sprites.length === 0) {
@@ -40,7 +37,9 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  clearInterval(interval);
+  if (interval) {
+    clearInterval(interval);
+  }
   interval = null;
 });
 </script>
