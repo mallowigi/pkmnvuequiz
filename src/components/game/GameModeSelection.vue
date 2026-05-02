@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useState } from '@/stores/useState.ts';
 
 const { setDialog } = useDialogs();
 const { setGameMode, setGen, setCurrentType, state } = useState();
@@ -39,68 +39,58 @@ const setSpecialQuiz = () => {
 
 <template>
   <div class="row">
-    <div class="column">
-      <RoundedButton
-        class="rad-tl cell-btn"
-        :selected="state.gameMode === 'full'"
-        @click="setFullQuiz"
-      >
-        Full Quiz
-        <img
-          src="@/assets/FullQuiz.png"
-          alt="Full Quiz"
-        />
-      </RoundedButton>
+    <RoundedButton
+      class="rad-tl cell-btn"
+      :selected="state.gameMode === 'full'"
+      @click="setFullQuiz"
+    >
+      Full Quiz
+      <img
+        src="@/assets/FullQuiz.png"
+        alt="Full Quiz"
+      />
+    </RoundedButton>
 
-      <RoundedButton
-        class="rad-no cell-btn"
-        :selected="state.gameMode === 'gen'"
-        @click="setGenQuiz"
-      >
-        Generations
-        <img
-          src="@/assets/GenQuiz.png"
-          alt="Generations"
-        />
-      </RoundedButton>
+    <RoundedButton
+      class="rad-no cell-btn"
+      :selected="state.gameMode === 'gen'"
+      @click="setGenQuiz"
+    >
+      Generations
+      <img
+        src="@/assets/GenQuiz.png"
+        alt="Generations"
+      />
+    </RoundedButton>
 
-      <RoundedButton
-        class="rad-no cell-btn"
-        :selected="state.gameMode === 'types'"
-        @click="setTypeQuiz"
-      >
-        Types
-        <img
-          src="@/assets/TypeQuiz.png"
-          alt="Types"
-        />
-      </RoundedButton>
+    <RoundedButton
+      class="rad-no cell-btn"
+      :selected="state.gameMode === 'types'"
+      @click="setTypeQuiz"
+    >
+      Types
+      <img
+        src="@/assets/TypeQuiz.png"
+        alt="Types"
+      />
+    </RoundedButton>
 
-      <RoundedButton
-        class="rad-br cell-btn"
-        :selected="state.gameMode === 'special'"
-        @click="setSpecialQuiz"
-      >
-        Special Quiz
-        <img
-          src="@/assets/special.png"
-          alt="Special Quiz"
-        />
-      </RoundedButton>
-    </div>
+    <RoundedButton
+      class="rad-br cell-btn"
+      :selected="state.gameMode === 'special'"
+      @click="setSpecialQuiz"
+    >
+      Special Quiz
+      <img
+        src="@/assets/special.png"
+        alt="Special Quiz"
+      />
+    </RoundedButton>
   </div>
 </template>
 
 <style scoped>
 .row {
-  line-height: 30px;
-}
-
-.column {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0;
   margin: 10px 0 0 10px;
 }
 

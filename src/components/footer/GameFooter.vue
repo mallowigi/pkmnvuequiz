@@ -6,7 +6,7 @@ const { toggleShowCredits } = useCredits();
 
 <template>
   <footer class="footer rad transition-element">
-    <div class="row">
+    <div class="footerRow">
       <p class="p1">
         Project by
         <a
@@ -22,7 +22,7 @@ const { toggleShowCredits } = useCredits();
       </p>
     </div>
 
-    <div class="row">
+    <div class="footerRow">
       <p class="p2">
         Original Project found at
         <a
@@ -97,7 +97,7 @@ const { toggleShowCredits } = useCredits();
   font-size: 0.9em;
 }
 
-.row {
+.footerRow {
   line-height: 30px;
 }
 
