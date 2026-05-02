@@ -4,9 +4,11 @@ import { computed } from 'vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useCurrentType } from '@/stores/useCurrentType.js';
 import { useDialogs } from '@/stores/useDialogs.js';
+import { useState } from '@/stores/useState.js';
 
 const { setDialog } = useDialogs();
 const { getCurrentType } = useCurrentType();
+const { state } = useState();
 
 const buttonStyles = computed(() => {
   const type = getCurrentType();
@@ -46,7 +48,10 @@ const resetGame = () => {
 
   <div class="row">
     <div class="longButton">
-      <RoundedButton class="rad-tl cell-btn">
+      <RoundedButton
+        class="rad-tl cell-btn"
+        :selected="state.gameMode === 'full'"
+      >
         Full Quiz
         <img
           src="@/assets/FullQuiz.png"
