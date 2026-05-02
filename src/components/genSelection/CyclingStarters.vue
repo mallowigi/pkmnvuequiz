@@ -3,10 +3,10 @@ import { computed } from 'vue';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
-import type { Gen } from '@/types';
+import type { GenerationInfo } from '@/types';
 
 const props = defineProps<{
-  gen: Gen;
+  gen: GenerationInfo;
   start?: number;
 }>();
 

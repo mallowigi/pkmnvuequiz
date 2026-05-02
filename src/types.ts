@@ -1,3 +1,10 @@
+export type GameMode = 'full' | 'gen' | 'special' | 'type';
+
+export type GameModeInfo = {
+  id: GameMode;
+  name: string;
+};
+
 export interface Region {
   id: string;
   name: string;
@@ -18,7 +25,10 @@ export interface Type {
   symbol: string;
 }
 
-export interface Gen {
+export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
+
+export interface GenerationInfo {
+  id: Gen;
   boxes: string[];
   name: string;
   sprites: string[];
@@ -35,8 +45,8 @@ export interface Pokemon {
 
 export interface State {
   currentType: string | null;
-  gameMode: string | null;
-  gen: string | null;
+  gameMode: GameMode | null;
+  gen: Gen | null;
   isDark: boolean;
   isEnded: boolean;
   isPaused: boolean;

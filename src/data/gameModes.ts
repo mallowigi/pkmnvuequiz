@@ -1,9 +1,4 @@
-type GameMode = 'full' | 'gen' | 'special' | 'type';
-
-type GameModeInfo = {
-  id: GameMode;
-  name: string;
-};
+import type { GameMode, GameModeInfo } from '@/types.ts';
 
 export const gameModes: Record<GameMode, GameModeInfo> = {
   full: {
