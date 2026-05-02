@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.js';
+import { useRoomMessages } from '@/stores/useRoomMessages';
 
-const { setRoomMessage } = useState();
+const { setRoomMessage } = useRoomMessages();
 
 defineProps(['message']);
 </script>
