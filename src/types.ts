@@ -12,8 +12,26 @@ export interface ModeInfo {
   name: string;
 }
 
-export interface Region {
-  id: string;
+export type Region =
+  | 'alola'
+  | 'areazero'
+  | 'galar'
+  | 'gmax'
+  | 'hisui'
+  | 'hoenn'
+  | 'hoennmega'
+  | 'hyperspace'
+  | 'johto'
+  | 'kalos'
+  | 'kalosmega'
+  | 'kanto'
+  | 'lumiose'
+  | 'paldea'
+  | 'sinnoh'
+  | 'unova';
+
+export interface RegionInfo {
+  id: Region;
   name: string;
 }
 

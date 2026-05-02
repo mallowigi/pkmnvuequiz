@@ -1,4 +1,6 @@
-export const regions = {
+import type { RegionInfo, Region } from '@/types';
+
+export const regions: Record<Region, RegionInfo> = {
   alola: {
     id: 'alola',
     name: 'Alola',
