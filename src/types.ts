@@ -34,6 +34,14 @@ export interface GenerationInfo {
   sprites: string[];
 }
 
+export type Language = 'cn' | 'de' | 'en' | 'fr' | 'ja' | 'ko' | 'zh';
+
+export interface LanguageInfo {
+  id: Language;
+  name: string;
+  symbol: string;
+}
+
 export interface Pokemon {
   id: string;
   baseName: string;
@@ -51,7 +59,7 @@ export interface State {
   isEnded: boolean;
   isPaused: boolean;
   isStarted: boolean;
-  languages: Set<string>;
+  languages: Set<Language>;
   mode: string;
   numFound: number;
   numShadows: number;
