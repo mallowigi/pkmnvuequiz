@@ -1,24 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useCurrentType } from '@/stores/useCurrentType';
 import { useDialogs } from '@/stores/useDialogs';
-import { useState } from '@/stores/useState';
+import { useState, setGameMode, setGen, setCurrentType } from '@/stores/useState';
 
 const { setDialog } = useDialogs();
-const { getCurrentType } = useCurrentType();
 const { state } = useState();
-
-const buttonStyles = computed(() => {
-  const type = getCurrentType();
-  const color = type?.buttonColor;
-  const bgColor = type?.bgColor;
-  return {
-    '--bg-color': bgColor,
-    '--btn-color': color,
-  };
-});
 
 const giveUp = () => {
   setDialog('giveup');
@@ -26,6 +12,36 @@ const giveUp = () => {
 
 const resetGame = () => {
   setDialog('reset');
+};
+
+const setFullQuiz = () => {
+  setDialog('switchQuiz', () => {
+    setGameMode('full');
+    setGen(null);
+    setCurrentType(null);
+  });
+};
+
+const setGenQuiz = () => {
+  setDialog('switchQuiz', () => {
+    setGameMode(null);
+    setCurrentType(null);
+  });
+};
+
+const setTypeQuiz = () => {
+  setDialog('switchQuiz', () => {
+    setGameMode('types');
+    setGen(null);
+  });
+};
+
+const setSpecialQuiz = () => {
+  setDialog('switchQuiz', () => {
+    setGameMode('special');
+    setGen(null);
+    setCurrentType(null);
+  });
 };
 </script>
 
@@ -47,10 +63,11 @@ const resetGame = () => {
   </div>
 
   <div class="row">
-    <div class="longButton">
+    <div class="column">
       <RoundedButton
         class="rad-tl cell-btn"
         :selected="state.gameMode === 'full'"
+        @click="setFullQuiz()"
       >
         Full Quiz
         <img
@@ -59,7 +76,11 @@ const resetGame = () => {
         />
       </RoundedButton>
 
-      <RoundedButton class="rad-no cell-btn">
+      <RoundedButton
+        class="rad-no cell-btn"
+        :selected="state.gameMode === 'gen'"
+        @click="setGenQuiz()"
+      >
         Generations
         <img
           src="@/assets/GenQuiz.png"
@@ -67,7 +88,11 @@ const resetGame = () => {
         />
       </RoundedButton>
 
-      <RoundedButton class="rad-no cell-btn">
+      <RoundedButton
+        class="rad-no cell-btn"
+        :selected="state.gameMode === 'types'"
+        @click="setTypeQuiz()"
+      >
         Types
         <img
           src="@/assets/TypeQuiz.png"
@@ -75,7 +100,11 @@ const resetGame = () => {
         />
       </RoundedButton>
 
-      <RoundedButton class="rad-br cell-btn">
+      <RoundedButton
+        class="rad-br cell-btn"
+        :selected="state.gameMode === 'special'"
+        @click="setSpecialQuiz()"
+      >
         Special Quiz
         <img
           src="@/assets/special.png"
@@ -91,7 +120,7 @@ const resetGame = () => {
   line-height: 30px;
 }
 
-.longButton {
+.column {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -113,14 +142,18 @@ const resetGame = () => {
   gap: 8px;
   padding: 9px 14px;
 
+  &.selected {
+    border-left: none;
+  }
+
   &:hover {
-    background-color: var(--btn-color, var(--primary));
-    border-color: var(--btn-color, var(--primary));
+    background-color: var(--btn-color, var(--darkPrimary));
+    border-color: var(--btn-color, var(--darkPrimary));
     border-left: none;
   }
 
   &:first-child {
-    border-left: 2px solid var(--btn-color, var(--primary));
+    border-left: 2px solid var(--btn-color, var(--darkPrimary));
   }
 
   &:last-child {

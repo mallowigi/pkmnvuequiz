@@ -11,18 +11,19 @@ import { useCurrentType } from '@/stores/useCurrentType';
 
 const props = defineProps({
   primary: Boolean,
+  selected: Boolean,
   text: String,
 });
 
-const { getCurrentType } = useCurrentType();
+const { getCurrentTypeOrSpecial } = useCurrentType();
 
 const buttonStyles = computed(() => {
-  const type = getCurrentType();
-  const color = type?.buttonColor;
+  const type = getCurrentTypeOrSpecial();
+  const buttonColor = type?.buttonColor;
   const bgColor = type?.bgColor;
   return {
     '--bg-color': bgColor,
-    '--btn-color': color,
+    '--btn-color': buttonColor,
   };
 });
 </script>
@@ -30,7 +31,7 @@ const buttonStyles = computed(() => {
 <template>
   <div
     class="cell rad-bl-tr transition-element"
-    :class="{ primary: primary }"
+    :class="{ primary: props.primary, selected: props.selected }"
     :style="buttonStyles"
     v-bind="$attrs"
   >
@@ -57,6 +58,11 @@ const buttonStyles = computed(() => {
   &.primary {
     background: var(--bg-color, var(--primary));
     border: 2px solid var(--btn-color, var(--primary));
+  }
+
+  &.selected {
+    background: var(--btn-color, var(--darkPrimary));
+    border: 2px solid var(--btn-color, var(--darkPrimary));
   }
 
   &:hover {

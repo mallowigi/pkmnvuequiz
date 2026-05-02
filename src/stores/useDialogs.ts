@@ -5,15 +5,20 @@ import type { Dialog } from '@/types.ts';
 interface DialogsState {
   data: any;
   dialog: Dialog | null;
+  callback: (() => void) | null;
 }
 
 const dialogs: DialogsState = reactive({
+  callback: null,
   data: null,
   dialog: null,
 });
 
-export const setDialog = (dialog: Dialog | null) => {
+export const setDialog = (dialog: Dialog | null, callback?: () => void) => {
   dialogs.dialog = dialog;
+  if (callback) {
+    dialogs.callback = callback;
+  }
 };
 
 export const setData = <T>(data: T) => {

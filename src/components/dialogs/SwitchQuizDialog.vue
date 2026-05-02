@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
-const { setGen } = useState();
+const { dialogs } = useDialogs();
 
-const props = defineProps({
-  gen: {
-    required: true,
-    type: String,
-  },
-  toggleFunction: {
-    required: true,
-    type: Function,
-  },
-});
+interface Props {
+  toggleFunction: () => void;
+}
+
+const props = defineProps<Props>();
 
 const switchQuiz = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
-  setGen(props.gen);
+
+  if (dialogs.callback) {
+    dialogs.callback();
+  }
 };
 
 const cancel = (e: Event) => {

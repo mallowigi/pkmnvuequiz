@@ -41,7 +41,6 @@ const closeDialog = () => setDialog(null);
 
   <SwitchQuizDialog
     :toggle-function="closeDialog"
-    :gen="dialogs.data"
     v-if="dialogs.dialog === 'switchQuiz'"
   />
 
