@@ -1,10 +1,14 @@
 import { reactive, readonly } from 'vue';
 
-const roomState = reactive({
+interface RoomMessagesState {
+  roomMessage: string | null;
+}
+
+const roomState: RoomMessagesState = reactive({
   roomMessage: null,
 });
 
-export const setRoomMessage = (message) => {
+export const setRoomMessage = (message: string | null) => {
   roomState.roomMessage = message;
 };
 

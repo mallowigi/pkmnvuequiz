@@ -1,10 +1,14 @@
 import { reactive, readonly } from 'vue';
 
-const state = reactive({
+interface MessagesState {
+  messages: string[];
+}
+
+const state: MessagesState = reactive({
   messages: [],
 });
 
-export const showUserMessage = (message) => {
+export const showUserMessage = (message: string) => {
   state.messages.push(message);
 
   setTimeout(() => {
@@ -18,8 +22,8 @@ export const clearMessages = () => {
 
 export const useMessages = () => {
   return {
-    state: readonly(state),
-    showUserMessage,
     clearMessages,
+    showUserMessage,
+    state: readonly(state),
   };
 };
