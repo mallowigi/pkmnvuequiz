@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { useState } from '@/stores/useState';
-import RoundedButton from '@/components/common/RoundedButton.vue';
 import { computed } from 'vue';
-import { usePokemons } from '@/stores/usePokemons';
+
+import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useCurrentRegion } from '@/stores/useCurrentRegion';
 import { useCurrentType } from '@/stores/useCurrentType';
+import { usePokemons } from '@/stores/usePokemons';
+import { useState } from '@/stores/useState';
 
 const { state, toggleDarkMode } = useState();
 const { getPokemon } = usePokemons();
 const { getCurrentRegion } = useCurrentRegion();
-const { getCurrentType } = useCurrentType();
+const { getCurrentTypeOrSpecial } = useCurrentType();
 
 const unknownSprite = computed(() => {
   switch (state.isDark) {
@@ -28,7 +29,7 @@ const regionOrType = computed(() => {
       const currentRegion = getCurrentRegion();
       return currentRegion?.name ?? '';
     case 'types':
-      const currentType = getCurrentType();
+      const currentType = getCurrentTypeOrSpecial();
       return currentType?.name ?? '';
     case 'special':
       return 'Special';
@@ -53,7 +54,7 @@ const elapsed = computed(() => {
 });
 
 const boxStyles = computed(() => {
-  const currentType = getCurrentType();
+  const currentType = getCurrentTypeOrSpecial();
   return {
     '--bg-color': currentType?.bgColor,
     '--text': currentType?.fgColor,

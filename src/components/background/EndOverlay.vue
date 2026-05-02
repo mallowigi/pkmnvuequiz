@@ -5,11 +5,11 @@ import { donors } from '@/data/donors';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
 
-const { getCurrentType } = useCurrentType();
+const { getCurrentTypeOrSpecial } = useCurrentType();
 const { state, setEnded } = useState();
 
 const sidebarStyles = computed(() => {
-  const type = getCurrentType();
+  const type = getCurrentTypeOrSpecial();
   return {
     '--bg-color': type?.bgColor,
   };
