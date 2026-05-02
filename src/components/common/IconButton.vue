@@ -1,7 +1,7 @@
-<script setup>
-defineProps({
-  onClick: Function,
-});
+<script setup lang="ts">
+defineProps<{
+  onClick?: () => void;
+}>();
 </script>
 
 <template>
