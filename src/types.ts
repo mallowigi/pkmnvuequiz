@@ -27,6 +27,7 @@ export type Region =
   | 'kanto'
   | 'lumiose'
   | 'paldea'
+  | 'pokemongo'
   | 'sinnoh'
   | 'unova';
 
@@ -35,13 +36,33 @@ export interface RegionInfo {
   name: string;
 }
 
-export interface Type {
+export type Type =
+  | 'bug'
+  | 'dark'
+  | 'dragon'
+  | 'electric'
+  | 'fairy'
+  | 'fighting'
+  | 'fire'
+  | 'flying'
+  | 'ghost'
+  | 'grass'
+  | 'ground'
+  | 'ice'
+  | 'normal'
+  | 'poison'
+  | 'psychic'
+  | 'rock'
+  | 'steel'
+  | 'water';
+
+export interface TypeInfo {
   bgColor: string;
   buttonColor: string;
   darkBgColor: string;
   fgColor: string;
   icon: string;
-  id: string;
+  id: Type;
   index: number;
   inlineColor: string;
   lightBgColor: string;
@@ -50,11 +71,15 @@ export interface Type {
   symbol: string;
 }
 
+export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
+  id: 'special';
+};
+
 export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
 
 export interface GenerationInfo {
   id: Gen;
-  boxes: string[];
+  boxes: Region[];
   name: string;
   sprites: string[];
 }
@@ -67,17 +92,17 @@ export interface LanguageInfo {
   symbol: string;
 }
 
-export interface Pokemon {
+export interface PokemonInfo {
   id: string;
   baseName: string;
-  primaryType: string;
-  secondaryType: string | null;
+  primaryType: Type;
+  secondaryType: Type | null;
   box: string;
   specialType: string;
 }
 
 export interface State {
-  currentType: string | null;
+  currentType: Type | null;
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;
@@ -108,12 +133,12 @@ export interface PkmnData {
   error: any;
   isLoaded: boolean;
   namings: Record<string, string> | null;
-  pokemon: Pokemon[] | null;
+  pokemon: PokemonInfo[] | null;
   spriteCycles: Record<string, string[]> | null;
   sprites: {
     sprite: Record<string, string>;
     shiny: Record<string, string>;
     silhouette: Record<string, string>;
   } | null;
-  translations: Record<string, Record<string, string>> | null;
+  translations: Record<Language, Record<string, string>> | null;
 }

@@ -1,4 +1,6 @@
-export const types = {
+import type { TypeInfo, Type, SpecialTypeInfo } from '@/types';
+
+export const types: Record<Type, TypeInfo> = {
   bug: {
     bgColor: '#aaee33',
     buttonColor: '#84b329',
@@ -223,20 +225,6 @@ export const types = {
     name: 'Rock',
     symbol: 'RCK',
   },
-  special: {
-    bgColor: '#ffbb11',
-    buttonColor: '#c99000',
-    darkBgColor: '#ac7b00',
-    fgColor: '#ffffff',
-    icon: 'SPECIAL',
-    id: 'special',
-    index: -1,
-    inlineColor: '#ffcd50',
-    lightBgColor: '#ffbf1e',
-    lightFgColor: '#111111',
-    name: 'Special',
-    symbol: 'SPC',
-  },
   steel: {
     bgColor: '#558888',
     buttonColor: '#3a5757',
@@ -267,6 +255,19 @@ export const types = {
   },
 };
 
-export const typesList = Object.values(types)
-  .filter((type) => type.symbol !== 'SPC')
-  .sort((a, b) => a.index - b.index);
+export const specialType: SpecialTypeInfo = {
+  bgColor: '#ffbb11',
+  buttonColor: '#c99000',
+  darkBgColor: '#ac7b00',
+  fgColor: '#ffffff',
+  icon: 'SPECIAL',
+  id: 'special',
+  index: -1,
+  inlineColor: '#ffcd50',
+  lightBgColor: '#ffbf1e',
+  lightFgColor: '#111111',
+  name: 'Special',
+  symbol: 'SPC',
+};
+
+export const typesList = Object.values(types).sort((a, b) => a.index - b.index);
