@@ -17,6 +17,7 @@ const { state } = useState();
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: flex-start;
   flex: 1;
 }
 </style>

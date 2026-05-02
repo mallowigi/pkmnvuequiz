@@ -39,8 +39,9 @@ const buttonStyles = computed(() => {
   padding: 11px 14px;
   text-align: center;
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
+  align-self: flex-start;
   gap: 8px;
   margin: 10px 0 0 10px;
   min-height: 30px;

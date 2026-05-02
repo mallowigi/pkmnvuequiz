@@ -1,45 +1,28 @@
 <script setup lang="ts">
-import RoundedButton from '@/components/common/RoundedButton.vue';
+import GameAbort from '@/components/game/GameAbort.vue';
 import GameModeSelection from '@/components/game/GameModeSelection.vue';
+import ModeSelection from '@/components/game/ModeSelection.vue';
 import TimerSelection from '@/components/game/TimerSelection.vue';
-import { useDialogs } from '@/stores/useDialogs';
-
-const { setDialog } = useDialogs();
-
-const giveUp = () => {
-  setDialog('giveup');
-};
-
-const resetGame = () => {
-  setDialog('reset');
-};
+import TypeShuffle from '@/components/game/TypeShuffle.vue';
 </script>
 
-<template>
-  <div class="row">
-    <RoundedButton
-      class="rad-br-tl danger-btn"
-      @click="giveUp()"
-    >
-      Give Up
-    </RoundedButton>
+<template class="root">
+  <GameAbort />
 
-    <RoundedButton
-      class="rad-br-tl danger-btn"
-      @click="resetGame()"
-    >
-      Reset
-    </RoundedButton>
+  <div class="selection-row">
+    <GameModeSelection />
+
+    <TimerSelection />
+
+    <ModeSelection />
+
+    <TypeShuffle />
   </div>
-
-  <GameModeSelection />
-
-  <TimerSelection />
 </template>
 
 <style scoped>
-.danger-btn:hover {
-  background-color: var(--danger);
-  border-color: var(--danger);
+.selection-row {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
