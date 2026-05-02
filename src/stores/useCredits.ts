@@ -1,6 +1,10 @@
 import { reactive, readonly } from 'vue';
 
-const credits = reactive({
+interface CreditsState {
+  showCredits: boolean;
+}
+
+const credits: CreditsState = reactive({
   showCredits: false,
 });
 
