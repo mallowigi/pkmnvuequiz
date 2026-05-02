@@ -16,7 +16,7 @@ export const useCurrentRegion = () => {
       return;
     }
 
-    return regions.find((r) => r.id === firstBox);
+    return regions[firstBox];
   };
 
   return {

@@ -1,66 +1,66 @@
-export const regions = [
-  {
-    id: 'kanto',
-    name: 'Kanto',
-  },
-  {
-    id: 'johto',
-    name: 'Johto',
-  },
-  {
-    id: 'hoenn',
-    name: 'Hoenn',
-  },
-  {
-    id: 'sinnoh',
-    name: 'Sinnoh',
-  },
-  {
-    id: 'unova',
-    name: 'Unova',
-  },
-  {
-    id: 'kalos',
-    name: 'Kalos',
-  },
-  {
-    id: 'kalosmega',
-    name: 'Mega Evolution (Kalos)',
-  },
-  {
-    id: 'hoennmega',
-    name: 'Mega Evolution (Hoenn)',
-  },
-  {
+export const regions = {
+  alola: {
     id: 'alola',
     name: 'Alola',
   },
-  {
-    id: 'galar',
-    name: 'Galar',
-  },
-  {
-    id: 'gmax',
-    name: 'Gigantamax',
-  },
-  {
-    id: 'hisui',
-    name: 'Hisui',
-  },
-  {
-    id: 'paldea',
-    name: 'Paldea',
-  },
-  {
+  areazero: {
     id: 'areazero',
     name: 'Area Zero (Paldea)',
   },
-  {
-    id: 'lumiose',
-    name: 'Mega Evolution (Lumiose)',
+  galar: {
+    id: 'galar',
+    name: 'Galar',
   },
-  {
+  gmax: {
+    id: 'gmax',
+    name: 'Gigantamax',
+  },
+  hisui: {
+    id: 'hisui',
+    name: 'Hisui',
+  },
+  hoenn: {
+    id: 'hoenn',
+    name: 'Hoenn',
+  },
+  hoennmega: {
+    id: 'hoennmega',
+    name: 'Mega Evolution (Hoenn)',
+  },
+  hyperspace: {
     id: 'hyperspace',
     name: 'Mega Evolution (Hyperspace)',
   },
-];
+  johto: {
+    id: 'johto',
+    name: 'Johto',
+  },
+  kalos: {
+    id: 'kalos',
+    name: 'Kalos',
+  },
+  kalosmega: {
+    id: 'kalosmega',
+    name: 'Mega Evolution (Kalos)',
+  },
+  kanto: {
+    id: 'kanto',
+    name: 'Kanto',
+  },
+  lumiose: {
+    id: 'lumiose',
+    name: 'Mega Evolution (Lumiose)',
+  },
+  paldea: {
+    id: 'paldea',
+    name: 'Paldea',
+  },
+  sinnoh: {
+    id: 'sinnoh',
+    name: 'Sinnoh',
+  },
+  unova: {
+    id: 'unova',
+    name: 'Unova',
+  },
+};

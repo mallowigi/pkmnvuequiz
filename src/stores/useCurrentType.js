@@ -10,14 +10,13 @@ export const useCurrentType = () => {
 
   const getCurrentType = () => {
     const currentType = state.currentType;
-    console.log('getCurrentType', currentType);
 
     const foundType = types[currentType];
     return foundType ?? null;
   };
 
   const getSpecialType = () => {
-    const foundType = types['special'];
+    const foundType = types.special;
     return foundType ?? null;
   };
 
