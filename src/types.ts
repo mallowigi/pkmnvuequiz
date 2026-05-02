@@ -1,6 +1,6 @@
 export type Dialog = 'chaos' | 'order' | 'normal' | 'shadows' | 'switchQuiz' | 'timer' | 'giveup' | 'reset';
 
-export type GameMode = 'full' | 'gen' | 'special' | 'type';
+export type GameMode = 'full' | 'gen' | 'special' | 'types';
 
 export type GameModeInfo = {
   id: GameMode;
@@ -131,16 +131,27 @@ export interface State {
   withTypeShuffle: boolean;
 }
 
+export type Translations = {
+  ENG: string;
+  FRE: string;
+  GER: string;
+  ESP: string;
+  ITA: string;
+  KOR: string;
+  JPN: string;
+  CHT: string;
+  CHS: string;
+};
+
 export interface PkmnData {
   error: any;
   isLoaded: boolean;
   namings: Record<string, string> | null;
+  suffixNamings: Record<string, string> | null;
   pokemon: PokemonInfo[] | null;
   spriteCycles: Record<string, string[]> | null;
-  sprites: {
-    sprite: Record<string, string>;
-    shiny: Record<string, string>;
-    silhouette: Record<string, string>;
-  } | null;
-  translations: Record<Language, Record<string, string>> | null;
+  sprites: Record<string, string> | null;
+  shinies: Record<string, string> | null;
+  silhouettes: Record<string, string> | null;
+  translations: Record<string, Translations> | null;
 }

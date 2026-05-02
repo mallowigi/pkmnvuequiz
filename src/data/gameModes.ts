@@ -13,8 +13,8 @@ export const gameModes: Record<GameMode, GameModeInfo> = {
     id: 'special',
     name: 'Special',
   },
-  type: {
-    id: 'type',
+  types: {
+    id: 'types',
     name: 'Types',
   },
 };
