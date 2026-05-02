@@ -2,10 +2,10 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import IconButton from '@/components/common/IconButton.vue';
-import { setState, useState } from '@/stores/useState';
+import { useState } from '@/stores/useState';
 import { useMessages } from '@/stores/useMessages';
 
-const { state, setPaused } = useState();
+const { state, setPaused, setState } = useState();
 const { showUserMessage } = useMessages();
 
 const saveState = () => {

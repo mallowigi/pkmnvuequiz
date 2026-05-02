@@ -29,75 +29,75 @@ const state: State = reactive({
   withTypeShuffle: false,
 });
 
-export const setGen = (id: Gen | null) => {
+const setGen = (id: Gen | null) => {
   state.gen = id;
 };
 
-export const setGameMode = (mode: GameMode | null) => {
+const setGameMode = (mode: GameMode | null) => {
   state.gameMode = mode;
 };
 
-export const setMode = (mode: Mode) => {
+const setMode = (mode: Mode) => {
   state.mode = mode;
 };
 
-export const setCurrentType = (type: Type | null) => {
+const setCurrentType = (type: Type | null) => {
   state.currentType = type;
 };
 
-export const toggleDarkMode = () => {
+const toggleDarkMode = () => {
   state.isDark = !state.isDark;
 };
 
-export const setDarkMode = (isDark: boolean) => {
+const setDarkMode = (isDark: boolean) => {
   state.isDark = isDark;
 };
 
-export const setStarted = (isStarted: boolean) => {
+const setStarted = (isStarted: boolean) => {
   state.isStarted = isStarted;
 };
 
-export const setEnded = (isEnded: boolean) => {
+const setEnded = (isEnded: boolean) => {
   state.isEnded = isEnded;
 };
 
-export const setPaused = (isPaused: boolean) => {
+const setPaused = (isPaused: boolean) => {
   state.isPaused = isPaused;
 };
 
-export const setShowCredits = (showCredits: boolean) => {
+const setShowCredits = (showCredits: boolean) => {
   state.showCredits = showCredits;
 };
 
-export const toggleShowShinies = () => {
+const toggleShowShinies = () => {
   state.withShinies = !state.withShinies;
 };
 
-export const toggleSpelling = () => {
+const toggleSpelling = () => {
   state.withSpelling = !state.withSpelling;
 };
 
-export const toggleShadows = () => {
+const toggleShadows = () => {
   state.withShadows = !state.withShadows;
 };
 
-export const toggleShadowHelper = () => {
+const toggleShadowHelper = () => {
   state.withShadowHelper = !state.withShadowHelper;
 };
 
-export const toggleTypeShuffle = () => {
+const toggleTypeShuffle = () => {
   state.withTypeShuffle = !state.withTypeShuffle;
 };
 
-export const toggleCycleSprites = () => {
+const toggleCycleSprites = () => {
   state.withCycleSprites = !state.withCycleSprites;
 };
 
-export const toggleSound = () => {
+const toggleSound = () => {
   state.withSound = !state.withSound;
 };
 
-export const toggleLanguage = (language: Language) => {
+const toggleLanguage = (language: Language) => {
   if (state.languages.has(language)) {
     state.languages.delete(language);
     return;
@@ -105,31 +105,31 @@ export const toggleLanguage = (language: Language) => {
   state.languages.add(language);
 };
 
-export const addShadow = () => {
+const addShadow = () => {
   state.numShadows++;
 };
 
-export const addFound = () => {
+const addFound = () => {
   state.numFound++;
 };
 
-export const setStartTime = () => {
+const setStartTime = () => {
   state.timer.startTime = Date.now();
 };
 
-export const setEndTime = (minutes: number = 0) => {
+const setEndTime = (minutes: number = 0) => {
   state.timer.endTime = minutes * 60;
 };
 
-export const addSecond = () => {
+const addSecond = () => {
   state.timer.elapsed += 1;
 };
 
-export const setState = (newState: Partial<State>) => {
+const setState = (newState: Partial<State>) => {
   Object.assign(state, newState);
 };
 
-export const resetState = () => {
+const resetState = () => {
   Object.assign(state, {
     isEnded: false,
     isPaused: false,

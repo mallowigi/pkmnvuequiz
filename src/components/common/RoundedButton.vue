@@ -3,11 +3,13 @@ import { computed } from 'vue';
 
 import { useCurrentType } from '@/stores/useCurrentType';
 
-const props = defineProps({
-  primary: Boolean,
-  selected: Boolean,
-  text: String,
-});
+type Props = {
+  primary?: boolean;
+  selected?: boolean;
+  text?: string;
+};
+
+const props = defineProps<Props>();
 
 const { getCurrentTypeOrSpecial } = useCurrentType();
 

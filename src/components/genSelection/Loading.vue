@@ -1,36 +1,11 @@
 <script setup lang="ts">
-import { setError, usePkmnData } from '@/stores/usePkmnStore';
+import { usePkmnData } from '@/stores/usePkmnStore';
 import { onMounted } from 'vue';
 
-const {
-  data,
-  setLoaded,
-  loadPokemons,
-  loadSprites,
-  loadNamings,
-  loadSpriteCycles,
-  loadTranslations,
-  loadSilhouettes,
-  loadShinies,
-} = usePkmnData();
+const { data, loadData } = usePkmnData();
 
 onMounted(() => {
-  Promise.all([
-    loadPokemons(),
-    loadSprites(),
-    loadSpriteCycles(),
-    loadTranslations(),
-    loadNamings(),
-    loadSilhouettes(),
-    loadShinies(),
-  ])
-    .then(() => {
-      setLoaded();
-    })
-    .catch((error) => {
-      console.error('Error loading data:', error);
-      setError(error);
-    });
+  loadData();
 });
 </script>
 

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { setStartTime, useState } from '@/stores/useState';
+import { useState } from '@/stores/useState';
 
-const { setEndTime } = useState();
+const { setEndTime, setStartTime } = useState();
 
 type Props = {
   timer: number;

@@ -4,6 +4,7 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { typesList } from '@/data/types';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
+import type { Type } from '@/types.ts';
 
 const { setGameMode } = useState();
 const { setCurrentType } = useCurrentType();
@@ -14,7 +15,7 @@ const setTypeOrSpecial = (type: string) => {
       setGameMode('special');
       break;
     default:
-      setCurrentType(type);
+      setCurrentType(type as Type);
   }
 };
 

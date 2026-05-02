@@ -14,14 +14,14 @@ const dialogs: DialogsState = reactive({
   dialog: null,
 });
 
-export const setDialog = (dialog: Dialog | null, callback?: () => void) => {
+const setDialog = (dialog: Dialog | null, callback?: () => void) => {
   dialogs.dialog = dialog;
   if (callback) {
     dialogs.callback = callback;
   }
 };
 
-export const setData = <T>(data: T) => {
+const setData = <T>(data: T) => {
   dialogs.data = data;
 };
 

@@ -8,7 +8,7 @@ const state: MessagesState = reactive({
   messages: [],
 });
 
-export const showUserMessage = (message: string) => {
+const showUserMessage = (message: string) => {
   state.messages.push(message);
 
   setTimeout(() => {
@@ -16,7 +16,7 @@ export const showUserMessage = (message: string) => {
   }, 5000);
 };
 
-export const clearMessages = () => {
+const clearMessages = () => {
   state.messages = [];
 };
 

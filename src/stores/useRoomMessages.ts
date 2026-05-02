@@ -8,7 +8,7 @@ const roomState: RoomMessagesState = reactive({
   roomMessage: null,
 });
 
-export const setRoomMessage = (message: string | null) => {
+const setRoomMessage = (message: string | null) => {
   roomState.roomMessage = message;
 };
 

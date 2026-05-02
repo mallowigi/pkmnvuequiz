@@ -15,61 +15,72 @@ const data: PkmnData = reactive({
   translations: null,
 });
 
-export async function loadPokemons() {
+async function loadPokemons() {
   const module = await import('@/data/pokemon.json');
   data.pokemon = module.default.pokemon as PokemonInfo[];
 }
 
-export async function loadNamings() {
+async function loadNamings() {
   const module = await import('@/data/namings.json');
   data.namings = module.default.namings;
   data.suffixNamings = module.default.suffix_namings;
 }
 
-export async function loadSpriteCycles() {
+async function loadSpriteCycles() {
   const module = await import('@/data/spriteCycles.json');
   data.spriteCycles = module.default.sprite_cycles;
 }
 
-export async function loadTranslations() {
+async function loadTranslations() {
   const module = await import('@/data/translations.json');
   data.translations = module.default.translations as Record<string, Translations>;
 }
 
-export async function loadSprites() {
+async function loadSprites() {
   const module = await import('@/data/sprites.json');
   data.sprites = module.default.sprite as Record<string, string>;
 }
 
-export async function loadShinies() {
+async function loadShinies() {
   const module = await import('@/data/shinies.json');
   data.shinies = module.default.shiny as Record<string, string>;
 }
 
-export async function loadSilhouettes() {
+async function loadSilhouettes() {
   const module = await import('@/data/silhouettes.json');
   data.silhouettes = module.default.silhouette as Record<string, string>;
 }
 
-export async function setLoaded() {
+async function setLoaded() {
   data.isLoaded = true;
 }
 
-export async function setError(error: any) {
+async function setError(error: any) {
   data.error = error;
+}
+
+async function loadData() {
+  return Promise.all([
+    loadPokemons(),
+    loadSprites(),
+    loadSpriteCycles(),
+    loadTranslations(),
+    loadNamings(),
+    loadSilhouettes(),
+    loadShinies(),
+  ])
+    .then(() => {
+      setLoaded();
+    })
+    .catch((error) => {
+      console.error('Error loading data:', error);
+      setError(error);
+    });
 }
 
 export const usePkmnData = () => {
   return {
     data: readonly(data),
-    loadNamings,
-    loadPokemons,
-    loadShinies,
-    loadSilhouettes,
-    loadSpriteCycles,
-    loadSprites,
-    loadTranslations,
-    setError,
-    setLoaded,
+    loadData,
   };
 };
