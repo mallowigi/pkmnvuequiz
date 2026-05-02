@@ -15,10 +15,10 @@ const { data } = usePkmnData();
 
 const sprites = computed(() => {
   const encodings = data.sprites;
-  if (!encodings?.sprite) {
+  if (!encodings) {
     return [];
   }
-  return props.gen.sprites.map((sprite: string) => encodings.sprite[sprite]);
+  return props.gen.sprites.map((sprite: string) => encodings[sprite]);
 });
 </script>
 
