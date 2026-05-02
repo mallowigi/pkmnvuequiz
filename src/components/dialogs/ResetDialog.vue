@@ -5,24 +5,21 @@ import { useState } from '@/stores/useState';
 
 const { state, setGen, resetState, setStarted } = useState();
 
-const props = defineProps({
-  toggleFunction: {
-    required: true,
-    type: Function,
-  },
-});
+type Props = {
+  toggleFunction: () => void;
+};
 
-const reset = (e: Event) => {
+const props = defineProps<Props>();
+
+const reset = () => {
   const gen = state.gen;
-  e.stopPropagation();
   props.toggleFunction();
   resetState();
   setGen(gen);
   setStarted(true);
 };
 
-const cancel = (e: Event) => {
-  e.stopPropagation();
+const cancel = () => {
   props.toggleFunction();
 };
 </script>
@@ -30,21 +27,21 @@ const cancel = (e: Event) => {
 <template>
   <Overlay
     class="overlay"
-    @click="props.toggleFunction()"
+    @click.stop="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>Reset?</h2>
       <p class="desc">Are you sure you want to reset?</p>
 
       <RoundedButton
-        @click="reset"
+        @click.stop="reset"
         primary
       >
         Reset
       </RoundedButton>
 
       <RoundedButton
-        @click="cancel"
+        @click.stop="cancel"
         primary
       >
         Cancel

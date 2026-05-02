@@ -5,19 +5,14 @@ import { setStartTime, useState } from '@/stores/useState';
 
 const { setEndTime } = useState();
 
-const props = defineProps({
-  timer: {
-    required: true,
-    type: Number,
-  },
-  toggleFunction: {
-    required: true,
-    type: Function,
-  },
-});
+type Props = {
+  timer: number;
+  toggleFunction: () => void;
+};
 
-const switchTimer = (e: Event) => {
-  e.stopPropagation();
+const props = defineProps<Props>();
+
+const switchTimer = () => {
   props.toggleFunction();
   setStartTime();
   setEndTime(props.timer);
@@ -39,7 +34,7 @@ const cancel = (e: Event) => {
       <p class="desc">Quiz and timer will reset</p>
 
       <RoundedButton
-        @click="switchTimer"
+        @click.stop="switchTimer"
         primary
       >
         Switch

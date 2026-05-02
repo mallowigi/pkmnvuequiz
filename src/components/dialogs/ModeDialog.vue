@@ -2,32 +2,24 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState';
+import type { Mode } from '@/types.ts';
 
 const { setMode } = useState();
 
-const props = defineProps({
-  caption: {
-    required: true,
-    type: String,
-  },
-  mode: {
-    required: true,
-    type: String,
-  },
-  toggleFunction: {
-    required: true,
-    type: Function,
-  },
-});
+type Props = {
+  caption: string;
+  mode: Mode;
+  toggleFunction: () => void;
+};
 
-const enableMode = (e: Event) => {
-  e.stopPropagation();
+const props = defineProps<Props>();
+
+const enableMode = () => {
   props.toggleFunction();
   setMode(props.mode);
 };
 
-const disableMode = (e: Event) => {
-  e.stopPropagation();
+const disableMode = () => {
   props.toggleFunction();
 };
 </script>
@@ -35,7 +27,7 @@ const disableMode = (e: Event) => {
 <template>
   <Overlay
     class="overlay"
-    @click="props.toggleFunction()"
+    @click.stop="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>{{ props.caption }}</h2>
@@ -49,7 +41,7 @@ const disableMode = (e: Event) => {
       </RoundedButton>
 
       <RoundedButton
-        @click="disableMode"
+        @click.stop="disableMode"
         primary
       >
         Cancel

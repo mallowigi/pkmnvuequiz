@@ -5,21 +5,18 @@ import { useState } from '@/stores/useState';
 
 const { toggleShadows } = useState();
 
-const props = defineProps({
-  toggleFunction: {
-    required: true,
-    type: Function,
-  },
-});
+type Props = {
+  toggleFunction: () => void;
+};
 
-const enableReveal = (e: Event) => {
-  e.stopPropagation();
+const props = defineProps<Props>();
+
+const enableReveal = () => {
   props.toggleFunction();
   toggleShadows();
 };
 
-const cancel = (e: Event) => {
-  e.stopPropagation();
+const cancel = () => {
   props.toggleFunction();
 };
 </script>
@@ -27,21 +24,21 @@ const cancel = (e: Event) => {
 <template>
   <Overlay
     class="overlay"
-    @click="props.toggleFunction()"
+    @click.stop="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>Reveal Shadows?</h2>
       <p class="desc">Cannot be undone without reset</p>
 
       <RoundedButton
-        @click="enableReveal"
+        @click.stop="enableReveal"
         primary
       >
         Reveal
       </RoundedButton>
 
       <RoundedButton
-        @click="cancel"
+        @click.stop="cancel"
         primary
       >
         Cancel

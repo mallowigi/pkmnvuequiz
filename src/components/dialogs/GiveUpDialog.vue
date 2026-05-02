@@ -5,22 +5,19 @@ import { useState } from '@/stores/useState';
 
 const { setEnded } = useState();
 
-const props = defineProps({
-  toggleFunction: {
-    required: true,
-    type: Function,
-  },
-});
+type Props = {
+  toggleFunction: () => void;
+};
 
-const giveUp = (e: Event) => {
-  e.stopPropagation();
+const props = defineProps<Props>();
+
+const giveUp = () => {
   props.toggleFunction();
   setEnded(true);
   // TODO show all missing shadows
 };
 
-const cancel = (e: Event) => {
-  e.stopPropagation();
+const cancel = () => {
   props.toggleFunction();
 };
 </script>
@@ -28,21 +25,21 @@ const cancel = (e: Event) => {
 <template>
   <Overlay
     class="overlay"
-    @click="props.toggleFunction()"
+    @click.stop="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>Give Up?</h2>
       <p class="desc">Are you sure you want to give up?</p>
 
       <RoundedButton
-        @click="giveUp"
+        @click.stop="giveUp"
         primary
       >
         Give Up
       </RoundedButton>
 
       <RoundedButton
-        @click="cancel"
+        @click.stop="cancel"
         primary
       >
         Cancel

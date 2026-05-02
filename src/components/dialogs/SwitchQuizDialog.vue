@@ -5,14 +5,13 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { dialogs } = useDialogs();
 
-interface Props {
+type Props = {
   toggleFunction: () => void;
-}
+};
 
 const props = defineProps<Props>();
 
-const switchQuiz = (e: Event) => {
-  e.stopPropagation();
+const switchQuiz = () => {
   props.toggleFunction();
 
   if (dialogs.callback) {
@@ -20,8 +19,7 @@ const switchQuiz = (e: Event) => {
   }
 };
 
-const cancel = (e: Event) => {
-  e.stopPropagation();
+const cancel = () => {
   props.toggleFunction();
 };
 </script>
@@ -29,21 +27,21 @@ const cancel = (e: Event) => {
 <template>
   <Overlay
     class="overlay"
-    @click="props.toggleFunction()"
+    @click.stop="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>Switch Quiz?</h2>
       <p class="desc">Quiz and timer will reset</p>
 
       <RoundedButton
-        @click="switchQuiz"
+        @click.stop="switchQuiz"
         primary
       >
         Switch
       </RoundedButton>
 
       <RoundedButton
-        @click="cancel"
+        @click.stop="cancel"
         primary
       >
         Cancel
