@@ -32,12 +32,12 @@ const setGen = (gen) => {
       <!-- Gens -->
       <div
         class="cell rad-bl"
-        v-for="(gen, i) in gens"
+        v-for="(gen, id, i) in gens"
         :class="{ 'rad-bl': i % 3 === 0, rad: i % 3 === 1, 'rad-tr': i % 3 === 2 }"
-        @click="setGen(gen.id)"
+        @click="setGen(id)"
         :key="gen.id"
       >
-        <div hidden>{{ gen.id }}</div>
+        <div hidden>{{ id }}</div>
         <div class="gen-name">{{ gen.name }}</div>
 
         <CyclingStarters

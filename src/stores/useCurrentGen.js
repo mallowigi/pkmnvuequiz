@@ -10,7 +10,7 @@ export const useCurrentGen = () => {
 
   const getCurrentGen = () => {
     const currentGen = state.gen;
-    return gens.find((g) => g.id === currentGen);
+    return gens[currentGen];
   };
 
   return {

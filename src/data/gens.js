@@ -1,108 +1,47 @@
-export const gens = [
-  {
-    id: 'gen1',
-    name: 'Gen 1',
+export const gens = {
+  gen1: {
     boxes: ['kanto'],
-    sprites: [
-      'bulbasaur',
-      'charmander',
-      'squirtle',
-    ],
+    name: 'Gen 1',
+    sprites: ['bulbasaur', 'charmander', 'squirtle'],
   },
-  {
-    id: 'gen2',
-    name: 'Gen 2',
+  gen2: {
     boxes: ['johto'],
-    sprites: [
-      'chikorita',
-      'cyndaquil',
-      'totodile',
-    ],
+    name: 'Gen 2',
+    sprites: ['chikorita', 'cyndaquil', 'totodile'],
   },
-  {
-    id: 'gen3',
-    name: 'Gen 3',
+  gen3: {
     boxes: ['hoenn'],
-    sprites: [
-      'treecko',
-      'torchic',
-      'mudkip',
-    ],
+    name: 'Gen 3',
+    sprites: ['treecko', 'torchic', 'mudkip'],
   },
-  {
-    id: 'gen4',
-    name: 'Gen 4',
+  gen4: {
     boxes: ['sinnoh'],
-    sprites: [
-      'turtwig',
-      'chimchar',
-      'piplup',
-    ],
+    name: 'Gen 4',
+    sprites: ['turtwig', 'chimchar', 'piplup'],
   },
-  {
-    id: 'gen5',
-    name: 'Gen 5',
+  gen5: {
     boxes: ['unova'],
-    sprites: [
-      'snivy',
-      'tepig',
-      'oshawott',
-    ],
+    name: 'Gen 5',
+    sprites: ['snivy', 'tepig', 'oshawott'],
   },
-  {
-    id: 'gen6',
+  gen6: {
+    boxes: ['kalos', 'kalosmega', 'hoennmega'],
     name: 'Gen 6',
-    boxes: [
-      'kalos',
-      'kalosmega',
-      'hoennmega',
-    ],
-    sprites: [
-      'chespin',
-      'fennekin',
-      'froakie',
-    ],
+    sprites: ['chespin', 'fennekin', 'froakie'],
   },
-  {
-    id: 'gen7',
+  gen7: {
+    boxes: ['alola', 'pokemongo'],
     name: 'Gen 7',
-    boxes: [
-      'alola',
-      'pokemongo',
-    ],
-    sprites: [
-      'rowlet',
-      'litten',
-      'popplio',
-    ],
+    sprites: ['rowlet', 'litten', 'popplio'],
   },
-  {
-    id: 'gen8',
+  gen8: {
+    boxes: ['galar', 'gmax', 'hisui'],
     name: 'Gen 8',
-    boxes: [
-      'galar',
-      'gmax',
-      'hisui',
-    ],
-    sprites: [
-      'grookey',
-      'scorbunny',
-      'sobble',
-    ],
+    sprites: ['grookey', 'scorbunny', 'sobble'],
   },
-  {
-    id: 'gen9',
+  gen9: {
+    boxes: ['paldea', 'areazero', 'lumiose', 'hyperspace'],
     name: 'Gen 9',
-    boxes: [
-      'paldea',
-      'areazero',
-      'lumiose',
-      'hyperspace',
-    ],
-    sprites: [
-      'sprigatito',
-      'fuecoco',
-      'quaxly',
-    ],
+    sprites: ['sprigatito', 'fuecoco', 'quaxly'],
   },
-];
+};
