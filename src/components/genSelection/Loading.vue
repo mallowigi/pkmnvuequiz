@@ -2,10 +2,28 @@
 import { setError, usePkmnData } from '@/stores/usePkmnStore';
 import { onMounted } from 'vue';
 
-const { data, setLoaded, loadPokemons, loadSprites, loadNamings, loadSpriteCycles, loadTranslations } = usePkmnData();
+const {
+  data,
+  setLoaded,
+  loadPokemons,
+  loadSprites,
+  loadNamings,
+  loadSpriteCycles,
+  loadTranslations,
+  loadSilhouettes,
+  loadShinies,
+} = usePkmnData();
 
 onMounted(() => {
-  Promise.all([loadPokemons(), loadSprites(), loadSpriteCycles(), loadTranslations(), loadNamings()])
+  Promise.all([
+    loadPokemons(),
+    loadSprites(),
+    loadSpriteCycles(),
+    loadTranslations(),
+    loadNamings(),
+    loadSilhouettes(),
+    loadShinies(),
+  ])
     .then(() => {
       setLoaded();
     })
