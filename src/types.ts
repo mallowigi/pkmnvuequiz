@@ -77,6 +77,8 @@ export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
   id: 'special';
 };
 
+export type SpecialType = 'no' | 'sub-legendary' | 'legendary' | 'mythical' | 'ultrabeast' | 'paradox';
+
 export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
 
 export interface GenerationInfo {
@@ -99,8 +101,8 @@ export interface PokemonInfo {
   baseName: string;
   primaryType: Type;
   secondaryType: Type | null;
-  box: string;
-  specialType: string;
+  box: Region;
+  specialType: SpecialType;
 }
 
 export interface State {

@@ -1,12 +1,13 @@
-import { useState } from '@/stores/useState.js';
-import { usePkmnData } from '@/stores/usePkmnStore.js';
-import { useCurrentGen } from '@/stores/useCurrentGen.js';
-import { useCurrentType } from '@/stores/useCurrentType.js';
+import { useCurrentGen } from '@/stores/useCurrentGen';
+import { useCurrentType } from '@/stores/useCurrentType';
+import { usePkmnData } from '@/stores/usePkmnStore';
+import { useState } from '@/stores/useState';
+import type { PokemonInfo } from '@/types';
 
-const removeDuplicates = (pokemons) => {
+const removeDuplicates = (pokemons: PokemonInfo[] | readonly PokemonInfo[]) => {
   const seen = new Set();
 
-  return pokemons.filter((pok) => {
+  return pokemons.filter((pok: PokemonInfo) => {
     if (seen.has(pok.baseName)) {
       return false;
     }
@@ -47,10 +48,7 @@ export const usePokemons = () => {
     }
 
     const filtered = data.pokemon.filter((pok) => {
-      const types = [
-        pok.primaryType,
-        pok.secondaryType,
-      ].filter(Boolean);
+      const types = [pok.primaryType, pok.secondaryType].filter(Boolean);
       return types.includes(currentType.id);
     });
 
@@ -63,11 +61,7 @@ export const usePokemons = () => {
     }
 
     const filtered = data.pokemon.filter((pok) => {
-      const types = [
-        'legendary',
-        'sub-legendary',
-        'mythical',
-      ].filter(Boolean);
+      const types = ['legendary', 'sub-legendary', 'mythical'].filter(Boolean);
       return types.includes(pok.specialType);
     });
 
@@ -101,7 +95,7 @@ export const usePokemons = () => {
   return {
     getCurrentGenPokemon,
     getCurrentTypePokemon,
-    getTotalPokemon,
     getPokemon,
+    getTotalPokemon,
   };
 };
