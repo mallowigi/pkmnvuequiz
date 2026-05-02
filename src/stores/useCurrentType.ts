@@ -1,23 +1,24 @@
-import { types } from '@/data/types.js';
-import { useState } from '@/stores/useState.js';
+import { types, specialType } from '@/data/types';
+import { useState } from '@/stores/useState';
+import type { Type } from '@/types.ts';
 
 export const useCurrentType = () => {
   const { state, setCurrentType: setStateType } = useState();
 
-  const setCurrentType = (type) => {
+  const setCurrentType = (type: Type | null) => {
     setStateType(type);
   };
 
   const getCurrentType = () => {
     const currentType = state.currentType;
+    if (!currentType) return null;
 
     const foundType = types[currentType];
     return foundType ?? null;
   };
 
   const getSpecialType = () => {
-    const foundType = types.special;
-    return foundType ?? null;
+    return specialType;
   };
 
   const getCurrentTypeOrSpecial = () => {
