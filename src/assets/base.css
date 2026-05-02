@@ -10,16 +10,28 @@
   border-radius: 20px 3px;
 }
 
+.rad-tl {
+  border-radius: 20px 3px 3px 3px;
+}
+
+.rad-br {
+  border-radius: 3px 3px 20px 3px;
+}
+
 .rad-bl {
   border-radius: 3px 3px 3px 20px;
+}
+
+.rad-tr {
+  border-radius: 3px 20px 3px 3px;
 }
 
 .rad {
   border-radius: 3px;
 }
 
-.rad-tr {
-  border-radius: 3px 20px 3px 3px;
+.rad-no {
+  border-radius: 0;
 }
 
 .pointer {

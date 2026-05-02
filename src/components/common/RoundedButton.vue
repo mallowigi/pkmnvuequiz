@@ -17,7 +17,7 @@ const props = defineProps({
 const { getCurrentType } = useCurrentType();
 
 const buttonStyles = computed(() => {
-  const type = getCurrentType(); //types.find(t => t.id === state.currentType);
+  const type = getCurrentType();
   const color = type?.buttonColor;
   const bgColor = type?.bgColor;
   return {
