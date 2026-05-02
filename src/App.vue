@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
 
 import Background from '@/components/background/Background.vue';
@@ -13,9 +13,9 @@ import GameFooter from '@/components/footer/GameFooter.vue';
 import GameStart from '@/components/genSelection/GameStart.vue';
 import TypeSelection from '@/components/genSelection/TypeSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
-import { useCredits } from '@/stores/useCredits.js';
-import { useRoomMessages } from '@/stores/useRoomMessages.js';
-import { useState } from '@/stores/useState.js';
+import { useCredits } from '@/stores/useCredits';
+import { useRoomMessages } from '@/stores/useRoomMessages';
+import { useState } from '@/stores/useState';
 import Game from '@/components/game/Game.vue';
 
 const { state, setDarkMode } = useState();
@@ -29,7 +29,7 @@ onMounted(() => {
   setDarkMode(darkModeMediaQuery.matches);
 
   // 2. Define the listener function
-  const handleDarkModeChange = (e) => {
+  const handleDarkModeChange = (e: MediaQueryListEvent) => {
     setDarkMode(e.matches);
   };
 
