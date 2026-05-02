@@ -1,7 +1,7 @@
-<script setup>
-import { useState } from '@/stores/useState.js';
+<script setup lang="ts">
+import { useState } from '@/stores/useState';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { typesList } from '@/data/types.js';
+import { typesList } from '@/data/types';
 
 const { setGameMode } = useState();
 
@@ -15,7 +15,7 @@ const currentType = computed(() => {
   };
 });
 
-let interval;
+let interval: ReturnType<typeof setInterval> | null = null;
 
 const startCycle = () => {
   if (interval) {
@@ -31,7 +31,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  clearInterval(interval);
+  if (interval) clearInterval(interval);
   interval = null;
 });
 </script>

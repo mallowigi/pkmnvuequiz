@@ -1,15 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
-import { usePkmnData } from '@/stores/usePkmnStore.js';
+import { usePkmnData } from '@/stores/usePkmnStore';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
-const props = defineProps({
-  gen: {
-    required: true,
-    type: Object,
-  },
-  start: Number,
-});
+import type { Gen } from '@/types';
+
+const props = defineProps<{
+  gen: Gen;
+  start?: number;
+}>();
 
 // Load data
 const { data } = usePkmnData();
@@ -19,7 +18,7 @@ const sprites = computed(() => {
   if (!encodings?.sprite) {
     return [];
   }
-  return props.gen.sprites.map((sprite) => encodings.sprite[sprite]);
+  return props.gen.sprites.map((sprite: string) => encodings.sprite[sprite]);
 });
 </script>
 

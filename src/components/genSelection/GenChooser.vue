@@ -1,14 +1,14 @@
-<script setup>
-import { gens } from '@/data/gens.js';
+<script setup lang="ts">
+import { gens } from '@/data/gens';
 import CyclingType from '@/components/genSelection/CyclingType.vue';
 import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
-import { useCurrentGen } from '@/stores/useCurrentGen.js';
-import { useState } from '@/stores/useState.js';
+import { useCurrentGen } from '@/stores/useCurrentGen';
+import { useState } from '@/stores/useState';
 
 const { setGameMode } = useState();
 const { setCurrentGen } = useCurrentGen();
 
-const setGen = (gen) => {
+const setGen = (gen: string) => {
   setGameMode('gen');
   setCurrentGen(gen);
 };
@@ -35,7 +35,7 @@ const setGen = (gen) => {
         v-for="(gen, id, i) in gens"
         :class="{ 'rad-bl': i % 3 === 0, rad: i % 3 === 1, 'rad-tr': i % 3 === 2 }"
         @click="setGen(id)"
-        :key="gen.id"
+        :key="id"
       >
         <div hidden>{{ id }}</div>
         <div class="gen-name">{{ gen.name }}</div>
