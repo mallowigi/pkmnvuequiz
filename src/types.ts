@@ -1,3 +1,5 @@
+export type Dialog = 'chaos' | 'order' | 'normal' | 'shadows' | 'switchQuiz' | 'timer' | 'giveup' | 'reset';
+
 export type GameMode = 'full' | 'gen' | 'special' | 'type';
 
 export type GameModeInfo = {
