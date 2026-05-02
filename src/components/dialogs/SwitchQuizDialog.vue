@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.js';
+import { useState } from '@/stores/useState';
 
 const { setGen } = useState();
 
@@ -16,13 +16,13 @@ const props = defineProps({
   },
 });
 
-const switchQuiz = (e) => {
+const switchQuiz = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
   setGen(props.gen);
 };
 
-const cancel = (e) => {
+const cancel = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
 };

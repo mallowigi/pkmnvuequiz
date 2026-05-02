@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import IconButton from '@/components/common/IconButton.vue';
-import { setState, useState } from '@/stores/useState.js';
-import { useMessages } from '@/stores/useMessages.js';
+import { setState, useState } from '@/stores/useState';
+import { useMessages } from '@/stores/useMessages';
 
 const { state, setPaused } = useState();
 const { showUserMessage } = useMessages();
@@ -34,17 +34,19 @@ const saveState = () => {
   URL.revokeObjectURL(url);
 };
 
-const loadState = (e) => {
-  const files = Array.from(e.target.files || []);
+const loadState = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const files = Array.from(target.files || []);
   if (files.length === 0) {
     return;
   }
 
   const file = files[0];
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = (e: ProgressEvent<FileReader>) => {
     try {
-      const loadedState = JSON.parse(e.target.result);
+      const result = e.target?.result as string;
+      const loadedState = JSON.parse(result);
       if (loadedState.version !== 1) {
         console.error('Unsupported save version.');
         showUserMessage('Unsupported save version.');

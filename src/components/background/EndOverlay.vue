@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
-import { donors } from '@/data/donors.js';
-import { useCurrentType } from '@/stores/useCurrentType.js';
-import { useState } from '@/stores/useState.js';
+import { donors } from '@/data/donors';
+import { useCurrentType } from '@/stores/useCurrentType';
+import { useState } from '@/stores/useState';
 
 const { getCurrentType } = useCurrentType();
 const { state, setEnded } = useState();

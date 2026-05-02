@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import GameOptions from '@/components/game/GameOptions.vue';
-import { useState } from '@/stores/useState.js';
+import { useState } from '@/stores/useState';
 
 const { state } = useState();
 </script>

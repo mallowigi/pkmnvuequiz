@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.js';
+import { useState } from '@/stores/useState';
 
 const { toggleShadows } = useState();
 
@@ -12,13 +12,13 @@ const props = defineProps({
   },
 });
 
-const enableReveal = (e) => {
+const enableReveal = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
   toggleShadows();
 };
 
-const cancel = (e) => {
+const cancel = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
 };

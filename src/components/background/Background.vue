@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
-import { useCurrentType } from '@/stores/useCurrentType.js';
-import { useState } from '@/stores/useState.js';
+import { useCurrentType } from '@/stores/useCurrentType';
+import { useState } from '@/stores/useState';
 
 const { state } = useState();
 const { getCurrentTypeOrSpecial } = useCurrentType();

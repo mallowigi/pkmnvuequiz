@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { setStartTime, useState } from '@/stores/useState.js';
+import { setStartTime, useState } from '@/stores/useState';
 
 const { setEndTime } = useState();
 
@@ -16,14 +16,14 @@ const props = defineProps({
   },
 });
 
-const switchTimer = (e) => {
+const switchTimer = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
   setStartTime();
   setEndTime(props.timer);
 };
 
-const cancel = (e) => {
+const cancel = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
 };

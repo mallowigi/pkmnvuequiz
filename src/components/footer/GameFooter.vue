@@ -1,5 +1,5 @@
-<script setup>
-import { useCredits } from '@/stores/useCredits.js';
+<script setup lang="ts">
+import { useCredits } from '@/stores/useCredits';
 
 const { toggleShowCredits } = useCredits();
 </script>

@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.js';
+import { useState } from '@/stores/useState';
 
 const { setEnded } = useState();
 
@@ -12,14 +12,14 @@ const props = defineProps({
   },
 });
 
-const giveUp = (e) => {
+const giveUp = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
   setEnded(true);
   // TODO show all missing shadows
 };
 
-const cancel = (e) => {
+const cancel = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
 };

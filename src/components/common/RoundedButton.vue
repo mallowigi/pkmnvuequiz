@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
 export default {
   inheritAttrs: false,
 };
 </script>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
-import { useCurrentType } from '@/stores/useCurrentType.js';
+import { useCurrentType } from '@/stores/useCurrentType';
 
 const props = defineProps({
   primary: Boolean,

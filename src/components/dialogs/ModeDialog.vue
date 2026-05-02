@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.js';
+import { useState } from '@/stores/useState';
 
 const { setMode } = useState();
 
@@ -20,13 +20,13 @@ const props = defineProps({
   },
 });
 
-const enableMode = (e) => {
+const enableMode = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
   setMode(props.mode);
 };
 
-const disableMode = (e) => {
+const disableMode = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
 };

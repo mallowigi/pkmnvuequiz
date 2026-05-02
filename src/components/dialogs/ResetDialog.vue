@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState.js';
+import { useState } from '@/stores/useState';
 
 const { state, setGen, resetState, setStarted } = useState();
 
@@ -12,7 +12,7 @@ const props = defineProps({
   },
 });
 
-const reset = (e) => {
+const reset = (e: Event) => {
   const gen = state.gen;
   e.stopPropagation();
   props.toggleFunction();
@@ -21,7 +21,7 @@ const reset = (e) => {
   setStarted(true);
 };
 
-const cancel = (e) => {
+const cancel = (e: Event) => {
   e.stopPropagation();
   props.toggleFunction();
 };

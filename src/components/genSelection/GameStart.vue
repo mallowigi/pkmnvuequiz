@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import FadeTransition from '@/components/common/FadeTransition.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
 import Loading from '@/components/genSelection/Loading.vue';
-import { usePkmnData } from '@/stores/usePkmnStore.js';
+import { usePkmnData } from '@/stores/usePkmnStore';
 
 const { data } = usePkmnData();
 </script>

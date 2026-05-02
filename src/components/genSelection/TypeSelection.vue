@@ -1,14 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { typesList } from '@/data/types.js';
-import { useCurrentType } from '@/stores/useCurrentType.js';
-import { useState } from '@/stores/useState.js';
+import { typesList } from '@/data/types';
+import { useCurrentType } from '@/stores/useCurrentType';
+import { useState } from '@/stores/useState';
 
 const { setGameMode } = useState();
 const { setCurrentType } = useCurrentType();
 
-const setTypeOrSpecial = (type) => {
+const setTypeOrSpecial = (type: string) => {
   switch (type) {
     case 'special':
       setGameMode('special');

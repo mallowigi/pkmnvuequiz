@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useCurrentType } from '@/stores/useCurrentType.js';
-import { useDialogs } from '@/stores/useDialogs.js';
-import { useState } from '@/stores/useState.js';
+import { useCurrentType } from '@/stores/useCurrentType';
+import { useDialogs } from '@/stores/useDialogs';
+import { useState } from '@/stores/useState';
 
 const { setDialog } = useDialogs();
 const { getCurrentType } = useCurrentType();

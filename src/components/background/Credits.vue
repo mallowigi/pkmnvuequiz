@@ -1,6 +1,6 @@
-<script setup>
-import { credits } from '@/data/credits.js';
-import { useCredits } from '@/stores/useCredits.js';
+<script setup lang="ts">
+import { credits } from '@/data/credits';
+import { useCredits } from '@/stores/useCredits';
 
 const { toggleShowCredits } = useCredits();
 </script>
