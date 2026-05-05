@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { donors } from '@/data/donors';
 import { useState } from '@/stores/useState';
 
-const { state, setEnded } = useState();
+const { state, setEnded, setGameOver } = useState();
 
 const closeOverlay = () => {
-  setEnded(false);
+  setGameOver();
 };
 </script>
 
@@ -16,9 +14,7 @@ const closeOverlay = () => {
     class="overlay"
     @click="closeOverlay()"
   >
-    <div
-      class="sidepanel"
-    >
+    <div class="sidepanel">
       <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
 

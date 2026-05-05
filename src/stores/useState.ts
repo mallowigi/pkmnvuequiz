@@ -1,4 +1,5 @@
 import { reactive, readonly } from 'vue';
+
 import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
 
 const state: State = reactive({
@@ -149,6 +150,27 @@ const resetState = () => {
   });
 };
 
+const setGameOver = () => {
+  Object.assign(state, {
+    currentType: null,
+    gameMode: null,
+    gen: null,
+    isEnded: false,
+    isPaused: false,
+    isStarted: false,
+    numFound: 0,
+    numShadows: 0,
+    showCredits: false,
+    timer: {
+      elapsed: 0,
+      isLimited: false,
+      minutes: 35,
+      savedAt: null,
+      startTime: null,
+    },
+  });
+};
+
 export const useState = () => {
   return {
     addFound,
@@ -159,6 +181,7 @@ export const useState = () => {
     setDarkMode,
     setEnded,
     setGameMode,
+    setGameOver,
     setGen,
     setIsLimited,
     setMinutes,

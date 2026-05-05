@@ -5,8 +5,10 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { state, setMinutes, setIsLimited, setPaused } = useState();
+const { setDialog } = useDialogs();
 const { showUserMessage } = useMessages();
 
 const setInfinite = () => {
@@ -15,6 +17,12 @@ const setInfinite = () => {
 };
 
 const setFinite = () => {
+  // If the timer is already running and the elapsed time exceeds the new limit, end the game immediately
+  if (state.timer.elapsed > state.timer.minutes * 60) {
+    setDialog('giveup');
+    return;
+  }
+
   setIsLimited(true);
   showUserMessage(`Timer set to ${state.timer.minutes} minutes.`);
 };
@@ -23,7 +31,15 @@ const togglePause = () => setPaused(!state.isPaused);
 
 const minutes = computed({
   get: () => state.timer.minutes,
-  set: (value) => setMinutes(value),
+  set: (value) => {
+    // If the timer is currently running and the new time limit is less than the elapsed time, end the game immediately
+    if (state.timer.isLimited && state.timer.elapsed > value - 1 * 60) {
+      setDialog('giveup');
+      return;
+    }
+
+    setMinutes(value);
+  },
 });
 </script>
 
