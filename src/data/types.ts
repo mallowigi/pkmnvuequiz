@@ -271,3 +271,9 @@ export const specialType: SpecialTypeInfo = {
 };
 
 export const typesList = Object.values(types).sort((a, b) => a.index - b.index);
+
+export const getRandomType = (): TypeInfo => {
+  const typeKeys = Object.keys(types) as Type[];
+  const randomKey = typeKeys[Math.floor(Math.random() * typeKeys.length)];
+  return types[randomKey];
+};

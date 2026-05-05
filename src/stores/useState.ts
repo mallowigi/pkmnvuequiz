@@ -1,6 +1,7 @@
 import { reactive, readonly } from 'vue';
 
 import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
+import { getRandomType } from '@/data/types.ts';
 
 const state: State = reactive({
   currentType: null,
@@ -87,8 +88,15 @@ const toggleShadowHelper = () => {
   state.withShadowHelper = !state.withShadowHelper;
 };
 
-const toggleTypeShuffle = () => {
-  state.withTypeShuffle = !state.withTypeShuffle;
+const setTypeShuffle = (withTypeShuffle: boolean) => {
+  state.withTypeShuffle = withTypeShuffle;
+
+  if (withTypeShuffle) {
+    const randomType = getRandomType();
+    setCurrentType(randomType.id);
+  } else {
+    setCurrentType(null);
+  }
 };
 
 const toggleCycleSprites = () => {
@@ -191,6 +199,7 @@ export const useState = () => {
     setStartTime,
     setStarted,
     setState,
+    setTypeShuffle,
     state: readonly(state),
     toggleCycleSprites,
     toggleDarkMode,
@@ -200,6 +209,5 @@ export const useState = () => {
     toggleShowShinies,
     toggleSound,
     toggleSpelling,
-    toggleTypeShuffle,
   };
 };
