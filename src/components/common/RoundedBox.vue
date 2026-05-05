@@ -26,6 +26,7 @@ defineProps<Props>();
   display: inline-flex;
   flex-direction: row;
   align-self: flex-start;
+  align-items: center;
   gap: 8px;
   margin: 10px 0 0 10px;
   min-height: 30px;
