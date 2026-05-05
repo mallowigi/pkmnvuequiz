@@ -2,8 +2,9 @@
 import { computed } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
-import { useState } from '@/stores/useState.ts';
+import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
+import { useState } from '@/stores/useState.ts';
 
 const { state, setMinutes, setIsLimited, setPaused } = useState();
 const { showUserMessage } = useMessages();
@@ -27,90 +28,86 @@ const minutes = computed({
 </script>
 
 <template>
-  <RoundedBox>
-    Timer:
-    <div
-      class="smolbutton"
-      :class="{ active: !state.timer.isLimited }"
-      @click="setInfinite"
+  <RoundedBox class="timer-box">
+    <SegmentButton
+      :active="{
+        left: !state.timer.isLimited,
+        right: state.timer.isLimited,
+        suffix: state.isPaused,
+      }"
+      :attached="{
+        right: true,
+      }"
+      :noPointer="{
+        right: true,
+      }"
+      :classes="{
+        center: 'input-segment',
+      }"
+      @click:left="setInfinite"
+      @click:right="setFinite"
+      @click:suffix="togglePause"
     >
-      ∞
-    </div>
+      <template #prefix> Timer: </template>
 
-    <div class="input-timer-container">
-      <input
-        type="number"
-        name="timer"
-        class="input-timer"
-        min="1"
-        max="999"
-        v-model="minutes"
-        autocomplete="off"
-        placeholder="1"
-      />
-    </div>
+      <template #left> ∞ </template>
 
-    <div
-      class="smolbutton attached"
-      :class="{ active: state.timer.isLimited }"
-      @click="setFinite"
-    >
-      set
-    </div>
+      <template #center>
+        <div class="input-timer-container">
+          <input
+            type="number"
+            name="timer"
+            class="input-timer"
+            min="1"
+            max="999"
+            v-model="minutes"
+            autocomplete="off"
+            placeholder="1"
+          />
+        </div>
+      </template>
 
-    <div
-      class="smolbutton"
-      :class="{ active: state.isPaused }"
-      @click="togglePause"
-    >
-      ⏸
-    </div>
+      <template #right> set </template>
+
+      <template #suffix> ⏸ </template>
+    </SegmentButton>
   </RoundedBox>
 </template>
 
 <style scoped>
-.smolbutton {
-  border: solid 2px var(--type-btn-color, var(--primary));
-  color: var(--type-btn-color, var(--primary));
-  border-radius: 6px 3px 6px 3px;
-  text-align: center;
-  text-decoration: none;
-  padding: 3px 5px 3px 5px;
-  vertical-align: middle;
-  line-height: 16px;
-  cursor: pointer;
-
-  &.active {
-    background: var(--type-btn-color, var(--primary));
-    color: var(--button);
-  }
-
-  &.attached {
-    border-radius: 0 3px 6px 0;
-    margin-left: -10px;
-  }
+:deep(.input-segment) {
+  padding: 0;
+  border-radius: 6px 0 0 3px;
+  display: flex;
+  align-items: stretch;
+  flex: 1;
 }
 
 .input-timer-container {
   position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+
   &::after {
     content: 'min';
     position: absolute;
-    right: 6px;
+    right: 3px;
     color: var(--input-text);
+    pointer-events: none;
   }
 }
 
 .input-timer {
-  border: solid 2px var(--type-btn-color, var(--primary));
+  border: none;
   box-sizing: border-box;
   font-size: 16px;
+  border-radius: 3px 0 0 0px;
   color: var(--input-text);
   background: var(--input);
-  padding: 2px 36px 2px 6px;
+  padding: 2px 32px 2px 0;
   text-align: right;
-  border-radius: 6px 0 0 3px;
-  -moz-appearance: textfield;
+  width: 100%;
   outline: none;
 
   &::-webkit-outer-spin-button,

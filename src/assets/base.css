@@ -67,3 +67,25 @@
   align-items: center;
   gap: 0;
 }
+
+.smolbutton {
+  border: solid 2px var(--type-btn-color, var(--primary));
+  color: var(--type-btn-color, var(--primary));
+  border-radius: 6px 3px 6px 3px;
+  text-align: center;
+  text-decoration: none;
+  padding: 3px 5px 3px 5px;
+  vertical-align: middle;
+  line-height: 16px;
+  cursor: pointer;
+
+  &.active {
+    background: var(--type-btn-color, var(--primary));
+    color: var(--button);
+  }
+
+  &.attached {
+    border-radius: 0 3px 6px 0;
+    margin-left: -10px;
+  }
+}
