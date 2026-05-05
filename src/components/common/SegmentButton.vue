@@ -61,7 +61,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.left"
-    class="smolbutton"
+    class="smolbutton left"
     :class="[
       {
         active: isActive('left'),
@@ -77,7 +77,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.center"
-    class="smolbutton"
+    class="smolbutton center"
     :class="[
       {
         active: isActive('center'),
@@ -93,7 +93,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.right"
-    class="smolbutton"
+    class="smolbutton right"
     :class="[
       {
         active: isActive('right'),
@@ -109,7 +109,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.suffix"
-    class="smolbutton"
+    class="smolbutton suffix"
     :class="[
       {
         active: isActive('suffix'),
@@ -132,6 +132,10 @@ div:empty {
 }
 
 .no-pointer {
-  cursor: default !important;
+  cursor: default;
+}
+
+.smolbutton.center.attached {
+  border-radius: 0;
 }
 </style>

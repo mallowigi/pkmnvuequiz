@@ -3,43 +3,45 @@ import { computed } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 
-const { state, setMinutes, setIsLimited, setPaused } = useState();
-const { setDialog } = useDialogs();
-const { showUserMessage } = useMessages();
+const { state, setMinutes, setIsLimited, setPaused, resetState } = useState();
+const { setDialog, setData } = useDialogs();
 
 const setInfinite = () => {
-  setIsLimited(false);
-  showUserMessage('Timer unset.');
-};
+  if (!state.timer.isLimited) return;
 
-const setFinite = () => {
-  // If the timer is already running and the elapsed time exceeds the new limit, end the game immediately
-  if (state.timer.elapsed > state.timer.minutes * 60) {
-    setDialog('giveup');
+  if (!state.isStarted) {
+    setIsLimited(false);
     return;
   }
 
-  setIsLimited(true);
-  showUserMessage(`Timer set to ${state.timer.minutes} minutes.`);
+  setDialog('timer', () => {
+    resetState();
+    setIsLimited(false);
+  });
+};
+
+const setFinite = () => {
+  if (state.timer.isLimited) return;
+
+  if (!state.isStarted) {
+    setIsLimited(true);
+    return;
+  }
+
+  setDialog('timer', () => {
+    resetState();
+    setIsLimited(true);
+  });
 };
 
 const togglePause = () => setPaused(!state.isPaused);
 
 const minutes = computed({
   get: () => state.timer.minutes,
-  set: (value) => {
-    // If the timer is currently running and the new time limit is less than the elapsed time, end the game immediately
-    if (state.timer.isLimited && state.timer.elapsed > value - 1 * 60) {
-      setDialog('giveup');
-      return;
-    }
-
-    setMinutes(value);
-  },
+  set: (value) => setMinutes(value),
 });
 </script>
 
@@ -52,9 +54,6 @@ const minutes = computed({
         suffix: state.isPaused,
       }"
       :attached="{
-        right: true,
-      }"
-      :noPointer="{
         right: true,
       }"
       :classes="{

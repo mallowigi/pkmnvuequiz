@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
-const { setEndTime, setStartTime } = useState();
+const { dialogs } = useDialogs();
 
 type Props = {
-  timer: number;
   toggleFunction: () => void;
 };
 
@@ -14,8 +13,10 @@ const props = defineProps<Props>();
 
 const switchTimer = () => {
   props.toggleFunction();
-  setStartTime();
-  setEndTime(props.timer);
+
+  if (dialogs.callback) {
+    dialogs.callback();
+  }
 };
 
 const cancel = (e: Event) => {
