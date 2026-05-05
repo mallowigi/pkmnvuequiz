@@ -1,31 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import { useCurrentType } from '@/stores/useCurrentType.ts';
-
 type Props = {
   text?: string;
 };
 
-const props = defineProps<Props>();
-
-const { getCurrentTypeOrSpecial } = useCurrentType();
-
-const buttonStyles = computed(() => {
-  const type = getCurrentTypeOrSpecial();
-  const buttonColor = type?.buttonColor;
-  const bgColor = type?.bgColor;
-  return {
-    '--bg-color': bgColor,
-    '--btn-color': buttonColor,
-  };
-});
+defineProps<Props>();
 </script>
 
 <template>
   <div
     class="cell rad-br-tl transition-element"
-    :style="buttonStyles"
     v-bind="$attrs"
   >
     <slot />
@@ -35,7 +18,7 @@ const buttonStyles = computed(() => {
 <style scoped>
 .cell {
   background: var(--button);
-  border: 2px solid var(--bg-color, var(--primary));
+  border: 2px solid var(--type-bg-color, var(--primary));
   color: var(--text);
   padding: 11px 14px;
   text-align: center;

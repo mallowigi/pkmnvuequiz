@@ -2,18 +2,9 @@
 import { computed } from 'vue';
 
 import { donors } from '@/data/donors';
-import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
 
-const { getCurrentTypeOrSpecial } = useCurrentType();
 const { state, setEnded } = useState();
-
-const sidebarStyles = computed(() => {
-  const type = getCurrentTypeOrSpecial();
-  return {
-    '--bg-color': type?.bgColor,
-  };
-});
 
 const closeOverlay = () => {
   setEnded(false);
@@ -27,7 +18,6 @@ const closeOverlay = () => {
   >
     <div
       class="sidepanel"
-      :style="sidebarStyles"
     >
       <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
@@ -108,7 +98,7 @@ const closeOverlay = () => {
   color: white;
   padding: 20px 10px;
   box-sizing: border-box;
-  background-color: var(--bg-color, var(--primary));
+  background-color: var(--type-bg-color, var(--primary));
   display: flex;
   flex-direction: column;
   gap: 10px;

@@ -104,13 +104,13 @@ const setSpecialQuiz = () => {
   padding: 9px 14px;
 
   &:hover {
-    background-color: var(--btn-color, var(--darkPrimary));
-    border-color: var(--btn-color, var(--darkPrimary));
+    background-color: var(--type-btn-color, var(--darkPrimary));
+    border-color: var(--type-btn-color, var(--darkPrimary));
     border-left: none;
   }
 
   &:first-child {
-    border-left: 2px solid var(--btn-color, var(--darkPrimary));
+    border-left: 2px solid var(--type-btn-color, var(--darkPrimary));
   }
 
   &:last-child {

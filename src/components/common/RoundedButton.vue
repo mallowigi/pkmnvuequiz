@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import { useCurrentType } from '@/stores/useCurrentType';
-
 type Props = {
   primary?: boolean;
   selected?: boolean;
@@ -10,25 +6,12 @@ type Props = {
 };
 
 const props = defineProps<Props>();
-
-const { getCurrentTypeOrSpecial } = useCurrentType();
-
-const buttonStyles = computed(() => {
-  const type = getCurrentTypeOrSpecial();
-  const buttonColor = type?.buttonColor;
-  const bgColor = type?.bgColor;
-  return {
-    '--bg-color': bgColor,
-    '--btn-color': buttonColor,
-  };
-});
 </script>
 
 <template>
   <div
     class="cell rad-bl-tr transition-element"
     :class="{ primary: props.primary, selected: props.selected }"
-    :style="buttonStyles"
     v-bind="$attrs"
   >
     <slot />
@@ -37,7 +20,7 @@ const buttonStyles = computed(() => {
 
 <style scoped>
 .cell {
-  border: 2px solid var(--btn-color, var(--primary));
+  border: 2px solid var(--type-btn-color, var(--primary));
   background: var(--button);
   color: var(--text);
   padding: 9px 8px 8px;
@@ -52,13 +35,13 @@ const buttonStyles = computed(() => {
   font-size: 16px;
 
   &.primary {
-    background: var(--bg-color, var(--primary));
-    border: 2px solid var(--btn-color, var(--primary));
+    background: var(--type-bg-color, var(--primary));
+    border: 2px solid var(--type-btn-color, var(--primary));
   }
 
   &.selected {
-    background: var(--btn-color, var(--darkPrimary));
-    border: 2px solid var(--btn-color, var(--darkPrimary));
+    background: var(--type-btn-color, var(--darkPrimary));
+    border: 2px solid var(--type-btn-color, var(--darkPrimary));
   }
 
   &:hover {

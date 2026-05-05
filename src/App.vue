@@ -17,10 +17,12 @@ import { useCredits } from '@/stores/useCredits';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
 import Game from '@/components/game/Game.vue';
+import { useTypeStyles } from '@/composables/useTypeStyles';
 
 const { state, setDarkMode } = useState();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
+const typeStyles = useTypeStyles();
 
 onMounted(() => {
   const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -47,6 +49,7 @@ onMounted(() => {
   <main
     class="main"
     :class="{ dark: state.isDark }"
+    :style="typeStyles"
   >
     <Background />
 

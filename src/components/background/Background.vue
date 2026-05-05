@@ -16,7 +16,7 @@ const currentType = computed(() => {
   <div
     class="background"
     :class="{ typed: currentType, dark: state.isDark }"
-    :style="`background-color: ${currentType?.bgColor}`"
+    style="background-color: var(--type-bg-color)"
   >
     <Transition
       name="fade"

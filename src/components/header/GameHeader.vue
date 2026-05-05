@@ -52,21 +52,12 @@ const elapsed = computed(() => {
 
   return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
 });
-
-const boxStyles = computed(() => {
-  const currentType = getCurrentTypeOrSpecial();
-  return {
-    '--bg-color': currentType?.bgColor,
-    '--text': currentType?.fgColor,
-  };
-});
 </script>
 
 <template>
   <header class="header">
     <section
       class="controls"
-      :style="boxStyles"
     >
       <RoundedButton
         class="cell moon"
@@ -210,7 +201,7 @@ const boxStyles = computed(() => {
 }
 
 .box {
-  background: var(--bg-color, var(--primary));
+  background: var(--type-bg-color, var(--primary));
   color: white;
   min-height: 30px;
   line-height: 30px;
@@ -224,7 +215,7 @@ const boxStyles = computed(() => {
 }
 
 .input-name {
-  color: var(--text);
+  color: var(--type-fg-color, var(--text));
   background-color: var(--secondary);
   font-size: 20px;
   width: 170px;
@@ -250,7 +241,7 @@ const boxStyles = computed(() => {
   font-size: 20px;
   z-index: 10;
   padding: 4px 0 10px 40px;
-  border-top: 3px dotted var(--bg-color, var(--primary));
+  border-top: 3px dotted var(--type-bg-color, var(--primary));
   color: var(--text);
 }
 
