@@ -120,7 +120,8 @@ export interface State {
   showCredits: boolean;
   timer: {
     elapsed: number;
-    endTime: number | null;
+    minutes: number;
+    isLimited: boolean;
     savedAt: number | null;
     startTime: number | null;
   };

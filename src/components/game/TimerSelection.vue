@@ -3,10 +3,27 @@ import { computed } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { useState } from '@/stores/useState.ts';
+import { useMessages } from '@/stores/useMessages.ts';
 
-const { state } = useState();
+const { state, setMinutes, setIsLimited, setPaused } = useState();
+const { showUserMessage } = useMessages();
 
-const isInfiniteTimer = computed(() => state.timer.endTime === null);
+const setInfinite = () => {
+  setIsLimited(false);
+  showUserMessage('Timer unset.');
+};
+
+const setFinite = () => {
+  setIsLimited(true);
+  showUserMessage(`Timer set to ${state.timer.minutes} minutes.`);
+};
+
+const togglePause = () => setPaused(!state.isPaused);
+
+const minutes = computed({
+  get: () => state.timer.minutes,
+  set: (value) => setMinutes(value),
+});
 </script>
 
 <template>
@@ -14,7 +31,8 @@ const isInfiniteTimer = computed(() => state.timer.endTime === null);
     Timer:
     <div
       class="smolbutton"
-      :class="{ active: isInfiniteTimer }"
+      :class="{ active: !state.timer.isLimited }"
+      @click="setInfinite"
     >
       ∞
     </div>
@@ -26,18 +44,24 @@ const isInfiniteTimer = computed(() => state.timer.endTime === null);
         class="input-timer"
         min="1"
         max="999"
-        value="35"
+        v-model="minutes"
         autocomplete="off"
         placeholder="1"
       />
     </div>
 
-    <div class="smolbutton attached">set</div>
+    <div
+      class="smolbutton attached"
+      :class="{ active: state.timer.isLimited }"
+      @click="setFinite"
+    >
+      set
+    </div>
 
     <div
       class="smolbutton"
-      name="pause"
-      value="pause"
+      :class="{ active: state.isPaused }"
+      @click="togglePause"
     >
       ⏸
     </div>
@@ -86,11 +110,13 @@ const isInfiniteTimer = computed(() => state.timer.endTime === null);
   padding: 2px 36px 2px 6px;
   text-align: right;
   border-radius: 6px 0 0 3px;
+  -moz-appearance: textfield;
   outline: none;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    margin: 0;
   }
 }
 </style>

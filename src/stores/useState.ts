@@ -16,7 +16,8 @@ const state: State = reactive({
   showCredits: false,
   timer: {
     elapsed: 0,
-    endTime: null,
+    isLimited: false,
+    minutes: 35,
     savedAt: null,
     startTime: null,
   },
@@ -117,8 +118,12 @@ const setStartTime = () => {
   state.timer.startTime = Date.now();
 };
 
-const setEndTime = (minutes: number = 0) => {
-  state.timer.endTime = minutes * 60;
+const setIsLimited = (isLimited: boolean) => {
+  state.timer.isLimited = isLimited;
+};
+
+const setMinutes = (minutes: number) => {
+  state.timer.minutes = minutes;
 };
 
 const addSecond = () => {
@@ -137,7 +142,7 @@ const resetState = () => {
     showCredits: false,
     timer: {
       elapsed: 0,
-      endTime: null,
+      minutes: 35,
       savedAt: null,
       startTime: null,
     },
@@ -152,10 +157,11 @@ export const useState = () => {
     resetState,
     setCurrentType,
     setDarkMode,
-    setEndTime,
     setEnded,
     setGameMode,
     setGen,
+    setIsLimited,
+    setMinutes,
     setMode,
     setPaused,
     setShowCredits,
