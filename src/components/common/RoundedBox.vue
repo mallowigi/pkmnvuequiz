@@ -35,6 +35,7 @@ const buttonStyles = computed(() => {
 <style scoped>
 .cell {
   background: var(--button);
+  border: 2px solid var(--bg-color, var(--primary));
   color: var(--text);
   padding: 11px 14px;
   text-align: center;
@@ -45,6 +46,7 @@ const buttonStyles = computed(() => {
   gap: 8px;
   margin: 10px 0 0 10px;
   min-height: 30px;
+  max-height: 52px;
   line-height: 30px;
   font-size: 16px;
 }

@@ -6,7 +6,7 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
   <RoundedBox>
     Timer:
     <div
-      class="smolbutton smolbuttonx transition-element smolbuttondark smolbuttonxdark smolbuttonxdarkice smolbuttonxice smolbuttonice"
+      class="smolbutton smolbuttonx transition-element"
       name="timer"
       value="timer0"
     >
@@ -36,4 +36,16 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
   </RoundedBox>
 </template>
 
-<style scoped></style>
+<style scoped>
+.smolbutton {
+  border: solid 2px var(--primary);
+  border-radius: 6px 3px 6px 3px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 0 0 5px;
+  padding: 3px 5px 3px 5px;
+  vertical-align: middle;
+  line-height: 16px;
+  cursor: pointer;
+}
+</style>

@@ -24,5 +24,6 @@ import TypeShuffle from '@/components/game/TypeShuffle.vue';
 .selection-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 </style>
