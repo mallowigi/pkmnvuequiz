@@ -92,7 +92,6 @@ const minutes = computed({
 <style scoped>
 :deep(.input-segment) {
   padding: 0;
-  border-radius: 6px 0 0 3px;
   display: flex;
   align-items: stretch;
   flex: 1;

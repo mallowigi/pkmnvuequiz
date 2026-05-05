@@ -54,6 +54,22 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
   if (!props.noPointer) return false;
   return props.noPointer[name as keyof typeof props.noPointer] === true;
 };
+
+const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
+  if (name === 'left') {
+    if (slots.center) return isAttached('center');
+    if (slots.right) return isAttached('right');
+    if (slots.suffix) return isAttached('suffix');
+  }
+  if (name === 'center') {
+    if (slots.right) return isAttached('right');
+    if (slots.suffix) return isAttached('suffix');
+  }
+  if (name === 'right') {
+    if (slots.suffix) return isAttached('suffix');
+  }
+  return false;
+};
 </script>
 
 <template>
@@ -66,6 +82,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
       {
         active: isActive('left'),
         attached: isAttached('left'),
+        'attached-next': isAttachedToNext('left'),
         'no-pointer': isNoPointer('left'),
       },
       classes?.left,
@@ -82,6 +99,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
       {
         active: isActive('center'),
         attached: isAttached('center'),
+        'attached-next': isAttachedToNext('center'),
         'no-pointer': isNoPointer('center'),
       },
       classes?.center,
@@ -98,6 +116,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
       {
         active: isActive('right'),
         attached: isAttached('right'),
+        'attached-next': isAttachedToNext('right'),
         'no-pointer': isNoPointer('right'),
       },
       classes?.right,
@@ -114,6 +133,7 @@ const isNoPointer = (name: 'left' | 'center' | 'right' | 'suffix') => {
       {
         active: isActive('suffix'),
         attached: isAttached('suffix'),
+        'attached-next': isAttachedToNext('suffix'),
         'no-pointer': isNoPointer('suffix'),
       },
       classes?.suffix,
@@ -135,7 +155,8 @@ div:empty {
   cursor: default;
 }
 
-.smolbutton.center.attached {
-  border-radius: 0;
+.smolbutton.attached-next {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 </style>
