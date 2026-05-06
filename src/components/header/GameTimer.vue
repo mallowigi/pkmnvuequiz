@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import DarkModeToggle from '@/components/header/DarkModeToggle.vue';
-import GameTimer from '@/components/header/GameTimer.vue';
-import PokemonCounts from '@/components/header/PokemonCounts.vue';
-import PokemonInput from '@/components/header/PokemonInput.vue';
-import Watermark from '@/components/header/Watermark.vue';
+import { useState } from '@/stores/useState.ts';
+import { computed } from 'vue';
+
+const { state } = useState();
+
+// todo move to hook
+const elapsed = computed(() => {
+  const total = state.timer.elapsed ?? 0;
+  const hours = String(Math.floor(total / 3600));
+  const minutes = String(Math.floor(total / 60));
+  const seconds = String(total % 60);
+
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+});
 </script>
 
 <template>
-  <header class="header">
-    <section class="controls">
-      <DarkModeToggle />
-
-      <PokemonInput />
-
-      <PokemonCounts />
-
-      <GameTimer />
-    </section>
-
-    <Watermark />
-  </header>
+  <div class="box rad-bl-tr">
+    Timer: <span class="highlight">{{ elapsed }}</span>
+  </div>
 </template>
 
 <style scoped>
@@ -59,22 +58,22 @@ import Watermark from '@/components/header/Watermark.vue';
   }
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  z-index: 2;
+.box {
+  background: var(--type-bg-color);
+  color: white;
+  min-height: 30px;
+  line-height: 30px;
+  padding: 10px 18px;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  padding: 10px;
+  align-items: stretch;
+  gap: 8px;
 }
 
-.controls {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
+.highlight {
+  color: var(--text-inverted);
+  text-shadow: 0 0 5px white;
 }
 </style>
