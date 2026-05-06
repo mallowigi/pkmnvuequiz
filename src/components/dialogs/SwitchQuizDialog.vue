@@ -33,19 +33,9 @@ const cancel = () => {
       <h2>Switch Quiz?</h2>
       <p class="desc">Quiz and timer will reset</p>
 
-      <RoundedButton
-        @click.stop="switchQuiz"
-        primary
-      >
-        Switch
-      </RoundedButton>
+      <RoundedButton @click.stop="switchQuiz"> Switch </RoundedButton>
 
-      <RoundedButton
-        @click.stop="cancel"
-        primary
-      >
-        Cancel
-      </RoundedButton>
+      <RoundedButton @click.stop="cancel"> Cancel </RoundedButton>
     </div>
   </Overlay>
 </template>
