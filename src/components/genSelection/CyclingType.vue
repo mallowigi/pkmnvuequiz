@@ -3,7 +3,7 @@ import { useState } from '@/stores/useState';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { typesList } from '@/data/types';
 
-const { setGameMode } = useState();
+const { setGameMode, setStarted } = useState();
 
 const currentIndex = ref(0);
 
@@ -26,6 +26,11 @@ const startCycle = () => {
   }, 3000);
 };
 
+const setType = () => {
+  setGameMode('types');
+  setStarted(true);
+};
+
 onMounted(() => {
   startCycle();
 });
@@ -43,7 +48,7 @@ onUnmounted(() => {
       border: `2px solid ${currentType.bgColor}`,
       color: currentType.fgColor,
     }"
-    @click="setGameMode('types')"
+    @click="setType"
   >
     Types
     <img

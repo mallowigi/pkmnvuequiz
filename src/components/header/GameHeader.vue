@@ -56,9 +56,7 @@ const elapsed = computed(() => {
 
 <template>
   <header class="header">
-    <section
-      class="controls"
-    >
+    <section class="controls">
       <RoundedButton
         class="cell moon"
         v-if="!state.isDark"
@@ -82,7 +80,10 @@ const elapsed = computed(() => {
         />
       </RoundedButton>
 
-      <div class="box rad-bl-tr shake">
+      <div
+        class="box rad-bl-tr"
+        :class="{ shake: state.isStarted }"
+      >
         <p>Name all {{ regionOrType }} Pokémon:</p>
         <input
           type="text"

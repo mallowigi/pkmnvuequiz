@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import { gens } from '@/data/gens';
-import CyclingType from '@/components/genSelection/CyclingType.vue';
 import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
+import CyclingType from '@/components/genSelection/CyclingType.vue';
+import { gens } from '@/data/gens';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useState } from '@/stores/useState';
 import type { Gen } from '@/types.ts';
 
-const { setGameMode } = useState();
+const { setGameMode, setStarted } = useState();
 const { setCurrentGen } = useCurrentGen();
+
+const setFullQuiz = () => {
+  setGameMode('full');
+  setCurrentGen(null);
+  setStarted(true);
+};
 
 const setGen = (gen: Gen) => {
   setGameMode('gen');
   setCurrentGen(gen);
+  setStarted(true);
 };
 </script>
 
@@ -23,7 +30,7 @@ const setGen = (gen: Gen) => {
       <div class="cell-full">
         <div
           class="cell rad-bl-tr"
-          @click="setGameMode('full')"
+          @click="setFullQuiz"
         >
           Full quiz
         </div>
