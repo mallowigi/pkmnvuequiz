@@ -58,6 +58,7 @@ const minutes = computed({
       }"
       :classes="{
         center: 'input-segment',
+        suffix: 'smolbutton',
       }"
       @click:left="setInfinite"
       @click:right="setFinite"

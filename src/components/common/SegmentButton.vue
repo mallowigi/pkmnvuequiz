@@ -128,7 +128,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.suffix"
-    class="smolbutton transition-element suffix"
+    class="transition-element suffix"
     :class="[
       {
         active: isActive('suffix'),

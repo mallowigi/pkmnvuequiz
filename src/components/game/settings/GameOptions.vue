@@ -7,6 +7,7 @@ import ShinyToggle from '@/components/game/settings/ShinyToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
+import ShadowHotkeyToggle from '@/components/game/settings/ShadowHotkeyToggle.vue';
 </script>
 
 <template class="root">
@@ -28,6 +29,8 @@ import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
     <SpellingToggle />
 
     <ShadowsToggle />
+
+    <ShadowHotkeyToggle />
   </div>
 </template>
 
