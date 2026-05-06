@@ -2,9 +2,10 @@
 import GameAbort from '@/components/game/GameAbort.vue';
 import GameModeSelection from '@/components/game/GameModeSelection.vue';
 import ModeSelection from '@/components/game/ModeSelection.vue';
+import ShinyToggle from '@/components/game/ShinyToggle.vue';
 import TimerSelection from '@/components/game/TimerSelection.vue';
 import TypeShuffle from '@/components/game/TypeShuffle.vue';
-import ShinyToggle from '@/components/game/ShinyToggle.vue';
+import SpellingToggle from '@/components/game/SpellingToggle.vue';
 </script>
 
 <template class="root">
@@ -22,6 +23,8 @@ import ShinyToggle from '@/components/game/ShinyToggle.vue';
 
   <div class="selection-row">
     <ShinyToggle />
+
+    <SpellingToggle />
   </div>
 </template>
 

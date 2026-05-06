@@ -3,48 +3,47 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
 
-const { state, toggleShowShinies } = useState();
+const { state, toggleSpelling } = useState();
 const { showUserMessage } = useMessages();
 
-const toggleShiny = () => {
-  toggleShowShinies();
-  showUserMessage(state.withShinies ? 'Shinies mode active' : 'Shinies mode disabled');
+const toggle = () => {
+  toggleSpelling();
+  showUserMessage('Spelling help toggled');
 };
 </script>
 
 <template>
   <RoundedButton
-    class="rad-br-tl shiny-toggle-icon"
-    :class="{ selected: state.withShinies }"
-    @click="toggleShiny"
+    class="spelling-toggle rad-br-tl"
+    @click="toggle"
+    :class="{ selected: state.withSpelling }"
   >
-    <img
-      src="@/assets/shiny.svg"
-      alt="Toggle Shinies"
-    />
+    Spelling Help
+    <img src="@/assets/spellcheck.png" />
   </RoundedButton>
 </template>
 
 <style scoped>
-.shiny-toggle-icon {
-  min-width: 0;
-  padding: 6px;
+.spelling-toggle {
+  padding: 9px 14px 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 
   & img {
-    width: 35px;
+    height: 28px;
   }
 
   &:hover {
-    background-color: #ff7b9a;
-    border-color: #ff7b9a;
+    background-color: var(--type-dark-color);
+    border-color: var(--type-dark-color);
   }
 
   &.selected {
     background-color: var(--type-btn-color);
     border-color: var(--type-btn-color);
+    color: var(--button);
   }
 }
 </style>

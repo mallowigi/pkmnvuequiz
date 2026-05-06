@@ -14,7 +14,11 @@ export const useTypeStyles = () => {
     return {
       '--type-bg-color': type.bgColor,
       '--type-btn-color': type.buttonColor,
+      '--type-dark-color': type.darkBgColor,
       '--type-fg-color': type.fgColor,
+      '--type-inline-color': type.inlineColor,
+      '--type-light-color': type.lightBgColor,
+      '--type-light-fg-color': type.lightFgColor,
     };
   });
 };

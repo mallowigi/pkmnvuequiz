@@ -20,7 +20,7 @@ const props = defineProps<Props>();
 
 <style scoped>
 .cell {
-  border: 2px solid var(--type-btn-color, var(--primary));
+  border: 2px solid var(--type-btn-color);
   background: var(--button);
   color: var(--text);
   padding: 9px 8px 8px;
@@ -36,7 +36,7 @@ const props = defineProps<Props>();
 
   &.primary {
     background: var(--type-bg-color, var(--primary));
-    border: 2px solid var(--type-btn-color, var(--primary));
+    border: 2px solid var(--type-btn-color);
   }
 
   &.selected {

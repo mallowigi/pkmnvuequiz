@@ -10,14 +10,14 @@ import SnackBar from '@/components/background/SnackBar.vue';
 import FadeTransition from '@/components/common/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
 import GameFooter from '@/components/footer/GameFooter.vue';
+import Game from '@/components/game/Game.vue';
 import GameStart from '@/components/genSelection/GameStart.vue';
 import TypeSelection from '@/components/genSelection/TypeSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
+import { useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
-import Game from '@/components/game/Game.vue';
-import { useTypeStyles } from '@/composables/useTypeStyles';
 
 const { state, setDarkMode } = useState();
 const { credits } = useCredits();
@@ -96,6 +96,12 @@ onMounted(() => {
   --secondary: rgba(255, 255, 255, 0.85);
   --input: #eee;
   --input-text: #333;
+
+  --type-btn-color: var(--primary);
+  --type-dark-color: var(--darkPrimary);
+  --type-inline-color: inherit;
+  --type-fg-color: inherit;
+  --type-bg-color: inherit;
 }
 
 .dark {

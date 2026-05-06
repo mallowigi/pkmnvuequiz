@@ -156,8 +156,8 @@ div:empty {
 }
 
 .smolbutton {
-  border: solid 2px var(--type-btn-color, var(--primary));
-  color: var(--type-btn-color, var(--primary));
+  border: solid 2px var(--type-btn-color);
+  color: var(--type-btn-color);
   border-radius: 6px 3px 6px 3px;
   text-align: center;
   text-decoration: none;
@@ -167,7 +167,7 @@ div:empty {
   cursor: pointer;
 
   &.active {
-    background: var(--type-btn-color, var(--primary));
+    background: var(--type-btn-color);
     color: var(--button);
   }
 
@@ -177,8 +177,8 @@ div:empty {
   }
 
   &:hover {
-    background: var(--type-btn-color, var(--darkPrimary));
-    border-color: var(--type-btn-color, var(--darkPrimary));
+    background: var(--type-dark-color);
+    border-color: var(--type-dark-color);
     color: var(--button);
   }
 }
