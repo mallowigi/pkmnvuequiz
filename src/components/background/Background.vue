@@ -44,6 +44,18 @@ const currentType = computed(() => {
 </template>
 
 <style scoped>
+@keyframes animated-bg {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .background {
   background-image: url(@/assets/background-50.svg);
   background-repeat: no-repeat;
@@ -78,6 +90,7 @@ const currentType = computed(() => {
   width: 18%;
   opacity: 0.9;
   z-index: -2;
+  animation: animated-bg 10s ease-in-out infinite;
 }
 
 .bgpattern2 {
@@ -87,6 +100,7 @@ const currentType = computed(() => {
   width: 33%;
   opacity: 0.2;
   z-index: -2;
+  animation: animated-bg 10s ease-in-out infinite;
 }
 
 .fade-enter-active,
