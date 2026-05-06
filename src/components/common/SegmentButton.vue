@@ -168,7 +168,7 @@ div:empty {
 
   &.active {
     background: var(--type-btn-color);
-    color: var(--button);
+    color: var(--type-fg-color);
   }
 
   &.attached {
@@ -179,7 +179,7 @@ div:empty {
   &:hover {
     background: var(--type-dark-color);
     border-color: var(--type-dark-color);
-    color: var(--button);
+    color: var(--type-fg-color);
   }
 }
 

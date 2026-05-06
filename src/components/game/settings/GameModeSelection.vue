@@ -7,6 +7,7 @@ const { setDialog } = useDialogs();
 const { setGameMode, setGen, setCurrentType, state } = useState();
 
 const setFullQuiz = () => {
+  if (state.gameMode === 'full') return;
   setDialog('switchQuiz', () => {
     setGameMode('full');
     setGen(null);
@@ -15,6 +16,7 @@ const setFullQuiz = () => {
 };
 
 const setGenQuiz = () => {
+  if (state.gameMode === 'gen') return;
   setDialog('switchQuiz', () => {
     setGameMode(null);
     setCurrentType(null);
@@ -25,10 +27,12 @@ const setTypeQuiz = () => {
   setDialog('switchQuiz', () => {
     setGameMode('types');
     setGen(null);
+    setCurrentType(null);
   });
 };
 
 const setSpecialQuiz = () => {
+  if (state.gameMode === 'special') return;
   setDialog('switchQuiz', () => {
     setGameMode('special');
     setGen(null);
@@ -113,7 +117,7 @@ const setSpecialQuiz = () => {
     background-color: var(--type-btn-color);
     border-color: var(--type-btn-color);
     border-left: none;
-    color: var(--button);
+    color: var(--type-fg-color);
   }
 
   &:first-child {

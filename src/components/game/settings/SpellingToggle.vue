@@ -43,7 +43,7 @@ const toggle = () => {
   &.selected {
     background-color: var(--type-btn-color);
     border-color: var(--type-btn-color);
-    color: var(--button);
+    color: var(--type-fg-color);
   }
 }
 </style>
