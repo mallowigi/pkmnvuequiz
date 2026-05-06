@@ -28,6 +28,7 @@ const cancel = () => {
   <Overlay
     class="overlay"
     @click.stop="props.toggleFunction()"
+    @keydown.esc="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>Switch Quiz?</h2>

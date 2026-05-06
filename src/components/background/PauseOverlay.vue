@@ -8,6 +8,8 @@ import { useMessages } from '@/stores/useMessages';
 const { state, setPaused, setState } = useState();
 const { showUserMessage } = useMessages();
 
+const resume = () => setPaused(false);
+
 const saveState = () => {
   const savedState = {
     ...state,
@@ -67,7 +69,10 @@ const loadState = (e: Event) => {
 </script>
 
 <template>
-  <Overlay class="full-overlay">
+  <Overlay
+    class="full-overlay"
+    @keydown.esc="resume"
+  >
     <input
       type="file"
       id="file-input"
@@ -81,7 +86,7 @@ const loadState = (e: Event) => {
 
       <RoundedButton
         :primary="true"
-        @click="setPaused(false)"
+        @click.stop="resume"
       >
         Resume
       </RoundedButton>

@@ -86,6 +86,19 @@ const toggleShadows = () => {
 
 const toggleShadowHelper = () => {
   state.withShadowHelper = !state.withShadowHelper;
+  if (state.withShadowHelper) {
+    document.addEventListener('keydown', shadowHelperListener);
+  } else {
+    document.removeEventListener('keydown', shadowHelperListener);
+  }
+};
+
+const shadowHelperListener = (event: KeyboardEvent) => {
+  const keycode = event.key;
+  if (keycode === ',') {
+    event.preventDefault();
+    console.log('Shadow Helper');
+  }
 };
 
 const setTypeShuffle = (withTypeShuffle: boolean) => {
