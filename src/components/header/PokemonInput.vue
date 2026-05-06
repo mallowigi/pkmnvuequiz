@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import { useState } from '@/stores/useState.ts';
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+
 import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useDialogs } from '@/stores/useDialogs.ts';
+import { useMessages } from '@/stores/useMessages.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
+import { useRoomMessages } from '@/stores/useRoomMessages.ts';
+import { useState } from '@/stores/useState.ts';
 
-const { state } = useState();
+const { state, addShadow } = useState();
 const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentTypeOrSpecial } = useCurrentType();
+const { dialogs } = useDialogs();
+const { showUserMessage } = useMessages();
+const { roomState } = useRoomMessages();
+const { findPokemon } = usePokemons();
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -33,6 +42,68 @@ const unknownSprite = computed(() => {
       return '/src/assets/sprites/unknown.png';
   }
 });
+
+const inputRef = ref<HTMLInputElement | null>(null);
+
+const ensureFocus = () => {
+  // Do not focus if the game is in paused or ended state, or if a dialog or room message is open
+  if (state.isPaused || state.isEnded || dialogs.dialog !== null || roomState.roomMessage !== null) {
+    return;
+  }
+
+  // If the focused element is not our input, do nothing
+  const active = document.activeElement;
+  if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA') && active !== inputRef.value) {
+    return;
+  }
+
+  inputRef.value?.focus();
+};
+
+const handleKeydown = (e: KeyboardEvent) => {
+  // Every key down on the app will trigger focus on the input
+  ensureFocus();
+
+  // Shadow helper shortcut: ',' key
+  if (e.key === ',') {
+    if (state.withShadowHelper) {
+      // TODO need to know how to add a shadow and especially where, in which hook
+      addShadow();
+    } else {
+      showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
+      return;
+    }
+  }
+
+  const value = inputRef.value?.value || '';
+  const foundPokemon = findPokemon(value);
+  if (foundPokemon) {
+    // If the user has typed a valid Pokémon name, clear the input for the next guess
+    inputRef.value!.value = '';
+    return;
+  }
+};
+
+// Clicking anywhere on the app will trigger focus on the input
+const handleMousedown = () => {
+  setTimeout(ensureFocus, 0);
+};
+
+onMounted(() => {
+  ensureFocus();
+  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('mousedown', handleMousedown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('mousedown', handleMousedown);
+});
+
+// Make sure to refocus the input when the state changes
+watch([() => state.isPaused, () => state.isEnded, () => dialogs.dialog, () => roomState.roomMessage], () => {
+  setTimeout(ensureFocus, 0);
+});
 </script>
 
 <template>
@@ -42,6 +113,7 @@ const unknownSprite = computed(() => {
   >
     <p>Name all {{ regionOrType }} Pokémon:</p>
     <input
+      ref="inputRef"
       type="text"
       class="input-name"
       maxlength="13"
