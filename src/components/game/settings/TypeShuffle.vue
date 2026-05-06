@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useMessages } from '@/stores/useMessages.ts';
-import { useState } from '@/stores/useState.ts';
+import { useMessages } from '@/stores/useMessages.js';
+import { useState } from '@/stores/useState.js';
 
 const { state, setTypeShuffle } = useState();
 const { showUserMessage } = useMessages();

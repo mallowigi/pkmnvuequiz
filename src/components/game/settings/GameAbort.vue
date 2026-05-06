@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useDialogs } from '@/stores/useDialogs.ts';
+import { useDialogs } from '@/stores/useDialogs.js';
 
 const { setDialog } = useDialogs();
 

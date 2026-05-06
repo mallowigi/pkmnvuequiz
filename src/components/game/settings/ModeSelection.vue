@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useState } from '@/stores/useState.ts';
-import type { Mode } from '@/types.ts';
-import { useDialogs } from '@/stores/useDialogs.ts';
+import { useDialogs } from '@/stores/useDialogs.js';
+import { useState } from '@/stores/useState.js';
+import type { Mode } from '@/types.js';
 
 const { state, setMode } = useState();
 const { setDialog } = useDialogs();

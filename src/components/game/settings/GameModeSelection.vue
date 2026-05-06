@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useDialogs } from '@/stores/useDialogs.ts';
-import { useState } from '@/stores/useState.ts';
+import { useDialogs } from '@/stores/useDialogs.js';
+import { useState } from '@/stores/useState.js';
 
 const { setDialog } = useDialogs();
 const { setGameMode, setGen, setCurrentType, state } = useState();

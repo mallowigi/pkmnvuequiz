@@ -3,8 +3,8 @@ import { computed } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useState } from '@/stores/useState.ts';
-import { useDialogs } from '@/stores/useDialogs.ts';
+import { useDialogs } from '@/stores/useDialogs.js';
+import { useState } from '@/stores/useState.js';
 
 const { state, setMinutes, setIsLimited, setPaused, resetState } = useState();
 const { setDialog, setData } = useDialogs();

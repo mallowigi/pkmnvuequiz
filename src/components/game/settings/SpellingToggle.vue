@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useMessages } from '@/stores/useMessages.ts';
-import { useState } from '@/stores/useState.ts';
+import { useMessages } from '@/stores/useMessages.js';
+import { useState } from '@/stores/useState.js';
 
 const { state, toggleSpelling } = useState();
 const { showUserMessage } = useMessages();
