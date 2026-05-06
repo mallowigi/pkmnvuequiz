@@ -202,7 +202,7 @@ const elapsed = computed(() => {
 }
 
 .box {
-  background: var(--type-bg-color, var(--primary));
+  background: var(--type-bg-color);
   color: white;
   min-height: 30px;
   line-height: 30px;
@@ -216,7 +216,7 @@ const elapsed = computed(() => {
 }
 
 .input-name {
-  color: var(--type-fg-color, var(--text));
+  color: var(--input-text);
   background-color: var(--secondary);
   font-size: 20px;
   width: 170px;
@@ -242,7 +242,7 @@ const elapsed = computed(() => {
   font-size: 20px;
   z-index: 10;
   padding: 4px 0 10px 40px;
-  border-top: 3px dotted var(--type-bg-color, var(--primary));
+  border-top: 3px dotted var(--type-bg-color);
   color: var(--text);
 }
 

@@ -23,7 +23,7 @@ const goBack = () => setGameMode(null);
 </script>
 
 <template>
-  <Overlay>
+  <Overlay @close="goBack">
     <div class="prompt type-grid">
       <RoundedButton
         v-for="typeMeta in typesList"

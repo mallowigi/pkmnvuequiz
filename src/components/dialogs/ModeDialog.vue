@@ -27,8 +27,7 @@ const disableMode = () => {
 <template>
   <Overlay
     class="overlay"
-    @click.stop="props.toggleFunction()"
-    @keydown.esc="props.toggleFunction()"
+    @close="disableMode"
   >
     <div class="prompt">
       <h2>{{ props.caption }}</h2>

@@ -71,7 +71,7 @@ const loadState = (e: Event) => {
 <template>
   <Overlay
     class="full-overlay"
-    @keydown.esc="resume"
+    @close="resume"
   >
     <input
       type="file"

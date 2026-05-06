@@ -24,8 +24,7 @@ const cancel = () => {
 <template>
   <Overlay
     class="overlay"
-    @click.stop="props.toggleFunction()"
-    @keydown.esc="props.toggleFunction()"
+    @close="cancel"
   >
     <div class="prompt">
       <h2>Reveal Shadows?</h2>

@@ -9,7 +9,10 @@ defineProps(['message']);
 </script>
 
 <template>
-  <Overlay class="full-overlay">
+  <Overlay
+    class="full-overlay"
+    @close="setRoomMessage(null)"
+  >
     <div class="prompt">
       <h2>{{ message }}</h2>
       <RoundedButton @click="setRoomMessage(null)"> Exit </RoundedButton>

@@ -1,7 +1,30 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue';
+
+const emit = defineEmits<{
+  (e: 'close'): void;
+}>();
+
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    emit('close');
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
+</script>
 
 <template>
-  <div :class="['overlay', $attrs.class]">
+  <div
+    :class="['overlay', $attrs.class]"
+    @click.self="emit('close')"
+  >
     <slot />
   </div>
 </template>

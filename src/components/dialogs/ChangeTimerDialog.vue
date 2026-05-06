@@ -28,7 +28,7 @@ const cancel = (e: Event) => {
 <template>
   <Overlay
     class="overlay"
-    @click="props.toggleFunction()"
+    @close="props.toggleFunction()"
   >
     <div class="prompt">
       <h2>Change timer?</h2>
