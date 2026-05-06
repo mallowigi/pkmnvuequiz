@@ -116,7 +116,9 @@ export interface State {
   languages: Set<Language>;
   mode: Mode;
   numFound: number;
+  pokemonFound: Set<string>;
   numShadows: number;
+  pokemonShadowed: Set<string>;
   showCredits: boolean;
   timer: {
     elapsed: number;

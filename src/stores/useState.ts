@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue';
 
-import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
 import { getRandomType } from '@/data/types.ts';
+import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
 
 const state: State = reactive({
   currentType: null,
@@ -15,6 +15,8 @@ const state: State = reactive({
   mode: 'normal',
   numFound: 0,
   numShadows: 0,
+  pokemonFound: new Set<string>(),
+  pokemonShadowed: new Set<string>(),
   showCredits: false,
   timer: {
     elapsed: 0,
