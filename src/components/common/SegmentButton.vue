@@ -77,7 +77,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.left"
-    class="smolbutton left"
+    class="smolbutton transition-element left"
     :class="[
       {
         active: isActive('left'),
@@ -94,7 +94,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.center"
-    class="smolbutton center"
+    class="smolbutton transition-element center"
     :class="[
       {
         active: isActive('center'),
@@ -111,7 +111,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.right"
-    class="smolbutton right"
+    class="smolbutton transition-element right"
     :class="[
       {
         active: isActive('right'),
@@ -128,7 +128,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.suffix"
-    class="smolbutton suffix"
+    class="smolbutton transition-element suffix"
     :class="[
       {
         active: isActive('suffix'),
@@ -153,6 +153,34 @@ div:empty {
 
 .no-pointer {
   cursor: default;
+}
+
+.smolbutton {
+  border: solid 2px var(--type-btn-color, var(--primary));
+  color: var(--type-btn-color, var(--primary));
+  border-radius: 6px 3px 6px 3px;
+  text-align: center;
+  text-decoration: none;
+  padding: 3px 5px 3px 5px;
+  vertical-align: middle;
+  line-height: 16px;
+  cursor: pointer;
+
+  &.active {
+    background: var(--type-btn-color, var(--primary));
+    color: var(--button);
+  }
+
+  &.attached {
+    border-radius: 0 3px 6px 0;
+    margin-left: -10px;
+  }
+
+  &:hover {
+    background: var(--type-btn-color, var(--darkPrimary));
+    border-color: var(--type-btn-color, var(--darkPrimary));
+    color: var(--button);
+  }
 }
 
 .smolbutton.attached-next {

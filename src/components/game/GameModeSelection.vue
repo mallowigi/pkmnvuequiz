@@ -96,14 +96,20 @@ const setSpecialQuiz = () => {
 
 .cell-btn {
   margin: 0;
-  border-left: none;
   border-right-style: dotted;
+  border-left: none;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 9px 14px;
 
   &:hover {
+    background-color: var(--type-btn-color, var(--darkPrimary));
+    border-color: var(--type-btn-color, var(--darkPrimary));
+    border-left: none;
+  }
+
+  &.selected {
     background-color: var(--type-btn-color, var(--darkPrimary));
     border-color: var(--type-btn-color, var(--darkPrimary));
     border-left: none;
