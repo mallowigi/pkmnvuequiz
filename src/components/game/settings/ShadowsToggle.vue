@@ -1,0 +1,73 @@
+<script setup lang="ts">
+import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useMessages } from '@/stores/useMessages.ts';
+import { useState } from '@/stores/useState.ts';
+import { useDialogs } from '@/stores/useDialogs.ts';
+
+const { state, toggleShadows } = useState();
+const { showUserMessage } = useMessages();
+const { setDialog } = useDialogs();
+
+const toggle = () => {
+  if (!state.withShadows) {
+    setDialog('shadows', () => {
+      toggleShadows();
+      showUserMessage(`Shadows ${state.withShadows ? 'enabled' : 'disabled'}`);
+    });
+  } else {
+    toggleShadows();
+    showUserMessage(`Shadows ${state.withShadows ? 'enabled' : 'disabled'}`);
+  }
+};
+</script>
+
+<template>
+  <RoundedButton
+    class="rad-br-tl shadows-toggle"
+    :class="{ selected: state.withShadows }"
+    @click="toggle"
+  >
+    Shadows
+    <img
+      src="@/assets/raichu.png"
+      alt="silhouette"
+    />
+  </RoundedButton>
+</template>
+
+<style scoped>
+.shadows-toggle {
+  padding: 9px 14px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  & img {
+    margin: -5px;
+    width: 52px;
+    height: 39px;
+    object-fit: none;
+    object-position: 50% 100%;
+    filter: brightness(0) invert(0.7);
+  }
+
+  &.selected {
+    background-color: var(--type-btn-color);
+    border-color: var(--type-btn-color);
+
+    & img {
+      filter: brightness(0) invert(0.3);
+    }
+  }
+
+  &:hover {
+    background-color: var(--type-dark-color);
+    border-color: var(--type-dark-color);
+
+    & img {
+      filter: brightness(0) invert(0.8);
+    }
+  }
+}
+</style>
