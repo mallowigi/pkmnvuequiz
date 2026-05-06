@@ -4,6 +4,7 @@ import GameModeSelection from '@/components/game/GameModeSelection.vue';
 import ModeSelection from '@/components/game/ModeSelection.vue';
 import TimerSelection from '@/components/game/TimerSelection.vue';
 import TypeShuffle from '@/components/game/TypeShuffle.vue';
+import ShinyToggle from '@/components/game/ShinyToggle.vue';
 </script>
 
 <template class="root">
@@ -17,6 +18,10 @@ import TypeShuffle from '@/components/game/TypeShuffle.vue';
     <ModeSelection />
 
     <TypeShuffle />
+  </div>
+
+  <div class="selection-row">
+    <ShinyToggle />
   </div>
 </template>
 
