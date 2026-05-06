@@ -1,5 +1,6 @@
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
+import { useMessages } from '@/stores/useMessages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
 import type { PokemonInfo } from '@/types';
@@ -21,6 +22,7 @@ export const usePokemons = () => {
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
   const { data } = usePkmnData();
+  const { showUserMessage } = useMessages();
 
   const getCurrentGenPokemon = () => {
     if (!data || !data.pokemon) {
@@ -92,7 +94,18 @@ export const usePokemons = () => {
     }
   };
 
+  const findPokemon = (name: string) => {
+    if (state.pokemonFound.has(name.toLowerCase())) {
+      showUserMessage(`You've already found ${name}!`);
+      return;
+    }
+
+    // TODO: Need to know how to handle pokemon that contain other pokemons in their name
+    return getPokemon().find((pok) => pok.baseName.toLowerCase() === name.toLowerCase());
+  };
+
   return {
+    findPokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
     getPokemon,
