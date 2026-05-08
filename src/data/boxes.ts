@@ -1,6 +1,6 @@
-import type { RegionInfo, Region } from '@/types';
+import type { RegionBoxInfo, RegionBox } from '@/types';
 
-export const regions: Record<Region, RegionInfo> = {
+export const boxes: Record<RegionBox, RegionBoxInfo> = {
   alola: {
     id: 'alola',
     name: 'Alola',

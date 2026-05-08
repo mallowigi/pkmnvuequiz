@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
-import { regions } from '@/data/regions.ts';
+import { boxes } from '@/data/boxes.js';
 import { useBoxes } from '@/composables/useBoxes.ts';
 
 const { getCurrentGameModeBoxes } = useBoxes();
@@ -11,7 +11,7 @@ const { getCurrentGameModeBoxes } = useBoxes();
 const boxes = computed(() => {
   const currentGameModeBoxes = getCurrentGameModeBoxes();
 
-  return currentGameModeBoxes?.map((box) => regions[box]);
+  return currentGameModeBoxes?.map((box) => boxes[box]);
 });
 </script>
 

@@ -14,7 +14,7 @@ export type ModeInfo = {
   name: string;
 };
 
-export type Region =
+export type RegionBox =
   | 'alola'
   | 'areazero'
   | 'galar'
@@ -33,8 +33,8 @@ export type Region =
   | 'sinnoh'
   | 'unova';
 
-export type RegionInfo = {
-  id: Region;
+export type RegionBoxInfo = {
+  id: RegionBox;
   name: string;
 };
 
@@ -83,7 +83,7 @@ export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' |
 
 export type GenerationInfo = {
   id: Gen;
-  boxes: Region[];
+  boxes: RegionBox[];
   name: string;
   sprites: string[];
 };
@@ -102,7 +102,7 @@ export type PokemonInfo = {
   baseName: string;
   primaryType: Type;
   secondaryType: Type | null;
-  box: Region;
+  box: RegionBox;
   specialType: SpecialType;
 };
 

@@ -1,5 +1,4 @@
 import { useCurrentGen } from '@/stores/useCurrentGen';
-import { regions } from '@/data/regions';
 
 export const useCurrentRegion = () => {
   const { getCurrentGen } = useCurrentGen();
@@ -16,7 +15,7 @@ export const useCurrentRegion = () => {
       return;
     }
 
-    return regions[firstBox];
+    return boxes[firstBox];
   };
 
   return {

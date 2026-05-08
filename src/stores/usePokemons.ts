@@ -5,7 +5,7 @@ import { useCurrentType } from '@/stores/useCurrentType';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
-import type { PokemonInfo, PokemonProgressState, Region, Type } from '@/types.ts';
+import type { PokemonInfo, PokemonProgressState, RegionBox, Type } from '@/types.ts';
 
 const pokemonState: PokemonProgressState = reactive<PokemonProgressState>({
   numFound: 0,
@@ -54,7 +54,7 @@ export const usePokemons = () => {
     });
   };
 
-  const getGenPokemon = (genId: Region) => {
+  const getGenPokemon = (genId: RegionBox) => {
     if (!data || !data.pokemon) {
       return [];
     }

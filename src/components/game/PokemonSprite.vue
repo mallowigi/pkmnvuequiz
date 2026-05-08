@@ -4,14 +4,14 @@ import { computed } from 'vue';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { RegionInfo } from '@/types.ts';
+import type { RegionBoxInfo } from '@/types.ts';
 
 const { state } = useState();
 const { getCurrentGen } = useCurrentGen();
 const { getGenPokemon } = usePokemons();
 
 type Props = {
-  box: RegionInfo;
+  box: RegionBoxInfo;
 };
 
 const props = defineProps<Props>();
