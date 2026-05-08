@@ -82,10 +82,15 @@ const unknownSprite = computed(() => {
 }
 
 .sprite {
-  margin: -36px -19px -12px -20px;
-  width: 63px;
+  margin: -25px -20px -10px -10px;
+  width: 64px;
   height: 56px;
   object-fit: none;
   object-position: 100% 0;
+}
+
+.full .sprite {
+  margin: -36px -19px -12px -20px;
+  width: 63px;
 }
 </style>

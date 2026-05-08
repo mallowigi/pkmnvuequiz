@@ -32,7 +32,7 @@ const type = computed(() => {
 
 <template>
   <div
-    class="container"
+    class="region-boxes"
     :class="{ 'full-layout': state.gameMode === 'full' }"
   >
     <!-- Gen/Full/Types Mode -->
@@ -66,18 +66,20 @@ const type = computed(() => {
 </template>
 
 <style scoped>
-.container {
+.region-boxes {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  max-width: 66%;
 
   &.full-layout {
     display: block;
-    columns: 5;
+    columns: 6;
     column-gap: 10px;
     padding: 10px;
+    max-width: none;
 
     & .region-box {
       display: inline-flex;
