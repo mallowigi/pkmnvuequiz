@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { RegionBoxInfo, SpecialTypeInfo } from '@/types.ts';
@@ -36,6 +37,7 @@ const unknownSprite = computed(() => {
   >
     <!-- Gen Mode -->
     <div
+      class="sprite-container"
       v-if="props.type === 'gen'"
       v-for="pokemon in getGenPokemon(props.box.id)"
       :key="pokemon.id"
@@ -49,6 +51,7 @@ const unknownSprite = computed(() => {
 
     <!-- Special Mode -->
     <div
+      class="sprite-container"
       v-else-if="props.type === 'special'"
       v-for="pokemon in getSpecialTypePokemon(props.box.id)"
       :key="pokemon.id"
@@ -72,15 +75,15 @@ const unknownSprite = computed(() => {
   gap: 4px;
   width: 100%;
   height: 100%;
+}
 
-  &.full {
-    gap: 0;
-  }
+.sprite-container {
+  line-height: 26px;
 }
 
 .sprite {
-  margin: -25px -20px -10px -10px;
-  width: 64px;
+  margin: -36px -19px -12px -20px;
+  width: 63px;
   height: 56px;
   object-fit: none;
   object-position: 100% 0;

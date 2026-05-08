@@ -3,10 +3,10 @@ import { computed } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
-import { boxes } from '@/data/boxes.js';
 import { useBoxes } from '@/composables/useBoxes.ts';
-import { useState } from '@/stores/useState.ts';
+import { boxes } from '@/data/boxes.js';
 import { specialTypes } from '@/data/specialTypes.ts';
+import { useState } from '@/stores/useState.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { state } = useState();
@@ -31,11 +31,13 @@ const type = computed(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="{ 'full-layout': state.gameMode === 'full' }"
+  >
     <!-- Gen/Full/Types Mode -->
     <RoundedBox
       class="region-box"
-      :class="{ full: state.gameMode === 'full' }"
       v-for="box in currentBoxes"
       v-if="type === 'gen'"
       :key="box.id"
@@ -67,12 +69,23 @@ const type = computed(() => {
 .container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-}
 
-.region-name {
-  padding-left: 7px;
+  &.full-layout {
+    display: block;
+    columns: 5;
+    column-gap: 10px;
+    padding: 10px;
+
+    & .region-box {
+      display: inline-flex;
+      width: 100%;
+      margin: 0 0 10px;
+      break-inside: avoid;
+    }
+  }
 }
 
 .region-box {
@@ -83,12 +96,5 @@ const type = computed(() => {
   max-height: inherit;
   margin: 10px;
   border: none;
-
-  &.full {
-    flex-direction: column;
-    max-width: 20%;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-  }
 }
 </style>
