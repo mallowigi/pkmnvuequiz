@@ -5,7 +5,7 @@ import { useCurrentType } from '@/stores/useCurrentType';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
-import type { PokemonInfo, PokemonProgressState, RegionBox, Type } from '@/types.ts';
+import type { PokemonInfo, PokemonProgressState, RegionBox, SpecialType, Type } from '@/types.ts';
 
 const pokemonState: PokemonProgressState = reactive<PokemonProgressState>({
   numFound: 0,
@@ -109,14 +109,17 @@ export const usePokemons = () => {
     return removeDuplicates(filtered);
   };
 
-  const getSpecialTypePokemon = () => {
+  const getSpecialTypePokemon = (specialTypeId?: SpecialType) => {
     if (!data || !data.pokemon) {
       return [];
     }
 
     const filtered = data.pokemon.filter((pok) => {
-      const types = ['legendary', 'sublegendary', 'mythical'].filter(Boolean);
-      return types.includes(pok.specialType);
+      if (specialTypeId) {
+        return pok.specialType === specialTypeId;
+      } else {
+        return pok.specialType !== undefined;
+      }
     });
 
     return removeDuplicates(filtered);
@@ -160,11 +163,12 @@ export const usePokemons = () => {
     addFound,
     addShadow,
     findPokemon,
+    getAllPokemon,
     getCurrentGameModePokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
     getGenPokemon,
-    getTotalPokemon: getAllPokemon,
+    getSpecialTypePokemon,
     getTypePokemon,
     pokemonState: readonly(pokemonState),
     resetPokemonState,

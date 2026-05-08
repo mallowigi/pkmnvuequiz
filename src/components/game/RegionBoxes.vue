@@ -20,6 +20,14 @@ const currentBoxes = computed(() => {
     return specialBoxes?.map((box) => specialTypes[box]);
   }
 });
+
+const type = computed(() => {
+  if (state.gameMode !== 'special') {
+    return 'gen';
+  } else {
+    return 'special';
+  }
+});
 </script>
 
 <template>
@@ -29,7 +37,10 @@ const currentBoxes = computed(() => {
     :key="box.id"
   >
     <span class="region-name">{{ box.name }}</span>
-    <PokemonSprite :box="box" />
+    <PokemonSprite
+      :box="box"
+      :type="type"
+    />
   </RoundedBox>
 </template>
 

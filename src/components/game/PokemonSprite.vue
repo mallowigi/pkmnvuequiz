@@ -5,10 +5,14 @@ import { useState } from '@/stores/useState.ts';
 import type { RegionBoxInfo, SpecialTypeInfo } from '@/types.ts';
 
 const { state } = useState();
-const { getGenPokemon } = usePokemons();
+const { getGenPokemon, getSpecialTypePokemon } = usePokemons();
 
 type Props = {
-  box: RegionBoxInfo | SpecialTypeInfo;
+  box: RegionBoxInfo;
+  type: 'gen';
+} | {
+  box: SpecialTypeInfo;
+  type: 'special';
 };
 
 const props = defineProps<Props>();
@@ -29,7 +33,20 @@ const unknownSprite = computed(() => {
     :class="{ full: state.gameMode === 'full' }"
   >
     <div
+      v-if="props.type === 'gen'"
       v-for="pokemon in getGenPokemon(props.box.id)"
+      :key="pokemon.id"
+    >
+      <img
+        class="sprite"
+        :src="unknownSprite"
+        alt="Unknown Pokemon"
+      />
+    </div>
+
+    <div
+      v-else-if="props.type === 'special'"
+      v-for="pokemon in getSpecialTypePokemon(props.box.id)"
       :key="pokemon.id"
     >
       <img
