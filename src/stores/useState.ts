@@ -5,16 +5,12 @@ const state: State = reactive<State>({
   gameMode: null,
   gen: null,
   isDark: false,
-  isEnded: false,
-  isPaused: false,
-  isStarted: false,
   languages: new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']),
   mode: 'normal',
   numFound: 0,
   numShadows: 0,
   pokemonFound: new Set<string>(),
   pokemonShadowed: new Set<string>(),
-  showCredits: false,
   timer: {
     elapsed: 0,
     isLimited: false,
@@ -49,22 +45,6 @@ const toggleDarkMode = () => {
 
 const setDarkMode = (isDark: boolean) => {
   state.isDark = isDark;
-};
-
-const setStarted = (isStarted: boolean) => {
-  state.isStarted = isStarted;
-};
-
-const setEnded = (isEnded: boolean) => {
-  state.isEnded = isEnded;
-};
-
-const setPaused = (isPaused: boolean) => {
-  state.isPaused = isPaused;
-};
-
-const setShowCredits = (showCredits: boolean) => {
-  state.showCredits = showCredits;
 };
 
 const toggleShowShinies = () => {
@@ -133,10 +113,6 @@ const setState = (newState: Partial<State>) => {
 
 const resetState = () => {
   Object.assign(state, {
-    isEnded: false,
-    isPaused: false,
-    isStarted: false,
-    showCredits: false,
     timer: {
       elapsed: 0,
       minutes: 35,
@@ -150,12 +126,8 @@ const setGameOver = () => {
   Object.assign(state, {
     gameMode: null,
     gen: null,
-    isEnded: false,
-    isPaused: false,
-    isStarted: false,
     numFound: 0,
     numShadows: 0,
-    showCredits: false,
     timer: {
       elapsed: 0,
       isLimited: false,
@@ -173,17 +145,13 @@ export const useState = () => {
     addShadow,
     resetState,
     setDarkMode,
-    setEnded,
     setGameMode,
     setGameOver,
     setGen,
     setIsLimited,
     setMinutes,
     setMode,
-    setPaused,
-    setShowCredits,
     setStartTime,
-    setStarted,
     setState,
     setTypeShuffle,
     state: readonly(state),

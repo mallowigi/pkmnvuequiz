@@ -2,16 +2,18 @@
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
+import { useGameFlow } from '@/stores/useGameFlow.js';
 import { useState } from '@/stores/useState.js';
 import type { Mode } from '@/types.js';
 
 const { state, setMode } = useState();
+const { flowState } = useGameFlow();
 const { setDialog } = useDialogs();
 
 const applyMode = (mode: Mode) => {
   if (state.mode === mode) return;
 
-  if (!state.isStarted) {
+  if (!flowState.isStarted) {
     setMode(mode);
     return;
   }

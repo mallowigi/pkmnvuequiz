@@ -109,16 +109,12 @@ export interface State {
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;
-  isEnded: boolean;
-  isPaused: boolean;
-  isStarted: boolean;
   languages: Set<Language>;
   mode: Mode;
   numFound: number;
   pokemonFound: Set<string>;
   numShadows: number;
   pokemonShadowed: Set<string>;
-  showCredits: boolean;
   timer: {
     elapsed: number;
     minutes: number;
@@ -133,6 +129,12 @@ export interface State {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
+}
+
+export interface GameFlowState {
+  isEnded: boolean;
+  isPaused: boolean;
+  isStarted: boolean;
 }
 
 export type Translations = {

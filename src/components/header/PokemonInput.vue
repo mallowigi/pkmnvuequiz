@@ -4,12 +4,14 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 
 const { state, addShadow } = useState();
+const { flowState } = useGameFlow();
 const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
@@ -47,7 +49,7 @@ const inputRef = ref<HTMLInputElement | null>(null);
 
 const ensureFocus = () => {
   // Do not focus if the game is in paused or ended state, or if a dialog or room message is open
-  if (state.isPaused || state.isEnded || dialogs.dialog !== null || roomState.roomMessage !== null) {
+  if (flowState.isPaused || flowState.isEnded || dialogs.dialog !== null || roomState.roomMessage !== null) {
     return;
   }
 
@@ -101,7 +103,7 @@ onUnmounted(() => {
 });
 
 // Make sure to refocus the input when the state changes
-watch([() => state.isPaused, () => state.isEnded, () => dialogs.dialog, () => roomState.roomMessage], () => {
+watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, () => roomState.roomMessage], () => {
   setTimeout(ensureFocus, 0);
 });
 </script>
@@ -109,7 +111,7 @@ watch([() => state.isPaused, () => state.isEnded, () => dialogs.dialog, () => ro
 <template>
   <div
     class="box rad-bl-tr"
-    :class="{ shake: state.isStarted }"
+    :class="{ shake: flowState.isStarted }"
   >
     <p>Name all {{ regionOrType }} Pokémon:</p>
     <input

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 
-const { state, setGen, resetState, setStarted } = useState();
+const { resetFlowState, setStarted } = useGameFlow();
+const { state, setGen, resetState } = useState();
 
 type Props = {
   toggleFunction: () => void;
@@ -15,6 +17,7 @@ const reset = () => {
   const gen = state.gen;
   props.toggleFunction();
   resetState();
+  resetFlowState();
   setGen(gen);
   setStarted(true);
 };

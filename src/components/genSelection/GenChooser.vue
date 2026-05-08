@@ -3,10 +3,12 @@ import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
 import CyclingType from '@/components/genSelection/CyclingType.vue';
 import { gens } from '@/data/gens';
 import { useCurrentGen } from '@/stores/useCurrentGen';
+import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 import type { Gen } from '@/types.ts';
 
-const { setGameMode, setStarted } = useState();
+const { setStarted } = useGameFlow();
+const { setGameMode } = useState();
 const { setCurrentGen } = useCurrentGen();
 
 const setFullQuiz = () => {

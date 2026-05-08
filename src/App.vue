@@ -17,11 +17,13 @@ import GameHeader from '@/components/header/GameHeader.vue';
 import { useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
 import { useCurrentType } from '@/stores/useCurrentType';
+import { useGameFlow } from '@/stores/useGameFlow';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
 
 const { state, setDarkMode } = useState();
 const { currentTypeState } = useCurrentType();
+const { flowState } = useGameFlow();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 const typeStyles = useTypeStyles();
@@ -67,7 +69,7 @@ onMounted(() => {
 
     <RoomMessageOverlay v-if="roomState.roomMessage !== null" />
 
-    <PauseOverlay v-if="state.isPaused" />
+    <PauseOverlay v-if="flowState.isPaused" />
 
     <FadeTransition>
       <GameStart v-if="state.gameMode === null" />
@@ -79,7 +81,7 @@ onMounted(() => {
 
     <Dialogs />
 
-    <EndOverlay v-if="state.isEnded" />
+    <EndOverlay v-if="flowState.isEnded" />
 
     <SnackBar />
   </main>

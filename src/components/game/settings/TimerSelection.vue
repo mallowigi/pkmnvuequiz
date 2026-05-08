@@ -4,21 +4,24 @@ import { computed } from 'vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
+import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState.js';
 
-const { state, setMinutes, setIsLimited, setPaused, resetState } = useState();
+const { flowState, resetFlowState, setPaused } = useGameFlow();
+const { state, setMinutes, setIsLimited, resetState } = useState();
 const { setDialog, setData } = useDialogs();
 
 const setInfinite = () => {
   if (!state.timer.isLimited) return;
 
-  if (!state.isStarted) {
+  if (!flowState.isStarted) {
     setIsLimited(false);
     return;
   }
 
   setDialog('timer', () => {
     resetState();
+    resetFlowState();
     setIsLimited(false);
   });
 };
@@ -26,18 +29,19 @@ const setInfinite = () => {
 const setFinite = () => {
   if (state.timer.isLimited) return;
 
-  if (!state.isStarted) {
+  if (!flowState.isStarted) {
     setIsLimited(true);
     return;
   }
 
   setDialog('timer', () => {
     resetState();
+    resetFlowState();
     setIsLimited(true);
   });
 };
 
-const togglePause = () => setPaused(!state.isPaused);
+const togglePause = () => setPaused(!flowState.isPaused);
 
 const minutes = computed({
   get: () => state.timer.minutes,
@@ -51,7 +55,7 @@ const minutes = computed({
       :active="{
         left: !state.timer.isLimited,
         right: state.timer.isLimited,
-        suffix: state.isPaused,
+        suffix: flowState.isPaused,
       }"
       :attached="{
         right: true,

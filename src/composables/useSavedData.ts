@@ -1,4 +1,5 @@
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
 
@@ -37,8 +38,9 @@ export const useSavedData = () => {
   };
 
   const loadState = (e: Event) => {
-    const { setPaused, setState } = useState();
+    const { setState } = useState();
     const { setCurrentType } = useCurrentType();
+    const { setFlowState } = useGameFlow();
 
     const target = e.target as HTMLInputElement;
     const files = Array.from(target.files || []);
@@ -59,11 +61,16 @@ export const useSavedData = () => {
         }
 
         const { currentType: loadedCurrentType, version: _version, ...statePayload } = loadedState;
+
         showUserMessage('Successfully loaded quiz!');
 
         setCurrentType(loadedCurrentType ?? null);
+        setFlowState({
+          isEnded: false,
+          isPaused: false,
+          isStarted: true,
+        });
         setState(statePayload);
-        setPaused(false);
       } catch (error) {
         console.error('Failed to load state: Invalid file format.', error);
         showUserMessage('Failed to load quiz: Invalid file format.');

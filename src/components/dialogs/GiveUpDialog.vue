@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useState } from '@/stores/useState';
+import { useGameFlow } from '@/stores/useGameFlow';
 
-const { setEnded } = useState();
+const { setEnded } = useGameFlow();
 
 type Props = {
   toggleFunction: () => void;

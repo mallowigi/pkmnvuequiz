@@ -3,9 +3,9 @@ import IconButton from '@/components/common/IconButton.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
-import { useState } from '@/stores/useState';
+import { useGameFlow } from '@/stores/useGameFlow';
 
-const { setPaused } = useState();
+const { setPaused } = useGameFlow();
 const { saveState, loadState } = useSavedData();
 
 const resume = () => setPaused(false);

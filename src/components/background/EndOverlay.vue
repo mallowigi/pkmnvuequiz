@@ -2,13 +2,16 @@
 import Overlay from '@/components/common/Overlay.vue';
 import { donors } from '@/data/donors';
 import { useCurrentType } from '@/stores/useCurrentType';
+import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 
 const { state, setGameOver } = useState();
 const { clearCurrentType } = useCurrentType();
+const { resetFlowState } = useGameFlow();
 
 const closeOverlay = () => {
   clearCurrentType();
+  resetFlowState();
   setGameOver();
 };
 </script>
