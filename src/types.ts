@@ -92,6 +92,7 @@ export type Language = 'cn' | 'de' | 'en' | 'fr' | 'ja' | 'ko' | 'zh';
 
 export type LanguageInfo = {
   id: Language;
+  index: number;
   name: string;
   symbol: string;
 };
@@ -109,7 +110,6 @@ export type State = {
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;
-  languages: Set<Language>;
   mode: Mode;
   withCycleSprites: boolean;
   withShadowHelper: boolean;
@@ -118,6 +118,10 @@ export type State = {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
+};
+
+export type LanguagesState = {
+  languages: Set<Language>;
 };
 
 export type PokemonProgressState = {

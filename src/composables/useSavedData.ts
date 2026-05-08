@@ -1,5 +1,6 @@
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useLanguages } from '@/stores/useLanguages.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
@@ -14,11 +15,12 @@ export const useSavedData = () => {
     const { currentTypeState } = useCurrentType();
     const { pokemonState } = usePokemons();
     const { timerState } = useTimer();
+    const { languagesState } = useLanguages();
 
     const savedState: SaveData = {
       ...state,
       currentType: currentTypeState.currentType,
-      languages: Array.from(state.languages),
+      languages: Array.from(languagesState.languages),
       pokemonProgress: {
         numFound: pokemonState.numFound,
         numShadows: pokemonState.numShadows,
@@ -55,6 +57,7 @@ export const useSavedData = () => {
     const { resetFlowState } = useGameFlow();
     const { resetPokemonState, setPokemonState } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
+    const { setLanguages, resetLanguages } = useLanguages();
 
     const target = e.target as HTMLInputElement;
     const files = Array.from(target.files || []);
@@ -77,6 +80,7 @@ export const useSavedData = () => {
         // Parse and validate loaded state
         const {
           currentType,
+          languages,
           pokemonProgress,
           timer,
           version: _version,
@@ -85,6 +89,10 @@ export const useSavedData = () => {
 
         const { pokemonFound, pokemonShadowed, numFound, numShadows } = pokemonProgress ?? {};
         const { elapsed, isLimited, minutes, startTime } = timer ?? {};
+
+        // Languages
+        resetLanguages();
+        setLanguages(languages ?? []);
 
         // Type
         setCurrentType(currentType ?? null);
@@ -115,7 +123,6 @@ export const useSavedData = () => {
           gameMode: statePayload.gameMode ?? null,
           gen: statePayload.gen ?? null,
           isDark: statePayload.isDark ?? false,
-          languages: new Set(statePayload.languages ?? []),
           mode: statePayload.mode ?? 'normal',
           withCycleSprites: statePayload.withCycleSprites ?? true,
           withShadowHelper: statePayload.withShadowHelper ?? false,

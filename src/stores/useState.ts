@@ -1,12 +1,11 @@
 import { reactive, readonly } from 'vue';
 
-import type { State, Gen, GameMode, Mode, Language } from '@/types';
+import type { State, Gen, GameMode, Mode } from '@/types';
 
 const state: State = reactive<State>({
   gameMode: null,
   gen: null,
   isDark: false,
-  languages: new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']),
   mode: 'normal',
   withCycleSprites: true,
   withShadowHelper: false,
@@ -65,14 +64,6 @@ const setSound = (withSound: boolean) => {
   state.withSound = withSound;
 };
 
-const toggleLanguage = (language: Language) => {
-  if (state.languages.has(language)) {
-    state.languages.delete(language);
-    return;
-  }
-  state.languages.add(language);
-};
-
 const setState = (newState: Partial<State>) => {
   Object.assign(state, newState);
 };
@@ -102,7 +93,6 @@ export const useState = () => {
     setTypeShuffle,
     state: readonly(state),
     toggleDarkMode,
-    toggleLanguage,
     toggleShadowHelper,
     toggleShadows,
     toggleShowShinies,

@@ -10,6 +10,7 @@ import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
+import LanguagesSelection from '@/components/game/settings/LanguagesSelection.vue';
 </script>
 
 <template class="root">
@@ -37,6 +38,10 @@ import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
     <CycleSpritesToggle />
 
     <SoundToggle />
+  </div>
+
+  <div class="selection-row">
+    <LanguagesSelection />
   </div>
 </template>
 
