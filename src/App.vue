@@ -105,7 +105,7 @@ onMounted(() => {
   --type-dark-color: var(--darkPrimary);
   --type-inline-color: inherit;
   --type-fg-color: var(--text);
-  --type-bg-color: inherit;
+  --type-bg-color: var(--primary);
 }
 
 .dark {
