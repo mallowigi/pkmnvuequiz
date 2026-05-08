@@ -11,14 +11,14 @@ import { specialTypes } from '@/data/specialTypes.ts';
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { state } = useState();
 
+const specialBoxes = computed(() => {
+  const specialGameModeBoxes = getSpecialBoxes();
+  return specialGameModeBoxes?.map((box) => specialTypes[box]);
+});
+
 const currentBoxes = computed(() => {
-  if (state.gameMode !== 'special') {
-    const currentGameModeBoxes = getCurrentGameModeBoxes();
-    return currentGameModeBoxes?.map((box) => boxes[box]);
-  } else {
-    const specialBoxes = getSpecialBoxes();
-    return specialBoxes?.map((box) => specialTypes[box]);
-  }
+  const currentGameModeBoxes = getCurrentGameModeBoxes();
+  return currentGameModeBoxes?.map((box) => boxes[box]);
 });
 
 const type = computed(() => {
@@ -31,20 +31,46 @@ const type = computed(() => {
 </script>
 
 <template>
-  <RoundedBox
-    class="region-box"
-    v-for="box in currentBoxes"
-    :key="box.id"
-  >
-    <span class="region-name">{{ box.name }}</span>
-    <PokemonSprite
-      :box="box"
-      :type="type"
-    />
-  </RoundedBox>
+  <div class="container">
+    <!-- Gen/Full/Types Mode -->
+    <RoundedBox
+      class="region-box"
+      :class="{ full: state.gameMode === 'full' }"
+      v-for="box in currentBoxes"
+      v-if="type === 'gen'"
+      :key="box.id"
+    >
+      <span class="region-name">{{ box.name }}</span>
+      <PokemonSprite
+        :box="box"
+        type="gen"
+      />
+    </RoundedBox>
+
+    <!-- Special Mode -->
+    <RoundedBox
+      class="region-box special"
+      v-for="box in specialBoxes"
+      v-else-if="type === 'special'"
+      :key="box.id"
+    >
+      <span class="region-name">{{ box.name }}</span>
+      <PokemonSprite
+        :box="box"
+        type="special"
+      />
+    </RoundedBox>
+  </div>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 .region-name {
   padding-left: 7px;
 }
@@ -57,5 +83,12 @@ const type = computed(() => {
   max-height: inherit;
   margin: 10px;
   border: none;
+
+  &.full {
+    flex-direction: column;
+    max-width: 20%;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
 }
 </style>
