@@ -17,7 +17,7 @@ const hasLanguage = (id: Language) => {
 </script>
 
 <template>
-  <RoundedBox>
+  <RoundedBox title="Guess Pokemon in other languages">
     <div class="selection-content">
       <div
         v-for="language in sortedLanguages"

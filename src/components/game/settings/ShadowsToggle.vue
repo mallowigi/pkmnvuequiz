@@ -23,6 +23,7 @@ const toggle = () => {
 
 <template>
   <RoundedButton
+    title="Toggle Pokemon Shadows (this action cannot be undone)"
     class="rad-br-tl shadows-toggle"
     :class="{ selected: state.withShadows }"
     @click="toggle"

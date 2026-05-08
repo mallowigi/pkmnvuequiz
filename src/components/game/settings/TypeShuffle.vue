@@ -21,7 +21,7 @@ const applyTypeShuffle = (value: boolean) => {
 </script>
 
 <template>
-  <RoundedBox>
+  <RoundedBox title="Guess the next Pokemon of a given type">
     <SegmentButton
       :active="{
         left: state.withTypeShuffle,

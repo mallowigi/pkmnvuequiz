@@ -14,6 +14,7 @@ const toggle = () => {
 
 <template>
   <RoundedButton
+    title="Toggle spelling help"
     class="spelling-toggle rad-br-tl"
     @click="toggle"
     :class="{ selected: state.withSpelling }"

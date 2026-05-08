@@ -58,7 +58,10 @@ const minutes = computed({
 </script>
 
 <template>
-  <RoundedBox class="timer-box">
+  <RoundedBox
+    class="timer-box"
+    title="Set a timer for the game."
+  >
     <SegmentButton
       :active="{
         left: !timerState.isLimited,

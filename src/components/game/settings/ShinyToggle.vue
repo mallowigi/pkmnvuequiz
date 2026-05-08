@@ -14,6 +14,7 @@ const toggleShiny = () => {
 
 <template>
   <RoundedButton
+    title="Toggle Shinies On/Off"
     class="rad-br-tl shiny-toggle-icon"
     :class="{ selected: state.withShinies }"
     @click="toggleShiny"

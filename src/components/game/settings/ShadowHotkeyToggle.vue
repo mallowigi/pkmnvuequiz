@@ -14,7 +14,7 @@ const toggle = () => {
 </script>
 
 <template>
-  <RoundedBox>
+  <RoundedBox title="When enabled, press the , key to display the shadow of a Pokemon at random.">
     <SegmentButton
       :active="{
         left: state.withShadowHelper,

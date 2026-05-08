@@ -36,11 +36,17 @@ const applyMode = (mode: Mode) => {
     >
       <template #prefix> Mode: </template>
 
-      <template #left> Chaos </template>
+      <template #left>
+        <span title="Chaos Mode: Find Pokemon in any order, without predefined placements">Chaos</span>
+      </template>
 
-      <template #center> Regular </template>
+      <template #center>
+        <span title="Regular Mode: Find Pokemon in any order with predefined placements">Regular</span>
+      </template>
 
-      <template #right> Dex Order </template>
+      <template #right>
+        <span title="Dex Order Mode: Find Pokemon in Pokedex order">Dex Order</span>
+      </template>
     </SegmentButton>
   </RoundedBox>
 </template>

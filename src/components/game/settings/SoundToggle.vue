@@ -16,7 +16,7 @@ const applySound = (value: boolean) => {
 </script>
 
 <template>
-  <RoundedBox>
+  <RoundedBox title="Toggle Sounds On/Off">
     <SegmentButton
       :active="{
         left: state.withSound,
