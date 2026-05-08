@@ -11,13 +11,6 @@ const state: State = reactive<State>({
   numShadows: 0,
   pokemonFound: new Set<string>(),
   pokemonShadowed: new Set<string>(),
-  timer: {
-    elapsed: 0,
-    isLimited: false,
-    minutes: 35,
-    savedAt: null,
-    startTime: null,
-  },
   withCycleSprites: true,
   withShadowHelper: false,
   withShadows: false,
@@ -91,35 +84,12 @@ const addFound = () => {
   state.numFound++;
 };
 
-const setStartTime = () => {
-  state.timer.startTime = Date.now();
-};
-
-const setIsLimited = (isLimited: boolean) => {
-  state.timer.isLimited = isLimited;
-};
-
-const setMinutes = (minutes: number) => {
-  state.timer.minutes = minutes;
-};
-
-const addSecond = () => {
-  state.timer.elapsed += 1;
-};
-
 const setState = (newState: Partial<State>) => {
   Object.assign(state, newState);
 };
 
 const resetState = () => {
-  Object.assign(state, {
-    timer: {
-      elapsed: 0,
-      minutes: 35,
-      savedAt: null,
-      startTime: null,
-    },
-  });
+  Object.assign(state, {});
 };
 
 const setGameOver = () => {
@@ -128,30 +98,19 @@ const setGameOver = () => {
     gen: null,
     numFound: 0,
     numShadows: 0,
-    timer: {
-      elapsed: 0,
-      isLimited: false,
-      minutes: 35,
-      savedAt: null,
-      startTime: null,
-    },
   });
 };
 
 export const useState = () => {
   return {
     addFound,
-    addSecond,
     addShadow,
     resetState,
     setDarkMode,
     setGameMode,
     setGameOver,
     setGen,
-    setIsLimited,
-    setMinutes,
     setMode,
-    setStartTime,
     setState,
     setTypeShuffle,
     state: readonly(state),

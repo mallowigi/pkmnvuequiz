@@ -3,9 +3,11 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
+import { useTimer } from '@/stores/useTimer';
 
 const { resetFlowState, setStarted } = useGameFlow();
 const { state, setGen, resetState } = useState();
+const { resetTimer } = useTimer();
 
 type Props = {
   toggleFunction: () => void;
@@ -17,6 +19,7 @@ const reset = () => {
   const gen = state.gen;
   props.toggleFunction();
   resetState();
+  resetTimer();
   resetFlowState();
   setGen(gen);
   setStarted(true);

@@ -115,13 +115,6 @@ export interface State {
   pokemonFound: Set<string>;
   numShadows: number;
   pokemonShadowed: Set<string>;
-  timer: {
-    elapsed: number;
-    minutes: number;
-    isLimited: boolean;
-    savedAt: number | null;
-    startTime: number | null;
-  };
   withCycleSprites: boolean;
   withShadowHelper: boolean;
   withShadows: boolean;
@@ -129,6 +122,14 @@ export interface State {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
+}
+
+export interface TimerState {
+  elapsed: number;
+  minutes: number;
+  isLimited: boolean;
+  savedAt: number | null;
+  startTime: number | null;
 }
 
 export interface GameFlowState {

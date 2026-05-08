@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useState } from '@/stores/useState.ts';
 import { computed } from 'vue';
+import { useTimer } from '@/stores/useTimer.ts';
 
-const { state } = useState();
+const { timerState } = useTimer();
 
 // todo move to hook
 const elapsed = computed(() => {
-  const total = state.timer.elapsed ?? 0;
+  const total = timerState.elapsed ?? 0;
   const hours = String(Math.floor(total / 3600));
   const minutes = String(Math.floor(total / 60));
   const seconds = String(total % 60);

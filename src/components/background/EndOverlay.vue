@@ -4,14 +4,17 @@ import { donors } from '@/data/donors';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
+import { useTimer } from '@/stores/useTimer';
 
 const { state, setGameOver } = useState();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState } = useGameFlow();
+const { resetTimer, timerState } = useTimer();
 
 const closeOverlay = () => {
   clearCurrentType();
   resetFlowState();
+  resetTimer();
   setGameOver();
 };
 </script>
@@ -26,7 +29,7 @@ const closeOverlay = () => {
         <h1>Well done!</h1>
 
         <h2>
-          You named {{ state.numFound }} {{ state.gen }} Pokémon in {{ state.timer.elapsed }} seconds in Pokédex order!
+          You named {{ state.numFound }} {{ state.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!
         </h2>
 
         <p>Challenge yourself further, try naming them without shadows. <br />({{ state.numShadows }} shadows used)</p>

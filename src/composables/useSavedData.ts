@@ -2,6 +2,8 @@ import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useTimer } from '@/stores/useTimer.ts';
+import type { State, TimerState, Type } from '@/types.ts';
 
 const { showUserMessage } = useMessages();
 
@@ -9,12 +11,13 @@ export const useSavedData = () => {
   const saveState = () => {
     const { state } = useState();
     const { currentTypeState } = useCurrentType();
+    const { timerState } = useTimer();
 
     const savedState = {
       ...state,
       currentType: currentTypeState.currentType,
       timer: {
-        ...state.timer,
+        ...timerState,
         savedAt: Date.now(),
       },
       version: 1,
@@ -41,6 +44,7 @@ export const useSavedData = () => {
     const { setState } = useState();
     const { setCurrentType } = useCurrentType();
     const { setFlowState } = useGameFlow();
+    const { resetTimer, setTimerState } = useTimer();
 
     const target = e.target as HTMLInputElement;
     const files = Array.from(target.files || []);
@@ -60,11 +64,22 @@ export const useSavedData = () => {
           return;
         }
 
-        const { currentType: loadedCurrentType, version: _version, ...statePayload } = loadedState;
+        const {
+          currentType: loadedCurrentType,
+          timer: loadedTimer,
+          version: _version,
+          ...statePayload
+        } = loadedState as Partial<State> & {
+          currentType?: Type | null;
+          timer?: Partial<TimerState>;
+          version?: number;
+        };
 
         showUserMessage('Successfully loaded quiz!');
 
         setCurrentType(loadedCurrentType ?? null);
+        resetTimer();
+        setTimerState(loadedTimer ?? {});
         setFlowState({
           isEnded: false,
           isPaused: false,
