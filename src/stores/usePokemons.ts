@@ -1,9 +1,18 @@
+import { reactive, readonly } from 'vue';
+
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
-import type { PokemonInfo } from '@/types';
+import type { PokemonInfo, PokemonProgressState } from '@/types.ts';
+
+const pokemonState: PokemonProgressState = reactive<PokemonProgressState>({
+  numFound: 0,
+  numShadows: 0,
+  pokemonFound: new Set<string>(),
+  pokemonShadowed: new Set<string>(),
+});
 
 const removeDuplicates = (pokemons: PokemonInfo[] | readonly PokemonInfo[]) => {
   const seen = new Set();
@@ -23,6 +32,27 @@ export const usePokemons = () => {
   const { getCurrentType } = useCurrentType();
   const { data } = usePkmnData();
   const { showUserMessage } = useMessages();
+
+  const addFound = () => {
+    pokemonState.numFound += 1;
+  };
+
+  const addShadow = () => {
+    pokemonState.numShadows += 1;
+  };
+
+  const setPokemonState = (newState: Partial<PokemonProgressState>) => {
+    Object.assign(pokemonState, newState);
+  };
+
+  const resetPokemonState = () => {
+    Object.assign(pokemonState, {
+      numFound: 0,
+      numShadows: 0,
+      pokemonFound: new Set<string>(),
+      pokemonShadowed: new Set<string>(),
+    });
+  };
 
   const getCurrentGenPokemon = () => {
     if (!data || !data.pokemon) {
@@ -95,7 +125,7 @@ export const usePokemons = () => {
   };
 
   const findPokemon = (name: string) => {
-    if (state.pokemonFound.has(name.toLowerCase())) {
+    if (pokemonState.pokemonFound.has(name.toLowerCase())) {
       showUserMessage(`You've already found ${name}!`);
       return;
     }
@@ -105,10 +135,15 @@ export const usePokemons = () => {
   };
 
   return {
+    addFound,
+    addShadow,
     findPokemon,
     getCurrentGameModePokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
     getTotalPokemon,
+    pokemonState: readonly(pokemonState),
+    resetPokemonState,
+    setPokemonState,
   };
 };

@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useState } from '@/stores/useState.ts';
 import { computed } from 'vue';
 import { usePokemons } from '@/stores/usePokemons.ts';
 
-const { state } = useState();
-const { getCurrentGameModePokemon } = usePokemons();
+const { getCurrentGameModePokemon, pokemonState } = usePokemons();
 
 const total = computed(() => {
   const pokemons = getCurrentGameModePokemon();
@@ -14,7 +12,7 @@ const total = computed(() => {
 
 <template>
   <div class="box rad-bl-tr counter">
-    <span class="highlight">{{ state.numFound }}</span> / {{ total }}
+    <span class="highlight">{{ pokemonState.numFound }}</span> / {{ total }}
   </div>
 </template>
 

@@ -7,10 +7,6 @@ const state: State = reactive<State>({
   isDark: false,
   languages: new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']),
   mode: 'normal',
-  numFound: 0,
-  numShadows: 0,
-  pokemonFound: new Set<string>(),
-  pokemonShadowed: new Set<string>(),
   withCycleSprites: true,
   withShadowHelper: false,
   withShadows: false,
@@ -76,14 +72,6 @@ const toggleLanguage = (language: Language) => {
   state.languages.add(language);
 };
 
-const addShadow = () => {
-  state.numShadows++;
-};
-
-const addFound = () => {
-  state.numFound++;
-};
-
 const setState = (newState: Partial<State>) => {
   Object.assign(state, newState);
 };
@@ -96,15 +84,11 @@ const setGameOver = () => {
   Object.assign(state, {
     gameMode: null,
     gen: null,
-    numFound: 0,
-    numShadows: 0,
   });
 };
 
 export const useState = () => {
   return {
-    addFound,
-    addShadow,
     resetState,
     setDarkMode,
     setGameMode,

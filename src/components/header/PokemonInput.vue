@@ -10,14 +10,14 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 
-const { state, addShadow } = useState();
+const { state } = useState();
 const { flowState } = useGameFlow();
 const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
-const { findPokemon } = usePokemons();
+const { addShadow, findPokemon } = usePokemons();
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;

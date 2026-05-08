@@ -5,10 +5,12 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow';
+import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState.js';
 import { useTimer } from '@/stores/useTimer';
 
 const { flowState, resetFlowState, setPaused } = useGameFlow();
+const { resetPokemonState } = usePokemons();
 const { resetState } = useState();
 const { resetTimer, setMinutes, setIsLimited, timerState } = useTimer();
 const { setDialog } = useDialogs();
@@ -24,6 +26,7 @@ const setInfinite = () => {
   setDialog('timer', () => {
     resetState();
     resetFlowState();
+    resetPokemonState();
     resetTimer();
     setIsLimited(false);
   });
@@ -40,6 +43,7 @@ const setFinite = () => {
   setDialog('timer', () => {
     resetState();
     resetFlowState();
+    resetPokemonState();
     resetTimer();
     setIsLimited(true);
   });

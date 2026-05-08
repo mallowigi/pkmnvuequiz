@@ -3,17 +3,20 @@ import Overlay from '@/components/common/Overlay.vue';
 import { donors } from '@/data/donors';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
+import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
 const { state, setGameOver } = useState();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState } = useGameFlow();
+const { pokemonState, resetPokemonState } = usePokemons();
 const { resetTimer, timerState } = useTimer();
 
 const closeOverlay = () => {
   clearCurrentType();
   resetFlowState();
+  resetPokemonState();
   resetTimer();
   setGameOver();
 };
@@ -29,10 +32,10 @@ const closeOverlay = () => {
         <h1>Well done!</h1>
 
         <h2>
-          You named {{ state.numFound }} {{ state.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!
+          You named {{ pokemonState.numFound }} {{ state.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!
         </h2>
 
-        <p>Challenge yourself further, try naming them without shadows. <br />({{ state.numShadows }} shadows used)</p>
+        <p>Challenge yourself further, try naming them without shadows. <br />({{ pokemonState.numShadows }} shadows used)</p>
       </div>
 
       <div class="section rad-bl-tr supporters">

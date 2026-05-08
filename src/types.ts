@@ -111,10 +111,6 @@ export interface State {
   isDark: boolean;
   languages: Set<Language>;
   mode: Mode;
-  numFound: number;
-  pokemonFound: Set<string>;
-  numShadows: number;
-  pokemonShadowed: Set<string>;
   withCycleSprites: boolean;
   withShadowHelper: boolean;
   withShadows: boolean;
@@ -122,6 +118,13 @@ export interface State {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
+}
+
+export interface PokemonProgressState {
+  numFound: number;
+  pokemonFound: Set<string>;
+  numShadows: number;
+  pokemonShadowed: Set<string>;
 }
 
 export interface TimerState {
