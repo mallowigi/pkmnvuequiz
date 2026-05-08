@@ -1,9 +1,7 @@
 import { reactive, readonly } from 'vue';
-
-import { getRandomType } from '@/data/types.ts';
 import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
 
-const state: State = reactive({
+const state: State = reactive<State>({
   currentType: null,
   gameMode: null,
   gen: null,
@@ -92,13 +90,6 @@ const toggleShadowHelper = () => {
 
 const setTypeShuffle = (withTypeShuffle: boolean) => {
   state.withTypeShuffle = withTypeShuffle;
-
-  if (withTypeShuffle) {
-    const randomType = getRandomType();
-    setCurrentType(randomType.id);
-  } else {
-    setCurrentType(null);
-  }
 };
 
 const toggleCycleSprites = () => {

@@ -78,7 +78,7 @@ export const usePokemons = () => {
     return removeDuplicates(data.pokemon);
   };
 
-  const getPokemon = () => {
+  const getCurrentGameModePokemon = () => {
     const gameMode = state.gameMode;
     switch (gameMode) {
       case 'gen':
@@ -101,14 +101,14 @@ export const usePokemons = () => {
     }
 
     // TODO: Need to know how to handle pokemon that contain other pokemons in their name
-    return getPokemon().find((pok) => pok.baseName.toLowerCase() === name.toLowerCase());
+    return getCurrentGameModePokemon().find((pok) => pok.baseName.toLowerCase() === name.toLowerCase());
   };
 
   return {
     findPokemon,
+    getCurrentGameModePokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
-    getPokemon,
     getTotalPokemon,
   };
 };

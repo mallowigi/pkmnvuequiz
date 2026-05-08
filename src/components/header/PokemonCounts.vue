@@ -4,10 +4,10 @@ import { computed } from 'vue';
 import { usePokemons } from '@/stores/usePokemons.ts';
 
 const { state } = useState();
-const { getPokemon } = usePokemons();
+const { getCurrentGameModePokemon } = usePokemons();
 
 const total = computed(() => {
-  const pokemons = getPokemon();
+  const pokemons = getCurrentGameModePokemon();
   return pokemons.length ?? 0;
 });
 </script>
