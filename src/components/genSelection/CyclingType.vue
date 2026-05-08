@@ -2,7 +2,7 @@
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { typesList } from '@/data/types';
+import { typesList } from '@/data/pokemonTypes';
 
 const { setStarted } = useGameFlow();
 const { setGameMode } = useState();

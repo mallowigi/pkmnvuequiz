@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { typesList } from '@/data/types';
+import { typesList } from '@/data/pokemonTypes';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';

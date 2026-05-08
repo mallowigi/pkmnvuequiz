@@ -1,8 +1,8 @@
 import { reactive, readonly } from 'vue';
 
-import { types, specialType } from '@/data/types';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
+import { pokemonTypes, specialType } from '@/data/pokemonTypes.ts';
 
 type CurrentTypeState = {
   currentType: Type | null;
@@ -26,7 +26,7 @@ export const useCurrentType = () => {
   const getCurrentType = () => {
     if (!currentTypeState.currentType) return null;
 
-    const foundType = types[currentTypeState.currentType];
+    const foundType = pokemonTypes[currentTypeState.currentType];
     return foundType ?? null;
   };
 

@@ -1,6 +1,6 @@
 import type { TypeInfo, Type, SpecialTypeInfo } from '@/types';
 
-export const types: Record<Type, TypeInfo> = {
+export const pokemonTypes: Record<Type, TypeInfo> = {
   bug: {
     bgColor: '#aaee33',
     buttonColor: '#84b329',
@@ -270,10 +270,10 @@ export const specialType: SpecialTypeInfo = {
   symbol: 'SPC',
 };
 
-export const typesList = Object.values(types).sort((a, b) => a.index - b.index);
+export const typesList = Object.values(pokemonTypes).sort((a, b) => a.index - b.index);
 
 export const getRandomType = (): TypeInfo => {
-  const typeKeys = Object.keys(types) as Type[];
+  const typeKeys = Object.keys(pokemonTypes) as Type[];
   const randomKey = typeKeys[Math.floor(Math.random() * typeKeys.length)];
-  return types[randomKey];
+  return pokemonTypes[randomKey];
 };

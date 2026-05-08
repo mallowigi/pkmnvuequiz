@@ -104,7 +104,7 @@ onMounted(() => {
   --type-btn-color: var(--primary);
   --type-dark-color: var(--darkPrimary);
   --type-inline-color: inherit;
-  --type-fg-color: inherit;
+  --type-fg-color: var(--text);
   --type-bg-color: inherit;
 }
 
