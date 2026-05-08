@@ -9,10 +9,10 @@ export type GameModeInfo = {
 
 export type Mode = 'chaos' | 'normal' | 'order';
 
-export interface ModeInfo {
+export type ModeInfo = {
   id: Mode;
   name: string;
-}
+};
 
 export type Region =
   | 'alola'
@@ -33,10 +33,10 @@ export type Region =
   | 'sinnoh'
   | 'unova';
 
-export interface RegionInfo {
+export type RegionInfo = {
   id: Region;
   name: string;
-}
+};
 
 export type Type =
   | 'bug'
@@ -58,7 +58,7 @@ export type Type =
   | 'steel'
   | 'water';
 
-export interface TypeInfo {
+export type TypeInfo = {
   bgColor: string;
   buttonColor: string;
   darkBgColor: string;
@@ -71,7 +71,7 @@ export interface TypeInfo {
   lightFgColor: string;
   name: string;
   symbol: string;
-}
+};
 
 export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
   id: 'special';
@@ -81,31 +81,31 @@ export type SpecialType = 'no' | 'sub-legendary' | 'legendary' | 'mythical' | 'u
 
 export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
 
-export interface GenerationInfo {
+export type GenerationInfo = {
   id: Gen;
   boxes: Region[];
   name: string;
   sprites: string[];
-}
+};
 
 export type Language = 'cn' | 'de' | 'en' | 'fr' | 'ja' | 'ko' | 'zh';
 
-export interface LanguageInfo {
+export type LanguageInfo = {
   id: Language;
   name: string;
   symbol: string;
-}
+};
 
-export interface PokemonInfo {
+export type PokemonInfo = {
   id: string;
   baseName: string;
   primaryType: Type;
   secondaryType: Type | null;
   box: Region;
   specialType: SpecialType;
-}
+};
 
-export interface State {
+export type State = {
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;
@@ -118,28 +118,28 @@ export interface State {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
-}
+};
 
-export interface PokemonProgressState {
+export type PokemonProgressState = {
   numFound: number;
   pokemonFound: Set<string>;
   numShadows: number;
   pokemonShadowed: Set<string>;
-}
+};
 
-export interface TimerState {
+export type TimerState = {
   elapsed: number;
   minutes: number;
   isLimited: boolean;
   savedAt: number | null;
   startTime: number | null;
-}
+};
 
-export interface GameFlowState {
+export type GameFlowState = {
   isEnded: boolean;
   isPaused: boolean;
   isStarted: boolean;
-}
+};
 
 export type Translations = {
   ENG: string;
@@ -153,7 +153,7 @@ export type Translations = {
   CHS: string;
 };
 
-export interface PkmnData {
+export type PkmnData = {
   error: any;
   isLoaded: boolean;
   namings: Record<string, string> | null;
@@ -164,4 +164,33 @@ export interface PkmnData {
   shinies: Record<string, string> | null;
   silhouettes: Record<string, string> | null;
   translations: Record<string, Translations> | null;
-}
+};
+
+export type SaveData = {
+  gameMode: GameMode | null;
+  gen: Gen | null;
+  isDark: boolean;
+  mode: Mode;
+
+  languages: Language[];
+
+  withCycleSprites: boolean;
+  withShadowHelper: boolean;
+  withShadows: boolean;
+  withShinies: boolean;
+  withSound: boolean;
+  withSpelling: boolean;
+  withTypeShuffle: boolean;
+
+  currentType: Type | null;
+
+  timer: TimerState;
+
+  pokemonProgress: {
+    numFound: number;
+    numShadows: number;
+    pokemonFound: string[];
+    pokemonShadowed: string[];
+  };
+  version: number;
+};

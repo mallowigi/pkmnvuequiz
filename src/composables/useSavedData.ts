@@ -1,9 +1,10 @@
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import type { State, TimerState, Type } from '@/types.ts';
+import type { SaveData } from '@/types.ts';
 
 const { showUserMessage } = useMessages();
 
@@ -11,11 +12,19 @@ export const useSavedData = () => {
   const saveState = () => {
     const { state } = useState();
     const { currentTypeState } = useCurrentType();
+    const { pokemonState } = usePokemons();
     const { timerState } = useTimer();
 
-    const savedState = {
+    const savedState: SaveData = {
       ...state,
       currentType: currentTypeState.currentType,
+      languages: Array.from(state.languages),
+      pokemonProgress: {
+        numFound: pokemonState.numFound,
+        numShadows: pokemonState.numShadows,
+        pokemonFound: Array.from(pokemonState.pokemonFound),
+        pokemonShadowed: Array.from(pokemonState.pokemonShadowed),
+      },
       timer: {
         ...timerState,
         savedAt: Date.now(),
@@ -43,7 +52,8 @@ export const useSavedData = () => {
   const loadState = (e: Event) => {
     const { setState } = useState();
     const { setCurrentType } = useCurrentType();
-    const { setFlowState } = useGameFlow();
+    const { resetFlowState } = useGameFlow();
+    const { resetPokemonState, setPokemonState } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
 
     const target = e.target as HTMLInputElement;
@@ -64,28 +74,59 @@ export const useSavedData = () => {
           return;
         }
 
+        // Parse and validate loaded state
         const {
-          currentType: loadedCurrentType,
-          timer: loadedTimer,
+          currentType,
+          pokemonProgress,
+          timer,
           version: _version,
           ...statePayload
-        } = loadedState as Partial<State> & {
-          currentType?: Type | null;
-          timer?: Partial<TimerState>;
-          version?: number;
-        };
+        } = loadedState as Partial<SaveData>;
+
+        const { pokemonFound, pokemonShadowed, numFound, numShadows } = pokemonProgress ?? {};
+        const { elapsed, isLimited, minutes, startTime } = timer ?? {};
+
+        // Type
+        setCurrentType(currentType ?? null);
+
+        // Pokemon progress
+        resetPokemonState();
+        setPokemonState({
+          numFound: numFound ?? 0,
+          numShadows: numShadows ?? 0,
+          pokemonFound: new Set(pokemonFound ?? []),
+          pokemonShadowed: new Set(pokemonShadowed ?? []),
+        });
+
+        // Timer
+        resetTimer();
+        setTimerState({
+          elapsed: elapsed ?? 0,
+          isLimited: isLimited ?? false,
+          minutes: minutes ?? 35,
+          startTime: startTime ?? null,
+        });
+
+        // Game flow
+        resetFlowState();
+
+        // State
+        setState({
+          gameMode: statePayload.gameMode ?? null,
+          gen: statePayload.gen ?? null,
+          isDark: statePayload.isDark ?? false,
+          languages: new Set(statePayload.languages ?? []),
+          mode: statePayload.mode ?? 'normal',
+          withCycleSprites: statePayload.withCycleSprites ?? true,
+          withShadowHelper: statePayload.withShadowHelper ?? false,
+          withShadows: statePayload.withShadows ?? false,
+          withShinies: statePayload.withShinies ?? false,
+          withSound: statePayload.withSound ?? true,
+          withSpelling: statePayload.withSpelling ?? false,
+          withTypeShuffle: statePayload.withTypeShuffle ?? false,
+        });
 
         showUserMessage('Successfully loaded quiz!');
-
-        setCurrentType(loadedCurrentType ?? null);
-        resetTimer();
-        setTimerState(loadedTimer ?? {});
-        setFlowState({
-          isEnded: false,
-          isPaused: false,
-          isStarted: true,
-        });
-        setState(statePayload);
       } catch (error) {
         console.error('Failed to load state: Invalid file format.', error);
         showUserMessage('Failed to load quiz: Invalid file format.');
