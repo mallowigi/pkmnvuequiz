@@ -5,7 +5,7 @@ import { useCurrentType } from '@/stores/useCurrentType';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
-import type { PokemonInfo, PokemonProgressState } from '@/types.ts';
+import type { PokemonInfo, PokemonProgressState, Region, Type } from '@/types.ts';
 
 const pokemonState: PokemonProgressState = reactive<PokemonProgressState>({
   numFound: 0,
@@ -54,6 +54,15 @@ export const usePokemons = () => {
     });
   };
 
+  const getGenPokemon = (genId: Region) => {
+    if (!data || !data.pokemon) {
+      return [];
+    }
+
+    const filtered = data.pokemon.filter((pok) => pok.box === genId);
+    return removeDuplicates(filtered);
+  };
+
   const getCurrentGenPokemon = () => {
     if (!data || !data.pokemon) {
       return [];
@@ -66,6 +75,19 @@ export const usePokemons = () => {
     }
 
     const filtered = data.pokemon.filter((pok) => boxes.includes(pok.box));
+    return removeDuplicates(filtered);
+  };
+
+  const getTypePokemon = (typeId: Type) => {
+    if (!data || !data.pokemon) {
+      return [];
+    }
+
+    const filtered = data.pokemon.filter((pok) => {
+      const types = [pok.primaryType, pok.secondaryType].filter(Boolean);
+      return types.includes(typeId);
+    });
+
     return removeDuplicates(filtered);
   };
 
@@ -100,7 +122,7 @@ export const usePokemons = () => {
     return removeDuplicates(filtered);
   };
 
-  const getTotalPokemon = () => {
+  const getAllPokemon = () => {
     if (!data || !data.pokemon) {
       return [];
     }
@@ -118,7 +140,7 @@ export const usePokemons = () => {
       case 'special':
         return getSpecialTypePokemon();
       case 'full':
-        return getTotalPokemon();
+        return getAllPokemon();
       default:
         return [];
     }
@@ -141,7 +163,9 @@ export const usePokemons = () => {
     getCurrentGameModePokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
-    getTotalPokemon,
+    getGenPokemon,
+    getTotalPokemon: getAllPokemon,
+    getTypePokemon,
     pokemonState: readonly(pokemonState),
     resetPokemonState,
     setPokemonState,

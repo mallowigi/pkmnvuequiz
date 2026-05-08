@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import RegionBoxes from '@/components/game/RegionBoxes.vue';
 import GameOptions from '@/components/game/settings/GameOptions.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
+import Spacer from '@/components/common/Spacer.vue';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -9,7 +11,8 @@ const { flowState } = useGameFlow();
 
 <template>
   <div class="game">
-    <div style="flex: 1">&nbsp;</div>
+    <RegionBoxes />
+    <Spacer />
     <GameOptions v-if="state.gameMode !== null && !flowState.isEnded" />
   </div>
 </template>

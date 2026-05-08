@@ -122,7 +122,7 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
       autocomplete="off"
     />
     <img
-      class="recent-sprite"
+      class="sprite"
       :src="unknownSprite"
       alt="Recent sprite"
     />
@@ -201,7 +201,7 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
   }
 }
 
-.recent-sprite {
+.sprite {
   margin: -25px -20px -10px -10px;
   width: 64px;
   height: 56px;

@@ -59,7 +59,7 @@ onMounted(() => {
 
     <GameHeader />
 
-    <Game class="game" />
+    <Game />
 
     <GameFooter />
 

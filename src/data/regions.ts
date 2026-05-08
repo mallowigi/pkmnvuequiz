@@ -57,6 +57,10 @@ export const regions: Record<Region, RegionInfo> = {
     id: 'paldea',
     name: 'Paldea',
   },
+  pokemongo: {
+    id: 'pokemongo',
+    name: 'Pokémon GO',
+  },
   sinnoh: {
     id: 'sinnoh',
     name: 'Sinnoh',
