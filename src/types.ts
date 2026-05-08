@@ -106,7 +106,6 @@ export interface PokemonInfo {
 }
 
 export interface State {
-  currentType: Type | null;
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;

@@ -1,8 +1,7 @@
 import { reactive, readonly } from 'vue';
-import type { State, Gen, GameMode, Mode, Type, Language } from '@/types';
+import type { State, Gen, GameMode, Mode, Language } from '@/types';
 
 const state: State = reactive<State>({
-  currentType: null,
   gameMode: null,
   gen: null,
   isDark: false,
@@ -42,10 +41,6 @@ const setGameMode = (mode: GameMode | null) => {
 
 const setMode = (mode: Mode) => {
   state.mode = mode;
-};
-
-const setCurrentType = (type: Type | null) => {
-  state.currentType = type;
 };
 
 const toggleDarkMode = () => {
@@ -153,7 +148,6 @@ const resetState = () => {
 
 const setGameOver = () => {
   Object.assign(state, {
-    currentType: null,
     gameMode: null,
     gen: null,
     isEnded: false,
@@ -178,7 +172,6 @@ export const useState = () => {
     addSecond,
     addShadow,
     resetState,
-    setCurrentType,
     setDarkMode,
     setEnded,
     setGameMode,

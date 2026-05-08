@@ -16,10 +16,12 @@ import TypeSelection from '@/components/genSelection/TypeSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
 import { useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
+import { useCurrentType } from '@/stores/useCurrentType';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
 
 const { state, setDarkMode } = useState();
+const { currentTypeState } = useCurrentType();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 const typeStyles = useTypeStyles();
@@ -72,7 +74,7 @@ onMounted(() => {
     </FadeTransition>
 
     <FadeTransition>
-      <TypeSelection v-if="state.gameMode === 'types' && state.currentType === null" />
+      <TypeSelection v-if="state.gameMode === 'types' && currentTypeState.currentType === null" />
     </FadeTransition>
 
     <Dialogs />

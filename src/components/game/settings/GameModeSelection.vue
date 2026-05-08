@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useCurrentType } from '@/stores/useCurrentType';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useState } from '@/stores/useState.js';
 
 const { setDialog } = useDialogs();
-const { setGameMode, setGen, setCurrentType, state } = useState();
+const { clearCurrentType } = useCurrentType();
+const { setGameMode, setGen, state } = useState();
 
 const setFullQuiz = () => {
   if (state.gameMode === 'full') return;
   setDialog('switchQuiz', () => {
     setGameMode('full');
     setGen(null);
-    setCurrentType(null);
+    clearCurrentType();
   });
 };
 
@@ -19,7 +21,7 @@ const setGenQuiz = () => {
   if (state.gameMode === 'gen') return;
   setDialog('switchQuiz', () => {
     setGameMode(null);
-    setCurrentType(null);
+    clearCurrentType();
   });
 };
 
@@ -27,7 +29,7 @@ const setTypeQuiz = () => {
   setDialog('switchQuiz', () => {
     setGameMode('types');
     setGen(null);
-    setCurrentType(null);
+    clearCurrentType();
   });
 };
 
@@ -36,7 +38,7 @@ const setSpecialQuiz = () => {
   setDialog('switchQuiz', () => {
     setGameMode('special');
     setGen(null);
-    setCurrentType(null);
+    clearCurrentType();
   });
 };
 </script>

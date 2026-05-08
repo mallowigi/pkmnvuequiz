@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import { donors } from '@/data/donors';
+import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
 
 const { state, setGameOver } = useState();
+const { clearCurrentType } = useCurrentType();
 
 const closeOverlay = () => {
+  clearCurrentType();
   setGameOver();
 };
 </script>

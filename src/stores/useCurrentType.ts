@@ -1,19 +1,32 @@
+import { reactive, readonly } from 'vue';
+
 import { types, specialType } from '@/data/types';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
 
+type CurrentTypeState = {
+  currentType: Type | null;
+};
+
+const currentTypeState = reactive<CurrentTypeState>({
+  currentType: null,
+});
+
 export const useCurrentType = () => {
-  const { state, setCurrentType: setStateType } = useState();
+  const { state } = useState();
 
   const setCurrentType = (type: Type | null) => {
-    setStateType(type);
+    currentTypeState.currentType = type;
+  };
+
+  const clearCurrentType = () => {
+    currentTypeState.currentType = null;
   };
 
   const getCurrentType = () => {
-    const currentType = state.currentType;
-    if (!currentType) return null;
+    if (!currentTypeState.currentType) return null;
 
-    const foundType = types[currentType];
+    const foundType = types[currentTypeState.currentType];
     return foundType ?? null;
   };
 
@@ -32,7 +45,8 @@ export const useCurrentType = () => {
   };
 
   return {
-    currentType: state.currentType,
+    clearCurrentType,
+    currentTypeState: readonly(currentTypeState),
     getCurrentType,
     getCurrentTypeOrSpecial,
     getSpecialType,
