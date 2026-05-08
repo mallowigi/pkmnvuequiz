@@ -73,11 +73,11 @@ export type TypeInfo = {
   symbol: string;
 };
 
-export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
-  id: 'special';
-};
+export type SpecialType = 'special' | 'sublegendary' | 'legendary' | 'mythical' | 'ultrabeast' | 'paradox';
 
-export type SpecialType = 'no' | 'sub-legendary' | 'legendary' | 'mythical' | 'ultrabeast' | 'paradox';
+export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
+  id: SpecialType;
+};
 
 export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
 

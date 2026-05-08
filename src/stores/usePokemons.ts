@@ -115,7 +115,7 @@ export const usePokemons = () => {
     }
 
     const filtered = data.pokemon.filter((pok) => {
-      const types = ['legendary', 'sub-legendary', 'mythical'].filter(Boolean);
+      const types = ['legendary', 'sublegendary', 'mythical'].filter(Boolean);
       return types.includes(pok.specialType);
     });
 

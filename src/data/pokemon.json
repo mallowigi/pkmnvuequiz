@@ -1007,7 +1007,7 @@
       "primaryType": "ice",
       "secondaryType": "flying",
       "box": "kanto",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "zapdos",
@@ -1015,7 +1015,7 @@
       "primaryType": "electric",
       "secondaryType": "flying",
       "box": "kanto",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "moltres",
@@ -1023,7 +1023,7 @@
       "primaryType": "fire",
       "secondaryType": "flying",
       "box": "kanto",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "dratini",
@@ -1705,7 +1705,7 @@
       "primaryType": "electric",
       "secondaryType": null,
       "box": "johto",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "entei",
@@ -1713,7 +1713,7 @@
       "primaryType": "fire",
       "secondaryType": null,
       "box": "johto",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "suicune",
@@ -1721,7 +1721,7 @@
       "primaryType": "water",
       "secondaryType": null,
       "box": "johto",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "larvitar",
@@ -2670,7 +2670,7 @@
       "primaryType": "rock",
       "secondaryType": null,
       "box": "hoenn",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "regice",
@@ -2678,7 +2678,7 @@
       "primaryType": "ice",
       "secondaryType": null,
       "box": "hoenn",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "registeel",
@@ -2686,7 +2686,7 @@
       "primaryType": "steel",
       "secondaryType": null,
       "box": "hoenn",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "latias",
@@ -2694,7 +2694,7 @@
       "primaryType": "dragon",
       "secondaryType": "psychic",
       "box": "hoenn",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "latios",
@@ -2702,7 +2702,7 @@
       "primaryType": "dragon",
       "secondaryType": "psychic",
       "box": "hoenn",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "kyogre",
@@ -3495,7 +3495,7 @@
       "primaryType": "psychic",
       "secondaryType": null,
       "box": "sinnoh",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "mesprit",
@@ -3503,7 +3503,7 @@
       "primaryType": "psychic",
       "secondaryType": null,
       "box": "sinnoh",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "azelf",
@@ -3511,7 +3511,7 @@
       "primaryType": "psychic",
       "secondaryType": null,
       "box": "sinnoh",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "dialga",
@@ -3535,7 +3535,7 @@
       "primaryType": "fire",
       "secondaryType": "steel",
       "box": "sinnoh",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "regigigas",
@@ -3543,7 +3543,7 @@
       "primaryType": "normal",
       "secondaryType": null,
       "box": "sinnoh",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "giratina",
@@ -3567,7 +3567,7 @@
       "primaryType": "psychic",
       "secondaryType": null,
       "box": "sinnoh",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "phione",
@@ -4782,7 +4782,7 @@
       "primaryType": "steel",
       "secondaryType": "fighting",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "terrakion",
@@ -4790,7 +4790,7 @@
       "primaryType": "rock",
       "secondaryType": "fighting",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "virizion",
@@ -4798,7 +4798,7 @@
       "primaryType": "grass",
       "secondaryType": "fighting",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "tornadus",
@@ -4806,7 +4806,7 @@
       "primaryType": "flying",
       "secondaryType": null,
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "tornadustherian",
@@ -4814,7 +4814,7 @@
       "primaryType": "flying",
       "secondaryType": null,
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "thundurus",
@@ -4822,7 +4822,7 @@
       "primaryType": "electric",
       "secondaryType": "flying",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "thundurustherian",
@@ -4830,7 +4830,7 @@
       "primaryType": "electric",
       "secondaryType": "flying",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "reshiram",
@@ -4854,7 +4854,7 @@
       "primaryType": "ground",
       "secondaryType": "flying",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "landorustherian",
@@ -4862,7 +4862,7 @@
       "primaryType": "ground",
       "secondaryType": "flying",
       "box": "unova",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "kyurem",
@@ -5977,7 +5977,7 @@
       "primaryType": "normal",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvally",
@@ -5985,7 +5985,7 @@
       "primaryType": "normal",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallywater",
@@ -5993,7 +5993,7 @@
       "primaryType": "water",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallygrass",
@@ -6001,7 +6001,7 @@
       "primaryType": "grass",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyfire",
@@ -6009,7 +6009,7 @@
       "primaryType": "fire",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyelectric",
@@ -6017,7 +6017,7 @@
       "primaryType": "electric",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyice",
@@ -6025,7 +6025,7 @@
       "primaryType": "ice",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyground",
@@ -6033,7 +6033,7 @@
       "primaryType": "ground",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyflying",
@@ -6041,7 +6041,7 @@
       "primaryType": "flying",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyfighting",
@@ -6049,7 +6049,7 @@
       "primaryType": "fighting",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallypoison",
@@ -6057,7 +6057,7 @@
       "primaryType": "poison",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallypsychic",
@@ -6065,7 +6065,7 @@
       "primaryType": "psychic",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallydark",
@@ -6073,7 +6073,7 @@
       "primaryType": "dark",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallybug",
@@ -6081,7 +6081,7 @@
       "primaryType": "bug",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyrock",
@@ -6089,7 +6089,7 @@
       "primaryType": "rock",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyghost",
@@ -6097,7 +6097,7 @@
       "primaryType": "ghost",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallysteel",
@@ -6105,7 +6105,7 @@
       "primaryType": "steel",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallydragon",
@@ -6113,7 +6113,7 @@
       "primaryType": "dragon",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "silvallyfairy",
@@ -6121,7 +6121,7 @@
       "primaryType": "fairy",
       "secondaryType": null,
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "zygarde10",
@@ -6278,7 +6278,7 @@
       "primaryType": "electric",
       "secondaryType": "fairy",
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "tapulele",
@@ -6286,7 +6286,7 @@
       "primaryType": "psychic",
       "secondaryType": "fairy",
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "tapubulu",
@@ -6294,7 +6294,7 @@
       "primaryType": "grass",
       "secondaryType": "fairy",
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "tapufini",
@@ -6302,7 +6302,7 @@
       "primaryType": "water",
       "secondaryType": "fairy",
       "box": "alola",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "cosmog",
@@ -7236,7 +7236,7 @@
       "primaryType": "fighting",
       "secondaryType": null,
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "urshifu",
@@ -7244,7 +7244,7 @@
       "primaryType": "fighting",
       "secondaryType": "dark",
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "urshifurapidstrike",
@@ -7252,7 +7252,7 @@
       "primaryType": "fighting",
       "secondaryType": "water",
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "zarude",
@@ -7276,7 +7276,7 @@
       "primaryType": "electric",
       "secondaryType": null,
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "regidrago",
@@ -7284,7 +7284,7 @@
       "primaryType": "dragon",
       "secondaryType": null,
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "articunogalar",
@@ -7292,7 +7292,7 @@
       "primaryType": "psychic",
       "secondaryType": "flying",
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "zapdosgalar",
@@ -7300,7 +7300,7 @@
       "primaryType": "fighting",
       "secondaryType": "flying",
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "moltresgalar",
@@ -7308,7 +7308,7 @@
       "primaryType": "dark",
       "secondaryType": "flying",
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "glastrier",
@@ -7316,7 +7316,7 @@
       "primaryType": "ice",
       "secondaryType": null,
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "spectrier",
@@ -7324,7 +7324,7 @@
       "primaryType": "ghost",
       "secondaryType": null,
       "box": "galar",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "calyrex",
@@ -7524,7 +7524,7 @@
       "primaryType": "fairy",
       "secondaryType": "flying",
       "box": "hisui",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "enamorustherian",
@@ -7532,7 +7532,7 @@
       "primaryType": "fairy",
       "secondaryType": "flying",
       "box": "hisui",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "dialgaorigin",
@@ -8296,7 +8296,7 @@
       "primaryType": "dark",
       "secondaryType": "grass",
       "box": "paldea",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "chienpao",
@@ -8304,7 +8304,7 @@
       "primaryType": "dark",
       "secondaryType": "ice",
       "box": "paldea",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "tinglu",
@@ -8312,7 +8312,7 @@
       "primaryType": "dark",
       "secondaryType": "ground",
       "box": "paldea",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "chiyu",
@@ -8320,7 +8320,7 @@
       "primaryType": "dark",
       "secondaryType": "fire",
       "box": "paldea",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "roaringmoon",
@@ -8419,7 +8419,7 @@
       "primaryType": "poison",
       "secondaryType": "fighting",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "munkidori",
@@ -8427,7 +8427,7 @@
       "primaryType": "poison",
       "secondaryType": "psychic",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "fezandipiti",
@@ -8435,7 +8435,7 @@
       "primaryType": "poison",
       "secondaryType": "fairy",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerpon",
@@ -8443,7 +8443,7 @@
       "primaryType": "grass",
       "secondaryType": null,
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerpontealmask",
@@ -8451,7 +8451,7 @@
       "primaryType": "grass",
       "secondaryType": null,
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerponwellspring",
@@ -8459,7 +8459,7 @@
       "primaryType": "grass",
       "secondaryType": "water",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerponwellspringmask",
@@ -8467,7 +8467,7 @@
       "primaryType": "grass",
       "secondaryType": "water",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerponhearthflame",
@@ -8475,7 +8475,7 @@
       "primaryType": "grass",
       "secondaryType": "fire",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerponhearthflamemask",
@@ -8483,7 +8483,7 @@
       "primaryType": "grass",
       "secondaryType": "fire",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerponcornerstone",
@@ -8491,7 +8491,7 @@
       "primaryType": "grass",
       "secondaryType": "rock",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "ogerponcornerstonemask",
@@ -8499,7 +8499,7 @@
       "primaryType": "grass",
       "secondaryType": "rock",
       "box": "areazero",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "archaludon",
@@ -8861,7 +8861,7 @@
       "primaryType": "dragon",
       "secondaryType": "psychic",
       "box": "hoennmega",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "latiosmega",
@@ -8869,7 +8869,7 @@
       "primaryType": "dragon",
       "secondaryType": "psychic",
       "box": "hoennmega",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "kyogreprimal",
@@ -9169,7 +9169,7 @@
       "primaryType": "fighting",
       "secondaryType": "dark",
       "box": "gmax",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "urshifurapidstrikegmax",
@@ -9177,7 +9177,7 @@
       "primaryType": "fighting",
       "secondaryType": "water",
       "box": "gmax",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "eternatuseternamax",
@@ -9425,7 +9425,7 @@
       "primaryType": "fire",
       "secondaryType": "steel",
       "box": "hyperspace",
-      "specialType": "sub-legendary"
+      "specialType": "sublegendary"
     },
     {
       "id": "darkraimega",
