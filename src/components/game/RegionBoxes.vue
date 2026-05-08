@@ -5,20 +5,27 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { boxes } from '@/data/boxes.js';
 import { useBoxes } from '@/composables/useBoxes.ts';
+import { useState } from '@/stores/useState.ts';
+import { specialTypes } from '@/data/specialTypes.ts';
 
-const { getCurrentGameModeBoxes } = useBoxes();
+const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
+const { state } = useState();
 
-const boxes = computed(() => {
-  const currentGameModeBoxes = getCurrentGameModeBoxes();
-
-  return currentGameModeBoxes?.map((box) => boxes[box]);
+const currentBoxes = computed(() => {
+  if (state.gameMode !== 'special') {
+    const currentGameModeBoxes = getCurrentGameModeBoxes();
+    return currentGameModeBoxes?.map((box) => boxes[box]);
+  } else {
+    const specialBoxes = getSpecialBoxes();
+    return specialBoxes?.map((box) => specialTypes[box]);
+  }
 });
 </script>
 
 <template>
   <RoundedBox
     class="region-box"
-    v-for="box in boxes"
+    v-for="box in currentBoxes"
     :key="box.id"
   >
     <span class="region-name">{{ box.name }}</span>

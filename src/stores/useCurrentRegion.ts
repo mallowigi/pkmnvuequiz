@@ -1,3 +1,4 @@
+import { boxes } from '@/data/boxes';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 
 export const useCurrentRegion = () => {
@@ -9,8 +10,7 @@ export const useCurrentRegion = () => {
       return;
     }
 
-    const boxes = currentGen.boxes ?? [];
-    const firstBox = boxes?.[0];
+    const firstBox = currentGen.boxes?.[0];
     if (!firstBox) {
       return;
     }

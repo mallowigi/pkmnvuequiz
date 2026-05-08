@@ -11,7 +11,7 @@ export const useCurrentGen = () => {
 
   const getCurrentGen = () => {
     const currentGen = state.gen;
-    if (!currentGen) return [];
+    if (!currentGen) return null;
 
     return gens[currentGen];
   };

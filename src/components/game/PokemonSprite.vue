@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-
-import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { RegionBoxInfo } from '@/types.ts';
+import type { RegionBoxInfo, SpecialTypeInfo } from '@/types.ts';
 
 const { state } = useState();
-const { getCurrentGen } = useCurrentGen();
 const { getGenPokemon } = usePokemons();
 
 type Props = {
-  box: RegionBoxInfo;
+  box: RegionBoxInfo | SpecialTypeInfo;
 };
 
 const props = defineProps<Props>();
