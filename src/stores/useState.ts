@@ -1,4 +1,5 @@
 import { reactive, readonly } from 'vue';
+
 import type { State, Gen, GameMode, Mode, Language } from '@/types';
 
 const state: State = reactive<State>({
@@ -56,12 +57,12 @@ const setTypeShuffle = (withTypeShuffle: boolean) => {
   state.withTypeShuffle = withTypeShuffle;
 };
 
-const toggleCycleSprites = () => {
-  state.withCycleSprites = !state.withCycleSprites;
+const setCycleSprites = (withCycleSprites: boolean) => {
+  state.withCycleSprites = withCycleSprites;
 };
 
-const toggleSound = () => {
-  state.withSound = !state.withSound;
+const setSound = (withSound: boolean) => {
+  state.withSound = withSound;
 };
 
 const toggleLanguage = (language: Language) => {
@@ -90,21 +91,21 @@ const setGameOver = () => {
 export const useState = () => {
   return {
     resetState,
+    setCycleSprites,
     setDarkMode,
     setGameMode,
     setGameOver,
     setGen,
     setMode,
+    setSound,
     setState,
     setTypeShuffle,
     state: readonly(state),
-    toggleCycleSprites,
     toggleDarkMode,
     toggleLanguage,
     toggleShadowHelper,
     toggleShadows,
     toggleShowShinies,
-    toggleSound,
     toggleSpelling,
   };
 };
