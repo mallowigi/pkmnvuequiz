@@ -1,4 +1,6 @@
 // oxlint-disable no-unused-expressions
+// noinspection CommaExpressionJS
+
 class Pokemon {
   constructor(data) {
     this.data = data;
@@ -38,49 +40,49 @@ function seededRandom(seed) {
 }
 
 class Quiz {
-  ['pokemon'] = [];
-  ['pokemonBaseNameDict'] = {};
-  ['pokemonIdDict'] = {};
-  ['silhouetteDictionary'] = {};
-  ['spriteDictionary'] = {};
-  ['pokeballDictionary'] = {};
-  ['unguessedDictionary'] = {};
-  ['unguessedDict'] = {};
-  ['unguessedDictTexts'] = {};
-  ['enabledLanguages'] = [];
-  ['nameDict'] = {};
-  ['nameArr'] = [];
-  ['langDict'] = {};
-  ['currentBaseNames'] = new Set();
-  ['currentIds'] = new Set();
-  ['currentLangsNames'] = new Set();
-  ['revealTimeouts'] = [];
-  ['allSprites'] = [];
-  ['silhouetteArray'] = [];
-  ['pokeballArray'] = [];
-  ['missingnoEnabled'] = false;
-  ['shinyEnabled'] = false;
-  ['named'] = new Set();
-  ['users'] = {};
-  ['langCounts'] = {};
-  ['currentLang'] = 'ENG';
-  ['spriteCycles'] = {};
-  ['cyclingEnabled'] = true;
-  ['filters'] = {};
-  ['paused'] = false;
-  ['orderModeSet'] = new Set();
-  ['baseNameIdDict'] = {};
-  ['orderMode'] = false;
-  ['chaosMode'] = false;
-  ['typeDisorder'] = false;
-  ['revealedShadows'] = new Set();
-  ['giveUpState'] = false;
-  ['spooky'] = false;
-  ['name'] = 'none';
-  ['currentType'] = null;
-  ['seed'] = 0;
-  ['typeChaosIds'] = new Set();
-  ['boxConstruction'] = [];
+  pokemon = [];
+  pokemonBaseNameDict = {};
+  pokemonIdDict = {};
+  silhouetteDictionary = {};
+  spriteDictionary = {};
+  pokeballDictionary = {};
+  unguessedDictionary = {};
+  unguessedDict = {};
+  unguessedDictTexts = {};
+  enabledLanguages = [];
+  nameDict = {};
+  nameArr = [];
+  langDict = {};
+  currentBaseNames = new Set();
+  currentIds = new Set();
+  currentLangsNames = new Set();
+  revealTimeouts = [];
+  allSprites = [];
+  silhouetteArray = [];
+  pokeballArray = [];
+  missingnoEnabled = false;
+  shinyEnabled = false;
+  named = new Set();
+  users = {};
+  langCounts = {};
+  currentLang = 'ENG';
+  spriteCycles = {};
+  cyclingEnabled = true;
+  filters = {};
+  paused = false;
+  orderModeSet = new Set();
+  baseNameIdDict = {};
+  orderMode = false;
+  chaosMode = false;
+  typeDisorder = false;
+  revealedShadows = new Set();
+  giveUpState = false;
+  spooky = false;
+  name = 'none';
+  currentType = null;
+  seed = 0;
+  typeChaosIds = new Set();
+  boxConstruction = [];
 
   constructor(boxDict, genQuizBoxes, allLanguages) {
     this.boxDict = boxDict;
@@ -126,473 +128,463 @@ class Quiz {
   }
 
   reset() {
-    const ops = {
-      ODzPx: 'outline',
+    this.giveUpState = false;
+    this.stopReveal();
+    this.named = new Set();
+    this.users = {};
+    this.langCounts = {};
+    this.missingnoEnabled = false;
+    this.useSilhouettes = false;
+    this.revealedShadows = new Set();
+    this.boxCounters = {};
+
+    for (let box in this.currentBoxes) {
+      this.boxCounters[box] = [];
+    }
+
+    this.usePokeball();
+
+    for (let sprite in this.spriteDictionary) {
+      this.hideSprite(sprite);
+      this.spriteDictionary[sprite].classList.add('zoom');
+      this.spriteDictionary[sprite].classList.remove('revealed');
+    }
+
+    for (let unguessed in this.unguessedDict) {
+      this.unguessedDict[unguessed].style.display = 'none';
+    }
+
+    for (let box in this.boxDict) {
+      this.boxDict[box].classList.remove('outline');
+      this.boxDict[box].classList.remove(`outline${this.getStyleName()}`);
+    }
+
+    document.getElementById('big').classList.remove('outline');
+    document.getElementById('big').classList.remove(`outline${this.getStyleName()}`);
+
+    for (let unguessed in this.unguessedDictionary) {
+      this.currentIds.has(unguessed)
+        ? (this.unguessedDictionary[unguessed].style.display = 'inline')
+        : (this.unguessedDictionary[unguessed].style.display = 'none');
+    }
+
+    if (this.shinyEnabled) {
+      this.spriteDictionary.ditto.src = this.encodedImages.shiny.ditto;
+      this.unguessedDict.ditto.getElementsByTagName('img')[0].src = this.encodedImages.shiny.ditto;
+    } else {
+      this.spriteDictionary.ditto.src = this.encodedImages.sprite.ditto;
+      this.unguessedDict.ditto.getElementsByTagName('img')[0].src = this.encodedImages.sprite.ditto;
+    }
+
+    this.onReset();
+  }
+
+  setOrderMode(enabled) {
+    this.orderMode = enabled;
+    this.chaosMode = false;
+
+    if (enabled) {
+      this.typeDisorder = false;
+    }
+
+    this.setQuiz(this.name, this.filters);
+  }
+
+  setChaosMode(enabled) {
+    this.chaosMode = enabled;
+    this.orderMode = false;
+    this.setQuiz(this.name, this.filters);
+  }
+
+  setTypeMode(enabled) {
+    this.typeDisorder = enabled;
+
+    if (enabled) {
+      this.changeTypeStyle(this.currentType);
+      this.currentType = this.getCurrentRandomType();
+      this.changeTypeStyle(this.currentType);
+    } else {
+      this.changeTypeStyle(null);
+      this.currentType = null;
+    }
+  }
+
+  checkHighestLang() {
+    let highestLang = 'ENG';
+    let max = 0;
+
+    for (let lang in this.langCounts) {
+      if (this.langCounts[lang] > max) {
+        max = this.langCounts[lang];
+        highestLang = lang;
+      }
+    }
+
+    if (this.currentLang !== highestLang) {
+      document.getElementById(`missing-${highestLang}`).click();
+      this.currentLang = highestLang;
+    }
+  }
+
+  getScore() {
+    return this.named.size;
+  }
+
+  getMaxScore() {
+    return this.currentBaseNames.size;
+  }
+
+  setGenQuiz(gen) {
+    let title = gen === 0 ? 'Full' : `Generation ${gen}`;
+
+    this.setQuiz(title, {
+      boxes: this.genQuizBoxes[gen.toString()],
+    });
+  }
+
+  setTypeQuiz(type) {
+    const title = `${type}\x20type\x20`;
+
+    this.setQuiz(title, {
+      types: [type],
+    });
+  }
+
+  setQuiz(title, data) {
+    const consts = {
       add: (a, b) => a + b,
-      dyyYE: 'inline',
-      eULOa: 'pokemon-box-big',
-      sDavH: 'none',
+      add2: (a, b) => a + b,
+      add3: (a, b) => a + b,
+      bgpattern: 'bgpattern',
+      bgpattern2: 'bgpattern2',
+      blenddark: 'blenddark',
+      block: 'block',
+      body: 'body',
+      boxes: 'boxes',
+      button: 'button',
+      call: (f, x) => f(x),
+      call3: (f, x) => f(x),
+      call4: (f, x) => f(x),
+      callf: (f, x, y) => f(x, y),
+      callf2: (f, x) => f(x),
+      callf3: (f, x) => f(x),
+      dark: 'dark',
+      darumaka: 'darumaka',
+      darumakagalar: 'darumakagalar',
+      equals: (a, b) => a === b,
+      equals2: (a, b) => a === b,
+      fifth: 'fifth',
+      gmax: 'gmax',
+      imagesTypes: '/images/types/',
+      in: (elem, arr) => elem in arr,
+      in2: (elem, arr) => elem in arr,
+      inside: (elem, arr) => elem in arr,
+      legendary: 'legendary',
+      lessThan: (a, b) => a < b,
+      lt: (a, b) => a < b,
+      lt2: (a, b) => a < b,
+      lt3: (a, b) => a < b,
+      lt4: (a, b) => a < b,
+      lt5: (a, b) => a < b,
+      lt6: (a, b) => a < b,
+      mega: 'mega',
+      meowthalola: 'meowthalola',
+      meowthgalar: 'meowthgalar',
+      none: 'none',
+      notEquals: (a, b) => a !== b,
+      orderDisabled: 'Order\x20mode\x20disabled',
+      orderOff: 'order-off',
+      orderOn: 'order-on',
+      persian: 'persian',
+      persianalola: 'persianalola',
+      region: 'region',
+      spritet: 'spritet',
+      spritew: 'spritew',
+      sub: (a, b) => a - b,
+      twothirds: 'twothirds',
+      type: 'type',
+      types: 'types',
+      unknown: 'pokemon-box-unknown',
+      unknownBox: 'unknownbox',
     };
 
-    ((this['giveUpState'] = false),
-      this['stopReveal'](),
-      (this['named'] = new Set()),
-      (this['users'] = {}),
-      (this['langCounts'] = {}),
-      (this['missingnoEnabled'] = false),
-      (this.useSilhouettes = false),
-      (this['revealedShadows'] = new Set()),
-      (this['boxCounters'] = {}));
-    for (let _0x217d94 in this['currentBoxes']) this['boxCounters'][_0x217d94] = [];
+    this.emptyBoxes();
+    // Set classes for the types
+    if (this.getStyleName() !== '') {
+      document.getElementById('body').classList.remove(this.getStyleName());
 
-    this['usePokeball']();
+      for (let i = 0; i < typeClasses.length; i++) {
+        const typeClass = typeClasses[i];
+        const styleName = this.getStyleName();
+        const elements = document.getElementsByClassName(typeClass.replace('type', ''));
 
-    for (let _0x439204 in this['spriteDictionary'])
-      (this['hideSprite'](_0x439204),
-        this['spriteDictionary'][_0x439204]['classList']['add']('zoom'),
-        this['spriteDictionary'][_0x439204]['classList']['remove']('revealed'));
+        for (let j = 0; j < elements.length; j++) {
+          elements[j].classList.remove(typeClass.replace('type', styleName));
+        }
 
-    for (let _0x49565b in this['unguessedDict']) this['unguessedDict'][_0x49565b]['style']['display'] = ops['sDavH'];
-
-    for (let _0x125f9 in this.boxDict)
-      (this.boxDict[_0x125f9]['classList']['remove'](ops['ODzPx']),
-        this.boxDict[_0x125f9]['classList']['remove'](ops['add'](ops['ODzPx'], this['getStyleName']())));
-
-    (document['getElementById'](ops['eULOa'])['classList']['remove'](ops['ODzPx']),
-      document['getElementById'](ops['eULOa'])['classList']['remove']('outline' + this['getStyleName']()));
-
-    for (let _0x201d4b in this['unguessedDictionary'])
-      this['currentIds']['has'](_0x201d4b)
-        ? (this['unguessedDictionary'][_0x201d4b]['style']['display'] = ops['dyyYE'])
-        : (this['unguessedDictionary'][_0x201d4b]['style']['display'] = 'none');
-
-    (this['shinyEnabled']
-      ? ((this['spriteDictionary']['ditto']['src'] = this['encodedImages']['shiny']['ditto']),
-        (this['unguessedDict']['ditto']['getElementsByTagName']('img')[0x0]['src'] =
-          this['encodedImages']['shiny']['ditto']))
-      : ((this['spriteDictionary']['ditto']['src'] = this['encodedImages']['sprite']['ditto']),
-        (this['unguessedDict']['ditto']['getElementsByTagName']('img')[0x0]['src'] =
-          this['encodedImages']['sprite']['ditto'])),
-      this['onReset']());
-  }
-
-  ['setOrderMode'](_0x29dedc) {
-    ((this['orderMode'] = _0x29dedc),
-      (this['chaosMode'] = false),
-      _0x29dedc && (this['typeDisorder'] = false),
-      this['setQuiz'](this['name'], this['filters']));
-  }
-
-  ['setChaosMode'](_0x562b76) {
-    ((this['chaosMode'] = _0x562b76), (this['orderMode'] = false), this['setQuiz'](this['name'], this['filters']));
-  }
-
-  ['setTypeMode'](_0x50816b) {
-    ((this['typeDisorder'] = _0x50816b),
-      _0x50816b
-        ? (this['changeTypeStyle'](this['currentType']),
-          (this['currentType'] = this['getCurrentRandomType']()),
-          this['changeTypeStyle'](this['currentType']))
-        : (this['changeTypeStyle'](null), (this['currentType'] = null)));
-  }
-
-  ['checkHighestLang']() {
-    const ops = {
-      QILyi: 'ENG',
-      VlOYO: function (_0x10e1b6, _0x65e1c1) {
-        return _0x10e1b6 !== _0x65e1c1;
-      },
-      atBxN: function (_0x12413c, _0x249c35) {
-        return _0x12413c + _0x249c35;
-      },
-      iTgqf: function (_0x16521f, _0x21cd62) {
-        return _0x16521f > _0x21cd62;
-      },
-    };
-    let _0xbc322f = ops['QILyi'],
-      _0x49c4f9 = 0x0;
-    for (let _0x3cdf00 in this['langCounts'])
-      ops['iTgqf'](this['langCounts'][_0x3cdf00], _0x49c4f9) &&
-        ((_0x49c4f9 = this['langCounts'][_0x3cdf00]), (_0xbc322f = _0x3cdf00));
-    ops['VlOYO'](this['currentLang'], _0xbc322f) &&
-      (document['getElementById'](ops['atBxN']('missing-', _0xbc322f))['click'](), (this['currentLang'] = _0xbc322f));
-  }
-
-  ['getScore']() {
-    return this['named']['size'];
-  }
-
-  ['getMaxScore']() {
-    return this['currentBaseNames']['size'];
-  }
-
-  ['setGenQuiz'](_0xd6bcd9) {
-    const _0x3134c1 = {
-      Gvkae: 'Generation\x20',
-      pMRHU: function (_0x149280, _0x24e7d4) {
-        return _0x149280 + _0x24e7d4;
-      },
-      zDDmG: function (_0x21e485, _0x5367e4) {
-        return _0x21e485 === _0x5367e4;
-      },
-    };
-    let _0x51ce3e,
-      _0x1c8321 = {
-        boxes: this.genQuizBoxes[_0xd6bcd9['toString']()],
-      };
-    ((_0x51ce3e = _0x3134c1['zDDmG']('0', _0xd6bcd9) ? 'Full' : _0x3134c1['pMRHU'](_0x3134c1['Gvkae'], _0xd6bcd9)),
-      this['setQuiz'](_0x51ce3e, _0x1c8321));
-  }
-
-  ['setTypeQuiz'](_0x1a85b9) {
-    const _0x3aff23 = {
-      UNvbJ: '\x20type\x20',
-      hJyby: function (_0x252b07, _0xa55900) {
-        return _0x252b07 + _0xa55900;
-      },
-    };
-    let _0xba5ce8 = {
-      types: [_0x1a85b9],
-    };
-    this['setQuiz'](_0x3aff23['hJyby'](_0x1a85b9, _0x3aff23['UNvbJ']), _0xba5ce8);
-  }
-
-  ['setQuiz'](_0x144e1c, _0x5d90ad) {
-    const _0x5078f8 = {
-      Aeslo: 'legendary',
-      BrooJ: 'spritet',
-      CbBtS: 'body',
-      DWRwj: 'boxes',
-      DzBTL: function (_0x1d22fc, _0x816374) {
-        return _0x1d22fc < _0x816374;
-      },
-      FbxdF: function (_0x28a913, _0x46758f) {
-        return _0x28a913 + _0x46758f;
-      },
-      GcXYH: 'twothirds',
-      IGWsa: function (_0x55c113, _0x2a7e27) {
-        return _0x55c113 in _0x2a7e27;
-      },
-      ImeQX: function (_0x4f64c2, _0x23c58c) {
-        return _0x4f64c2(_0x23c58c);
-      },
-      LBAMA: function (_0x1a58ad, _0x5ccbcf) {
-        return _0x1a58ad in _0x5ccbcf;
-      },
-      MTaUj: function (_0x36eb33, _0x1b6ea3, _0x214603) {
-        return _0x36eb33(_0x1b6ea3, _0x214603);
-      },
-      NBUSm: 'gmax',
-      OtveJ: function (_0x2dc337, _0x4a5d57) {
-        return _0x2dc337 < _0x4a5d57;
-      },
-      PMIEl: 'block',
-      QKsth: 'blenddark',
-      RufvM: 'order-off',
-      TJhQK: function (_0x4c9e0e, _0x3c1bfc) {
-        return _0x4c9e0e - _0x3c1bfc;
-      },
-      TPNVV: 'Order\x20mode\x20disabled',
-      TYxwn: function (_0x199754, _0x5cb008) {
-        return _0x199754 < _0x5cb008;
-      },
-      VAbRf: 'type',
-      VJhQF: 'pokemon-box-unknown',
-      Wqogg: function (_0x257593, _0x45eb82) {
-        return _0x257593 === _0x45eb82;
-      },
-      WrBzB: function (_0x52f7e8, _0x2cc133) {
-        return _0x52f7e8 < _0x2cc133;
-      },
-      XJzyf: function (_0x3f056a, _0xb28f24) {
-        return _0x3f056a(_0xb28f24);
-      },
-      YCnPP: 'bgpattern2',
-      YTFBG: 'types',
-      YxFKd: 'button',
-      ZhpXO: function (_0x3c2610, _0x30776f) {
-        return _0x3c2610 < _0x30776f;
-      },
-      ZxhyI: 'region',
-      eXFIT: 'darumakagalar',
-      ecPxj: 'fifth',
-      fiAoV: 'none',
-      fqqFw: 'meowthalola',
-      hUFbO: 'unknownbox',
-      hXxrn: 'mega',
-      hzqDg: function (_0x2a0a29, _0x52ab61) {
-        return _0x2a0a29(_0x52ab61);
-      },
-      kPHDm: 'darumaka',
-      kwPTR: function (_0x33deff, _0x2c478d) {
-        return _0x33deff in _0x2c478d;
-      },
-      lLTyM: function (_0x457b4e, _0x2269de) {
-        return _0x457b4e + _0x2269de;
-      },
-      mPWLC: 'spritew',
-      mXFTu: 'bgpattern',
-      matlU: function (_0x35872a, _0x5c4a80) {
-        return _0x35872a + _0x5c4a80;
-      },
-      njchq: 'order-on',
-      rSBCM: function (_0x2805d6, _0x13e1c2) {
-        return _0x2805d6 === _0x13e1c2;
-      },
-      shQqX: 'persian',
-      skdDf: function (_0x4092e5, _0x5f37f3) {
-        return _0x4092e5 !== _0x5f37f3;
-      },
-      stqYi: function (_0x157da2, _0x473855) {
-        return _0x157da2 < _0x473855;
-      },
-      tTrZp: '/images/types/',
-      vZDmP: function (_0x208d4c, _0x162486) {
-        return _0x208d4c(_0x162486);
-      },
-      vorId: 'meowthgalar',
-      waspi: function (_0x38fa04, _0x133365) {
-        return _0x38fa04 < _0x133365;
-      },
-      xLTfB: function (_0x39951f, _0x2fb77a) {
-        return _0x39951f(_0x2fb77a);
-      },
-      yAwQa: 'dark',
-      zpNGx: 'persianalola',
-    };
-    if ((this['emptyBoxes'](), _0x5078f8['skdDf']('', this['getStyleName']()))) {
-      document['getElementById']('body')['classList']['remove'](this['getStyleName']());
-      for (let _0x6dba86 = 0x0; _0x5078f8['OtveJ'](_0x6dba86, typeClasses['length']); _0x6dba86++) {
-        let _0x4b528a = typeClasses[_0x6dba86],
-          _0x48bec7 = this['getStyleName'](),
-          _0x580d3e = document['getElementsByClassName'](_0x4b528a['replace']('type', ''));
-        _0x4b528a['replace']('type', '');
-        for (let _0x518e13 = 0x0; _0x518e13 < _0x580d3e['length']; _0x518e13++)
-          _0x580d3e[_0x518e13]['classList']['remove'](_0x4b528a['replace'](_0x5078f8['VAbRf'], _0x48bec7));
+        let buttons = document.getElementsByClassName('button');
+        for (let k = 0; k < buttons.length; k++) {
+          buttons[k].classList.remove(`button${this.getStyleName()}`);
+        }
       }
-      let _0x18ddee = document['getElementsByClassName']('button');
-      for (let _0x4ad350 = 0x0; _0x5078f8['WrBzB'](_0x4ad350, _0x18ddee['length']); _0x4ad350++)
-        _0x18ddee[_0x4ad350]['classList']['remove'](_0x5078f8['lLTyM'](_0x5078f8['YxFKd'], this['getStyleName']()));
     }
-    ((this['filters'] = _0x5d90ad), (this['currentType'] = null), (this['name'] = _0x144e1c));
-    let _0xc0787e = [];
-    ((this['typeChaosIds'] = new Set()),
-      (_0xc0787e = _0x5078f8['kwPTR'](_0x5078f8['DWRwj'], _0x5d90ad)
-        ? this['pokemon']['filter']((_0x58248e) => _0x5d90ad['boxes']['includes'](_0x58248e['box']))
-        : [...this['pokemon']]),
-      _0x5078f8['YTFBG'] in _0x5d90ad &&
-        ((_0xc0787e = _0xc0787e['filter']((_0x539e94) =>
-          _0x5d90ad['types']['some']((_0x20296c) => _0x539e94['isType'](_0x20296c)),
-        )),
-        this['orderMode'] &&
-          (_0x5078f8['XJzyf'](visualizeButtonClick, document['getElementById'](_0x5078f8['RufvM'])),
-          visualizeButtonUnclick(document['getElementById'](_0x5078f8['njchq'])),
-          (this['orderMode'] = false),
-          _0x5078f8['ImeQX'](showUserMessage, 'Order\x20mode\x20disabled'))),
-      _0x5078f8['IGWsa'](_0x5078f8['Aeslo'], _0x5d90ad) &&
-        ((_0xc0787e = _0xc0787e['filter']((_0x25919c) => _0x25919c['isLegendary']())),
-        this['orderMode'] &&
-          (_0x5078f8['vZDmP'](visualizeButtonClick, document['getElementById'](_0x5078f8['RufvM'])),
-          _0x5078f8['xLTfB'](visualizeButtonUnclick, document['getElementById'](_0x5078f8['njchq'])),
-          (this['orderMode'] = false),
-          showUserMessage(_0x5078f8['TPNVV']))));
-    for (let _0x2debba = 0x0; _0x5078f8['waspi'](_0x2debba, _0xc0787e['length']); _0x2debba++)
-      this['typeChaosIds']['add'](_0xc0787e[_0x2debba]['id']);
-    let _0x2fcfad = {},
-      _0x2fd0bf = [],
-      _0x39286b = 0x0;
-    for (; _0x39286b < _0xc0787e['length'] - 0x1; ) {
-      if (
-        _0x5078f8['Wqogg'](_0xc0787e[_0x39286b]['baseName'], _0xc0787e[_0x5078f8['FbxdF'](_0x39286b, 0x1)]['baseName'])
-      ) {
-        _0x2fcfad[_0xc0787e[_0x39286b]['id']] = [_0xc0787e[_0x39286b]['id']];
-        let _0x2d787a = 0x1;
-        for (
-          ;
-          _0x5078f8['OtveJ'](_0x39286b + _0x2d787a, _0xc0787e['length']) &&
-          _0xc0787e[_0x39286b]['baseName'] === _0xc0787e[_0x39286b + _0x2d787a]['baseName'];
-        )
-          (_0x2fd0bf['push'](_0x39286b + _0x2d787a),
-            _0x2fcfad[_0xc0787e[_0x39286b]['id']]['push'](_0xc0787e[_0x5078f8['FbxdF'](_0x39286b, _0x2d787a)]['id']),
-            (_0x2d787a += 0x1));
-        ((_0x2d787a -= 0x1), (_0x39286b += _0x2d787a));
+
+    this.filters = data;
+    this.currentType = null;
+    this.name = title;
+
+    let filteredPokemon;
+    this.typeChaosIds = new Set();
+
+    // Filter by boxes
+    if ('boxes' in data) {
+      filteredPokemon = this.pokemon.filter((p) => data.boxes.includes(p.box));
+    } else {
+      filteredPokemon = [...this.pokemon];
+    }
+
+    // Filter by typws
+    if ('types' in data) {
+      filteredPokemon = filteredPokemon.filter((p) => data.types.some((type) => p.isType(type)));
+
+      // Reset order mode
+      if (this.orderMode) {
+        const orderOff = document.getElementById('order-off');
+        const orderOn = document.getElementById('order-on');
+        visualizeButtonClick(orderOff);
+        visualizeButtonUnclick(orderOn);
+        this.orderMode = false;
+        showUserMessage('Order mode disabled');
       }
-      _0x39286b += 0x1;
     }
-    for (let _0xb50d2d = _0x5078f8['TJhQK'](_0x2fd0bf['length'], 0x1); _0xb50d2d >= 0x0; _0xb50d2d--)
-      _0xc0787e['splice'](_0x2fd0bf[_0xb50d2d], 0x1);
-    if (this['orderMode'] || _0x5078f8['Aeslo'] in this['filters'] || this['chaosMode']) {
-      let _0xc0748b = [],
-        _0x4b521d = _0xc0787e['map']((_0x34a409) => _0x34a409['id']);
-      new Set();
-      for (let _0x2cf30b = 0x0; _0x5078f8['WrBzB'](_0x2cf30b, _0xc0787e['length']); _0x2cf30b++)
-        if (this['orderMode']) {
-          if (
-            _0x5078f8['NBUSm'] === _0xc0787e[_0x2cf30b]['box'] ||
-            _0x5078f8['hXxrn'] === _0xc0787e[_0x2cf30b]['box']
-          ) {
+
+    // Filter by legendary status
+    if ('legendary' in data) {
+      filteredPokemon = filteredPokemon.filter((p) => p.isLegendary());
+
+      // Reset order mode
+      if (this.orderMode) {
+        const orderOff = document.getElementById('order-off');
+        const orderOn = document.getElementById('order-on');
+        visualizeButtonClick(orderOff);
+        visualizeButtonUnclick(orderOn);
+        this.orderMode = false;
+        showUserMessage('Order mode disabled');
+      }
+    }
+
+    // Add type chaos ids
+    for (let i = 0; i < filteredPokemon.length; i++) {
+      this.typeChaosIds.add(filteredPokemon[i].id);
+    }
+
+    // Regroup all pokemon of the same sprite cycle
+    let spriteCycles = {},
+      indices = [],
+      i = 0;
+    while (i < filteredPokemon.length - 1) {
+      if (filteredPokemon[i].baseName === filteredPokemon[i + 1].baseName) {
+        spriteCycles[filteredPokemon[i].id] = [filteredPokemon[i].id];
+        let j = 1;
+
+        while (i + j < filteredPokemon.length && filteredPokemon[i].baseName === filteredPokemon[i + j].baseName) {
+          indices.push(i + j);
+          spriteCycles[filteredPokemon[i].id].push(filteredPokemon[i + j].id);
+          j++;
+        }
+        j--;
+        i += j;
+      }
+      i++;
+    }
+
+    for (let i = indices.length - 1; i >= 0; i--) {
+      filteredPokemon.splice(indices[i], 1);
+    }
+
+    // Populate order mode and sprite cycles
+    if (this.orderMode || 'legendary' in this.filters || this.chaosMode) {
+      let filtered = [],
+        ids = filteredPokemon.map((pok) => pok.id);
+
+      for (let i = 0; i < filteredPokemon.length; i++) {
+        if (this.orderMode) {
+          // Filter out gmax and megas
+          if (filteredPokemon[i].box === 'gmax' || filteredPokemon[i].box === 'mega') {
             continue;
           }
-          let _0x2ebb0d = _0xc0787e[_0x2cf30b]['id'];
-          if (this['orderModeSet']['has'](_0x2ebb0d)) {
-            _0xc0748b['push'](_0xc0787e[_0x2cf30b]);
+
+          let pokemonId = filteredPokemon[i].id;
+
+          if (this.orderModeSet.has(pokemonId)) {
+            filtered.push(filteredPokemon[i]);
           } else {
-            let _0x41c0f0 = this['baseNameIdDict'][_0xc0787e[_0x2cf30b]['baseName']];
-            if (
-              (_0x5078f8['IGWsa'](_0x41c0f0, _0x2fcfad) || (_0x2fcfad[_0x41c0f0] = [_0x41c0f0]), _0x2ebb0d in _0x2fcfad)
-            ) {
-              for (let _0x3d37f7 = 0x0; _0x3d37f7 < _0x2fcfad[_0x2ebb0d]['length']; _0x3d37f7++)
-                _0x2fcfad[_0x41c0f0]['push'](_0x2fcfad[_0x2ebb0d][_0x3d37f7]);
+            let baseNameId = this.baseNameIdDict[filteredPokemon[i].baseName];
+            if (baseNameId in spriteCycles || pokemonId in spriteCycles) {
+              for (let j = 0; j < spriteCycles[pokemonId].length; j++) {
+                spriteCycles[baseNameId].push(spriteCycles[pokemonId][j]);
+              }
             } else {
-              _0x2fcfad[_0x41c0f0]['push'](_0x2ebb0d);
+              spriteCycles[baseNameId].push(pokemonId);
             }
           }
         } else {
-          let _0xd22c51 = _0xc0787e[_0x2cf30b]['id'],
-            _0x3022bd = this['baseNameIdDict'][_0xc0787e[_0x2cf30b]['baseName']];
-          if (this['orderModeSet']['has'](_0xd22c51) || !_0x4b521d['includes'](_0x3022bd)) {
-            _0xc0748b['push'](_0xc0787e[_0x2cf30b]);
+          let pokemonId = filteredPokemon[i].id,
+            baseNameId = this.baseNameIdDict[filteredPokemon[i].baseName];
+
+          if (this.orderModeSet.has(pokemonId) || !ids.includes(baseNameId)) {
+            filtered.push(filteredPokemon[i]);
           } else {
-            if ((_0x3022bd in _0x2fcfad || (_0x2fcfad[_0x3022bd] = [_0x3022bd]), _0xd22c51 in _0x2fcfad)) {
-              for (let _0x444cb9 = 0x0; _0x5078f8['waspi'](_0x444cb9, _0x2fcfad[_0xd22c51]['length']); _0x444cb9++)
-                _0x2fcfad[_0x3022bd]['push'](_0x2fcfad[_0xd22c51][_0x444cb9]);
+            if (baseNameId in spriteCycles || pokemonId in spriteCycles) {
+              for (let j = 0; j < spriteCycles[pokemonId].length; j++) {
+                spriteCycles[baseNameId].push(spriteCycles[pokemonId][j]);
+              }
             } else {
-              _0x2fcfad[_0x3022bd]['push'](_0xd22c51);
+              spriteCycles[baseNameId].push(pokemonId);
             }
           }
         }
-      ((_0xc0787e = _0xc0748b),
-        _0x5078f8['kPHDm'] in _0x2fcfad &&
-          (_0x2fcfad['darumaka'] = ['darumaka', _0x5078f8['kPHDm'], _0x5078f8['eXFIT'], 'darumakagalar']),
-        'meowth' in _0x2fcfad &&
-          _0x2fcfad['meowth']['includes']('meowthalola') &&
-          _0x2fcfad['meowth']['includes']('meowthgalar') &&
-          (_0x2fcfad['meowth'] = ['meowth', _0x5078f8['fqqFw'], _0x5078f8['vorId']]),
-        _0x5078f8['shQqX'] in _0x2fcfad &&
-          _0x2fcfad['persian']['includes'](_0x5078f8['zpNGx']) &&
-          (_0x2fcfad['persian'] = ['persian', 'persianalola', 'persian']));
-    }
-    if (
-      ((this['spriteCycles'] = _0x2fcfad),
-      (this['currentBaseNames'] = new Set()),
-      (this['currentIds'] = new Set()),
-      (this['currentBoxes'] = {}),
-      (this['currentPokemonList'] = _0xc0787e),
-      this['typeDisorder'] ? (this['currentType'] = this['getCurrentRandomType']()) : (this['currentType'] = null),
-      this['chaosMode'] || this['orderMode'])
-    ) {
-      for (let _0x4f601d = 0x0; _0x4f601d < _0xc0787e['length']; _0x4f601d++)
-        _0xc0787e[_0x4f601d]['currentBox'] = 'big';
-    } else {
-      if ('legendary' in _0x5d90ad) {
-        for (let _0x188b2c = 0x0; _0x188b2c < _0xc0787e['length']; _0x188b2c++)
-          _0xc0787e[_0x188b2c]['currentBox'] = _0xc0787e[_0x188b2c]['legendary'];
-      } else {
-        for (let _0x2a0e9b = 0x0; _0x5078f8['TYxwn'](_0x2a0e9b, _0xc0787e['length']); _0x2a0e9b++)
-          _0xc0787e[_0x2a0e9b]['currentBox'] = _0xc0787e[_0x2a0e9b]['box'];
+
+        filteredPokemon = filtered;
+        if ('darumaka' in spriteCycles) {
+          spriteCycles.darumaka = ['darumaka', 'darumaka', 'darumakagalar', 'darumakagalar'];
+        }
+        if (
+          'meowth' in spriteCycles &&
+          spriteCycles.meowth.includes('meowthalola') &&
+          spriteCycles.meowth.includes('meowthgalar')
+        ) {
+          spriteCycles.meowth = ['meowth', 'meowthalola', 'meowthgalar'];
+        }
+        if ('persian' in spriteCycles && spriteCycles.persian.includes('persianalola')) {
+          spriteCycles.persian = ['persian', 'persianalola', 'persiangalar'];
+        }
       }
     }
-    for (let _0x17fc41 = 0x0; _0x17fc41 < _0xc0787e['length']; _0x17fc41++)
-      (this['currentBaseNames']['add'](_0xc0787e[_0x17fc41]['baseName']),
-        this['currentIds']['add'](_0xc0787e[_0x17fc41]['id']),
-        _0xc0787e[_0x17fc41]['currentBox'] in this['currentBoxes'] ||
-          (this['currentBoxes'][_0xc0787e[_0x17fc41]['currentBox']] = []),
-        this['currentBoxes'][_0xc0787e[_0x17fc41]['currentBox']]['push'](_0xc0787e[_0x17fc41]));
-    'types' in this['filters'] &&
-      ('dark' === this['filters']['types'][0x0]
+
+    if (
+      ((this['spriteCycles'] = spriteCycles),
+      (this.currentBaseNames = new Set()),
+      (this.currentIds = new Set()),
+      (this['currentBoxes'] = {}),
+      (this['currentPokemonList'] = filteredPokemon),
+      this['typeDisorder'] ? (this['currentType'] = this['getCurrentRandomType']()) : (this['currentType'] = null),
+      this.chaosMode || this.orderMode)
+    ) {
+      for (let _0x4f601d = 0x0; _0x4f601d < filteredPokemon.length; _0x4f601d++)
+        filteredPokemon[_0x4f601d]['currentBox'] = 'big';
+    } else {
+      if ('legendary' in data) {
+        for (let _0x188b2c = 0x0; _0x188b2c < filteredPokemon.length; _0x188b2c++)
+          filteredPokemon[_0x188b2c]['currentBox'] = filteredPokemon[_0x188b2c]['legendary'];
+      } else {
+        for (let _0x2a0e9b = 0x0; consts['lt2'](_0x2a0e9b, filteredPokemon.length); _0x2a0e9b++)
+          filteredPokemon[_0x2a0e9b]['currentBox'] = filteredPokemon[_0x2a0e9b]['box'];
+      }
+    }
+
+    for (let _0x17fc41 = 0x0; _0x17fc41 < filteredPokemon.length; _0x17fc41++)
+      (this.currentBaseNames['add'](filteredPokemon[_0x17fc41].baseName),
+        this.currentIds['add'](filteredPokemon[_0x17fc41].id),
+        filteredPokemon[_0x17fc41]['currentBox'] in this['currentBoxes'] ||
+          (this['currentBoxes'][filteredPokemon[_0x17fc41]['currentBox']] = []),
+        this['currentBoxes'][filteredPokemon[_0x17fc41]['currentBox']].push(filteredPokemon[_0x17fc41]));
+
+    'types' in this.filters &&
+      ('dark' === this.filters['types'][0x0]
         ? (this['currentType'] = 'evil')
-        : (this['currentType'] = this['filters']['types'][0x0]));
-    for (let _0x3e0f96 in this['unguessedDictionary'])
-      _0x3e0f96 in this['currentIds']
-        ? (this['unguessedDictionary'][_0x3e0f96]['style']['display'] = 'inline')
-        : (this['unguessedDictionary'][_0x3e0f96]['style']['display'] = _0x5078f8['fiAoV']);
+        : (this['currentType'] = this.filters['types'][0x0]));
+
+    for (let _0x3e0f96 in this.unguessedDictionary)
+      _0x3e0f96 in this.currentIds
+        ? (this.unguessedDictionary[_0x3e0f96]['style']['display'] = 'inline')
+        : (this.unguessedDictionary[_0x3e0f96]['style']['display'] = consts['none']);
+
     for (let _0x25182b in this.boxDict)
       _0x25182b in this['currentBoxes']
         ? (this.boxDict[_0x25182b]['style']['display'] = 'block')
         : (this.boxDict[_0x25182b]['style']['display'] = 'none');
+
     for (let _0x5c6dca in this['currentBoxes'])
-      _0x5078f8['rSBCM']('Full', this['name'])
-        ? regionToAll(document['getElementById']('region' + _0x5c6dca))
-        : _0x5078f8['hzqDg'](regionToSingle, document['getElementById'](_0x5078f8['ZxhyI'] + _0x5c6dca));
+      consts['equals2']('Full', this['name'])
+        ? regionToAll(document.getElementById('region' + _0x5c6dca))
+        : consts['callf3'](regionToSingle, document.getElementById(consts['region'] + _0x5c6dca));
+
     if ((this['updateLanguages'](this['enabledLanguages']), 'Full' === this['name'])) {
-      for (let _0x18eefa in this['currentBoxes'])
-        regionToAll(document['getElementById'](_0x5078f8['ZxhyI'] + _0x18eefa));
-      document['getElementById'](_0x5078f8['VJhQF'])['classList']['remove'](_0x5078f8['hUFbO']);
-      for (let _0x3f1e94 = 0x0; _0x5078f8['stqYi'](_0x3f1e94, this['allSprites']['length']); _0x3f1e94++)
+      for (let _0x18eefa in this['currentBoxes']) regionToAll(document.getElementById(consts['region'] + _0x18eefa));
+      document.getElementById(consts['unknown']).classList.remove(consts['unknownBox']);
+      for (let _0x3f1e94 = 0x0; consts['lt5'](_0x3f1e94, this['allSprites']['length']); _0x3f1e94++)
         (this['allSprites'][_0x3f1e94]['classList']['add']('sprite'),
-          this['allSprites'][_0x3f1e94]['classList']['remove'](_0x5078f8['mPWLC']),
-          this['allSprites'][_0x3f1e94]['classList']['remove'](_0x5078f8['BrooJ']));
-      for (let _0x597312 = 0x0; _0x5078f8['OtveJ'](_0x597312, pokecolumns['length']); _0x597312++)
+          this['allSprites'][_0x3f1e94].classList.remove(consts['spritew']),
+          this['allSprites'][_0x3f1e94].classList.remove(consts['spritet']));
+      for (let _0x597312 = 0x0; consts['lt'](_0x597312, pokecolumns['length']); _0x597312++)
         (pokecolumns[_0x597312]['classList']['add']('fifth'),
-          pokecolumns[_0x597312]['classList']['remove'](_0x5078f8['GcXYH']));
+          pokecolumns[_0x597312].classList.remove(consts['twothirds']));
     } else {
-      if (this['name']['includes']('eneration')) {
+      if (this['name'].includes('eneration')) {
         for (let _0x477dbd in this['currentBoxes'])
-          _0x5078f8['xLTfB'](regionToSingle, document['getElementById'](_0x5078f8['ZxhyI'] + _0x477dbd));
-        document['getElementById'](_0x5078f8['VJhQF'])['classList']['add']('unknownbox');
-        for (let _0x4475d1 = 0x0; _0x5078f8['ZhpXO'](_0x4475d1, this['allSprites']['length']); _0x4475d1++)
-          (this['allSprites'][_0x4475d1]['classList']['add'](_0x5078f8['mPWLC']),
-            this['allSprites'][_0x4475d1]['classList']['remove']('sprite'),
-            this['allSprites'][_0x4475d1]['classList']['remove']('spritet'));
-        for (let _0x1aec35 = 0x0; _0x5078f8['waspi'](_0x1aec35, pokecolumns['length']); _0x1aec35++)
-          (pokecolumns[_0x1aec35]['classList']['remove'](_0x5078f8['ecPxj']),
-            pokecolumns[_0x1aec35]['classList']['add'](_0x5078f8['GcXYH']));
+          consts['call3'](regionToSingle, document.getElementById(consts['region'] + _0x477dbd));
+        document.getElementById(consts['unknown'])['classList']['add']('unknownbox');
+        for (let _0x4475d1 = 0x0; consts['lt4'](_0x4475d1, this['allSprites']['length']); _0x4475d1++)
+          (this['allSprites'][_0x4475d1]['classList']['add'](consts['spritew']),
+            this['allSprites'][_0x4475d1].classList.remove('sprite'),
+            this['allSprites'][_0x4475d1].classList.remove('spritet'));
+        for (let _0x1aec35 = 0x0; consts['lt6'](_0x1aec35, pokecolumns['length']); _0x1aec35++)
+          (pokecolumns[_0x1aec35].classList.remove(consts['fifth']),
+            pokecolumns[_0x1aec35]['classList']['add'](consts['twothirds']));
       } else {
-        document['getElementById'](_0x5078f8['VJhQF'])['classList']['remove']('unknownbox');
+        document.getElementById(consts['unknown']).classList.remove('unknownbox');
         for (let _0xf9d30 in this['currentBoxes'])
-          regionToSingle(document['getElementById'](_0x5078f8['lLTyM']('region', _0xf9d30)));
-        for (let _0x1a9c3e = 0x0; _0x5078f8['stqYi'](_0x1a9c3e, pokecolumns['length']); _0x1a9c3e++)
-          (pokecolumns[_0x1a9c3e]['classList']['add'](_0x5078f8['ecPxj']),
-            pokecolumns[_0x1a9c3e]['classList']['remove'](_0x5078f8['GcXYH']));
+          regionToSingle(document.getElementById(consts['add2']('region', _0xf9d30)));
+        for (let _0x1a9c3e = 0x0; consts['lt5'](_0x1a9c3e, pokecolumns['length']); _0x1a9c3e++)
+          (pokecolumns[_0x1a9c3e]['classList']['add'](consts['fifth']),
+            pokecolumns[_0x1a9c3e].classList.remove(consts['twothirds']));
         for (let _0x4f3e86 = 0x0; _0x4f3e86 < this['allSprites']['length']; _0x4f3e86++)
-          (this['allSprites'][_0x4f3e86]['classList']['add'](_0x5078f8['BrooJ']),
-            this['allSprites'][_0x4f3e86]['classList']['remove'](_0x5078f8['mPWLC']),
-            this['allSprites'][_0x4f3e86]['classList']['remove']('sprite'));
+          (this['allSprites'][_0x4f3e86]['classList']['add'](consts['spritet']),
+            this['allSprites'][_0x4f3e86].classList.remove(consts['spritew']),
+            this['allSprites'][_0x4f3e86].classList.remove('sprite'));
       }
     }
-    if (_0x5078f8['YTFBG'] in _0x5d90ad || _0x5078f8['LBAMA']('legendary', _0x5d90ad) || this['typeDisorder']) {
-      (document['getElementById']('body')['classList']['add'](this['getStyleName']()),
+    if (consts['types'] in data || consts['inside']('legendary', data) || this['typeDisorder']) {
+      (document.getElementById('body')['classList']['add'](this.getStyleName()),
         darkMode
-          ? document['getElementById'](_0x5078f8['CbBtS'])['classList']['add'](_0x5078f8['QKsth'])
-          : document['getElementById']('body')['classList']['add']('blend'));
+          ? document.getElementById(consts['body'])['classList']['add'](consts['blenddark'])
+          : document.getElementById('body')['classList']['add']('blend'));
       for (let _0x457b25 = 0x0; _0x457b25 < typeClasses['length']; _0x457b25++) {
         let _0x41a499 = typeClasses[_0x457b25];
-        if (_0x41a499['includes'](_0x5078f8['yAwQa']) && !darkMode) {
+        if (_0x41a499.includes(consts['dark']) && !darkMode) {
           continue;
         }
         let _0x3a95bb = document['getElementsByClassName'](_0x41a499['replace']('type', ''));
-        for (let _0x3d65ba = 0x0; _0x5078f8['DzBTL'](_0x3d65ba, _0x3a95bb['length']); _0x3d65ba++)
-          _0x3a95bb[_0x3d65ba]['classList']['add'](_0x41a499['replace'](_0x5078f8['VAbRf'], this['getStyleName']()));
+        for (let _0x3d65ba = 0x0; consts['lessThan'](_0x3d65ba, _0x3a95bb['length']); _0x3d65ba++)
+          _0x3a95bb[_0x3d65ba]['classList']['add'](_0x41a499['replace'](consts['type'], this.getStyleName()));
       }
       let _0xf9efb4 = document['getElementsByClassName']('button');
       for (let _0x2c5cb5 = 0x0; _0x2c5cb5 < _0xf9efb4['length']; _0x2c5cb5++)
-        _0xf9efb4[_0x2c5cb5]['classList']['add'](_0x5078f8['YxFKd'] + this['getStyleName']());
-      let _0x2b43a1 = this['getStyleName']()['toUpperCase']();
+        _0xf9efb4[_0x2c5cb5]['classList']['add'](consts['button'] + this.getStyleName());
+      let _0x2b43a1 = this.getStyleName()['toUpperCase']();
       ('EVIL' === _0x2b43a1 && (_0x2b43a1 = 'DARK'),
-        (document['getElementById']('bgpattern')['style']['display'] = _0x5078f8['PMIEl']),
-        (document['getElementById'](_0x5078f8['YCnPP'])['style']['display'] = _0x5078f8['PMIEl']),
-        (document['getElementById']('bgpattern2')['src'] = '/images/types/' + _0x2b43a1 + '.svg'),
-        (document['getElementById'](_0x5078f8['YCnPP'])['src'] = _0x5078f8['matlU'](
-          _0x5078f8['FbxdF'](_0x5078f8['tTrZp'], _0x2b43a1),
+        (document.getElementById('bgpattern')['style']['display'] = consts['block']),
+        (document.getElementById(consts['bgpattern2'])['style']['display'] = consts['block']),
+        (document.getElementById('bgpattern2')['src'] = '/images/types/' + _0x2b43a1 + '.svg'),
+        (document.getElementById(consts['bgpattern2'])['src'] = consts['add3'](
+          consts['add'](consts['imagesTypes'], _0x2b43a1),
           '.svg',
         )),
-        (document['getElementById']('bgpattern')['style']['opacity'] = 0x0),
-        _0x5078f8['MTaUj'](
+        (document.getElementById('bgpattern')['style']['opacity'] = 0x0),
+        consts['callf'](
           setTimeout,
           () => {
-            ((document['getElementById']('bgpattern')['src'] = _0x5078f8['lLTyM'](
-              _0x5078f8['tTrZp'] + _0x2b43a1,
-              '.svg',
-            )),
-              (document['getElementById'](_0x5078f8['mXFTu'])['style']['opacity'] = 0x1));
+            ((document.getElementById('bgpattern')['src'] = consts['add2'](consts['imagesTypes'] + _0x2b43a1, '.svg')),
+              (document.getElementById(consts['bgpattern'])['style']['opacity'] = 0x1));
           },
           0xfa,
         ));
     } else {
-      (document['getElementById'](_0x5078f8['CbBtS'])['classList']['remove']('blend'),
-        document['getElementById']('body')['classList']['remove']('blenddark'),
-        (document['getElementById'](_0x5078f8['mXFTu'])['style']['display'] = _0x5078f8['fiAoV']),
-        (document['getElementById']('bgpattern2')['style']['display'] = _0x5078f8['fiAoV']));
+      (document.getElementById(consts['body']).classList.remove('blend'),
+        document.getElementById('body').classList.remove('blenddark'),
+        (document.getElementById(consts['bgpattern'])['style']['display'] = consts['none']),
+        (document.getElementById('bgpattern2')['style']['display'] = consts['none']));
     }
     (this['moveBoxes'](), this['resetCurrentSprites'](), this['reset']());
   }
@@ -633,29 +625,29 @@ class Quiz {
     if (
       (null !== _0x584e89 && (_0x584e89 = _0x584e89['toLowerCase']()),
       _0x5bee86['zlGUz']('dark', _0x584e89) && (_0x584e89 = 'evil'),
-      _0x5bee86['yTSmE']('', this['getStyleName']()))
+      _0x5bee86['yTSmE']('', this.getStyleName()))
     ) {
-      document['getElementById']('body')['classList']['remove'](this['getStyleName']());
+      document.getElementById('body').classList.remove(this.getStyleName());
       for (let _0x21b19f = 0x0; _0x5bee86['sSCSc'](_0x21b19f, typeClasses['length']); _0x21b19f++) {
         let _0x10e8e1 = typeClasses[_0x21b19f],
-          _0x2faf98 = this['getStyleName'](),
+          _0x2faf98 = this.getStyleName(),
           _0x2d3530 = document['getElementsByClassName'](_0x10e8e1['replace']('type', ''));
         _0x10e8e1['replace'](_0x5bee86['gNQRg'], '');
         for (let _0x56b6b7 = 0x0; _0x56b6b7 < _0x2d3530['length']; _0x56b6b7++)
-          _0x2d3530[_0x56b6b7]['classList']['remove'](_0x10e8e1['replace']('type', _0x2faf98));
+          _0x2d3530[_0x56b6b7].classList.remove(_0x10e8e1['replace']('type', _0x2faf98));
       }
       let _0x24373c = document['getElementsByClassName']('button');
       for (let _0x57f06b = 0x0; _0x57f06b < _0x24373c['length']; _0x57f06b++)
-        _0x24373c[_0x57f06b]['classList']['remove'](_0x5bee86['vQpZZ'](_0x5bee86['zBrdv'], this['getStyleName']()));
+        _0x24373c[_0x57f06b].classList.remove(_0x5bee86['vQpZZ'](_0x5bee86['zBrdv'], this.getStyleName()));
     }
     if (_0x5bee86['YHQIl'](null, _0x584e89)) {
-      (document['getElementById'](_0x5bee86['QetUa'])['classList']['add'](_0x584e89),
+      (document.getElementById(_0x5bee86['QetUa'])['classList']['add'](_0x584e89),
         darkMode
-          ? document['getElementById']('body')['classList']['add'](_0x5bee86['tZtKU'])
-          : document['getElementById']('body')['classList']['add'](_0x5bee86['DRJTL']));
+          ? document.getElementById('body')['classList']['add'](_0x5bee86['tZtKU'])
+          : document.getElementById('body')['classList']['add'](_0x5bee86['DRJTL']));
       for (let _0xd0fbb5 = 0x0; _0x5bee86['sSCSc'](_0xd0fbb5, typeClasses['length']); _0xd0fbb5++) {
         let _0x62c04a = typeClasses[_0xd0fbb5];
-        if (_0x62c04a['includes'](_0x5bee86['yPCCL']) && !darkMode) {
+        if (_0x62c04a.includes(_0x5bee86['yPCCL']) && !darkMode) {
           continue;
         }
         let _0x100571 = document['getElementsByClassName'](_0x62c04a['replace']('type', ''));
@@ -667,25 +659,25 @@ class Quiz {
         _0x42bcb3[_0x5dec58]['classList']['add'](_0x5bee86['vQpZZ'](_0x5bee86['zBrdv'], _0x584e89));
       let _0x32624d = _0x584e89['toUpperCase']();
       (_0x5bee86['DbDqh'] === _0x32624d && (_0x32624d = _0x5bee86['sDQLq']),
-        (document['getElementById'](_0x5bee86['XrEow'])['style']['display'] = 'block'),
-        (document['getElementById']('bgpattern2')['style']['display'] = 'block'),
-        (document['getElementById'](_0x5bee86['jbOgR'])['src'] = _0x5bee86['vQpZZ'](
+        (document.getElementById(_0x5bee86['XrEow'])['style']['display'] = 'block'),
+        (document.getElementById('bgpattern2')['style']['display'] = 'block'),
+        (document.getElementById(_0x5bee86['jbOgR'])['src'] = _0x5bee86['vQpZZ'](
           _0x5bee86['fwPmU'] + _0x32624d,
           _0x5bee86['PghZp'],
         )),
-        (document['getElementById']('bgpattern2')['src'] =
+        (document.getElementById('bgpattern2')['src'] =
           _0x5bee86['vQpZZ']('/images/types/', _0x32624d) + _0x5bee86['PghZp']),
-        (document['getElementById'](_0x5bee86['XrEow'])['style']['opacity'] = 0x0),
+        (document.getElementById(_0x5bee86['XrEow'])['style']['opacity'] = 0x0),
         setTimeout(() => {
-          ((document['getElementById']('bgpattern')['src'] = _0x5bee86['fwPmU'] + _0x32624d + _0x5bee86['PghZp']),
-            (document['getElementById']('bgpattern')['style']['opacity'] = 0x1));
+          ((document.getElementById('bgpattern')['src'] = _0x5bee86['fwPmU'] + _0x32624d + _0x5bee86['PghZp']),
+            (document.getElementById('bgpattern')['style']['opacity'] = 0x1));
         }, 0xfa),
         'evil' === _0x584e89['toLowerCase']() && (_0x584e89 = _0x5bee86['yPCCL']));
     } else {
-      (document['getElementById'](_0x5bee86['QetUa'])['classList']['remove'](_0x5bee86['DRJTL']),
-        document['getElementById']('body')['classList']['remove']('blenddark'),
-        (document['getElementById']('bgpattern')['style']['display'] = 'none'),
-        (document['getElementById']('bgpattern2')['style']['display'] = 'none'));
+      (document.getElementById(_0x5bee86['QetUa']).classList.remove(_0x5bee86['DRJTL']),
+        document.getElementById('body').classList.remove('blenddark'),
+        (document.getElementById('bgpattern')['style']['display'] = 'none'),
+        (document.getElementById('bgpattern2')['style']['display'] = 'none'));
     }
     this['currentType'] = _0x584e89;
   }
@@ -718,7 +710,7 @@ class Quiz {
       for (let _0x446a21 = 0x0; _0x446a21 < _0x7dab2f['length']; _0x446a21++)
         boxDict[_0x115998['currentBox']]['appendChild'](_0x7dab2f[_0x446a21]);
     }
-    document['getElementById']('regionbig')['innerText'] = '';
+    document.getElementById('regionbig')['innerText'] = '';
   }
 
   ['getStyleName']() {
@@ -737,11 +729,11 @@ class Quiz {
       ? 'dark' === this['currentType']
         ? _0x3df728['qZXtD']
         : this['currentType']
-      : _0x3df728['bzedH'](_0x3df728['FEcpk'], this['filters'])
-        ? 'dark' === this['filters']['types'][0x0]
+      : _0x3df728['bzedH'](_0x3df728['FEcpk'], this.filters)
+        ? 'dark' === this.filters['types'][0x0]
           ? _0x3df728['qZXtD']
-          : this['filters']['types'][0x0]
-        : _0x3df728['aEDnP'] in this['filters']
+          : this.filters['types'][0x0]
+        : _0x3df728['aEDnP'] in this.filters
           ? 'special'
           : '';
   }
@@ -770,18 +762,18 @@ class Quiz {
     };
     for (let _0x4d1f32 in this['pokemonIdDict']) {
       let _0x31f342 = this['pokemonIdDict'][_0x4d1f32],
-        _0x47f864 = this['translations'][_0x31f342['baseName']],
+        _0x47f864 = this['translations'][_0x31f342.baseName],
         _0x1eed83 = null;
-      if (_0x1ab701['dodMR'](_0x31f342['id'], this['namings'])) {
+      if (_0x1ab701['dodMR'](_0x31f342.id, this['namings'])) {
         _0x1eed83 = {};
         for (let _0x3d524d in _0x47f864)
-          _0x1eed83[_0x3d524d] = _0x1ab701['JlBgy'](_0x47f864[_0x3d524d], this['namings'][_0x31f342['id']]);
+          _0x1eed83[_0x3d524d] = _0x1ab701['JlBgy'](_0x47f864[_0x3d524d], this['namings'][_0x31f342.id]);
       } else {
         for (let _0x142c0f in this['suffixes'])
-          if (_0x31f342['id']['endsWith'](_0x142c0f)) {
+          if (_0x31f342.id['endsWith'](_0x142c0f)) {
             if (
               _0x1ab701['duWqw'](
-                _0x31f342['id']['substring'](0x0, _0x1ab701['UPDnw'](_0x31f342['id']['length'], _0x142c0f['length'])),
+                _0x31f342.id['substring'](0x0, _0x1ab701['UPDnw'](_0x31f342.id['length'], _0x142c0f['length'])),
                 this['pokemonBaseNameDict'],
               )
             ) {
@@ -796,7 +788,7 @@ class Quiz {
         _0x1eed83 = {};
         for (let _0x3199a9 in _0x47f864) _0x1eed83[_0x3199a9] = _0x47f864[_0x3199a9];
       }
-      if (_0x1ab701['LtnnN']('nidoranm', _0x31f342['baseName']) || _0x1ab701['yLgtS'] === _0x31f342['baseName']) {
+      if (_0x1ab701['LtnnN']('nidoranm', _0x31f342.baseName) || _0x1ab701['yLgtS'] === _0x31f342.baseName) {
         for (let _0xdd5fb7 in _0x1eed83)
           (_0x1eed83[_0xdd5fb7]['endsWith']('m') || _0x1eed83[_0xdd5fb7]['endsWith']('f')) &&
             (_0x1eed83[_0xdd5fb7] = _0x1eed83[_0xdd5fb7]['substring'](
@@ -825,18 +817,18 @@ class Quiz {
       (this['currentLangsNames'] = new Set()),
       (this['nameDict'] = {}),
       (this['nameArr'] = []));
-    for (let _0x418ad7 of this['currentIds'])
+    for (let _0x418ad7 of this.currentIds)
       for (let _0x459452 = 0x0; _0x32c7ec['kJyCw'](_0x459452, _0x888110['length']); _0x459452++) {
         let _0x47a8d4 = _0x888110[_0x459452];
         this['currentLangsNames']['add'](
-          standardizeName(this['translations'][this['pokemonIdDict'][_0x418ad7]['baseName']][_0x47a8d4]),
+          standardizeName(this['translations'][this['pokemonIdDict'][_0x418ad7].baseName][_0x47a8d4]),
         );
       }
     for (let _0x2893ac = 0x0; _0x32c7ec['kJyCw'](_0x2893ac, this['pokemon']['length']); _0x2893ac++)
       for (let _0x3ece75 = 0x0; _0x3ece75 < this['enabledLanguages']['length']; _0x3ece75++) {
         let _0x5eeb70 = this['enabledLanguages'][_0x3ece75],
-          _0x3cda60 = standardizeName(this['translations'][this['pokemon'][_0x2893ac]['baseName']][_0x5eeb70]);
-        ((this['nameDict'][_0x3cda60] = this['pokemon'][_0x2893ac]['id']), this['nameArr']['push'](_0x3cda60));
+          _0x3cda60 = standardizeName(this['translations'][this['pokemon'][_0x2893ac].baseName][_0x5eeb70]);
+        ((this['nameDict'][_0x3cda60] = this['pokemon'][_0x2893ac].id), this['nameArr'].push(_0x3cda60));
       }
   }
 
@@ -853,17 +845,13 @@ class Quiz {
     for (let _0x3ccfeb = 0x0; _0x3deb73['LNpHb'](_0x3ccfeb, this['pokemon']['length']); _0x3ccfeb++)
       for (let _0x3144bc = 0x0; _0x3deb73['LNpHb'](_0x3144bc, this.allLanguages['length']); _0x3144bc++) {
         let _0x354701 = this.allLanguages[_0x3144bc];
-        _0x3deb73['EvQKH'](standardizeName, this['translations'][this['pokemon'][_0x3ccfeb]['baseName']]['ENG']) ===
-        _0x3deb73['EvQKH'](standardizeName, this['translations'][this['pokemon'][_0x3ccfeb]['baseName']][_0x354701])
+        _0x3deb73['EvQKH'](standardizeName, this['translations'][this['pokemon'][_0x3ccfeb].baseName]['ENG']) ===
+        _0x3deb73['EvQKH'](standardizeName, this['translations'][this['pokemon'][_0x3ccfeb].baseName][_0x354701])
           ? (this['langDict'][
-              _0x3deb73['EvQKH'](
-                standardizeName,
-                this['translations'][this['pokemon'][_0x3ccfeb]['baseName']][_0x354701],
-              )
+              _0x3deb73['EvQKH'](standardizeName, this['translations'][this['pokemon'][_0x3ccfeb].baseName][_0x354701])
             ] = _0x3deb73['afCCt'])
-          : (this['langDict'][
-              standardizeName(this['translations'][this['pokemon'][_0x3ccfeb]['baseName']][_0x354701])
-            ] = _0x354701);
+          : (this['langDict'][standardizeName(this['translations'][this['pokemon'][_0x3ccfeb].baseName][_0x354701])] =
+              _0x354701);
       }
   }
 
@@ -900,7 +888,7 @@ class Quiz {
           'none',
           this['allSprites'][_0x308332]['parentElement']['parentElement']['style']['display'],
         ) &&
-        _0x18dede['push'](this['allSprites'][_0x308332]);
+        _0x18dede.push(this['allSprites'][_0x308332]);
     let _0xdd85d1,
       _0x1ccff6 = randomIntFromInterval(0x0, _0x274b76['qSnpZ'](_0x18dede['length'], 0x1)),
       _0xd6baa1 = _0x18dede[_0x1ccff6]['src'],
@@ -959,7 +947,7 @@ class Quiz {
                 _0x5a5a3a['eDkqO'],
                 this['allSprites'][_0x130239]['parentElement']['parentElement']['style']['display'],
               ) &&
-              _0x563e11['push'](this['allSprites'][_0x130239]);
+              _0x563e11.push(this['allSprites'][_0x130239]);
           if (_0x563e11['length'] < 0x1) {
             _0x5a5a3a['FybWz'](
               setTimeout,
@@ -994,9 +982,9 @@ class Quiz {
                       let _0x5297a4 = new Audio(_0x5a5a3a['HmclW']);
                       ((_0x5297a4['volume'] = 0.2),
                         _0x5297a4['play'](),
-                        (document['getElementById']('spooky')['style']['display'] = _0x5a5a3a['bvvae']));
+                        (document.getElementById('spooky')['style']['display'] = _0x5a5a3a['bvvae']));
                     }
-                    (soundEnabled || (document['getElementById'](_0x5a5a3a['YaFkU'])['style']['display'] = 'block'),
+                    (soundEnabled || (document.getElementById(_0x5a5a3a['YaFkU'])['style']['display'] = 'block'),
                       _0x5daa11['startSpooky']());
                   }
                 },
@@ -1065,16 +1053,16 @@ class Quiz {
       ((_0x196a36['KislN'](_0x196a36['XntIL'], (_0x3102a5 = _0x3102a5['toLowerCase']())) &&
         _0x196a36['KislN'](_0x3102a5, 'ニドラン'['toLowerCase']()) &&
         _0x196a36['KislN'](_0x3102a5, '니드런'['toLowerCase']())) ||
-        (this['orderMode']
-          ? this['named']['has']('nidoranf')
-            ? (_0x29065c['push'](_0x196a36['lClBG']), _0x29065c['push']('ニドランm'), _0x29065c['push']('니드런m'))
-            : (_0x29065c['push']('nidoranf'), _0x29065c['push']('ニドランf'), _0x29065c['push']('니드런f'))
-          : (_0x29065c['push'](_0x196a36['TwEqg']),
-            _0x29065c['push']('ニドランf'),
-            _0x29065c['push']('니드런f'),
-            _0x29065c['push']('nidoranm'),
-            _0x29065c['push'](_0x196a36['kfvif']),
-            _0x29065c['push']('니드런m'))),
+        (this.orderMode
+          ? this.named.has('nidoranf')
+            ? (_0x29065c.push(_0x196a36['lClBG']), _0x29065c.push('ニドランm'), _0x29065c.push('니드런m'))
+            : (_0x29065c.push('nidoranf'), _0x29065c.push('ニドランf'), _0x29065c.push('니드런f'))
+          : (_0x29065c.push(_0x196a36['TwEqg']),
+            _0x29065c.push('ニドランf'),
+            _0x29065c.push('니드런f'),
+            _0x29065c.push('nidoranm'),
+            _0x29065c.push(_0x196a36['kfvif']),
+            _0x29065c.push('니드런m'))),
       (_0x196a36['dXzoE'](_0x196a36['ULqCV'], _0x3102a5) || _0x196a36['VrlQv']('けつばん', _0x3102a5)) &&
         !this['missingnoEnabled'])
     ) {
@@ -1092,8 +1080,8 @@ class Quiz {
       (_0x3c122f = _0x3c122f['replace']('ue', 'ü')),
       (_0x3c122f = _0x3c122f['replace']('ss', 'ß')),
       (_0x3c122f = _0x196a36['FeNxo'](standardizeName, _0x3c122f)),
-      _0x196a36['KislN'](_0x405d65, _0x3c122f) && _0x29065c['push'](_0x3c122f),
-      _0x29065c['push'](_0x3102a5));
+      _0x196a36['KislN'](_0x405d65, _0x3c122f) && _0x29065c.push(_0x3c122f),
+      _0x29065c.push(_0x3102a5));
     let _0x107706 = false,
       _0x1c9adb = null;
     for (let _0x532c4d = 0x0; _0x196a36['gSNIn'](_0x532c4d, _0x29065c['length']); _0x532c4d++) {
@@ -1101,8 +1089,8 @@ class Quiz {
       let _0xf2c4ee = _0x29065c[_0x532c4d];
       if (_0xf2c4ee in this['nameDict']) {
         let _0x22dd81 = this['nameDict'][_0xf2c4ee],
-          _0x54c9f8 = this['pokemonIdDict'][_0x22dd81]['baseName'];
-        if (this['named']['has'](_0x54c9f8)) {
+          _0x54c9f8 = this['pokemonIdDict'][_0x22dd81].baseName;
+        if (this.named.has(_0x54c9f8)) {
           let _0x3b5fc9 = false;
           for (let _0x6d102b in this['nameDict'])
             if (_0x6d102b['startsWith'](_0xf2c4ee) && _0x6d102b !== _0xf2c4ee) {
@@ -1111,12 +1099,12 @@ class Quiz {
             }
           _0x3b5fc9 ||
             (_0x1c9adb = _0x196a36['IQLCK'](
-              this['pokemonIdDict'][this['baseNameIdDict'][_0x54c9f8]]['getFormattedName'](this['currentLang']),
+              this['pokemonIdDict'][this.baseNameIdDict[_0x54c9f8]]['getFormattedName'](this['currentLang']),
               '\x20already\x20named',
             ));
           continue;
         }
-        if (!this['currentBaseNames']['has'](_0x54c9f8)) {
+        if (!this.currentBaseNames.has(_0x54c9f8)) {
           let _0x360eb9 = false;
           for (const _0x40295d of this['currentLangsNames'])
             if (_0x40295d['startsWith'](_0xf2c4ee)) {
@@ -1125,21 +1113,21 @@ class Quiz {
             }
           _0x360eb9 ||
             (_0x1c9adb = _0x196a36['PZCTn'](
-              this['pokemonIdDict'][this['baseNameIdDict'][_0x54c9f8]]['getFormattedName'](this['currentLang']),
+              this['pokemonIdDict'][this.baseNameIdDict[_0x54c9f8]]['getFormattedName'](this['currentLang']),
               '\x20is\x20not\x20part\x20of\x20this\x20quiz',
             ));
           continue;
         }
-        if (!this['currentLangsNames']['has'](_0xf2c4ee)) {
+        if (!this['currentLangsNames'].has(_0xf2c4ee)) {
           continue;
         }
-        if (this['orderMode']) {
+        if (this.orderMode) {
           let _0x7abf30 = -0x1;
           for (let _0x9f281d = 0x0; _0x196a36['gSNIn'](_0x9f281d, this['currentPokemonList']['length']); _0x9f281d++)
-            this['named']['has'](this['currentPokemonList'][_0x9f281d]['baseName']) &&
+            this.named.has(this['currentPokemonList'][_0x9f281d].baseName) &&
               _0x9f281d > _0x7abf30 &&
               (_0x7abf30 = _0x9f281d);
-          if (_0x54c9f8 !== this['currentPokemonList'][_0x7abf30 + 0x1]['baseName']) {
+          if (_0x54c9f8 !== this['currentPokemonList'][_0x7abf30 + 0x1].baseName) {
             let _0x1dcc0f = false;
             for (let _0x559fc1 in this['nameDict'])
               if (_0x559fc1['startsWith'](_0xf2c4ee) && _0x559fc1 !== _0xf2c4ee) {
@@ -1148,7 +1136,7 @@ class Quiz {
               }
             _0x1dcc0f ||
               (_0x1c9adb = _0x196a36['IQLCK'](
-                this['pokemonIdDict'][this['baseNameIdDict'][_0x54c9f8]]['getFormattedName'](this['currentLang']),
+                this['pokemonIdDict'][this.baseNameIdDict[_0x54c9f8]]['getFormattedName'](this['currentLang']),
                 '\x20is\x20not\x20the\x20next\x20Pokémon',
               ));
             continue;
@@ -1164,7 +1152,7 @@ class Quiz {
               if (
                 (this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066]['primaryType'] === this['currentType'] ||
                   this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066]['secondaryType'] === this['currentType']) &&
-                this['typeChaosIds']['has'](this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066]['id'])
+                this['typeChaosIds'].has(this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066].id)
               ) {
                 _0x544000 = true;
                 break;
@@ -1180,7 +1168,7 @@ class Quiz {
                 let _0x11267b = this['currentType']['toLowerCase']();
                 ((_0x11267b = _0x11267b['charAt'](0x0)['toUpperCase']() + _0x11267b['slice'](0x1)),
                   (_0x1c9adb = _0x196a36['jTfYW'](
-                    this['pokemonIdDict'][this['baseNameIdDict'][_0x54c9f8]]['getFormattedName'](this['currentLang']) +
+                    this['pokemonIdDict'][this.baseNameIdDict[_0x54c9f8]]['getFormattedName'](this['currentLang']) +
                       _0x196a36['phnBY'],
                     _0x11267b,
                   )));
@@ -1191,10 +1179,10 @@ class Quiz {
         }
         let _0x5e476d = this['addNamed'](_0x54c9f8);
         (this['addUserPoint'](_0x205c99),
-          this['langDict'][_0xf2c4ee] in this['langCounts'] || (this['langCounts'][this['langDict'][_0xf2c4ee]] = 0x0),
-          (this['langCounts'][this['langDict'][_0xf2c4ee]] += 0x1),
+          this['langDict'][_0xf2c4ee] in this.langCounts || (this.langCounts[this['langDict'][_0xf2c4ee]] = 0x0),
+          (this.langCounts[this['langDict'][_0xf2c4ee]] += 0x1),
           this['checkHighestLang'](),
-          (recentSprite['src'] = this['spriteDictionary'][_0x5e476d['id']]['src']),
+          (recentSprite['src'] = this['spriteDictionary'][_0x5e476d.id]['src']),
           (_0x107706 = true),
           _0x196a36['WnPCV'](null, _0x5b7f33) && _0x196a36['ljimI'](_0x5b7f33, _0x54c9f8));
       }
@@ -1214,14 +1202,14 @@ class Quiz {
           return _0x3f4c0f(_0x1a1ebf);
         },
       },
-      _0x414ced = this['currentPokemonList']['filter']((_0x418f66) => !this['named']['has'](_0x418f66['baseName']));
+      _0x414ced = this['currentPokemonList']['filter']((_0x418f66) => !this.named.has(_0x418f66.baseName));
     if (0x0 === _0x414ced['length']) {
       return null;
     }
-    const _0x4bcb8f = _0x1af7a6['wBpEx'](seededRandom, this['seed'] + this['named']['size']),
+    const _0x4bcb8f = _0x1af7a6['wBpEx'](seededRandom, this['seed'] + this.named['size']),
       _0x53b3e7 = _0x414ced[Math.floor(_0x1af7a6['ONVuS'](_0x4bcb8f, _0x414ced['length']))];
     if (_0x53b3e7['secondaryType']) {
-      return seededRandom(_0x1af7a6['KsgXX'](this['seed'] + this['named']['size'], 0.5)) < 0.5
+      return seededRandom(_0x1af7a6['KsgXX'](this['seed'] + this.named['size'], 0.5)) < 0.5
         ? _0x53b3e7['primaryType']
         : _0x53b3e7['secondaryType'];
     }
@@ -1270,16 +1258,16 @@ class Quiz {
     let _0x2369b3 = this['pokemonBaseNameDict'][_0x5f1f5d],
       _0x417328 = [];
     for (let _0x474ca8 = 0x0; _0x350b17['sHoMQ'](_0x474ca8, _0x2369b3['length']); _0x474ca8++)
-      this['currentIds']['has'](_0x2369b3[_0x474ca8]['id']) && _0x417328['push'](_0x2369b3[_0x474ca8]);
+      this.currentIds.has(_0x2369b3[_0x474ca8].id) && _0x417328.push(_0x2369b3[_0x474ca8]);
     this['cyclingEnabled']
-      ? this['named']['has'](_0x350b17['XdOvi']) &&
-        ((this['spriteDictionary']['ditto']['src'] = this['spriteDictionary'][_0x417328[0x0]['id']]['src']),
+      ? this.named.has(_0x350b17['XdOvi']) &&
+        ((this['spriteDictionary']['ditto']['src'] = this['spriteDictionary'][_0x417328[0x0].id]['src']),
         (this['unguessedDict']['ditto']['getElementsByTagName']('img')[0x0]['src'] =
-          this['spriteDictionary'][_0x417328[0x0]['id']]['src']))
+          this['spriteDictionary'][_0x417328[0x0].id]['src']))
       : this['resetDitto']();
     for (let _0x52ea0f = 0x0; _0x350b17['sHoMQ'](_0x52ea0f, _0x417328['length']); _0x52ea0f++)
-      this['showSprite'](_0x417328[_0x52ea0f]['id']);
-    if ((this['named']['add'](_0x5f1f5d), this['typeDisorder'])) {
+      this['showSprite'](_0x417328[_0x52ea0f].id);
+    if ((this.named['add'](_0x5f1f5d), this['typeDisorder'])) {
       let _0x22b7b2 = this['getCurrentRandomType']();
       _0x350b17['ZbAez'](_0x22b7b2, this['currentType']) && this['changeTypeStyle'](_0x22b7b2);
       let _0x2257f4 = this['currentType'];
@@ -1318,8 +1306,8 @@ class Quiz {
   }
 
   ['animateCongrats']() {
-    for (let _0x707d07 of this['currentIds'])
-      this['named']['has'](this['pokemonIdDict'][_0x707d07]['baseName']) && animateInput(_0x707d07);
+    for (let _0x707d07 of this.currentIds)
+      this.named.has(this['pokemonIdDict'][_0x707d07].baseName) && animateInput(_0x707d07);
   }
 
   ['isAllShadowsRevealed']() {
@@ -1331,7 +1319,7 @@ class Quiz {
     let _0x2e06bc = true;
     for (let _0x26ff90 = 0x0; _0x3e972b['lrRjp'](_0x26ff90, this['currentPokemonList']['length']); _0x26ff90++) {
       let _0x387969 = this['currentPokemonList'][_0x26ff90];
-      if (!this['revealedShadows']['has'](_0x387969['id']) && !this['named']['has'](_0x387969['baseName'])) {
+      if (!this['revealedShadows'].has(_0x387969.id) && !this.named.has(_0x387969.baseName)) {
         _0x2e06bc = false;
         break;
       }
@@ -1344,13 +1332,13 @@ class Quiz {
       IRWBV: 'inline',
     };
     for (let _0x167ced = 0x0; _0x167ced < this['currentPokemonList']['length']; _0x167ced++)
-      if (!this['named']['has'](this['currentPokemonList'][_0x167ced]['baseName'])) {
+      if (!this.named.has(this['currentPokemonList'][_0x167ced].baseName)) {
         return (
-          (this['silhouetteDictionary'][this['currentPokemonList'][_0x167ced]['id']]['style']['display'] =
+          (this['silhouetteDictionary'][this['currentPokemonList'][_0x167ced].id]['style']['display'] =
             _0x4700f7['IRWBV']),
-          (this['pokeballDictionary'][this['currentPokemonList'][_0x167ced]['id']]['style']['display'] = 'none'),
-          this['revealedShadows']['add'](this['currentPokemonList'][_0x167ced]['id']),
-          this['currentPokemonList'][_0x167ced]['id']
+          (this['pokeballDictionary'][this['currentPokemonList'][_0x167ced].id]['style']['display'] = 'none'),
+          this['revealedShadows']['add'](this['currentPokemonList'][_0x167ced].id),
+          this['currentPokemonList'][_0x167ced].id
         );
       }
     return null;
@@ -1366,13 +1354,13 @@ class Quiz {
       },
       lIBbw: 'inline',
     };
-    if (!this['orderMode']) {
+    if (!this.orderMode) {
       let _0x505cbb = [];
       for (let _0xc8e3fc = 0x0; _0x410ee3['KFSiY'](_0xc8e3fc, this['currentPokemonList']['length']); _0xc8e3fc++) {
         let _0x3b3edc = this['currentPokemonList'][_0xc8e3fc];
-        this['named']['has'](_0x3b3edc['baseName']) ||
-          this['revealedShadows']['has'](_0x3b3edc['id']) ||
-          _0x505cbb['push'](this['currentPokemonList'][_0xc8e3fc]['id']);
+        this.named.has(_0x3b3edc.baseName) ||
+          this['revealedShadows'].has(_0x3b3edc.id) ||
+          _0x505cbb.push(this['currentPokemonList'][_0xc8e3fc].id);
       }
       if (_0x410ee3['XNqkw'](_0x505cbb['length'], 0x0)) {
         let _0x23483c = _0x505cbb[Math.floor(Math.random() * _0x505cbb['length'])];
@@ -1402,11 +1390,11 @@ class Quiz {
       let _0x94c794 = [];
       for (let _0x19884a = 0x0; _0x4ad45e['mtaeK'](_0x19884a, this['currentPokemonList']['length']); _0x19884a++) {
         let _0x10923c = this['currentPokemonList'][_0x19884a];
-        this['named']['has'](_0x10923c['baseName']) ||
-          this['revealedShadows']['has'](_0x10923c['id']) ||
+        this.named.has(_0x10923c.baseName) ||
+          this['revealedShadows'].has(_0x10923c.id) ||
           (_0x4ad45e['xXnSy'](_0x10923c['primaryType'], this['currentType']) &&
             _0x10923c['secondaryType'] !== this['currentType']) ||
-          _0x94c794['push'](this['currentPokemonList'][_0x19884a]['id']);
+          _0x94c794.push(this['currentPokemonList'][_0x19884a].id);
       }
       if (_0x94c794['length'] > 0x0) {
         let _0x4a6662 = _0x94c794[Math.floor(Math.random() * _0x94c794['length'])];
@@ -1426,7 +1414,7 @@ class Quiz {
       NovJA: 'none',
       hZprA: 'inline',
     };
-    this['revealedShadows']['has'](_0x2e1f00) ||
+    this['revealedShadows'].has(_0x2e1f00) ||
       (this['revealedShadows']['add'](_0x2e1f00),
       (this['silhouetteDictionary'][_0x2e1f00]['style']['display'] = _0x412322['hZprA']),
       (this['pokeballDictionary'][_0x2e1f00]['style']['display'] = _0x412322['NovJA']));
@@ -1438,7 +1426,7 @@ class Quiz {
         return _0x51204a !== _0x24be84;
       },
     };
-    for (let _0x5d2205 of this['currentIds'])
+    for (let _0x5d2205 of this.currentIds)
       _0x2135e4['ERUrU']('inline', this['spriteDictionary'][_0x5d2205]['style']['display']) &&
         this['revealSingleShadow'](_0x5d2205);
     this.useSilhouettes = true;
@@ -1461,7 +1449,7 @@ class Quiz {
       OIGUI: 'inline',
     };
     ((this['spriteDictionary'][_0x363a8b]['style']['display'] = 'none'),
-      (this['unguessedDictionary'][_0x363a8b]['style']['display'] = _0x2829e3['OIGUI']));
+      (this.unguessedDictionary[_0x363a8b]['style']['display'] = _0x2829e3['OIGUI']));
   }
 
   ['setupSprites']() {
@@ -1476,35 +1464,31 @@ class Quiz {
         _0x42d23c = document['createElement'](_0x68417b['GQDbQ']);
       (_0x42d23c['classList']['add'](_0x68417b['DAZqr']),
         _0x42d23c['classList']['add']('zoom'),
-        (_0x42d23c['src'] = this['encodedImages']['sprite'][_0x2a3557['id']]),
-        (this['spriteDictionary'][_0x2a3557['id']] = _0x42d23c),
-        this['allSprites']['push'](_0x42d23c));
+        (_0x42d23c['src'] = this['encodedImages']['sprite'][_0x2a3557.id]),
+        (this['spriteDictionary'][_0x2a3557.id] = _0x42d23c),
+        this['allSprites'].push(_0x42d23c));
       let _0x55767b = document['createElement'](_0x68417b['GQDbQ']);
       (_0x55767b['classList']['add'](_0x68417b['DAZqr']),
-        (_0x55767b['src'] = this['encodedImages']['silhouette'][_0x2a3557['id']]),
+        (_0x55767b['src'] = this['encodedImages']['silhouette'][_0x2a3557.id]),
         (_0x55767b['style']['display'] = 'none'),
-        (this['silhouetteDictionary'][_0x2a3557['id']] = _0x55767b),
-        this['silhouetteArray']['push'](_0x55767b),
-        this['allSprites']['push'](_0x55767b));
+        (this['silhouetteDictionary'][_0x2a3557.id] = _0x55767b),
+        this['silhouetteArray'].push(_0x55767b),
+        this['allSprites'].push(_0x55767b));
       let _0x4282b0 = document['createElement'](_0x68417b['QtSlK']),
         _0x39237d = document['createElement']('img');
       (_0x39237d['classList']['add'](_0x68417b['DAZqr']),
         (_0x39237d['src'] = _0x68417b['SVWXU']),
-        (this['unguessedDictionary'][_0x2a3557['id']] = _0x4282b0),
-        (this['pokeballDictionary'][_0x2a3557['id']] = _0x39237d),
-        this['pokeballArray']['push'](_0x39237d),
-        this['allSprites']['push'](_0x39237d),
-        _0x4282b0['appendChild'](this['silhouetteDictionary'][_0x2a3557['id']]),
+        (this.unguessedDictionary[_0x2a3557.id] = _0x4282b0),
+        (this['pokeballDictionary'][_0x2a3557.id] = _0x39237d),
+        this['pokeballArray'].push(_0x39237d),
+        this['allSprites'].push(_0x39237d),
+        _0x4282b0['appendChild'](this['silhouetteDictionary'][_0x2a3557.id]),
         _0x4282b0['appendChild'](_0x39237d));
       let _0x288528 = this.boxDict[_0x2a3557['box']];
-      (_0x288528['appendChild'](this['spriteDictionary'][_0x2a3557['id']]),
+      (_0x288528['appendChild'](this['spriteDictionary'][_0x2a3557.id]),
         _0x288528['appendChild'](_0x4282b0),
-        this['hideSprite'](_0x2a3557['id']),
-        this['boxConstruction']['push']([
-          _0x288528,
-          [this['spriteDictionary'][_0x2a3557['id']], _0x4282b0],
-          _0x2a3557,
-        ]));
+        this['hideSprite'](_0x2a3557.id),
+        this['boxConstruction'].push([_0x288528, [this['spriteDictionary'][_0x2a3557.id], _0x4282b0], _0x2a3557]));
     }
   }
 
@@ -1518,7 +1502,7 @@ class Quiz {
       yMdWu: 'none',
     };
     let _0x21794c = {};
-    document['getElementById']('panel')['innerHTML'] = '';
+    document.getElementById('panel')['innerHTML'] = '';
     for (let _0x43dba0 in this.boxDict) {
       let _0x4ab1de = document['createElement'](_0x12481a['MHSMP']),
         _0x59e065 = document['createElement']('div');
@@ -1527,7 +1511,7 @@ class Quiz {
         _0x59e065['classList']['add'](_0x12481a['ZbXzW']),
         (_0x59e065['style']['display'] = 'block'),
         _0x4ab1de['appendChild'](_0x59e065),
-        document['getElementById']('panel')['appendChild'](_0x4ab1de),
+        document.getElementById('panel')['appendChild'](_0x4ab1de),
         (_0x21794c[_0x43dba0] = _0x59e065));
     }
     for (let _0x3f4c33 = 0x0; _0x3f4c33 < this['pokemon']['length']; _0x3f4c33++) {
@@ -1536,13 +1520,13 @@ class Quiz {
         _0x39aaa8 = document['createElement']('img'),
         _0x333c0a = document['createTextNode']('');
       ((_0x39aaa8['style']['display'] = _0x12481a['fcoTc']),
-        (_0x39aaa8['src'] = this['spriteDictionary'][_0x166453['id']]['src']),
+        (_0x39aaa8['src'] = this['spriteDictionary'][_0x166453.id]['src']),
         _0x39aaa8['classList']['add']('spritel'),
         (_0x1f1d47['style']['display'] = _0x12481a['yMdWu']),
         _0x1f1d47['appendChild'](_0x39aaa8),
         _0x1f1d47['appendChild'](_0x333c0a),
-        (this['unguessedDict'][_0x166453['id']] = _0x1f1d47),
-        (this['unguessedDictTexts'][_0x166453['id']] = _0x333c0a),
+        (this['unguessedDict'][_0x166453.id] = _0x1f1d47),
+        (this['unguessedDictTexts'][_0x166453.id] = _0x333c0a),
         _0x21794c[_0x166453['currentBox']]['appendChild'](_0x1f1d47));
     }
   }
@@ -1573,11 +1557,11 @@ class Quiz {
       },
     };
     ((this['spriteDictionary'][_0x57a4e2]['style']['display'] = 'inline'),
-      (this['unguessedDictionary'][_0x57a4e2]['style']['display'] = 'none'));
+      (this.unguessedDictionary[_0x57a4e2]['style']['display'] = 'none'));
     let _0x3224bc = this['pokemonIdDict'][_0x57a4e2]['currentBox'],
       _0x17f82a = this['pokemonIdDict'][_0x57a4e2];
-    if (this['chaosMode']) {
-      let _0x425ede = document['getElementById'](_0x4f8dc1['RNAtg'])['children'],
+    if (this.chaosMode) {
+      let _0x425ede = document.getElementById(_0x4f8dc1['RNAtg'])['children'],
         _0x2258cf = -0x1,
         _0x47c85e = -0x1;
       for (let _0x3f95d2 = 0x1; _0x3f95d2 < _0x425ede['length']; _0x3f95d2++)
@@ -1601,21 +1585,20 @@ class Quiz {
             break;
           }
         }
-      (_0x4f8dc1['pmeLc'](swapChildren, document['getElementById']('pokemon-box-big'), _0x2258cf, _0x47c85e),
+      (_0x4f8dc1['pmeLc'](swapChildren, document.getElementById('pokemon-box-big'), _0x2258cf, _0x47c85e),
         _0x2258cf > _0x47c85e &&
-          document['getElementById'](_0x4f8dc1['RNAtg'])['insertBefore'](
-            _0x425ede[_0x4f8dc1['KzHVw'](_0x47c85e, 0x1)],
-            _0x425ede[_0x2258cf + 0x1],
-          ));
+          document
+            .getElementById(_0x4f8dc1['RNAtg'])
+            ['insertBefore'](_0x425ede[_0x4f8dc1['KzHVw'](_0x47c85e, 0x1)], _0x425ede[_0x2258cf + 0x1]));
     }
     if (
-      !this['boxCounters'][_0x3224bc]['includes'](_0x17f82a) &&
-      (this['boxCounters'][_0x3224bc]['push'](_0x17f82a),
+      !this['boxCounters'][_0x3224bc].includes(_0x17f82a) &&
+      (this['boxCounters'][_0x3224bc].push(_0x17f82a),
       this['boxCounters'][_0x3224bc]['length'] === this['currentBoxes'][_0x3224bc]['length'])
     ) {
       let _0x448584 = this['spriteDictionary'][_0x57a4e2]['parentElement'];
       (_0x448584['classList']['add']('outline'),
-        _0x448584['classList']['add'](_0x4f8dc1['KzHVw']('outline', this['getStyleName']())));
+        _0x448584['classList']['add'](_0x4f8dc1['KzHVw']('outline', this.getStyleName())));
     }
   }
 
@@ -1641,8 +1624,8 @@ class Quiz {
     this['giveUpState'] = true;
     let _0x2d00dd = 0x0,
       _0x10fb71 = [];
-    for (const _0x3d5600 of this['currentIds'])
-      this['named']['has'](this['pokemonIdDict'][_0x3d5600]['baseName']) || _0x10fb71['push'](_0x3d5600);
+    for (const _0x3d5600 of this.currentIds)
+      this.named.has(this['pokemonIdDict'][_0x3d5600].baseName) || _0x10fb71.push(_0x3d5600);
     for (let _0x561a22 = 0x0; _0x561a22 < _0x10fb71['length']; _0x561a22++) {
       let _0x54fa21 = _0x10fb71[_0x561a22];
       _0x2d00dd += 0x23;
@@ -1651,13 +1634,13 @@ class Quiz {
           setTimeout,
           function () {
             (_0x373eb6['spriteDictionary'][_0x54fa21]['classList']['add'](_0x5944ef['qeItO']),
-              _0x373eb6['spriteDictionary'][_0x54fa21]['classList']['remove']('zoom'),
+              _0x373eb6['spriteDictionary'][_0x54fa21].classList.remove('zoom'),
               _0x373eb6['showSprite'](_0x54fa21),
               changeFooterPosition());
           },
           _0x2d00dd,
         );
-      this['revealTimeouts']['push'](_0x26245d);
+      this['revealTimeouts'].push(_0x26245d);
     }
     for (let _0x4d9f04 = 0x0; _0x4d9f04 < _0x10fb71['length']; _0x4d9f04++) {
       let _0x1bb9f2 = _0x10fb71[_0x4d9f04];
@@ -1669,12 +1652,12 @@ class Quiz {
 
   ['resetCurrentSprites']() {
     if (this['shinyEnabled']) {
-      for (let _0x2311e1 of this['currentIds'])
+      for (let _0x2311e1 of this.currentIds)
         ((this['spriteDictionary'][_0x2311e1]['src'] = this['encodedImages']['shiny'][_0x2311e1]),
           (this['unguessedDict'][_0x2311e1]['getElementsByTagName']('img')[0x0]['src'] =
             this['encodedImages']['shiny'][_0x2311e1]));
     } else {
-      for (let _0x2643b3 of this['currentIds'])
+      for (let _0x2643b3 of this.currentIds)
         ((this['spriteDictionary'][_0x2643b3]['src'] = this['encodedImages']['sprite'][_0x2643b3]),
           (this['unguessedDict'][_0x2643b3]['getElementsByTagName']('img')[0x0]['src'] =
             this['encodedImages']['sprite'][_0x2643b3]));
@@ -1811,63 +1794,63 @@ let rankVals = ['rankone', 'ranktwo', 'rankthree'],
   lastDarkSwap = 0x0,
   lastShinySwap = 0x0,
   swapLimit = 0x2710,
-  missingOptionsDiv = document['getElementById']('missednames-options'),
-  language_box = document['getElementById']('lang_box'),
-  inputField = document['getElementById']('pokemon'),
-  recentSprite = document['getElementById']('recentsprite'),
-  spellingElement = document['getElementById']('spelling'),
-  spellingButton = document['getElementById']('spellingbutton'),
-  spellingCheck = document['getElementById']('check'),
-  spellingHint = document['getElementById']('hint'),
-  radioPokeball = document['getElementById']('pokeball'),
-  radioSilhouette = document['getElementById']('silhouette'),
-  orderModeMenu = document['getElementById']('orderbox'),
-  orderButton = document['getElementById']('order-on'),
-  regularButton = document['getElementById']('order-off'),
-  typeDisorderButtonOn = document['getElementById']('type-on'),
-  typeDisorderButtonOff = document['getElementById']('type-off'),
-  chaosButton = document['getElementById']('chaos-on'),
-  shadowNextBtn = document['getElementById']('shadownext'),
-  shadowHelpRadio = document['getElementById']('shadowhelp'),
-  counterText = document['getElementById']('counter'),
-  totalText = document['getElementById']('total'),
-  giveUpBtn = document['getElementById']('surrender'),
-  resetBtn = document['getElementById']('resetButton'),
-  promptSilh = document['getElementById']('promptsilhouette'),
-  promptOrderEnable = document['getElementById']('promptorder-enable'),
-  promptChaosEnable = document['getElementById']('promptchaos-enable'),
-  promptOrderDisable = document['getElementById']('promptorder-disable'),
-  promptTypeDisorderEnable = document['getElementById']('prompttype-enable'),
-  promptGen = document['getElementById']('promptswitch'),
-  promptSilhYes = document['getElementById']('sil-yes'),
-  promptSilhNo = document['getElementById']('sil-no'),
-  promptOrderEnableYes = document['getElementById']('order-enable-yes'),
-  promptChaosEnableYes = document['getElementById']('chaos-enable-yes'),
-  promptOrderDisableYes = document['getElementById']('order-disable-yes'),
-  promptOrderEnableNo = document['getElementById']('order-enable-no'),
-  promptChaosEnableNo = document['getElementById']('chaos-enable-no'),
-  promptOrderDisableNo = document['getElementById']('order-disable-no'),
-  promptTypeDisorderYes = document['getElementById']('type-enable-yes'),
-  promptTypeDisorderNo = document['getElementById']('type-enable-no'),
-  promptGenYes = document['getElementById']('gen-yes'),
-  promptGenNo = document['getElementById']('gen-no'),
-  timerBtn = document['getElementById']('timer-set'),
-  stopwatchBtn = document['getElementById']('timer0'),
-  timerText = document['getElementById']('timer'),
-  pauseBtn = document['getElementById']('pause'),
-  main = document['getElementById']('main'),
-  footer = document['getElementById']('footer'),
-  hostGame = document['getElementById']('hostButton'),
-  linkGame = document['getElementById']('linkButton'),
-  usernamePrompt = document['getElementById']('promptusername'),
-  genBoxes = document['getElementById']('gen-boxes'),
-  bigBox = document['getElementById']('pokemon-box-big'),
-  saveButton = document['getElementById']('savestate'),
-  loadButton = document['getElementById']('loadstate'),
+  missingOptionsDiv = document.getElementById('missednames-options'),
+  language_box = document.getElementById('lang_box'),
+  inputField = document.getElementById('pokemon'),
+  recentSprite = document.getElementById('recentsprite'),
+  spellingElement = document.getElementById('spelling'),
+  spellingButton = document.getElementById('spellingbutton'),
+  spellingCheck = document.getElementById('check'),
+  spellingHint = document.getElementById('hint'),
+  radioPokeball = document.getElementById('pokeball'),
+  radioSilhouette = document.getElementById('silhouette'),
+  orderModeMenu = document.getElementById('orderbox'),
+  orderButton = document.getElementById('order-on'),
+  regularButton = document.getElementById('order-off'),
+  typeDisorderButtonOn = document.getElementById('type-on'),
+  typeDisorderButtonOff = document.getElementById('type-off'),
+  chaosButton = document.getElementById('chaos-on'),
+  shadowNextBtn = document.getElementById('shadownext'),
+  shadowHelpRadio = document.getElementById('shadowhelp'),
+  counterText = document.getElementById('counter'),
+  totalText = document.getElementById('total'),
+  giveUpBtn = document.getElementById('surrender'),
+  resetBtn = document.getElementById('resetButton'),
+  promptSilh = document.getElementById('promptsilhouette'),
+  promptOrderEnable = document.getElementById('promptorder-enable'),
+  promptChaosEnable = document.getElementById('promptchaos-enable'),
+  promptOrderDisable = document.getElementById('promptorder-disable'),
+  promptTypeDisorderEnable = document.getElementById('prompttype-enable'),
+  promptGen = document.getElementById('promptswitch'),
+  promptSilhYes = document.getElementById('sil-yes'),
+  promptSilhNo = document.getElementById('sil-no'),
+  promptOrderEnableYes = document.getElementById('order-enable-yes'),
+  promptChaosEnableYes = document.getElementById('chaos-enable-yes'),
+  promptOrderDisableYes = document.getElementById('order-disable-yes'),
+  promptOrderEnableNo = document.getElementById('order-enable-no'),
+  promptChaosEnableNo = document.getElementById('chaos-enable-no'),
+  promptOrderDisableNo = document.getElementById('order-disable-no'),
+  promptTypeDisorderYes = document.getElementById('type-enable-yes'),
+  promptTypeDisorderNo = document.getElementById('type-enable-no'),
+  promptGenYes = document.getElementById('gen-yes'),
+  promptGenNo = document.getElementById('gen-no'),
+  timerBtn = document.getElementById('timer-set'),
+  stopwatchBtn = document.getElementById('timer0'),
+  timerText = document.getElementById('timer'),
+  pauseBtn = document.getElementById('pause'),
+  main = document.getElementById('main'),
+  footer = document.getElementById('footer'),
+  hostGame = document.getElementById('hostButton'),
+  linkGame = document.getElementById('linkButton'),
+  usernamePrompt = document.getElementById('promptusername'),
+  genBoxes = document.getElementById('gen-boxes'),
+  bigBox = document.getElementById('pokemon-box-big'),
+  saveButton = document.getElementById('savestate'),
+  loadButton = document.getElementById('loadstate'),
   boxDict = {};
 for (let e = 0x0; e < boxIds['length']; e++) {
   let t = boxIds[e];
-  ((boxDict[t] = document['getElementById']('pokemon-box-' + t)), (boxDict[t]['style']['display'] = 'none'));
+  ((boxDict[t] = document.getElementById('pokemon-box-' + t)), (boxDict[t]['style']['display'] = 'none'));
 }
 let multiplayerUrl,
   randomIntFromInterval = function (_0xdf60d1, _0x59f1dd) {
@@ -1889,16 +1872,16 @@ function noSuchRoom() {
   const _0x1c0987 = {
     xFSWB: 'return-message',
   };
-  ((document['getElementById'](_0x1c0987['xFSWB'])['innerText'] = 'Room\x20no\x20longer\x20exists'),
-    (document['getElementById']('return-overlay')['style']['display'] = 'block'));
+  ((document.getElementById(_0x1c0987['xFSWB'])['innerText'] = 'Room\x20no\x20longer\x20exists'),
+    (document.getElementById('return-overlay')['style']['display'] = 'block'));
 }
 
 function roomClosed() {
   const _0x4fdb8d = {
     PAbWI: 'block',
   };
-  ((document['getElementById']('return-message')['innerText'] = 'The\x20host\x20has\x20disbanded\x20the\x20room'),
-    (document['getElementById']('return-overlay')['style']['display'] = _0x4fdb8d['PAbWI']));
+  ((document.getElementById('return-message')['innerText'] = 'The\x20host\x20has\x20disbanded\x20the\x20room'),
+    (document.getElementById('return-overlay')['style']['display'] = _0x4fdb8d['PAbWI']));
 }
 
 function multiplayerDisabled() {
@@ -1906,12 +1889,12 @@ function multiplayerDisabled() {
     eyOBa: 'block',
     zCMNV: 'return-overlay',
   };
-  ((document['getElementById']('return-message')['innerText'] =
+  ((document.getElementById('return-message')['innerText'] =
     'Multiplayer\x20is\x20undergoing\x20maintenance.\x20Try\x20again\x20later.'),
-    (document['getElementById'](_0x647998['zCMNV'])['style']['display'] = _0x647998['eyOBa']));
+    (document.getElementById(_0x647998['zCMNV'])['style']['display'] = _0x647998['eyOBa']));
 }
 
-document['getElementById']('return')['onclick'] = function () {
+document.getElementById('return')['onclick'] = function () {
   (window['removeEventListener']('beforeunload', beforeUnload), (window['location']['href'] = '/'));
 };
 let current = new URL(window['location']['href']);
@@ -1941,7 +1924,7 @@ function getRoomNameFromURL() {
   return _0x3d8ef4[_0x2cf89c['mawoM'](_0x3d8ef4['length'], 0x1)];
 }
 
-multiplayerUrl = current['hostname']['includes']('localhost') ? '//localhost:3001/' : '//stapo.cloud/';
+multiplayerUrl = current['hostname'].includes('localhost') ? '//localhost:3001/' : '//stapo.cloud/';
 let roomId = getRoomNameFromURL();
 
 async function fetchData(_0x5ee8df, _0x29f4cc = true) {
@@ -2648,13 +2631,13 @@ async function loadData() {
           _0x4b417b['uPlGb'](_0x34a9b2),
           (inputField['disabled'] = false),
           (recentSprite['src'] = darkMode ? '/sprites/unknown-2.png' : '/sprites/unknown.png'),
-          (document['getElementById']('silhouette')['checked'] = false),
+          (document.getElementById('silhouette')['checked'] = false),
           _0x4b417b['uPlGb'](changeFooterPosition),
-          _0x4b417b['oeper'](_0x4b417b['WZEPU'], document['getElementById'](_0x4b417b['PllaF'])['style']['display']) &&
-            document['getElementById']('accordion')['click'](),
-          (document['getElementById']('missednames')['style']['display'] = _0x4b417b['xAFWt']),
-          (document['getElementById'](_0x4b417b['JxGQa'])['style']['display'] = _0x4b417b['xAFWt']),
-          (document['getElementById'](_0x4b417b['lBinT'])['style']['display'] = 'none'),
+          _0x4b417b['oeper'](_0x4b417b['WZEPU'], document.getElementById(_0x4b417b['PllaF'])['style']['display']) &&
+            document.getElementById('accordion')['click'](),
+          (document.getElementById('missednames')['style']['display'] = _0x4b417b['xAFWt']),
+          (document.getElementById(_0x4b417b['JxGQa'])['style']['display'] = _0x4b417b['xAFWt']),
+          (document.getElementById(_0x4b417b['lBinT'])['style']['display'] = 'none'),
           emptyLeaderboard());
       }));
   } catch (_0x43fb95) {
@@ -2819,7 +2802,7 @@ async function loadData() {
                     _0x5e81a3['port'] ? _0x4d9807['WZGex'](':', _0x5e81a3['port']) : '',
                   );
                 let _0x10fb31 = _0x4d9807['WZGex'](_0x4d9807['CGOqn'], _0x27a2e6) + _0x4d9807['yjkxu'] + _0x19cb56;
-                (_0x27a2e6['includes']('localhost') &&
+                (_0x27a2e6.includes('localhost') &&
                   (_0x10fb31 = _0x4d9807['WZGex'](
                     _0x4d9807['WZGex'](_0x4d9807['NYcRb']('http://', _0x27a2e6), '/join/'),
                     _0x19cb56,
@@ -2921,8 +2904,8 @@ async function loadData() {
       },
     };
     usernamePrompt['style']['display'] = _0x4b417b['WZEPU'];
-    let _0x2759ec = document['getElementById']('input-username'),
-      _0x1c3111 = document['getElementById'](_0x4b417b['JqROi']);
+    let _0x2759ec = document.getElementById('input-username'),
+      _0x1c3111 = document.getElementById(_0x4b417b['JqROi']);
 
     function _0x420f5d(_0x4f9c3d) {
       0xd === _0x4f9c3d['keyCode']
@@ -2942,7 +2925,7 @@ async function loadData() {
           return _0x1e765a['XuhVN'](_0x551960);
         },
       };
-      let _0x599168 = document['getElementById'](_0x1e765a['KoZpJ'])['value'];
+      let _0x599168 = document.getElementById(_0x1e765a['KoZpJ'])['value'];
       if (_0x599168['length'] < 0x2) {
         showUserMessage('Username\x20should\x20be\x20at\x20least\x202\x20characters\x20long');
       } else {
@@ -3004,8 +2987,8 @@ async function loadData() {
   }
   if (null !== roomId) {
     usernamePrompt['style']['display'] = _0x4b417b['WZEPU'];
-    let _0x4e1c2a = document['getElementById']('input-username'),
-      _0x124bae = document['getElementById'](_0x4b417b['JqROi']);
+    let _0x4e1c2a = document.getElementById('input-username'),
+      _0x124bae = document.getElementById(_0x4b417b['JqROi']);
 
     function _0x46cb76(_0x43096d) {
       _0x4b417b['zjJEY'](0xd, _0x43096d['keyCode']) && _0x124bae['click']();
@@ -3015,7 +2998,7 @@ async function loadData() {
       const _0x373dc9 = {
         VcPal: 'joinRoom',
       };
-      let _0x29184d = document['getElementById']('input-username')['value'];
+      let _0x29184d = document.getElementById('input-username')['value'];
       if (_0x29184d['length'] < 0x2) {
         showUserMessage(_0x4b417b['HAvSt']);
       } else {
@@ -3090,7 +3073,7 @@ async function loadData() {
           _0x4b417b['oeper'](0x4, this['readyState']) &&
             (_0x4b417b['pQual'](0xc8, this['status'])
               ? (function (_0x54e6e1) {
-                  table = document['getElementById'](_0x5a57f6['rNtRQ']);
+                  table = document.getElementById(_0x5a57f6['rNtRQ']);
                   for (let _0x44d959 = 0x0; _0x44d959 < _0x54e6e1['length']; _0x44d959++) {
                     const _0x960127 = _0x54e6e1[_0x44d959],
                       _0x2ddba9 = _0x960127['sprites'],
@@ -3143,7 +3126,7 @@ async function loadData() {
           _0x5993d7['cePDJ'](0x4, this['readyState']) &&
             (_0x5993d7['gmCVV'](0xc8, this['status'])
               ? ((_0x3c3faa = JSON['parse'](this['response'])),
-                (_0x4fa89c = document['getElementById']('donors')['getElementsByTagName']('ol')[0x0]),
+                (_0x4fa89c = document.getElementById('donors')['getElementsByTagName']('ol')[0x0]),
                 _0x3c3faa['forEach'](function (_0x5683ac) {
                   var _0x5e4249 = document['createElement']('li');
                   (_0x5e4249['appendChild'](document['createTextNode'](_0x5683ac)),
@@ -3217,7 +3200,7 @@ async function loadData() {
   }
 
   function _0x4a696a() {
-    document['getElementById'](_0x4b417b['zSkqu'])['style']['display'] = _0x4b417b['xAFWt'];
+    document.getElementById(_0x4b417b['zSkqu'])['style']['display'] = _0x4b417b['xAFWt'];
   }
 
   let _0x1d011c = function (_0x1044ec) {
@@ -3226,17 +3209,17 @@ async function loadData() {
       zgjhW: _0x4b417b['xAFWt'],
     };
     activeTimer
-      ? ((document['getElementById'](_0x4b417b['zSkqu'])['style']['display'] = _0x4b417b['WZEPU']),
-        (document['getElementById']('timer-yes')['onclick'] = function () {
-          ((document['getElementById'](_0x7ee5e6['MCGDn'])['style']['display'] = _0x7ee5e6['zgjhW']),
+      ? ((document.getElementById(_0x4b417b['zSkqu'])['style']['display'] = _0x4b417b['WZEPU']),
+        (document.getElementById('timer-yes')['onclick'] = function () {
+          ((document.getElementById(_0x7ee5e6['MCGDn'])['style']['display'] = _0x7ee5e6['zgjhW']),
             _0x4dcdfc(_0x1044ec));
         }),
-        (document['getElementById']('timer-no')['onclick'] = _0x4a696a))
+        (document.getElementById('timer-no')['onclick'] = _0x4a696a))
       : _0x4b417b['GYoHP'](_0x4dcdfc, _0x1044ec);
   };
   ((timerBtn['onclick'] = function () {
     (_0x2f9557(timerBtn), _0x4b417b['YCRpd'](_0x57dd20, stopwatchBtn));
-    let _0x59c01f = Math['abs'](document['getElementById']('timer-min')['value']);
+    let _0x59c01f = Math['abs'](document.getElementById('timer-min')['value']);
     _0x1d011c(_0x59c01f);
   }),
     (stopwatchBtn['onclick'] = function () {
@@ -3245,12 +3228,12 @@ async function loadData() {
     _0x3ef989(),
     _0x4b417b['oHyyf'](_0x45c9c9));
   let _0x57dd20 = function (_0x420198) {
-      (_0x420198['classList']['remove'](_0x4b417b['wuzLL']), _0x420198['classList']['remove']('smolbuttonxdark'));
+      (_0x420198.classList.remove(_0x4b417b['wuzLL']), _0x420198.classList.remove('smolbuttonxdark'));
       let _0xe3fad5 = quiz['getStyleName']();
       _0x4b417b['cxVWr']('', _0xe3fad5) &&
         (_0x4b417b['jRJMd'] == _0xe3fad5 && (_0xe3fad5 = 'evil'),
-        _0x420198['classList']['remove']('smolbuttonx' + _0xe3fad5),
-        _0x420198['classList']['remove'](_0x4b417b['FBbYa']('smolbuttonxdark', _0xe3fad5)));
+        _0x420198.classList.remove('smolbuttonx' + _0xe3fad5),
+        _0x420198.classList.remove(_0x4b417b['FBbYa']('smolbuttonxdark', _0xe3fad5)));
     },
     _0x185180 = function () {
       (_0x4b417b['YyfEm'](_0x5ab889, quiz['getMaxScore']()),
@@ -3259,7 +3242,7 @@ async function loadData() {
         changeFooterPosition());
     };
   for (let _0x55b3f7 in genQuizBoxes)
-    document['getElementById'](_0x4b417b['tJYCi'] + _0x55b3f7)['onclick'] = function () {
+    document.getElementById(_0x4b417b['tJYCi'] + _0x55b3f7)['onclick'] = function () {
       const _0xef4229 = {
         hxtaf: _0x4b417b['xAFWt'],
         onOdF: function (_0x410ed7) {
@@ -3268,8 +3251,8 @@ async function loadData() {
       };
       let _0x1137ed = function () {
         var _0xc8494f;
-        ((document['getElementById'](_0x4b417b['hYQNJ'])['onclick'] = off2),
-          (document['getElementById']('typeselection')['onclick'] = off2),
+        ((document.getElementById(_0x4b417b['hYQNJ'])['onclick'] = off2),
+          (document.getElementById('typeselection')['onclick'] = off2),
           (promptGen['style']['display'] = _0x4b417b['xAFWt']),
           (_0xc8494f = _0x55b3f7),
           quiz['setGenQuiz'](_0xc8494f),
@@ -3283,7 +3266,7 @@ async function loadData() {
         }),
         0x0 !== quiz['getScore']() ? (promptGen['style']['display'] = 'inline') : (_0x1137ed(), off2()));
     };
-  document['getElementById'](_0x4b417b['mQSAN'])['onclick'] = function () {
+  document.getElementById(_0x4b417b['mQSAN'])['onclick'] = function () {
     const _0x3d8e34 = {
       FWabX: function (_0x2cef67) {
         return _0x4b417b['oHyyf'](_0x2cef67);
@@ -3292,8 +3275,8 @@ async function loadData() {
       SIBpr: 'special',
     };
     let _0x58261e = function () {
-      ((document['getElementById'](_0x3d8e34['RLjxd'])['onclick'] = off2),
-        (document['getElementById']('typeselection')['onclick'] = off2),
+      ((document.getElementById(_0x3d8e34['RLjxd'])['onclick'] = off2),
+        (document.getElementById('typeselection')['onclick'] = off2),
         (promptGen['style']['display'] = 'none'),
         quiz['setQuiz'](_0x3d8e34['SIBpr'], {
           legendary: true,
@@ -3317,28 +3300,28 @@ async function loadData() {
     ((_0x53a6b7['innerHTML'] += _0x4fc0d0),
       _0x53a6b7['classList']['add'](_0x4b417b['mTscN']),
       _0x53a6b7['classList']['add']('langbutton'),
-      (_0x53a6b7['id'] = _0x4b417b['YDpvf']('missing-', _0x4fc0d0)),
+      (_0x53a6b7.id = _0x4b417b['YDpvf']('missing-', _0x4fc0d0)),
       (_0x53a6b7['onclick'] = function () {
         let _0x32e152 = quiz['getStyleName']();
         for (let _0x19ce55 = 0x0; _0x19ce55 < _0x2a95c1['length']; _0x19ce55++)
           (_0x4b417b['hJiVE'](_0x2a95c1[_0x19ce55], _0x53a6b7) &&
-            (_0x2a95c1[_0x19ce55]['classList']['remove']('smolbuttonSwap'),
-            _0x2a95c1[_0x19ce55]['classList']['remove']('smolbuttonSwap' + _0x32e152),
+            (_0x2a95c1[_0x19ce55].classList.remove('smolbuttonSwap'),
+            _0x2a95c1[_0x19ce55].classList.remove('smolbuttonSwap' + _0x32e152),
             _0x2a95c1[_0x19ce55]['classList']['add'](_0x4b417b['mTscN']),
             _0x2a95c1[_0x19ce55]['classList']['add'](_0x4b417b['gnZpI']('smolbutton', _0x32e152)),
             darkMode &&
               (_0x2a95c1[_0x19ce55]['classList']['add'](_0x4b417b['NXTZt']),
               _0x2a95c1[_0x19ce55]['classList']['add'](_0x4b417b['FBbYa'](_0x4b417b['NXTZt'], _0x32e152)))),
-            _0x53a6b7['classList']['remove'](_0x4b417b['mTscN']),
-            _0x53a6b7['classList']['remove'](_0x4b417b['mTscN'] + _0x32e152),
-            _0x53a6b7['classList']['remove'](_0x4b417b['NXTZt']),
-            _0x53a6b7['classList']['remove'](_0x4b417b['FBbYa'](_0x4b417b['NXTZt'], _0x32e152)),
+            _0x53a6b7.classList.remove(_0x4b417b['mTscN']),
+            _0x53a6b7.classList.remove(_0x4b417b['mTscN'] + _0x32e152),
+            _0x53a6b7.classList.remove(_0x4b417b['NXTZt']),
+            _0x53a6b7.classList.remove(_0x4b417b['FBbYa'](_0x4b417b['NXTZt'], _0x32e152)),
             _0x53a6b7['classList']['add']('smolbuttonSwap'),
             _0x53a6b7['classList']['add']('smolbuttonSwap' + _0x32e152));
         quiz['setLanguage'](_0x4fc0d0);
       }),
       missingOptionsDiv['appendChild'](_0x53a6b7),
-      _0x2a95c1['push'](_0x53a6b7));
+      _0x2a95c1.push(_0x53a6b7));
   }
 
   function _0x3cf874(_0x33cd2e) {
@@ -3391,7 +3374,7 @@ async function loadData() {
       (timerObj = {
         type: 'none',
       }),
-      (document['getElementById'](_0x4b417b['cyfgz'])['style']['display'] = _0x4b417b['WZEPU']),
+      (document.getElementById(_0x4b417b['cyfgz'])['style']['display'] = _0x4b417b['WZEPU']),
       soundEnabled && soundEffect2['play']());
     let _0x26c108 = '',
       _0x337ba5 = '';
@@ -3402,25 +3385,25 @@ async function loadData() {
             ? _0x4b417b['vefac'](_0x15939e, '\x20minutes')
             : _0x4b417b['ZBXCb'](_0x37b652, _0x4b417b['PoGPv'](0x3c, _0x15939e) * 1000 - _0x148484)),
         (_0x337ba5 = _0x4b417b['cuGcH']('\x20', quiz['getScore']()) + '\x20')),
-      (document['getElementById'](_0x4b417b['gipqR'])['innerHTML'] = quiz['getEndText']()),
-      (document['getElementById'](_0x4b417b['brKMA'])['innerHTML'] = _0x26c108),
-      (document['getElementById']('currentcount')['innerHTML'] = _0x337ba5),
-      (document['getElementById']('shadow-count')['innerHTML'] = quiz['revealedShadows']['size']),
+      (document.getElementById(_0x4b417b['gipqR'])['innerHTML'] = quiz['getEndText']()),
+      (document.getElementById(_0x4b417b['brKMA'])['innerHTML'] = _0x26c108),
+      (document.getElementById('currentcount')['innerHTML'] = _0x337ba5),
+      (document.getElementById('shadow-count')['innerHTML'] = quiz['revealedShadows']['size']),
       quiz['orderMode']
-        ? (document['getElementById'](_0x4b417b['SWNAr'])['innerHTML'] = _0x4b417b['CqBeW'])
+        ? (document.getElementById(_0x4b417b['SWNAr'])['innerHTML'] = _0x4b417b['CqBeW'])
         : quiz['chaosMode']
-          ? (document['getElementById'](_0x4b417b['SWNAr'])['innerHTML'] = _0x4b417b['AAiBR'])
-          : (document['getElementById'](_0x4b417b['SWNAr'])['innerHTML'] = '!'),
+          ? (document.getElementById(_0x4b417b['SWNAr'])['innerHTML'] = _0x4b417b['AAiBR'])
+          : (document.getElementById(_0x4b417b['SWNAr'])['innerHTML'] = '!'),
       quiz['revealedShadows']['size'] > 0x0
-        ? (document['getElementById']('trychallenge')['style']['display'] = _0x4b417b['WZEPU'])
-        : (document['getElementById']('trychallenge')['style']['display'] = 'none'),
+        ? (document.getElementById('trychallenge')['style']['display'] = _0x4b417b['WZEPU'])
+        : (document.getElementById('trychallenge')['style']['display'] = 'none'),
       Object['keys'](quiz['users'])['length'] > 0x1 &&
-        (document['getElementById'](_0x4b417b['JxGQa'])['style']['display'] = _0x4b417b['WZEPU']),
-      (document['getElementById']('ranking')['style']['display'] = _0x4b417b['xAFWt']),
+        (document.getElementById(_0x4b417b['JxGQa'])['style']['display'] = _0x4b417b['WZEPU']),
+      (document.getElementById('ranking')['style']['display'] = _0x4b417b['xAFWt']),
       quiz['animateCongrats'](),
       quiz['giveUp'](),
-      (document['getElementById'](_0x4b417b['hmfGc'])['style']['display'] = _0x4b417b['WZEPU']),
-      document['getElementById'](_0x4b417b['IICbU'])['click'](),
+      (document.getElementById(_0x4b417b['hmfGc'])['style']['display'] = _0x4b417b['WZEPU']),
+      document.getElementById(_0x4b417b['IICbU'])['click'](),
       (result_data = {
         allShadows: quiz['useSilhouettes'],
         chaosMode: quiz['chaosMode'],
@@ -3445,15 +3428,15 @@ async function loadData() {
       _0x43ad00(),
       (inputField['disabled'] = true),
       _0x4b417b['HJLRw'](Object['keys'](quiz['users'])['length'], 0x1) &&
-        (document['getElementById'](_0x4b417b['JxGQa'])['style']['display'] = _0x4b417b['WZEPU']),
-      (document['getElementById']('ranking')['style']['display'] = _0x4b417b['xAFWt']),
+        (document.getElementById(_0x4b417b['JxGQa'])['style']['display'] = _0x4b417b['WZEPU']),
+      (document.getElementById('ranking')['style']['display'] = _0x4b417b['xAFWt']),
       clearInterval(activeTimer),
       (timerObj = {
         type: 'none',
       }),
       quiz['giveUp'](),
-      (document['getElementById']('missednames')['style']['display'] = 'block'),
-      document['getElementById'](_0x4b417b['IICbU'])['click'](),
+      (document.getElementById('missednames')['style']['display'] = 'block'),
+      document.getElementById(_0x4b417b['IICbU'])['click'](),
       (result_data = {
         allShadows: quiz['useSilhouettes'],
         chaosMode: quiz['chaosMode'],
@@ -3470,7 +3453,7 @@ async function loadData() {
   }
 
   ((nameAll = function () {
-    for (let _0x3eea9e of quiz['currentIds']) _0x46eda6(quiz['pokemonIdDict'][_0x3eea9e]['baseName'], myUsername);
+    for (let _0x3eea9e of quiz['currentIds']) _0x46eda6(quiz['pokemonIdDict'][_0x3eea9e].baseName, myUsername);
   }),
     (inputField['oninput'] = function () {
       if (_0x4b417b['KDfMw'](inputField['value']['length'], 0x0)) {
@@ -3493,7 +3476,7 @@ async function loadData() {
         let _0x4346b4 = res[0x0],
           _0x260dd3 = res[0x1];
         (_0x4b417b['PqSrS'](null, _0x260dd3) &&
-          _0x260dd3['includes']('not\x20the\x20next') &&
+          _0x260dd3.includes('not\x20the\x20next') &&
           soundEnabled &&
           soundEffectWrongOrder['play'](),
           _0x4b417b['mWsZe'] === _0x260dd3
@@ -3782,9 +3765,9 @@ async function loadData() {
     }
   }
 
-  document['getElementById']('hintplace')['onclick'] = _0x33228f;
+  document.getElementById('hintplace')['onclick'] = _0x33228f;
   let _0x43ad00 = function () {
-    let _0x2833ef = document['getElementById'](_0x4b417b['ymhUF']);
+    let _0x2833ef = document.getElementById(_0x4b417b['ymhUF']);
     for (; _0x2833ef['firstChild']; ) _0x2833ef['firstChild']['remove']();
     if (_0x4b417b['WuFFG'](Object['keys'](quiz['users'])['length'], 0x1)) {
       let _0x4a90c3 = _0x4b417b['tAjLJ'](sortDictionaryByValue, quiz['users']),
@@ -3821,20 +3804,20 @@ async function loadData() {
       changeFooterPosition();
     }
   };
-  document['getElementById']('accordion2')['onclick'] = function () {
-    ('block' == document['getElementById'](_0x4b417b['ymhUF'])['style']['display']
-      ? ((document['getElementById']('leaderboard2')['style']['display'] = _0x4b417b['xAFWt']),
-        document['getElementById'](_0x4b417b['lbZpH'])['classList']['add'](_0x4b417b['fdQWM']),
-        document['getElementById'](_0x4b417b['lbZpH'])['classList']['remove'](_0x4b417b['dOfhF']))
-      : ((document['getElementById'](_0x4b417b['ymhUF'])['style']['display'] = 'block'),
-        document['getElementById']('arrow2')['classList']['add'](_0x4b417b['dOfhF']),
-        document['getElementById'](_0x4b417b['lbZpH'])['classList']['remove']('adown'),
+  document.getElementById('accordion2')['onclick'] = function () {
+    ('block' == document.getElementById(_0x4b417b['ymhUF'])['style']['display']
+      ? ((document.getElementById('leaderboard2')['style']['display'] = _0x4b417b['xAFWt']),
+        document.getElementById(_0x4b417b['lbZpH'])['classList']['add'](_0x4b417b['fdQWM']),
+        document.getElementById(_0x4b417b['lbZpH']).classList.remove(_0x4b417b['dOfhF']))
+      : ((document.getElementById(_0x4b417b['ymhUF'])['style']['display'] = 'block'),
+        document.getElementById('arrow2')['classList']['add'](_0x4b417b['dOfhF']),
+        document.getElementById(_0x4b417b['lbZpH']).classList.remove('adown'),
         _0x43ad00()),
       _0x4b417b['MvOIa'](changeFooterPosition));
   };
   for (let _0x216774 = 0x0; _0x4b417b['bWuzq'](_0x216774, typeList['length']); _0x216774++) {
     let _0x13aa2e = _0x216774;
-    document['getElementById']('b-' + typeList[_0x216774])['onclick'] = function () {
+    document.getElementById('b-' + typeList[_0x216774])['onclick'] = function () {
       const _0x114f6c = {
         EamlX: function (_0x333cdd) {
           return _0x333cdd();
@@ -3843,8 +3826,8 @@ async function loadData() {
       };
       let _0x5b4a5c = function () {
         var _0x513538;
-        ((document['getElementById'](_0x114f6c['YbXhu'])['onclick'] = off2),
-          (document['getElementById']('genselection')['onclick'] = off2),
+        ((document.getElementById(_0x114f6c['YbXhu'])['onclick'] = off2),
+          (document.getElementById('genselection')['onclick'] = off2),
           (promptGen['style']['display'] = 'none'),
           quiz['reset'](),
           (_0x513538 = typeList[_0x13aa2e]),
@@ -3862,7 +3845,7 @@ async function loadData() {
     };
   }
   let _0x103bde = null;
-  document['getElementById']('accordion2')['click']();
+  document.getElementById('accordion2')['click']();
   let _0x535161 = [
       [
         encodedImages['sprite']['bulbasaur'],
@@ -3881,7 +3864,7 @@ async function loadData() {
     _0x5bd580 = 0x0,
     _0x193402 = true,
     _0x14d036 = response['sprite_cycles'],
-    _0xec1497 = document['getElementById']('type0')['classList']['length'],
+    _0xec1497 = document.getElementById('type0')['classList']['length'],
     _0x12e639 = function () {
       const _0x42f94c = {
         GQOHK: function (_0x693401, _0x437361, _0x10874c) {
@@ -3896,13 +3879,13 @@ async function loadData() {
         },
       };
       for (let _0x398e08 = 0x0; _0x4b417b['bWuzq'](_0x398e08, _0x535161['length']); _0x398e08++) {
-        document['getElementById'](
+        document.getElementById(
           _0x4b417b['ZauVy'](_0x4b417b['CGBtI']('gen', [_0x4b417b['IGEEC'](_0x398e08, 0x1)]), _0x4b417b['iBUbD']),
         )['src'] = _0x535161[_0x398e08][_0x4b417b['GlnwJ'](_0x5bd580, _0x535161[0x0]['length'])];
       }
       (!(function (_0xadd48e) {
-        let _0x305c92 = document['getElementById']('type-img'),
-          _0x10c719 = document['getElementById']('type0'),
+        let _0x305c92 = document.getElementById('type-img'),
+          _0x10c719 = document.getElementById('type0'),
           _0x268ffe = _0x4b417b['xzAeN'](_0xadd48e, typeList['length']);
         _0x268ffe = _0x193402 ? _0x268ffe : 0x0;
         let _0x2a553c = typeList[_0x268ffe];
@@ -3912,7 +3895,7 @@ async function loadData() {
             _0x4b417b['uXaTw'],
           )),
           _0x10c719['classList']['length'] !== _0xec1497 &&
-            _0x10c719['classList']['remove'](_0x10c719['classList'][_0x10c719['classList']['length'] - 0x1]),
+            _0x10c719.classList.remove(_0x10c719['classList'][_0x10c719['classList']['length'] - 0x1]),
           _0x10c719['classList']['add'](_0x4b417b['DuMaG'](_0x4b417b['gGEHQ'], _0x2a553c)));
       })(_0x5bd580),
         (function (_0x446286) {
@@ -3968,7 +3951,7 @@ async function loadData() {
   function _0x45f4e9() {
     let _0x463e68 = _0x4b417b['rAhCF'](sortDictionaryByValue, quiz['users']);
     _0x4b417b['MgmJG'](emptyLeaderboard);
-    let _0x5949a5 = document['getElementById']('leaderboard'),
+    let _0x5949a5 = document.getElementById('leaderboard'),
       _0xe19fdb = quiz['getStyleName']();
     for (let _0x168b32 = 0x0; _0x4b417b['ZrMvO'](_0x168b32, _0x463e68['length']); _0x168b32++) {
       let _0x4c45b9 = document['createElement'](_0x4b417b['iwELR']);
@@ -3992,25 +3975,25 @@ async function loadData() {
       }
     }
     _0x4b417b['BHdfv'](_0x463e68['length'], 0x1) &&
-      (document['getElementById'](_0x4b417b['lBinT'])['style']['display'] = 'block');
+      (document.getElementById(_0x4b417b['lBinT'])['style']['display'] = 'block');
   }
 
-  ((document['getElementById'](_0x4b417b['KWwwr'])['onclick'] = () => {
+  ((document.getElementById(_0x4b417b['KWwwr'])['onclick'] = () => {
     ((_0x193402 = true),
       (quiz['cyclingEnabled'] = true),
-      _0x57dd20(document['getElementById'](_0x4b417b['avBhJ'])),
-      _0x4b417b['oArOe'](_0x2f9557, document['getElementById']('cycle-on')));
+      _0x57dd20(document.getElementById(_0x4b417b['avBhJ'])),
+      _0x4b417b['oArOe'](_0x2f9557, document.getElementById('cycle-on')));
   }),
-    (document['getElementById'](_0x4b417b['avBhJ'])['onclick'] = () => {
+    (document.getElementById(_0x4b417b['avBhJ'])['onclick'] = () => {
       ((_0x193402 = false),
         (quiz['cyclingEnabled'] = false),
         quiz['resetDitto'](),
         _0x12e639(),
-        _0x4b417b['JbBCS'](_0x57dd20, document['getElementById']('cycle-on')),
-        _0x2f9557(document['getElementById']('cycle-off')));
+        _0x4b417b['JbBCS'](_0x57dd20, document.getElementById('cycle-on')),
+        _0x2f9557(document.getElementById('cycle-off')));
     }),
     window['addEventListener'](_0x4b417b['mykHM'], beforeUnload),
-    (document['getElementById']('twitch-on')['onclick'] = function () {
+    (document.getElementById('twitch-on')['onclick'] = function () {
       const _0x5da9dd = {
         KlDFr: function (_0x2cb46e, _0x41f589) {
           return _0x4b417b['VotkM'](_0x2cb46e, _0x41f589);
@@ -4033,15 +4016,15 @@ async function loadData() {
         },
         veUMa: _0x4b417b['trEuJ'],
       };
-      if (!isTwitchOn && _0x4b417b['wlUmD']('', document['getElementById']('twitch-channel')['value'])) {
+      if (!isTwitchOn && _0x4b417b['wlUmD']('', document.getElementById('twitch-channel')['value'])) {
         isTwitchOn = true;
-        let _0x2fdaa7 = document['getElementById']('twitch-channel')['value'];
+        let _0x2fdaa7 = document.getElementById('twitch-channel')['value'];
         (console['log']('enable', _0x2fdaa7),
-          (document['getElementById'](_0x4b417b['evGnO'])['disabled'] = true),
-          _0x57dd20(document['getElementById'](_0x4b417b['YWOxB'])),
-          _0x2f9557(document['getElementById'](_0x4b417b['mVJjM'])),
+          (document.getElementById(_0x4b417b['evGnO'])['disabled'] = true),
+          _0x57dd20(document.getElementById(_0x4b417b['YWOxB'])),
+          _0x2f9557(document.getElementById(_0x4b417b['mVJjM'])),
           (client = new tmi['Client']({
-            channels: [document['getElementById']('twitch-channel')['value']],
+            channels: [document.getElementById('twitch-channel')['value']],
           }))['on']('connected', function (_0x4cb0c1, _0x4bccc7) {
             _0x5da9dd['SeLVa'](showUserMessage, 'Connected\x20to\x20Twitch\x20chat\x20for\x20' + _0x2fdaa7);
           }),
@@ -4087,10 +4070,10 @@ async function loadData() {
                     ) && window['scrollBy'](0x0, -0x3c),
                 _0x4b417b['GBQPa'](standardizeName, _0x426cd4) === _0x4b417b['NKgdk']['toLowerCase']()
                   ? _0x4b417b['whOMZ'](Date['now'](), swapLimit) > lastDarkSwap &&
-                    (document['getElementById'](_0x4b417b['NKgdk'])['click'](), (lastDarkSwap = Date['now']()))
+                    (document.getElementById(_0x4b417b['NKgdk'])['click'](), (lastDarkSwap = Date['now']()))
                   : _0x4b417b['yTXmM'](_0x4b417b['jOMHk'](standardizeName, _0x426cd4), 'darkon'['toLowerCase']())
                     ? _0x4b417b['HJLRw'](_0x4b417b['hNfMt'](Date['now'](), swapLimit), lastDarkSwap) &&
-                      (document['getElementById'](_0x4b417b['ibiqg'])['click'](), (lastDarkSwap = Date['now']()))
+                      (document.getElementById(_0x4b417b['ibiqg'])['click'](), (lastDarkSwap = Date['now']()))
                     : _0x4b417b['EjTKk'](standardizeName, _0x426cd4) === _0x4b417b['iBupY']['toLowerCase']()
                       ? _0x4b417b['wMSro'](_0x4b417b['WvVuB'](Date['now'](), swapLimit), lastShinySwap) &&
                         (shinyOn(), (lastShinySwap = Date['now']()))
@@ -4102,10 +4085,10 @@ async function loadData() {
               if ('ethan_from_chicago' == _0x52294e && _0x4b417b['RwcIQ'] == _0x426cd4) {
                 let _0x9e8699 = 0x5;
                 for (const _0x5785ed of quiz['currentIds']) {
-                  if (quiz['named']['has'](_0x5785ed)) {
+                  if (quiz['named'].has(_0x5785ed)) {
                     continue;
                   }
-                  let _0x25a808 = quiz['pokemonIdDict'][_0x5785ed]['baseName'];
+                  let _0x25a808 = quiz['pokemonIdDict'][_0x5785ed].baseName;
                   (_0x4b417b['NYtQA'](
                     setTimeout,
                     () => {
@@ -4133,17 +4116,17 @@ async function loadData() {
                 ? (function () {
                     let _0x22b8b2 = 0x0;
                     (_0x4e5200['UWGLD']('', currentType) &&
-                      document['getElementById']('body')['classList']['remove'](currentType),
+                      document.getElementById('body').classList.remove(currentType),
                       (_0x103bde = _0x4e5200['SpoUc'](
                         setInterval,
                         () => {
-                          (document['getElementById'](_0x4e5200['XRPvW'])['classList']['remove'](typeList[_0x22b8b2]),
+                          (document.getElementById(_0x4e5200['XRPvW']).classList.remove(typeList[_0x22b8b2]),
                             (_0x22b8b2 += 0x1),
                             _0x22b8b2 == typeList['length'] && (_0x22b8b2 = 0x0),
-                            document['getElementById'](_0x4e5200['XRPvW'])['classList']['add'](typeList[_0x22b8b2]),
+                            document.getElementById(_0x4e5200['XRPvW'])['classList']['add'](typeList[_0x22b8b2]),
                             darkMode
-                              ? document['getElementById']('body')['classList']['add'](_0x4e5200['conTZ'])
-                              : document['getElementById']('body')['classList']['add']('blend'));
+                              ? document.getElementById('body')['classList']['add'](_0x4e5200['conTZ'])
+                              : document.getElementById('body')['classList']['add']('blend'));
                         },
                         0x96,
                       )));
@@ -4152,14 +4135,14 @@ async function loadData() {
                   (function () {
                     _0x5da9dd['YBtrc'](null, _0x103bde) && _0x5da9dd['KlDFr'](clearInterval, _0x103bde);
                     for (let _0x4b9999 = 0x0; _0x5da9dd['ccJBa'](_0x4b9999, typeList['length']); _0x4b9999++)
-                      document['getElementById']('body')['classList']['remove'](typeList[_0x4b9999]);
+                      document.getElementById('body').classList.remove(typeList[_0x4b9999]);
                     '' === currentType
-                      ? (document['getElementById']('body')['classList']['remove']('blend'),
-                        document['getElementById']('body')['classList']['remove'](_0x5da9dd['PJcyp']))
+                      ? (document.getElementById('body').classList.remove('blend'),
+                        document.getElementById('body').classList.remove(_0x5da9dd['PJcyp']))
                       : (darkMode
-                          ? document['getElementById']('body')['classList']['add'](_0x5da9dd['PJcyp'])
-                          : document['getElementById'](_0x5da9dd['veUMa'])['classList']['add']('blend'),
-                        document['getElementById'](_0x5da9dd['veUMa'])['classList']['add'](currentType));
+                          ? document.getElementById('body')['classList']['add'](_0x5da9dd['PJcyp'])
+                          : document.getElementById(_0x5da9dd['veUMa'])['classList']['add']('blend'),
+                        document.getElementById(_0x5da9dd['veUMa'])['classList']['add'](currentType));
                   })()),
               ('ethan_from_chicago' != _0x52294e && 'ethan_from_chicago' != _0x2fdaa7['toLowerCase']()) ||
                 (_0x4b417b['zjJEY'](_0x426cd4, 'ethan_from_chicago\x27s\x20favorite\x20pokemon'['toLowerCase']()) &&
@@ -4368,14 +4351,14 @@ async function loadData() {
     ((paused = true),
       (quiz['paused'] = true),
       (inputField['disabled'] = true),
-      (document['getElementById'](_0x4b417b['zrKWt'])['style']['display'] = 'block'));
+      (document.getElementById(_0x4b417b['zrKWt'])['style']['display'] = 'block'));
   }
 
   function _0x3caacb() {
     ((paused = false),
       (quiz['paused'] = false),
       (inputField['disabled'] = false),
-      (document['getElementById'](_0x4b417b['zrKWt'])['style']['display'] = 'none'));
+      (document.getElementById(_0x4b417b['zrKWt'])['style']['display'] = 'none'));
   }
 
   function _0x3a2342() {
@@ -4398,15 +4381,15 @@ async function loadData() {
     );
   }
 
-  ((document['getElementById'](_0x4b417b['YWOxB'])['onclick'] = function () {
+  ((document.getElementById(_0x4b417b['YWOxB'])['onclick'] = function () {
     isTwitchOn &&
       ((isTwitchOn = false),
       console['log'](_0x4b417b['DdfxE']),
-      (document['getElementById'](_0x4b417b['evGnO'])['disabled'] = false),
-      _0x4b417b['MAcCo'](_0x57dd20, document['getElementById'](_0x4b417b['mVJjM'])),
-      _0x4b417b['eAttu'](_0x2f9557, document['getElementById'](_0x4b417b['YWOxB'])),
+      (document.getElementById(_0x4b417b['evGnO'])['disabled'] = false),
+      _0x4b417b['MAcCo'](_0x57dd20, document.getElementById(_0x4b417b['mVJjM'])),
+      _0x4b417b['eAttu'](_0x2f9557, document.getElementById(_0x4b417b['YWOxB'])),
       client['disconnect'](),
-      (document['getElementById']('ranking')['style']['display'] = _0x4b417b['xAFWt']));
+      (document.getElementById('ranking')['style']['display'] = _0x4b417b['xAFWt']));
   }),
     (saveButton['onclick'] = () => {
       let _0x182a0b = _0x4b417b['CqQlI'](_0x3a2342);
@@ -4529,18 +4512,18 @@ async function loadData() {
   }
 
   (loadButton['addEventListener']('change', function (_0x56422e) {
-    document['getElementById'](_0x4b417b['eaunD'])['click']();
+    document.getElementById(_0x4b417b['eaunD'])['click']();
   }),
     (loadButton['onclick'] = () => {
-      document['getElementById']('fileInput')['click']();
+      document.getElementById('fileInput')['click']();
     }),
-    document['getElementById']('fileInput')['addEventListener']('change', function (_0x1c3aa7) {
+    document.getElementById('fileInput')['addEventListener']('change', function (_0x1c3aa7) {
       if (_0x1c3aa7['target']['files']['length'] > 0x0) {
         let _0x4c8f03 = _0x1c3aa7['target']['files'][0x0];
-        (_0x4b417b['ziTIU'](_0x5de384, _0x4c8f03), (document['getElementById'](_0x4b417b['eaunD'])['value'] = ''));
+        (_0x4b417b['ziTIU'](_0x5de384, _0x4c8f03), (document.getElementById(_0x4b417b['eaunD'])['value'] = ''));
       }
     }),
-    (document['getElementById'](_0x4b417b['lgEtF'])['onclick'] = () => {
+    (document.getElementById(_0x4b417b['lgEtF'])['onclick'] = () => {
       (_0x1ffa5f(false), _0x3caacb());
     }),
     (pauseBtn['onclick'] = () => {
@@ -4589,15 +4572,15 @@ async function loadData() {
             }
           }
         }),
-        (document['getElementById']('loader')['style']['display'] = 'none'),
-        (document['getElementById']('loadboxguest')['style']['display'] = _0x4b417b['xAFWt']),
-        (document['getElementById']('playtext')['style']['opacity'] = '1'),
-        (document['getElementById'](_0x4b417b['KCzke'])['style']['opacity'] = '1'),
-        (document['getElementById'](_0x4b417b['BGNrJ'])['disabled'] = false),
-        (document['getElementById'](_0x4b417b['lOswR'])['style']['display'] = 'none'),
-        (document['getElementById']('spinnerguest')['style']['display'] = 'none'),
-        (document['getElementById']('username-area')['style']['display'] = 'block'),
-        document['getElementById'](_0x4b417b['uApsS'])['click'](),
+        (document.getElementById('loader')['style']['display'] = 'none'),
+        (document.getElementById('loadboxguest')['style']['display'] = _0x4b417b['xAFWt']),
+        (document.getElementById('playtext')['style']['opacity'] = '1'),
+        (document.getElementById(_0x4b417b['KCzke'])['style']['opacity'] = '1'),
+        (document.getElementById(_0x4b417b['BGNrJ'])['disabled'] = false),
+        (document.getElementById(_0x4b417b['lOswR'])['style']['display'] = 'none'),
+        (document.getElementById('spinnerguest')['style']['display'] = 'none'),
+        (document.getElementById('username-area')['style']['display'] = 'block'),
+        document.getElementById(_0x4b417b['uApsS'])['click'](),
         _0x4b417b['iOZEL'](changeFooterPosition),
         _0x4b417b['oHyyf'](addTransitionCss),
         preloadSmallerImages());
@@ -4610,11 +4593,11 @@ roomId['length'] > 0x1
     })['then']((_0x2613ec) => {
       _0x2613ec['success'] || noSuchRoom();
     }),
-    (document['getElementById']('guest-info')['style']['display'] = 'block'),
-    (document['getElementById']('loadboxguest')['style']['display'] = 'block'),
-    (document['getElementById']('savemenu')['style']['display'] = 'none'),
-    (document['getElementById']('loadbox')['style']['display'] = 'none'),
-    (document['getElementById']('extrashadow')['style']['display'] = 'none'),
+    (document.getElementById('guest-info')['style']['display'] = 'block'),
+    (document.getElementById('loadboxguest')['style']['display'] = 'block'),
+    (document.getElementById('savemenu')['style']['display'] = 'none'),
+    (document.getElementById('loadbox')['style']['display'] = 'none'),
+    (document.getElementById('extrashadow')['style']['display'] = 'none'),
     (usernamePrompt['style']['display'] = 'block'),
     (radioSilhouette['style']['display'] = 'none'),
     (orderModeMenu['style']['display'] = 'none'),
@@ -4624,18 +4607,18 @@ roomId['length'] > 0x1
     (stopwatchBtn['style']['display'] = 'none'),
     (pauseBtn['style']['display'] = 'none'),
     (hostGame['style']['display'] = 'none'),
-    (document['getElementById']('genselect')['style']['display'] = 'none'),
-    (document['getElementById']('typeshufflebox')['style']['display'] = 'none'),
-    (document['getElementById']('specialButton')['style']['display'] = 'none'),
-    (document['getElementById']('typeselect')['style']['display'] = 'none'),
-    (document['getElementById']('timers')['style']['display'] = 'none'),
-    (document['getElementById']('twitchbox')['style']['display'] = 'none'),
-    (document['getElementById']('fullQuizButton')['style']['display'] = 'none'),
-    (document['getElementById']('playtext')['style']['display'] = 'none'),
+    (document.getElementById('genselect')['style']['display'] = 'none'),
+    (document.getElementById('typeshufflebox')['style']['display'] = 'none'),
+    (document.getElementById('specialButton')['style']['display'] = 'none'),
+    (document.getElementById('typeselect')['style']['display'] = 'none'),
+    (document.getElementById('timers')['style']['display'] = 'none'),
+    (document.getElementById('twitchbox')['style']['display'] = 'none'),
+    (document.getElementById('fullQuizButton')['style']['display'] = 'none'),
+    (document.getElementById('playtext')['style']['display'] = 'none'),
     (pauseBtn['style']['display'] = 'none'),
-    (document['getElementById']('unpause')['style']['display'] = 'none'),
-    (document['getElementById']('pause-text')['innerText'] = 'Paused\x20by\x20host'))
-  : ((roomId = null), (document['getElementById']('host-info')['style']['display'] = 'block'));
+    (document.getElementById('unpause')['style']['display'] = 'none'),
+    (document.getElementById('pause-text')['innerText'] = 'Paused\x20by\x20host'))
+  : ((roomId = null), (document.getElementById('host-info')['style']['display'] = 'block'));
 let visualizeButtonClick = function (_0x1f008a) {
     const _0x4c6340 = {
       DUlKI: 'smolbuttonxdark',
@@ -4658,14 +4641,14 @@ let visualizeButtonClick = function (_0x1f008a) {
       oxsEu: 'smolbuttonxdark',
     };
     if (
-      (_0x3007ef['classList']['remove']('smolbuttonx'),
-      _0x3007ef['classList']['remove'](_0x59923c['oxsEu']),
+      (_0x3007ef.classList.remove('smolbuttonx'),
+      _0x3007ef.classList.remove(_0x59923c['oxsEu']),
       '' !== quiz['getStyleName']())
     ) {
       let _0x4ba72e = quiz['getStyleName']();
       ('dark' == _0x4ba72e && (_0x4ba72e = 'evil'),
-        _0x3007ef['classList']['remove']('smolbuttonx' + _0x4ba72e),
-        _0x3007ef['classList']['remove'](_0x59923c['oxsEu'] + _0x4ba72e));
+        _0x3007ef.classList.remove('smolbuttonx' + _0x4ba72e),
+        _0x3007ef.classList.remove(_0x59923c['oxsEu'] + _0x4ba72e));
     }
   };
 
@@ -4686,7 +4669,7 @@ function addTransitionCss() {
     lRDDt: 'bgpattern',
   };
   let _0x2279a6 = [];
-  _0x2279a6['push'](document['getElementById']('body'));
+  _0x2279a6.push(document.getElementById('body'));
   let _0x17c281 = [
     _0x108ce6['Hagzj'],
     _0x108ce6['RauhI'],
@@ -4701,14 +4684,14 @@ function addTransitionCss() {
   ];
   for (const _0x5555e8 of _0x17c281) {
     let _0x22fd69 = document['getElementsByClassName'](_0x5555e8);
-    for (let _0x3e1eb9 = 0x0; _0x3e1eb9 < _0x22fd69['length']; _0x3e1eb9++) _0x2279a6['push'](_0x22fd69[_0x3e1eb9]);
+    for (let _0x3e1eb9 = 0x0; _0x3e1eb9 < _0x22fd69['length']; _0x3e1eb9++) _0x2279a6.push(_0x22fd69[_0x3e1eb9]);
   }
   for (let _0x22a938 = 0x0; _0x108ce6['dRZgx'](_0x22a938, _0x2279a6['length']); _0x22a938++)
     _0x2279a6[_0x22a938]['classList']['add'](_0x108ce6['MrLQu']);
   let _0x50fdd4 = new Date();
   (_0x108ce6['VILwW'](_0x50fdd4['getHours'](), 0x12) || _0x50fdd4['getHours']() <= 0x7) &&
     setTimeout(() => {
-      document['getElementById']('darkon')['click']();
+      document.getElementById('darkon')['click']();
     }, 0xa);
 }
 
@@ -4740,12 +4723,12 @@ function showUserMessage(_0xc4211d) {
     },
   };
   _0x374346['aimfA'](null, currentMessageTimeout) && _0x374346['UVtWa'](clearTimeout, currentMessageTimeout);
-  let _0x335a5c = document['getElementById'](_0x374346['ToHGY']);
+  let _0x335a5c = document.getElementById(_0x374346['ToHGY']);
   ((_0x335a5c['innerHTML'] = _0xc4211d),
-    _0x335a5c['classList']['remove']('snackbarshow'),
+    _0x335a5c.classList.remove('snackbarshow'),
     _0x335a5c['classList']['add']('snackbarshow'),
     (currentMessageTimeout = setTimeout(function () {
-      (_0x335a5c['classList']['remove']('snackbarshow'), _0x335a5c['classList']['add']('snackbar'));
+      (_0x335a5c.classList.remove('snackbarshow'), _0x335a5c['classList']['add']('snackbar'));
     }, 0xbb8)));
 }
 
@@ -4770,11 +4753,11 @@ function showImage(_0x3b8072) {
     pWeeJ: 'block',
     zjmWe: 'transition-element',
   };
-  let _0x50a393 = document['getElementById'](_0x5ce1bc['ODXYU']),
-    _0x218e04 = document['getElementById'](_0x5ce1bc['EiiRU']);
+  let _0x50a393 = document.getElementById(_0x5ce1bc['ODXYU']),
+    _0x218e04 = document.getElementById(_0x5ce1bc['EiiRU']);
   ((_0x50a393['style']['visibility'] = _0x5ce1bc['kikTb']),
-    _0x50a393['classList']['remove']('slow-transition-element'),
-    _0x50a393['classList']['remove']('transition-element'),
+    _0x50a393.classList.remove('slow-transition-element'),
+    _0x50a393.classList.remove('transition-element'),
     (_0x50a393['style']['opacity'] = 0x0),
     (_0x50a393['style']['display'] = _0x5ce1bc['pWeeJ']),
     (_0x218e04['src'] = _0x5ce1bc['nKuga'] + _0x3b8072 + _0x5ce1bc['Udier']),
@@ -4787,14 +4770,14 @@ function showImage(_0x3b8072) {
           return _0x3e1849(_0x2fecb7, _0x2fbfe3);
         },
       };
-      (_0x50a393['classList']['remove'](_0x5ce1bc['Gmhmi']),
+      (_0x50a393.classList.remove(_0x5ce1bc['Gmhmi']),
         _0x50a393['classList']['add'](_0x5ce1bc['zjmWe']),
         (_0x50a393['style']['opacity'] = 0.8),
         (currentImageFadeOut = _0x5ce1bc['dUGWT'](
           setTimeout,
           function () {
             (_0x50a393['classList']['add']('slow-transition-element'),
-              _0x50a393['classList']['remove']('transition-element'),
+              _0x50a393.classList.remove('transition-element'),
               (_0x50a393['style']['opacity'] = 0x0),
               (currentImageEnd = _0x47614b['MyCqZ'](
                 setTimeout,
@@ -4812,7 +4795,7 @@ function showImage(_0x3b8072) {
 function remove_duplicates_safe(_0x3c333f) {
   for (var _0x55dea8 = {}, _0x42b831 = [], _0x27ead3 = 0x0; _0x27ead3 < _0x3c333f['length']; _0x27ead3++)
     _0x3c333f[_0x27ead3] in _0x55dea8 ||
-      (_0x42b831['push'](_0x3c333f[_0x27ead3]), (_0x55dea8[_0x3c333f[_0x27ead3]] = true));
+      (_0x42b831.push(_0x3c333f[_0x27ead3]), (_0x55dea8[_0x3c333f[_0x27ead3]] = true));
   return _0x42b831;
 }
 
@@ -4918,15 +4901,15 @@ let typeClasses = [
     'arrowtype',
   ],
   pokecolumns = [];
-for (let e = 0x0; e < 0x5; e++) pokecolumns['push'](document['getElementById']('pokecolumn' + (e + 0x1)));
+for (let e = 0x0; e < 0x5; e++) pokecolumns.push(document.getElementById('pokecolumn' + (e + 0x1)));
 let regionToSingle = function (_0x1bc850) {
     const _0x15fc39 = {
       najgf: 'regionb',
     };
-    (_0x1bc850['classList']['remove']('region'), _0x1bc850['classList']['add'](_0x15fc39['najgf']));
+    (_0x1bc850.classList.remove('region'), _0x1bc850['classList']['add'](_0x15fc39['najgf']));
   },
   regionToAll = function (_0x58d324) {
-    (_0x58d324['classList']['add']('region'), _0x58d324['classList']['remove']('regionb'));
+    (_0x58d324['classList']['add']('region'), _0x58d324.classList.remove('regionb'));
   };
 
 function resetQuiz() {
@@ -4935,7 +4918,7 @@ function resetQuiz() {
 
 resetBtn['onclick'] = resetQuiz;
 let emptyLeaderboard = function () {
-  let _0x24bf2a = document['getElementById']('leaderboard');
+  let _0x24bf2a = document.getElementById('leaderboard');
   for (; _0x24bf2a['firstChild']; ) _0x24bf2a['removeChild'](_0x24bf2a['firstChild']);
 };
 
@@ -4959,7 +4942,7 @@ function off() {
     KACdl: 'none',
     qVova: 'overlay',
   };
-  document['getElementById'](_0x570f7f['qVova'])['style']['display'] = _0x570f7f['KACdl'];
+  document.getElementById(_0x570f7f['qVova'])['style']['display'] = _0x570f7f['KACdl'];
 }
 
 function off2() {
@@ -4971,12 +4954,12 @@ function off2() {
     glfjE: 'starttype',
     oupwz: 'attentionshake',
   };
-  ((document['getElementById']('loadbox')['style']['display'] = _0x4ba84f['QeMeg']),
-    (document['getElementById'](_0x4ba84f['MALsB'])['style']['display'] = 'none'),
-    (document['getElementById'](_0x4ba84f['glfjE'])['style']['display'] = _0x4ba84f['QeMeg']),
-    (document['getElementById'](_0x4ba84f['crdtF'])['style']['display'] = _0x4ba84f['QeMeg']),
-    (document['getElementById']('typeselection')['style']['display'] = _0x4ba84f['QeMeg']),
-    document['getElementById'](_0x4ba84f['UKHyQ'])['classList']['add'](_0x4ba84f['oupwz']),
+  ((document.getElementById('loadbox')['style']['display'] = _0x4ba84f['QeMeg']),
+    (document.getElementById(_0x4ba84f['MALsB'])['style']['display'] = 'none'),
+    (document.getElementById(_0x4ba84f['glfjE'])['style']['display'] = _0x4ba84f['QeMeg']),
+    (document.getElementById(_0x4ba84f['crdtF'])['style']['display'] = _0x4ba84f['QeMeg']),
+    (document.getElementById('typeselection')['style']['display'] = _0x4ba84f['QeMeg']),
+    document.getElementById(_0x4ba84f['UKHyQ'])['classList']['add'](_0x4ba84f['oupwz']),
     inputField['focus']());
 }
 
@@ -4987,21 +4970,21 @@ function off3() {
     qvAGs: 'promptsilhouette',
     sGSnw: 'promptorder-disable',
   };
-  ((document['getElementById']('promptswitch')['style']['display'] = 'none'),
-    (document['getElementById']('prompttimer')['style']['display'] = 'none'),
-    (document['getElementById']('promptsilhouette')['style']['display'] = 'none'),
-    (document['getElementById'](_0x27a0cd['qvAGs'])['style']['display'] = 'none'),
-    (document['getElementById']('promptorder-enable')['style']['display'] = 'none'),
-    (document['getElementById'](_0x27a0cd['sGSnw'])['style']['display'] = _0x27a0cd['dVDqV']),
-    (document['getElementById'](_0x27a0cd['kfKDG'])['style']['display'] = 'none'));
+  ((document.getElementById('promptswitch')['style']['display'] = 'none'),
+    (document.getElementById('prompttimer')['style']['display'] = 'none'),
+    (document.getElementById('promptsilhouette')['style']['display'] = 'none'),
+    (document.getElementById(_0x27a0cd['qvAGs'])['style']['display'] = 'none'),
+    (document.getElementById('promptorder-enable')['style']['display'] = 'none'),
+    (document.getElementById(_0x27a0cd['sGSnw'])['style']['display'] = _0x27a0cd['dVDqV']),
+    (document.getElementById(_0x27a0cd['kfKDG'])['style']['display'] = 'none'));
 }
 
 function genselectmenu() {
-  document['getElementById']('genselection')['style']['display'] = 'block';
+  document.getElementById('genselection')['style']['display'] = 'block';
 }
 
 function typeselectmenu() {
-  document['getElementById']('typeselection')['style']['display'] = 'block';
+  document.getElementById('typeselection')['style']['display'] = 'block';
 }
 
 function typeselectmenuInitial() {
@@ -5009,8 +4992,8 @@ function typeselectmenuInitial() {
     FNaia: 'none',
     TTxkH: 'genselection',
   };
-  ((document['getElementById'](_0x230cf3['TTxkH'])['style']['display'] = _0x230cf3['FNaia']),
-    (document['getElementById']('typeselection')['style']['display'] = 'block'));
+  ((document.getElementById(_0x230cf3['TTxkH'])['style']['display'] = _0x230cf3['FNaia']),
+    (document.getElementById('typeselection')['style']['display'] = 'block'));
 }
 
 function twitchopen() {
@@ -5019,9 +5002,9 @@ function twitchopen() {
     XzEXa: 'twitch-coll',
     hfuBt: 'inline-block',
   };
-  ((document['getElementById'](_0x5f7bd0['XzEXa'])['style']['display'] = _0x5f7bd0['hfuBt']),
-    (document['getElementById']('twitch-open')['style']['display'] = 'none'),
-    (document['getElementById']('twitch-bar')['style']['cursor'] = _0x5f7bd0['VQECD']));
+  ((document.getElementById(_0x5f7bd0['XzEXa'])['style']['display'] = _0x5f7bd0['hfuBt']),
+    (document.getElementById('twitch-open')['style']['display'] = 'none'),
+    (document.getElementById('twitch-bar')['style']['cursor'] = _0x5f7bd0['VQECD']));
 }
 
 function twitchclose() {
@@ -5031,9 +5014,9 @@ function twitchclose() {
     rNMUq: 'twitch-bar',
     vxXwm: 'pointer',
   };
-  ((document['getElementById'](_0x5159fe['UPfNr'])['style']['display'] = 'none'),
-    (document['getElementById']('twitch-open')['style']['display'] = _0x5159fe['SJfJd']),
-    (document['getElementById'](_0x5159fe['rNMUq'])['style']['cursor'] = _0x5159fe['vxXwm']));
+  ((document.getElementById(_0x5159fe['UPfNr'])['style']['display'] = 'none'),
+    (document.getElementById('twitch-open')['style']['display'] = _0x5159fe['SJfJd']),
+    (document.getElementById(_0x5159fe['rNMUq'])['style']['cursor'] = _0x5159fe['vxXwm']));
 }
 
 function orderopen() {
@@ -5042,9 +5025,9 @@ function orderopen() {
     iYFrr: 'order-bar',
     nQjrp: 'inline-block',
   };
-  ((document['getElementById'](_0x36ec39['YFvym'])['style']['display'] = _0x36ec39['nQjrp']),
-    (document['getElementById']('order-open')['style']['display'] = 'none'),
-    (document['getElementById'](_0x36ec39['iYFrr'])['style']['cursor'] = 'default'));
+  ((document.getElementById(_0x36ec39['YFvym'])['style']['display'] = _0x36ec39['nQjrp']),
+    (document.getElementById('order-open')['style']['display'] = 'none'),
+    (document.getElementById(_0x36ec39['iYFrr'])['style']['cursor'] = 'default'));
 }
 
 function orderclose() {
@@ -5053,9 +5036,9 @@ function orderclose() {
     Uertp: 'order-coll',
     uWdpx: 'none',
   };
-  ((document['getElementById'](_0x5be094['Uertp'])['style']['display'] = _0x5be094['uWdpx']),
-    (document['getElementById']('order-open')['style']['display'] = 'inline-block'),
-    (document['getElementById'](_0x5be094['GmXpL'])['style']['cursor'] = 'pointer'));
+  ((document.getElementById(_0x5be094['Uertp'])['style']['display'] = _0x5be094['uWdpx']),
+    (document.getElementById('order-open')['style']['display'] = 'inline-block'),
+    (document.getElementById(_0x5be094['GmXpL'])['style']['cursor'] = 'pointer'));
 }
 
 function gen0click() {
@@ -5070,21 +5053,21 @@ function gen0click() {
     tGQZe: 'gen0',
   };
   (_0x5d7b19['RQvml']('', quiz['getStyleName']()) && _0x5d7b19['lQKyD'](_0x5d7b19['plueD'], quiz['name'])) ||
-    document['getElementById'](_0x5d7b19['tGQZe'])['click']();
+    document.getElementById(_0x5d7b19['tGQZe'])['click']();
 }
 
 function swapShiny() {
   const _0x48d716 = {
     TFBQS: 'smolbuttonx',
   };
-  document['getElementById']('shiny')['classList']['contains'](_0x48d716['TFBQS']) ? shinyOff() : shinyOn();
+  document.getElementById('shiny')['classList']['contains'](_0x48d716['TFBQS']) ? shinyOff() : shinyOn();
 }
 
 function shinyOn() {
   const _0x299ee2 = {
     esvVG: 'shiny',
   };
-  (visualizeButtonClick(document['getElementById'](_0x299ee2['esvVG'])), quiz['shinyOn']());
+  (visualizeButtonClick(document.getElementById(_0x299ee2['esvVG'])), quiz['shinyOn']());
 }
 
 function shinyOff() {
@@ -5093,7 +5076,7 @@ function shinyOff() {
       return _0x1e47eb(_0x215134);
     },
   };
-  (_0x405c11['FmjBF'](visualizeButtonUnclick, document['getElementById']('shiny')), quiz['shinyOff']());
+  (_0x405c11['FmjBF'](visualizeButtonUnclick, document.getElementById('shiny')), quiz['shinyOff']());
 }
 
 (window['addEventListener'](
@@ -5120,7 +5103,7 @@ function shinyOff() {
     },
     false,
   ),
-  (document['getElementById']('shiny')['onclick'] = swapShiny),
+  (document.getElementById('shiny')['onclick'] = swapShiny),
   (recentSprite['src'] = '/sprites/unknown.png'),
   recentSprite['addEventListener'](
     'load',
@@ -5192,7 +5175,7 @@ let animationCanvasWidth,
         ),
         _0x471771 = randomIntFromInterval(0x0, 0x168),
         _0x54f55f = _0x34dc85['bemEh'](randomIntFromInterval, -0x7d0, 0x7d0);
-      _0x19bd11['push']([_0x1ce4c6, _0x470a4a, _0x1660e9, _0x3961bd, _0x471771, _0x54f55f]);
+      _0x19bd11.push([_0x1ce4c6, _0x470a4a, _0x1660e9, _0x3961bd, _0x471771, _0x54f55f]);
     }
     let _0x27e3f4 = 0x0;
     for (let _0x449b41 = 0x0; _0x449b41 < 0x168; _0x449b41++) {
@@ -5317,7 +5300,7 @@ let animationCanvasWidth,
       _0x353ccd = _0x1341ad['WtRDu'](randomIntFromInterval, 0x1b58, 0x251c),
       _0x4541a2 = _0x1341ad['WtRDu'](randomIntFromInterval, 0x0, 0x168),
       _0x55e53f = randomIntFromInterval(-0x7d0, 0x7d0);
-    ongoingAnimations['push']([
+    ongoingAnimations.push([
       _0x194841,
       _0x18c21f,
       _0x353ccd,
@@ -5326,7 +5309,7 @@ let animationCanvasWidth,
       quiz['spriteDictionary'][_0x4aabe7],
     ]);
   };
-document['getElementById']('accordion')['onclick'] = function () {
+document.getElementById('accordion')['onclick'] = function () {
   const _0x231d01 = {
     CSFpk: 'block',
     Nxbit: function (_0x18793e, _0x3e5f5f) {
@@ -5342,18 +5325,18 @@ document['getElementById']('accordion')['onclick'] = function () {
     swCuS: 'none',
     xjMXo: 'panel',
   };
-  if (_0x231d01['CSFpk'] == document['getElementById']('panel')['style']['display']) {
-    ((document['getElementById'](_0x231d01['xjMXo'])['style']['display'] = 'none'),
-      document['getElementById'](_0x231d01['cErGj'])['classList']['add']('adown'),
-      document['getElementById']('arrow')['classList']['remove']('aup'));
-    let _0xfd5434 = document['getElementById']('panel')['childNodes'];
+  if (_0x231d01['CSFpk'] == document.getElementById('panel')['style']['display']) {
+    ((document.getElementById(_0x231d01['xjMXo'])['style']['display'] = 'none'),
+      document.getElementById(_0x231d01['cErGj'])['classList']['add']('adown'),
+      document.getElementById('arrow').classList.remove('aup'));
+    let _0xfd5434 = document.getElementById('panel')['childNodes'];
     for (let _0x17a7cc = 0x0; _0x231d01['Nxbit'](_0x17a7cc, _0xfd5434['length']); _0x17a7cc++)
       _0xfd5434[_0x17a7cc]['style']['display'] = 'block';
   } else {
-    ((document['getElementById'](_0x231d01['xjMXo'])['style']['display'] = _0x231d01['CSFpk']),
-      document['getElementById'](_0x231d01['cErGj'])['classList']['add']('aup'),
-      document['getElementById']('arrow')['classList']['remove']('adown'));
-    let _0x4f63e9 = document['getElementById']('panel')['childNodes'];
+    ((document.getElementById(_0x231d01['xjMXo'])['style']['display'] = _0x231d01['CSFpk']),
+      document.getElementById(_0x231d01['cErGj'])['classList']['add']('aup'),
+      document.getElementById('arrow').classList.remove('adown'));
+    let _0x4f63e9 = document.getElementById('panel')['childNodes'];
     for (let _0x2f350d = 0x0; _0x231d01['ciqKD'](_0x2f350d, _0x4f63e9['length']); _0x2f350d++) {
       let _0xfbec96 = _0x4f63e9[_0x2f350d]['childNodes'][0x0]['childNodes'],
         _0x1adca0 = false;
@@ -5377,10 +5360,10 @@ function creditspopup() {
     kgoxl: 'credits',
     mopqM: 'show',
   };
-  document['getElementById'](_0x7c1901['kgoxl'])['classList']['toggle'](_0x7c1901['mopqM']);
+  document.getElementById(_0x7c1901['kgoxl'])['classList']['toggle'](_0x7c1901['mopqM']);
 }
 
-((document['getElementById']('darkon')['onclick'] = function () {
+((document.getElementById('darkon')['onclick'] = function () {
   const _0x257cc0 = {
     CnJxd: function (_0x1e8786, _0x56f9cb) {
       return _0x1e8786(_0x56f9cb);
@@ -5414,11 +5397,11 @@ function creditspopup() {
   };
   if (!darkMode) {
     ((darkMode = !darkMode),
-      _0x257cc0['CnJxd'](visualizeButtonUnclick, document['getElementById'](_0x257cc0['ccgpC'])),
-      _0x257cc0['tZWSs'](visualizeButtonClick, document['getElementById'](_0x257cc0['qlNCD'])),
-      (document['getElementById'](_0x257cc0['qlNCD'])['style']['display'] = 'none'),
-      (document['getElementById']('darkoff')['style']['display'] = 'inline'),
-      document['getElementById'](_0x257cc0['vqsyo'])['classList']['add']('bodydark'));
+      _0x257cc0['CnJxd'](visualizeButtonUnclick, document.getElementById(_0x257cc0['ccgpC'])),
+      _0x257cc0['tZWSs'](visualizeButtonClick, document.getElementById(_0x257cc0['qlNCD'])),
+      (document.getElementById(_0x257cc0['qlNCD'])['style']['display'] = 'none'),
+      (document.getElementById('darkoff')['style']['display'] = 'inline'),
+      document.getElementById(_0x257cc0['vqsyo'])['classList']['add']('bodydark'));
     let _0x318602 = document['getElementsByClassName']('box');
     for (let _0x160f96 = 0x0; _0x257cc0['YaxNP'](_0x160f96, _0x318602['length']); _0x160f96++)
       _0x318602[_0x160f96]['classList']['add']('boxdark');
@@ -5446,11 +5429,11 @@ function creditspopup() {
     for (let _0x234da2 = 0x0; _0x234da2 < quiz['pokeballArray']['length']; _0x234da2++)
       quiz['pokeballArray'][_0x234da2]['src'] = _0x257cc0['tPTKz'];
     if (((recentSprite['src'] = _0x257cc0['tPTKz']), '' !== quiz['getStyleName']())) {
-      (document['getElementById']('body')['classList']['add']('blenddark'),
-        document['getElementById'](_0x257cc0['vqsyo'])['classList']['remove'](_0x257cc0['LHaLx']));
+      (document.getElementById('body')['classList']['add']('blenddark'),
+        document.getElementById(_0x257cc0['vqsyo']).classList.remove(_0x257cc0['LHaLx']));
       for (let _0x2b927b = 0x0; _0x257cc0['jGrqy'](_0x2b927b, typeClasses['length']); _0x2b927b++) {
         let _0x1ed631 = typeClasses[_0x2b927b];
-        if (!_0x1ed631['includes'](_0x257cc0['ukCml'])) {
+        if (!_0x1ed631.includes(_0x257cc0['ukCml'])) {
           continue;
         }
         let _0x5544b7 = quiz['getStyleName'](),
@@ -5461,7 +5444,7 @@ function creditspopup() {
     }
   }
 }),
-  (document['getElementById']('darkoff')['onclick'] = function () {
+  (document.getElementById('darkoff')['onclick'] = function () {
     const _0x4736b4 = {
       BRlnQ: 'blenddark',
       DlLHK: 'body',
@@ -5485,49 +5468,49 @@ function creditspopup() {
     };
     if (darkMode) {
       if (((darkMode = !darkMode), '' !== quiz['getStyleName']())) {
-        (document['getElementById'](_0x4736b4['DlLHK'])['classList']['remove'](_0x4736b4['BRlnQ']),
-          document['getElementById'](_0x4736b4['DlLHK'])['classList']['add']('blend'));
+        (document.getElementById(_0x4736b4['DlLHK']).classList.remove(_0x4736b4['BRlnQ']),
+          document.getElementById(_0x4736b4['DlLHK'])['classList']['add']('blend'));
         for (let _0x3db8e5 = 0x0; _0x4736b4['euKXt'](_0x3db8e5, typeClasses['length']); _0x3db8e5++) {
           let _0x2ab79e = typeClasses[_0x3db8e5];
-          if (!_0x2ab79e['includes'](_0x4736b4['LsGxZ'])) {
+          if (!_0x2ab79e.includes(_0x4736b4['LsGxZ'])) {
             continue;
           }
           let _0x442475 = quiz['getStyleName'](),
             _0x4e684c =
               (_0x2ab79e['replace']('type', ''), document['getElementsByClassName'](_0x2ab79e['replace']('type', '')));
           for (let _0x586f60 = 0x0; _0x586f60 < _0x4e684c['length']; _0x586f60++)
-            _0x4e684c[_0x586f60]['classList']['remove'](_0x2ab79e['replace']('type', _0x442475));
+            _0x4e684c[_0x586f60].classList.remove(_0x2ab79e['replace']('type', _0x442475));
         }
       }
-      (_0x4736b4['kWEhF'](visualizeButtonUnclick, document['getElementById'](_0x4736b4['zMaUf'])),
-        visualizeButtonClick(document['getElementById']('darkoff')),
-        (document['getElementById'](_0x4736b4['UTFxo'])['style']['display'] = 'none'),
-        (document['getElementById'](_0x4736b4['zMaUf'])['style']['display'] = _0x4736b4['dVtJG']),
-        document['getElementById']('body')['classList']['remove']('bodydark'));
+      (_0x4736b4['kWEhF'](visualizeButtonUnclick, document.getElementById(_0x4736b4['zMaUf'])),
+        visualizeButtonClick(document.getElementById('darkoff')),
+        (document.getElementById(_0x4736b4['UTFxo'])['style']['display'] = 'none'),
+        (document.getElementById(_0x4736b4['zMaUf'])['style']['display'] = _0x4736b4['dVtJG']),
+        document.getElementById('body').classList.remove('bodydark'));
       let _0xa29faa = document['getElementsByClassName']('box');
       for (let _0xad0f8b = 0x0; _0x4736b4['euKXt'](_0xad0f8b, _0xa29faa['length']); _0xad0f8b++)
-        _0xa29faa[_0xad0f8b]['classList']['remove']('boxdark');
+        _0xa29faa[_0xad0f8b].classList.remove('boxdark');
       let _0x404b4a = document['getElementsByClassName']('button');
       for (let _0x18bddd = 0x0; _0x4736b4['euKXt'](_0x18bddd, _0x404b4a['length']); _0x18bddd++)
-        _0x404b4a[_0x18bddd]['classList']['remove'](_0x4736b4['OphgS']);
+        _0x404b4a[_0x18bddd].classList.remove(_0x4736b4['OphgS']);
       let _0xeba669 = document['getElementsByClassName'](_0x4736b4['djIbV']);
       for (let _0x57358d = 0x0; _0x57358d < _0xeba669['length']; _0x57358d++)
-        _0xeba669[_0x57358d]['classList']['remove'](_0x4736b4['IwmYT']);
+        _0xeba669[_0x57358d].classList.remove(_0x4736b4['IwmYT']);
       let _0x2cd548 = document['getElementsByClassName']('smolbuttonx');
       for (let _0x4f67a0 = 0x0; _0x4f67a0 < _0x2cd548['length']; _0x4f67a0++)
-        _0x2cd548[_0x4f67a0]['classList']['remove']('smolbuttonxdark');
+        _0x2cd548[_0x4f67a0].classList.remove('smolbuttonxdark');
       let _0x6c2cc7 = document['getElementsByClassName']('limelight');
       for (let _0x4f5808 = 0x0; _0x4736b4['ziSTe'](_0x4f5808, _0x6c2cc7['length']); _0x4f5808++)
-        _0x6c2cc7[_0x4f5808]['classList']['remove']('limelightdark');
+        _0x6c2cc7[_0x4f5808].classList.remove('limelightdark');
       let _0x672b96 = document['getElementsByClassName']('greyer');
       for (let _0x361d9e = 0x0; _0x361d9e < _0x672b96['length']; _0x361d9e++)
-        _0x672b96[_0x361d9e]['classList']['remove']('greyerdark');
+        _0x672b96[_0x361d9e].classList.remove('greyerdark');
       let _0x1487af = document['getElementsByClassName']('inlinebox');
       for (let _0x337e96 = 0x0; _0x4736b4['euKXt'](_0x337e96, _0x1487af['length']); _0x337e96++)
-        _0x1487af[_0x337e96]['classList']['remove'](_0x4736b4['HdZQB']);
+        _0x1487af[_0x337e96].classList.remove(_0x4736b4['HdZQB']);
       let _0x3f8088 = document['getElementsByClassName']('spbutton');
       for (let _0x311364 = 0x0; _0x4736b4['ziSTe'](_0x311364, _0x3f8088['length']); _0x311364++)
-        _0x3f8088[_0x311364]['classList']['remove'](_0x4736b4['OphgS']);
+        _0x3f8088[_0x311364].classList.remove(_0x4736b4['OphgS']);
       for (let _0x2a29c0 = 0x0; _0x2a29c0 < quiz['pokeballArray']['length']; _0x2a29c0++)
         quiz['pokeballArray'][_0x2a29c0]['src'] = '/sprites/unknown.png';
       recentSprite['src'] = '/sprites/unknown.png';
@@ -5544,10 +5527,10 @@ let enabledLanguages = [],
         return _0x5c225d(_0x12f4f1);
       },
     };
-    (enabledLanguages['push'](_0xf2cd71['id']),
+    (enabledLanguages.push(_0xf2cd71.id),
       visualizeButtonClick(_0xf2cd71),
       (_0xf2cd71['onclick'] = function () {
-        ('ENG' === _0xf2cd71['id'] && (langButtonsDict['ESP']['click'](), langButtonsDict['ITA']['click']()),
+        ('ENG' === _0xf2cd71.id && (langButtonsDict['ESP']['click'](), langButtonsDict['ITA']['click']()),
           _0x2ad28a['CJKnP'](disableLanguage, _0xf2cd71));
       }),
       false !== updateTimeout && _0x2ad28a['ieEcO'](clearTimeout, updateTimeout),
@@ -5576,11 +5559,11 @@ disableLanguage = function (_0x44f467) {
     },
   };
   if (_0x3c38e5['lkube'](enabledLanguages['length'], 0x1)) {
-    let _0x24dc7e = enabledLanguages['indexOf'](_0x44f467['id']);
+    let _0x24dc7e = enabledLanguages['indexOf'](_0x44f467.id);
     (_0x3c38e5['lkube'](_0x24dc7e, -0x1) && enabledLanguages['splice'](_0x24dc7e, 0x1),
       visualizeButtonUnclick(_0x44f467),
       (_0x44f467['onclick'] = function () {
-        (_0x3c38e5['MBevU'](_0x3c38e5['GcRHX'], _0x44f467['id']) &&
+        (_0x3c38e5['MBevU'](_0x3c38e5['GcRHX'], _0x44f467.id) &&
           (langButtonsDict['ESP']['click'](), langButtonsDict['ITA']['click']()),
           enableLanguage(_0x44f467));
       }),
@@ -5600,7 +5583,7 @@ for (let e of allLanguages) {
   ((t['innerHTML'] += e),
     t['classList']['add']('smolbutton'),
     t['classList']['add']('langbutton'),
-    (t['id'] = e),
+    (t.id = e),
     (t['onclick'] = function () {
       enableLanguage(t);
     }),
@@ -5625,8 +5608,8 @@ for (let e of allLanguages) {
   langButtonsDict['KOR']['click'](),
   langButtonsDict['CHT']['click'](),
   langButtonsDict['CHS']['click'](),
-  navigator['language']['includes']('de') && langButtonsDict['GER']['click'](),
-  navigator['language']['includes']('fr') && langButtonsDict['FRE']['click'](),
+  navigator['language'].includes('de') && langButtonsDict['GER']['click'](),
+  navigator['language'].includes('fr') && langButtonsDict['FRE']['click'](),
   document['addEventListener']('keydown', function (_0x18296e) {
     const _0x127de1 = {
       adDYN: 'Enter',
@@ -5641,7 +5624,7 @@ for (let e of allLanguages) {
       (inputField['value'] = ''),
       _0x127de1['npQQD'](_0x127de1['nuoBv'], document['activeElement']['tagName']) && inputField['focus']());
   }),
-  (document['getElementById']('sound-on')['onclick'] = () => {
+  (document.getElementById('sound-on')['onclick'] = () => {
     const _0x44a9dc = {
       Epucx: function (_0x4ec370, _0x483634) {
         return _0x4ec370(_0x483634);
@@ -5649,10 +5632,10 @@ for (let e of allLanguages) {
       yQlYI: 'sound-off',
     };
     ((soundEnabled = true),
-      visualizeButtonUnclick(document['getElementById'](_0x44a9dc['yQlYI'])),
-      _0x44a9dc['Epucx'](visualizeButtonClick, document['getElementById']('sound-on')));
+      visualizeButtonUnclick(document.getElementById(_0x44a9dc['yQlYI'])),
+      _0x44a9dc['Epucx'](visualizeButtonClick, document.getElementById('sound-on')));
   }),
-  (document['getElementById']('sound-off')['onclick'] = () => {
+  (document.getElementById('sound-off')['onclick'] = () => {
     const _0x310a48 = {
       cnfAR: function (_0x4c57e4, _0xf0d9f4) {
         return _0x4c57e4(_0xf0d9f4);
@@ -5660,7 +5643,7 @@ for (let e of allLanguages) {
       kPFGA: 'sound-on',
     };
     ((soundEnabled = false),
-      _0x310a48['cnfAR'](visualizeButtonUnclick, document['getElementById'](_0x310a48['kPFGA'])),
-      _0x310a48['cnfAR'](visualizeButtonClick, document['getElementById']('sound-off')));
+      _0x310a48['cnfAR'](visualizeButtonUnclick, document.getElementById(_0x310a48['kPFGA'])),
+      _0x310a48['cnfAR'](visualizeButtonClick, document.getElementById('sound-off')));
   }),
   loadData());
