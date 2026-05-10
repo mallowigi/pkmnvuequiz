@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const props = defineProps<{
-  sprites: string[];
+  sprites: string[] | readonly string[];
   start?: number;
 }>();
 

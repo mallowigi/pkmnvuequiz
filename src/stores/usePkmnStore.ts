@@ -28,7 +28,7 @@ async function loadNamings() {
 
 async function loadSpriteCycles() {
   const module = await import('@/data/spriteCycles.json');
-  data.spriteCycles = module.default.sprite_cycles;
+  data.spriteCycles = module.default.sprite_cycles as Record<string, string[]>;
 }
 
 async function loadTranslations() {

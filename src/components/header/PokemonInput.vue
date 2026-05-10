@@ -9,6 +9,7 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -18,6 +19,7 @@ const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
 const { addShadow, findPokemon } = usePokemons();
+const { unknownSprite } = useUnknownSprite();
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -33,15 +35,6 @@ const regionOrType = computed(() => {
       return 'Special';
     default:
       return '';
-  }
-});
-
-const unknownSprite = computed(() => {
-  switch (state.isDark) {
-    case true:
-      return '/src/assets/sprites/unknown-2.png';
-    case false:
-      return '/src/assets/sprites/unknown.png';
   }
 });
 
