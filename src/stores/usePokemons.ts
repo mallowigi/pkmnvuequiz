@@ -11,6 +11,8 @@ const pokemonState: PokemonProgressState = reactive<PokemonProgressState>({
   numFound: 0,
   numShadows: 0,
   pokemonFound: new Set<string>(),
+  pokemonNotFound: new Set<string>(),
+  pokemonNotShadowed: new Set<string>(),
   pokemonShadowed: new Set<string>(),
 });
 
@@ -33,13 +35,17 @@ export const usePokemons = () => {
   const { data } = usePkmnData();
   const { showUserMessage } = useMessages();
 
-  const addFound = () => {
+  const addFound = (pokemon: string) => {
     pokemonState.numFound += 1;
+    pokemonState.pokemonFound.add(pokemon.toLowerCase());
   };
 
-  const addShadow = () => {
+  const addShadow = (pokemon: string) => {
     pokemonState.numShadows += 1;
+    pokemonState.pokemonShadowed.add(pokemon.toLowerCase());
   };
+
+  const addRandomShadow = () => {};
 
   const setPokemonState = (newState: Partial<PokemonProgressState>) => {
     Object.assign(pokemonState, newState);
@@ -161,6 +167,7 @@ export const usePokemons = () => {
 
   return {
     addFound,
+    addRandomShadow,
     addShadow,
     findPokemon,
     getAllPokemon,

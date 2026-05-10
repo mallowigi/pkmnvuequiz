@@ -18,7 +18,7 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
-const { addShadow, findPokemon } = usePokemons();
+const { addShadow, addRandomShadow, findPokemon, addFound, pokemonState } = usePokemons();
 const { unknownSprite } = useUnknownSprite();
 
 const regionOrType = computed(() => {
@@ -63,7 +63,7 @@ const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === ',') {
     if (state.withShadowHelper) {
       // TODO need to know how to add a shadow and especially where, in which hook
-      addShadow();
+      addRandomShadow();
     } else {
       showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
       return;
@@ -73,6 +73,7 @@ const handleKeydown = (e: KeyboardEvent) => {
   const value = inputRef.value?.value || '';
   const foundPokemon = findPokemon(value);
   if (foundPokemon) {
+    addFound(value);
     // If the user has typed a valid Pokémon name, clear the input for the next guess
     inputRef.value!.value = '';
     return;
@@ -86,7 +87,7 @@ const handleMousedown = () => {
 
 onMounted(() => {
   ensureFocus();
-  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('keyup', handleKeydown);
   window.addEventListener('mousedown', handleMousedown);
 });
 
