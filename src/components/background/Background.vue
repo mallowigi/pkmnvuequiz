@@ -28,13 +28,13 @@ const currentType = computed(() => {
       >
         <img
           :alt="currentType?.name"
-          :src="`/src/assets/types/${currentType?.icon}.svg`"
+          :src="`/assets/types/${currentType?.icon}.svg`"
           id="bgpattern"
           class="bgpattern"
         />
         <img
           :alt="currentType?.name"
-          :src="`/src/assets/types/${currentType?.icon}.svg`"
+          :src="`/assets/types/${currentType?.icon}.svg`"
           id="bgpattern2"
           class="bgpattern2"
         />
