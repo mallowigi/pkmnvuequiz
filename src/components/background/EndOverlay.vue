@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import { donors } from '@/data/donors';
+import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
@@ -8,6 +9,7 @@ import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
 const { state, setGameOver } = useState();
+const { setCurrentGen, currentGenState } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState } = useGameFlow();
 const { pokemonState, resetPokemonState, numFound, numShadows } = usePokemons();
@@ -15,6 +17,7 @@ const { resetTimer, timerState } = useTimer();
 
 const closeOverlay = () => {
   clearCurrentType();
+  setCurrentGen(null);
   resetFlowState();
   resetPokemonState();
   resetTimer();
@@ -31,7 +34,7 @@ const closeOverlay = () => {
       <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
 
-        <h2>You named {{ numFound }} {{ state.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!</h2>
+        <h2>You named {{ numFound }} {{ currentGenState.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!</h2>
 
         <p>Challenge yourself further, try naming them without shadows. <br />({{ numShadows }} shadows used)</p>
       </div>

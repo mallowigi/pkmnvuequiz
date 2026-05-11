@@ -1,3 +1,4 @@
+import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
@@ -12,6 +13,7 @@ const { showUserMessage } = useMessages();
 export const useSavedData = () => {
   const saveState = () => {
     const { state } = useState();
+    const { currentGenState } = useCurrentGen();
     const { currentTypeState } = useCurrentType();
     const { pokemonState } = usePokemons();
     const { timerState } = useTimer();
@@ -19,6 +21,7 @@ export const useSavedData = () => {
 
     const savedState: SaveData = {
       ...state,
+      gen: currentGenState.gen,
       currentType: currentTypeState.currentType,
       languages: Array.from(languagesState.languages),
       pokemonProgress: {
@@ -51,6 +54,7 @@ export const useSavedData = () => {
 
   const loadState = (e: Event) => {
     const { setState } = useState();
+    const { setCurrentGen } = useCurrentGen();
     const { setCurrentType } = useCurrentType();
     const { resetFlowState } = useGameFlow();
     const { resetPokemonState, setPokemonState } = usePokemons();
@@ -95,6 +99,9 @@ export const useSavedData = () => {
         // Type
         setCurrentType(currentType ?? null);
 
+        // Gen
+        setCurrentGen(statePayload.gen ?? null);
+
         // Pokemon progress
         resetPokemonState();
         setPokemonState({
@@ -117,7 +124,6 @@ export const useSavedData = () => {
         // State
         setState({
           gameMode: statePayload.gameMode ?? null,
-          gen: statePayload.gen ?? null,
           isDark: statePayload.isDark ?? false,
           mode: statePayload.mode ?? 'normal',
           withCycleSprites: statePayload.withCycleSprites ?? true,

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
@@ -8,7 +9,8 @@ import { useTimer } from '@/stores/useTimer';
 
 const { resetFlowState, setStarted } = useGameFlow();
 const { resetPokemonState } = usePokemons();
-const { state, setGen, resetState } = useState();
+const { state, resetState } = useState();
+const { setCurrentGen, currentGenState } = useCurrentGen();
 const { resetTimer } = useTimer();
 
 type Props = {
@@ -18,13 +20,13 @@ type Props = {
 const props = defineProps<Props>();
 
 const reset = () => {
-  const gen = state.gen;
+  const gen = currentGenState.gen;
   props.toggleFunction();
   resetState();
   resetPokemonState();
   resetTimer();
   resetFlowState();
-  setGen(gen);
+  setCurrentGen(gen);
   setStarted(true);
 };
 

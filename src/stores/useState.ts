@@ -1,10 +1,9 @@
 import { reactive, readonly } from 'vue';
 
-import type { State, Gen, GameMode, Mode } from '@/types';
+import type { State, GameMode, Mode } from '@/types';
 
 const state: State = reactive<State>({
   gameMode: null,
-  gen: null,
   isDark: false,
   mode: 'normal',
   withCycleSprites: true,
@@ -15,10 +14,6 @@ const state: State = reactive<State>({
   withSpelling: false,
   withTypeShuffle: false,
 });
-
-const setGen = (id: Gen | null) => {
-  state.gen = id;
-};
 
 const setGameMode = (mode: GameMode | null) => {
   state.gameMode = mode;
@@ -75,7 +70,6 @@ const resetState = () => {
 const setGameOver = () => {
   Object.assign(state, {
     gameMode: null,
-    gen: null,
   });
 };
 
@@ -86,7 +80,6 @@ export const useState = () => {
     setDarkMode,
     setGameMode,
     setGameOver,
-    setGen,
     setMode,
     setSound,
     setState,

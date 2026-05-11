@@ -109,7 +109,6 @@ export type PokemonInfo = {
 
 export type State = {
   gameMode: GameMode | null;
-  gen: Gen | null;
   isDark: boolean;
   mode: Mode;
   withCycleSprites: boolean;

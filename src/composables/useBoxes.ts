@@ -1,4 +1,5 @@
 import { gens } from '@/data/gens.ts';
+import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
@@ -6,11 +7,12 @@ import { specialTypes } from '@/data/specialTypes.ts';
 
 export const useBoxes = () => {
   const { state } = useState();
+  const { currentGenState } = useCurrentGen();
   const { data } = usePkmnData();
   const { getCurrentType } = useCurrentType();
 
   const getCurrentGenBoxes = () => {
-    const currentGen = state.gen;
+    const currentGen = currentGenState.gen;
     if (!currentGen) return [];
 
     return gens[currentGen].boxes;

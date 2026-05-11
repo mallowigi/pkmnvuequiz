@@ -1,22 +1,30 @@
+import { reactive, readonly } from 'vue';
+
 import { gens } from '@/data/gens';
-import { useState } from '@/stores/useState';
 import type { Gen } from '@/types.ts';
 
-export const useCurrentGen = () => {
-  const { state, setGen } = useState();
+type CurrentGenState = {
+  gen: Gen | null;
+};
 
+const currentGenState = reactive<CurrentGenState>({
+  gen: null,
+});
+
+export const useCurrentGen = () => {
   const setCurrentGen = (gen: Gen | null) => {
-    setGen(gen);
+    currentGenState.gen = gen;
   };
 
   const getCurrentGen = () => {
-    const currentGen = state.gen;
+    const currentGen = currentGenState.gen;
     if (!currentGen) return null;
 
     return gens[currentGen];
   };
 
   return {
+    currentGenState: readonly(currentGenState),
     getCurrentGen,
     setCurrentGen,
   };
