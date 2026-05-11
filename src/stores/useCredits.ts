@@ -1,20 +1,25 @@
-import { reactive, readonly } from 'vue';
+import { reactive } from 'vue';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
 interface CreditsState {
   showCredits: boolean;
 }
 
-const credits: CreditsState = reactive({
-  showCredits: false,
-});
+export const useCredits = defineStore('credits', () => {
+  const credits = reactive<CreditsState>({
+    showCredits: false,
+  });
 
-export const toggleShowCredits = () => {
-  credits.showCredits = !credits.showCredits;
-};
+  const toggleShowCredits = () => {
+    credits.showCredits = !credits.showCredits;
+  };
 
-export const useCredits = () => {
   return {
-    credits: readonly(credits),
+    credits,
     toggleShowCredits,
   };
-};
+});
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCredits, import.meta.hot));
+}

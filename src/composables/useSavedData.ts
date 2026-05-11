@@ -8,9 +8,9 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData } from '@/types.ts';
 
-const { showUserMessage } = useMessages();
-
 export const useSavedData = () => {
+  const { showUserMessage } = useMessages();
+
   const saveState = () => {
     const { state } = useState();
     const { currentGenState } = useCurrentGen();

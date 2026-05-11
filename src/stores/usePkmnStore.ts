@@ -1,90 +1,108 @@
-import { reactive, readonly } from 'vue';
+import { reactive } from 'vue';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
 import { usePokemons } from '@/stores/usePokemons.ts';
 import type { PkmnData, PokemonInfo, Translations } from '@/types';
 
-const data: PkmnData = reactive({
-  error: null,
-  isLoaded: false,
-  namings: null,
-  pokemon: null,
-  shinies: null,
-  silhouettes: null,
-  spriteCycles: null,
-  sprites: null,
-  suffixNamings: null,
-  translations: null,
-});
+type PkmnDataState = {
+  error: unknown;
+  isLoaded: boolean;
+  namings: Record<string, string> | null;
+  pokemon: PokemonInfo[] | null;
+  shinies: Record<string, string> | null;
+  silhouettes: Record<string, string> | null;
+  spriteCycles: Record<string, string[]> | null;
+  sprites: Record<string, string> | null;
+  suffixNamings: Record<string, string> | null;
+  translations: Record<string, Translations> | null;
+};
 
-async function loadPokemons() {
-  const module = await import('@/data/pokemon.json');
-  data.pokemon = module.default.pokemon as PokemonInfo[];
-}
+export const usePkmnData = defineStore('pkmnData', () => {
+  const data: PkmnData = reactive<PkmnDataState>({
+    error: null,
+    isLoaded: false,
+    namings: null,
+    pokemon: null,
+    shinies: null,
+    silhouettes: null,
+    spriteCycles: null,
+    sprites: null,
+    suffixNamings: null,
+    translations: null,
+  });
 
-async function loadNamings() {
-  const module = await import('@/data/namings.json');
-  data.namings = module.default.namings;
-  data.suffixNamings = module.default.suffix_namings;
-}
+  async function loadPokemons() {
+    const module = await import('@/data/pokemon.json');
+    data.pokemon = module.default.pokemon as PokemonInfo[];
+  }
 
-async function loadSpriteCycles() {
-  const module = await import('@/data/spriteCycles.json');
-  data.spriteCycles = module.default.sprite_cycles as Record<string, string[]>;
-}
+  async function loadNamings() {
+    const module = await import('@/data/namings.json');
+    data.namings = module.default.namings;
+    data.suffixNamings = module.default.suffix_namings;
+  }
 
-async function loadTranslations() {
-  const module = await import('@/data/translations.json');
-  data.translations = module.default.translations as Record<string, Translations>;
-}
+  async function loadSpriteCycles() {
+    const module = await import('@/data/spriteCycles.json');
+    data.spriteCycles = module.default.sprite_cycles as Record<string, string[]>;
+  }
 
-async function loadSprites() {
-  const module = await import('@/data/sprites.json');
-  data.sprites = module.default.sprite as Record<string, string>;
-}
+  async function loadTranslations() {
+    const module = await import('@/data/translations.json');
+    data.translations = module.default.translations as Record<string, Translations>;
+  }
 
-async function loadShinies() {
-  const module = await import('@/data/shinies.json');
-  data.shinies = module.default.shiny as Record<string, string>;
-}
+  async function loadSprites() {
+    const module = await import('@/data/sprites.json');
+    data.sprites = module.default.sprite as Record<string, string>;
+  }
 
-async function loadSilhouettes() {
-  const module = await import('@/data/silhouettes.json');
-  data.silhouettes = module.default.silhouette as Record<string, string>;
-}
+  async function loadShinies() {
+    const module = await import('@/data/shinies.json');
+    data.shinies = module.default.shiny as Record<string, string>;
+  }
 
-function setLoaded() {
-  data.isLoaded = true;
-}
+  async function loadSilhouettes() {
+    const module = await import('@/data/silhouettes.json');
+    data.silhouettes = module.default.silhouette as Record<string, string>;
+  }
 
-function setError(error: unknown) {
-  data.error = error;
-}
+  function setLoaded() {
+    data.isLoaded = true;
+  }
 
-async function loadData() {
-  return Promise.all([
-    loadPokemons(),
-    loadSprites(),
-    loadSpriteCycles(),
-    loadTranslations(),
-    loadNamings(),
-    loadSilhouettes(),
-    loadShinies(),
-  ])
-    .then(() => {
-      const { initializePokemonMaps } = usePokemons();
+  function setError(error: unknown) {
+    data.error = error;
+  }
 
-      setLoaded();
-      initializePokemonMaps();
-    })
-    .catch((error) => {
-      console.error('Error loading data:', error);
-      setError(error);
-    });
-}
+  async function loadData() {
+    return Promise.all([
+      loadPokemons(),
+      loadSprites(),
+      loadSpriteCycles(),
+      loadTranslations(),
+      loadNamings(),
+      loadSilhouettes(),
+      loadShinies(),
+    ])
+      .then(() => {
+        const { initializePokemonMaps } = usePokemons();
 
-export const usePkmnData = () => {
+        setLoaded();
+        initializePokemonMaps();
+      })
+      .catch((error) => {
+        console.error('Error loading data:', error);
+        setError(error);
+      });
+  }
+
   return {
-    data: readonly(data),
+    data,
     loadData,
   };
-};
+});
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(usePkmnData, import.meta.hot));
+}

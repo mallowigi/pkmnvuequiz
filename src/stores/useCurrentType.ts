@@ -1,19 +1,20 @@
-import { reactive, readonly } from 'vue';
+import { defineStore, acceptHMRUpdate } from 'pinia';
+import { reactive } from 'vue';
 
+import { pokemonTypes, specialType } from '@/data/pokemonTypes.ts';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
-import { pokemonTypes, specialType } from '@/data/pokemonTypes.ts';
 
 type CurrentTypeState = {
   currentType: Type | null;
 };
 
-const currentTypeState = reactive<CurrentTypeState>({
-  currentType: null,
-});
-
-export const useCurrentType = () => {
+export const useCurrentType = defineStore('currentType', () => {
   const { state } = useState();
+
+  const currentTypeState = reactive<CurrentTypeState>({
+    currentType: null,
+  });
 
   const setCurrentType = (type: Type | null) => {
     currentTypeState.currentType = type;
@@ -46,10 +47,14 @@ export const useCurrentType = () => {
 
   return {
     clearCurrentType,
-    currentTypeState: readonly(currentTypeState),
+    currentTypeState,
     getCurrentType,
     getCurrentTypeOrSpecial,
     getSpecialType,
     setCurrentType,
   };
-};
+});
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCurrentType, import.meta.hot));
+}

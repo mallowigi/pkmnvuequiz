@@ -1,7 +1,8 @@
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { boxes } from '@/data/boxes';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 
-export const useCurrentRegion = () => {
+export const useCurrentRegion = defineStore('currentRegion', () => {
   const { getCurrentGen } = useCurrentGen();
 
   const getCurrentRegion = () => {
@@ -21,4 +22,8 @@ export const useCurrentRegion = () => {
   return {
     getCurrentRegion,
   };
-};
+});
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCurrentRegion, import.meta.hot));
+}

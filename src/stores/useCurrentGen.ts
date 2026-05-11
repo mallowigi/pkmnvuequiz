@@ -1,4 +1,5 @@
-import { reactive, readonly } from 'vue';
+import { reactive } from 'vue';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
 import { gens } from '@/data/gens';
 import type { Gen } from '@/types.ts';
@@ -7,11 +8,11 @@ type CurrentGenState = {
   gen: Gen | null;
 };
 
-const currentGenState = reactive<CurrentGenState>({
-  gen: null,
-});
+export const useCurrentGen = defineStore('currentGen', () => {
+  const currentGenState = reactive<CurrentGenState>({
+    gen: null,
+  });
 
-export const useCurrentGen = () => {
   const setCurrentGen = (gen: Gen | null) => {
     currentGenState.gen = gen;
   };
@@ -24,8 +25,12 @@ export const useCurrentGen = () => {
   };
 
   return {
-    currentGenState: readonly(currentGenState),
+    currentGenState,
     getCurrentGen,
     setCurrentGen,
   };
-};
+});
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCurrentGen, import.meta.hot));
+}

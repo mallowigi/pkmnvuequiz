@@ -1,20 +1,25 @@
-import { reactive, readonly } from 'vue';
+import { reactive } from 'vue';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
 interface RoomMessagesState {
   roomMessage: string | null;
 }
 
-const roomState: RoomMessagesState = reactive({
-  roomMessage: null,
-});
+export const useRoomMessages = defineStore('roomMessages', () => {
+  const roomState = reactive<RoomMessagesState>({
+    roomMessage: null,
+  });
 
-const setRoomMessage = (message: string | null) => {
-  roomState.roomMessage = message;
-};
+  const setRoomMessage = (message: string | null) => {
+    roomState.roomMessage = message;
+  };
 
-export const useRoomMessages = () => {
   return {
-    roomState: readonly(roomState),
+    roomState,
     setRoomMessage,
   };
-};
+});
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useRoomMessages, import.meta.hot));
+}
