@@ -1,4 +1,4 @@
-import { reactive, readonly } from 'vue';
+import { reactive, readonly, computed } from 'vue';
 
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
@@ -8,8 +8,6 @@ import { useState } from '@/stores/useState';
 import type { PokemonInfo, PokemonProgressState, RegionBox, SpecialType, Type } from '@/types.ts';
 
 const pokemonState: PokemonProgressState = reactive<PokemonProgressState>({
-  numFound: 0,
-  numShadows: 0,
   pokemonFound: new Set<string>(),
   pokemonNotFound: new Set<string>(),
   pokemonNotShadowed: new Set<string>(),
@@ -35,13 +33,15 @@ export const usePokemons = () => {
   const { data } = usePkmnData();
   const { showUserMessage } = useMessages();
 
+  const numFound = computed(() => pokemonState.pokemonFound.size);
+
+  const numShadows = computed(() => pokemonState.pokemonShadowed.size);
+
   const addFound = (pokemon: string) => {
-    pokemonState.numFound += 1;
     pokemonState.pokemonFound.add(pokemon.toLowerCase());
   };
 
   const addShadow = (pokemon: string) => {
-    pokemonState.numShadows += 1;
     pokemonState.pokemonShadowed.add(pokemon.toLowerCase());
   };
 
@@ -177,6 +177,8 @@ export const usePokemons = () => {
     getGenPokemon,
     getSpecialTypePokemon,
     getTypePokemon,
+    numFound,
+    numShadows,
     pokemonState: readonly(pokemonState),
     resetPokemonState,
     setPokemonState,

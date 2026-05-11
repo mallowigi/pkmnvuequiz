@@ -10,7 +10,7 @@ import { useTimer } from '@/stores/useTimer';
 const { state, setGameOver } = useState();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState } = useGameFlow();
-const { pokemonState, resetPokemonState } = usePokemons();
+const { pokemonState, resetPokemonState, numFound, numShadows } = usePokemons();
 const { resetTimer, timerState } = useTimer();
 
 const closeOverlay = () => {
@@ -31,11 +31,9 @@ const closeOverlay = () => {
       <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
 
-        <h2>
-          You named {{ pokemonState.numFound }} {{ state.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!
-        </h2>
+        <h2>You named {{ numFound }} {{ state.gen }} Pokémon in {{ timerState.elapsed }} seconds in Pokédex order!</h2>
 
-        <p>Challenge yourself further, try naming them without shadows. <br />({{ pokemonState.numShadows }} shadows used)</p>
+        <p>Challenge yourself further, try naming them without shadows. <br />({{ numShadows }} shadows used)</p>
       </div>
 
       <div class="section rad-bl-tr supporters">

@@ -22,8 +22,6 @@ export const useSavedData = () => {
       currentType: currentTypeState.currentType,
       languages: Array.from(languagesState.languages),
       pokemonProgress: {
-        numFound: pokemonState.numFound,
-        numShadows: pokemonState.numShadows,
         pokemonFound: Array.from(pokemonState.pokemonFound),
         pokemonShadowed: Array.from(pokemonState.pokemonShadowed),
       },
@@ -100,8 +98,6 @@ export const useSavedData = () => {
         // Pokemon progress
         resetPokemonState();
         setPokemonState({
-          numFound: numFound ?? 0,
-          numShadows: numShadows ?? 0,
           pokemonFound: new Set(pokemonFound ?? []),
           pokemonShadowed: new Set(pokemonShadowed ?? []),
         });

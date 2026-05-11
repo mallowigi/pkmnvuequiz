@@ -125,10 +125,8 @@ export type LanguagesState = {
 };
 
 export type PokemonProgressState = {
-  numFound: number;
   pokemonFound: Set<string>;
   pokemonNotFound: Set<string>;
-  numShadows: number;
   pokemonShadowed: Set<string>;
   pokemonNotShadowed: Set<string>;
 };
