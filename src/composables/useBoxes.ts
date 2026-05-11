@@ -35,7 +35,9 @@ export const useBoxes = () => {
   };
 
   const getSpecialBoxes = () => {
-    return Object.values(specialTypes).flatMap((type) => type.id);
+    return Object.values(specialTypes)
+      .filter((specialType) => specialType.id !== 'no')
+      .flatMap((type) => type.id);
   };
 
   const getCurrentGameModeBoxes = () => {

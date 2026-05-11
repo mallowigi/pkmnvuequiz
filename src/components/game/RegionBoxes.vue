@@ -10,7 +10,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
-const { getGenPokemon, getSpecialTypePokemon } = usePokemons();
+const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon } = usePokemons();
 const { state } = useState();
 
 const specialBoxes = computed(() => {
@@ -48,8 +48,8 @@ const type = computed(() => {
 
       <div class="sprite-container">
         <PokemonSprite
-          v-for="pokemon in getGenPokemon(box.id)"
-          :key="pokemon.id"
+          v-for="[, pokemon] in getCurrentGameModeBoxPokemon(box.id)"
+          :key="box.id"
           :pokemon="pokemon"
         />
       </div>
@@ -65,7 +65,7 @@ const type = computed(() => {
       <span class="region-name">{{ box.name }}</span>
       <div class="sprite-container">
         <PokemonSprite
-          v-for="pokemon in getSpecialTypePokemon(box.id)"
+          v-for="[, pokemon] in getSpecialTypePokemon(box.id)"
           :key="pokemon.id"
           :pokemon="pokemon"
         />

@@ -256,6 +256,6 @@ export const pokemonTypes: Record<Type, TypeInfo> = {
   },
 };
 
-export const specialType: SpecialTypeInfo = specialTypes.special;
+export const specialType: SpecialTypeInfo = specialTypes.no;
 
 export const typesList = Object.values(pokemonTypes).sort((a, b) => a.index - b.index);

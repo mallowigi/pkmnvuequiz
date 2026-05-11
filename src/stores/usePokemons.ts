@@ -53,7 +53,6 @@ export const usePokemons = defineStore('pokemons', () => {
       mythical: new Map<string, PokemonInfo>(),
       no: new Map<string, PokemonInfo>(),
       paradox: new Map<string, PokemonInfo>(),
-      special: new Map<string, PokemonInfo>(),
       sublegendary: new Map<string, PokemonInfo>(),
       ultrabeast: new Map<string, PokemonInfo>(),
     },
@@ -86,6 +85,12 @@ export const usePokemons = defineStore('pokemons', () => {
     remaining: new Set<string>(),
     remainingShadow: new Set<string>(),
   });
+
+  const { state } = useState();
+  const { getCurrentGen } = useCurrentGen();
+  const { getCurrentType } = useCurrentType();
+  const { showUserMessage } = useMessages();
+  const { languagesState } = useLanguages();
 
   const numFound = computed(() => pokemonState.pokemonFound.size);
   const numShadows = computed(() => pokemonState.pokemonShadowed.size);
@@ -165,11 +170,11 @@ export const usePokemons = defineStore('pokemons', () => {
     return pokemonMaps.boxes[boxId];
   };
 
-  const { state } = useState();
-  const { getCurrentGen } = useCurrentGen();
-  const { getCurrentType } = useCurrentType();
-  const { showUserMessage } = useMessages();
-  const { languagesState } = useLanguages();
+  const getTypedBoxPokemon = (typeId: Type, boxId: RegionBox): Map<string, PokemonInfo> => {
+    const typePokemon = pokemonMaps.types[typeId];
+    const boxPokemon = pokemonMaps.boxes[boxId];
+    return new Map(Array.from(typePokemon.entries()).filter(([key]) => boxPokemon.has(key)));
+  };
 
   const getCurrentGenPokemon = (): Map<string, PokemonInfo> => {
     const currentGen = getCurrentGen();
@@ -210,6 +215,27 @@ export const usePokemons = defineStore('pokemons', () => {
         return getSpecialTypePokemon();
       case 'full':
         return getAllPokemon();
+      default:
+        return new Map();
+    }
+  };
+
+  const getCurrentGameModeBoxPokemon = (boxId: RegionBox): Map<string, PokemonInfo> => {
+    const gameMode = state.gameMode;
+    switch (gameMode) {
+      case 'gen': {
+        return getGenPokemon(boxId);
+      }
+      case 'types': {
+        const typeId = getCurrentType()?.id;
+        if (!typeId) {
+          return getGenPokemon(boxId);
+        }
+
+        return getTypedBoxPokemon(typeId, boxId);
+      }
+      case 'full':
+        return getGenPokemon(boxId);
       default:
         return new Map();
     }
@@ -278,6 +304,7 @@ export const usePokemons = defineStore('pokemons', () => {
     addShadow,
     findPokemon,
     getAllPokemon,
+    getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
