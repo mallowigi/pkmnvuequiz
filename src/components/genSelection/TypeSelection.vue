@@ -33,7 +33,7 @@ const goBack = () => setGameMode(null);
         :style="{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }"
       >
         <img
-          :src="`/src/assets/types/${typeMeta.icon}.svg`"
+          :src="`/assets/types/${typeMeta.icon}.svg`"
           :alt="typeMeta.name"
           class="symbol"
         />

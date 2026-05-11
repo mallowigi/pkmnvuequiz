@@ -7,9 +7,9 @@ export const useUnknownSprite = () => {
     const { state } = useState();
     switch (state.isDark) {
       case true:
-        return '/src/assets/sprites/unknown-2.png';
+        return '/assets/sprites/unknown-2.png';
       case false:
-        return '/src/assets/sprites/unknown.png';
+        return '/assets/sprites/unknown.png';
     }
   });
 
