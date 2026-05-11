@@ -59,6 +59,11 @@ const handleKeydown = (e: KeyboardEvent) => {
   // Every key down on the app will trigger focus on the input
   ensureFocus();
 
+  // Make sure the user is not pressing ctrl or cmd or option or delete
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key === 'Backspace' || e.key === 'Delete') {
+    return;
+  }
+
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
     if (state.withShadowHelper) {
