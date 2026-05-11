@@ -2,11 +2,11 @@
 import { computed } from 'vue';
 import { usePokemons } from '@/stores/usePokemons.ts';
 
-const { getCurrentGameModePokemon, pokemonState, numFound } = usePokemons();
+const { getCurrentGameModePokemon, numFound } = usePokemons();
 
 const total = computed(() => {
   const pokemons = getCurrentGameModePokemon();
-  return pokemons.length ?? 0;
+  return pokemons.size ?? 0;
 });
 </script>
 

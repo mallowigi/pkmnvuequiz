@@ -175,34 +175,35 @@ export const usePokemons = () => {
   const { showUserMessage } = useMessages();
   const { languagesState } = useLanguages();
 
-  const getCurrentGenPokemon = () => {
+  const getCurrentGenPokemon = (): Map<string, PokemonInfo> => {
     const currentGen = getCurrentGen();
     const boxes = currentGen?.boxes ?? [];
     if (!boxes.length) {
-      return [];
+      return new Map();
     }
 
-    return boxes.flatMap((boxId) => pokemonMaps.boxes[boxId] ?? []);
+    const boxesMaps = boxes.map((box) => pokemonMaps.boxes[box]);
+    return new Map(boxesMaps.flatMap((box) => Array.from(box.entries())));
   };
 
-  const getTypePokemon = (typeId: Type) => {
+  const getTypePokemon = (typeId: Type): Map<string, PokemonInfo> => {
     return pokemonMaps.types[typeId];
   };
 
-  const getCurrentTypePokemon = () => {
+  const getCurrentTypePokemon = (): Map<string, PokemonInfo> => {
     const currentType = getCurrentType();
-    return currentType ? pokemonMaps.types[currentType.id as Type] : [];
+    return currentType ? pokemonMaps.types[currentType.id as Type] : new Map();
   };
 
-  const getSpecialTypePokemon = (specialTypeId?: SpecialType) => {
+  const getSpecialTypePokemon = (specialTypeId?: SpecialType): Map<string, PokemonInfo> => {
     return specialTypeId ? pokemonMaps.special[specialTypeId as SpecialType] : pokemonMaps.special.no;
   };
 
-  const getAllPokemon = () => {
+  const getAllPokemon = (): Map<string, PokemonInfo> => {
     return pokemonMaps.all;
   };
 
-  const getCurrentGameModePokemon = () => {
+  const getCurrentGameModePokemon = (): Map<string, PokemonInfo> => {
     const gameMode = state.gameMode;
     switch (gameMode) {
       case 'gen':
@@ -214,7 +215,7 @@ export const usePokemons = () => {
       case 'full':
         return getAllPokemon();
       default:
-        return [];
+        return new Map();
     }
   };
 
