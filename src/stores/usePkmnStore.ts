@@ -1,5 +1,6 @@
 import { reactive, readonly } from 'vue';
 
+import { usePokemons } from '@/stores/usePokemons.ts';
 import type { PkmnData, PokemonInfo, Translations } from '@/types';
 
 const data: PkmnData = reactive({
@@ -14,6 +15,8 @@ const data: PkmnData = reactive({
   suffixNamings: null,
   translations: null,
 });
+
+const { initializePokemonMaps } = usePokemons();
 
 async function loadPokemons() {
   const module = await import('@/data/pokemon.json');
@@ -71,6 +74,7 @@ async function loadData() {
   ])
     .then(() => {
       setLoaded();
+      initializePokemonMaps();
     })
     .catch((error) => {
       console.error('Error loading data:', error);

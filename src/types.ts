@@ -73,7 +73,7 @@ export type TypeInfo = {
   symbol: string;
 };
 
-export type SpecialType = 'special' | 'sublegendary' | 'legendary' | 'mythical' | 'ultrabeast' | 'paradox';
+export type SpecialType = 'no' | 'special' | 'sublegendary' | 'legendary' | 'mythical' | 'ultrabeast' | 'paradox';
 
 export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
   id: SpecialType;
