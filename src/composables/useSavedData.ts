@@ -21,8 +21,8 @@ export const useSavedData = () => {
 
     const savedState: SaveData = {
       ...state,
-      gen: currentGenState.gen,
       currentType: currentTypeState.currentType,
+      gen: currentGenState.gen,
       languages: Array.from(languagesState.languages),
       pokemonProgress: {
         pokemonFound: Array.from(pokemonState.pokemonFound),
@@ -89,7 +89,7 @@ export const useSavedData = () => {
           ...statePayload
         } = loadedState as Partial<SaveData>;
 
-        const { pokemonFound, pokemonShadowed, numFound, numShadows } = pokemonProgress ?? {};
+        const { pokemonFound, pokemonShadowed } = pokemonProgress ?? {};
         const { elapsed, isLimited, minutes, startTime } = timer ?? {};
 
         // Languages

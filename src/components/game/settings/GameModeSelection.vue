@@ -20,7 +20,11 @@ const setFullQuiz = () => {
 };
 
 const setGenQuiz = () => {
-  if (state.gameMode === 'gen') return;
+  if (state.gameMode === 'gen') {
+    setGameMode(null);
+    clearCurrentType();
+    return;
+  }
   setDialog('switchQuiz', () => {
     setGameMode(null);
     clearCurrentType();

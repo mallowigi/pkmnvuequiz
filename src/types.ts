@@ -192,8 +192,6 @@ export type SaveData = {
   timer: TimerState;
 
   pokemonProgress: {
-    numFound: number;
-    numShadows: number;
     pokemonFound: string[];
     pokemonShadowed: string[];
   };
