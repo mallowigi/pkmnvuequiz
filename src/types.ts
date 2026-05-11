@@ -100,6 +100,7 @@ export type LanguageInfo = {
 export type PokemonInfo = {
   id: string;
   baseName: string;
+  dexNum: number;
   primaryType: Type;
   secondaryType: Type | null;
   box: RegionBox;
