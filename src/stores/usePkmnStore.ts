@@ -16,8 +16,6 @@ const data: PkmnData = reactive({
   translations: null,
 });
 
-const { initializePokemonMaps } = usePokemons();
-
 async function loadPokemons() {
   const module = await import('@/data/pokemon.json');
   data.pokemon = module.default.pokemon as PokemonInfo[];
@@ -54,11 +52,11 @@ async function loadSilhouettes() {
   data.silhouettes = module.default.silhouette as Record<string, string>;
 }
 
-async function setLoaded() {
+function setLoaded() {
   data.isLoaded = true;
 }
 
-async function setError(error: any) {
+function setError(error: unknown) {
   data.error = error;
 }
 
@@ -73,6 +71,8 @@ async function loadData() {
     loadShinies(),
   ])
     .then(() => {
+      const { initializePokemonMaps } = usePokemons();
+
       setLoaded();
       initializePokemonMaps();
     })

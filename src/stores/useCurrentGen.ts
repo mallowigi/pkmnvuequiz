@@ -17,7 +17,6 @@ export const useCurrentGen = () => {
   };
 
   return {
-    currentGen: state.gen,
     getCurrentGen,
     setCurrentGen,
   };
