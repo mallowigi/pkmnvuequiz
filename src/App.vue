@@ -106,6 +106,11 @@ onMounted(() => {
   --type-inline-color: inherit;
   --type-fg-color: var(--text);
   --type-bg-color: var(--primary);
+
+  --max-width: 66%;
+  --num-cols: 5;
+  --sprite-width: 64px;
+  --text-padding: 10px;
 }
 
 .dark {

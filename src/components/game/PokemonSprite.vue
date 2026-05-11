@@ -88,14 +88,9 @@ const shadowed = computed(() => pokemonState.pokemonShadowed.has(props.pokemon.i
 <style scoped>
 .sprite {
   margin: -25px -20px -10px -10px;
-  width: 64px;
+  width: var(--sprite-width);
   height: 56px;
   object-fit: none;
   object-position: 100% 0;
-}
-
-.full .sprite {
-  margin: -36px -19px -12px -20px;
-  width: 63px;
 }
 </style>

@@ -172,7 +172,7 @@ export const pokemonTypes: Record<Type, TypeInfo> = {
   },
   normal: {
     bgColor: '#ddddcc',
-    buttonColor: '#555555',
+    buttonColor: '#ddddcc',
     darkBgColor: '#b3b3a6',
     fgColor: '#646464',
     icon: 'NORMAL',

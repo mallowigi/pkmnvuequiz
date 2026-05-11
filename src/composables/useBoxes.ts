@@ -37,6 +37,7 @@ export const useBoxes = () => {
   const getSpecialBoxes = () => {
     return Object.values(specialTypes)
       .filter((specialType) => specialType.id !== 'no')
+      .sort((a, b) => a.index - b.index)
       .flatMap((type) => type.id);
   };
 

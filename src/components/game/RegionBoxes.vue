@@ -4,6 +4,7 @@ import { computed } from 'vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
+import { useColumnLayout } from '@/composables/useColumnLayout.ts';
 import { boxes } from '@/data/boxes.js';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
@@ -12,6 +13,7 @@ import { useState } from '@/stores/useState.ts';
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon } = usePokemons();
 const { state } = useState();
+const styles = useColumnLayout();
 
 const specialBoxes = computed(() => {
   const specialGameModeBoxes = getSpecialBoxes();
@@ -35,7 +37,7 @@ const type = computed(() => {
 <template>
   <div
     class="region-boxes"
-    :class="{ 'full-layout': state.gameMode === 'full' }"
+    :style="styles"
   >
     <!-- Gen/Full/Types Mode -->
     <RoundedBox
@@ -76,26 +78,18 @@ const type = computed(() => {
 
 <style scoped>
 .region-boxes {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 66%;
+  display: block;
+  margin: 10px;
+  max-width: var(--max-width);
+  columns: var(--num-cols);
+  column-gap: 10px;
 
-  &.full-layout {
-    display: block;
-    columns: 5;
-    column-gap: 10px;
+  & .region-box {
+    display: inline-flex;
+    width: 100%;
+    margin: 0 0 10px;
     padding: 10px;
-    max-width: none;
-
-    & .region-box {
-      display: inline-flex;
-      width: 100%;
-      margin: 0 0 10px;
-      break-inside: avoid;
-    }
+    break-inside: avoid;
   }
 }
 
@@ -107,6 +101,10 @@ const type = computed(() => {
   max-height: inherit;
   margin: 10px;
   border: none;
+}
+
+.region-name {
+  padding-left: 10px;
 }
 
 .sprite-container {
