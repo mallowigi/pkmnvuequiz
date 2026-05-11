@@ -159,7 +159,7 @@ export type Translations = {
 };
 
 export type PkmnData = {
-  error: any;
+  error: unknown;
   isLoaded: boolean;
   namings: Record<string, string> | null;
   suffixNamings: Record<string, string> | null;
@@ -196,4 +196,12 @@ export type SaveData = {
     pokemonShadowed: string[];
   };
   version: number;
+};
+
+export type MessageType = 'success' | 'error' | 'info' | 'warning';
+
+export type Message = {
+  id: number;
+  text: string;
+  type: MessageType;
 };

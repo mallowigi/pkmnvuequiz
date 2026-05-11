@@ -1,8 +1,10 @@
-import { reactive } from 'vue';
 import { defineStore, acceptHMRUpdate } from 'pinia';
+import { reactive } from 'vue';
+
+import type { Message, MessageType } from '@/types.ts';
 
 interface MessagesState {
-  messages: string[];
+  messages: Message[];
 }
 
 export const useMessages = defineStore('messages', () => {
@@ -10,8 +12,12 @@ export const useMessages = defineStore('messages', () => {
     messages: [],
   });
 
-  const showUserMessage = (message: string) => {
-    state.messages.push(message);
+  const showUserMessage = (message: string, type?: MessageType) => {
+    state.messages.push({
+      id: Date.now(),
+      text: message,
+      type: type ?? 'info',
+    });
 
     setTimeout(() => {
       state.messages.shift();

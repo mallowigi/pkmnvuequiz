@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { useMessages } from '@/stores/useMessages';
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 
 const { state, showUserMessage } = useMessages();
+
+const lastMessages = computed(() => {
+  return state.messages.slice(-3);
+});
 
 onMounted(() => {
   showUserMessage('Welcome to the Pokémon Quiz! Select a generation to begin.');
@@ -13,11 +17,12 @@ onMounted(() => {
   <div class="snackbar-container">
     <TransitionGroup>
       <div
-        v-for="message in state.messages"
+        v-for="message in lastMessages"
         class="snackbar rad-br-tl"
-        :key="message"
+        :class="message.type"
+        :key="message.id"
       >
-        {{ message }}
+        {{ message.text }}
       </div>
     </TransitionGroup>
   </div>
@@ -42,6 +47,18 @@ onMounted(() => {
   padding: 16px;
   opacity: 1;
   margin-bottom: 16px;
+
+  &.error {
+    background-color: rgba(255, 0, 0, 0.3);
+  }
+
+  &.warning {
+    background-color: rgba(255, 255, 0, 0.3);
+  }
+
+  &.success {
+    background-color: rgba(0, 255, 0, 0.3);
+  }
 }
 
 .v-enter-active,
