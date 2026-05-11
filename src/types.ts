@@ -126,9 +126,10 @@ export type LanguagesState = {
 
 export type PokemonProgressState = {
   pokemonFound: Set<string>;
-  pokemonNotFound: Set<string>;
   pokemonShadowed: Set<string>;
-  pokemonNotShadowed: Set<string>;
+  remaining: Set<string>;
+  remainingShadow: Set<string>;
+  lastPokemon: string | null;
 };
 
 export type TimerState = {
@@ -146,15 +147,15 @@ export type GameFlowState = {
 };
 
 export type Translations = {
-  ENG: string;
-  FRE: string;
-  GER: string;
-  ESP: string;
-  ITA: string;
-  KOR: string;
-  JPN: string;
-  CHT: string;
-  CHS: string;
+  en: string;
+  fr: string;
+  de: string;
+  es: string;
+  it: string;
+  ko: string;
+  ja: string;
+  zh: string;
+  cn: string;
 };
 
 export type PkmnData = {
