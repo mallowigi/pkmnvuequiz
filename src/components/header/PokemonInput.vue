@@ -76,6 +76,10 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 
   const value = inputRef.value?.value || '';
+  if (value === '') {
+    return;
+  }
+
   const foundPokemon = findPokemon(value);
   if (foundPokemon) {
     addFound(value);
