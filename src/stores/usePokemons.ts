@@ -313,6 +313,14 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
+  const isPokemonFound = (pokemon: PokemonInfo) => {
+    return pokemonState.pokemonFound.has(normalizeName(pokemon.baseName));
+  };
+
+  const isPokemonShadowed = (pokemon: PokemonInfo) => {
+    return pokemonState.pokemonShadowed.has(normalizeName(pokemon.baseName));
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -329,6 +337,8 @@ export const usePokemons = defineStore('pokemons', () => {
     initializePokemonMaps,
     isAlreadyFound,
     isInRemaining,
+    isPokemonFound,
+    isPokemonShadowed,
     isPokemonsInCurrentGameMode,
     numFound,
     numShadows,

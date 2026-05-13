@@ -2,17 +2,16 @@
 import { computed } from 'vue';
 
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
+import ZoomTransition from '@/components/common/ZoomTransition.vue';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo } from '@/types.ts';
-import { normalizeName } from '@/utils/utils.ts';
-import ZoomTransition from '@/components/common/ZoomTransition.vue';
 
 const { state } = useState();
 const { data } = usePkmnData();
-const { pokemonState } = usePokemons();
+const { isPokemonFound, isPokemonShadowed } = usePokemons();
 const { unknownSprite } = useUnknownSprite();
 
 type Props = {
@@ -38,9 +37,9 @@ const spriteData = computed<SpriteData>(() => {
   };
 });
 
-const found = computed(() => pokemonState.pokemonFound.has(normalizeName(props.pokemon.baseName)));
+const found = computed(() => isPokemonFound(props.pokemon));
 
-const shadowed = computed(() => pokemonState.pokemonShadowed.has(normalizeName(props.pokemon.baseName)));
+const shadowed = computed(() => isPokemonShadowed(props.pokemon));
 </script>
 
 <template>
@@ -96,5 +95,9 @@ const shadowed = computed(() => pokemonState.pokemonShadowed.has(normalizeName(p
   height: 56px;
   object-fit: none;
   object-position: 100% 0;
+
+  &:hover {
+    transform: scale(1.3) translate(0, -5px);
+  }
 }
 </style>
