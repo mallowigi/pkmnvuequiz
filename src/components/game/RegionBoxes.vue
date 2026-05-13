@@ -49,11 +49,16 @@ const type = computed(() => {
       <span class="region-name">{{ box.name }}</span>
 
       <div class="sprite-container">
-        <PokemonSprite
-          v-for="[, pokemon] in getCurrentGameModeBoxPokemon(box.id)"
-          :key="box.id"
-          :pokemon="pokemon"
-        />
+        <template
+          v-for="[, pokemons] in getCurrentGameModeBoxPokemon(box.id)"
+          :key="pokemons[0].id"
+        >
+          <PokemonSprite
+            v-for="pokemon in pokemons"
+            :key="pokemon.id"
+            :pokemon="pokemon"
+          />
+        </template>
       </div>
     </RoundedBox>
 
@@ -66,11 +71,16 @@ const type = computed(() => {
     >
       <span class="region-name">{{ box.name }}</span>
       <div class="sprite-container">
-        <PokemonSprite
-          v-for="[, pokemon] in getSpecialTypePokemon(box.id)"
-          :key="pokemon.id"
-          :pokemon="pokemon"
-        />
+        <template
+          v-for="[, pokemons] in getSpecialTypePokemon(box.id)"
+          :key="pokemons[0].id"
+        >
+          <PokemonSprite
+            v-for="pokemon in pokemons"
+            :key="pokemon.id"
+            :pokemon="pokemon"
+          />
+        </template>
       </div>
     </RoundedBox>
   </div>

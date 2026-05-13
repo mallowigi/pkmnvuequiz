@@ -21,7 +21,7 @@ const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
 const {
   addShadow,
-  isPokemonInCurrentGameMode,
+  isPokemonsInCurrentGameMode,
   isInRemaining,
   addRandomShadow,
   findPokemon,
@@ -101,7 +101,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  if (!isPokemonInCurrentGameMode(foundPokemon)) {
+  if (!isPokemonsInCurrentGameMode(foundPokemon)) {
     showUserMessage(`${capitalize(value)} is not part of this game.`);
     inputRef.value!.value = '';
     return;

@@ -9,74 +9,74 @@ import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
 import type { PokemonInfo, PokemonProgressState, RegionBox, SpecialType, Type, Language } from '@/types.ts';
-import { normalizeName } from '@/utils/utils.ts';
+import { normalizeName, upsert } from '@/utils/utils.ts';
 
 type PokemonMaps = {
-  all: Map<string, PokemonInfo>;
-  special: Record<SpecialType, Map<string, PokemonInfo>>;
-  languages: Record<Language, Map<string, PokemonInfo>>;
-  types: Record<Type, Map<string, PokemonInfo>>;
-  boxes: Record<RegionBox, Map<string, PokemonInfo>>;
+  all: Map<string, Array<PokemonInfo>>;
+  special: Record<SpecialType, Map<string, Array<PokemonInfo>>>;
+  languages: Record<Language, Map<string, Array<PokemonInfo>>>;
+  types: Record<Type, Map<string, Array<PokemonInfo>>>;
+  boxes: Record<RegionBox, Map<string, Array<PokemonInfo>>>;
 };
 
 export const usePokemons = defineStore('pokemons', () => {
   const pokemonMaps: PokemonMaps = {
-    all: new Map<string, PokemonInfo>(),
+    all: new Map<string, Array<PokemonInfo>>(),
     boxes: {
-      alola: new Map<string, PokemonInfo>(),
-      areazero: new Map<string, PokemonInfo>(),
-      galar: new Map<string, PokemonInfo>(),
-      gmax: new Map<string, PokemonInfo>(),
-      hisui: new Map<string, PokemonInfo>(),
-      hoenn: new Map<string, PokemonInfo>(),
-      hoennmega: new Map<string, PokemonInfo>(),
-      hyperspace: new Map<string, PokemonInfo>(),
-      johto: new Map<string, PokemonInfo>(),
-      kalos: new Map<string, PokemonInfo>(),
-      kalosmega: new Map<string, PokemonInfo>(),
-      kanto: new Map<string, PokemonInfo>(),
-      lumiose: new Map<string, PokemonInfo>(),
-      paldea: new Map<string, PokemonInfo>(),
-      pokemongo: new Map<string, PokemonInfo>(),
-      sinnoh: new Map<string, PokemonInfo>(),
-      unova: new Map<string, PokemonInfo>(),
+      alola: new Map<string, Array<PokemonInfo>>(),
+      areazero: new Map<string, Array<PokemonInfo>>(),
+      galar: new Map<string, Array<PokemonInfo>>(),
+      gmax: new Map<string, Array<PokemonInfo>>(),
+      hisui: new Map<string, Array<PokemonInfo>>(),
+      hoenn: new Map<string, Array<PokemonInfo>>(),
+      hoennmega: new Map<string, Array<PokemonInfo>>(),
+      hyperspace: new Map<string, Array<PokemonInfo>>(),
+      johto: new Map<string, Array<PokemonInfo>>(),
+      kalos: new Map<string, Array<PokemonInfo>>(),
+      kalosmega: new Map<string, Array<PokemonInfo>>(),
+      kanto: new Map<string, Array<PokemonInfo>>(),
+      lumiose: new Map<string, Array<PokemonInfo>>(),
+      paldea: new Map<string, Array<PokemonInfo>>(),
+      pokemongo: new Map<string, Array<PokemonInfo>>(),
+      sinnoh: new Map<string, Array<PokemonInfo>>(),
+      unova: new Map<string, Array<PokemonInfo>>(),
     },
     languages: {
-      cn: new Map<string, PokemonInfo>(),
-      de: new Map<string, PokemonInfo>(),
-      en: new Map<string, PokemonInfo>(),
-      fr: new Map<string, PokemonInfo>(),
-      ja: new Map<string, PokemonInfo>(),
-      ko: new Map<string, PokemonInfo>(),
-      zh: new Map<string, PokemonInfo>(),
+      cn: new Map<string, Array<PokemonInfo>>(),
+      de: new Map<string, Array<PokemonInfo>>(),
+      en: new Map<string, Array<PokemonInfo>>(),
+      fr: new Map<string, Array<PokemonInfo>>(),
+      ja: new Map<string, Array<PokemonInfo>>(),
+      ko: new Map<string, Array<PokemonInfo>>(),
+      zh: new Map<string, Array<PokemonInfo>>(),
     },
     special: {
-      legendary: new Map<string, PokemonInfo>(),
-      mythical: new Map<string, PokemonInfo>(),
-      no: new Map<string, PokemonInfo>(),
-      paradox: new Map<string, PokemonInfo>(),
-      sublegendary: new Map<string, PokemonInfo>(),
-      ultrabeast: new Map<string, PokemonInfo>(),
+      legendary: new Map<string, Array<PokemonInfo>>(),
+      mythical: new Map<string, Array<PokemonInfo>>(),
+      no: new Map<string, Array<PokemonInfo>>(),
+      paradox: new Map<string, Array<PokemonInfo>>(),
+      sublegendary: new Map<string, Array<PokemonInfo>>(),
+      ultrabeast: new Map<string, Array<PokemonInfo>>(),
     },
     types: {
-      bug: new Map<string, PokemonInfo>(),
-      dark: new Map<string, PokemonInfo>(),
-      dragon: new Map<string, PokemonInfo>(),
-      electric: new Map<string, PokemonInfo>(),
-      fairy: new Map<string, PokemonInfo>(),
-      fighting: new Map<string, PokemonInfo>(),
-      fire: new Map<string, PokemonInfo>(),
-      flying: new Map<string, PokemonInfo>(),
-      ghost: new Map<string, PokemonInfo>(),
-      grass: new Map<string, PokemonInfo>(),
-      ground: new Map<string, PokemonInfo>(),
-      ice: new Map<string, PokemonInfo>(),
-      normal: new Map<string, PokemonInfo>(),
-      poison: new Map<string, PokemonInfo>(),
-      psychic: new Map<string, PokemonInfo>(),
-      rock: new Map<string, PokemonInfo>(),
-      steel: new Map<string, PokemonInfo>(),
-      water: new Map<string, PokemonInfo>(),
+      bug: new Map<string, Array<PokemonInfo>>(),
+      dark: new Map<string, Array<PokemonInfo>>(),
+      dragon: new Map<string, Array<PokemonInfo>>(),
+      electric: new Map<string, Array<PokemonInfo>>(),
+      fairy: new Map<string, Array<PokemonInfo>>(),
+      fighting: new Map<string, Array<PokemonInfo>>(),
+      fire: new Map<string, Array<PokemonInfo>>(),
+      flying: new Map<string, Array<PokemonInfo>>(),
+      ghost: new Map<string, Array<PokemonInfo>>(),
+      grass: new Map<string, Array<PokemonInfo>>(),
+      ground: new Map<string, Array<PokemonInfo>>(),
+      ice: new Map<string, Array<PokemonInfo>>(),
+      normal: new Map<string, Array<PokemonInfo>>(),
+      poison: new Map<string, Array<PokemonInfo>>(),
+      psychic: new Map<string, Array<PokemonInfo>>(),
+      rock: new Map<string, Array<PokemonInfo>>(),
+      steel: new Map<string, Array<PokemonInfo>>(),
+      water: new Map<string, Array<PokemonInfo>>(),
     },
   };
 
@@ -106,47 +106,51 @@ export const usePokemons = defineStore('pokemons', () => {
 
     data.pokemon.forEach((pok) => {
       const pokemonKey = normalizeName(pok.baseName);
+      if (!pokemonKey) return;
 
-      pokemonMaps.all.set(pokemonKey, pok);
+      upsert(pokemonMaps.all, pokemonKey, pok);
 
       if (pok.box) {
-        pokemonMaps.boxes[pok.box].set(pokemonKey, pok);
+        upsert(pokemonMaps.boxes[pok.box], pokemonKey, pok);
       }
 
       if (pok.specialType) {
-        pokemonMaps.special[pok.specialType].set(pokemonKey, pok);
+        upsert(pokemonMaps.special[pok.specialType], pokemonKey, pok);
       } else {
-        pokemonMaps.special.no.set(pokemonKey, pok);
+        upsert(pokemonMaps.special.no, pokemonKey, pok);
       }
 
       if (pok.primaryType) {
-        pokemonMaps.types[pok.primaryType].set(pokemonKey, pok);
+        upsert(pokemonMaps.types[pok.primaryType], pokemonKey, pok);
       }
 
       if (pok.secondaryType) {
-        pokemonMaps.types[pok.secondaryType].set(pokemonKey, pok);
+        upsert(pokemonMaps.types[pok.secondaryType], pokemonKey, pok);
       }
 
       for (const lang in pokemonMaps.languages) {
         const translations = data.translations![pokemonKey];
-        if (translations) {
-          const translationKey = normalizeName(translations[lang as Language]);
-          pokemonMaps.languages[lang as Language].set(translationKey, pok);
+        const translation = translations?.[lang as Language];
+        if (translation) {
+          const translationKey = normalizeName(translation);
+          if (translationKey) {
+            upsert(pokemonMaps.languages[lang as Language], translationKey, pok);
+          }
         }
       }
     });
   };
 
   const addFound = (pokemon: string) => {
-    pokemonState.pokemonFound.add(pokemon.toLowerCase());
+    pokemonState.pokemonFound.add(normalizeName(pokemon));
   };
 
   const addShadow = (pokemon: string) => {
-    pokemonState.pokemonShadowed.add(pokemon.toLowerCase());
+    pokemonState.pokemonShadowed.add(normalizeName(pokemon));
   };
 
   const setLastPokemon = (pokemon: string) => {
-    pokemonState.lastPokemon = pokemon.toLowerCase();
+    pokemonState.lastPokemon = normalizeName(pokemon);
   };
 
   const addRandomShadow = () => {};
@@ -165,34 +169,36 @@ export const usePokemons = defineStore('pokemons', () => {
     });
   };
 
-  const getGenPokemon = (boxId: RegionBox) => {
-    return pokemonMaps.boxes[boxId];
+  const getGenPokemon = (boxId: RegionBox): Map<string, PokemonInfo[]> => {
+    return pokemonMaps.boxes[boxId] ?? new Map();
   };
 
-  const getTypedBoxPokemon = (typeId: Type, boxId: RegionBox): Map<string, PokemonInfo> => {
-    const typePokemon = pokemonMaps.types[typeId];
+  const getTypedBoxPokemon = (typeId: Type, boxId: RegionBox): Map<string, PokemonInfo[]> => {
     const boxPokemon = pokemonMaps.boxes[boxId];
-    const result = new Map<string, PokemonInfo>();
+    if (!boxPokemon) return new Map();
 
-    for (const [key, pokemon] of typePokemon) {
-      if (boxPokemon.has(key)) {
-        result.set(key, pokemon);
+    const result = new Map<string, PokemonInfo[]>();
+
+    for (const [key, pokemons] of boxPokemon) {
+      const filtered = pokemons.filter((p) => p.primaryType === typeId || p.secondaryType === typeId);
+      if (filtered.length > 0) {
+        result.set(key, filtered);
       }
     }
 
     return result;
   };
 
-  const getCurrentGenPokemon = (): Map<string, PokemonInfo> => {
+  const getCurrentGenPokemon = (): Map<string, PokemonInfo[]> => {
     const currentGen = getCurrentGen();
-    const boxes = currentGen?.boxes ?? [];
-    const result = new Map<string, PokemonInfo>();
+    const currentGenBoxes = currentGen?.boxes ?? [];
+    const result = new Map<string, PokemonInfo[]>();
 
-    for (const boxId of boxes) {
-      const boxMap = pokemonMaps.boxes[boxId];
-      if (boxMap) {
-        for (const [key, pokemon] of boxMap) {
-          result.set(key, pokemon);
+    for (const boxId of currentGenBoxes) {
+      const box = pokemonMaps.boxes[boxId];
+      if (box) {
+        for (const [key, pokemons] of box) {
+          result.set(key, pokemons);
         }
       }
     }
@@ -200,24 +206,26 @@ export const usePokemons = defineStore('pokemons', () => {
     return result;
   };
 
-  const getTypePokemon = (typeId: Type): Map<string, PokemonInfo> => {
-    return pokemonMaps.types[typeId];
+  const getTypePokemon = (typeId: Type): Map<string, PokemonInfo[]> => {
+    return pokemonMaps.types[typeId] ?? new Map();
   };
 
-  const getCurrentTypePokemon = (): Map<string, PokemonInfo> => {
+  const getCurrentTypePokemon = (): Map<string, PokemonInfo[]> => {
     const currentType = getCurrentType();
-    return currentType ? pokemonMaps.types[currentType.id as Type] : new Map();
+    if (!currentType) return new Map();
+
+    return getTypePokemon(currentType.id as Type);
   };
 
-  const getSpecialTypePokemon = (specialTypeId?: SpecialType): Map<string, PokemonInfo> => {
-    return specialTypeId ? pokemonMaps.special[specialTypeId as SpecialType] : pokemonMaps.special.no;
+  const getSpecialTypePokemon = (specialTypeId?: SpecialType): Map<string, PokemonInfo[]> => {
+    return (specialTypeId ? pokemonMaps.special[specialTypeId] : pokemonMaps.special.no) ?? new Map();
   };
 
-  const getAllPokemon = (): Map<string, PokemonInfo> => {
+  const getAllPokemon = (): Map<string, PokemonInfo[]> => {
     return pokemonMaps.all;
   };
 
-  const getCurrentGameModePokemon = (): Map<string, PokemonInfo> => {
+  const getCurrentGameModePokemon = (): Map<string, PokemonInfo[]> => {
     const gameMode = state.gameMode;
     switch (gameMode) {
       case 'gen':
@@ -233,7 +241,7 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const getCurrentGameModeBoxPokemon = (boxId: RegionBox): Map<string, PokemonInfo> => {
+  const getCurrentGameModeBoxPokemon = (boxId: RegionBox): Map<string, PokemonInfo[]> => {
     const gameMode = state.gameMode;
     switch (gameMode) {
       case 'gen': {
@@ -254,37 +262,44 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const isPokemonInCurrentGameMode = (pokemon: PokemonInfo) => {
-    const gameMode = state.gameMode;
-    switch (gameMode) {
-      case 'gen': {
-        const currentGen = getCurrentGen();
-        return currentGen ? currentGen.boxes.includes(pokemon.box) : false;
-      }
-      case 'types': {
-        const currentType = getCurrentType();
-        if (!currentType) return false;
+  const isPokemonsInCurrentGameMode = (pokemons: PokemonInfo[]) => {
+    return pokemons.some((pokemon: PokemonInfo) => {
+      const gameMode = state.gameMode;
+      switch (gameMode) {
+        case 'gen': {
+          const currentGen = getCurrentGen();
+          return currentGen ? currentGen.boxes.includes(pokemon.box) : false;
+        }
+        case 'types': {
+          const currentType = getCurrentType();
+          if (!currentType) return false;
 
-        const types = [pokemon.primaryType, pokemon.secondaryType].filter(Boolean);
-        return types.includes(currentType.id);
+          const types = [pokemon.primaryType, pokemon.secondaryType].filter(Boolean);
+          return types.includes(currentType.id);
+        }
+        case 'special':
+          return pokemon.specialType !== undefined;
+        case 'full':
+          return true;
+        default:
+          return false;
       }
-      case 'special':
-        return pokemon.specialType !== undefined;
-      case 'full':
-        return true;
-      default:
-        return false;
-    }
+    });
   };
 
-  const isInRemaining = (pokemon: PokemonInfo) => {
-    const pokemonKey = normalizeName(pokemon.baseName);
-
-    for (const pok of pokemonState.remaining) {
-      if (normalizeName(pok).startsWith(pokemonKey)) {
-        return pok;
+  const isInRemaining = (pokemons: PokemonInfo[]) => {
+    return pokemons.some((pokemon) => {
+      for (const pok of pokemonState.remaining) {
+        const pokemonKey = normalizeName(pokemon.baseName);
+        if (normalizeName(pok).startsWith(pokemonKey)) {
+          return true;
+        }
       }
-    }
+    });
+  };
+
+  const isAlreadyFound = (pokemons: PokemonInfo[]) => {
+    return pokemons.some((pokemon) => pokemonState.pokemonFound.has(normalizeName(pokemon.baseName)));
   };
 
   const findPokemon = (input: string) => {
@@ -296,10 +311,6 @@ export const usePokemons = defineStore('pokemons', () => {
         return foundPokemon;
       }
     }
-  };
-
-  const isAlreadyFound = (pokemon: PokemonInfo) => {
-    return pokemonState.pokemonFound.has(normalizeName(pokemon.baseName));
   };
 
   return {
@@ -318,7 +329,7 @@ export const usePokemons = defineStore('pokemons', () => {
     initializePokemonMaps,
     isAlreadyFound,
     isInRemaining,
-    isPokemonInCurrentGameMode,
+    isPokemonsInCurrentGameMode,
     numFound,
     numShadows,
     pokemonState,

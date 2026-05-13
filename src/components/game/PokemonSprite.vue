@@ -7,6 +7,7 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo } from '@/types.ts';
+import { normalizeName } from '@/utils/utils.ts';
 import ZoomTransition from '@/components/common/ZoomTransition.vue';
 
 const { state } = useState();
@@ -37,9 +38,9 @@ const spriteData = computed<SpriteData>(() => {
   };
 });
 
-const found = computed(() => pokemonState.pokemonFound.has(props.pokemon.id));
+const found = computed(() => pokemonState.pokemonFound.has(normalizeName(props.pokemon.baseName)));
 
-const shadowed = computed(() => pokemonState.pokemonShadowed.has(props.pokemon.id));
+const shadowed = computed(() => pokemonState.pokemonShadowed.has(normalizeName(props.pokemon.baseName)));
 </script>
 
 <template>
