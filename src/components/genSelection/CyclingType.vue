@@ -13,7 +13,7 @@ const currentType = computed(() => {
   const type = typesList[currentIndex.value];
   return {
     ...type,
-    iconUrl: new URL(`/assets/types/${type.icon}.svg`, import.meta.url).href,
+    iconUrl: new URL(`/public/assets/types/${type.icon}.svg`, import.meta.url).href,
   };
 });
 
