@@ -1,13 +1,15 @@
+// noinspection JSUnfilteredForInLoop
+
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
 
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useLanguages } from '@/stores/useLanguages.ts';
-import { useMessages } from '@/stores/useMessages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
 import type { PokemonInfo, PokemonProgressState, RegionBox, SpecialType, Type, Language } from '@/types.ts';
+import { normalizeName } from '@/utils/utils.ts';
 
 type PokemonMaps = {
   all: Map<string, PokemonInfo>;
@@ -89,13 +91,10 @@ export const usePokemons = defineStore('pokemons', () => {
   const { state } = useState();
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
-  const { showUserMessage } = useMessages();
   const { languagesState } = useLanguages();
 
   const numFound = computed(() => pokemonState.pokemonFound.size);
   const numShadows = computed(() => pokemonState.pokemonShadowed.size);
-
-  const normalizeName = (str: string) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
 
   const initializePokemonMaps = () => {
     const { data } = usePkmnData();
@@ -173,18 +172,32 @@ export const usePokemons = defineStore('pokemons', () => {
   const getTypedBoxPokemon = (typeId: Type, boxId: RegionBox): Map<string, PokemonInfo> => {
     const typePokemon = pokemonMaps.types[typeId];
     const boxPokemon = pokemonMaps.boxes[boxId];
-    return new Map(Array.from(typePokemon.entries()).filter(([key]) => boxPokemon.has(key)));
+    const result = new Map<string, PokemonInfo>();
+
+    for (const [key, pokemon] of typePokemon) {
+      if (boxPokemon.has(key)) {
+        result.set(key, pokemon);
+      }
+    }
+
+    return result;
   };
 
   const getCurrentGenPokemon = (): Map<string, PokemonInfo> => {
     const currentGen = getCurrentGen();
     const boxes = currentGen?.boxes ?? [];
-    if (!boxes.length) {
-      return new Map();
+    const result = new Map<string, PokemonInfo>();
+
+    for (const boxId of boxes) {
+      const boxMap = pokemonMaps.boxes[boxId];
+      if (boxMap) {
+        for (const [key, pokemon] of boxMap) {
+          result.set(key, pokemon);
+        }
+      }
     }
 
-    const boxesMaps = boxes.map((box) => pokemonMaps.boxes[box]);
-    return new Map(boxesMaps.flatMap((box) => Array.from(box.entries())));
+    return result;
   };
 
   const getTypePokemon = (typeId: Type): Map<string, PokemonInfo> => {
@@ -264,38 +277,29 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
+  const isInRemaining = (pokemon: PokemonInfo) => {
+    const pokemonKey = normalizeName(pokemon.baseName);
+
+    for (const pok of pokemonState.remaining) {
+      if (normalizeName(pok).startsWith(pokemonKey)) {
+        return pok;
+      }
+    }
+  };
+
   const findPokemon = (input: string) => {
     const pokemonKey = normalizeName(input);
-    const languages = Array.from(languagesState.languages);
-    const remaining = Array.from(pokemonState.remaining);
 
-    const foundInLanguage = languages.find((lang) => pokemonMaps.languages[lang].has(pokemonKey));
-    if (!foundInLanguage) {
-      return;
-    }
-
-    const foundPokemon = pokemonMaps.languages[foundInLanguage].get(pokemonKey);
-    if (!foundPokemon) {
-      return;
-    }
-
-    if (pokemonState.pokemonFound.has(pokemonKey)) {
-      const isInRemaining = remaining.find((pok) => pok.toLowerCase().startsWith(pokemonKey));
-      if (isInRemaining) {
-        return;
+    for (const lang of languagesState.languages) {
+      const foundPokemon = pokemonMaps.languages[lang].get(pokemonKey);
+      if (foundPokemon) {
+        return foundPokemon;
       }
-
-      showUserMessage(`You've already found ${input}!`);
-      return;
     }
+  };
 
-    const isInCurrentGameBox = isPokemonInCurrentGameMode(foundPokemon);
-    if (!isInCurrentGameBox) {
-      showUserMessage(`${input} is not in the current game mode!`);
-      return;
-    }
-
-    return foundPokemon;
+  const isAlreadyFound = (pokemon: PokemonInfo) => {
+    return pokemonState.pokemonFound.has(normalizeName(pokemon.baseName));
   };
 
   return {
@@ -312,6 +316,9 @@ export const usePokemons = defineStore('pokemons', () => {
     getSpecialTypePokemon,
     getTypePokemon,
     initializePokemonMaps,
+    isAlreadyFound,
+    isInRemaining,
+    isPokemonInCurrentGameMode,
     numFound,
     numShadows,
     pokemonState,

@@ -10,6 +10,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
+import { capitalize } from '@/utils/utils.ts';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -18,7 +19,16 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
-const { addShadow, addRandomShadow, findPokemon, addFound, pokemonState } = usePokemons();
+const {
+  addShadow,
+  isPokemonInCurrentGameMode,
+  isInRemaining,
+  addRandomShadow,
+  findPokemon,
+  addFound,
+  pokemonState,
+  isAlreadyFound,
+} = usePokemons();
 const { unknownSprite } = useUnknownSprite();
 
 const regionOrType = computed(() => {
@@ -81,12 +91,26 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 
   const foundPokemon = findPokemon(value);
-  if (foundPokemon) {
-    addFound(value);
-    // If the user has typed a valid Pokémon name, clear the input for the next guess
+  if (!foundPokemon) {
+    return;
+  }
+
+  if (isAlreadyFound(foundPokemon) && !isInRemaining(foundPokemon)) {
+    showUserMessage(`${capitalize(value)} already named.`);
     inputRef.value!.value = '';
     return;
   }
+
+  if (!isPokemonInCurrentGameMode(foundPokemon)) {
+    showUserMessage(`${capitalize(value)} is not part of this game.`);
+    inputRef.value!.value = '';
+    return;
+  }
+
+  addFound(value);
+  // If the user has typed a valid Pokémon name, clear the input for the next guess
+  inputRef.value!.value = '';
+  return;
 };
 
 // Clicking anywhere on the app will trigger focus on the input

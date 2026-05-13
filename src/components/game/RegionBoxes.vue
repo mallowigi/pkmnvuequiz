@@ -88,7 +88,7 @@ const type = computed(() => {
     display: inline-flex;
     width: 100%;
     margin: 0 0 10px;
-    padding: 10px;
+    padding: 12px 12px 12px 10px;
     break-inside: avoid;
     border-radius: 3px 20px;
   }
