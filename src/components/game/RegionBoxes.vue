@@ -90,6 +90,7 @@ const type = computed(() => {
     margin: 0 0 10px;
     padding: 10px;
     break-inside: avoid;
+    border-radius: 3px 20px;
   }
 }
 

@@ -7,6 +7,7 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo } from '@/types.ts';
+import ZoomTransition from '@/components/common/ZoomTransition.vue';
 
 const { state } = useState();
 const { data } = usePkmnData();
@@ -47,19 +48,21 @@ const shadowed = computed(() => pokemonState.pokemonShadowed.has(props.pokemon.i
     :class="{ full: state.gameMode === 'full' }"
   >
     <div v-if="found">
-      <img
-        v-if="spriteData.shiny && state.withShinies"
-        class="sprite"
-        :src="spriteData.shiny"
-        :alt="`${props.pokemon.baseName}`"
-      />
+      <ZoomTransition>
+        <img
+          v-if="spriteData.shiny && state.withShinies"
+          class="sprite"
+          :src="spriteData.shiny"
+          :alt="`${props.pokemon.baseName}`"
+        />
 
-      <img
-        v-else-if="spriteData.sprite"
-        class="sprite"
-        :src="spriteData.sprite"
-        :alt="`Shiny ${props.pokemon.baseName}`"
-      />
+        <img
+          v-else-if="spriteData.sprite"
+          class="sprite"
+          :src="spriteData.sprite"
+          :alt="`Shiny ${props.pokemon.baseName}`"
+        />
+      </ZoomTransition>
     </div>
 
     <div v-else-if="shadowed">
