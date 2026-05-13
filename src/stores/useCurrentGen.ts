@@ -24,7 +24,12 @@ export const useCurrentGen = defineStore('currentGen', () => {
     return gens[currentGen];
   };
 
+  const clearCurrentGen = () => {
+    currentGenState.gen = null;
+  };
+
   return {
+    clearCurrentGen,
     currentGenState,
     getCurrentGen,
     setCurrentGen,

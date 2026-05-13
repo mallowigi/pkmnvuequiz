@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { useGameFlow } from '@/stores/useGameFlow';
-import { useState } from '@/stores/useState';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { typesList } from '@/data/pokemonTypes';
-
-const { setStarted } = useGameFlow();
-const { setGameMode } = useState();
 
 const currentIndex = ref(0);
 
@@ -28,11 +23,6 @@ const startCycle = () => {
   }, 3000);
 };
 
-const setType = () => {
-  setGameMode('types');
-  setStarted(true);
-};
-
 onMounted(() => {
   startCycle();
 });
@@ -41,6 +31,12 @@ onUnmounted(() => {
   if (interval) clearInterval(interval);
   interval = null;
 });
+
+const emits = defineEmits(['typeSelected']);
+
+const setType = () => {
+  emits('typeSelected');
+};
 </script>
 
 <template>

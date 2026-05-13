@@ -11,8 +11,7 @@ import FadeTransition from '@/components/common/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
 import GameFooter from '@/components/footer/GameFooter.vue';
 import Game from '@/components/game/Game.vue';
-import GameStart from '@/components/genSelection/GameStart.vue';
-import TypeSelection from '@/components/genSelection/TypeSelection.vue';
+import GameSelection from '@/components/genSelection/GameSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
 import { useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
@@ -72,11 +71,7 @@ onMounted(() => {
     <PauseOverlay v-if="flowState.isPaused" />
 
     <FadeTransition>
-      <GameStart v-if="state.gameMode === null" />
-    </FadeTransition>
-
-    <FadeTransition>
-      <TypeSelection v-if="state.gameMode === 'types' && currentTypeState.currentType === null" />
+      <GameSelection v-if="flowState.gameSelectionState" />
     </FadeTransition>
 
     <Dialogs />

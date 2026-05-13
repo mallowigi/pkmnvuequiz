@@ -6,21 +6,31 @@ import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 import type { Gen } from '@/types.ts';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
 
-const { setStarted } = useGameFlow();
+const { setStarted, setGameSelectionState } = useGameFlow();
 const { setGameMode } = useState();
-const { setCurrentGen } = useCurrentGen();
+const { setCurrentGen, clearCurrentGen } = useCurrentGen();
+const { clearCurrentType } = useCurrentType();
 
 const setFullQuiz = () => {
   setGameMode('full');
-  setCurrentGen(null);
+  clearCurrentGen();
+  clearCurrentType();
   setStarted(true);
 };
 
 const setGen = (gen: Gen) => {
   setGameMode('gen');
+  clearCurrentType();
   setCurrentGen(gen);
   setStarted(true);
+};
+
+const setType = () => {
+  clearCurrentGen();
+  clearCurrentType();
+  setGameSelectionState('types');
 };
 </script>
 
@@ -59,7 +69,10 @@ const setGen = (gen: Gen) => {
       <!-- Types -->
       <div></div>
       <div>
-        <CyclingType class="cell cell-type rad-bl-tr" />
+        <CyclingType
+          class="cell cell-type rad-bl-tr"
+          @click="setType"
+        />
       </div>
       <div></div>
     </div>

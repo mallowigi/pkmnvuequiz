@@ -278,7 +278,7 @@ export const usePokemons = defineStore('pokemons', () => {
           return types.includes(currentType.id);
         }
         case 'special':
-          return pokemon.specialType !== undefined;
+          return pokemon.specialType !== undefined && pokemon.specialType !== 'no';
         case 'full':
           return true;
         default:

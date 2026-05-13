@@ -1,9 +1,10 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import { pokemonTypes, specialType } from '@/data/pokemonTypes.ts';
+import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
+import { specialTypes } from '@/data/specialTypes.ts';
 
 type CurrentTypeState = {
   currentType: Type | null;
@@ -32,7 +33,7 @@ export const useCurrentType = defineStore('currentType', () => {
   };
 
   const getSpecialType = () => {
-    return specialType;
+    return specialTypes.no;
   };
 
   const getCurrentTypeOrSpecial = () => {

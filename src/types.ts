@@ -140,10 +140,13 @@ export type TimerState = {
   startTime: number | null;
 };
 
+export type GameSelectionState = 'gen' | 'types' | null;
+
 export type GameFlowState = {
   isEnded: boolean;
   isPaused: boolean;
   isStarted: boolean;
+  gameSelectionState: GameSelectionState;
 };
 
 export type Translations = {

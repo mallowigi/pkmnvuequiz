@@ -3,48 +3,49 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useDialogs } from '@/stores/useDialogs.js';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.js';
+import { scrollToTop } from '@/utils/utils.ts';
 
 const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();
-const { setCurrentGen } = useCurrentGen();
+const { clearCurrentGen } = useCurrentGen();
 const { setGameMode, state } = useState();
+const { setGameSelectionState } = useGameFlow();
 
 const setFullQuiz = () => {
   if (state.gameMode === 'full') return;
+
   setDialog('switchQuiz', () => {
     setGameMode('full');
-    setCurrentGen(null);
+    clearCurrentGen();
     clearCurrentType();
+    scrollToTop();
   });
 };
 
 const setGenQuiz = () => {
-  if (state.gameMode === 'gen') {
-    setGameMode(null);
-    clearCurrentType();
-    return;
-  }
   setDialog('switchQuiz', () => {
-    setGameMode(null);
-    clearCurrentType();
+    setGameSelectionState('gen');
+    scrollToTop();
   });
 };
 
 const setTypeQuiz = () => {
   setDialog('switchQuiz', () => {
-    setGameMode('types');
-    setCurrentGen(null);
-    clearCurrentType();
+    setGameSelectionState('types');
+    scrollToTop();
   });
 };
 
 const setSpecialQuiz = () => {
   if (state.gameMode === 'special') return;
+
   setDialog('switchQuiz', () => {
     setGameMode('special');
-    setCurrentGen(null);
+    clearCurrentGen();
     clearCurrentType();
+    scrollToTop();
   });
 };
 </script>

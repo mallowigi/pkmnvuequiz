@@ -40,7 +40,7 @@ export const specialTypes: Record<SpecialType, SpecialTypeInfo> = {
     inlineColor: '#ffcd50',
     lightBgColor: '#ffbf1e',
     lightFgColor: '#111111',
-    name: 'No Special Type',
+    name: 'Special',
     symbol: 'SPC',
   },
   paradox: {

@@ -14,3 +14,7 @@ export const upsert = <T>(map: Map<string, T[]>, key: string, value: T) => {
   }
   map.get(key)?.push(value);
 };
+
+export const scrollToTop = () => {
+  window.scrollTo({ behavior: 'smooth', top: 0 });
+};

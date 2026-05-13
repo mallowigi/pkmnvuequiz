@@ -1,10 +1,11 @@
 import { reactive } from 'vue';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 
-import type { GameFlowState } from '@/types.ts';
+import type { GameFlowState, GameSelectionState } from '@/types.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
   const flowState = reactive<GameFlowState>({
+    gameSelectionState: 'gen',
     isEnded: false,
     isPaused: false,
     isStarted: false,
@@ -12,6 +13,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
 
   const setStarted = (isStarted: boolean) => {
     flowState.isStarted = isStarted;
+    flowState.gameSelectionState = null;
   };
 
   const setPaused = (isPaused: boolean) => {
@@ -22,12 +24,17 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.isEnded = isEnded;
   };
 
+  const setGameSelectionState = (state: GameSelectionState) => {
+    flowState.gameSelectionState = state;
+  };
+
   const setFlowState = (newState: Partial<GameFlowState>) => {
     Object.assign(flowState, newState);
   };
 
   const resetFlowState = () => {
     Object.assign(flowState, {
+      gameSelectionState: 'gen',
       isEnded: false,
       isPaused: false,
       isStarted: false,
@@ -39,6 +46,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     resetFlowState,
     setEnded,
     setFlowState,
+    setGameSelectionState,
     setPaused,
     setStarted,
   };

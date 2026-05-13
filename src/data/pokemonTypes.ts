@@ -1,5 +1,4 @@
-import type { TypeInfo, Type, SpecialTypeInfo } from '@/types';
-import { specialTypes } from '@/data/specialTypes.ts';
+import type { TypeInfo, Type } from '@/types';
 
 export const pokemonTypes: Record<Type, TypeInfo> = {
   bug: {
@@ -255,7 +254,5 @@ export const pokemonTypes: Record<Type, TypeInfo> = {
     symbol: 'WTR',
   },
 };
-
-export const specialType: SpecialTypeInfo = specialTypes.no;
 
 export const typesList = Object.values(pokemonTypes).sort((a, b) => a.index - b.index);
