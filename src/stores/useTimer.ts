@@ -1,17 +1,9 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { reactive, computed } from 'vue';
+import { reactive } from 'vue';
 
 import type { TimerState } from '@/types.ts';
 
 export const useTimer = defineStore('timer', () => {
-  const elapsed = computed(() => {
-    if (!timerState.startTime) {
-      return 0;
-    }
-
-    return Date.now() - timerState.startTime;
-  });
-
   const timerState = reactive<TimerState>({
     isLimited: false,
     minutes: 35,
@@ -24,6 +16,9 @@ export const useTimer = defineStore('timer', () => {
   };
 
   const startTimer = () => {
+    if (timerState.startTime) {
+      return;
+    }
     timerState.startTime = Date.now();
   };
 
@@ -50,7 +45,6 @@ export const useTimer = defineStore('timer', () => {
   };
 
   return {
-    elapsed,
     resetTimer,
     save,
     setIsLimited,

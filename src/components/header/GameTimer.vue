@@ -1,18 +1,36 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useTimer } from '@/stores/useTimer.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
-const timerStore = useTimer();
-const { elapsed } = storeToRefs(timerStore);
+const { timerState } = useTimer();
+const { flowState } = useGameFlow();
+
+const localElapsed = ref(0);
 
 const elapsedTime = computed(() => {
-  const total = elapsed.value ?? 0;
+  const total = localElapsed.value ?? 0;
   const hours = String(Math.floor(total / 3600));
-  const minutes = String(Math.floor(total / 60));
+  const minutes = String(Math.floor((total % 3600) / 60));
   const seconds = String(total % 60);
 
   return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+});
+
+const interval = ref<ReturnType<typeof setInterval> | null>(null);
+
+onMounted(() => {
+  interval.value = setInterval(() => {
+    if (!timerState.startTime || flowState.isPaused) return;
+
+    localElapsed.value++;
+  }, 1000);
+});
+
+onUnmounted(() => {
+  if (interval.value) {
+    clearInterval(interval.value);
+  }
 });
 </script>
 
