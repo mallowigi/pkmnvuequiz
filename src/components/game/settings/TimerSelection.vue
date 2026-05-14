@@ -49,7 +49,7 @@ const setFinite = () => {
   });
 };
 
-const togglePause = () => pauseGame(!flowState.isPaused);
+const togglePause = () => pauseGame();
 
 const minutes = computed({
   get: () => timerState.minutes,

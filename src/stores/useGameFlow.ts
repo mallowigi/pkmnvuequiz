@@ -11,17 +11,21 @@ export const useGameFlow = defineStore('gameFlow', () => {
     isStarted: false,
   });
 
-  const startGame = (isStarted: boolean) => {
-    flowState.isStarted = isStarted;
+  const startGame = () => {
+    flowState.isStarted = true;
     flowState.gameSelectionState = null;
   };
 
-  const pauseGame = (isPaused: boolean) => {
-    flowState.isPaused = isPaused;
+  const pauseGame = () => {
+    flowState.isPaused = true;
   };
 
-  const endGame = (isEnded: boolean) => {
-    flowState.isEnded = isEnded;
+  const resumeGame = () => {
+    flowState.isPaused = false;
+  };
+
+  const endGame = () => {
+    flowState.isEnded = true;
   };
 
   const setGameSelectionState = (state: GameSelectionState) => {
@@ -46,6 +50,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState,
     pauseGame,
     resetFlowState,
+    resumeGame,
     setFlowState,
     setGameSelectionState,
     startGame,

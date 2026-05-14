@@ -4,7 +4,7 @@ import { useTimer } from '@/stores/useTimer.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { timerState } = useTimer();
-const { flowState } = useGameFlow();
+const { flowState, pauseGame } = useGameFlow();
 
 const localElapsed = ref(0);
 
@@ -19,18 +19,53 @@ const elapsedTime = computed(() => {
 
 const interval = ref<ReturnType<typeof setInterval> | null>(null);
 
-onMounted(() => {
-  interval.value = setInterval(() => {
-    if (!timerState.startTime || flowState.isPaused) return;
+let updateElapsedTime = () => {
+  if (!timerState.startTime || flowState.isPaused) return;
 
-    localElapsed.value++;
-  }, 1000);
+  localElapsed.value++;
+};
+
+let startInterval = () => {
+  if (!interval.value) {
+    interval.value = setInterval(updateElapsedTime, 1000);
+  }
+};
+
+let stopInterval = () => {
+  if (interval.value) {
+    clearInterval(interval.value);
+    interval.value = null;
+  }
+};
+
+let visibilityChangeListener = () => {
+  if (document.hidden) {
+    stopInterval();
+  } else {
+    startInterval();
+  }
+};
+
+let onBlurListener = () => {
+  stopInterval();
+  pauseGame();
+};
+
+onMounted(() => {
+  startInterval();
+
+  // Stops the interval when the tab is not active
+  document.addEventListener('visibilitychange', visibilityChangeListener);
+  window.addEventListener('blur', onBlurListener);
+  window.addEventListener('focus', startInterval);
 });
 
 onUnmounted(() => {
-  if (interval.value) {
-    clearInterval(interval.value);
-  }
+  stopInterval();
+
+  document.removeEventListener('visibilitychange', visibilityChangeListener);
+  window.removeEventListener('blur', onBlurListener);
+  window.removeEventListener('focus', startInterval);
 });
 </script>
 
