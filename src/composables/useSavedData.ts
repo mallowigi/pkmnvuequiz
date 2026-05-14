@@ -99,7 +99,7 @@ export const useSavedData = () => {
         } = loadedState as Partial<SaveData>;
 
         const { pokemonFound, pokemonShadowed } = pokemonProgress ?? {};
-        const { elapsed, isLimited, minutes, startTime } = timer ?? {};
+        const { isLimited, minutes, startTime } = timer ?? {};
 
         // Languages
         resetLanguages();
@@ -132,7 +132,6 @@ export const useSavedData = () => {
         // Timer
         resetTimer();
         setTimerState({
-          elapsed: elapsed ?? 0,
           isLimited: isLimited ?? false,
           minutes: minutes ?? 35,
           startTime: startTime ?? null,

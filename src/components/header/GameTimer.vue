@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useTimer } from '@/stores/useTimer.ts';
 
-const { timerState } = useTimer();
+const timerStore = useTimer();
+const { elapsed } = storeToRefs(timerStore);
 
-// todo move to hook
-const elapsed = computed(() => {
-  const total = timerState.elapsed ?? 0;
+const elapsedTime = computed(() => {
+  const total = elapsed.value ?? 0;
   const hours = String(Math.floor(total / 3600));
   const minutes = String(Math.floor(total / 60));
   const seconds = String(total % 60);
@@ -17,7 +18,7 @@ const elapsed = computed(() => {
 
 <template>
   <div class="box rad-bl-tr">
-    Timer: <span class="highlight">{{ elapsed }}</span>
+    Timer: <span class="highlight">{{ elapsedTime }}</span>
   </div>
 </template>
 

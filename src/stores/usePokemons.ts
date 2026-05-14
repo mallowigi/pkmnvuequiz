@@ -18,6 +18,7 @@ import type {
   PokemonStatus,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
+import { useTimer } from '@/stores/useTimer.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -99,6 +100,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
   const { languagesState } = useLanguages();
+  const { startTimer } = useTimer();
 
   const numFound = computed(() => {
     const currentGameModePokemon = getCurrentGameModePokemon();
@@ -191,6 +193,7 @@ export const usePokemons = defineStore('pokemons', () => {
     const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
     if (status) {
       status.isFound = true;
+      startTimer();
     }
   };
 
