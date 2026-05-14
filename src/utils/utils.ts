@@ -1,6 +1,6 @@
 export const normalizeName = (str: string) => {
   if (!str) return str;
-  return str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return str.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
 };
 
 export const capitalize = (str: string) => {
