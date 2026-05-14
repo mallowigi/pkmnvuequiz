@@ -21,6 +21,7 @@ import { normalizeName, upsert } from '@/utils/utils.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
+  allSpecials: Map<string, Array<PokemonInfo>>;
   special: Record<SpecialType, Map<string, Array<PokemonInfo>>>;
   languages: Record<Language, Map<string, Array<PokemonInfo>>>;
   types: Record<Type, Map<string, Array<PokemonInfo>>>;
@@ -30,6 +31,7 @@ type PokemonMaps = {
 export const usePokemons = defineStore('pokemons', () => {
   const pokemonMaps: PokemonMaps = {
     all: new Map<string, Array<PokemonInfo>>(),
+    allSpecials: new Map<string, Array<PokemonInfo>>(),
     boxes: {
       alola: new Map<string, Array<PokemonInfo>>(),
       areazero: new Map<string, Array<PokemonInfo>>(),
@@ -164,6 +166,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
       if (pok.specialType) {
         upsert(pokemonMaps.special[pok.specialType], pokemonKey, pok);
+        upsert(pokemonMaps.allSpecials, pokemonKey, pok);
       } else {
         upsert(pokemonMaps.special.no, pokemonKey, pok);
       }
@@ -298,7 +301,10 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const getSpecialTypePokemon = (specialTypeId?: SpecialType): Map<string, PokemonInfo[]> => {
-    return (specialTypeId ? pokemonMaps.special[specialTypeId] : pokemonMaps.special.no) ?? new Map();
+    if (specialTypeId) {
+      return pokemonMaps.special[specialTypeId] ?? new Map();
+    }
+    return pokemonMaps.allSpecials ?? new Map();
   };
 
   const getAllPokemon = (): Map<string, PokemonInfo[]> => {
