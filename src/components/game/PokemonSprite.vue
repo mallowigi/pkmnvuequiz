@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import CyclingSprite from '@/components/common/CyclingSprite.vue';
-import ZoomTransition from '@/components/common/ZoomTransition.vue';
+import { computed, capitalize } from 'vue';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
@@ -48,56 +45,91 @@ const shadowed = computed(() => isPokemonShadowed(props.pokemon));
     :class="{ full: state.gameMode === 'full' }"
   >
     <div v-if="found">
-      <ZoomTransition>
-        <img
-          v-if="spriteData.shiny && state.withShinies"
-          class="sprite"
-          :src="spriteData.shiny"
-          :alt="`${props.pokemon.baseName}`"
-        />
+      <div
+        v-if="spriteData.shiny && state.withShinies"
+        class="sprite"
+        :title="capitalize(props.pokemon.baseName)"
+        :style="{ '--bg-img': `url(${spriteData.shiny})` }"
+      />
 
-        <img
-          v-else-if="spriteData.sprite"
-          class="sprite"
-          :src="spriteData.sprite"
-          :alt="`Shiny ${props.pokemon.baseName}`"
-        />
-      </ZoomTransition>
+      <div
+        v-else-if="spriteData.sprite"
+        class="sprite"
+        :title="capitalize(props.pokemon.baseName)"
+        :style="{ '--bg-img': `url(${spriteData.sprite})` }"
+      />
     </div>
 
     <div v-else-if="shadowed">
-      <CyclingSprite
-        v-if="spriteData.spriteCycle.length"
-        :sprites="spriteData.spriteCycle"
-      />
+      <!-- TODO -->
+      <!--<CyclingSprite-->
+      <!--  v-if="spriteData.spriteCycle.length"-->
+      <!--  :sprites="spriteData.spriteCycle"-->
+      <!--/>-->
 
-      <img
-        v-else-if="spriteData.silhouette"
+      <div
+        v-if="spriteData.silhouette"
         class="sprite"
-        :src="spriteData.silhouette"
-        :alt="`${props.pokemon.baseName} silhouette`"
+        title="Who's that Pokémon?"
+        :style="{ '--bg-img': `url(${spriteData.silhouette})` }"
       />
     </div>
 
-    <img
+    <div
       v-else
-      class="sprite"
-      :src="unknownSprite"
-      alt="Guess the Pokémon"
+      class="sprite unknown"
+      :style="{ '--bg-img': `url(${unknownSprite})` }"
     />
   </section>
 </template>
 
 <style scoped>
+@keyframes hover-pop {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3); /* or whatever effect */
+  }
+}
+
+@keyframes hover-out {
+  from {
+    transform: scale(1.3);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .sprite {
-  margin: -25px -20px -10px -10px;
-  width: var(--sprite-width);
-  height: 56px;
-  object-fit: none;
-  object-position: 100% 0;
+  width: 28px;
+  height: 32px;
+  overflow: visible;
+  position: relative;
+  animation: hover-out 0.5s ease forwards;
 
   &:hover {
-    transform: scale(1.3) translate(0, -5px);
+    animation: hover-pop 0.5s ease forwards;
+  }
+
+  &.unknown {
+    z-index: 0;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    background-image: var(--bg-img);
+    background-size: auto;
+    background-position: bottom center;
+    pointer-events: none;
+    z-index: 10;
   }
 }
 </style>
