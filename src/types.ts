@@ -135,7 +135,6 @@ export type PokemonProgressState = {
 };
 
 export type TimerState = {
-  elapsed: number;
   minutes: number;
   isLimited: boolean;
   savedAt: number | null;

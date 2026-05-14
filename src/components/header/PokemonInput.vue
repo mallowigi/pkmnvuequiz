@@ -106,7 +106,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   // TODO support order mode and type shuffle
 
-  addFound(value);
+  addFound(foundPokemon[0].baseName);
   inputRef.value!.value = '';
   return;
 };
@@ -123,7 +123,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('keyup', handleKeydown);
   window.removeEventListener('mousedown', handleMousedown);
 });
 

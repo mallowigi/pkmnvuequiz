@@ -187,21 +187,16 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addFound = (pokemon: string) => {
-    const found = findPokemon(pokemon);
-    if (found && found.length > 0) {
-      const normalizedPokemon = normalizeName(found[0].baseName);
-      const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
-      if (status) {
-        status.isFound = true;
-      }
+    const normalizedPokemon = normalizeName(pokemon);
+    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+    if (status) {
+      status.isFound = true;
     }
   };
 
   const addShadow = (pokemon: string) => {
-    const found = findPokemon(pokemon);
-    const pokemonToShadow = found && found.length > 0 ? normalizeName(found[0].baseName) : normalizeName(pokemon);
-    const status = pokemonState.pokemonStatuses.get(pokemonToShadow);
-
+    const normalizedPokemon = normalizeName(pokemon);
+    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
     if (status) {
       status.isShadowed = true;
     }
