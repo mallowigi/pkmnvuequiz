@@ -8,7 +8,15 @@ import { useCurrentType } from '@/stores/useCurrentType';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
-import type { PokemonInfo, PokemonProgressState, RegionBox, SpecialType, Type, Language } from '@/types.ts';
+import type {
+  PokemonInfo,
+  PokemonProgressState,
+  RegionBox,
+  SpecialType,
+  Type,
+  Language,
+  PokemonStatus,
+} from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
 
 type PokemonMaps = {
@@ -82,10 +90,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const pokemonState = reactive<PokemonProgressState>({
     lastPokemon: null,
-    pokemonFound: new Set<string>(),
-    pokemonShadowed: new Set<string>(),
-    remaining: new Set<string>(),
-    remainingShadow: new Set<string>(),
+    pokemonStatuses: new Map<string, PokemonStatus>(),
   });
 
   const { state } = useState();
@@ -93,8 +98,47 @@ export const usePokemons = defineStore('pokemons', () => {
   const { getCurrentType } = useCurrentType();
   const { languagesState } = useLanguages();
 
-  const numFound = computed(() => pokemonState.pokemonFound.size);
-  const numShadows = computed(() => pokemonState.pokemonShadowed.size);
+  const numFound = computed(() => {
+    let count = 0;
+    for (const status of pokemonState.pokemonStatuses.values()) {
+      if (status.isFound) count++;
+    }
+    return count;
+  });
+
+  const numShadows = computed(() => {
+    let count = 0;
+    for (const status of pokemonState.pokemonStatuses.values()) {
+      if (status.isShadowed) count++;
+    }
+    return count;
+  });
+
+  const remaining = computed(() => {
+    const currentGameModePokemon = getCurrentGameModePokemon();
+    const result = new Set<string>();
+
+    for (const [name] of currentGameModePokemon) {
+      const status = pokemonState.pokemonStatuses.get(name);
+      if (status && !status.isFound) {
+        result.add(name);
+      }
+    }
+    return result;
+  });
+
+  const remainingShadow = computed(() => {
+    const currentGameModePokemon = getCurrentGameModePokemon();
+    const result = new Set<string>();
+
+    for (const [name] of currentGameModePokemon) {
+      const status = pokemonState.pokemonStatuses.get(name);
+      if (status && !status.isShadowed) {
+        result.add(name);
+      }
+    }
+    return result;
+  });
 
   const initializePokemonMaps = () => {
     const { data } = usePkmnData();
@@ -109,6 +153,10 @@ export const usePokemons = defineStore('pokemons', () => {
       if (!pokemonKey) return;
 
       upsert(pokemonMaps.all, pokemonKey, pok);
+
+      if (!pokemonState.pokemonStatuses.has(pokemonKey)) {
+        pokemonState.pokemonStatuses.set(pokemonKey, { isFound: false, isShadowed: false });
+      }
 
       if (pok.box) {
         upsert(pokemonMaps.boxes[pok.box], pokemonKey, pok);
@@ -143,14 +191,20 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const addFound = (pokemon: string) => {
     const normalizedPokemon = normalizeName(pokemon);
-    pokemonState.pokemonFound.add(normalizedPokemon);
-    pokemonState.remaining.delete(normalizedPokemon);
+    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+
+    if (status) {
+      status.isFound = true;
+    }
   };
 
   const addShadow = (pokemon: string) => {
     const normalizedPokemon = normalizeName(pokemon);
-    pokemonState.pokemonShadowed.add(normalizedPokemon);
-    pokemonState.remainingShadow.delete(normalizedPokemon);
+    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+
+    if (status) {
+      status.isShadowed = true;
+    }
   };
 
   const setLastPokemon = (pokemon: string) => {
@@ -158,22 +212,29 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addRandomShadow = () => {
-    const remainingArray = Array.from(pokemonState.remaining);
+    const remainingArray = Array.from(remaining.value);
     if (remainingArray.length === 0) return;
 
     let nextShadowPokemon = null;
-    while (!nextShadowPokemon) {
+    let maxIterations = 100;
+    let iterationCount = 0;
+
+    while (!nextShadowPokemon && iterationCount < maxIterations) {
       const randomIndex = Math.floor(Math.random() * remainingArray.length);
       const randomPokemon = remainingArray[randomIndex];
 
-      if (pokemonState.pokemonShadowed.has(randomPokemon)) {
+      const status = pokemonState.pokemonStatuses.get(randomPokemon);
+      if (status?.isShadowed) {
+        iterationCount++;
         continue;
       }
 
       nextShadowPokemon = randomPokemon;
     }
 
-    addShadow(nextShadowPokemon);
+    if (nextShadowPokemon) {
+      addShadow(nextShadowPokemon);
+    }
   };
 
   const setPokemonState = (newState: Partial<PokemonProgressState>) => {
@@ -181,12 +242,10 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const resetPokemonState = () => {
-    Object.assign(pokemonState, {
-      lastPokemon: null,
-      pokemonFound: new Set<string>(),
-      pokemonShadowed: new Set<string>(),
-      remaining: new Set<string>(),
-      remainingShadow: new Set<string>(),
+    pokemonState.lastPokemon = null;
+    pokemonState.pokemonStatuses.forEach((status) => {
+      status.isFound = false;
+      status.isShadowed = false;
     });
   };
 
@@ -310,17 +369,16 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const isInRemaining = (pokemons: PokemonInfo[]) => {
     return pokemons.some((pokemon) => {
-      for (const pok of pokemonState.remaining) {
-        const pokemonKey = normalizeName(pokemon.baseName);
-        if (normalizeName(pok).startsWith(pokemonKey)) {
-          return true;
-        }
-      }
+      const pokemonKey = normalizeName(pokemon.baseName);
+      return remaining.value.has(pokemonKey);
     });
   };
 
   const isAlreadyFound = (pokemons: PokemonInfo[]) => {
-    return pokemons.some((pokemon) => pokemonState.pokemonFound.has(normalizeName(pokemon.baseName)));
+    return pokemons.some((pokemon) => {
+      const status = pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName));
+      return status?.isFound;
+    });
   };
 
   const findPokemon = (input: string) => {
@@ -328,18 +386,18 @@ export const usePokemons = defineStore('pokemons', () => {
 
     for (const lang of languagesState.languages) {
       const foundPokemon = pokemonMaps.languages[lang].get(pokemonKey);
-      if (foundPokemon) {
+      if (foundPokemon && isPokemonsInCurrentGameMode(foundPokemon)) {
         return foundPokemon;
       }
     }
   };
 
   const isPokemonFound = (pokemon: PokemonInfo) => {
-    return pokemonState.pokemonFound.has(normalizeName(pokemon.baseName));
+    return pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName))?.isFound ?? false;
   };
 
   const isPokemonShadowed = (pokemon: PokemonInfo) => {
-    return pokemonState.pokemonShadowed.has(normalizeName(pokemon.baseName));
+    return pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName))?.isShadowed ?? false;
   };
 
   return {
@@ -364,6 +422,8 @@ export const usePokemons = defineStore('pokemons', () => {
     numFound,
     numShadows,
     pokemonState,
+    remaining,
+    remainingShadow,
     resetPokemonState,
     setLastPokemon,
     setPokemonState,

@@ -19,14 +19,22 @@ export const useSavedData = () => {
     const { timerState } = useTimer();
     const { languagesState } = useLanguages();
 
+    const pokemonFound: string[] = [];
+    const pokemonShadowed: string[] = [];
+
+    pokemonState.pokemonStatuses.forEach((status, name) => {
+      if (status.isFound) pokemonFound.push(name);
+      if (status.isShadowed) pokemonShadowed.push(name);
+    });
+
     const savedState: SaveData = {
       ...state,
       currentType: currentTypeState.currentType,
       gen: currentGenState.gen,
       languages: Array.from(languagesState.languages),
       pokemonProgress: {
-        pokemonFound: Array.from(pokemonState.pokemonFound),
-        pokemonShadowed: Array.from(pokemonState.pokemonShadowed),
+        pokemonFound,
+        pokemonShadowed,
       },
       timer: {
         ...timerState,
@@ -57,7 +65,7 @@ export const useSavedData = () => {
     const { setCurrentGen } = useCurrentGen();
     const { setCurrentType } = useCurrentType();
     const { resetFlowState } = useGameFlow();
-    const { resetPokemonState, setPokemonState } = usePokemons();
+    const { pokemonState, resetPokemonState } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
     const { setLanguages, resetLanguages } = useLanguages();
 
@@ -104,9 +112,14 @@ export const useSavedData = () => {
 
         // Pokemon progress
         resetPokemonState();
-        setPokemonState({
-          pokemonFound: new Set(pokemonFound ?? []),
-          pokemonShadowed: new Set(pokemonShadowed ?? []),
+
+        pokemonFound?.forEach((name: string) => {
+          const status = pokemonState.pokemonStatuses.get(name);
+          if (status) status.isFound = true;
+        });
+        pokemonShadowed?.forEach((name: string) => {
+          const status = pokemonState.pokemonStatuses.get(name);
+          if (status) status.isShadowed = true;
         });
 
         // Timer

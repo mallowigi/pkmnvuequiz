@@ -124,11 +124,13 @@ export type LanguagesState = {
   languages: Set<Language>;
 };
 
+export type PokemonStatus = {
+  isFound: boolean;
+  isShadowed: boolean;
+};
+
 export type PokemonProgressState = {
-  pokemonFound: Set<string>;
-  pokemonShadowed: Set<string>;
-  remaining: Set<string>;
-  remainingShadow: Set<string>;
+  pokemonStatuses: Map<string, PokemonStatus>;
   lastPokemon: string | null;
 };
 
