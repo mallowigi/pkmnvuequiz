@@ -342,7 +342,7 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const isPokemonsInCurrentGameMode = (pokemons: PokemonInfo[]) => {
+  const isPokemonInCurrentGameMode = (pokemons: PokemonInfo[]) => {
     return pokemons.some((pokemon: PokemonInfo) => {
       const gameMode = state.gameMode;
       switch (gameMode) {
@@ -370,7 +370,9 @@ export const usePokemons = defineStore('pokemons', () => {
   const isInRemaining = (pokemons: PokemonInfo[]) => {
     return pokemons.some((pokemon) => {
       const pokemonKey = normalizeName(pokemon.baseName);
-      return remaining.value.has(pokemonKey);
+      return Array.from(remaining.value.values()).some((remainingKey) => {
+        return remainingKey.startsWith(pokemonKey) && remainingKey !== pokemonKey;
+      });
     });
   };
 
@@ -386,7 +388,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
     for (const lang of languagesState.languages) {
       const foundPokemon = pokemonMaps.languages[lang].get(pokemonKey);
-      if (foundPokemon && isPokemonsInCurrentGameMode(foundPokemon)) {
+      if (foundPokemon) {
         return foundPokemon;
       }
     }
@@ -417,8 +419,8 @@ export const usePokemons = defineStore('pokemons', () => {
     isAlreadyFound,
     isInRemaining,
     isPokemonFound,
+    isPokemonInCurrentGameMode,
     isPokemonShadowed,
-    isPokemonsInCurrentGameMode,
     numFound,
     numShadows,
     pokemonState,

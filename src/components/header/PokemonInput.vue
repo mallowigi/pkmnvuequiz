@@ -19,16 +19,8 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
-const {
-  addShadow,
-  isPokemonsInCurrentGameMode,
-  isInRemaining,
-  addRandomShadow,
-  findPokemon,
-  addFound,
-  pokemonState,
-  isAlreadyFound,
-} = usePokemons();
+const { isPokemonInCurrentGameMode, isInRemaining, addRandomShadow, findPokemon, addFound, isAlreadyFound } =
+  usePokemons();
 const { unknownSprite } = useUnknownSprite();
 
 const regionOrType = computed(() => {
@@ -77,7 +69,6 @@ const handleKeydown = (e: KeyboardEvent) => {
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
     if (state.withShadowHelper) {
-      // TODO need to know how to add a shadow and especially where, in which hook
       addRandomShadow();
     } else {
       showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
@@ -95,20 +86,27 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  if (isAlreadyFound(foundPokemon) && !isInRemaining(foundPokemon)) {
+  const isPartOfAnotherPokemon = isInRemaining(foundPokemon);
+  if (isAlreadyFound(foundPokemon)) {
+    if (isPartOfAnotherPokemon) {
+      // Allow continue typing
+      return;
+    }
+
     showUserMessage(`${capitalize(value)} already named.`);
     inputRef.value!.value = '';
     return;
   }
 
-  if (!isPokemonsInCurrentGameMode(foundPokemon)) {
+  if (!isPokemonInCurrentGameMode(foundPokemon)) {
     showUserMessage(`${capitalize(value)} is not part of this game.`);
     inputRef.value!.value = '';
     return;
   }
 
+  // TODO support order mode and type shuffle
+
   addFound(value);
-  // If the user has typed a valid Pokémon name, clear the input for the next guess
   inputRef.value!.value = '';
   return;
 };
