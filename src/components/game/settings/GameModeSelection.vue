@@ -6,12 +6,14 @@ import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.js';
 import { scrollToTop } from '@/utils/utils.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 
 const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();
 const { clearCurrentGen } = useCurrentGen();
 const { setGameMode, state } = useState();
 const { setGameSelectionState } = useGameFlow();
+const { resetPokemonState } = usePokemons();
 
 const setFullQuiz = () => {
   if (state.gameMode === 'full') return;
@@ -20,6 +22,7 @@ const setFullQuiz = () => {
     setGameMode('full');
     clearCurrentGen();
     clearCurrentType();
+    resetPokemonState();
     scrollToTop();
   });
 };
@@ -45,6 +48,7 @@ const setSpecialQuiz = () => {
     setGameMode('special');
     clearCurrentGen();
     clearCurrentType();
+    resetPokemonState();
     scrollToTop();
   });
 };

@@ -7,16 +7,19 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 import type { Gen } from '@/types.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 
 const { setStarted, setGameSelectionState } = useGameFlow();
 const { setGameMode } = useState();
 const { setCurrentGen, clearCurrentGen } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
+const { resetPokemonState } = usePokemons();
 
 const setFullQuiz = () => {
   setGameMode('full');
   clearCurrentGen();
   clearCurrentType();
+  resetPokemonState();
   setStarted(true);
 };
 
@@ -24,12 +27,14 @@ const setGen = (gen: Gen) => {
   setGameMode('gen');
   clearCurrentType();
   setCurrentGen(gen);
+  resetPokemonState();
   setStarted(true);
 };
 
 const setType = () => {
   clearCurrentGen();
   clearCurrentType();
+  resetPokemonState();
   setGameSelectionState('types');
 };
 </script>
