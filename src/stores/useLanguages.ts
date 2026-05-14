@@ -5,7 +5,7 @@ import type { Language, LanguagesState } from '@/types.ts';
 
 export const useLanguages = defineStore('languages', () => {
   const languagesState = reactive<LanguagesState>({
-    languages: new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']),
+    languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
   });
 
   const toggleLanguage = (language: Language) => {

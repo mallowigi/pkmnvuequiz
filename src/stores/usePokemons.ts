@@ -142,18 +142,39 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addFound = (pokemon: string) => {
-    pokemonState.pokemonFound.add(normalizeName(pokemon));
+    const normalizedPokemon = normalizeName(pokemon);
+    pokemonState.pokemonFound.add(normalizedPokemon);
+    pokemonState.remaining.delete(normalizedPokemon);
   };
 
   const addShadow = (pokemon: string) => {
-    pokemonState.pokemonShadowed.add(normalizeName(pokemon));
+    const normalizedPokemon = normalizeName(pokemon);
+    pokemonState.pokemonShadowed.add(normalizedPokemon);
+    pokemonState.remainingShadow.delete(normalizedPokemon);
   };
 
   const setLastPokemon = (pokemon: string) => {
     pokemonState.lastPokemon = normalizeName(pokemon);
   };
 
-  const addRandomShadow = () => {};
+  const addRandomShadow = () => {
+    const remainingArray = Array.from(pokemonState.remaining);
+    if (remainingArray.length === 0) return;
+
+    let nextShadowPokemon = null;
+    while (!nextShadowPokemon) {
+      const randomIndex = Math.floor(Math.random() * remainingArray.length);
+      const randomPokemon = remainingArray[randomIndex];
+
+      if (pokemonState.pokemonShadowed.has(randomPokemon)) {
+        continue;
+      }
+
+      nextShadowPokemon = randomPokemon;
+    }
+
+    addShadow(nextShadowPokemon);
+  };
 
   const setPokemonState = (newState: Partial<PokemonProgressState>) => {
     Object.assign(pokemonState, newState);
