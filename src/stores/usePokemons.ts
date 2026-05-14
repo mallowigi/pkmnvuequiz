@@ -101,19 +101,13 @@ export const usePokemons = defineStore('pokemons', () => {
   const { languagesState } = useLanguages();
 
   const numFound = computed(() => {
-    let count = 0;
-    for (const status of pokemonState.pokemonStatuses.values()) {
-      if (status.isFound) count++;
-    }
-    return count;
+    const currentGameModePokemon = getCurrentGameModePokemon();
+    return currentGameModePokemon.size - remaining.value.size;
   });
 
   const numShadows = computed(() => {
-    let count = 0;
-    for (const status of pokemonState.pokemonStatuses.values()) {
-      if (status.isShadowed) count++;
-    }
-    return count;
+    const currentGameModePokemon = getCurrentGameModePokemon();
+    return currentGameModePokemon.size - remainingShadow.value.size;
   });
 
   const remaining = computed(() => {
@@ -193,17 +187,20 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addFound = (pokemon: string) => {
-    const normalizedPokemon = normalizeName(pokemon);
-    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
-
-    if (status) {
-      status.isFound = true;
+    const found = findPokemon(pokemon);
+    if (found && found.length > 0) {
+      const normalizedPokemon = normalizeName(found[0].baseName);
+      const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+      if (status) {
+        status.isFound = true;
+      }
     }
   };
 
   const addShadow = (pokemon: string) => {
-    const normalizedPokemon = normalizeName(pokemon);
-    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+    const found = findPokemon(pokemon);
+    const pokemonToShadow = found && found.length > 0 ? normalizeName(found[0].baseName) : normalizeName(pokemon);
+    const status = pokemonState.pokemonStatuses.get(pokemonToShadow);
 
     if (status) {
       status.isShadowed = true;

@@ -7,6 +7,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData } from '@/types.ts';
+import { normalizeName } from '@/utils/utils.ts';
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
@@ -65,7 +66,7 @@ export const useSavedData = () => {
     const { setCurrentGen } = useCurrentGen();
     const { setCurrentType } = useCurrentType();
     const { resetFlowState } = useGameFlow();
-    const { pokemonState, resetPokemonState } = usePokemons();
+    const { pokemonState, resetPokemonState, findPokemon } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
     const { setLanguages, resetLanguages } = useLanguages();
 
@@ -114,11 +115,17 @@ export const useSavedData = () => {
         resetPokemonState();
 
         pokemonFound?.forEach((name: string) => {
-          const status = pokemonState.pokemonStatuses.get(name);
+          const found = findPokemon(name);
+          const nameToFound = found && found.length > 0 ? normalizeName(found[0].baseName) : name;
+          const status = pokemonState.pokemonStatuses.get(nameToFound);
+
           if (status) status.isFound = true;
         });
         pokemonShadowed?.forEach((name: string) => {
-          const status = pokemonState.pokemonStatuses.get(name);
+          const found = findPokemon(name);
+          const nameToShadow = found && found.length > 0 ? normalizeName(found[0].baseName) : name;
+          const status = pokemonState.pokemonStatuses.get(nameToShadow);
+
           if (status) status.isShadowed = true;
         });
 

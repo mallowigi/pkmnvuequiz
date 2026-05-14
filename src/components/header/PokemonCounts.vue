@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { usePokemons } from '@/stores/usePokemons.ts';
 
-const { getCurrentGameModePokemon, numFound } = usePokemons();
+const pokemonStore = usePokemons();
+const { numFound } = storeToRefs(pokemonStore);
+const { getCurrentGameModePokemon } = pokemonStore;
 
 const total = computed(() => {
   const pokemons = getCurrentGameModePokemon();
