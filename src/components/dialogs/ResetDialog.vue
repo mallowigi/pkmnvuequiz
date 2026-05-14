@@ -7,7 +7,7 @@ import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
-const { resetFlowState, setStarted } = useGameFlow();
+const { resetFlowState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
 const { state, resetState } = useState();
 const { setCurrentGen, currentGenState } = useCurrentGen();
@@ -27,7 +27,7 @@ const reset = () => {
   resetTimer();
   resetFlowState();
   setCurrentGen(gen);
-  setStarted(true);
+  startGame(true);
 };
 
 const cancel = () => {

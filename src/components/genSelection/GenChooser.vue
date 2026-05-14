@@ -3,13 +3,13 @@ import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
 import CyclingType from '@/components/genSelection/CyclingType.vue';
 import { gens } from '@/data/gens';
 import { useCurrentGen } from '@/stores/useCurrentGen';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState';
 import type { Gen } from '@/types.ts';
-import { useCurrentType } from '@/stores/useCurrentType.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 
-const { setStarted, setGameSelectionState } = useGameFlow();
+const { startGame, setGameSelectionState } = useGameFlow();
 const { setGameMode } = useState();
 const { setCurrentGen, clearCurrentGen } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
@@ -20,7 +20,7 @@ const setFullQuiz = () => {
   clearCurrentGen();
   clearCurrentType();
   resetPokemonState();
-  setStarted(true);
+  startGame(true);
 };
 
 const setGen = (gen: Gen) => {
@@ -28,7 +28,7 @@ const setGen = (gen: Gen) => {
   clearCurrentType();
   setCurrentGen(gen);
   resetPokemonState();
-  setStarted(true);
+  startGame(true);
 };
 
 const setType = () => {

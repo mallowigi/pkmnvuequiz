@@ -6,11 +6,11 @@ import { typesList } from '@/data/pokemonTypes';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 
-const { setStarted, setGameSelectionState } = useGameFlow();
+const { startGame, setGameSelectionState } = useGameFlow();
 const { setGameMode } = useState();
 const { setCurrentType, clearCurrentType, getSpecialType } = useCurrentType();
 const { clearCurrentGen } = useCurrentGen();
@@ -32,7 +32,7 @@ const setTypeOrSpecial = (type: string) => {
       resetPokemonState();
   }
   setGameSelectionState(null);
-  setStarted(true);
+  startGame(true);
 };
 
 const goBack = () => {

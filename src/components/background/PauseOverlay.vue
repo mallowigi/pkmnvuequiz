@@ -5,10 +5,10 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow';
 
-const { setPaused } = useGameFlow();
+const { pauseGame } = useGameFlow();
 const { saveState, loadState } = useSavedData();
 
-const resume = () => setPaused(false);
+const resume = () => pauseGame(false);
 </script>
 
 <template>

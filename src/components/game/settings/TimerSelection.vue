@@ -9,7 +9,7 @@ import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState.js';
 import { useTimer } from '@/stores/useTimer';
 
-const { flowState, resetFlowState, setPaused } = useGameFlow();
+const { flowState, resetFlowState, pauseGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
 const { resetState } = useState();
 const { resetTimer, setMinutes, setIsLimited, timerState } = useTimer();
@@ -49,7 +49,7 @@ const setFinite = () => {
   });
 };
 
-const togglePause = () => setPaused(!flowState.isPaused);
+const togglePause = () => pauseGame(!flowState.isPaused);
 
 const minutes = computed({
   get: () => timerState.minutes,
