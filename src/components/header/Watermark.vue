@@ -1,8 +1,7 @@
-<script setup lang='ts'>
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class='url'>pkmnquiz.com</div>
+  <div class="url">pkmnvuequiz.netlify.app</div>
 </template>
 
 <style scoped>
@@ -49,5 +48,4 @@
   border-top: 3px dotted var(--type-bg-color);
   color: var(--text);
 }
-
 </style>
