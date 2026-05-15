@@ -12,8 +12,7 @@ import { useState } from '@/stores/useState.ts';
 import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
-const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getChaosOrderedPokemon, getStatus, pokemonState } =
-  usePokemons();
+const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
 const { state } = useState();
 const styles = useColumnLayout();
 
@@ -27,6 +26,21 @@ const currentBoxes = computed(() => {
   }
 });
 
+function orderByFoundAt(pokemonA: PokemonInfo, pokemonB: PokemonInfo): number {
+  const statusA = getStatus(pokemonA);
+  const statusB = getStatus(pokemonB);
+
+  if (!statusA.lastFoundAt && statusB.lastFoundAt) {
+    return 1; // pokemonA should come after pokemonB
+  } else if (statusA.lastFoundAt && !statusB.lastFoundAt) {
+    return -1; // pokemonA should come before pokemonB
+  } else if (!statusA.lastFoundAt && !statusB.lastFoundAt) {
+    return 0; // maintain original order
+  } else {
+    return statusA.lastFoundAt! - statusB.lastFoundAt!;
+  }
+}
+
 const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, PokemonInfo[]> => {
   let result;
 
@@ -36,9 +50,13 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
     result = getSpecialTypePokemon(boxId as SpecialType);
   }
 
-  // todo
+  // Apply chaos mode sorting
   if (state.mode === 'chaos') {
-    result = getChaosOrderedPokemon(result);
+    const values = Array.from(result.values());
+    const sorted = values.sort((pokemonsA, pokemonsB) => orderByFoundAt(pokemonsA[0], pokemonsB[0]));
+    for (const [boxId, pokemons] of result) {
+      result.set(boxId, sorted.shift() ?? []);
+    }
   }
 
   return result;

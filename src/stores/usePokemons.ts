@@ -153,7 +153,12 @@ export const usePokemons = defineStore('pokemons', () => {
       upsert(pokemonMaps.all, pokemonKey, pok);
 
       if (!pokemonState.pokemonStatuses.has(pokemonKey)) {
-        pokemonState.pokemonStatuses.set(pokemonKey, { isFound: false, isShadowed: false });
+        pokemonState.pokemonStatuses.set(pokemonKey, {
+          isFound: false,
+          isShadowed: false,
+          lastFoundAt: null,
+          lastShadowedAt: null,
+        });
       }
 
       if (pok.box) {
@@ -193,6 +198,7 @@ export const usePokemons = defineStore('pokemons', () => {
     const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
     if (status) {
       status.isFound = true;
+      status.lastFoundAt = Date.now();
       startTimer();
     }
   };
@@ -202,6 +208,8 @@ export const usePokemons = defineStore('pokemons', () => {
     const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
     if (status) {
       status.isShadowed = true;
+      status.lastShadowedAt = Date.now();
+      startTimer();
     }
   };
 
@@ -243,7 +251,9 @@ export const usePokemons = defineStore('pokemons', () => {
     pokemonState.lastPokemon = null;
     pokemonState.pokemonStatuses.forEach((status) => {
       status.isFound = false;
+      status.lastFoundAt = null;
       status.isShadowed = false;
+      status.lastShadowedAt = null;
     });
   };
 
@@ -343,16 +353,6 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const getChaosOrderedPokemon = (pokemons: Map<string, PokemonInfo[]>): Map<string, PokemonInfo[]> => {
-    // const values = Array.from(pokemons.values());
-    // const ordered = values.sort((a, b) => {
-    //   return pokemonState.pokemonStatuses[a.id].foundTime - pokemonState.pokemonStatuses[b.id].foundTime;
-    // });
-    //
-    // return new Map(ordered.map((group) => [group[0].box, group]));
-    return pokemons;
-  };
-
   const isPokemonInCurrentGameMode = (pokemons: PokemonInfo[]) => {
     return pokemons.some((pokemon: PokemonInfo) => {
       const gameMode = state.gameMode;
@@ -392,6 +392,8 @@ export const usePokemons = defineStore('pokemons', () => {
       pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName)) ?? {
         isFound: false,
         isShadowed: false,
+        lastFoundAt: null,
+        lastShadowedAt: null,
       }
     );
   };
@@ -428,7 +430,6 @@ export const usePokemons = defineStore('pokemons', () => {
     addShadow,
     findPokemon,
     getAllPokemon,
-    getChaosOrderedPokemon,
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
     getCurrentGenPokemon,

@@ -6,7 +6,7 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import type { SaveData } from '@/types.ts';
+import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
 
 export const useSavedData = () => {
@@ -20,12 +20,16 @@ export const useSavedData = () => {
     const { timerState } = useTimer();
     const { languagesState } = useLanguages();
 
-    const pokemonFound: string[] = [];
-    const pokemonShadowed: string[] = [];
+    const pokemonFound: PokemonProgress['pokemonFound'] = [];
+    const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
 
     pokemonState.pokemonStatuses.forEach((status, name) => {
-      if (status.isFound) pokemonFound.push(name);
-      if (status.isShadowed) pokemonShadowed.push(name);
+      if (status.isFound) {
+        pokemonFound.push({ id: name, lastFoundAt: status.lastFoundAt });
+      }
+      if (status.isShadowed) {
+        pokemonShadowed.push({ id: name, lastShadowedAt: status.lastShadowedAt });
+      }
     });
 
     const savedState: SaveData = {
@@ -114,19 +118,30 @@ export const useSavedData = () => {
         // Pokemon progress
         resetPokemonState();
 
-        pokemonFound?.forEach((name: string) => {
+        pokemonFound?.forEach((entry) => {
+          const { id: name, lastFoundAt } = entry;
+
           const found = findPokemon(name);
           const nameToFound = found && found.length > 0 ? normalizeName(found[0].baseName) : name;
           const status = pokemonState.pokemonStatuses.get(nameToFound);
 
-          if (status) status.isFound = true;
+          if (status) {
+            status.isFound = true;
+            status.lastFoundAt = lastFoundAt;
+          }
         });
-        pokemonShadowed?.forEach((name: string) => {
+
+        pokemonShadowed?.forEach((entry) => {
+          const { id: name, lastShadowedAt } = entry;
+
           const found = findPokemon(name);
           const nameToShadow = found && found.length > 0 ? normalizeName(found[0].baseName) : name;
           const status = pokemonState.pokemonStatuses.get(nameToShadow);
 
-          if (status) status.isShadowed = true;
+          if (status) {
+            status.isShadowed = true;
+            status.lastShadowedAt = lastShadowedAt;
+          }
         });
 
         // Timer

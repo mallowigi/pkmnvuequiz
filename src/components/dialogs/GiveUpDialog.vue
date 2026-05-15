@@ -2,8 +2,10 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { endGame } = useGameFlow();
+const { dialogs } = useDialogs();
 
 type Props = {
   toggleFunction: () => void;
@@ -13,8 +15,12 @@ const props = defineProps<Props>();
 
 const giveUp = () => {
   props.toggleFunction();
-  endGame(true);
+  endGame();
   // TODO show all missing shadows
+
+  if (dialogs.callback) {
+    dialogs.callback();
+  }
 };
 
 const cancel = () => {

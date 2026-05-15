@@ -6,12 +6,14 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { resetFlowState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
-const { state, resetState } = useState();
+const { resetState } = useState();
 const { setCurrentGen, currentGenState } = useCurrentGen();
 const { resetTimer } = useTimer();
+const { dialogs } = useDialogs();
 
 type Props = {
   toggleFunction: () => void;
@@ -27,7 +29,11 @@ const reset = () => {
   resetTimer();
   resetFlowState();
   setCurrentGen(gen);
-  startGame(true);
+  startGame();
+
+  if (dialogs.callback) {
+    dialogs.callback();
+  }
 };
 
 const cancel = () => {

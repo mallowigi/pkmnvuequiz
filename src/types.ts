@@ -127,6 +127,8 @@ export type LanguagesState = {
 export type PokemonStatus = {
   isFound: boolean;
   isShadowed: boolean;
+  lastFoundAt: number | null;
+  lastShadowedAt: number | null;
 };
 
 export type PokemonProgressState = {
@@ -175,6 +177,17 @@ export type PkmnData = {
   translations: Record<string, Translations> | null;
 };
 
+export type PokemonProgress = {
+  pokemonFound: {
+    id: string;
+    lastFoundAt: number | null;
+  }[];
+  pokemonShadowed: {
+    id: string;
+    lastShadowedAt: number | null;
+  }[];
+};
+
 export type SaveData = {
   gameMode: GameMode | null;
   gen: Gen | null;
@@ -195,10 +208,7 @@ export type SaveData = {
 
   timer: TimerState;
 
-  pokemonProgress: {
-    pokemonFound: string[];
-    pokemonShadowed: string[];
-  };
+  pokemonProgress: PokemonProgress;
   version: number;
 };
 

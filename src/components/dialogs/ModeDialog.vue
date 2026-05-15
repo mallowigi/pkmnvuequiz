@@ -3,8 +3,10 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState';
 import type { Mode } from '@/types.ts';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { setMode } = useState();
+const { dialogs } = useDialogs();
 
 type Props = {
   caption: string;
@@ -17,6 +19,10 @@ const props = defineProps<Props>();
 const enableMode = () => {
   props.toggleFunction();
   setMode(props.mode);
+
+  if (dialogs.callback) {
+    dialogs.callback();
+  }
 };
 
 const disableMode = () => {

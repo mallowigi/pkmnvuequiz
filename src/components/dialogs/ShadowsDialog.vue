@@ -2,8 +2,10 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { toggleShadows } = useState();
+const { dialogs } = useDialogs();
 
 type Props = {
   toggleFunction: () => void;
@@ -14,6 +16,10 @@ const props = defineProps<Props>();
 const enableReveal = () => {
   props.toggleFunction();
   toggleShadows();
+
+  if (dialogs.callback) {
+    dialogs.callback();
+  }
 };
 
 const cancel = () => {
