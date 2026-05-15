@@ -32,7 +32,7 @@ const setTypeOrSpecial = (type: string) => {
       resetPokemonState();
   }
   setGameSelectionState(null);
-  startGame(true);
+  startGame();
 };
 
 const goBack = () => {
@@ -61,7 +61,7 @@ const goBack = () => {
 
     <!-- Special -->
     <RoundedButton
-      class="button-type"
+      class="button-type button-special"
       @click="setTypeOrSpecial('special')"
       :style="{ backgroundColor: specialType.bgColor, color: specialType.fgColor }"
     >
@@ -86,8 +86,10 @@ const goBack = () => {
 .type-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(7, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   gap: 2px;
-  flex-direction: column;
 }
 
 .button-type {
@@ -105,6 +107,16 @@ const goBack = () => {
   &:hover {
     border-color: white;
   }
+}
+
+.button-special {
+  grid-row: 7;
+  grid-column: 1;
+}
+
+.button-back {
+  grid-row: 7;
+  grid-column: 2;
 }
 
 .symbol {
