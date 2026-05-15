@@ -254,10 +254,6 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const setPokemonState = (newState: Partial<PokemonProgressState>) => {
-    Object.assign(pokemonState, newState);
-  };
-
   const resetPokemonState = () => {
     pokemonState.lastPokemon = null;
     pokemonState.pokemonStatuses.forEach((status) => {
@@ -427,14 +423,6 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const isPokemonFound = (pokemon: PokemonInfo) => {
-    return getStatus(pokemon).isFound ?? false;
-  };
-
-  const isPokemonShadowed = (pokemon: PokemonInfo) => {
-    return getStatus(pokemon).isShadowed ?? false;
-  };
-
   const getNextOrderedPokemon = () => {
     const head = remainingHead.value;
     if (!head) return null;
@@ -454,32 +442,21 @@ export const usePokemons = defineStore('pokemons', () => {
     addRandomShadow,
     addShadow,
     findPokemon,
-    getAllPokemon,
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
-    getCurrentGenPokemon,
-    getCurrentTypePokemon,
-    getGenPokemon,
     getNextOrderedPokemon,
     getSpecialTypePokemon,
     getStatus,
-    getTypePokemon,
     initializePokemonMaps,
     isAlreadyFound,
     isInRemaining,
-    isPokemonFound,
     isPokemonInCurrentGameMode,
-    isPokemonShadowed,
     isWrongOrder,
     numFound,
     numShadows,
     pokemonState,
-    remaining,
-    remainingHead,
-    remainingShadow,
     resetPokemonState,
     setLastPokemon,
-    setPokemonState,
   };
 });
 
