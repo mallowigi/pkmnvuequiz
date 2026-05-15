@@ -83,6 +83,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
+    e.stopPropagation();
     if (state.withShadowHelper) {
       addRandomShadow();
     } else {
