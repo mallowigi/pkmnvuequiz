@@ -5,7 +5,7 @@ import { computed } from 'vue';
 import type { Language } from '@/types.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
 
-const { languagesState } = useLanguages();
+const { languagesState, toggleLanguage } = useLanguages();
 
 const sortedLanguages = computed(() => {
   return Object.values(languages).sort((a, b) => a.index - b.index);
@@ -24,6 +24,7 @@ const hasLanguage = (id: Language) => {
         :key="language.id"
         :title="language.name"
         class="smolbutton transition-element"
+        @click="toggleLanguage(language.id)"
         :class="{ active: hasLanguage(language.id) }"
       >
         {{ language.symbol }}
