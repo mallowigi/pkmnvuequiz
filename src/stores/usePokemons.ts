@@ -8,6 +8,7 @@ import { useCurrentType } from '@/stores/useCurrentType';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
+import { useTimer } from '@/stores/useTimer.ts';
 import type {
   PokemonInfo,
   PokemonProgressState,
@@ -18,7 +19,6 @@ import type {
   PokemonStatus,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
-import { useTimer } from '@/stores/useTimer.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -29,73 +29,74 @@ type PokemonMaps = {
   boxes: Record<RegionBox, Map<string, Array<PokemonInfo>>>;
 };
 
+const pokemonMaps: PokemonMaps = {
+  all: new Map<string, Array<PokemonInfo>>(),
+  allSpecials: new Map<string, Array<PokemonInfo>>(),
+  boxes: {
+    alola: new Map<string, Array<PokemonInfo>>(),
+    areazero: new Map<string, Array<PokemonInfo>>(),
+    galar: new Map<string, Array<PokemonInfo>>(),
+    gmax: new Map<string, Array<PokemonInfo>>(),
+    hisui: new Map<string, Array<PokemonInfo>>(),
+    hoenn: new Map<string, Array<PokemonInfo>>(),
+    hoennmega: new Map<string, Array<PokemonInfo>>(),
+    hyperspace: new Map<string, Array<PokemonInfo>>(),
+    johto: new Map<string, Array<PokemonInfo>>(),
+    kalos: new Map<string, Array<PokemonInfo>>(),
+    kalosmega: new Map<string, Array<PokemonInfo>>(),
+    kanto: new Map<string, Array<PokemonInfo>>(),
+    lumiose: new Map<string, Array<PokemonInfo>>(),
+    paldea: new Map<string, Array<PokemonInfo>>(),
+    pokemongo: new Map<string, Array<PokemonInfo>>(),
+    sinnoh: new Map<string, Array<PokemonInfo>>(),
+    unova: new Map<string, Array<PokemonInfo>>(),
+  },
+  languages: {
+    cn: new Map<string, Array<PokemonInfo>>(),
+    de: new Map<string, Array<PokemonInfo>>(),
+    en: new Map<string, Array<PokemonInfo>>(),
+    fr: new Map<string, Array<PokemonInfo>>(),
+    ja: new Map<string, Array<PokemonInfo>>(),
+    ko: new Map<string, Array<PokemonInfo>>(),
+    zh: new Map<string, Array<PokemonInfo>>(),
+  },
+  special: {
+    legendary: new Map<string, Array<PokemonInfo>>(),
+    mythical: new Map<string, Array<PokemonInfo>>(),
+    no: new Map<string, Array<PokemonInfo>>(),
+    paradox: new Map<string, Array<PokemonInfo>>(),
+    sublegendary: new Map<string, Array<PokemonInfo>>(),
+    ultrabeast: new Map<string, Array<PokemonInfo>>(),
+  },
+  types: {
+    bug: new Map<string, Array<PokemonInfo>>(),
+    dark: new Map<string, Array<PokemonInfo>>(),
+    dragon: new Map<string, Array<PokemonInfo>>(),
+    electric: new Map<string, Array<PokemonInfo>>(),
+    fairy: new Map<string, Array<PokemonInfo>>(),
+    fighting: new Map<string, Array<PokemonInfo>>(),
+    fire: new Map<string, Array<PokemonInfo>>(),
+    flying: new Map<string, Array<PokemonInfo>>(),
+    ghost: new Map<string, Array<PokemonInfo>>(),
+    grass: new Map<string, Array<PokemonInfo>>(),
+    ground: new Map<string, Array<PokemonInfo>>(),
+    ice: new Map<string, Array<PokemonInfo>>(),
+    normal: new Map<string, Array<PokemonInfo>>(),
+    poison: new Map<string, Array<PokemonInfo>>(),
+    psychic: new Map<string, Array<PokemonInfo>>(),
+    rock: new Map<string, Array<PokemonInfo>>(),
+    steel: new Map<string, Array<PokemonInfo>>(),
+    water: new Map<string, Array<PokemonInfo>>(),
+  },
+};
+
+const pokemonState = reactive<PokemonProgressState>({
+  lastIndex: null,
+  lastPokemon: null,
+  pokemonStatuses: new Map<string, PokemonStatus>(),
+});
+
 export const usePokemons = defineStore('pokemons', () => {
-  const pokemonMaps: PokemonMaps = {
-    all: new Map<string, Array<PokemonInfo>>(),
-    allSpecials: new Map<string, Array<PokemonInfo>>(),
-    boxes: {
-      alola: new Map<string, Array<PokemonInfo>>(),
-      areazero: new Map<string, Array<PokemonInfo>>(),
-      galar: new Map<string, Array<PokemonInfo>>(),
-      gmax: new Map<string, Array<PokemonInfo>>(),
-      hisui: new Map<string, Array<PokemonInfo>>(),
-      hoenn: new Map<string, Array<PokemonInfo>>(),
-      hoennmega: new Map<string, Array<PokemonInfo>>(),
-      hyperspace: new Map<string, Array<PokemonInfo>>(),
-      johto: new Map<string, Array<PokemonInfo>>(),
-      kalos: new Map<string, Array<PokemonInfo>>(),
-      kalosmega: new Map<string, Array<PokemonInfo>>(),
-      kanto: new Map<string, Array<PokemonInfo>>(),
-      lumiose: new Map<string, Array<PokemonInfo>>(),
-      paldea: new Map<string, Array<PokemonInfo>>(),
-      pokemongo: new Map<string, Array<PokemonInfo>>(),
-      sinnoh: new Map<string, Array<PokemonInfo>>(),
-      unova: new Map<string, Array<PokemonInfo>>(),
-    },
-    languages: {
-      cn: new Map<string, Array<PokemonInfo>>(),
-      de: new Map<string, Array<PokemonInfo>>(),
-      en: new Map<string, Array<PokemonInfo>>(),
-      fr: new Map<string, Array<PokemonInfo>>(),
-      ja: new Map<string, Array<PokemonInfo>>(),
-      ko: new Map<string, Array<PokemonInfo>>(),
-      zh: new Map<string, Array<PokemonInfo>>(),
-    },
-    special: {
-      legendary: new Map<string, Array<PokemonInfo>>(),
-      mythical: new Map<string, Array<PokemonInfo>>(),
-      no: new Map<string, Array<PokemonInfo>>(),
-      paradox: new Map<string, Array<PokemonInfo>>(),
-      sublegendary: new Map<string, Array<PokemonInfo>>(),
-      ultrabeast: new Map<string, Array<PokemonInfo>>(),
-    },
-    types: {
-      bug: new Map<string, Array<PokemonInfo>>(),
-      dark: new Map<string, Array<PokemonInfo>>(),
-      dragon: new Map<string, Array<PokemonInfo>>(),
-      electric: new Map<string, Array<PokemonInfo>>(),
-      fairy: new Map<string, Array<PokemonInfo>>(),
-      fighting: new Map<string, Array<PokemonInfo>>(),
-      fire: new Map<string, Array<PokemonInfo>>(),
-      flying: new Map<string, Array<PokemonInfo>>(),
-      ghost: new Map<string, Array<PokemonInfo>>(),
-      grass: new Map<string, Array<PokemonInfo>>(),
-      ground: new Map<string, Array<PokemonInfo>>(),
-      ice: new Map<string, Array<PokemonInfo>>(),
-      normal: new Map<string, Array<PokemonInfo>>(),
-      poison: new Map<string, Array<PokemonInfo>>(),
-      psychic: new Map<string, Array<PokemonInfo>>(),
-      rock: new Map<string, Array<PokemonInfo>>(),
-      steel: new Map<string, Array<PokemonInfo>>(),
-      water: new Map<string, Array<PokemonInfo>>(),
-    },
-  };
-
-  const pokemonState = reactive<PokemonProgressState>({
-    lastPokemon: null,
-    pokemonStatuses: new Map<string, PokemonStatus>(),
-  });
-
   const { state } = useState();
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
@@ -136,6 +137,16 @@ export const usePokemons = defineStore('pokemons', () => {
       }
     }
     return result;
+  });
+
+  const remainingHead = computed(() => {
+    const currentGameModePokemon = getCurrentGameModePokemon();
+    const remainingArray = Array.from(remaining.value);
+    if (remainingArray.length === 0) return null;
+
+    const nextPokemonKey = remainingArray[0];
+    const nextPokemon = currentGameModePokemon.get(nextPokemonKey);
+    return nextPokemon ? nextPokemon[0] : null;
   });
 
   const initializePokemonMaps = () => {
@@ -424,6 +435,20 @@ export const usePokemons = defineStore('pokemons', () => {
     return getStatus(pokemon).isShadowed ?? false;
   };
 
+  const getNextOrderedPokemon = () => {
+    const head = remainingHead.value;
+    if (!head) return null;
+
+    return head;
+  };
+
+  const isWrongOrder = (pokemons: PokemonInfo[]) => {
+    const next = getNextOrderedPokemon();
+    if (!next || !pokemons[0]) return false;
+
+    return next.dexNum !== pokemons[0].dexNum;
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -435,6 +460,7 @@ export const usePokemons = defineStore('pokemons', () => {
     getCurrentGenPokemon,
     getCurrentTypePokemon,
     getGenPokemon,
+    getNextOrderedPokemon,
     getSpecialTypePokemon,
     getStatus,
     getTypePokemon,
@@ -444,10 +470,12 @@ export const usePokemons = defineStore('pokemons', () => {
     isPokemonFound,
     isPokemonInCurrentGameMode,
     isPokemonShadowed,
+    isWrongOrder,
     numFound,
     numShadows,
     pokemonState,
     remaining,
+    remainingHead,
     remainingShadow,
     resetPokemonState,
     setLastPokemon,

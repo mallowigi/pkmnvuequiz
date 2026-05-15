@@ -52,11 +52,9 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
 
   // Apply chaos mode sorting
   if (state.mode === 'chaos') {
-    const values = Array.from(result.values());
-    const sorted = values.sort((pokemonsA, pokemonsB) => orderByFoundAt(pokemonsA[0], pokemonsB[0]));
-    for (const [boxId, pokemons] of result) {
-      result.set(boxId, sorted.shift() ?? []);
-    }
+    const entries = Array.from(result.entries());
+    entries.sort(([, pokemonsA], [, pokemonsB]) => orderByFoundAt(pokemonsA[0], pokemonsB[0]));
+    return new Map(entries);
   }
 
   return result;

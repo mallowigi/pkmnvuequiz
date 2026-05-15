@@ -19,8 +19,16 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
-const { isPokemonInCurrentGameMode, isInRemaining, addRandomShadow, findPokemon, addFound, isAlreadyFound } =
-  usePokemons();
+const {
+  isPokemonInCurrentGameMode,
+  isInRemaining,
+  addRandomShadow,
+  findPokemon,
+  addFound,
+  isAlreadyFound,
+  getNextOrderedPokemon,
+  isWrongOrder,
+} = usePokemons();
 const { unknownSprite } = useUnknownSprite();
 
 const regionOrType = computed(() => {
@@ -66,6 +74,13 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
+  // Cheat!
+  if (e.key === '#') {
+    showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
+    inputRef.value!.value = '';
+    return;
+  }
+
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
     if (state.withShadowHelper) {
@@ -99,7 +114,24 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 
   if (!isPokemonInCurrentGameMode(foundPokemon)) {
+    if (isPartOfAnotherPokemon) {
+      // Allow continue typing
+      return;
+    }
+
     showUserMessage(`${capitalize(value)} is not part of this game.`);
+    inputRef.value!.value = '';
+    return;
+  }
+
+  // order mode
+  if (state.mode === 'order' && isWrongOrder(foundPokemon)) {
+    if (isPartOfAnotherPokemon) {
+      // Allow continue typing
+      return;
+    }
+
+    showUserMessage(`${capitalize(value)} is not the next Pokemon.`);
     inputRef.value!.value = '';
     return;
   }
