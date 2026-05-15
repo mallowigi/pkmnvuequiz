@@ -2438,6 +2438,7 @@ async function loadData() {
       return _0x2491f5 !== _0x2bf1eb;
     },
     ninetales: 'ninetales',
+    none: 'none',
     notEquals: function (a, b) {
       return a !== b;
     },
@@ -2562,7 +2563,6 @@ async function loadData() {
     wuzLL: 'smolbuttonx',
     wvALH: 'absoltastic',
     wwfvW: '/images/mareep.png',
-    xAFWt: 'none',
     xzAeN: function (_0x21b36c, _0x10016c) {
       return _0x21b36c % _0x10016c;
     },
@@ -2619,8 +2619,8 @@ async function loadData() {
         constants['calll'](changeFooterPosition),
         constants['oeper'](constants['WZEPU'], document.getElementById(constants['panel']).style.display) &&
           document.getElementById('accordion')['click'](),
-        (document.getElementById('missednames').style.display = constants['xAFWt']),
-        (document.getElementById(constants['ranking2']).style.display = constants['xAFWt']),
+        (document.getElementById('missednames').style.display = constants['none']),
+        (document.getElementById(constants['ranking2']).style.display = constants['none']),
         (document.getElementById(constants['lBinT']).style.display = 'none'),
         emptyLeaderboard());
     });
@@ -2879,7 +2879,7 @@ async function loadData() {
   function _0x93513a() {
     const _0x1e765a = {
       KoZpJ: 'input-username',
-      UogWe: constants['xAFWt'],
+      UogWe: constants['none'],
       XuhVN: function (_0x48ad06) {
         return _0x48ad06();
       },
@@ -2894,7 +2894,7 @@ async function loadData() {
     function _0x420f5d(_0x4f9c3d) {
       0xd === _0x4f9c3d['keyCode']
         ? _0x1c3111['click']()
-        : 0x1b === _0x4f9c3d['keyCode'] && (usernamePrompt.style.display = constants['xAFWt']);
+        : 0x1b === _0x4f9c3d['keyCode'] && (usernamePrompt.style.display = constants['none']);
     }
 
     ((_0x1c3111['onclick'] = function () {
@@ -3184,13 +3184,13 @@ async function loadData() {
   }
 
   function _0x4a696a() {
-    document.getElementById(constants['prompttimer']).style.display = constants['xAFWt'];
+    document.getElementById(constants['prompttimer']).style.display = constants['none'];
   }
 
   let _0x1d011c = function (_0x1044ec) {
     const _0x7ee5e6 = {
       MCGDn: 'prompttimer',
-      zgjhW: constants['xAFWt'],
+      zgjhW: constants['none'],
     };
     activeTimer
       ? ((document.getElementById(constants['prompttimer']).style.display = constants['WZEPU']),
@@ -3227,7 +3227,7 @@ async function loadData() {
   for (let _0x55b3f7 in genQuizBoxes)
     document.getElementById(constants['tJYCi'] + _0x55b3f7)['onclick'] = function () {
       const _0xef4229 = {
-        hxtaf: constants['xAFWt'],
+        hxtaf: constants['none'],
         onOdF: function (_0x410ed7) {
           return _0x410ed7();
         },
@@ -3236,7 +3236,7 @@ async function loadData() {
         var _0xc8494f;
         ((document.getElementById(constants['hYQNJ'])['onclick'] = off2),
           (document.getElementById('typeselection')['onclick'] = off2),
-          (promptGen.style.display = constants['xAFWt']),
+          (promptGen.style.display = constants['none']),
           (_0xc8494f = _0x55b3f7),
           quiz['setGenQuiz'](_0xc8494f),
           constants['callf3'](_0x185180));
@@ -3381,7 +3381,7 @@ async function loadData() {
         : (document.getElementById('trychallenge').style.display = 'none'),
       Object['keys'](quiz['users']).length > 0x1 &&
         (document.getElementById(constants['ranking2']).style.display = constants['WZEPU']),
-      (document.getElementById('ranking').style.display = constants['xAFWt']),
+      (document.getElementById('ranking').style.display = constants['none']),
       quiz['animateCongrats'](),
       quiz['giveUp'](),
       (document.getElementById(constants['hmfGc']).style.display = constants['WZEPU']),
@@ -3411,7 +3411,7 @@ async function loadData() {
       (inputField['disabled'] = true),
       constants['HJLRw'](Object['keys'](quiz['users']).length, 0x1) &&
         (document.getElementById(constants['ranking2']).style.display = constants['WZEPU']),
-      (document.getElementById('ranking').style.display = constants['xAFWt']),
+      (document.getElementById('ranking').style.display = constants['none']),
       clearInterval(activeTimer),
       (timerObj = {
         type: 'none',
@@ -3441,37 +3441,35 @@ async function loadData() {
   };
 
   ((inputField['oninput'] = function () {
-    if (constants['gt2'](inputField['value'].length, 0x0)) {
-      if ('?' === inputField['value'][inputField['value'].length - 0x1]) {
-        return (
-          (inputField['value'] = inputField['value']['substring'](0x0, inputField['value'].length - 0x1)),
-          void _0x33228f()
-        );
-      }
-      if (constants['xAFWt'] !== quiz.name && ',' === inputField['value'][inputField['value'].length - 0x1]) {
-        return (
-          _0xc027bf ? _0x3806aa() : constants['ZBXCb'](showUserMessage, constants['QQEdY']),
-          void (inputField['value'] = inputField['value']['substring'](
-            0x0,
-            constants['whOMZ'](inputField['value'].length, 0x1),
-          ))
-        );
-      }
-      res = constants['callg'](_0x46eda6, inputField['value'], myUsername);
-      let _0x4346b4 = res[0x0],
-        _0x260dd3 = res[0x1];
-      (constants['PqSrS'](null, _0x260dd3) &&
-        _0x260dd3.includes('not\x20the\x20next') &&
-        soundEnabled &&
-        soundEffectWrongOrder['play'](),
-        constants['mWsZe'] === _0x260dd3
-          ? (inputField['value'] = '')
-          : _0x4346b4
-            ? ((inputField['value'] = ''), hideHint())
-            : _0x4346b4 ||
-              constants['KXNkQ'](null, _0x260dd3) ||
-              ((inputField['value'] = ''), hideHint(), constants['XlWaI'](showUserMessage, _0x260dd3)));
+    if (inputField.value.length === 0) return;
+
+    if (inputField.value[inputField.value.length - 1] === '?') {
+      inputField.value = inputField.value.substring(0, inputField.value.length - 1);
+      spellCheck();
+      return;
     }
+
+    if (constants['none'] !== quiz.name && ',' === inputField.value[inputField.value.length - 1]) {
+      return (
+        _0xc027bf ? _0x3806aa() : constants['ZBXCb'](showUserMessage, constants['QQEdY']),
+        void (inputField.value = inputField.value['substring'](0, constants['whOMZ'](inputField.value.length, 1)))
+      );
+    }
+
+    res = constants['callg'](_0x46eda6, inputField.value, myUsername);
+    let _0x4346b4 = res[0],
+      _0x260dd3 = res[1];
+    (constants['PqSrS'](null, _0x260dd3) &&
+      _0x260dd3.includes('not\x20the\x20next') &&
+      soundEnabled &&
+      soundEffectWrongOrder['play'](),
+      constants['mWsZe'] === _0x260dd3
+        ? (inputField.value = '')
+        : _0x4346b4
+          ? ((inputField.value = ''), hideHint())
+          : _0x4346b4 ||
+            constants['KXNkQ'](null, _0x260dd3) ||
+            ((inputField.value = ''), hideHint(), constants['XlWaI'](showUserMessage, _0x260dd3)));
   }),
     (giveUpBtn['onclick'] = _0x292768),
     (radioPokeball['onclick'] = function () {
@@ -3535,7 +3533,7 @@ async function loadData() {
         (promptOrderEnable.style.display = 'none'));
     }),
     (promptOrderEnableNo['onclick'] = function () {
-      promptOrderEnable.style.display = constants['xAFWt'];
+      promptOrderEnable.style.display = constants['none'];
     }),
     (promptOrderDisableYes['onclick'] = function () {
       (constants['HhOuq'](_0x57dd20, orderButton),
@@ -3546,7 +3544,7 @@ async function loadData() {
         (promptOrderDisable.style.display = 'none'));
     }),
     (promptOrderDisableNo['onclick'] = function () {
-      promptOrderDisable.style.display = constants['xAFWt'];
+      promptOrderDisable.style.display = constants['none'];
     }),
     (promptChaosEnableYes['onclick'] = function () {
       (_0x57dd20(regularButton),
@@ -3554,7 +3552,7 @@ async function loadData() {
         _0x57dd20(orderButton),
         quiz['setChaosMode'](true),
         constants['hPLhg'](_0x185180),
-        (promptChaosEnable.style.display = constants['xAFWt']));
+        (promptChaosEnable.style.display = constants['none']));
     }),
     (promptChaosEnableNo['onclick'] = function () {
       promptChaosEnable.style.display = 'none';
@@ -3673,86 +3671,73 @@ async function loadData() {
             20000,
           )));
     }));
-  let _0x5ae3b4 = response['misspellings'],
-    _0x3819a9 = {};
-  for (let _0x2bde04 in _0x5ae3b4)
-    for (let _0x500910 = 0x0; constants['zGgPi'](_0x500910, _0x5ae3b4[_0x2bde04].length); _0x500910++)
-      _0x3819a9[_0x5ae3b4[_0x2bde04][_0x500910]] = _0x2bde04;
+  let misspellings = response.misspellings,
+    mispellingDict = {};
 
-  function _0x33228f() {
-    const _0x4a73ac = {
-      GDYrI: function (_0x229cda, _0x322378) {
-        return _0x229cda <= _0x322378;
-      },
-      Jjmir: function (_0xc72e65, _0x1839bf) {
-        return _0xc72e65(_0x1839bf);
-      },
-      JoIxN: function (_0x2d1274, _0x4bda2a) {
-        return _0x2d1274 === _0x4bda2a;
-      },
-      daish: function (_0x5c4ae2, _0x1187c3) {
-        return _0x5c4ae2 > _0x1187c3;
-      },
-      lKAXB: constants['notFound'],
-      uFxgd: function (_0x295439, _0x51d6db) {
-        return _0x295439 >= _0x51d6db;
-      },
-    };
-    if (isSpellingEnabled) {
-      (inputField['focus'](),
-        (spellingCheck.style.display = 'none'),
-        (spellingHint.style.display = constants['inlineBlock']));
-      let _0x47cffd = (function (_0x491fb5) {
-        const _0x5a3852 = {
-          mFIQK: function (_0x109e13, _0x3c922a) {
-            return _0x109e13(_0x3c922a);
-          },
-          zDHgh: function (_0x4fc7ad, _0x59cf21) {
-            return _0x4a73ac['Jjmir'](_0x4fc7ad, _0x59cf21);
-          },
-        };
-        if (_0x4a73ac['daish'](_0x491fb5.length, 0x3)) {
-          let _0x3aec53 = (function (_0x188112) {
-            let _0x515008 = {};
-            _0x188112 = _0x5a3852['mFIQK'](standardizeName, _0x188112);
-            let _0x585045 = quiz['nameArr'];
-            for (const _0x1e5275 of _0x585045) {
-              let _0x464ae8 = Levenshtein(_0x5a3852['zDHgh'](standardizeName, _0x1e5275), _0x188112);
-              _0x515008[_0x1e5275] = _0x464ae8;
-            }
-            return ((sortedVals = _0x5a3852['mFIQK'](sortDictionaryByValue, _0x515008)), sortedVals['reverse']());
-          })(_0x491fb5);
-          if (_0x3aec53.length > 0x0) {
-            let _0xde5cc7 = _0x3aec53[0x0],
-              _0x4ff06a = _0xde5cc7[0x0],
-              _0x4ef752 = _0xde5cc7[0x1];
-            if (_0x491fb5 in _0x3819a9) {
-              return _0x3819a9[_0x491fb5];
-            }
-            if (0x1 == _0x4ef752) {
-              return _0x4ff06a;
-            }
-            if (0x5 === _0x491fb5.length && _0x4a73ac['GDYrI'](_0x4ef752, 0x2)) {
-              return _0x4ff06a;
-            }
-            if (_0x4a73ac['JoIxN'](0x6, _0x491fb5.length) && _0x4ef752 <= 0x2) {
-              return _0x4ff06a;
-            }
-            if (0x7 === _0x491fb5.length && _0x4a73ac['GDYrI'](_0x4ef752, 0x3)) {
-              return _0x4ff06a;
-            }
-            if (_0x4a73ac['uFxgd'](_0x491fb5.length, 0x8) && _0x4a73ac['GDYrI'](_0x4ef752, 0x4)) {
-              return _0x4ff06a;
-            }
-          }
-        }
-        return _0x4a73ac['lKAXB'];
-      })(standardizeName(inputField['value']));
-      ((spellingHint.innerHTML = _0x47cffd), inputField['value'].length > 0x0 && inputField['value']);
+  for (let mispell in misspellings) {
+    for (let i = 0; i < misspellings[mispell].length; i++) {
+      mispellingDict[misspellings[mispell][i]] = mispell;
     }
   }
 
-  document.getElementById('hintplace')['onclick'] = _0x33228f;
+  function spellCheck() {
+    if (!isSpellingEnabled) {
+      return;
+    }
+
+    inputField.focus();
+    spellingCheck.style.display = 'none';
+    spellingHint.style.display = 'inline-block';
+
+    let text = (function (name) {
+      let distances = (function (name) {
+        if (name.length >= 3) {
+          let result = {};
+          let standardName = standardizeName(name);
+
+          for (const n of quiz.nameArr) {
+            result[n] = Levenshtein(standardizeName(n), standardName);
+          }
+
+          sortedVals = sortDictionaryByValue(result);
+          return sortedVals.reverse();
+        }
+      })(name);
+
+      if (distances.length > 0) {
+        let distance = distances[0],
+          word = distance[0],
+          dist = distance[1];
+
+        if (name in mispellingDict) {
+          return mispellingDict[name];
+        }
+        if (dist === 1) {
+          return word;
+        }
+        if (name.length === 5 && dist <= 2) {
+          return word;
+        }
+        if (name.length === 6 && dist <= 2) {
+          return word;
+        }
+        if (name.length === 7 && dist <= 3) {
+          return word;
+        }
+        if (name.length >= 8 && dist <= 4) {
+          return word;
+        }
+      }
+      return 'not found';
+    })(standardizeName(inputField.value));
+
+    spellingHint.innerHTML = text;
+    if (inputField.value.length > 0) {
+      return inputField.value;
+    }
+  }
+
+  document.getElementById('hintplace')['onclick'] = spellCheck;
   let _0x43ad00 = function () {
     let _0x2833ef = document.getElementById(constants['ymhUF']);
     for (; _0x2833ef['firstChild']; ) _0x2833ef['firstChild']['remove']();
@@ -3793,7 +3778,7 @@ async function loadData() {
   };
   document.getElementById('accordion2')['onclick'] = function () {
     ('block' == document.getElementById(constants['ymhUF']).style.display
-      ? ((document.getElementById('leaderboard2').style.display = constants['xAFWt']),
+      ? ((document.getElementById('leaderboard2').style.display = constants['none']),
         document.getElementById(constants['lbZpH']).classList.add(constants['fdQWM']),
         document.getElementById(constants['lbZpH']).classList.remove(constants['dOfhF']))
       : ((document.getElementById(constants['ymhUF']).style.display = 'block'),
@@ -3826,7 +3811,7 @@ async function loadData() {
         (_0x114f6c['EamlX'](_0x5b4a5c), off2());
       }),
         (promptGenNo['onclick'] = function () {
-          promptGen.style.display = constants['xAFWt'];
+          promptGen.style.display = constants['none'];
         }),
         0x0 !== quiz['getScore']() ? (promptGen.style.display = constants['TjiLp']) : (_0x5b4a5c(), off2()));
     };
@@ -4372,7 +4357,7 @@ async function loadData() {
       constants['MAcCo'](_0x57dd20, document.getElementById(constants['mVJjM'])),
       constants['eAttu'](_0x2f9557, document.getElementById(constants['YWOxB'])),
       client['disconnect'](),
-      (document.getElementById('ranking').style.display = constants['xAFWt']));
+      (document.getElementById('ranking').style.display = constants['none']));
   }),
     (saveButton['onclick'] = () => {
       let _0x182a0b = constants['call2'](getState);
@@ -4393,7 +4378,7 @@ async function loadData() {
               return ((_0x406d0c = _0x406d0c.replace(/-/g, '_')), _0x406d0c);
             })(),
           ) + '.quiz'),
-        (_0x41fd18.style.display = constants['xAFWt']),
+        (_0x41fd18.style.display = constants['none']),
         document['body'].appendChild(_0x41fd18),
         _0x41fd18['click'](),
         URL['revokeObjectURL'](_0x36a4a0));
@@ -4576,7 +4561,7 @@ async function loadData() {
           }
         }),
         (document.getElementById('loader').style.display = 'none'),
-        (document.getElementById('loadboxguest').style.display = constants['xAFWt']),
+        (document.getElementById('loadboxguest').style.display = constants['none']),
         (document.getElementById('playtext').style.opacity = '1'),
         (document.getElementById(constants['inputBar']).style.opacity = '1'),
         (document.getElementById(constants['pokemon'])['disabled'] = false),
@@ -5618,7 +5603,7 @@ for (let e of allLanguages) {
     ((_0x127de1['adDYN'] !== _0x18296e['key'] &&
       _0x127de1['adDYN'] !== _0x18296e['code'] &&
       0xd !== _0x18296e['keyCode']) ||
-      (inputField['value'] = ''),
+      (inputField.value = ''),
       _0x127de1['npQQD'](_0x127de1['nuoBv'], document['activeElement']['tagName']) && inputField['focus']());
   }),
   (document.getElementById('sound-on')['onclick'] = () => {
