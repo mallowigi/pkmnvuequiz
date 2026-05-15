@@ -133,7 +133,7 @@ export type PokemonStatus = {
 
 export type PokemonProgressState = {
   pokemonStatuses: Map<string, PokemonStatus>;
-  lastPokemon: string | null;
+  lastPokemon: PokemonInfo | null;
   lastIndex: number | null;
 };
 

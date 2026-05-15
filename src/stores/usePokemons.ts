@@ -90,13 +90,12 @@ const pokemonMaps: PokemonMaps = {
   },
 };
 
-const pokemonState = reactive<PokemonProgressState>({
-  lastIndex: null,
-  lastPokemon: null,
-  pokemonStatuses: new Map<string, PokemonStatus>(),
-});
-
 export const usePokemons = defineStore('pokemons', () => {
+  const pokemonState = reactive<PokemonProgressState>({
+    lastIndex: null,
+    lastPokemon: null,
+    pokemonStatuses: new Map<string, PokemonStatus>(),
+  });
   const { state } = useState();
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
@@ -204,14 +203,18 @@ export const usePokemons = defineStore('pokemons', () => {
     });
   };
 
-  const addFound = (pokemon: string) => {
-    const normalizedPokemon = normalizeName(pokemon);
+  const addFound = (pokemons: PokemonInfo[]) => {
+    const firstPokemon = pokemons[0];
+    const normalizedPokemon = normalizeName(firstPokemon.baseName);
     const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+
     if (status) {
       status.isFound = true;
       status.lastFoundAt = Date.now();
       startTimer();
     }
+
+    setLastPokemon(firstPokemon);
   };
 
   const addShadow = (pokemon: string) => {
@@ -224,8 +227,8 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
-  const setLastPokemon = (pokemon: string) => {
-    pokemonState.lastPokemon = normalizeName(pokemon);
+  const setLastPokemon = (pokemon: PokemonInfo) => {
+    pokemonState.lastPokemon = pokemon;
   };
 
   const addRandomShadow = () => {
@@ -437,6 +440,10 @@ export const usePokemons = defineStore('pokemons', () => {
     return next.dexNum !== pokemons[0].dexNum;
   };
 
+  const getLastPokemon = () => {
+    return pokemonState.lastPokemon;
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -444,6 +451,7 @@ export const usePokemons = defineStore('pokemons', () => {
     findPokemon,
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
+    getLastPokemon,
     getNextOrderedPokemon,
     getSpecialTypePokemon,
     getStatus,

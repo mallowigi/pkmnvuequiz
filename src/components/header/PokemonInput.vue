@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
+import LastPokemon from '@/components/header/LastPokemon.vue';
 import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
@@ -9,7 +10,6 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
-import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { capitalize } from '@/utils/utils.ts';
 
 const { state } = useState();
@@ -29,7 +29,6 @@ const {
   getNextOrderedPokemon,
   isWrongOrder,
 } = usePokemons();
-const { unknownSprite } = useUnknownSprite();
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -83,13 +82,13 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
-    e.stopPropagation();
     if (state.withShadowHelper) {
       addRandomShadow();
     } else {
       showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
-      return;
     }
+    inputRef.value!.value = '';
+    return;
   }
 
   const value = inputRef.value?.value || '';
@@ -137,9 +136,9 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  // TODO support order mode and type shuffle
+  // TODO support type shuffle
 
-  addFound(foundPokemon[0].baseName);
+  addFound(foundPokemon);
   inputRef.value!.value = '';
   return;
 };
@@ -179,11 +178,7 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
       maxlength="13"
       autocomplete="off"
     />
-    <img
-      class="sprite"
-      :src="unknownSprite"
-      alt="Recent sprite"
-    />
+    <LastPokemon />
   </div>
 </template>
 
@@ -257,13 +252,5 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
     outline: none;
     background: white;
   }
-}
-
-.sprite {
-  margin: -25px -20px -10px -10px;
-  width: 64px;
-  height: 56px;
-  object-fit: none;
-  object-position: 100% 0;
 }
 </style>
