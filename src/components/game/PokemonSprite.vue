@@ -2,17 +2,16 @@
 import { computed, capitalize } from 'vue';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo } from '@/types.ts';
+import type { PokemonInfo, PokemonStatus } from '@/types.ts';
 
 const { state } = useState();
 const { data } = usePkmnData();
-const { isPokemonFound, isPokemonShadowed } = usePokemons();
 const { unknownSprite } = useUnknownSprite();
 
 type Props = {
   pokemon: PokemonInfo;
+  status: PokemonStatus;
 };
 
 type SpriteData = {
@@ -33,10 +32,6 @@ const spriteData = computed<SpriteData>(() => {
     spriteCycle: spriteCycles?.[props.pokemon.id] ?? [],
   };
 });
-
-const found = computed(() => isPokemonFound(props.pokemon));
-
-const shadowed = computed(() => isPokemonShadowed(props.pokemon));
 </script>
 
 <template>
@@ -44,7 +39,7 @@ const shadowed = computed(() => isPokemonShadowed(props.pokemon));
     class="container"
     :class="{ full: state.gameMode === 'full' }"
   >
-    <div v-if="found">
+    <div v-if="props.status.isFound">
       <div
         v-if="spriteData.shiny && state.withShinies"
         class="sprite"
@@ -60,7 +55,7 @@ const shadowed = computed(() => isPokemonShadowed(props.pokemon));
       />
     </div>
 
-    <div v-else-if="shadowed">
+    <div v-else-if="props.status.isShadowed">
       <!-- TODO -->
       <!--<CyclingSprite-->
       <!--  v-if="spriteData.spriteCycle.length"-->

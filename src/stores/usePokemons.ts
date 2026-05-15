@@ -343,6 +343,16 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
+  const getChaosOrderedPokemon = (pokemons: Map<string, PokemonInfo[]>): Map<string, PokemonInfo[]> => {
+    // const values = Array.from(pokemons.values());
+    // const ordered = values.sort((a, b) => {
+    //   return pokemonState.pokemonStatuses[a.id].foundTime - pokemonState.pokemonStatuses[b.id].foundTime;
+    // });
+    //
+    // return new Map(ordered.map((group) => [group[0].box, group]));
+    return pokemons;
+  };
+
   const isPokemonInCurrentGameMode = (pokemons: PokemonInfo[]) => {
     return pokemons.some((pokemon: PokemonInfo) => {
       const gameMode = state.gameMode;
@@ -377,10 +387,19 @@ export const usePokemons = defineStore('pokemons', () => {
     });
   };
 
+  const getStatus = (pokemon: PokemonInfo): PokemonStatus => {
+    return (
+      pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName)) ?? {
+        isFound: false,
+        isShadowed: false,
+      }
+    );
+  };
+
   const isAlreadyFound = (pokemons: PokemonInfo[]) => {
     return pokemons.some((pokemon) => {
-      const status = pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName));
-      return status?.isFound;
+      const status = getStatus(pokemon);
+      return status.isFound;
     });
   };
 
@@ -396,11 +415,11 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const isPokemonFound = (pokemon: PokemonInfo) => {
-    return pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName))?.isFound ?? false;
+    return getStatus(pokemon).isFound ?? false;
   };
 
   const isPokemonShadowed = (pokemon: PokemonInfo) => {
-    return pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName))?.isShadowed ?? false;
+    return getStatus(pokemon).isShadowed ?? false;
   };
 
   return {
@@ -409,12 +428,14 @@ export const usePokemons = defineStore('pokemons', () => {
     addShadow,
     findPokemon,
     getAllPokemon,
+    getChaosOrderedPokemon,
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
     getCurrentGenPokemon,
     getCurrentTypePokemon,
     getGenPokemon,
     getSpecialTypePokemon,
+    getStatus,
     getTypePokemon,
     initializePokemonMaps,
     isAlreadyFound,

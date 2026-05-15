@@ -9,29 +9,40 @@ import { boxes } from '@/data/boxes.js';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
+import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
-const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon } = usePokemons();
+const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getChaosOrderedPokemon, getStatus, pokemonState } =
+  usePokemons();
 const { state } = useState();
 const styles = useColumnLayout();
 
-const specialBoxes = computed(() => {
-  const specialGameModeBoxes = getSpecialBoxes();
-  return specialGameModeBoxes?.map((box) => specialTypes[box]);
-});
-
 const currentBoxes = computed(() => {
-  const currentGameModeBoxes = getCurrentGameModeBoxes();
-  return currentGameModeBoxes?.map((box) => boxes[box]);
-});
-
-const type = computed(() => {
   if (state.gameMode !== 'special') {
-    return 'gen';
+    const currentGameModeBoxes = getCurrentGameModeBoxes();
+    return currentGameModeBoxes?.map((box) => boxes[box]);
   } else {
-    return 'special';
+    const specialGameModeBoxes = getSpecialBoxes();
+    return specialGameModeBoxes?.map((box) => specialTypes[box]);
   }
 });
+
+const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, PokemonInfo[]> => {
+  let result;
+
+  if (state.gameMode !== 'special') {
+    result = getCurrentGameModeBoxPokemon(boxId as RegionBox);
+  } else {
+    result = getSpecialTypePokemon(boxId as SpecialType);
+  }
+
+  // todo
+  if (state.mode === 'chaos') {
+    result = getChaosOrderedPokemon(result);
+  }
+
+  return result;
+};
 </script>
 
 <template>
@@ -39,46 +50,23 @@ const type = computed(() => {
     class="region-boxes"
     :style="styles"
   >
-    <!-- Gen/Full/Types Mode -->
     <RoundedBox
       class="region-box"
       v-for="box in currentBoxes"
-      v-if="type === 'gen'"
       :key="box.id"
     >
       <span class="region-name">{{ box.name }}</span>
 
       <div class="sprite-container">
         <template
-          v-for="[, pokemons] in getCurrentGameModeBoxPokemon(box.id)"
+          v-for="[, pokemons] in getCurrentGamePokemon(box.id)"
           :key="pokemons[0].id"
         >
           <PokemonSprite
             v-for="pokemon in pokemons"
             :key="pokemon.id"
             :pokemon="pokemon"
-          />
-        </template>
-      </div>
-    </RoundedBox>
-
-    <!-- Special Mode -->
-    <RoundedBox
-      class="region-box special"
-      v-for="box in specialBoxes"
-      v-else-if="type === 'special'"
-      :key="box.id"
-    >
-      <span class="region-name">{{ box.name }}</span>
-      <div class="sprite-container">
-        <template
-          v-for="[, pokemons] in getSpecialTypePokemon(box.id)"
-          :key="pokemons[0].id"
-        >
-          <PokemonSprite
-            v-for="pokemon in pokemons"
-            :key="pokemon.id"
-            :pokemon="pokemon"
+            :status="getStatus(pokemon)"
           />
         </template>
       </div>
