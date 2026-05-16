@@ -78,13 +78,22 @@ const displayedSprite = computed<DisplayedSprite>(() => {
     title: null,
   };
 });
+
+const spriteDelay = computed<string>(() => {
+  const rawDelay = (props.index ?? 0) * 20;
+  if (displayedSprite.value.kind === 'shadowed') {
+    return `${rawDelay}ms`;
+  }
+
+  return `${Math.min(rawDelay, 100)}ms`;
+});
 </script>
 
 <template>
   <section
     class="container"
     :class="{ full: state.gameMode === 'full' }"
-    :style="{ '--sprite-delay': `${(props.index ?? 0) * 20}ms` }"
+    :style="{ '--sprite-delay': spriteDelay }"
   >
     <Transition name="sprite-swap">
       <div
@@ -123,14 +132,16 @@ const displayedSprite = computed<DisplayedSprite>(() => {
 
 .sprite-swap-enter-active,
 .sprite-swap-leave-active {
-  transition: transform 220ms ease, opacity 220ms ease;
+  transition:
+    transform 700ms ease,
+    opacity 0s ease;
   transition-delay: var(--sprite-delay, 0ms);
 }
 
 .sprite-swap-enter-from,
 .sprite-swap-leave-to {
   opacity: 0;
-  transform: scale(0.9);
+  transform: scale(1.3);
 }
 
 .sprite {
