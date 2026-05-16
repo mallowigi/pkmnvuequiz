@@ -6,6 +6,7 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
+import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -27,8 +28,9 @@ type SpriteData = {
 
 type DisplayedSprite = {
   image: string;
+  sprites?: readonly string[];
   key: string;
-  kind: 'found' | 'shadowed' | 'unknown';
+  kind: 'found' | 'shadowed' | 'cycle' | 'unknown';
   title: string | null;
 };
 
@@ -46,6 +48,16 @@ const spriteData = computed<SpriteData>(() => {
 
 const displayedSprite = computed<DisplayedSprite>(() => {
   if (props.status.isFound) {
+    if (spriteData.value.spriteCycle.length) {
+      return {
+        image: spriteData.value.spriteCycle[0],
+        key: 'found-cycle',
+        kind: 'cycle',
+        sprites: spriteData.value.spriteCycle,
+        title: capitalize(props.pokemon.baseName),
+      };
+    }
+
     if (spriteData.value.shiny && state.withShinies) {
       return {
         image: spriteData.value.shiny,
@@ -104,9 +116,15 @@ const spriteDelay = computed<string>(() => {
       <div
         :key="displayedSprite.key"
         class="sprite"
-        :class="{ unknown: displayedSprite.kind === 'unknown' }"
+        v-if="displayedSprite.kind !== 'cycle'"
+        :class="displayedSprite.kind"
         :title="displayedSprite.title ?? undefined"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+      />
+
+      <CyclingSprite
+        :sprites="displayedSprite.sprites"
+        v-else-if="displayedSprite.sprites"
       />
     </Transition>
   </section>

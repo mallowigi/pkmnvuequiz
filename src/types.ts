@@ -82,8 +82,8 @@ export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
 export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
 
 export type GenerationInfo = {
-  id: Gen;
   boxes: RegionBox[];
+  id: Gen;
   name: string;
   sprites: string[];
 };
@@ -98,16 +98,18 @@ export type LanguageInfo = {
 };
 
 export type PokemonInfo = {
-  id: string;
   baseName: string;
+  box: RegionBox;
   dexNum: number;
+  id: string;
   primaryType: Type;
   secondaryType: Type | null;
-  box: RegionBox;
   specialType: SpecialType;
+  sprites?: string[];
 };
 
 export type State = {
+  autoPause: boolean;
   gameMode: GameMode | null;
   isDark: boolean;
   mode: Mode;
@@ -132,14 +134,14 @@ export type PokemonStatus = {
 };
 
 export type PokemonProgressState = {
-  pokemonStatuses: Map<string, PokemonStatus>;
-  lastPokemon: PokemonInfo | null;
   lastIndex: number | null;
+  lastPokemon: PokemonInfo | null;
+  pokemonStatuses: Map<string, PokemonStatus>;
 };
 
 export type TimerState = {
-  minutes: number;
   isLimited: boolean;
+  minutes: number;
   savedAt: number | null;
   startTime: number | null;
 };
@@ -147,34 +149,34 @@ export type TimerState = {
 export type GameSelectionState = 'gen' | 'types' | null;
 
 export type GameFlowState = {
+  gameSelectionState: GameSelectionState;
   isEnded: boolean;
   isPaused: boolean;
   isStarted: boolean;
-  gameSelectionState: GameSelectionState;
 };
 
 export type Translations = {
-  en: string;
-  fr: string;
-  de: string;
-  es: string;
-  it: string;
-  ko: string;
-  ja: string;
-  zh: string;
   cn: string;
+  de: string;
+  en: string;
+  es: string;
+  fr: string;
+  it: string;
+  ja: string;
+  ko: string;
+  zh: string;
 };
 
 export type PkmnData = {
   error: unknown;
   isLoaded: boolean;
   namings: Record<string, string> | null;
-  suffixNamings: Record<string, string> | null;
   pokemon: PokemonInfo[] | null;
-  spriteCycles: Record<string, string[]> | null;
-  sprites: Record<string, string> | null;
   shinies: Record<string, string> | null;
   silhouettes: Record<string, string> | null;
+  spriteCycles: Record<string, string[]> | null;
+  sprites: Record<string, string> | null;
+  suffixNamings: Record<string, string> | null;
   translations: Record<string, Translations> | null;
 };
 
@@ -190,13 +192,15 @@ export type PokemonProgress = {
 };
 
 export type SaveData = {
+  currentType: Type | null;
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;
-  mode: Mode;
-
   languages: Language[];
-
+  mode: Mode;
+  pokemonProgress: PokemonProgress;
+  timer: TimerState;
+  version: number;
   withCycleSprites: boolean;
   withShadowHelper: boolean;
   withShadows: boolean;
@@ -204,13 +208,6 @@ export type SaveData = {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
-
-  currentType: Type | null;
-
-  timer: TimerState;
-
-  pokemonProgress: PokemonProgress;
-  version: number;
 };
 
 export type MessageType = 'success' | 'error' | 'info' | 'warning';
