@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import AutoPauseToggle from '@/components/game/settings/AutoPauseToggle.vue';
 import CycleSpritesToggle from '@/components/game/settings/CycleSpritesToggle.vue';
 import GameAbort from '@/components/game/settings/GameAbort.vue';
 import GameModeSelection from '@/components/game/settings/GameModeSelection.vue';
 import LanguagesSelection from '@/components/game/settings/LanguagesSelection.vue';
 import ModeSelection from '@/components/game/settings/ModeSelection.vue';
+import MultiplayerInvite from '@/components/game/settings/MultiplayerInvite.vue';
 import ShadowHotkeyToggle from '@/components/game/settings/ShadowHotkeyToggle.vue';
 import ShadowsToggle from '@/components/game/settings/ShadowsToggle.vue';
 import ShinyToggle from '@/components/game/settings/ShinyToggle.vue';
@@ -11,7 +13,6 @@ import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
-import MultiplayerInvite from '@/components/game/settings/MultiplayerInvite.vue';
 </script>
 
 <template class="root">
@@ -39,6 +40,8 @@ import MultiplayerInvite from '@/components/game/settings/MultiplayerInvite.vue'
     <CycleSpritesToggle />
 
     <SoundToggle />
+
+    <AutoPauseToggle />
   </div>
 
   <div class="selection-row">

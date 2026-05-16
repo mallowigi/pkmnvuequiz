@@ -1,10 +1,11 @@
-import { reactive } from 'vue';
 import { defineStore, acceptHMRUpdate } from 'pinia';
+import { reactive } from 'vue';
 
 import type { State, GameMode, Mode } from '@/types';
 
 export const useState = defineStore('state', () => {
   const state = reactive<State>({
+    autoPause: false,
     gameMode: null,
     isDark: false,
     mode: 'normal',
@@ -61,6 +62,10 @@ export const useState = defineStore('state', () => {
     state.withSound = withSound;
   };
 
+  const setAutoPause = (autoPause: boolean) => {
+    state.autoPause = autoPause;
+  };
+
   const setState = (newState: Partial<State>) => {
     Object.assign(state, newState);
   };
@@ -77,6 +82,7 @@ export const useState = defineStore('state', () => {
 
   return {
     resetState,
+    setAutoPause,
     setCycleSprites,
     setDarkMode,
     setGameMode,

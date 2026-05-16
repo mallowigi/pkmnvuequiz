@@ -2,7 +2,9 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useState } from '@/stores/useState.ts';
 
+const { state } = useState();
 const { timerState } = useTimer();
 const { flowState, pauseGame } = useGameFlow();
 
@@ -48,7 +50,9 @@ let visibilityChangeListener = () => {
 
 let onBlurListener = () => {
   stopInterval();
-  pauseGame();
+  if (state.autoPause) {
+    pauseGame();
+  }
 };
 
 onMounted(() => {
