@@ -21,6 +21,13 @@ type SpriteData = {
   spriteCycle: readonly string[];
 };
 
+type DisplayedSprite = {
+  image: string;
+  key: string;
+  kind: 'found' | 'shadowed' | 'unknown';
+  title: string | null;
+};
+
 const props = defineProps<Props>();
 
 const spriteData = computed<SpriteData>(() => {
@@ -32,6 +39,44 @@ const spriteData = computed<SpriteData>(() => {
     spriteCycle: spriteCycles?.[props.pokemon.id] ?? [],
   };
 });
+
+const displayedSprite = computed<DisplayedSprite>(() => {
+  if (props.status.isFound) {
+    if (spriteData.value.shiny && state.withShinies) {
+      return {
+        image: spriteData.value.shiny,
+        key: 'found-shiny',
+        kind: 'found',
+        title: capitalize(props.pokemon.baseName),
+      };
+    }
+
+    if (spriteData.value.sprite) {
+      return {
+        image: spriteData.value.sprite,
+        key: 'found-default',
+        kind: 'found',
+        title: capitalize(props.pokemon.baseName),
+      };
+    }
+  }
+
+  if (props.status.isShadowed && spriteData.value.silhouette) {
+    return {
+      image: spriteData.value.silhouette,
+      key: 'shadowed',
+      kind: 'shadowed',
+      title: "Who's that Pokemon?",
+    };
+  }
+
+  return {
+    image: unknownSprite.value,
+    key: 'unknown',
+    kind: 'unknown',
+    title: null,
+  };
+});
 </script>
 
 <template>
@@ -39,41 +84,12 @@ const spriteData = computed<SpriteData>(() => {
     class="container"
     :class="{ full: state.gameMode === 'full' }"
   >
-    <div v-if="props.status.isFound">
-      <div
-        v-if="spriteData.shiny && state.withShinies"
-        class="sprite"
-        :title="capitalize(props.pokemon.baseName)"
-        :style="{ '--bg-img': `url(${spriteData.shiny})` }"
-      />
-
-      <div
-        v-else-if="spriteData.sprite"
-        class="sprite"
-        :title="capitalize(props.pokemon.baseName)"
-        :style="{ '--bg-img': `url(${spriteData.sprite})` }"
-      />
-    </div>
-
-    <div v-else-if="props.status.isShadowed">
-      <!-- TODO -->
-      <!--<CyclingSprite-->
-      <!--  v-if="spriteData.spriteCycle.length"-->
-      <!--  :sprites="spriteData.spriteCycle"-->
-      <!--/>-->
-
-      <div
-        v-if="spriteData.silhouette"
-        class="sprite"
-        title="Who's that Pokémon?"
-        :style="{ '--bg-img': `url(${spriteData.silhouette})` }"
-      />
-    </div>
-
     <div
-      v-else
-      class="sprite unknown"
-      :style="{ '--bg-img': `url(${unknownSprite})` }"
+      :key="displayedSprite.key"
+      class="sprite"
+      :class="{ unknown: displayedSprite.kind === 'unknown' }"
+      :title="displayedSprite.title ?? undefined"
+      :style="{ '--bg-img': `url(${displayedSprite.image})` }"
     />
   </section>
 </template>
@@ -84,7 +100,7 @@ const spriteData = computed<SpriteData>(() => {
     transform: scale(1);
   }
   to {
-    transform: scale(1.3); /* or whatever effect */
+    transform: scale(1.3);
   }
 }
 
@@ -98,6 +114,7 @@ const spriteData = computed<SpriteData>(() => {
 }
 
 .sprite {
+  --bg-img: none;
   width: 28px;
   height: 32px;
   overflow: visible;
