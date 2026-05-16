@@ -257,6 +257,15 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
+  const showRemainingShadows = () => {
+    for (const pokemonStatus of pokemonState.pokemonStatuses.values()) {
+      if (!pokemonStatus.isShadowed) {
+        pokemonStatus.isShadowed = true;
+        pokemonStatus.lastShadowedAt = Date.now();
+      }
+    }
+  };
+
   const resetPokemonState = () => {
     pokemonState.lastPokemon = null;
     pokemonState.pokemonStatuses.forEach((status) => {
@@ -465,6 +474,7 @@ export const usePokemons = defineStore('pokemons', () => {
     pokemonState,
     resetPokemonState,
     setLastPokemon,
+    showRemainingShadows,
   };
 });
 

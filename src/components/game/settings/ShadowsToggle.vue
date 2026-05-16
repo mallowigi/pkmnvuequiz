@@ -3,20 +3,19 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 
 const { state, toggleShadows } = useState();
 const { showUserMessage } = useMessages();
 const { setDialog } = useDialogs();
+const { showRemainingShadows } = usePokemons();
 
 const toggle = () => {
   if (!state.withShadows) {
     setDialog('shadows', () => {
       toggleShadows();
-      showUserMessage(`Shadows ${state.withShadows ? 'enabled' : 'disabled'}`);
+      showRemainingShadows();
     });
-  } else {
-    toggleShadows();
-    showUserMessage(`Shadows ${state.withShadows ? 'enabled' : 'disabled'}`);
   }
 };
 </script>
