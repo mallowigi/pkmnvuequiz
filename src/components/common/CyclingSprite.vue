@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
+import { usePkmnData } from '@/stores/usePkmnStore.ts';
+
 const props = defineProps<{
-  sprites: string[] | readonly string[];
+  sprites: readonly string[];
   start?: number;
 }>();
 
+const { data } = usePkmnData();
+
+const sprites = computed(() => {
+  if (!data.sprites) {
+    return [];
+  }
+  return props.sprites.map((sprite) => data.sprites![sprite]);
+});
+
 // Keep state of the cycle
 const currentIndex = ref(props.start ?? 0);
-const sprite = computed(() => props.sprites[currentIndex.value]);
 
 // Run interval
 let interval: ReturnType<typeof setInterval> | null = null;
@@ -45,25 +55,34 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <img
-    alt="Sprite"
+  <div
     :hidden="sprites.length === 0"
-    :src="sprite"
-    class="sprite cropped"
+    class="sprite"
+    :style="{ '--bg-img': `url(${sprites[currentIndex]})` }"
   />
 </template>
 
 <style scoped>
 .sprite {
-  margin: -3px -10px 0 0;
-  padding-right: 2px;
-  float: right;
-}
+  --bg-img: none;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+  position: relative;
 
-.cropped {
-  width: 30px;
-  height: 30px;
-  object-fit: none;
-  object-position: 50% 100%;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    background-image: var(--bg-img);
+    background-size: auto;
+    background-position: bottom center;
+    pointer-events: none;
+    z-index: 10;
+  }
 }
 </style>

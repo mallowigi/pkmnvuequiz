@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed, capitalize } from 'vue';
+
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
+import CyclingSprite from '@/components/common/CyclingSprite.vue';
 
 const { state } = useState();
 const { data } = usePkmnData();
@@ -24,8 +26,9 @@ type SpriteData = {
 
 type DisplayedSprite = {
   image: string;
+  sprites?: readonly string[];
   key: string;
-  kind: 'found' | 'shadowed' | 'unknown';
+  kind: 'found' | 'shadowed' | 'cycle' | 'unknown';
   title: string | null;
 };
 
@@ -43,6 +46,16 @@ const spriteData = computed<SpriteData>(() => {
 
 const displayedSprite = computed<DisplayedSprite>(() => {
   if (props.status.isFound) {
+    if (spriteData.value.spriteCycle.length) {
+      return {
+        image: spriteData.value.spriteCycle[0],
+        key: 'found-cycle',
+        kind: 'cycle',
+        sprites: spriteData.value.spriteCycle,
+        title: capitalize(props.pokemon.baseName),
+      };
+    }
+
     if (spriteData.value.shiny && state.withShinies) {
       return {
         image: spriteData.value.shiny,
@@ -90,9 +103,15 @@ const displayedSprite = computed<DisplayedSprite>(() => {
       <div
         :key="displayedSprite.key"
         class="sprite"
-        :class="{ unknown: displayedSprite.kind === 'unknown' }"
+        v-if="displayedSprite.kind !== 'cycle'"
+        :class="displayedSprite.kind"
         :title="displayedSprite.title ?? undefined"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+      />
+
+      <CyclingSprite
+        :sprites="displayedSprite.sprites"
+        v-else-if="displayedSprite.sprites"
       />
     </Transition>
   </section>
@@ -123,7 +142,9 @@ const displayedSprite = computed<DisplayedSprite>(() => {
 
 .sprite-swap-enter-active,
 .sprite-swap-leave-active {
-  transition: transform 220ms ease, opacity 220ms ease;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
   transition-delay: var(--sprite-delay, 0ms);
 }
 

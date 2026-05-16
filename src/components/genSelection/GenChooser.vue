@@ -20,7 +20,7 @@ const setFullQuiz = () => {
   clearCurrentGen();
   clearCurrentType();
   resetPokemonState();
-  startGame(true);
+  startGame();
 };
 
 const setGen = (gen: Gen) => {
@@ -28,7 +28,7 @@ const setGen = (gen: Gen) => {
   clearCurrentType();
   setCurrentGen(gen);
   resetPokemonState();
-  startGame(true);
+  startGame();
 };
 
 const setType = () => {
