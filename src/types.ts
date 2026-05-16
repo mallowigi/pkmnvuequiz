@@ -105,6 +105,7 @@ export type PokemonInfo = {
   secondaryType: Type | null;
   box: RegionBox;
   specialType: SpecialType;
+  sprites?: string[];
 };
 
 export type State = {

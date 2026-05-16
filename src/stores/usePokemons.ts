@@ -156,11 +156,15 @@ export const usePokemons = defineStore('pokemons', () => {
       throw new Error('Pokemon data or translations not loaded');
     }
 
-    data.pokemon.forEach((pok) => {
-      const pokemonKey = normalizeName(pok.baseName);
+    data.pokemon.forEach((pokemon) => {
+      const pokemonKey = normalizeName(pokemon.baseName);
       if (!pokemonKey) return;
 
-      upsert(pokemonMaps.all, pokemonKey, pok);
+      if (data.spriteCycles?.[pokemonKey]) {
+        pokemon.sprites = data.spriteCycles[pokemonKey];
+      }
+
+      upsert(pokemonMaps.all, pokemonKey, pokemon);
 
       if (!pokemonState.pokemonStatuses.has(pokemonKey)) {
         pokemonState.pokemonStatuses.set(pokemonKey, {
@@ -171,23 +175,23 @@ export const usePokemons = defineStore('pokemons', () => {
         });
       }
 
-      if (pok.box) {
-        upsert(pokemonMaps.boxes[pok.box], pokemonKey, pok);
+      if (pokemon.box) {
+        upsert(pokemonMaps.boxes[pokemon.box], pokemonKey, pokemon);
       }
 
-      if (pok.specialType) {
-        upsert(pokemonMaps.special[pok.specialType], pokemonKey, pok);
-        upsert(pokemonMaps.allSpecials, pokemonKey, pok);
+      if (pokemon.specialType) {
+        upsert(pokemonMaps.special[pokemon.specialType], pokemonKey, pokemon);
+        upsert(pokemonMaps.allSpecials, pokemonKey, pokemon);
       } else {
-        upsert(pokemonMaps.special.no, pokemonKey, pok);
+        upsert(pokemonMaps.special.no, pokemonKey, pokemon);
       }
 
-      if (pok.primaryType) {
-        upsert(pokemonMaps.types[pok.primaryType], pokemonKey, pok);
+      if (pokemon.primaryType) {
+        upsert(pokemonMaps.types[pokemon.primaryType], pokemonKey, pokemon);
       }
 
-      if (pok.secondaryType) {
-        upsert(pokemonMaps.types[pok.secondaryType], pokemonKey, pok);
+      if (pokemon.secondaryType) {
+        upsert(pokemonMaps.types[pokemon.secondaryType], pokemonKey, pokemon);
       }
 
       for (const lang in pokemonMaps.languages) {
@@ -196,7 +200,7 @@ export const usePokemons = defineStore('pokemons', () => {
         if (translation) {
           const translationKey = normalizeName(translation);
           if (translationKey) {
-            upsert(pokemonMaps.languages[lang as Language], translationKey, pok);
+            upsert(pokemonMaps.languages[lang as Language], translationKey, pokemon);
           }
         }
       }
