@@ -4,9 +4,9 @@ import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.js';
 import { scrollToTop } from '@/utils/utils.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 
 const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();

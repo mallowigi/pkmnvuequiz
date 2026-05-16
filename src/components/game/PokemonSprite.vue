@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed, capitalize } from 'vue';
+
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
 
 const { state } = useState();
+const { flowState } = useGameFlow();
 const { data } = usePkmnData();
 const { unknownSprite } = useUnknownSprite();
 
@@ -81,11 +84,13 @@ const displayedSprite = computed<DisplayedSprite>(() => {
 
 const spriteDelay = computed<string>(() => {
   const rawDelay = (props.index ?? 0) * 20;
-  if (displayedSprite.value.kind === 'shadowed') {
+  // Make staggering animation when we need to display all found or all shadows
+  if (state.withShadows || flowState.isEnded) {
     return `${rawDelay}ms`;
   }
 
-  return `${Math.min(rawDelay, 100)}ms`;
+  // No delay otherwise
+  return `10ms`;
 });
 </script>
 

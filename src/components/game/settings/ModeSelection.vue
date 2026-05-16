@@ -3,9 +3,9 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow.js';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.js';
 import type { Mode } from '@/types.js';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { scrollToTop } from '@/utils/utils.ts';
 
 const { state, setMode } = useState();

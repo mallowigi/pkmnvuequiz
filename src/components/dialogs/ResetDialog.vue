@@ -2,11 +2,11 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useCurrentGen } from '@/stores/useCurrentGen';
+import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
-import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { resetFlowState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();

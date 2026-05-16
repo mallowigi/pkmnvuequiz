@@ -1,5 +1,5 @@
-import { reactive } from 'vue';
 import { defineStore, acceptHMRUpdate } from 'pinia';
+import { reactive } from 'vue';
 
 import type { State, GameMode, Mode } from '@/types';
 
@@ -41,8 +41,8 @@ export const useState = defineStore('state', () => {
     state.withSpelling = !state.withSpelling;
   };
 
-  const toggleShadows = () => {
-    state.withShadows = !state.withShadows;
+  const displayShadows = () => {
+    state.withShadows = true;
   };
 
   const toggleShadowHelper = () => {
@@ -76,6 +76,7 @@ export const useState = defineStore('state', () => {
   };
 
   return {
+    displayShadows,
     resetState,
     setCycleSprites,
     setDarkMode,
@@ -88,7 +89,6 @@ export const useState = defineStore('state', () => {
     state,
     toggleDarkMode,
     toggleShadowHelper,
-    toggleShadows,
     toggleShowShinies,
     toggleSpelling,
   };
