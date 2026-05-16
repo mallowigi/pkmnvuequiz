@@ -12,6 +12,7 @@ const { unknownSprite } = useUnknownSprite();
 type Props = {
   pokemon: PokemonInfo;
   status: PokemonStatus;
+  index?: number;
 };
 
 type SpriteData = {
@@ -83,14 +84,17 @@ const displayedSprite = computed<DisplayedSprite>(() => {
   <section
     class="container"
     :class="{ full: state.gameMode === 'full' }"
+    :style="{ '--sprite-delay': `${(props.index ?? 0) * 20}ms` }"
   >
-    <div
-      :key="displayedSprite.key"
-      class="sprite"
-      :class="{ unknown: displayedSprite.kind === 'unknown' }"
-      :title="displayedSprite.title ?? undefined"
-      :style="{ '--bg-img': `url(${displayedSprite.image})` }"
-    />
+    <Transition name="sprite-swap">
+      <div
+        :key="displayedSprite.key"
+        class="sprite"
+        :class="{ unknown: displayedSprite.kind === 'unknown' }"
+        :title="displayedSprite.title ?? undefined"
+        :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+      />
+    </Transition>
   </section>
 </template>
 
@@ -113,6 +117,22 @@ const displayedSprite = computed<DisplayedSprite>(() => {
   }
 }
 
+.container {
+  position: relative;
+}
+
+.sprite-swap-enter-active,
+.sprite-swap-leave-active {
+  transition: transform 220ms ease, opacity 220ms ease;
+  transition-delay: var(--sprite-delay, 0ms);
+}
+
+.sprite-swap-enter-from,
+.sprite-swap-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
 .sprite {
   --bg-img: none;
   width: 28px;
@@ -120,6 +140,10 @@ const displayedSprite = computed<DisplayedSprite>(() => {
   overflow: visible;
   position: relative;
   animation: hover-out 0.5s ease forwards;
+
+  &.sprite-swap-leave-active {
+    position: absolute;
+  }
 
   &:hover {
     animation: hover-pop 0.5s ease forwards;

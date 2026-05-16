@@ -59,6 +59,11 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
 
   return result;
 };
+
+const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
+  const pokemonByName = getCurrentGamePokemon(boxId);
+  return Array.from(pokemonByName.values()).flat();
+};
 </script>
 
 <template>
@@ -73,19 +78,15 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
     >
       <span class="region-name">{{ box.name }}</span>
 
-      <div class="sprite-container">
-        <template
-          v-for="[, pokemons] in getCurrentGamePokemon(box.id)"
-          :key="pokemons[0].id"
-        >
-          <PokemonSprite
-            v-for="pokemon in pokemons"
-            :key="pokemon.id"
-            :pokemon="pokemon"
-            :status="getStatus(pokemon)"
-          />
-        </template>
-      </div>
+      <template class="sprite-container">
+        <PokemonSprite
+          v-for="(pokemon, index) in getBoxPokemons(box.id)"
+          :key="pokemon.id"
+          :pokemon="pokemon"
+          :status="getStatus(pokemon)"
+          :index="index"
+        />
+      </template>
     </RoundedBox>
   </div>
 </template>
@@ -132,5 +133,33 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
   width: 100%;
   height: 100%;
   line-height: 26px;
+}
+
+@keyframes hover-pop {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes hover-out {
+  from {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sprite-container > * {
+  opacity: 0;
+  animation: hover-out 0.5s ease forwards;
+  animation-delay: calc((sibling-index() - 1) * 10ms);
 }
 </style>
