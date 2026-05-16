@@ -2,6 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
+import { normalizeName } from '@/utils/utils.ts';
 
 const props = defineProps<{
   sprites: readonly string[];
@@ -14,13 +15,11 @@ const sprites = computed(() => {
   if (!data.sprites) {
     return [];
   }
-  return props.sprites.map((sprite) => data.sprites![sprite]);
+  return props.sprites.map((sprite) => data.sprites![normalizeName(sprite)]);
 });
 
-// Keep state of the cycle
 const currentIndex = ref(props.start ?? 0);
 
-// Run interval
 let interval: ReturnType<typeof setInterval> | null = null;
 
 const startCycle = () => {
@@ -33,7 +32,6 @@ const startCycle = () => {
   }, 3000);
 };
 
-// Watch until the data is available and restart the interval
 watch(
   () => props.sprites,
   () => {
