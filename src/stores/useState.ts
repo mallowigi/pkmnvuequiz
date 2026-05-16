@@ -46,6 +46,10 @@ export const useState = defineStore('state', () => {
     state.withShadows = true;
   };
 
+  const hideShadows = () => {
+    state.withShadows = false;
+  };
+
   const toggleShadowHelper = () => {
     state.withShadowHelper = !state.withShadowHelper;
   };
@@ -82,6 +86,7 @@ export const useState = defineStore('state', () => {
 
   return {
     displayShadows,
+    hideShadows,
     resetState,
     setAutoPause,
     setCycleSprites,

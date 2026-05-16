@@ -96,7 +96,7 @@ export const usePokemons = defineStore('pokemons', () => {
     lastPokemon: null,
     pokemonStatuses: new Map<string, PokemonStatus>(),
   });
-  const { state } = useState();
+  const { state, hideShadows } = useState();
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
   const { languagesState } = useLanguages();
@@ -287,6 +287,8 @@ export const usePokemons = defineStore('pokemons', () => {
       status.isShadowed = false;
       status.lastShadowedAt = null;
     });
+
+    hideShadows();
   };
 
   const getGenPokemon = (boxId: RegionBox): Map<string, PokemonInfo[]> => {
