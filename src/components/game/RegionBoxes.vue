@@ -173,4 +173,8 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   animation: hover-out 0.5s ease forwards;
   animation-delay: calc((sibling-index() - 1) * 10ms);
 }
+
+.sprite-container > *:has(.shadowed) {
+  filter: brightness(calc(0.9 + 0.2 * cos(sibling-index() * 1.5)));
+}
 </style>
