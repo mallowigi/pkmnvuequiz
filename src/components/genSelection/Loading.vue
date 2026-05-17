@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { usePkmnData } from '@/stores/usePkmnStore';
 import { onMounted } from 'vue';
+import { usePkmnData } from '@/stores/usePkmnStore';
 
 const { data, loadData } = usePkmnData();
 
 onMounted(() => {
-  loadData();
+  setTimeout(() => {
+    loadData();
+  }, 500);
 });
 </script>
 

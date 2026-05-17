@@ -1,7 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  mode?: 'in-out' | 'out-in';
+}>();
+</script>
 
 <template>
-  <Transition appear>
+  <Transition
+    appear
+    :mode="mode"
+  >
     <slot></slot>
   </Transition>
 </template>

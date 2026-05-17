@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import FadeTransition from '@/components/common/FadeTransition.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
+import Loading from '@/components/genSelection/Loading.vue';
 import TypeChooser from '@/components/genSelection/TypeChooser.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import FadeTransition from '@/components/common/FadeTransition.vue';
-import Loading from '@/components/genSelection/Loading.vue';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 
 const { flowState, setGameSelectionState } = useGameFlow();
@@ -34,15 +34,17 @@ const close = () => {
           />
         </div>
 
-        <!-- Loader -->
-        <Loading v-if="!data.isLoaded" />
+        <FadeTransition mode="out-in">
+          <!-- Loader -->
+          <Loading v-if="!data.isLoaded" />
 
-        <!-- Game selection -->
-        <div>
-          <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
+          <!-- Game selection -->
+          <div v-else>
+            <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 
-          <TypeChooser v-if="flowState.gameSelectionState === 'types'" />
-        </div>
+            <TypeChooser v-if="flowState.gameSelectionState === 'types'" />
+          </div>
+        </FadeTransition>
       </div>
     </FadeTransition>
   </Overlay>
