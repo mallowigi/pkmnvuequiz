@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
 import Overlay from '@/components/common/Overlay.vue';
 import { donors } from '@/data/donors';
 import { useCurrentGen } from '@/stores/useCurrentGen';
@@ -8,7 +10,6 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
-import { computed } from 'vue';
 
 const { setGameOver } = useState();
 const { setCurrentGen, currentGenState } = useCurrentGen();
@@ -118,7 +119,7 @@ const elapsed = computed(() => {
   text-align: center;
   width: 330px;
   height: 100%;
-  color: white;
+  color: var(--type-fg-color, var(--text));
   padding: 20px 10px;
   box-sizing: border-box;
   background-color: var(--type-bg-color, var(--primary));

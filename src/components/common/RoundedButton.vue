@@ -37,11 +37,13 @@ const props = defineProps<Props>();
   &.primary {
     background: var(--type-bg-color, var(--primary));
     border: 2px solid var(--type-btn-color);
+    color: var(--type-fg-color, var(--text));
   }
 
   &.selected {
     background: var(--type-btn-color, var(--darkPrimary));
     border: 2px solid var(--type-btn-color, var(--darkPrimary));
+    color: var(--type-fg-color, var(--text));
   }
 
   &:hover {

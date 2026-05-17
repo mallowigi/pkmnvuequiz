@@ -120,6 +120,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 }
 
 .region-name {
+  color: var(--text);
   padding-left: 10px;
 }
 

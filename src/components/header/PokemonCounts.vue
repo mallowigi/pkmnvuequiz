@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
 import { usePokemons } from '@/stores/usePokemons.ts';
 
 const pokemonStore = usePokemons();
@@ -57,8 +58,8 @@ const total = computed(() => {
 }
 
 .box {
-  background: var(--type-bg-color);
-  color: white;
+  background: var(--type-bg-color, var(--primary));
+  color: var(--type-fg-color, var(--text));
   min-height: 30px;
   line-height: 30px;
   padding: 10px 18px;

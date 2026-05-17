@@ -100,7 +100,7 @@ const setType = () => {
 
 .cell {
   background: var(--primary);
-  color: white;
+  color: var(--type-fg-color, var(--text));
   padding: 16px 20px;
   text-align: center;
   text-decoration: none;

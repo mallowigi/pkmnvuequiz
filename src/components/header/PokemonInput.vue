@@ -226,8 +226,8 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
 }
 
 .box {
-  background: var(--type-bg-color);
-  color: white;
+  background: var(--type-bg-color, var(--primary));
+  color: var(--type-fg-color, var(--text));
   min-height: 30px;
   line-height: 30px;
   padding: 10px 18px;

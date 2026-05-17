@@ -45,7 +45,7 @@
   font-size: 20px;
   z-index: 10;
   padding: 4px 0 10px 40px;
-  border-top: 3px dotted var(--type-bg-color);
+  border-top: 3px dotted var(--type-bg-color, var(--primary));
   color: var(--text);
 }
 </style>

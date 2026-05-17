@@ -11,6 +11,9 @@ const { flowState, setGameSelectionState } = useGameFlow();
 const { data } = usePkmnData();
 
 const close = () => {
+  if (!flowState.isStarted) {
+    return;
+  }
   setGameSelectionState(null);
 };
 </script>

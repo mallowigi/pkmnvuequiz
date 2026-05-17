@@ -16,7 +16,6 @@ const currentType = computed(() => {
   <div
     class="background"
     :class="{ typed: currentType, dark: state.isDark }"
-    style="background-color: var(--type-bg-color)"
   >
     <Transition
       name="fade"
@@ -62,6 +61,7 @@ const currentType = computed(() => {
   background-size: cover;
   background-attachment: fixed;
   background-blend-mode: hard-light;
+  background-color: var(--type-bg-color, var(--primary));
   position: fixed;
   top: 0;
   left: 0;

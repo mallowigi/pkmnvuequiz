@@ -100,7 +100,6 @@ onMounted(() => {
   --type-dark-color: var(--darkPrimary);
   --type-inline-color: inherit;
   --type-fg-color: var(--text);
-  --type-bg-color: var(--primary);
 
   --max-width: 66%;
   --num-cols: 5;
@@ -109,10 +108,15 @@ onMounted(() => {
 }
 
 .dark {
-  --text: #eee;
+  --text: #fff;
   --text-inverted: #333;
   --button: #111;
   --button-hover: #444444;
+
+  --type-btn-color: var(--primary);
+  --type-dark-color: var(--darkPrimary);
+  --type-inline-color: inherit;
+  --type-fg-color: var(--text);
 }
 </style>
 
