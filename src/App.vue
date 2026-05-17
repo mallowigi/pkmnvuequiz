@@ -105,6 +105,8 @@ onMounted(() => {
   --num-cols: 5;
   --sprite-width: 64px;
   --text-padding: 10px;
+
+  --glow: #333;
 }
 
 .dark {
@@ -117,6 +119,8 @@ onMounted(() => {
   --type-dark-color: var(--darkPrimary);
   --type-inline-color: inherit;
   --type-fg-color: var(--text);
+
+  --glow: black;
 }
 </style>
 

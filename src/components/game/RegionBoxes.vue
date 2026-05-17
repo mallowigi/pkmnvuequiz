@@ -117,6 +117,16 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   max-height: inherit;
   margin: 10px;
   border: none;
+
+  transform: translate3d(0, 0, 0.1px);
+  will-change: transform, visibility;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.2s ease-in-out;
+  box-shadow: 0px 10px 20px -5px var(--glow);
+
+  &:hover {
+    --glow: var(--type-btn-color);
+  }
 }
 
 .region-name {
