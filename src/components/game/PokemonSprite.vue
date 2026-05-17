@@ -117,7 +117,7 @@ const spriteDelay = computed<string>(() => {
         :key="displayedSprite.key"
         class="sprite"
         v-if="displayedSprite.kind !== 'cycle'"
-        :class="displayedSprite.kind"
+        :class="[displayedSprite.kind, props.status.isMissed && 'missed']"
         :title="displayedSprite.title ?? undefined"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
       />
@@ -181,6 +181,10 @@ const spriteDelay = computed<string>(() => {
 
   &:hover {
     animation: hover-pop 0.5s ease forwards;
+  }
+
+  &.missed {
+    opacity: 0.5;
   }
 
   &.unknown {

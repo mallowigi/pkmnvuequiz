@@ -129,6 +129,7 @@ export type LanguagesState = {
 export type PokemonStatus = {
   isFound: boolean;
   isShadowed: boolean;
+  isMissed: boolean;
   lastFoundAt: number | null;
   lastShadowedAt: number | null;
 };
@@ -153,6 +154,7 @@ export type GameFlowState = {
   isEnded: boolean;
   isPaused: boolean;
   isStarted: boolean;
+  isGivenUp: boolean;
 };
 
 export type Translations = {

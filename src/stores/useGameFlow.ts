@@ -7,13 +7,16 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const flowState = reactive<GameFlowState>({
     gameSelectionState: 'gen',
     isEnded: false,
+    isGivenUp: false,
     isPaused: false,
     isStarted: false,
   });
 
   const startGame = () => {
     flowState.isStarted = true;
+    flowState.isEnded = false;
     flowState.gameSelectionState = null;
+    flowState.isGivenUp = false;
   };
 
   const pauseGame = () => {
@@ -26,6 +29,13 @@ export const useGameFlow = defineStore('gameFlow', () => {
 
   const endGame = () => {
     flowState.isEnded = true;
+    flowState.isStarted = false;
+    flowState.gameSelectionState = null;
+    flowState.isGivenUp = false;
+  };
+
+  const giveUp = () => {
+    flowState.isGivenUp = true;
   };
 
   const setGameSelectionState = (state: GameSelectionState) => {
@@ -48,6 +58,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   return {
     endGame,
     flowState,
+    giveUp,
     pauseGame,
     resetFlowState,
     resumeGame,

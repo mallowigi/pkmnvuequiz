@@ -138,6 +138,19 @@ export const usePokemons = defineStore('pokemons', () => {
     return result;
   });
 
+  const missed = computed(() => {
+    const currentGameModePokemon = getCurrentGameModePokemon();
+    const result = new Set<PokemonInfo>();
+
+    for (const [name, pokemonInfo] of currentGameModePokemon) {
+      const status = pokemonState.pokemonStatuses.get(name);
+      if (status && status.isMissed) {
+        result.add(pokemonInfo[0]);
+      }
+    }
+    return result;
+  });
+
   const remainingHead = computed(() => {
     const currentGameModePokemon = getCurrentGameModePokemon();
     const remainingArray = Array.from(remaining.value);
@@ -169,6 +182,7 @@ export const usePokemons = defineStore('pokemons', () => {
       if (!pokemonState.pokemonStatuses.has(pokemonKey)) {
         pokemonState.pokemonStatuses.set(pokemonKey, {
           isFound: false,
+          isMissed: false,
           isShadowed: false,
           lastFoundAt: null,
           lastShadowedAt: null,
@@ -273,6 +287,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const showRemaining = () => {
     for (const pokemonStatus of pokemonState.pokemonStatuses.values()) {
       if (!pokemonStatus.isFound) {
+        pokemonStatus.isMissed = true;
         pokemonStatus.isFound = true;
         pokemonStatus.lastFoundAt = Date.now();
       }
@@ -484,6 +499,7 @@ export const usePokemons = defineStore('pokemons', () => {
     isInRemaining,
     isPokemonInCurrentGameMode,
     isWrongOrder,
+    missed,
     numFound,
     numShadows,
     pokemonState,

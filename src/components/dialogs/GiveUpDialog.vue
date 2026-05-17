@@ -5,7 +5,7 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 
-const { endGame } = useGameFlow();
+const { giveUp } = useGameFlow();
 const { dialogs } = useDialogs();
 const { showRemaining } = usePokemons();
 
@@ -15,9 +15,9 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const giveUp = () => {
+const promptGiveUp = () => {
   props.toggleFunction();
-  endGame();
+  giveUp();
   showRemaining();
 
   if (dialogs.callback) {
@@ -40,7 +40,7 @@ const cancel = () => {
       <p class="desc">Are you sure you want to give up?</p>
 
       <RoundedButton
-        @click.stop="giveUp"
+        @click.stop="promptGiveUp"
         primary
       >
         Give Up
