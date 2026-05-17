@@ -2,6 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
+import { useState } from '@/stores/useState.ts';
 import { normalizeName } from '@/utils/utils.ts';
 
 const props = defineProps<{
@@ -10,6 +11,7 @@ const props = defineProps<{
 }>();
 
 const { data } = usePkmnData();
+const { state } = useState();
 
 const sprites = computed(() => {
   if (!data.sprites) {
@@ -23,7 +25,7 @@ const currentIndex = ref(props.start ?? 0);
 let interval: ReturnType<typeof setInterval> | null = null;
 
 const startCycle = () => {
-  if (interval || props.sprites.length === 0) {
+  if (interval || props.sprites.length === 0 || !state.withCycleSprites) {
     return;
   }
 
@@ -33,7 +35,7 @@ const startCycle = () => {
 };
 
 watch(
-  () => props.sprites,
+  () => [props.sprites, state.withCycleSprites],
   () => {
     startCycle();
   },
