@@ -94,12 +94,12 @@ class Quiz {
   }
 
   loadData(json, languages, onReset) {
-    this.encodedImages = json['encoded_images'];
+    this.encodedImages = json.encoded_images;
     this.translations = json.translations;
-    this.suffixes = json['suffix_namings'];
-    this.namings = json['namings'];
+    this.suffixes = json.suffix_namings;
+    this.namings = json.namings;
 
-    const pokemon = json['pokemon'];
+    const pokemon = json.pokemon;
 
     for (let i = 0; i < pokemon.length; i++) {
       const poke = new Pokemon(pokemon[i]);
@@ -801,187 +801,180 @@ class Quiz {
     this.currentLang = lang;
   }
 
-  ['updateLanguages'](_0x888110) {
-    const _0x32c7ec = {
-      kJyCw: function (_0x1323b0, _0x552d1b) {
-        return _0x1323b0 < _0x552d1b;
-      },
-    };
-    ((this.enabledLanguages = _0x888110),
-      (this['currentLangsNames'] = new Set()),
-      (this['nameDict'] = {}),
-      (this['nameArr'] = []));
-    for (let _0x418ad7 of this.currentIds)
-      for (let _0x459452 = 0; _0x32c7ec['kJyCw'](_0x459452, _0x888110.length); _0x459452++) {
-        let _0x47a8d4 = _0x888110[_0x459452];
-        this['currentLangsNames'].add(
-          standardizeName(this.translations[this.pokemonIdDict[_0x418ad7].baseName][_0x47a8d4]),
-        );
+  updateLanguages(languages) {
+    this.enabledLanguages = languages;
+    this.currentLangsNames = new Set();
+    this.nameDict = {};
+    this.nameArr = [];
+
+    // add lookup by translated name
+    for (let id of this.currentIds) {
+      for (let i = 0; i < languages.length; i++) {
+        let lang = languages[i];
+        this.currentLangsNames.add(standardizeName(this.translations[this.pokemonIdDict[id].baseName][lang]));
       }
-    for (let _0x2893ac = 0; _0x32c7ec['kJyCw'](_0x2893ac, this.pokemon.length); _0x2893ac++)
-      for (let _0x3ece75 = 0; _0x3ece75 < this.enabledLanguages.length; _0x3ece75++) {
-        let _0x5eeb70 = this.enabledLanguages[_0x3ece75],
-          _0x3cda60 = standardizeName(this.translations[this.pokemon[_0x2893ac].baseName][_0x5eeb70]);
-        ((this['nameDict'][_0x3cda60] = this.pokemon[_0x2893ac].id), this['nameArr'].push(_0x3cda60));
+    }
+
+    for (let i = 0; i < this.pokemon.length; i++) {
+      for (let l = 0; l < this.enabledLanguages.length; l++) {
+        let lang = this.enabledLanguages[l],
+          name = standardizeName(this.translations[this.pokemon[i].baseName][lang]);
+        this.nameDict[name] = this.pokemon[i].id;
+        this.nameArr.push(name);
       }
+    }
   }
 
-  ['setupNames']() {
-    const _0x3deb73 = {
-      EvQKH: function (_0x432463, _0x2f2db) {
-        return _0x432463(_0x2f2db);
-      },
-      LNpHb: function (_0x9f7c69, _0x196f7c) {
-        return _0x9f7c69 < _0x196f7c;
-      },
-      afCCt: 'ENG',
-    };
-    for (let _0x3ccfeb = 0; _0x3deb73['LNpHb'](_0x3ccfeb, this.pokemon.length); _0x3ccfeb++)
-      for (let _0x3144bc = 0; _0x3deb73['LNpHb'](_0x3144bc, this.allLanguages.length); _0x3144bc++) {
-        let _0x354701 = this.allLanguages[_0x3144bc];
-        _0x3deb73['EvQKH'](standardizeName, this.translations[this.pokemon[_0x3ccfeb].baseName]['ENG']) ===
-        _0x3deb73['EvQKH'](standardizeName, this.translations[this.pokemon[_0x3ccfeb].baseName][_0x354701])
-          ? (this['langDict'][
-              _0x3deb73['EvQKH'](standardizeName, this.translations[this.pokemon[_0x3ccfeb].baseName][_0x354701])
-            ] = _0x3deb73['afCCt'])
-          : (this['langDict'][standardizeName(this.translations[this.pokemon[_0x3ccfeb].baseName][_0x354701])] =
-              _0x354701);
+  setupNames() {
+    for (let i = 0; i < this.pokemon.length; i++) {
+      for (let l = 0; l < this.allLanguages.length; l++) {
+        let lang = this.allLanguages[l];
+        let translation = this.translations[this.pokemon[i].baseName];
+
+        if (standardizeName(translation['ENG']) === standardizeName(translation[lang])) {
+          this.langDict[standardizeName(translation[lang])] = 'ENG';
+        } else {
+          this.langDict[standardizeName(translation[lang])] = lang;
+        }
       }
+    }
   }
 
-  ['startMissingno']() {
-    const _0x274b76 = {
-      ACQXp: function (_0x1ebf44, _0x610cd3) {
-        return _0x1ebf44 !== _0x610cd3;
-      },
-      EeebQ: '/sprites/unknown.png',
-      LnNHZ: function (_0xfdfcb7, _0x505459) {
-        return _0xfdfcb7 != _0x505459;
-      },
-      MRNoh: function (_0x54faac, _0x4e633c, _0x52d4cc) {
-        return _0x54faac(_0x4e633c, _0x52d4cc);
-      },
-      ZdCiJ: 'none',
-      gJYYA: '/sprites/unknown-2.png',
-      qSnpZ: function (_0x3625dd, _0xca3e90) {
-        return _0x3625dd - _0xca3e90;
-      },
-      rskVE: function (_0x1d7052, _0x4c471c) {
-        return _0x1d7052 < _0x4c471c;
-      },
-      xiYTe: '/images/missingno2.png',
+  startMissingno() {
+    const ops = {
+      unknown2: '/sprites/unknown-2.png',
+      unknownPath: '/sprites/unknown.png',
     };
-    if (!this['missingnoEnabled']) {
+
+    if (!this.missingnoEnabled) {
       return;
     }
-    let _0x18dede = [];
-    for (let _0x308332 = 0; _0x274b76['rskVE'](_0x308332, this.allSprites.length); _0x308332++)
-      'none' != this.allSprites[_0x308332].style.display &&
-        _0x274b76['ZdCiJ'] != this.allSprites[_0x308332]['parentElement'].style.display &&
-        _0x274b76['LnNHZ']('none', this.allSprites[_0x308332]['parentElement']['parentElement'].style.display) &&
-        _0x18dede.push(this.allSprites[_0x308332]);
-    let _0xdd85d1,
-      _0x1ccff6 = randomIntFromInterval(0, _0x274b76['qSnpZ'](_0x18dede.length, 1)),
-      _0xd6baa1 = _0x18dede[_0x1ccff6].src,
-      _0x344b49 = randomIntFromInterval(0, 100);
-    ((_0xdd85d1 =
-      _0x344b49 < 0x46 ? '/images/missingno.png' : _0x344b49 < 0x5a ? _0x274b76['xiYTe'] : '/images/missingno3.png'),
-      (_0x18dede[_0x1ccff6].src = _0xdd85d1));
-    let _0x5a5140 = this;
+
+    let res = [];
+    for (let i = 0; i < this.allSprites.length; i++) {
+      if (
+        this.allSprites[i].style.display != 'none' &&
+        this.allSprites[i].parentElement.style.display != 'none' &&
+        this.allSprites[i].parentElement.parentElement.style.display != 'none'
+      ) {
+        res.push(this.allSprites[i]);
+      }
+    }
+
+    let img,
+      randomI = randomIntFromInterval(0, res.length - 1),
+      randomSrc = res[randomI].src,
+      rand = randomIntFromInterval(0, 100);
+
+    if (rand < 70) {
+      img = '/images/missingno.png';
+    } else if (rand < 90) {
+      img = '/images/missingno2.png';
+    } else {
+      img = '/images/missingno3.png';
+    }
+    res[randomI].src = img;
+
+    let self = this;
     setTimeout(
       () => {
-        (_0x274b76['ACQXp'](-1, _0xd6baa1['indexOf']('/unknown')) &&
-          (_0xd6baa1 = darkMode ? _0x274b76['gJYYA'] : _0x274b76['EeebQ']),
-          (_0x18dede[_0x1ccff6].src = _0xd6baa1),
-          _0x5a5140['startMissingno']());
+        if (randomSrc.indexOf('/unknown') !== -1) {
+          randomSrc = darkMode ? ops.unknown2 : ops.unknownPath;
+        }
+
+        res[randomI].src = randomSrc;
+        self.startMissingno();
       },
-      _0x274b76['MRNoh'](randomIntFromInterval, 0x12c, 0xbb8),
+      randomIntFromInterval(300, 3000),
     );
   }
 
-  ['startSpooky']() {
+  startSpooky() {
     const ops = {
-      CmdHp: function (_0x27bf96, _0x3680c7) {
-        return _0x27bf96 != _0x3680c7;
-      },
-      FybWz: function (_0x4f971d, _0x2988e0, _0x163621) {
-        return _0x4f971d(_0x2988e0, _0x163621);
-      },
-      GdeaN: '/unknown',
-      HCFlt: function (_0x5c4734, _0x3cdb83, _0x3cc98c) {
-        return _0x5c4734(_0x3cdb83, _0x3cc98c);
-      },
-      HmclW: '/sound-effects/ruby_00ED.wav',
-      RHucH: '/images/duskull.gif',
-      RKPsY: '/sound-effects/ruby_00F4.wav',
-      SSsBv: '/sprites/unknown-2.png',
-      bvvae: 'block',
-      eDkqO: 'none',
+      block: 'block',
+      duskullPath: '/images/duskull.gif',
+      none: 'none',
+      rubySound: '/sound-effects/ruby_00ED.wav',
+      rubySound2: '/sound-effects/ruby_00F4.wav',
       spooky: 'spooky',
-      tXcOl: function (_0x3cf727, _0x3eb325) {
-        return _0x3cf727 != _0x3eb325;
-      },
+      unknown: '/unknown',
+      unknown2: '/sprites/unknown-2.png',
     };
-    if (!this['spooky']) {
+
+    if (!this.spooky) {
       return;
     }
+
     let self = this;
-    ops['HCFlt'](
-      setTimeout,
+    setTimeout(
       () => {
-        if (self['spooky']) {
-          let _0x563e11 = [];
-          for (let _0x130239 = 0; _0x130239 < this.allSprites.length; _0x130239++)
-            ops['tXcOl']('none', this.allSprites[_0x130239].style.display) &&
-              'none' != this.allSprites[_0x130239]['parentElement'].style.display &&
-              ops['CmdHp'](ops['eDkqO'], this.allSprites[_0x130239]['parentElement']['parentElement'].style.display) &&
-              _0x563e11.push(this.allSprites[_0x130239]);
-          if (_0x563e11.length < 1) {
-            ops['FybWz'](
-              setTimeout,
-              () => {
-                self['startSpooky']();
-              },
-              1000,
-            );
-          } else {
-            let _0x534720 = false;
-            if (soundEnabled) {
-              let _0x35c9e8 = new Audio(ops['RKPsY']);
-              ((_0x35c9e8['volume'] = 0.2),
-                _0x35c9e8['play']()['then'](() => {
-                  _0x534720 = true;
-                }));
-            }
-            let _0x486eaa = randomIntFromInterval(0, _0x563e11.length - 1),
-              _0x41a4d8 = _0x563e11[_0x486eaa].src,
-              _0x4245e7 = ops['RHucH'];
-            ((_0x563e11[_0x486eaa].src = _0x4245e7),
-              ops['FybWz'](
-                setTimeout,
-                () => {
-                  if (
-                    (-1 !== _0x41a4d8['indexOf'](ops['GdeaN']) &&
-                      (_0x41a4d8 = darkMode ? ops['SSsBv'] : '/sprites/unknown.png'),
-                    (_0x563e11[_0x486eaa].src = _0x41a4d8),
-                    self.spooky)
-                  ) {
-                    if (soundEnabled && _0x534720) {
-                      let _0x5297a4 = new Audio(ops['HmclW']);
-                      ((_0x5297a4['volume'] = 0.2),
-                        _0x5297a4['play'](),
-                        (document.getElementById('spooky').style.display = ops['bvvae']));
-                    }
-                    (soundEnabled || (document.getElementById(ops['spooky']).style.display = 'block'),
-                      self.startSpooky());
-                  }
-                },
-                randomIntFromInterval(0xdac, 0x1194),
-              ));
+        if (!self.spooky) {
+          return;
+        }
+
+        let spritesToChange = [];
+        for (let i = 0; i < this.allSprites.length; i++) {
+          if (
+            this.allSprites[i].style.display != 'none' &&
+            this.allSprites[i].parentElement.style.display != 'none' &&
+            this.allSprites[i].parentElement.parentElement.style.display != 'none'
+          ) {
+            spritesToChange.push(this.allSprites[i]);
           }
         }
+
+        if (spritesToChange.length < 1) {
+          setTimeout(() => {
+            self.startSpooky();
+          }, 1000);
+          return;
+        }
+
+        let played = false;
+
+        if (soundEnabled) {
+          let audio = new Audio(ops.rubySound2);
+          audio.volume = 0.2;
+          audio.play().then(() => {
+            played = true;
+          });
+        }
+
+        let randomNumber = randomIntFromInterval(0, spritesToChange.length - 1),
+          randomSrc = spritesToChange[randomNumber].src,
+          duskullPath = ops.duskullPath;
+
+        spritesToChange[randomNumber].src = duskullPath;
+
+        setTimeout(
+          () => {
+            if (randomSrc.indexOf(ops.unknown) !== -1) {
+              randomSrc = darkMode ? ops.unknown2 : '/sprites/unknown.png';
+            }
+            spritesToChange[randomNumber].src = randomSrc;
+
+            if (!self.spooky) {
+              return;
+            }
+
+            if (soundEnabled && played) {
+              let audio = new Audio(ops.rubySound);
+              audio.volume = 0.2;
+              audio.play();
+              document.getElementById('spooky').style.display = ops.block;
+            }
+
+            if (!soundEnabled) {
+              document.getElementById(ops.spooky).style.display = ops.block;
+              self.startSpooky();
+              return;
+            }
+          },
+          randomIntFromInterval(3500, 4500),
+        );
       },
-      ops['FybWz'](randomIntFromInterval, 0x2710, 0x61a8),
+
+      randomIntFromInterval(10000, 25000),
     );
   }
 
@@ -1052,12 +1045,12 @@ class Quiz {
             _0x29065c.push(_0x196a36['kfvif']),
             _0x29065c.push('니드런m'))),
       (_0x196a36['dXzoE'](_0x196a36['ULqCV'], _0x3102a5) || _0x196a36['VrlQv']('けつばん', _0x3102a5)) &&
-        !this['missingnoEnabled'])
+        !this.missingnoEnabled)
     ) {
       return (
-        (this['missingnoEnabled'] = true),
-        soundEnabled && soundEffectMissingno['play'](),
-        this['startMissingno'](),
+        (this.missingnoEnabled = true),
+        soundEnabled && soundEffectMissingno.play(),
+        this.startMissingno(),
         [true, _0x196a36['ULqCV']]
       );
     }
@@ -1094,7 +1087,7 @@ class Quiz {
         }
         if (!this.currentBaseNames.has(_0x54c9f8)) {
           let _0x360eb9 = false;
-          for (const _0x40295d of this['currentLangsNames'])
+          for (const _0x40295d of this.currentLangsNames)
             if (_0x40295d['startsWith'](_0xf2c4ee)) {
               _0x360eb9 = true;
               break;
@@ -1106,16 +1099,16 @@ class Quiz {
             ));
           continue;
         }
-        if (!this['currentLangsNames'].has(_0xf2c4ee)) {
+        if (!this.currentLangsNames.has(_0xf2c4ee)) {
           continue;
         }
         if (this.orderMode) {
           let _0x7abf30 = -1;
-          for (let _0x9f281d = 0; _0x196a36['gSNIn'](_0x9f281d, this['currentPokemonList'].length); _0x9f281d++)
-            this.named.has(this['currentPokemonList'][_0x9f281d].baseName) &&
+          for (let _0x9f281d = 0; _0x196a36['gSNIn'](_0x9f281d, this.currentPokemonList.length); _0x9f281d++)
+            this.named.has(this.currentPokemonList[_0x9f281d].baseName) &&
               _0x9f281d > _0x7abf30 &&
               (_0x7abf30 = _0x9f281d);
-          if (_0x54c9f8 !== this['currentPokemonList'][_0x7abf30 + 1].baseName) {
+          if (_0x54c9f8 !== this.currentPokemonList[_0x7abf30 + 1].baseName) {
             let _0x1dcc0f = false;
             for (let _0x559fc1 in this['nameDict'])
               if (_0x559fc1['startsWith'](_0xf2c4ee) && _0x559fc1 !== _0xf2c4ee) {
@@ -1134,13 +1127,13 @@ class Quiz {
             let _0x544000 = false;
             for (
               let _0x5bc066 = 0;
-              _0x196a36['iXsac'](_0x5bc066, this['pokemonBaseNameDict'][_0x54c9f8].length);
+              _0x196a36['iXsac'](_0x5bc066, this.pokemonBaseNameDict[_0x54c9f8].length);
               _0x5bc066++
             )
               if (
-                (this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066]['primaryType'] === this.currentType ||
-                  this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066]['secondaryType'] === this.currentType) &&
-                this['typeChaosIds'].has(this['pokemonBaseNameDict'][_0x54c9f8][_0x5bc066].id)
+                (this.pokemonBaseNameDict[_0x54c9f8][_0x5bc066].primaryType === this.currentType ||
+                  this.pokemonBaseNameDict[_0x54c9f8][_0x5bc066].secondaryType === this.currentType) &&
+                this['typeChaosIds'].has(this.pokemonBaseNameDict[_0x54c9f8][_0x5bc066].id)
               ) {
                 _0x544000 = true;
                 break;
@@ -1167,8 +1160,8 @@ class Quiz {
         }
         let _0x5e476d = this['addNamed'](_0x54c9f8);
         (this['addUserPoint'](_0x205c99),
-          this['langDict'][_0xf2c4ee] in this.langCounts || (this.langCounts[this['langDict'][_0xf2c4ee]] = 0),
-          (this.langCounts[this['langDict'][_0xf2c4ee]] += 1),
+          this.langDict[_0xf2c4ee] in this.langCounts || (this.langCounts[this.langDict[_0xf2c4ee]] = 0),
+          (this.langCounts[this.langDict[_0xf2c4ee]] += 1),
           this['checkHighestLang'](),
           (recentSprite.src = this.spriteDictionary[_0x5e476d.id].src),
           (_0x107706 = true),
@@ -1178,89 +1171,80 @@ class Quiz {
     return [_0x107706, _0x1c9adb];
   }
 
-  ['getCurrentRandomType']() {
-    const _0x1af7a6 = {
-        KsgXX: function (_0x13cfc0, _0x5657ab) {
-          return _0x13cfc0 + _0x5657ab;
-        },
-        ONVuS: function (_0xe1636, _0x4294cc) {
-          return _0xe1636 * _0x4294cc;
-        },
-        wBpEx: function (_0x3f4c0f, _0x1a1ebf) {
-          return _0x3f4c0f(_0x1a1ebf);
-        },
-      },
-      _0x414ced = this['currentPokemonList']['filter']((_0x418f66) => !this.named.has(_0x418f66.baseName));
-    if (0 === _0x414ced.length) {
+  getCurrentRandomType() {
+    const ops = {};
+    const remaining = this.currentPokemonList.filter((pok) => !this.named.has(pok.baseName));
+
+    if (remaining.length === 0) {
       return null;
     }
-    const _0x4bcb8f = _0x1af7a6['wBpEx'](seededRandom, this['seed'] + this.named['size']),
-      _0x53b3e7 = _0x414ced[Math.floor(_0x1af7a6['ONVuS'](_0x4bcb8f, _0x414ced.length))];
-    if (_0x53b3e7['secondaryType']) {
-      return seededRandom(_0x1af7a6['KsgXX'](this['seed'] + this.named['size'], 0.5)) < 0.5
-        ? _0x53b3e7['primaryType']
-        : _0x53b3e7['secondaryType'];
+
+    const random = seededRandom(this.seed + this.named.size),
+      randomPoke = remaining[Math.floor(random * remaining.length)];
+
+    if (randomPoke.secondaryType) {
+      return seededRandom(this.seed + this.named.size + 0.5) < 0.5 ? randomPoke.primaryType : randomPoke.secondaryType;
     }
-    return _0x53b3e7['primaryType'];
+    return randomPoke.primaryType;
   }
 
-  ['addUserPoint'](_0x24129b) {
-    const _0x5a72fa = {
-      DINWg: function (_0xcff8b6, _0x58a68a) {
-        return _0xcff8b6 in _0x58a68a;
-      },
-    };
-    (_0x5a72fa['DINWg'](_0x24129b, this['users']) || (this['users'][_0x24129b] = 0), (this['users'][_0x24129b] += 1));
+  addUserPoint(user) {
+    if (!(user in this.users)) {
+      this.users[user] = 0;
+    }
+    this.users[user] += 1;
   }
 
-  ['resetDitto']() {
-    const _0x39c3a3 = {
-      evxkM: 'img',
-    };
-    this['shinyEnabled']
-      ? ((this.spriteDictionary['ditto'].src = this.encodedImages['shiny']['ditto']),
-        (this['unguessedDict']['ditto']['getElementsByTagName']('img')[0].src = this.encodedImages['shiny']['ditto']))
-      : ((this.spriteDictionary['ditto'].src = this.encodedImages['sprite']['ditto']),
-        (this['unguessedDict']['ditto']['getElementsByTagName'](_0x39c3a3['evxkM'])[0].src =
-          this.encodedImages['sprite']['ditto']));
+  resetDitto() {
+    if (this.shinyEnabled) {
+      this.spriteDictionary.ditto.src = this.encodedImages.shiny.ditto;
+      this.unguessedDict.ditto.getElementsByTagName('img')[0].src = this.encodedImages.shiny.ditto;
+    } else {
+      this.spriteDictionary.ditto.src = this.encodedImages.sprite.ditto;
+      this.unguessedDict.ditto.getElementsByTagName('img')[0].src = this.encodedImages.sprite.ditto;
+    }
   }
 
-  ['addNamed'](_0x5f1f5d) {
+  addNamed(value) {
     const _0x350b17 = {
-      Ffxqi: function (_0x4282ea, _0xbb2cf1) {
+      ditto: 'ditto',
+      eqeqeq: function (_0x4282ea, _0xbb2cf1) {
         return _0x4282ea === _0xbb2cf1;
       },
-      XAURk: function (_0x4197b7, _0x2af43b) {
-        return _0x4197b7 - _0x2af43b;
-      },
-      XdOvi: 'ditto',
-      ZbAez: function (_0x222990, _0xddc3d4) {
-        return _0x222990 !== _0xddc3d4;
-      },
-      sHoMQ: function (_0x1d9df1, _0x49c753) {
+      lt: function (_0x1d9df1, _0x49c753) {
         return _0x1d9df1 < _0x49c753;
       },
+      neq: function (_0x222990, _0xddc3d4) {
+        return _0x222990 !== _0xddc3d4;
+      },
+      sub: function (_0x4197b7, _0x2af43b) {
+        return _0x4197b7 - _0x2af43b;
+      },
     };
-    let _0x2369b3 = this['pokemonBaseNameDict'][_0x5f1f5d],
+    let _0x2369b3 = this.pokemonBaseNameDict[value],
       _0x417328 = [];
-    for (let _0x474ca8 = 0; _0x350b17['sHoMQ'](_0x474ca8, _0x2369b3.length); _0x474ca8++)
+
+    for (let _0x474ca8 = 0; _0x350b17['lt'](_0x474ca8, _0x2369b3.length); _0x474ca8++)
       this.currentIds.has(_0x2369b3[_0x474ca8].id) && _0x417328.push(_0x2369b3[_0x474ca8]);
-    this['cyclingEnabled']
-      ? this.named.has(_0x350b17['XdOvi']) &&
-        ((this.spriteDictionary['ditto'].src = this.spriteDictionary[_0x417328[0].id].src),
-        (this['unguessedDict']['ditto']['getElementsByTagName']('img')[0].src =
-          this.spriteDictionary[_0x417328[0].id].src))
+
+    this.cyclingEnabled
+      ? this.named.has(_0x350b17['ditto']) &&
+        ((this.spriteDictionary.ditto.src = this.spriteDictionary[_0x417328[0].id].src),
+        (this.unguessedDict.ditto.getElementsByTagName('img')[0].src = this.spriteDictionary[_0x417328[0].id].src))
       : this['resetDitto']();
-    for (let _0x52ea0f = 0; _0x350b17['sHoMQ'](_0x52ea0f, _0x417328.length); _0x52ea0f++)
+
+    for (let _0x52ea0f = 0; _0x350b17['lt'](_0x52ea0f, _0x417328.length); _0x52ea0f++)
       this['showSprite'](_0x417328[_0x52ea0f].id);
-    if ((this.named.add(_0x5f1f5d), this.typeDisorder)) {
+
+    if ((this.named.add(value), this.typeDisorder)) {
       let _0x22b7b2 = this['getCurrentRandomType']();
-      _0x350b17['ZbAez'](_0x22b7b2, this.currentType) && this['changeTypeStyle'](_0x22b7b2);
+      _0x350b17['neq'](_0x22b7b2, this.currentType) && this['changeTypeStyle'](_0x22b7b2);
       let _0x2257f4 = this.currentType;
-      (null !== _0x2257f4 && _0x350b17['Ffxqi']('evil', _0x2257f4.toLowerCase()) && (_0x2257f4 = 'DARK'),
+      (null !== _0x2257f4 && _0x350b17['eqeqeq']('evil', _0x2257f4.toLowerCase()) && (_0x2257f4 = 'DARK'),
         null !== _0x2257f4 && showImage(_0x2257f4.toUpperCase()));
     }
-    return _0x417328[_0x350b17['XAURk'](_0x417328.length, 1)];
+
+    return _0x417328[_0x350b17['sub'](_0x417328.length, 1)];
   }
 
   ['getEndText']() {
@@ -1300,8 +1284,8 @@ class Quiz {
       },
     };
     let _0x2e06bc = true;
-    for (let _0x26ff90 = 0; _0x3e972b['lrRjp'](_0x26ff90, this['currentPokemonList'].length); _0x26ff90++) {
-      let _0x387969 = this['currentPokemonList'][_0x26ff90];
+    for (let _0x26ff90 = 0; _0x3e972b['lrRjp'](_0x26ff90, this.currentPokemonList.length); _0x26ff90++) {
+      let _0x387969 = this.currentPokemonList[_0x26ff90];
       if (!this['revealedShadows'].has(_0x387969.id) && !this.named.has(_0x387969.baseName)) {
         _0x2e06bc = false;
         break;
@@ -1314,13 +1298,13 @@ class Quiz {
     const _0x4700f7 = {
       IRWBV: 'inline',
     };
-    for (let _0x167ced = 0; _0x167ced < this['currentPokemonList'].length; _0x167ced++)
-      if (!this.named.has(this['currentPokemonList'][_0x167ced].baseName)) {
+    for (let _0x167ced = 0; _0x167ced < this.currentPokemonList.length; _0x167ced++)
+      if (!this.named.has(this.currentPokemonList[_0x167ced].baseName)) {
         return (
-          (this.silhouetteDictionary[this['currentPokemonList'][_0x167ced].id].style.display = _0x4700f7['IRWBV']),
-          (this['pokeballDictionary'][this['currentPokemonList'][_0x167ced].id].style.display = 'none'),
-          this['revealedShadows'].add(this['currentPokemonList'][_0x167ced].id),
-          this['currentPokemonList'][_0x167ced].id
+          (this.silhouetteDictionary[this.currentPokemonList[_0x167ced].id].style.display = _0x4700f7['IRWBV']),
+          (this['pokeballDictionary'][this.currentPokemonList[_0x167ced].id].style.display = 'none'),
+          this['revealedShadows'].add(this.currentPokemonList[_0x167ced].id),
+          this.currentPokemonList[_0x167ced].id
         );
       }
     return null;
@@ -1338,11 +1322,11 @@ class Quiz {
     };
     if (!this.orderMode) {
       let _0x505cbb = [];
-      for (let _0xc8e3fc = 0; _0x410ee3['KFSiY'](_0xc8e3fc, this['currentPokemonList'].length); _0xc8e3fc++) {
-        let _0x3b3edc = this['currentPokemonList'][_0xc8e3fc];
+      for (let _0xc8e3fc = 0; _0x410ee3['KFSiY'](_0xc8e3fc, this.currentPokemonList.length); _0xc8e3fc++) {
+        let _0x3b3edc = this.currentPokemonList[_0xc8e3fc];
         this.named.has(_0x3b3edc.baseName) ||
           this['revealedShadows'].has(_0x3b3edc.id) ||
-          _0x505cbb.push(this['currentPokemonList'][_0xc8e3fc].id);
+          _0x505cbb.push(this.currentPokemonList[_0xc8e3fc].id);
       }
       if (_0x410ee3['XNqkw'](_0x505cbb.length, 0)) {
         let _0x23483c = _0x505cbb[Math.floor(Math.random() * _0x505cbb.length)];
@@ -1370,13 +1354,13 @@ class Quiz {
     };
     if (this.typeDisorder) {
       let _0x94c794 = [];
-      for (let _0x19884a = 0; _0x4ad45e['mtaeK'](_0x19884a, this['currentPokemonList'].length); _0x19884a++) {
-        let _0x10923c = this['currentPokemonList'][_0x19884a];
+      for (let _0x19884a = 0; _0x4ad45e['mtaeK'](_0x19884a, this.currentPokemonList.length); _0x19884a++) {
+        let _0x10923c = this.currentPokemonList[_0x19884a];
         this.named.has(_0x10923c.baseName) ||
           this['revealedShadows'].has(_0x10923c.id) ||
-          (_0x4ad45e['xXnSy'](_0x10923c['primaryType'], this.currentType) &&
-            _0x10923c['secondaryType'] !== this.currentType) ||
-          _0x94c794.push(this['currentPokemonList'][_0x19884a].id);
+          (_0x4ad45e['xXnSy'](_0x10923c.primaryType, this.currentType) &&
+            _0x10923c.secondaryType !== this.currentType) ||
+          _0x94c794.push(this.currentPokemonList[_0x19884a].id);
       }
       if (_0x94c794.length > 0) {
         let _0x4a6662 = _0x94c794[Math.floor(Math.random() * _0x94c794.length)];
@@ -1515,7 +1499,7 @@ class Quiz {
         (_0x1f1d47.style.display = _0x12481a['yMdWu']),
         _0x1f1d47.appendChild(_0x39aaa8),
         _0x1f1d47.appendChild(_0x333c0a),
-        (this['unguessedDict'][_0x166453.id] = _0x1f1d47),
+        (this.unguessedDict[_0x166453.id] = _0x1f1d47),
         (this.unguessedDictTexts[_0x166453.id] = _0x333c0a),
         _0x21794c[_0x166453.currentBox].appendChild(_0x1f1d47));
     }
@@ -1586,7 +1570,7 @@ class Quiz {
       (this['boxCounters'][_0x3224bc].push(_0x17f82a),
       this['boxCounters'][_0x3224bc].length === this.currentBoxes[_0x3224bc].length)
     ) {
-      let _0x448584 = this.spriteDictionary[_0x57a4e2]['parentElement'];
+      let _0x448584 = this.spriteDictionary[_0x57a4e2].parentElement;
       (_0x448584.classList.add('outline'), _0x448584.classList.add(_0x4f8dc1['KzHVw']('outline', this.getStyleName())));
     }
   }
@@ -1633,32 +1617,30 @@ class Quiz {
     }
     for (let _0x4d9f04 = 0; _0x4d9f04 < _0x10fb71.length; _0x4d9f04++) {
       let _0x1bb9f2 = _0x10fb71[_0x4d9f04];
-      ((this['unguessedDict'][_0x1bb9f2].style.display = _0x5944ef['pAZDD']),
-        this['unguessedDict'][_0x1bb9f2].classList.add('fixed-width'));
+      ((this.unguessedDict[_0x1bb9f2].style.display = _0x5944ef['pAZDD']),
+        this.unguessedDict[_0x1bb9f2].classList.add('fixed-width'));
     }
     this['resetDitto']();
   }
 
   ['resetCurrentSprites']() {
-    if (this['shinyEnabled']) {
+    if (this.shinyEnabled) {
       for (let _0x2311e1 of this.currentIds)
-        ((this.spriteDictionary[_0x2311e1].src = this.encodedImages['shiny'][_0x2311e1]),
-          (this['unguessedDict'][_0x2311e1]['getElementsByTagName']('img')[0].src =
-            this.encodedImages['shiny'][_0x2311e1]));
+        ((this.spriteDictionary[_0x2311e1].src = this.encodedImages.shiny[_0x2311e1]),
+          (this.unguessedDict[_0x2311e1].getElementsByTagName('img')[0].src = this.encodedImages.shiny[_0x2311e1]));
     } else {
       for (let _0x2643b3 of this.currentIds)
-        ((this.spriteDictionary[_0x2643b3].src = this.encodedImages['sprite'][_0x2643b3]),
-          (this['unguessedDict'][_0x2643b3]['getElementsByTagName']('img')[0].src =
-            this.encodedImages['sprite'][_0x2643b3]));
+        ((this.spriteDictionary[_0x2643b3].src = this.encodedImages.sprite[_0x2643b3]),
+          (this.unguessedDict[_0x2643b3].getElementsByTagName('img')[0].src = this.encodedImages.sprite[_0x2643b3]));
     }
   }
 
   ['shinyOn']() {
-    ((this['shinyEnabled'] = true), this['resetCurrentSprites']());
+    ((this.shinyEnabled = true), this['resetCurrentSprites']());
   }
 
   ['shinyOff']() {
-    ((this['shinyEnabled'] = false), this['resetCurrentSprites']());
+    ((this.shinyEnabled = false), this['resetCurrentSprites']());
   }
 }
 
@@ -1756,14 +1738,14 @@ let allLanguages = ['ENG', 'FRE', 'GER', 'ESP', 'ITA', 'KOR', 'JPN', 'CHT', 'CHS
   },
   soundEffect = new Audio('/sound-effects/gen3-click2.wav'),
   soundEffectMissingno = new Audio('/sound-effects/032.wav');
-((soundEffectMissingno['volume'] = 0.2), (soundEffect['volume'] = 0.5));
+((soundEffectMissingno.volume = 0.2), (soundEffect.volume = 0.5));
 let soundEffect2 = new Audio('/sound-effects/Dex-Fanfare.mp3'),
   soundEffectJoin = new Audio('/sound-effects/quizjoin.wav');
-soundEffectJoin['volume'] = 0.35;
+soundEffectJoin.volume = 0.35;
 let soundEffectExit = new Audio('/sound-effects/quizleave.wav');
-((soundEffectExit['volume'] = 0.35), (soundEffect2['volume'] = 0.3));
+((soundEffectExit.volume = 0.35), (soundEffect2.volume = 0.3));
 let soundEffectWrongOrder = new Audio('/sound-effects/wrong.mp3');
-soundEffectWrongOrder['volume'] = 0.15;
+soundEffectWrongOrder.volume = 0.15;
 let darkMode = false,
   isSpellingEnabled = false,
   currentType = '',
@@ -1781,7 +1763,7 @@ let rankVals = ['rankone', 'ranktwo', 'rankthree'],
   myUsername = 'Quizmaster',
   lastDarkSwap = 0,
   lastShinySwap = 0,
-  swapLimit = 0x2710,
+  swapLimit = 10000,
   missingOptionsDiv = document.getElementById('missednames-options'),
   language_box = document.getElementById('lang_box'),
   inputField = document.getElementById('pokemon'),
@@ -2563,7 +2545,7 @@ async function loadData() {
         (recentSprite.src = darkMode ? '/sprites/unknown-2.png' : '/sprites/unknown.png'),
         (document.getElementById('silhouette').checked = false),
         constants.calll(changeFooterPosition),
-        constants['similar'](constants['block'], document.getElementById(constants.panel).style.display) &&
+        constants['similar'](constants.block, document.getElementById(constants.panel).style.display) &&
           document.getElementById('accordion').click(),
         (document.getElementById('missednames').style.display = constants.none),
         (document.getElementById(constants['ranking2']).style.display = constants.none),
@@ -2656,7 +2638,7 @@ async function loadData() {
         return constants['eq'](_0x84729, _0x232932);
       },
       bOfIq: constants['SsLza'],
-      dCweY: constants['block'],
+      dCweY: constants.block,
       evXwu: 'reset',
       ghASX: 'revealSingle',
       hFtRs: function (_0x4703c4, _0x83aab1) {
@@ -2668,7 +2650,7 @@ async function loadData() {
       iWZpG: 'roomCreated',
     };
     loadSocketIO()
-      ['then'](() => {
+      .then(() => {
         const _0x3c4e91 = {
           FOeSp: function (_0x12eae5) {
             return _0x35aeb8['JFHbB'](_0x12eae5);
@@ -2703,10 +2685,10 @@ async function loadData() {
             transports: ['polling'],
           })),
             socket['on']('userJoined', (_0x5c9acb) => {
-              (soundEnabled && soundEffectJoin['play'](), showUserMessage(_0x5c9acb + _0x35aeb8['VgTdr']));
+              (soundEnabled && soundEffectJoin.play(), showUserMessage(_0x5c9acb + _0x35aeb8['VgTdr']));
             }),
             socket['on']('userLeft', (_0x39c776) => {
-              (soundEnabled && soundEffectExit['play'](),
+              (soundEnabled && soundEffectExit.play(),
                 _0x35aeb8['JGYLU'](showUserMessage, _0x39c776 + '\x20left\x20the\x20room\x20!'));
             }),
             socket['on'](_0x35aeb8['iWZpG'], (_0x19cb56) => {
@@ -2752,7 +2734,7 @@ async function loadData() {
               const { username: _0x5cb705, id: _0xf065cb } = _0x199e13;
               (quiz['addNamed'](_0xf065cb),
                 quiz['addUserPoint'](_0x5cb705),
-                soundEnabled && soundEffect['play'](),
+                soundEnabled && soundEffect.play(),
                 _0x46dbc4(quiz['getScore']()),
                 activeTimer ||
                   (_0x35aeb8['hltGz'](0, _0x15939e) ? _0x35aeb8['GEvSV'](_0x1609e5) : _0x3cf874(_0x15939e)),
@@ -2773,7 +2755,7 @@ async function loadData() {
               showUserMessage(_0x1a79e6['message']);
             }),
             socket['on']('scores', (_0x34e0dc) => {
-              ((quiz['users'] = _0x34e0dc), _0x35aeb8['GEvSV'](_0x43ad00), _0x45f4e9());
+              ((quiz.users = _0x34e0dc), _0x35aeb8['GEvSV'](_0x43ad00), _0x45f4e9());
             }),
             socket['on']('reveal', (_0x44bff4) => {
               if (_0x3c4e91['iERiN'] in _0x44bff4) {
@@ -2833,7 +2815,7 @@ async function loadData() {
         return _0x13a832(_0x60b042, _0x3a1fdd);
       },
     };
-    usernamePrompt.style.display = constants['block'];
+    usernamePrompt.style.display = constants.block;
     let _0x2759ec = document.getElementById('input-username'),
       _0x1c3111 = document.getElementById(constants['usernameConfirm']);
 
@@ -2869,8 +2851,8 @@ async function loadData() {
               if (null !== socket) {
                 let _0x351780 = {};
                 ((_0x351780['username'] = _0x8b6d7d),
-                  _0x19db26['PnYlP'](myUsername, quiz['users']) &&
-                    ((quiz['users'][_0x8b6d7d] = quiz['users'][myUsername]), delete quiz['users'][myUsername]),
+                  _0x19db26['PnYlP'](myUsername, quiz.users) &&
+                    ((quiz.users[_0x8b6d7d] = quiz.users[myUsername]), delete quiz.users[myUsername]),
                   (myUsername = _0x8b6d7d),
                   (_0x351780['state'] = _0x19db26['zjaIp'](getState)),
                   (_0x351780['state']['timer']['updatedAt'] = Date['now']()),
@@ -2916,7 +2898,7 @@ async function loadData() {
       ));
   }
   if (null !== roomId) {
-    usernamePrompt.style.display = constants['block'];
+    usernamePrompt.style.display = constants.block;
     let _0x4e1c2a = document.getElementById('input-username'),
       _0x124bae = document.getElementById(constants['usernameConfirm']);
 
@@ -2972,7 +2954,7 @@ async function loadData() {
     (missingno = new Image()),
     (missingno.src = '/images/missingno.png'),
     (missingno = new Image()),
-    (missingno.src = constants['missingno2']),
+    (missingno.src = constants.missingno2),
     (missingno = new Image()),
     (missingno.src = constants['missigno3']));
   let globalElapsed,
@@ -3056,7 +3038,7 @@ async function loadData() {
           _0x5993d7['cePDJ'](0x4, this['readyState']) &&
             (_0x5993d7['gmCVV'](0xc8, this['status'])
               ? ((_0x3c3faa = JSON['parse'](this['response'])),
-                (_0x4fa89c = document.getElementById('donors')['getElementsByTagName']('ol')[0]),
+                (_0x4fa89c = document.getElementById('donors').getElementsByTagName('ol')[0]),
                 _0x3c3faa['forEach'](function (_0x5683ac) {
                   var _0x5e4249 = document.createElement('li');
                   (_0x5e4249.appendChild(document['createTextNode'](_0x5683ac)), _0x4fa89c.appendChild(_0x5e4249));
@@ -3139,7 +3121,7 @@ async function loadData() {
       zgjhW: constants.none,
     };
     activeTimer
-      ? ((document.getElementById(constants['prompttimer']).style.display = constants['block']),
+      ? ((document.getElementById(constants['prompttimer']).style.display = constants.block),
         (document.getElementById('timer-yes')['onclick'] = function () {
           ((document.getElementById(_0x7ee5e6['MCGDn']).style.display = _0x7ee5e6['zgjhW']), _0x4dcdfc(_0x1044ec));
         }),
@@ -3281,7 +3263,7 @@ async function loadData() {
       _0x49f54c = _0xc688a8[1];
     return (
       _0x2ee05c &&
-        (soundEnabled && soundEffect['play'](),
+        (soundEnabled && soundEffect.play(),
         _0x46dbc4(quiz['getScore']()),
         activeTimer || (constants['eqeqeq3'](0, _0x15939e) ? _0x1609e5() : constants['EkIcu'](_0x3cf874, _0x15939e)),
         quiz.getMaxScore() === quiz['getScore']() && null === roomId && someFunc(),
@@ -3302,8 +3284,8 @@ async function loadData() {
       (timerObj = {
         type: 'none',
       }),
-      (document.getElementById(constants['overlay']).style.display = constants['block']),
-      soundEnabled && soundEffect2['play']());
+      (document.getElementById(constants['overlay']).style.display = constants.block),
+      soundEnabled && soundEffect2.play());
     let _0x26c108 = '',
       _0x337ba5 = '';
     (constants['Lzipw'](0, _0x15939e)
@@ -3316,21 +3298,21 @@ async function loadData() {
       (document.getElementById(constants['genname']).innerHTML = quiz['getEndText']()),
       (document.getElementById(constants['timerScore']).innerHTML = _0x26c108),
       (document.getElementById('currentcount').innerHTML = _0x337ba5),
-      (document.getElementById('shadow-count').innerHTML = quiz['revealedShadows']['size']),
+      (document.getElementById('shadow-count').innerHTML = quiz['revealedShadows'].size),
       quiz['orderMode']
         ? (document.getElementById(constants['SWNAr']).innerHTML = constants['pokedexOrder'])
         : quiz['chaosMode']
           ? (document.getElementById(constants['SWNAr']).innerHTML = constants['chaosmode'])
           : (document.getElementById(constants['SWNAr']).innerHTML = '!'),
-      quiz['revealedShadows']['size'] > 0
-        ? (document.getElementById('trychallenge').style.display = constants['block'])
+      quiz['revealedShadows'].size > 0
+        ? (document.getElementById('trychallenge').style.display = constants.block)
         : (document.getElementById('trychallenge').style.display = 'none'),
-      Object['keys'](quiz['users']).length > 1 &&
-        (document.getElementById(constants['ranking2']).style.display = constants['block']),
+      Object['keys'](quiz.users).length > 1 &&
+        (document.getElementById(constants['ranking2']).style.display = constants.block),
       (document.getElementById('ranking').style.display = constants.none),
       quiz['animateCongrats'](),
       quiz['giveUp'](),
-      (document.getElementById(constants['missednames']).style.display = constants['block']),
+      (document.getElementById(constants['missednames']).style.display = constants.block),
       document.getElementById(constants['accordion']).click(),
       (result_data = {
         allShadows: quiz['useSilhouettes'],
@@ -3355,8 +3337,8 @@ async function loadData() {
       }),
       _0x43ad00(),
       (inputField.disabled = true),
-      constants['HJLRw'](Object['keys'](quiz['users']).length, 1) &&
-        (document.getElementById(constants['ranking2']).style.display = constants['block']),
+      constants['HJLRw'](Object['keys'](quiz.users).length, 1) &&
+        (document.getElementById(constants['ranking2']).style.display = constants.block),
       (document.getElementById('ranking').style.display = constants.none),
       clearInterval(activeTimer),
       (timerObj = {
@@ -3408,7 +3390,7 @@ async function loadData() {
     (constants['PqSrS'](null, _0x260dd3) &&
       _0x260dd3.includes('not\x20the\x20next') &&
       soundEnabled &&
-      soundEffectWrongOrder['play'](),
+      soundEffectWrongOrder.play(),
       constants['missingno'] === _0x260dd3
         ? (inputField.value = '')
         : _0x4346b4
@@ -3529,7 +3511,7 @@ async function loadData() {
   function _0x101adf() {
     const _0x18c009 = {
       BFCih: function (_0x236ad0) {
-        return constants['call2'](_0x236ad0);
+        return constants.call2(_0x236ad0);
       },
       RCtvw: function (_0x547b66, _0x362d96) {
         return constants['callf5'](_0x547b66, _0x362d96);
@@ -3587,7 +3569,7 @@ async function loadData() {
         ? (_0x57dd20(shadowHelpRadio),
           clearTimeout(shadowHelpInterval),
           clearTimeout(shadowHelpIntervalMessage),
-          constants['call'](showUserMessage, 'Disabled\x20auto-reveal\x20of\x20shadows'),
+          constants.call(showUserMessage, 'Disabled\x20auto-reveal\x20of\x20shadows'),
           (shadowHelpInterval = null))
         : (constants['HhOuq'](_0x2f9557, shadowHelpRadio),
           quiz['orderMode']
@@ -3688,8 +3670,8 @@ async function loadData() {
   let _0x43ad00 = function () {
     let _0x2833ef = document.getElementById(constants['leaderboard2']);
     for (; _0x2833ef['firstChild']; ) _0x2833ef['firstChild']['remove']();
-    if (constants['gt35'](Object['keys'](quiz['users']).length, 1)) {
-      let _0x4a90c3 = constants['callg4'](sortDictionaryByValue, quiz['users']),
+    if (constants['gt35'](Object['keys'](quiz.users).length, 1)) {
+      let _0x4a90c3 = constants['callg4'](sortDictionaryByValue, quiz.users),
         _0x3a3d36 = quiz['getStyleName']();
       for (let _0x23ab74 = 0; _0x23ab74 < _0x4a90c3.length; _0x23ab74++) {
         let _0x50c082 = document.createElement('div'),
@@ -3766,19 +3748,15 @@ async function loadData() {
   let _0x103bde = null;
   document.getElementById('accordion2').click();
   let _0x535161 = [
-      [
-        encodedImages['sprite']['bulbasaur'],
-        encodedImages['sprite']['charmander'],
-        encodedImages['sprite']['squirtle'],
-      ],
-      [encodedImages['sprite']['cyndaquil'], encodedImages['sprite']['totodile'], encodedImages['sprite']['chikorita']],
-      [encodedImages['sprite']['mudkip'], encodedImages['sprite']['treecko'], encodedImages['sprite']['torchic']],
-      [encodedImages['sprite']['turtwig'], encodedImages['sprite']['chimchar'], encodedImages['sprite']['piplup']],
-      [encodedImages['sprite']['tepig'], encodedImages['sprite']['oshawott'], encodedImages['sprite']['snivy']],
-      [encodedImages['sprite']['froakie'], encodedImages['sprite']['chespin'], encodedImages['sprite']['fennekin']],
-      [encodedImages['sprite']['rowlet'], encodedImages['sprite']['litten'], encodedImages['sprite']['popplio']],
-      [encodedImages['sprite']['scorbunny'], encodedImages['sprite']['sobble'], encodedImages['sprite']['grookey']],
-      [encodedImages['sprite']['quaxly'], encodedImages['sprite']['sprigatito'], encodedImages['sprite']['fuecoco']],
+      [encodedImages.sprite['bulbasaur'], encodedImages.sprite['charmander'], encodedImages.sprite['squirtle']],
+      [encodedImages.sprite['cyndaquil'], encodedImages.sprite['totodile'], encodedImages.sprite['chikorita']],
+      [encodedImages.sprite['mudkip'], encodedImages.sprite['treecko'], encodedImages.sprite['torchic']],
+      [encodedImages.sprite['turtwig'], encodedImages.sprite['chimchar'], encodedImages.sprite['piplup']],
+      [encodedImages.sprite['tepig'], encodedImages.sprite['oshawott'], encodedImages.sprite['snivy']],
+      [encodedImages.sprite['froakie'], encodedImages.sprite['chespin'], encodedImages.sprite['fennekin']],
+      [encodedImages.sprite['rowlet'], encodedImages.sprite['litten'], encodedImages.sprite['popplio']],
+      [encodedImages.sprite['scorbunny'], encodedImages.sprite['sobble'], encodedImages.sprite['grookey']],
+      [encodedImages.sprite['quaxly'], encodedImages.sprite['sprigatito'], encodedImages.sprite['fuecoco']],
     ],
     _0x5bd580 = 0,
     _0x193402 = true,
@@ -3836,13 +3814,13 @@ async function loadData() {
           let _0x13e6ef = (_0x9eb8f2, _0x3e07cb) => {
             let _0x25374d,
               _0x2c5d0e = _0x1afb49['HXAxL'](standardizeName, _0x9eb8f2);
-            _0x25374d = quiz['shinyEnabled'] ? 'shiny' : 'sprite';
+            _0x25374d = quiz.shinyEnabled ? 'shiny' : 'sprite';
             let _0x5e4fc8 = _0x1afb49['cqpgA'](_0x446286, _0x3e07cb[_0x9eb8f2].length);
             _0x5e4fc8 = _0x193402 ? _0x5e4fc8 : 0;
             let _0x1d1f48 = _0x1afb49['hwgYR'](standardizeName, _0x3e07cb[_0x9eb8f2][_0x5e4fc8]);
             ((quiz.spriteDictionary[standardizeName(_0x2c5d0e)].src = encodedImages[_0x25374d][_0x1d1f48]),
               _0x1afb49['IqSYq'](_0x1d1f48, encodedImages[_0x25374d])
-                ? ((quiz['unguessedDict'][standardizeName(_0x2c5d0e)]['getElementsByTagName']('img')[0].src =
+                ? ((quiz.unguessedDict[standardizeName(_0x2c5d0e)].getElementsByTagName('img')[0].src =
                     encodedImages[_0x25374d][_0x1d1f48]),
                   _0x1afb49['IqSYq'](_0x1d1f48, quiz.pokemonIdDict)
                     ? (quiz.unguessedDictTexts[standardizeName(_0x2c5d0e)]['nodeValue'] = quiz.pokemonIdDict[
@@ -3868,7 +3846,7 @@ async function loadData() {
     _0x12e639());
 
   function _0x45f4e9() {
-    let _0x463e68 = constants['callf4'](sortDictionaryByValue, quiz['users']);
+    let _0x463e68 = constants['callf4'](sortDictionaryByValue, quiz.users);
     constants['callf3'](emptyLeaderboard);
     let _0x5949a5 = document.getElementById('leaderboard'),
       _0xe19fdb = quiz['getStyleName']();
@@ -3896,13 +3874,13 @@ async function loadData() {
 
   ((document.getElementById(constants['KWwwr'])['onclick'] = () => {
     ((_0x193402 = true),
-      (quiz['cyclingEnabled'] = true),
+      (quiz.cyclingEnabled = true),
       _0x57dd20(document.getElementById(constants['cycleOff'])),
       constants['call7'](_0x2f9557, document.getElementById('cycle-on')));
   }),
     (document.getElementById(constants['cycleOff'])['onclick'] = () => {
       ((_0x193402 = false),
-        (quiz['cyclingEnabled'] = false),
+        (quiz.cyclingEnabled = false),
         quiz['resetDitto'](),
         _0x12e639(),
         constants['JbBCS'](_0x57dd20, document.getElementById('cycle-on')),
@@ -3994,7 +3972,7 @@ async function loadData() {
                       ? constants['gt3'](constants['sub3'](Date['now'](), swapLimit), lastShinySwap) &&
                         (shinyOn(), (lastShinySwap = Date['now']()))
                       : constants['ffg'](standardizeName, _0x426cd4) === 'shinyoff'.toLowerCase() &&
-                        constants['gt4'](constants['sub'](Date['now'](), swapLimit), lastShinySwap) &&
+                        constants['gt4'](constants.sub(Date['now'](), swapLimit), lastShinySwap) &&
                         (constants['callf3'](shinyOff), (lastShinySwap = Date['now']()))),
               constants['similar'](constants['Qqmuu'], _0x2fdaa7.toLowerCase()))
             ) {
@@ -4080,7 +4058,7 @@ async function loadData() {
                   image['addEventListener'](
                     constants['load'],
                     function () {
-                      _0x5da9dd['mjFul'](imageRain, image, 0x32, 0x12c);
+                      _0x5da9dd['mjFul'](imageRain, image, 0x32, 300);
                     },
                     false,
                   )),
@@ -4091,7 +4069,7 @@ async function loadData() {
                   image['addEventListener'](
                     'load',
                     function () {
-                      _0x4e5200['ZJzcm'](imageRain, image, 0x32, 0x12c);
+                      _0x4e5200['ZJzcm'](imageRain, image, 0x32, 300);
                     },
                     false,
                   ))),
@@ -4103,7 +4081,7 @@ async function loadData() {
                   image['addEventListener'](
                     'load',
                     function () {
-                      imageRain(image, 0x32, 0x12c);
+                      imageRain(image, 0x32, 300);
                     },
                     false,
                   ))),
@@ -4159,7 +4137,7 @@ async function loadData() {
                 image['addEventListener'](
                   constants['load'],
                   function () {
-                    imageRain(image, 0x32, 0x12c);
+                    imageRain(image, 0x32, 300);
                   },
                   false,
                 )),
@@ -4176,7 +4154,7 @@ async function loadData() {
                 image['addEventListener'](
                   'load',
                   function () {
-                    imageRain(image, 0x32, 0x12c);
+                    imageRain(image, 0x32, 300);
                   },
                   false,
                 )),
@@ -4190,7 +4168,7 @@ async function loadData() {
                 image['addEventListener'](
                   constants['load'],
                   function () {
-                    imageRain(image, 0x32, 0x12c);
+                    imageRain(image, 0x32, 300);
                   },
                   false,
                 )),
@@ -4204,7 +4182,7 @@ async function loadData() {
                 image['addEventListener'](
                   constants['load'],
                   function () {
-                    imageRain(image, 0x32, 0x12c);
+                    imageRain(image, 0x32, 300);
                   },
                   false,
                 )),
@@ -4216,7 +4194,7 @@ async function loadData() {
                   image['addEventListener'](
                     constants['load'],
                     function () {
-                      imageRain(image, 0x32, 0x12c);
+                      imageRain(image, 0x32, 300);
                     },
                     false,
                   ))),
@@ -4240,7 +4218,7 @@ async function loadData() {
                   image['addEventListener'](
                     'load',
                     function () {
-                      imageRain(image, 0x32, 0x12c);
+                      imageRain(image, 0x32, 300);
                     },
                     false,
                   )),
@@ -4251,7 +4229,7 @@ async function loadData() {
                   image['addEventListener'](
                     'load',
                     function () {
-                      imageRain(image, 0x32, 0x12c);
+                      imageRain(image, 0x32, 300);
                     },
                     false,
                   ))),
@@ -4307,7 +4285,7 @@ async function loadData() {
       (document.getElementById('ranking').style.display = constants.none));
   }),
     (saveButton['onclick'] = () => {
-      let _0x182a0b = constants['call2'](getState);
+      let _0x182a0b = constants.call2(getState);
       ((_0x182a0b['timer']['savedAt'] = Date['now']()), (_0x182a0b['version'] = 1));
       let _0x111cc6 = JSON['stringify'](_0x182a0b),
         _0x3cf089 = constants['fff9'](btoa, _0x111cc6),
@@ -4379,7 +4357,7 @@ async function loadData() {
         setInterval,
         function () {
           let currentNow = Date['now']();
-          paused && (timer['t'] += constants['sub'](currentNow, startTime));
+          paused && (timer['t'] += constants.sub(currentNow, startTime));
           let elapsed = constants['sub2'](timer['t'], currentNow);
           ((constants['eq3'](null, socket) || isSocketHost) && elapsed < 0 && constants['callf'](someFunc),
             (startTime = currentNow),
@@ -4396,7 +4374,7 @@ async function loadData() {
           paused || (_0x3e3645 += _0x5bb7ee),
           (timerObj['t'] = _0x3e3645),
           (timerObj['updatedAt'] = _0x72ee0e),
-          ops['call'](setElapsed, _0x3e3645));
+          ops.call(setElapsed, _0x3e3645));
       }, 100);
     }
   }
@@ -4424,7 +4402,7 @@ async function loadData() {
         _0x57dd20(orderButton),
         constants['call9'](_0x57dd20, regularButton)),
       quiz['setQuiz'](_0x4b5ecc['quizName'], _0x4b5ecc['filters']),
-      constants['typeSeed'] in _0x4b5ecc && (quiz['seed'] = _0x4b5ecc['typeSeed']),
+      constants['typeSeed'] in _0x4b5ecc && (quiz.seed = _0x4b5ecc['typeSeed']),
       constants['typeDisorder'] in _0x4b5ecc && _0x4b5ecc['typeDisorder']
         ? ((quiz['orderMode'] = false), typeDisorderButtonOn.click())
         : typeDisorderButtonOff.click(),
@@ -4435,7 +4413,7 @@ async function loadData() {
         quiz['revealSingleShadow'](_0x4b5ecc['revealedShadows'][_0x4a1a4b]);
     }
     for (let _0x15316b of _0x4b5ecc['named']) quiz['addNamed'](_0x15316b);
-    ((quiz['users'] = _0x4b5ecc['users']),
+    ((quiz.users = _0x4b5ecc.users),
       _0x46dbc4(quiz['getScore']()),
       _0x29a8b3 &&
         ((_0x4b5ecc['timer']['t'] += Date['now']() - _0x4b5ecc['timer']['savedAt']),
@@ -4489,7 +4467,7 @@ async function loadData() {
           (_0x570ae4['preventDefault'](),
           (_0x24455b['ENRqm'](null, socket) || isSocketHost) && _0x24455b['WejrV']('none', quiz.name))
         ) {
-          if (_0x24455b['TxHpX'](Date['now'](), _0x4bd580 + 0xbb8)) {
+          if (_0x24455b['TxHpX'](Date['now'](), _0x4bd580 + 3000)) {
             return;
           }
           ((_0x4bd580 = Date['now']()), showUserMessage('Drop\x20the\x20.quiz\x20file\x20anywhere\x20to\x20load'));
@@ -4525,7 +4503,7 @@ async function loadData() {
 roomId.length > 1
   ? (postMultiplayerServer('roomExists', {
       roomId: roomId,
-    })['then']((_0x2613ec) => {
+    }).then((_0x2613ec) => {
       _0x2613ec['success'] || noSuchRoom();
     }),
     (document.getElementById('guest-info').style.display = 'block'),
@@ -4664,7 +4642,7 @@ function showUserMessage(_0xc4211d) {
     _0x335a5c.classList.add('snackbarshow'),
     (currentMessageTimeout = setTimeout(function () {
       (_0x335a5c.classList.remove('snackbarshow'), _0x335a5c.classList.add('snackbar'));
-    }, 0xbb8)));
+    }, 3000)));
 }
 
 let currentImageFadeIn = null,
@@ -5233,7 +5211,7 @@ let animationCanvasWidth,
         animationWidth / 0x2,
         _0x1341ad['wPpsm'](animationCanvasWidth, animationWidth / 0x2),
       ),
-      _0x18c21f = randomIntFromInterval(-0xdac, 1.5 * -animationWidth),
+      _0x18c21f = randomIntFromInterval(-3500, 1.5 * -animationWidth),
       _0x353ccd = _0x1341ad['WtRDu'](randomIntFromInterval, 0x1b58, 0x251c),
       _0x4541a2 = _0x1341ad['WtRDu'](randomIntFromInterval, 0, 0x168),
       _0x55e53f = randomIntFromInterval(-0x7d0, 0x7d0);
@@ -5486,7 +5464,7 @@ disableLanguage = function (_0x44f467) {
     },
   };
   if (_0x3c38e5['lkube'](enabledLanguages.length, 1)) {
-    let _0x24dc7e = enabledLanguages['indexOf'](_0x44f467.id);
+    let _0x24dc7e = enabledLanguages.indexOf(_0x44f467.id);
     (_0x3c38e5['lkube'](_0x24dc7e, -1) && enabledLanguages['splice'](_0x24dc7e, 1),
       visualizeButtonUnclick(_0x44f467),
       (_0x44f467['onclick'] = function () {
