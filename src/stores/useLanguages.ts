@@ -1,9 +1,12 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import type { Language, LanguagesState } from '@/types.ts';
+import type { Language, LanguagesState, PokemonInfo } from '@/types.ts';
+import { usePkmnData } from '@/stores/usePkmnStore.ts';
 
 export const useLanguages = defineStore('languages', () => {
+  const { data } = usePkmnData();
+
   const languagesState = reactive<LanguagesState>({
     languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
   });
@@ -24,7 +27,15 @@ export const useLanguages = defineStore('languages', () => {
     languagesState.languages = new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']);
   };
 
+  const getTranslation = (pokemon: PokemonInfo, language: Language | null) => {
+    if (!language) {
+      return data.translations?.[pokemon.id]?.en;
+    }
+    return data.translations?.[pokemon.id]?.[language];
+  };
+
   return {
+    getTranslation,
     languagesState,
     resetLanguages,
     setLanguages,

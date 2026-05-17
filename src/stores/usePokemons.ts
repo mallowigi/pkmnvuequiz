@@ -440,6 +440,7 @@ export const usePokemons = defineStore('pokemons', () => {
     return (
       pokemonState.pokemonStatuses.get(normalizeName(pokemon.baseName)) ?? {
         isFound: false,
+        isMissed: false,
         isShadowed: false,
         lastFoundAt: null,
         lastShadowedAt: null,
