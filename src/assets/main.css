@@ -37,7 +37,7 @@ p {
 
 a {
   text-decoration: none;
-  color: var(--primary);
+  color: var(--type-inline-color, var(--primary));
 }
 
 ol {
@@ -46,7 +46,7 @@ ol {
   margin-block-start: 5px;
   margin-block-end: 5px;
   margin-inline-start: 0;
-  margin-inline-end: 0px;
+  margin-inline-end: 0;
   padding-inline-start: 0;
 }
 
@@ -60,7 +60,7 @@ ol {
 }
 
 ::selection {
-  background: var(--primary);
+  background: var(--type-bg-color, var(--primary));
   color: white;
   text-shadow: none;
 }
@@ -74,5 +74,5 @@ ol {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
+  background-color: var(--type-bg-color, var(--primary));
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, watchEffect } from 'vue';
 
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
@@ -13,7 +13,7 @@ import GameFooter from '@/components/footer/GameFooter.vue';
 import Game from '@/components/game/Game.vue';
 import GameSelection from '@/components/genSelection/GameSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
-import { useTypeStyles } from '@/composables/useTypeStyles';
+import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
@@ -26,6 +26,26 @@ const { flowState } = useGameFlow();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 const typeStyles = useTypeStyles();
+
+watchEffect(() => {
+  if (typeof document === 'undefined') {
+    return;
+  }
+
+  const root = document.documentElement;
+  const styles = typeStyles.value;
+
+  TYPE_STYLE_KEYS.forEach((key) => {
+    const value = styles[key];
+
+    if (value) {
+      root.style.setProperty(key, value);
+      return;
+    }
+
+    root.style.removeProperty(key);
+  });
+});
 
 onMounted(() => {
   const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
