@@ -8,7 +8,15 @@ import { languages } from '@/data/languages.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
-import type { Language } from '@/types.ts';
+import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
+import { boxes } from '@/data/boxes.ts';
+import { specialTypes } from '@/data/specialTypes.ts';
+import { useState } from '@/stores/useState.ts';
+import { useBoxes } from '@/composables/useBoxes.ts';
+
+const { state } = useState();
+const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
+const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
 
 const { languagesState, getTranslation } = useLanguages();
 const pokemonStore = usePokemons();
@@ -34,6 +42,21 @@ const toggleAccordion = () => {
 
 const pokemonSprite = (pokemonId: string) => {
   return data.sprites?.[pokemonId] ?? '';
+};
+
+const currentBoxes = computed(() => {
+  if (state.gameMode !== 'special') {
+    const currentGameModeBoxes = getCurrentGameModeBoxes();
+    return currentGameModeBoxes?.map((box) => boxes[box]);
+  } else {
+    const specialGameModeBoxes = getSpecialBoxes();
+    return specialGameModeBoxes?.map((box) => specialTypes[box]);
+  }
+});
+
+const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
+  const pokemonByBox = Array.from(missed.value).filter((pokemon) => pokemon.box === boxId);
+  return pokemonByBox;
 };
 </script>
 
@@ -65,16 +88,23 @@ const pokemonSprite = (pokemonId: string) => {
       </div>
     </div>
 
-    <div class="missed-panel">
-      <div class="missed-section">
+    <div
+      class="missed-panel"
+      v-show="isAccordionOpen"
+    >
+      <div
+        v-for="box in currentBoxes"
+        :key="box.id"
+        class="missed-section"
+      >
         <div
-          v-for="pokemon in missed"
+          v-for="(pokemon, index) in getBoxPokemons(box.id)"
           :key="pokemon.id"
           class="pokemon"
         >
           <div
             :style="{ '--bg-img': `url(${pokemonSprite(pokemon.id)})` }"
-            class="spritel"
+            class="sprite"
           />
           {{ getTranslation(pokemon, currentLanguage) }}
         </div>
@@ -153,7 +183,7 @@ const pokemonSprite = (pokemonId: string) => {
 
 .missed-section {
   border-top: 2px dotted var(--type-btn-color, var(--primary));
-  padding-top: 10px;
+  padding: 10px;
 
   display: grid;
   grid-template-columns: repeat(4, 180px);
@@ -165,9 +195,13 @@ const pokemonSprite = (pokemonId: string) => {
     align-items: center;
     gap: 18px;
   }
+
+  &:empty {
+    display: none;
+  }
 }
 
-.spritel {
+.sprite {
   --bg-img: none;
   width: 28px;
   height: 32px;
