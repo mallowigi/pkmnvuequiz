@@ -97,7 +97,7 @@ const displayedSprite = computed<DisplayedSprite>(() => {
 const spriteDelay = computed<string>(() => {
   const rawDelay = (props.index ?? 0) * 20;
   // Make staggering animation when we need to display all found or all shadows
-  if (state.withShadows || flowState.isEnded) {
+  if (state.withShadows || flowState.isGivenUp) {
     return `${rawDelay}ms`;
   }
 
@@ -109,7 +109,7 @@ const spriteDelay = computed<string>(() => {
 <template>
   <section
     class="container"
-    :class="{ full: state.gameMode === 'full' }"
+    :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
     <Transition name="sprite-swap">
@@ -117,7 +117,7 @@ const spriteDelay = computed<string>(() => {
         :key="displayedSprite.key"
         class="sprite"
         v-if="displayedSprite.kind !== 'cycle'"
-        :class="[displayedSprite.kind, props.status.isMissed && 'missed']"
+        :class="displayedSprite.kind"
         :title="displayedSprite.title ?? undefined"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
       />
@@ -167,6 +167,10 @@ const spriteDelay = computed<string>(() => {
   transform: scale(1.3);
 }
 
+.container.missed > * {
+  opacity: 0.5;
+}
+
 .sprite {
   --bg-img: none;
   width: 28px;
@@ -181,10 +185,6 @@ const spriteDelay = computed<string>(() => {
 
   &:hover {
     animation: hover-pop 0.5s ease forwards;
-  }
-
-  &.missed {
-    opacity: 0.5;
   }
 
   &.unknown {
