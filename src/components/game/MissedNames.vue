@@ -16,7 +16,6 @@ import { useBoxes } from '@/composables/useBoxes.ts';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
-const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
 
 const { languagesState, getTranslation } = useLanguages();
 const pokemonStore = usePokemons();
@@ -55,8 +54,7 @@ const currentBoxes = computed(() => {
 });
 
 const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
-  const pokemonByBox = Array.from(missed.value).filter((pokemon) => pokemon.box === boxId);
-  return pokemonByBox;
+  return Array.from(missed.value).filter((pokemon) => pokemon.box === boxId);
 };
 </script>
 

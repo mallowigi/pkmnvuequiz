@@ -50,6 +50,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     Object.assign(flowState, {
       gameSelectionState: 'gen',
       isEnded: false,
+      isGivenUp: false,
       isPaused: false,
       isStarted: false,
     });
