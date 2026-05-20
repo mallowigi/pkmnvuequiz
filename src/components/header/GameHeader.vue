@@ -60,7 +60,7 @@ import Watermark from '@/components/header/Watermark.vue';
 }
 
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 2;
   display: flex;
