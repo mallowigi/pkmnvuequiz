@@ -88,6 +88,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 
     <div
       class="missed-panel"
+      :class="{ single: currentBoxes.length === 1 }"
       v-show="isAccordionOpen"
     >
       <div
@@ -183,6 +184,16 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   column-count: 2;
   column-gap: 1em;
   width: 100%;
+
+  &.single > .missed-section {
+    column-span: all;
+    width: 100%;
+    min-width: 800px;
+  }
+}
+
+.missed-panel.single {
+  column-span: all;
 }
 
 .missed-section {
