@@ -5,6 +5,7 @@ import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow.js';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.js';
+import { useTimer } from '@/stores/useTimer.ts';
 import type { Mode } from '@/types.js';
 import { scrollToTop } from '@/utils/utils.ts';
 
@@ -12,6 +13,7 @@ const { state, setMode } = useState();
 const { flowState } = useGameFlow();
 const { setDialog } = useDialogs();
 const { resetPokemonState } = usePokemons();
+const { resetTimer } = useTimer();
 
 const applyMode = (mode: Mode) => {
   if (state.mode === mode) return;
@@ -23,6 +25,7 @@ const applyMode = (mode: Mode) => {
   setDialog(mode, () => {
     setMode(mode);
     resetPokemonState();
+    resetTimer();
     scrollToTop();
   });
 };

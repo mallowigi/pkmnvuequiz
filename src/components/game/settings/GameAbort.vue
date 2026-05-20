@@ -16,13 +16,11 @@ const resetGame = () => {
 </script>
 
 <template>
-  <div
-    class="row"
-    v-if="!flowState.isGivenUp && !flowState.isEnded"
-  >
+  <div class="row">
     <RoundedButton
       class="rad-br-tl danger-btn"
       @click="giveUp"
+      v-if="!flowState.isGivenUp && !flowState.isEnded"
     >
       Give Up
     </RoundedButton>

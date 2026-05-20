@@ -5,11 +5,16 @@ import type { TimerState } from '@/types.ts';
 
 export const useTimer = defineStore('timer', () => {
   const timerState = reactive<TimerState>({
+    elapsed: 0,
     isLimited: false,
     minutes: 35,
     savedAt: null,
     startTime: null,
   });
+
+  const incElapsed = () => {
+    timerState.elapsed++;
+  };
 
   const save = () => {
     timerState.savedAt = Date.now();
@@ -35,16 +40,13 @@ export const useTimer = defineStore('timer', () => {
   };
 
   const resetTimer = () => {
-    Object.assign(timerState, {
-      elapsed: 0,
-      isLimited: false,
-      minutes: 35,
-      savedAt: null,
-      startTime: null,
-    });
+    timerState.startTime = null;
+    timerState.savedAt = null;
+    timerState.elapsed = 0;
   };
 
   return {
+    incElapsed,
     resetTimer,
     save,
     setIsLimited,

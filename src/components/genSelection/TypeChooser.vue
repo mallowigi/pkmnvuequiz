@@ -9,12 +9,14 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
+import { useTimer } from '@/stores/useTimer.ts';
 
 const { startGame, setGameSelectionState } = useGameFlow();
 const { setGameMode } = useState();
 const { setCurrentType, clearCurrentType, getSpecialType } = useCurrentType();
 const { clearCurrentGen } = useCurrentGen();
 const { resetPokemonState } = usePokemons();
+const { resetTimer } = useTimer();
 
 const specialType = computed(() => getSpecialType());
 
@@ -24,13 +26,13 @@ const setTypeOrSpecial = (type: string) => {
     case 'special':
       setGameMode('special');
       clearCurrentType();
-      resetPokemonState();
       break;
     default:
       setGameMode('types');
       setCurrentType(type as Type);
-      resetPokemonState();
   }
+  resetPokemonState();
+  resetTimer();
   setGameSelectionState(null);
   startGame();
 };

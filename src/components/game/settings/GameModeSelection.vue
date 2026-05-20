@@ -7,6 +7,7 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.js';
 import { scrollToTop } from '@/utils/utils.ts';
+import { useTimer } from '@/stores/useTimer.ts';
 
 const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();
@@ -14,6 +15,7 @@ const { clearCurrentGen } = useCurrentGen();
 const { setGameMode, state } = useState();
 const { setGameSelectionState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
+const { resetTimer } = useTimer();
 
 const setFullQuiz = () => {
   if (state.gameMode === 'full') return;
@@ -23,6 +25,7 @@ const setFullQuiz = () => {
     clearCurrentGen();
     clearCurrentType();
     resetPokemonState();
+    resetTimer();
     startGame();
     scrollToTop();
   });
@@ -50,6 +53,7 @@ const setSpecialQuiz = () => {
     clearCurrentGen();
     clearCurrentType();
     resetPokemonState();
+    resetTimer();
     scrollToTop();
   });
 };

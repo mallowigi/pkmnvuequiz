@@ -24,11 +24,11 @@ const props = defineProps<Props>();
 const reset = () => {
   const gen = currentGenState.gen;
   props.toggleFunction();
-  resetState();
+  // resetState();
   resetPokemonState();
   resetTimer();
   resetFlowState();
-  setCurrentGen(gen);
+  // setCurrentGen(gen);
   startGame();
 
   if (dialogs.callback) {

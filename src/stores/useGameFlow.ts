@@ -47,13 +47,9 @@ export const useGameFlow = defineStore('gameFlow', () => {
   };
 
   const resetFlowState = () => {
-    Object.assign(flowState, {
-      gameSelectionState: 'gen',
-      isEnded: false,
-      isGivenUp: false,
-      isPaused: false,
-      isStarted: false,
-    });
+    flowState.isEnded = false;
+    flowState.isGivenUp = false;
+    flowState.isPaused = false;
   };
 
   return {

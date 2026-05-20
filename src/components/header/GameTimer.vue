@@ -6,13 +6,13 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 
 const { state } = useState();
-const { timerState } = useTimer();
+const { timerState, incElapsed } = useTimer();
 const { flowState, pauseGame } = useGameFlow();
 
-const localElapsed = ref(0);
-
 const elapsedTime = computed(() => {
-  const total = localElapsed.value ?? 0;
+  if (!timerState.startTime) return '- - : - - : - -';
+
+  const total = timerState.elapsed ?? 0;
   const hours = String(Math.floor(total / 3600));
   const minutes = String(Math.floor((total % 3600) / 60));
   const seconds = String(total % 60);
@@ -25,7 +25,7 @@ const interval = ref<ReturnType<typeof setInterval> | null>(null);
 let updateElapsedTime = () => {
   if (!timerState.startTime || flowState.isPaused) return;
 
-  localElapsed.value++;
+  incElapsed();
 };
 
 let startInterval = () => {
