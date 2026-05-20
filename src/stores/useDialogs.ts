@@ -4,7 +4,6 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import type { Dialog } from '@/types.ts';
 
 interface DialogsState {
-  data: any;
   dialog: Dialog | null;
   callback: (() => void) | null;
 }
@@ -12,7 +11,6 @@ interface DialogsState {
 export const useDialogs = defineStore('dialogs', () => {
   const dialogs = reactive<DialogsState>({
     callback: null,
-    data: null,
     dialog: null,
   });
 
@@ -23,13 +21,8 @@ export const useDialogs = defineStore('dialogs', () => {
     }
   };
 
-  const setData = <T>(data: T) => {
-    dialogs.data = data;
-  };
-
   return {
     dialogs,
-    setData,
     setDialog,
   };
 });
