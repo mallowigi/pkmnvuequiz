@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
-
-import ExpandTransition from '@/components/common/ExpandTransition.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import Spacer from '@/components/common/Spacer.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
@@ -14,6 +12,7 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
+import SlideDownTransition from '@/components/common/SlideDownTransition.vue';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
@@ -87,7 +86,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
       </div>
     </div>
 
-    <ExpandTransition>
+    <SlideDownTransition>
       <div
         class="missed-panel"
         :class="{ single: currentBoxes.length === 1 }"
@@ -111,7 +110,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
           </div>
         </div>
       </div>
-    </ExpandTransition>
+    </SlideDownTransition>
   </RoundedBox>
 </template>
 
@@ -184,6 +183,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 }
 
 .missed-panel {
+  overflow: hidden;
   column-count: 2;
   column-gap: 1em;
   width: 100%;

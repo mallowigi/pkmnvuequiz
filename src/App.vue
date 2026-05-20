@@ -127,6 +127,9 @@ onMounted(() => {
   --text-padding: 10px;
 
   --glow: #333;
+  --animate-duration: 0.5s;
+  --animate-delay: 0;
+  --animate-repeat: 1;
 }
 
 .dark {
