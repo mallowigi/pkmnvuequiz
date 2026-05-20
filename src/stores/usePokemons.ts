@@ -301,6 +301,7 @@ export const usePokemons = defineStore('pokemons', () => {
       status.lastFoundAt = null;
       status.isShadowed = false;
       status.lastShadowedAt = null;
+      status.isMissed = false;
     });
 
     hideShadows();

@@ -47,11 +47,21 @@ const regionOrType = computed(() => {
   }
 });
 
+const isDisabled = computed(() => {
+  return (
+    flowState.isPaused ||
+    flowState.isEnded ||
+    flowState.isGivenUp ||
+    dialogs.dialog !== null ||
+    roomState.roomMessage !== null
+  );
+});
+
 const inputRef = ref<HTMLInputElement | null>(null);
 
 const ensureFocus = () => {
   // Do not focus if the game is in paused or ended state, or if a dialog or room message is open
-  if (flowState.isPaused || flowState.isEnded || dialogs.dialog !== null || roomState.roomMessage !== null) {
+  if (isDisabled.value) {
     return;
   }
 
@@ -160,7 +170,7 @@ onUnmounted(() => {
 });
 
 // Make sure to refocus the input when the state changes
-watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, () => roomState.roomMessage], () => {
+watch([isDisabled], () => {
   setTimeout(ensureFocus, 0);
 });
 </script>
@@ -168,7 +178,7 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
 <template>
   <div
     class="box rad-bl-tr"
-    :class="{ shake: flowState.isStarted }"
+    :class="{ shake: flowState.isStarted, disabled: isDisabled }"
   >
     <p>Name all {{ regionOrType }} Pokémon:</p>
     <input
@@ -237,6 +247,11 @@ watch([() => flowState.isPaused, () => flowState.isEnded, () => dialogs.dialog, 
   justify-content: space-between;
   align-items: stretch;
   gap: 8px;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
 }
 
 .input-name {
