@@ -32,7 +32,7 @@ const applyMode = (mode: Mode) => {
 </script>
 
 <template>
-  <RoundedBox :class="{ disabled: flowState.isGivenUp || flowState.isEnded }">
+  <RoundedBox :class="{ disabled: flowState.isGivenUp || flowState.isEnded || state.withTypeShuffle }">
     <SegmentButton
       :active="{
         left: state.mode === 'chaos',

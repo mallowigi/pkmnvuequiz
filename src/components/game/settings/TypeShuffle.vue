@@ -32,7 +32,7 @@ const applyTypeShuffle = (value: boolean) => {
 <template>
   <RoundedBox
     title="Guess the next Pokemon of a given type"
-    :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
+    :class="{ disabled: flowState.isGivenUp || flowState.isEnded || state.mode !== 'normal' }"
   >
     <SegmentButton
       :active="{
