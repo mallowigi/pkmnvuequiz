@@ -11,6 +11,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
+import { useSound } from '@vueuse/sound';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -29,6 +30,9 @@ const {
   getNextOrderedPokemon,
   isWrongOrder,
 } = usePokemons();
+
+const soundFile = ref();
+const { play } = useSound(soundFile);
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -72,6 +76,15 @@ const ensureFocus = () => {
   }
 
   inputRef.value?.focus();
+};
+
+const playFailSound = () => {
+  if (state.withSound) {
+    soundFile.value = 'assets/sounds/wrong.mp3';
+    setTimeout(() => {
+      play();
+    }, 50);
+  }
 };
 
 const handleKeydown = (e: KeyboardEvent) => {
@@ -119,6 +132,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     }
 
     showUserMessage(`${capitalize(value)} already named.`);
+    playFailSound();
     inputRef.value!.value = '';
     return;
   }
@@ -130,6 +144,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     }
 
     showUserMessage(`${capitalize(value)} is not part of this game.`);
+    playFailSound();
     inputRef.value!.value = '';
     return;
   }
@@ -142,6 +157,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     }
 
     showUserMessage(`${capitalize(value)} is not the next Pokemon.`);
+    playFailSound();
     inputRef.value!.value = '';
     return;
   }
@@ -149,6 +165,14 @@ const handleKeydown = (e: KeyboardEvent) => {
   // TODO support type shuffle
 
   addFound(foundPokemon);
+
+  if (state.withSound) {
+    soundFile.value = `assets/sounds/latest/${foundPokemon[0].dexNum}.ogg`;
+    setTimeout(() => {
+      play();
+    }, 50);
+  }
+
   inputRef.value!.value = '';
   return;
 };
