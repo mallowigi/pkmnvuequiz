@@ -226,7 +226,7 @@
     },
     {
       "id": "nidoranf",
-      "baseName": "nidoran",
+      "baseName": "nidoranf",
       "dexNum": 29,
       "primaryType": "poison",
       "secondaryType": null,
@@ -250,7 +250,7 @@
     },
     {
       "id": "nidoranm",
-      "baseName": "nidoran",
+      "baseName": "nidoranm",
       "dexNum": 32,
       "primaryType": "poison",
       "secondaryType": null,
