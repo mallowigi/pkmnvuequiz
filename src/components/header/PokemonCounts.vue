@@ -3,12 +3,22 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const pokemonStore = usePokemons();
 const { numFound } = storeToRefs(pokemonStore);
 const { getCurrentGameModePokemon } = pokemonStore;
 
+const { flowState } = useGameFlow();
+
+const found = computed(() => {
+  if (!flowState.isStarted) return '--';
+  return numFound.value;
+});
+
 const total = computed(() => {
+  if (!flowState.isStarted) return '--';
+
   const pokemons = getCurrentGameModePokemon();
   return pokemons.size ?? 0;
 });
@@ -16,7 +26,7 @@ const total = computed(() => {
 
 <template>
   <div class="box rad-bl-tr counter">
-    <span class="highlight">{{ numFound }}</span> / {{ total }}
+    <span class="highlight">{{ found }}</span> / {{ total }}
   </div>
 </template>
 
