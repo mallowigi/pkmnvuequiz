@@ -23,7 +23,7 @@ const hasLanguage = (id: Language) => {
         v-for="language in sortedLanguages"
         :key="language.id"
         :title="language.name"
-        class="smolbutton transition-element"
+        class="toggle transition-element"
         @click="toggleLanguage(language.id)"
         :class="{ active: hasLanguage(language.id) }"
       >
@@ -41,7 +41,7 @@ const hasLanguage = (id: Language) => {
   gap: 4px;
 }
 
-.smolbutton {
+.toggle {
   border: solid 2px var(--type-btn-color);
   color: var(--type-btn-color);
   border-radius: 6px 3px 6px 3px;

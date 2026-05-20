@@ -4,15 +4,15 @@ import { computed, ref } from 'vue';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import Spacer from '@/components/common/Spacer.vue';
+import { useBoxes } from '@/composables/useBoxes.ts';
+import { boxes } from '@/data/boxes.ts';
 import { languages } from '@/data/languages.ts';
+import { specialTypes } from '@/data/specialTypes.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
-import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
-import { boxes } from '@/data/boxes.ts';
-import { specialTypes } from '@/data/specialTypes.ts';
 import { useState } from '@/stores/useState.ts';
-import { useBoxes } from '@/composables/useBoxes.ts';
+import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
@@ -78,7 +78,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
         v-for="language in sortedLanguages"
         :key="language.id"
         :title="language.name"
-        class="smolbutton transition-element"
+        class="toggle transition-element"
         @click="selectLanguage(language.id)"
         :class="{ active: currentLanguage === language.id }"
       >
@@ -96,7 +96,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
         class="missed-section"
       >
         <div
-          v-for="(pokemon, index) in getBoxPokemons(box.id)"
+          v-for="pokemon in getBoxPokemons(box.id)"
           :key="pokemon.id"
           class="pokemon"
         >
@@ -128,7 +128,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   gap: 4px;
 }
 
-.smolbutton {
+.toggle {
   border: solid 2px var(--type-btn-color);
   color: var(--type-btn-color);
   border-radius: 6px 3px 6px 3px;

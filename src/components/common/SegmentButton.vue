@@ -77,7 +77,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.left"
-    class="smolbutton transition-element left"
+    class="toggle transition-element left"
     :class="[
       {
         active: isActive('left'),
@@ -94,7 +94,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.center"
-    class="smolbutton transition-element center"
+    class="toggle transition-element center"
     :class="[
       {
         active: isActive('center'),
@@ -111,7 +111,7 @@ const isAttachedToNext = (name: 'left' | 'center' | 'right' | 'suffix') => {
 
   <div
     v-if="slots.right"
-    class="smolbutton transition-element right"
+    class="toggle transition-element right"
     :class="[
       {
         active: isActive('right'),
@@ -155,7 +155,7 @@ div:empty {
   cursor: default;
 }
 
-.smolbutton {
+.toggle {
   border: solid 2px var(--type-btn-color);
   color: var(--type-btn-color);
   border-radius: 6px 3px 6px 3px;
@@ -183,7 +183,7 @@ div:empty {
   }
 }
 
-.smolbutton.attached-next {
+.toggle.attached-next {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
