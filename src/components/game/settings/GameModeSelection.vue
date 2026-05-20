@@ -12,7 +12,7 @@ const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();
 const { clearCurrentGen } = useCurrentGen();
 const { setGameMode, state } = useState();
-const { setGameSelectionState } = useGameFlow();
+const { setGameSelectionState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
 
 const setFullQuiz = () => {
@@ -23,6 +23,7 @@ const setFullQuiz = () => {
     clearCurrentGen();
     clearCurrentType();
     resetPokemonState();
+    startGame();
     scrollToTop();
   });
 };

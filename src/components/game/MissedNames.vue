@@ -25,7 +25,7 @@ const { data } = usePkmnData();
 const currentLanguage = ref<Language | null>(
   languagesState.languages.size > 0 ? Array.from(languagesState.languages)[0] : null,
 );
-const isAccordionOpen = ref(false);
+const isAccordionOpen = ref(true);
 
 const sortedLanguages = computed(() => {
   return Object.values(languages).sort((a, b) => a.index - b.index);
@@ -179,13 +179,22 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   }
 }
 
+.missed-panel {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 1fr;
+}
+
 .missed-section {
   border-top: 2px dotted var(--type-btn-color, var(--primary));
   padding: 10px;
-
+  overflow: auto;
+  max-height: 500px;
   display: grid;
-  grid-template-columns: repeat(4, 180px);
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: 36px;
   gap: 10px;
+  align-items: flex-start;
 
   & .pokemon {
     display: flex;
