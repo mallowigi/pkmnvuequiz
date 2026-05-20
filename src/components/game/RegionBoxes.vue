@@ -64,6 +64,11 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   const pokemonByName = getCurrentGamePokemon(boxId);
   return Array.from(pokemonByName.values()).flat();
 };
+
+const isFull = (boxId: SpecialType | RegionBox) => {
+  const pokemons = getBoxPokemons(boxId);
+  return pokemons.every((pokemon) => getStatus(pokemon).isFound);
+};
 </script>
 
 <template>
@@ -74,6 +79,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
     <RoundedBox
       class="region-box"
       v-for="box in currentBoxes"
+      :class="{ full: isFull(box.id) }"
       :key="box.id"
     >
       <span class="region-name">{{ box.name }}</span>
@@ -125,7 +131,11 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   box-shadow: 0px 10px 20px -5px var(--glow);
 
   &:hover {
-    --glow: var(--type-btn-color);
+    --glow: var(--type-btn-color, var(--primary));
+  }
+
+  &.full {
+    border: 2px solid var(--type-btn-color, var(--primary));
   }
 }
 
