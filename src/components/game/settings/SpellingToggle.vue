@@ -2,9 +2,11 @@
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, toggleSpelling } = useState();
 const { showUserMessage } = useMessages();
+const { flowState } = useGameFlow();
 
 const toggle = () => {
   toggleSpelling();
@@ -17,7 +19,7 @@ const toggle = () => {
     title="Toggle spelling help"
     class="spelling-toggle rad-br-tl"
     @click="toggle"
-    :class="{ selected: state.withSpelling }"
+    :class="{ selected: state.withSpelling, disabled: flowState.isGivenUp || flowState.isEnded }"
   >
     Spelling Help
     <img src="@/assets/spellcheck.png" />

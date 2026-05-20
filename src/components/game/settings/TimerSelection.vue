@@ -61,6 +61,7 @@ const minutes = computed({
   <RoundedBox
     class="timer-box"
     title="Set a timer for the game."
+    :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
   >
     <SegmentButton
       :active="{

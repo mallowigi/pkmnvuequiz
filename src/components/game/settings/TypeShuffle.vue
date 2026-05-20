@@ -3,9 +3,11 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, setTypeShuffle } = useState();
 const { showUserMessage } = useMessages();
+const { flowState } = useGameFlow();
 
 const applyTypeShuffle = (value: boolean) => {
   if (state.withTypeShuffle === value) return;
@@ -21,7 +23,10 @@ const applyTypeShuffle = (value: boolean) => {
 </script>
 
 <template>
-  <RoundedBox title="Guess the next Pokemon of a given type">
+  <RoundedBox
+    title="Guess the next Pokemon of a given type"
+    :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
+  >
     <SegmentButton
       :active="{
         left: state.withTypeShuffle,

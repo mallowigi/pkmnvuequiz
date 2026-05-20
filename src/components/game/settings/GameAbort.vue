@@ -20,7 +20,7 @@ const resetGame = () => {
     <RoundedButton
       class="rad-br-tl danger-btn"
       @click="giveUp"
-      v-if="!flowState.isGivenUp && !flowState.isEnded"
+      :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
     >
       Give Up
     </RoundedButton>

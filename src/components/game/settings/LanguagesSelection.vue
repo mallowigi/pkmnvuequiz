@@ -4,8 +4,10 @@ import { languages } from '@/data/languages.ts';
 import { computed } from 'vue';
 import type { Language } from '@/types.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { languagesState, toggleLanguage } = useLanguages();
+const { flowState } = useGameFlow();
 
 const sortedLanguages = computed(() => {
   return Object.values(languages).sort((a, b) => a.index - b.index);
@@ -17,7 +19,10 @@ const hasLanguage = (id: Language) => {
 </script>
 
 <template>
-  <RoundedBox title="Guess Pokemon in other languages">
+  <RoundedBox
+    title="Guess Pokemon in other languages"
+    :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
+  >
     <div class="selection-content">
       <div
         v-for="language in sortedLanguages"

@@ -3,9 +3,11 @@ import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import RoundedBox from '@/components/common/RoundedBox.vue';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, setSound } = useState();
 const { showUserMessage } = useMessages();
+const { flowState } = useGameFlow();
 
 const applySound = (value: boolean) => {
   if (state.withSound === value) return;
@@ -16,7 +18,10 @@ const applySound = (value: boolean) => {
 </script>
 
 <template>
-  <RoundedBox title="Toggle Sounds On/Off">
+  <RoundedBox
+    :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
+    title="Toggle Sounds On/Off"
+  >
     <SegmentButton
       :active="{
         left: state.withSound,

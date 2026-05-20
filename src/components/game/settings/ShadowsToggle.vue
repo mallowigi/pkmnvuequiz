@@ -23,10 +23,9 @@ const toggle = () => {
 
 <template>
   <RoundedButton
-    v-if="!flowState.isGivenUp && !flowState.isEnded"
     title="Toggle Pokemon Shadows (this action cannot be undone)"
     class="rad-br-tl shadows-toggle"
-    :class="{ selected: state.withShadows }"
+    :class="{ selected: state.withShadows, disabled: flowState.isGivenUp || flowState.isEnded }"
     @click="toggle"
   >
     Shadows
