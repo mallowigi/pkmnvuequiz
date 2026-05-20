@@ -5,6 +5,7 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 import Spacer from '@/components/common/Spacer.vue';
 import MissedNames from '@/components/game/MissedNames.vue';
+import ExpandTransition from '@/components/common/ExpandTransition.vue';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -12,7 +13,9 @@ const { flowState } = useGameFlow();
 
 <template>
   <div class="game">
-    <MissedNames v-if="flowState.isGivenUp" />
+    <ExpandTransition>
+      <MissedNames v-if="flowState.isGivenUp" />
+    </ExpandTransition>
 
     <RegionBoxes />
     <Spacer />

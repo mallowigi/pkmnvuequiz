@@ -3,32 +3,25 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
 
-const { dialogs } = useDialogs();
-
-type Props = {
-  toggleFunction: () => void;
-};
-
-const props = defineProps<Props>();
+const { dialogs, closeDialog } = useDialogs();
 
 const switchTimer = () => {
-  props.toggleFunction();
+  closeDialog();
 
   if (dialogs.callback) {
     dialogs.callback();
   }
 };
 
-const cancel = (e: Event) => {
-  e.stopPropagation();
-  props.toggleFunction();
+const cancel = () => {
+  closeDialog();
 };
 </script>
 
 <template>
   <Overlay
     class="overlay"
-    @close="props.toggleFunction()"
+    @close="cancel"
   >
     <div class="prompt">
       <h2>Change timer?</h2>
@@ -42,7 +35,7 @@ const cancel = (e: Event) => {
       </RoundedButton>
 
       <RoundedButton
-        @click="cancel"
+        @click.stop="cancel"
         primary
       >
         Cancel

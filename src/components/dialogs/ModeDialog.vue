@@ -6,18 +6,17 @@ import type { Mode } from '@/types.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { setMode } = useState();
-const { dialogs } = useDialogs();
+const { dialogs, closeDialog } = useDialogs();
 
 type Props = {
   caption: string;
   mode: Mode;
-  toggleFunction: () => void;
 };
 
 const props = defineProps<Props>();
 
 const enableMode = () => {
-  props.toggleFunction();
+  closeDialog();
   setMode(props.mode);
 
   if (dialogs.callback) {
@@ -26,7 +25,7 @@ const enableMode = () => {
 };
 
 const disableMode = () => {
-  props.toggleFunction();
+  closeDialog();
 };
 </script>
 

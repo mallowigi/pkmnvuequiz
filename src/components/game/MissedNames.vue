@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
 
+import ExpandTransition from '@/components/common/ExpandTransition.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import Spacer from '@/components/common/Spacer.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
@@ -25,7 +26,7 @@ const { data } = usePkmnData();
 const currentLanguage = ref<Language | null>(
   languagesState.languages.size > 0 ? Array.from(languagesState.languages)[0] : null,
 );
-const isAccordionOpen = ref(true);
+const isAccordionOpen = ref(false);
 
 const sortedLanguages = computed(() => {
   return Object.values(languages).sort((a, b) => a.index - b.index);
@@ -86,29 +87,31 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
       </div>
     </div>
 
-    <div
-      class="missed-panel"
-      :class="{ single: currentBoxes.length === 1 }"
-      v-show="isAccordionOpen"
-    >
+    <ExpandTransition>
       <div
-        v-for="box in currentBoxes"
-        :key="box.id"
-        class="missed-section"
+        class="missed-panel"
+        :class="{ single: currentBoxes.length === 1 }"
+        v-show="isAccordionOpen"
       >
         <div
-          v-for="pokemon in getBoxPokemons(box.id)"
-          :key="pokemon.id"
-          class="pokemon"
+          v-for="box in currentBoxes"
+          :key="box.id"
+          class="missed-section"
         >
           <div
-            :style="{ '--bg-img': `url(${pokemonSprite(pokemon.id)})` }"
-            class="sprite"
-          />
-          {{ getTranslation(pokemon, currentLanguage) }}
+            v-for="pokemon in getBoxPokemons(box.id)"
+            :key="pokemon.id"
+            class="pokemon"
+          >
+            <div
+              :style="{ '--bg-img': `url(${pokemonSprite(pokemon.id)})` }"
+              class="sprite"
+            />
+            {{ getTranslation(pokemon, currentLanguage) }}
+          </div>
         </div>
       </div>
-    </div>
+    </ExpandTransition>
   </RoundedBox>
 </template>
 

@@ -6,17 +6,11 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 
 const { giveUp } = useGameFlow();
-const { dialogs } = useDialogs();
+const { dialogs, closeDialog } = useDialogs();
 const { showRemaining } = usePokemons();
 
-type Props = {
-  toggleFunction: () => void;
-};
-
-const props = defineProps<Props>();
-
 const promptGiveUp = () => {
-  props.toggleFunction();
+  closeDialog();
   giveUp();
   showRemaining();
 
@@ -26,7 +20,7 @@ const promptGiveUp = () => {
 };
 
 const cancel = () => {
-  props.toggleFunction();
+  closeDialog();
 };
 </script>
 

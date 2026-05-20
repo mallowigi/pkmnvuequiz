@@ -13,17 +13,11 @@ const { resetPokemonState } = usePokemons();
 const { resetState } = useState();
 const { setCurrentGen, currentGenState } = useCurrentGen();
 const { resetTimer } = useTimer();
-const { dialogs } = useDialogs();
-
-type Props = {
-  toggleFunction: () => void;
-};
-
-const props = defineProps<Props>();
+const { dialogs, closeDialog } = useDialogs();
 
 const reset = () => {
   const gen = currentGenState.gen;
-  props.toggleFunction();
+  closeDialog();
   // resetState();
   resetPokemonState();
   resetTimer();
@@ -37,7 +31,7 @@ const reset = () => {
 };
 
 const cancel = () => {
-  props.toggleFunction();
+  closeDialog();
 };
 </script>
 

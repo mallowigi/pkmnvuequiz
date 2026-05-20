@@ -3,16 +3,10 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
 
-const { dialogs } = useDialogs();
-
-type Props = {
-  toggleFunction: () => void;
-};
-
-const props = defineProps<Props>();
+const { dialogs, closeDialog } = useDialogs();
 
 const switchQuiz = () => {
-  props.toggleFunction();
+  closeDialog();
 
   if (dialogs.callback) {
     dialogs.callback();
@@ -20,7 +14,7 @@ const switchQuiz = () => {
 };
 
 const cancel = () => {
-  props.toggleFunction();
+  closeDialog();
 };
 </script>
 

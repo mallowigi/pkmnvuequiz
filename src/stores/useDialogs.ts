@@ -16,12 +16,15 @@ export const useDialogs = defineStore('dialogs', () => {
 
   const setDialog = (dialog: Dialog | null, callback?: () => void) => {
     dialogs.dialog = dialog;
-    if (callback) {
-      dialogs.callback = callback;
-    }
+    dialogs.callback = callback || null;
+  };
+
+  const closeDialog = () => {
+    dialogs.dialog = null;
   };
 
   return {
+    closeDialog,
     dialogs,
     setDialog,
   };

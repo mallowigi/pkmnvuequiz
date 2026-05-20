@@ -5,16 +5,10 @@ import { useState } from '@/stores/useState';
 import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { displayShadows } = useState();
-const { dialogs } = useDialogs();
-
-type Props = {
-  toggleFunction: () => void;
-};
-
-const props = defineProps<Props>();
+const { dialogs, closeDialog } = useDialogs();
 
 const enableReveal = () => {
-  props.toggleFunction();
+  closeDialog();
   displayShadows();
 
   if (dialogs.callback) {
@@ -23,7 +17,7 @@ const enableReveal = () => {
 };
 
 const cancel = () => {
-  props.toggleFunction();
+  closeDialog();
 };
 </script>
 
