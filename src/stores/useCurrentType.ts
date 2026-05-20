@@ -5,6 +5,7 @@ import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { useState } from '@/stores/useState';
 import type { Type } from '@/types.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 
 type CurrentTypeState = {
   currentType: Type | null;
@@ -12,6 +13,7 @@ type CurrentTypeState = {
 
 export const useCurrentType = defineStore('currentType', () => {
   const { state } = useState();
+  const { getRandomRemainingPokemon } = usePokemons();
 
   const currentTypeState = reactive<CurrentTypeState>({
     currentType: null,
@@ -46,6 +48,21 @@ export const useCurrentType = defineStore('currentType', () => {
     }
   };
 
+  const setRandomCurrentType = () => {
+    const remainingPokemon = getRandomRemainingPokemon();
+    if (!remainingPokemon) return;
+
+    let randomType;
+    if (!remainingPokemon.secondaryType) {
+      randomType = remainingPokemon.primaryType;
+      setCurrentType(randomType);
+      return;
+    }
+
+    randomType = Math.random() < 0.5 ? remainingPokemon.primaryType : remainingPokemon.secondaryType;
+    setCurrentType(randomType);
+  };
+
   return {
     clearCurrentType,
     currentTypeState,
@@ -53,6 +70,7 @@ export const useCurrentType = defineStore('currentType', () => {
     getCurrentTypeOrSpecial,
     getSpecialType,
     setCurrentType,
+    setRandomCurrentType,
   };
 });
 

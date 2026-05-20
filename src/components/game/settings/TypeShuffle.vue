@@ -4,10 +4,12 @@ import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
 
 const { state, setTypeShuffle } = useState();
 const { showUserMessage } = useMessages();
 const { flowState } = useGameFlow();
+const { setRandomCurrentType, clearCurrentType } = useCurrentType();
 
 const applyTypeShuffle = (value: boolean) => {
   if (state.withTypeShuffle === value) return;
@@ -18,6 +20,11 @@ const applyTypeShuffle = (value: boolean) => {
   }
 
   setTypeShuffle(value);
+  if (value) {
+    setRandomCurrentType();
+  } else {
+    clearCurrentType();
+  }
   showUserMessage(`Type Shuffle ${value ? 'enabled' : 'disabled'}`);
 };
 </script>

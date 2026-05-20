@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSound } from '@vueuse/sound';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import LastPokemon from '@/components/header/LastPokemon.vue';
@@ -11,12 +12,11 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
-import { useSound } from '@vueuse/sound';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
 const { getCurrentRegion } = useCurrentRegion();
-const { getCurrentTypeOrSpecial } = useCurrentType();
+const { getCurrentType, getCurrentTypeOrSpecial, setRandomCurrentType } = useCurrentType();
 const { dialogs } = useDialogs();
 const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
@@ -32,7 +32,7 @@ const {
 } = usePokemons();
 
 const soundFile = ref();
-const { play } = useSound(soundFile);
+const { play } = useSound(soundFile, { interrupt: true, volume: 0.5 });
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -162,9 +162,24 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  // TODO support type shuffle
+  if (state.withTypeShuffle) {
+    const currentType = getCurrentType();
+    const types = [foundPokemon[0].primaryType, foundPokemon[0].secondaryType].filter(Boolean);
 
+    if (currentType && !types.includes(currentType.id)) {
+      showUserMessage(`${capitalize(value)} is not of type ${capitalize(currentType.name)}.`);
+      playFailSound();
+      inputRef.value!.value = '';
+      return;
+    }
+  }
+
+  // Add the pokemon at last
   addFound(foundPokemon);
+
+  if (state.withTypeShuffle) {
+    setRandomCurrentType();
+  }
 
   if (state.withSound) {
     soundFile.value = `assets/sounds/latest/${foundPokemon[0].dexNum}.ogg`;

@@ -485,6 +485,17 @@ export const usePokemons = defineStore('pokemons', () => {
     return pokemonState.lastPokemon;
   };
 
+  const getRandomRemainingPokemon = () => {
+    const remainingArray = Array.from(remaining.value);
+    if (remainingArray.length === 0) return null;
+    const currentGameModePokemon = getCurrentGameModePokemon();
+
+    const randomIndex = Math.floor(Math.random() * remainingArray.length);
+    const randomPokemonKey = remainingArray[randomIndex];
+    const randomPokemon = currentGameModePokemon.get(randomPokemonKey);
+    return randomPokemon ? randomPokemon[0] : null;
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -494,6 +505,7 @@ export const usePokemons = defineStore('pokemons', () => {
     getCurrentGameModePokemon,
     getLastPokemon,
     getNextOrderedPokemon,
+    getRandomRemainingPokemon,
     getSpecialTypePokemon,
     getStatus,
     initializePokemonMaps,
