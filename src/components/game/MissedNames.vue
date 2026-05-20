@@ -180,14 +180,17 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 }
 
 .missed-panel {
-  display: grid;
-  grid-gap: 1em;
-  grid-template-columns: 1fr 1fr;
+  column-count: 2;
+  column-gap: 1em;
+  width: 100%;
 }
 
 .missed-section {
-  border-top: 2px dotted var(--type-btn-color, var(--primary));
+  break-inside: avoid;
+  border: 2px dotted var(--type-btn-color, var(--primary));
+  border-radius: 13px;
   padding: 10px;
+  margin-bottom: 1em;
   overflow: auto;
   max-height: 500px;
   display: grid;
