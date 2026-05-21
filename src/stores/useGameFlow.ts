@@ -1,9 +1,12 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import type { GameFlowState, GameSelectionState } from '@/types.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
+  const { playFanfare } = usePlaySounds();
+
   const flowState = reactive<GameFlowState>({
     gameSelectionState: 'gen',
     isEnded: false,
@@ -35,6 +38,8 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.gameSelectionState = null;
     flowState.isGivenUp = false;
     flowState.lastInput = null;
+
+    playFanfare();
   };
 
   const giveUp = () => {
@@ -64,6 +69,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState,
     giveUp,
     pauseGame,
+    playFanfare,
     resetFlowState,
     resumeGame,
     setGameSelectionState,

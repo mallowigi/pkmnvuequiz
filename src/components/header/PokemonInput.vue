@@ -12,6 +12,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
@@ -30,6 +31,7 @@ const {
   getNextOrderedPokemon,
   isWrongOrder,
 } = usePokemons();
+const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
 
 const soundFile = ref();
 const { play } = useSound(soundFile, { interrupt: true, volume: 0.5 });
@@ -78,15 +80,6 @@ const ensureFocus = () => {
   inputRef.value?.focus();
 };
 
-const playFailSound = () => {
-  if (state.withSound) {
-    soundFile.value = 'assets/sounds/wrong.mp3';
-    setTimeout(() => {
-      play();
-    }, 50);
-  }
-};
-
 const clearInput = () => {
   inputRef.value!.value = '';
   updateInput(null);
@@ -104,6 +97,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   // Cheat!
   if (e.key === '#') {
+    playFanfare();
     showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
     clearInput();
     return;
@@ -187,13 +181,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     setRandomCurrentType();
   }
 
-  if (state.withSound) {
-    soundFile.value = `assets/sounds/latest/${foundPokemon[0].dexNum}.ogg`;
-    setTimeout(() => {
-      play();
-    }, 50);
-  }
-
+  playPokemonCry(foundPokemon[0].dexNum);
   clearInput();
   return;
 };

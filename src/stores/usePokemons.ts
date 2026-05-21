@@ -20,6 +20,7 @@ import type {
   PokemonStatus,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -98,6 +99,7 @@ export const usePokemons = defineStore('pokemons', () => {
     pokemonStatuses: new Map<string, PokemonStatus>(),
   });
   const { state, hideShadows } = useState();
+  const { endGame } = useGameFlow();
   const { getCurrentGen } = useCurrentGen();
   const { getCurrentType } = useCurrentType();
   const { languagesState } = useLanguages();
@@ -234,6 +236,10 @@ export const usePokemons = defineStore('pokemons', () => {
     }
 
     setLastPokemon(firstPokemon);
+
+    if (remaining.value.size === 0) {
+      endGame();
+    }
   };
 
   const addShadow = (pokemon: string) => {
