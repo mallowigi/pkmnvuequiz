@@ -5,6 +5,7 @@ import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { computed } from 'vue';
 
 const { state, setTypeShuffle } = useState();
 const { showUserMessage } = useMessages();
@@ -27,12 +28,14 @@ const applyTypeShuffle = (value: boolean) => {
   }
   showUserMessage(`Type Shuffle ${value ? 'enabled' : 'disabled'}`);
 };
+
+const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
 </script>
 
 <template>
   <RoundedBox
     title="Guess the next Pokemon of a given type"
-    :class="{ disabled: flowState.isGivenUp || flowState.isEnded || state.mode !== 'normal' }"
+    :class="{ disabled: isDisabled }"
   >
     <SegmentButton
       :active="{

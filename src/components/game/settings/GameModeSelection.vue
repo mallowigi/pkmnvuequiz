@@ -12,7 +12,7 @@ import { useTimer } from '@/stores/useTimer.ts';
 const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();
 const { clearCurrentGen } = useCurrentGen();
-const { setGameMode, state } = useState();
+const { setGameMode, state, setMode } = useState();
 const { setGameSelectionState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
 const { resetTimer } = useTimer();
@@ -50,6 +50,7 @@ const setSpecialQuiz = () => {
 
   setDialog('switchQuiz', () => {
     setGameMode('special');
+    setMode('normal');
     clearCurrentGen();
     clearCurrentType();
     resetPokemonState();

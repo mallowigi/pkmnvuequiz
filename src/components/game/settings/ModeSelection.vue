@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
@@ -29,10 +31,14 @@ const applyMode = (mode: Mode) => {
     scrollToTop();
   });
 };
+
+const isDisabled = computed(
+  () => flowState.isGivenUp || flowState.isEnded || state.withTypeShuffle || state.mode !== 'normal',
+);
 </script>
 
 <template>
-  <RoundedBox :class="{ disabled: flowState.isGivenUp || flowState.isEnded || state.withTypeShuffle }">
+  <RoundedBox :class="{ disabled: isDisabled }">
     <SegmentButton
       :active="{
         left: state.mode === 'chaos',

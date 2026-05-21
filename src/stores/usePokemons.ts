@@ -503,8 +503,6 @@ export const usePokemons = defineStore('pokemons', () => {
       normalizeName(pokemons[0].baseName),
     );
 
-    // oxlint-disable-next-line no-debugger
-    debugger;
     return closest(pokemonKey, names);
   };
 
