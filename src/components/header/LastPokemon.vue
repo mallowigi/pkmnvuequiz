@@ -16,10 +16,12 @@ type SpriteData = {
   sprite: string;
 };
 
-const spriteData = computed<SpriteData>(() => {
+const lastPokemon = computed(() => getLastPokemon());
+
+const spriteData = computed(() => {
   const { sprites, shinies } = data;
-  const lastPokemon = getLastPokemon();
-  if (!lastPokemon) {
+  const lp = lastPokemon.value;
+  if (!lp) {
     return {
       shiny: '',
       sprite: '',
@@ -27,46 +29,48 @@ const spriteData = computed<SpriteData>(() => {
   }
 
   return {
-    shiny: shinies?.[lastPokemon.id] ?? '',
-    sprite: sprites?.[lastPokemon.id] ?? '',
+    shiny: shinies?.[lp.id] ?? '',
+    sprite: sprites?.[lp.id] ?? '',
   };
 });
 
-const lastPokemon = computed(() => getLastPokemon());
+const bgImg = computed(() => {
+  if (lastPokemon.value) {
+    if (spriteData.value.shiny && state.withShinies) return `url(${spriteData.value.shiny})`;
+    if (spriteData.value.sprite) return `url(${spriteData.value.sprite})`;
+  }
+  return `url(${unknownSprite.value})`;
+});
+
+const isUnknown = computed(() => !lastPokemon.value || (!spriteData.value.shiny && !spriteData.value.sprite));
+
+const title = computed(() => (lastPokemon.value ? capitalize(lastPokemon.value.baseName) : ''));
 </script>
 
 <template>
-  <div v-if="lastPokemon">
-    <div
-      v-if="spriteData.shiny && state.withShinies"
-      class="sprite"
-      :title="capitalize(lastPokemon.baseName)"
-      :style="{ '--bg-img': `url(${spriteData.shiny})` }"
-    />
-
-    <div
-      v-else-if="spriteData.sprite"
-      class="sprite"
-      :title="capitalize(lastPokemon.baseName)"
-      :style="{ '--bg-img': `url(${spriteData.sprite})` }"
-    />
-
-    <div
-      v-else
-      class="sprite unknown"
-      :title="capitalize(lastPokemon.baseName)"
-      :style="{ '--bg-img': `url(${unknownSprite})` }"
-    />
+  <div class="last-pokemon-container">
+    <Transition name="morph">
+      <div
+        :key="lastPokemon?.id ?? 'unknown'"
+        class="sprite"
+        :class="{ unknown: isUnknown }"
+        :title="title"
+        :style="{ '--bg-img': bgImg }"
+      />
+    </Transition>
   </div>
-
-  <div
-    v-else
-    class="sprite unknown"
-    :style="{ '--bg-img': `url(${unknownSprite})` }"
-  />
 </template>
 
 <style scoped>
+.last-pokemon-container {
+  width: 28px;
+  height: 32px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .sprite {
   width: 28px;
   height: 32px;
@@ -91,5 +95,20 @@ const lastPokemon = computed(() => getLastPokemon());
     pointer-events: none;
     z-index: 10;
   }
+}
+
+.morph-enter-active,
+.morph-leave-active {
+  transition: all 1s ease-in-out;
+}
+
+.morph-leave-active {
+  position: absolute;
+}
+
+.morph-enter-from,
+.morph-leave-to {
+  opacity: 0;
+  filter: blur(8px);
 }
 </style>
