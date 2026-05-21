@@ -4,6 +4,7 @@ import { closest } from 'fastest-levenshtein';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
 
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -104,6 +105,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const { getCurrentType } = useCurrentType();
   const { languagesState } = useLanguages();
   const { startTimer } = useTimer();
+  const { playShiny } = usePlaySounds();
 
   const numFound = computed(() => {
     const currentGameModePokemon = getCurrentGameModePokemon();
@@ -233,6 +235,14 @@ export const usePokemons = defineStore('pokemons', () => {
     if (status) {
       status.isFound = true;
       status.lastFoundAt = Date.now();
+
+      const shinyRandom = Math.random();
+
+      const shinyRate = state.withShinies ? 0.1 : 0.01;
+      if (shinyRandom < shinyRate) {
+        status!.isShiny = true;
+        playShiny(firstPokemon);
+      }
 
       startTimer();
     }

@@ -8,13 +8,13 @@ const { showUserMessage } = useMessages();
 
 const toggleShiny = () => {
   toggleShowShinies();
-  showUserMessage(state.withShinies ? 'Shinies mode active' : 'Shinies mode disabled');
+  showUserMessage(state.withShinies ? 'Shiny Charm active' : 'Shiny Charm inactive');
 };
 </script>
 
 <template>
   <RoundedButton
-    title="Toggle Shinies On/Off"
+    title="Toggle Shiny Charm On/Off"
     class="rad-br-tl shiny-toggle-icon"
     :class="{ selected: state.withShinies }"
     @click="toggleShiny"
