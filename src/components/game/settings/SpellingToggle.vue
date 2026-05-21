@@ -22,7 +22,10 @@ const toggle = () => {
     :class="{ selected: state.withSpelling, disabled: flowState.isGivenUp || flowState.isEnded }"
   >
     Spelling Help
-    <img src="@/assets/spellcheck.png" />
+    <img
+      src="@/assets/spellcheck.png"
+      alt="Spellcheck"
+    />
   </RoundedButton>
 </template>
 

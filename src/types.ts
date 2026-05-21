@@ -156,6 +156,7 @@ export type GameFlowState = {
   isPaused: boolean;
   isStarted: boolean;
   isGivenUp: boolean;
+  lastInput: string | null;
 };
 
 export type Translations = {

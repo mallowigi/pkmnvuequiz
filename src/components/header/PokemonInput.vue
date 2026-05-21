@@ -14,7 +14,7 @@ import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
 
 const { state } = useState();
-const { flowState } = useGameFlow();
+const { flowState, updateInput } = useGameFlow();
 const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentType, getCurrentTypeOrSpecial, setRandomCurrentType } = useCurrentType();
 const { dialogs } = useDialogs();
@@ -87,9 +87,15 @@ const playFailSound = () => {
   }
 };
 
+const clearInput = () => {
+  inputRef.value!.value = '';
+  updateInput(null);
+};
+
 const handleKeydown = (e: KeyboardEvent) => {
   // Every key down on the app will trigger focus on the input
   ensureFocus();
+  updateInput(inputRef.value!.value);
 
   // Make sure the user is not pressing ctrl or cmd or option or delete
   if (e.ctrlKey || e.metaKey || e.altKey || e.key === 'Backspace' || e.key === 'Delete') {
@@ -99,7 +105,7 @@ const handleKeydown = (e: KeyboardEvent) => {
   // Cheat!
   if (e.key === '#') {
     showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
-    inputRef.value!.value = '';
+    clearInput();
     return;
   }
 
@@ -110,7 +116,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     } else {
       showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
     }
-    inputRef.value!.value = '';
+    clearInput();
     return;
   }
 
@@ -133,7 +139,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
     showUserMessage(`${capitalize(value)} already named.`);
     playFailSound();
-    inputRef.value!.value = '';
+    clearInput();
     return;
   }
 
@@ -145,7 +151,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
     showUserMessage(`${capitalize(value)} is not part of this game.`);
     playFailSound();
-    inputRef.value!.value = '';
+    clearInput();
     return;
   }
 
@@ -158,7 +164,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
     showUserMessage(`${capitalize(value)} is not the next Pokemon.`);
     playFailSound();
-    inputRef.value!.value = '';
+    clearInput();
     return;
   }
 
@@ -169,7 +175,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     if (currentType && !types.includes(currentType.id)) {
       showUserMessage(`${capitalize(value)} is not of type ${capitalize(currentType.name)}.`);
       playFailSound();
-      inputRef.value!.value = '';
+      clearInput();
       return;
     }
   }
@@ -188,7 +194,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     }, 50);
   }
 
-  inputRef.value!.value = '';
+  clearInput();
   return;
 };
 

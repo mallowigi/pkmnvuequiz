@@ -2,6 +2,7 @@
 
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
+import { closest } from 'fastest-levenshtein';
 
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
@@ -496,10 +497,22 @@ export const usePokemons = defineStore('pokemons', () => {
     return randomPokemon ? randomPokemon[0] : null;
   };
 
+  const findClosestPokemon = (input: string): string | null => {
+    const pokemonKey = normalizeName(input);
+    const names = Array.from(getCurrentGameModePokemon().values()).map((pokemons) =>
+      normalizeName(pokemons[0].baseName),
+    );
+
+    // oxlint-disable-next-line no-debugger
+    debugger;
+    return closest(pokemonKey, names);
+  };
+
   return {
     addFound,
     addRandomShadow,
     addShadow,
+    findClosestPokemon,
     findPokemon,
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,

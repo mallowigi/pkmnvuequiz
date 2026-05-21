@@ -5,6 +5,8 @@ import RegionBoxes from '@/components/game/RegionBoxes.vue';
 import GameOptions from '@/components/game/settings/GameOptions.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
+import SpellingChecker from '@/components/game/SpellingChecker.vue';
+import FadeTransition from '@/components/common/FadeTransition.vue';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -12,7 +14,13 @@ const { flowState } = useGameFlow();
 
 <template>
   <div class="game">
-    <MissedNames v-if="flowState.isGivenUp" />
+    <FadeTransition>
+      <MissedNames v-if="flowState.isGivenUp" />
+    </FadeTransition>
+
+    <FadeTransition>
+      <SpellingChecker v-if="state.withSpelling" />
+    </FadeTransition>
 
     <RegionBoxes />
     <Spacer />

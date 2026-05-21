@@ -10,6 +10,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     isGivenUp: false,
     isPaused: false,
     isStarted: false,
+    lastInput: null,
   });
 
   const startGame = () => {
@@ -17,6 +18,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.isEnded = false;
     flowState.gameSelectionState = null;
     flowState.isGivenUp = false;
+    flowState.lastInput = null;
   };
 
   const pauseGame = () => {
@@ -32,24 +34,29 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.isStarted = false;
     flowState.gameSelectionState = null;
     flowState.isGivenUp = false;
+    flowState.lastInput = null;
   };
 
   const giveUp = () => {
     flowState.isGivenUp = true;
+    flowState.lastInput = null;
   };
 
   const setGameSelectionState = (state: GameSelectionState) => {
     flowState.gameSelectionState = state;
-  };
-
-  const setFlowState = (newState: Partial<GameFlowState>) => {
-    Object.assign(flowState, newState);
+    flowState.lastInput = null;
   };
 
   const resetFlowState = () => {
     flowState.isEnded = false;
     flowState.isGivenUp = false;
     flowState.isPaused = false;
+    flowState.isStarted = false;
+    flowState.lastInput = null;
+  };
+
+  const updateInput = (input: string | null) => {
+    flowState.lastInput = input;
   };
 
   return {
@@ -59,9 +66,9 @@ export const useGameFlow = defineStore('gameFlow', () => {
     pauseGame,
     resetFlowState,
     resumeGame,
-    setFlowState,
     setGameSelectionState,
     startGame,
+    updateInput,
   };
 });
 
