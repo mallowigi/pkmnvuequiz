@@ -7,6 +7,7 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
+import LastPokemon from '@/components/header/LastPokemon.vue';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -104,6 +105,10 @@ const spriteDelay = computed<string>(() => {
   // No delay otherwise
   return `10ms`;
 });
+
+const isDitto = computed(() => {
+  return props.pokemon.baseName === 'ditto';
+});
 </script>
 
 <template>
@@ -116,7 +121,7 @@ const spriteDelay = computed<string>(() => {
       <div
         :key="displayedSprite.key"
         class="sprite"
-        v-if="displayedSprite.kind !== 'cycle'"
+        v-if="displayedSprite.kind !== 'cycle' && !isDitto"
         :class="displayedSprite.kind"
         :title="displayedSprite.title ?? undefined"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
@@ -124,8 +129,10 @@ const spriteDelay = computed<string>(() => {
 
       <CyclingSprite
         :sprites="displayedSprite.sprites"
-        v-else-if="displayedSprite.sprites"
+        v-else-if="displayedSprite.sprites && !isDitto"
       />
+
+      <LastPokemon v-else-if="isDitto && props.status.isFound" />
     </Transition>
   </section>
 </template>
