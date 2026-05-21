@@ -129,6 +129,7 @@ export type LanguagesState = {
 export type PokemonStatus = {
   isFound: boolean;
   isShadowed: boolean;
+  isShiny: boolean;
   isMissed: boolean;
   lastFoundAt: number | null;
   lastShadowedAt: number | null;
@@ -192,6 +193,9 @@ export type PokemonProgress = {
   pokemonShadowed: {
     id: string;
     lastShadowedAt: number | null;
+  }[];
+  shinyPokemon: {
+    id: string;
   }[];
 };
 

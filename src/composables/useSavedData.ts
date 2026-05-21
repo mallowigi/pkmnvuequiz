@@ -22,6 +22,7 @@ export const useSavedData = () => {
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
     const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
+    const shinyPokemon: PokemonProgress['shinyPokemon'] = [];
 
     pokemonState.pokemonStatuses.forEach((status, name) => {
       if (status.isFound) {
@@ -29,6 +30,9 @@ export const useSavedData = () => {
       }
       if (status.isShadowed) {
         pokemonShadowed.push({ id: name, lastShadowedAt: status.lastShadowedAt });
+      }
+      if (status.isShiny) {
+        shinyPokemon.push({ id: name });
       }
     });
 
@@ -40,6 +44,7 @@ export const useSavedData = () => {
       pokemonProgress: {
         pokemonFound,
         pokemonShadowed,
+        shinyPokemon,
       },
       timer: {
         ...timerState,
@@ -102,7 +107,7 @@ export const useSavedData = () => {
           ...statePayload
         } = loadedState as Partial<SaveData>;
 
-        const { pokemonFound, pokemonShadowed } = pokemonProgress ?? {};
+        const { pokemonFound, pokemonShadowed, shinyPokemon } = pokemonProgress ?? {};
         const { isLimited, minutes, startTime } = timer ?? {};
 
         // Languages
@@ -141,6 +146,18 @@ export const useSavedData = () => {
           if (status) {
             status.isShadowed = true;
             status.lastShadowedAt = lastShadowedAt;
+          }
+        });
+
+        shinyPokemon?.forEach((entry) => {
+          const { id: name } = entry;
+
+          const found = findPokemon(name);
+          const nameToShiny = found && found.length > 0 ? normalizeName(found[0].baseName) : name;
+          const status = pokemonState.pokemonStatuses.get(nameToShiny);
+
+          if (status) {
+            status.isShiny = true;
           }
         });
 

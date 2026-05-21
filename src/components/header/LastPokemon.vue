@@ -1,22 +1,18 @@
 <script setup lang="ts">
-import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { computed } from 'vue';
+
+import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import { useState } from '@/stores/useState.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { capitalize } from '@/utils/utils.ts';
 
-const { state } = useState();
 const { unknownSprite } = useUnknownSprite();
-const { getLastPokemon } = usePokemons();
+const { getLastPokemon, getStatus } = usePokemons();
 const { data } = usePkmnData();
 
-type SpriteData = {
-  shiny: string;
-  sprite: string;
-};
-
 const lastPokemon = computed(() => getLastPokemon());
+
+const lastPokemonStatus = computed(() => (lastPokemon.value ? getStatus(lastPokemon.value) : null));
 
 const spriteData = computed(() => {
   const { sprites, shinies } = data;
@@ -35,10 +31,16 @@ const spriteData = computed(() => {
 });
 
 const bgImg = computed(() => {
-  if (lastPokemon.value) {
-    if (spriteData.value.shiny && state.withShinies) return `url(${spriteData.value.shiny})`;
-    if (spriteData.value.sprite) return `url(${spriteData.value.sprite})`;
+  if (lastPokemon.value && lastPokemonStatus.value) {
+    if (spriteData.value.shiny && lastPokemonStatus.value.isShiny) {
+      return `url(${spriteData.value.shiny})`;
+    }
+
+    if (spriteData.value.sprite) {
+      return `url(${spriteData.value.sprite})`;
+    }
   }
+
   return `url(${unknownSprite.value})`;
 });
 

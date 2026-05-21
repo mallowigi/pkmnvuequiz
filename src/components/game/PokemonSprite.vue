@@ -59,7 +59,7 @@ const displayedSprite = computed<DisplayedSprite>(() => {
       };
     }
 
-    if (spriteData.value.shiny && state.withShinies) {
+    if (spriteData.value.shiny && props.status.isShiny) {
       return {
         image: spriteData.value.shiny,
         key: 'found-shiny',

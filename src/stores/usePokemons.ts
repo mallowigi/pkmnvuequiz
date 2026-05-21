@@ -1,11 +1,12 @@
 // noinspection JSUnfilteredForInLoop
 
+import { closest } from 'fastest-levenshtein';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
-import { closest } from 'fastest-levenshtein';
 
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
@@ -20,7 +21,6 @@ import type {
   PokemonStatus,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -187,6 +187,7 @@ export const usePokemons = defineStore('pokemons', () => {
           isFound: false,
           isMissed: false,
           isShadowed: false,
+          isShiny: false,
           lastFoundAt: null,
           lastShadowedAt: null,
         });
@@ -232,6 +233,7 @@ export const usePokemons = defineStore('pokemons', () => {
     if (status) {
       status.isFound = true;
       status.lastFoundAt = Date.now();
+
       startTimer();
     }
 
@@ -308,6 +310,7 @@ export const usePokemons = defineStore('pokemons', () => {
       status.lastFoundAt = null;
       status.isShadowed = false;
       status.lastShadowedAt = null;
+      status.isShiny = false;
       status.isMissed = false;
     });
 
@@ -450,6 +453,7 @@ export const usePokemons = defineStore('pokemons', () => {
         isFound: false,
         isMissed: false,
         isShadowed: false,
+        isShiny: false,
         lastFoundAt: null,
         lastShadowedAt: null,
       }
