@@ -102,7 +102,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const { state, hideShadows } = useState();
   const { endGame } = useGameFlow();
   const { getCurrentGen } = useCurrentGen();
-  const { getCurrentType } = useCurrentType();
+  const currentTypeStore = useCurrentType();
   const { languagesState } = useLanguages();
   const { startTimer } = useTimer();
   const { playShiny } = usePlaySounds();
@@ -369,7 +369,7 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const getCurrentTypePokemon = (): Map<string, PokemonInfo[]> => {
-    const currentType = getCurrentType();
+    const currentType = currentTypeStore.getCurrentType();
     if (!currentType) return new Map();
 
     return getTypePokemon(currentType.id as Type);
@@ -409,7 +409,7 @@ export const usePokemons = defineStore('pokemons', () => {
         return getGenPokemon(boxId);
       }
       case 'types': {
-        const typeId = getCurrentType()?.id;
+        const typeId = currentTypeStore.getCurrentType()?.id;
         if (!typeId) {
           return getGenPokemon(boxId);
         }
@@ -432,7 +432,7 @@ export const usePokemons = defineStore('pokemons', () => {
           return currentGen ? currentGen.boxes.includes(pokemon.box) : false;
         }
         case 'types': {
-          const currentType = getCurrentType();
+          const currentType = currentTypeStore.getCurrentType();
           if (!currentType) return false;
 
           const types = [pokemon.primaryType, pokemon.secondaryType].filter(Boolean);

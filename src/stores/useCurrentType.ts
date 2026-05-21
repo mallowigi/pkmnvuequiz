@@ -13,7 +13,6 @@ type CurrentTypeState = {
 
 export const useCurrentType = defineStore('currentType', () => {
   const { state } = useState();
-  const { getRandomRemainingPokemon } = usePokemons();
 
   const currentTypeState = reactive<CurrentTypeState>({
     currentType: null,
@@ -49,6 +48,7 @@ export const useCurrentType = defineStore('currentType', () => {
   };
 
   const setRandomCurrentType = () => {
+    const { getRandomRemainingPokemon } = usePokemons();
     const remainingPokemon = getRandomRemainingPokemon();
     if (!remainingPokemon) return;
 
