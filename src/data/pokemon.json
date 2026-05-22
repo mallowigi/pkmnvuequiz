@@ -9740,7 +9740,7 @@
       "specialType": "paradox"
     },
     {
-      "id": "terapagosnormal",
+      "id": "terapagos",
       "baseName": "terapagos",
       "dexNum": 1024,
       "primaryType": "normal",
@@ -9749,7 +9749,7 @@
       "specialType": "legendary"
     },
     {
-      "id": "terapagos",
+      "id": "terapagosnormal",
       "baseName": "terapagos",
       "dexNum": 1024,
       "primaryType": "normal",
