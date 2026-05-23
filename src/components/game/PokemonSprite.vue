@@ -8,6 +8,7 @@ import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
+import RevealZoomTransition from '@/components/common/RevealZoomTransition.vue';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -117,7 +118,7 @@ const isDitto = computed(() => {
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
-    <Transition
+    <RevealZoomTransition
       appear
       v-if="displayedSprite.kind !== 'cycle' && displayedSprite.kind !== 'unknown' && !isDitto"
     >
@@ -128,18 +129,15 @@ const isDitto = computed(() => {
         :title="displayedSprite.title ?? undefined"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
       />
-    </Transition>
+    </RevealZoomTransition>
 
-    <Transition v-else-if="displayedSprite.sprites && !isDitto">
+    <RevealZoomTransition v-else-if="displayedSprite.sprites && !isDitto">
       <CyclingSprite :sprites="displayedSprite.sprites" />
-    </Transition>
+    </RevealZoomTransition>
 
-    <Transition
-      name="sprite-swap"
-      v-else-if="isDitto && props.status.isFound && !props.status.isMissed"
-    >
+    <RevealZoomTransition v-else-if="isDitto && props.status.isFound && !props.status.isMissed">
       <LastPokemon />
-    </Transition>
+    </RevealZoomTransition>
 
     <Transition
       name="sprite-swap"
@@ -166,24 +164,6 @@ const isDitto = computed(() => {
 </template>
 
 <style scoped>
-@keyframes zoomIn {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.3);
-  }
-}
-
-@keyframes revealZoom {
-  from {
-    transform: scale(2);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
 .container {
   position: relative;
 }
@@ -204,16 +184,6 @@ const isDitto = computed(() => {
 
 .container.missed > * {
   opacity: 0.5;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: all 1.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  transform: scale(2);
 }
 
 .sprite {
