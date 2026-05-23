@@ -3,7 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
-import { normalizeName } from '@/utils/utils.ts';
+import { normalizeName, capitalize } from '@/utils/utils.ts';
 
 const props = defineProps<{
   sprites: readonly string[];
@@ -58,6 +58,7 @@ onUnmounted(() => {
   <div
     :hidden="sprites.length === 0"
     class="sprite"
+    :title="sprites[currentIndex] ? capitalize(props.sprites[currentIndex]) : ''"
     :style="{ '--bg-img': `url(${sprites[currentIndex]})` }"
   />
 </template>

@@ -5,7 +5,13 @@ export const normalizeName = (str: string) => {
 
 export const capitalize = (str: string) => {
   if (!str) return str;
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  const words = str.split(/[\s_-]+/);
+  return words
+    .map((word) => {
+      const [first, ...rest] = word;
+      return first.toUpperCase() + rest.join('').toLowerCase();
+    })
+    .join(' ');
 };
 
 export const upsert = <T>(map: Map<string, T[]>, key: string, value: T) => {
