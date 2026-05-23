@@ -5,8 +5,11 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import { scrollToTop } from '@/utils/utils.ts';
+import { scrollToTop, capitalize } from '@/utils/utils.ts';
 import type { Type, Gen } from '@/types.ts';
+import { useTitle } from '@vueuse/core';
+
+export const TITLE = 'Pkmn Vue Quiz';
 
 export const useQuiz = ({ withDialog = false } = {}) => {
   const { startGame, setGameSelectionState } = useGameFlow();
@@ -28,6 +31,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       resetTimer();
       startGame();
       scrollToTop();
+      useTitle(`Full Quiz | ${TITLE}`);
     };
 
     if (withDialog) {
@@ -49,6 +53,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       resetTimer();
       startGame();
       scrollToTop();
+      useTitle(`Gen ${gen} Quiz | ${TITLE}`);
     };
 
     if (withDialog) {
@@ -83,15 +88,19 @@ export const useQuiz = ({ withDialog = false } = {}) => {
 
   const setTypeOrSpecial = (type: string) => {
     clearCurrentGen();
+    clearCurrentType();
+
     switch (type) {
       case 'special':
         setGameMode('special');
-        clearCurrentType();
+        useTitle(`Special Quiz | ${TITLE}`);
         break;
       default:
         setGameMode('types');
         setCurrentType(type as Type);
+        useTitle(`${capitalize(type)} Type Quiz | ${TITLE}`);
     }
+
     resetPokemonState();
     resetTimer();
     setGameSelectionState(null);
