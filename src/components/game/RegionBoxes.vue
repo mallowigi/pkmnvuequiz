@@ -77,8 +77,19 @@ const isFull = (boxId: SpecialType | RegionBox) => {
     :style="styles"
   >
     <RoundedBox
+      v-motion
+      :initial="{ opacity: 0, y: 50 }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: index * 100, // Staggers manually by index
+          duration: 400,
+        },
+      }"
+      :delay="index * 50"
       class="region-box"
-      v-for="box in currentBoxes"
+      v-for="(box, index) in currentBoxes"
       :class="{ full: isFull(box.id) }"
       :key="box.id"
     >
