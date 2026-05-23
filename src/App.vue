@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, watchEffect } from 'vue';
+import { useDark } from '@vueuse/core';
+import { watchEffect, watch } from 'vue';
 
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
@@ -15,13 +16,11 @@ import GameSelection from '@/components/genSelection/GameSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
 import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
-import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
 
 const { state, setDarkMode } = useState();
-const { currentTypeState } = useCurrentType();
 const { flowState } = useGameFlow();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
@@ -47,25 +46,15 @@ watchEffect(() => {
   });
 });
 
-onMounted(() => {
-  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const isDark = useDark();
 
-  // 1. Initial sync (handles BOTH true and false)
-  setDarkMode(darkModeMediaQuery.matches);
-
-  // 2. Define the listener function
-  const handleDarkModeChange = (e: MediaQueryListEvent) => {
-    setDarkMode(e.matches);
-  };
-
-  // 3. Attach listener with compatibility fallback
-  darkModeMediaQuery.addEventListener('change', handleDarkModeChange);
-
-  // 4. Clean up to prevent memory leaks or duplicate listeners
-  onUnmounted(() => {
-    darkModeMediaQuery.removeEventListener('change', handleDarkModeChange);
-  });
-});
+watch(
+  isDark,
+  () => {
+    setDarkMode(isDark.value);
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
