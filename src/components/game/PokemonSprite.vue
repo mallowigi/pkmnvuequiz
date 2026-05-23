@@ -151,7 +151,7 @@ const isDitto = computed(() => {
 </template>
 
 <style scoped>
-@keyframes hover-pop {
+@keyframes zoomIn {
   from {
     transform: scale(1);
   }
@@ -160,9 +160,9 @@ const isDitto = computed(() => {
   }
 }
 
-@keyframes hover-out {
+@keyframes revealZoom {
   from {
-    transform: scale(1.3);
+    transform: scale(2);
   }
   to {
     transform: scale(1);
@@ -197,14 +197,14 @@ const isDitto = computed(() => {
   height: 32px;
   overflow: visible;
   position: relative;
-  animation: hover-out 0.5s ease forwards;
+
+  &.found,
+  &.shadowed {
+    animation: revealZoom 1.5s ease forwards;
+  }
 
   &.sprite-swap-leave-active {
     position: absolute;
-  }
-
-  &:hover {
-    animation: hover-pop 0.5s ease forwards;
   }
 
   &.unknown {
@@ -218,11 +218,10 @@ const isDitto = computed(() => {
     bottom: 0;
     transform: translateX(-50%);
     width: 44px;
-    height: 44px;
+    height: 56px;
     background-image: var(--bg-img);
     background-size: auto;
     background-position: bottom center;
-    pointer-events: none;
     z-index: 10;
   }
 }

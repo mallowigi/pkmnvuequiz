@@ -156,34 +156,6 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   line-height: 26px;
 }
 
-@keyframes hover-pop {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.3);
-  }
-}
-
-@keyframes hover-out {
-  from {
-    opacity: 0;
-    transform: scale(1.3);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.sprite-container > * {
-  opacity: 0;
-  animation: hover-out 0.5s ease forwards;
-  animation-delay: calc((sibling-index() - 1) * 10ms);
-}
-
 .sprite-container > *:has(.shadowed) {
   filter: brightness(calc(0.9 + 0.2 * cos(sibling-index() * 1.5)));
 }
