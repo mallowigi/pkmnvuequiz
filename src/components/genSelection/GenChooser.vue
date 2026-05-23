@@ -2,46 +2,10 @@
 import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
 import CyclingType from '@/components/genSelection/CyclingType.vue';
 import { gens } from '@/data/gens';
-import { useCurrentGen } from '@/stores/useCurrentGen';
-import { useCurrentType } from '@/stores/useCurrentType.ts';
-import { useGameFlow } from '@/stores/useGameFlow';
-import { usePokemons } from '@/stores/usePokemons.ts';
-import { useState } from '@/stores/useState';
-import { useTimer } from '@/stores/useTimer.ts';
 import type { Gen } from '@/types.ts';
+import { useQuiz } from '@/composables/useQuiz.ts';
 
-const { startGame, setGameSelectionState } = useGameFlow();
-const { setGameMode } = useState();
-const { setCurrentGen, clearCurrentGen } = useCurrentGen();
-const { clearCurrentType } = useCurrentType();
-const { resetPokemonState } = usePokemons();
-const { resetTimer } = useTimer();
-
-const setFullQuiz = () => {
-  setGameMode('full');
-  clearCurrentGen();
-  clearCurrentType();
-  resetPokemonState();
-  resetTimer();
-  startGame();
-};
-
-const setGen = (gen: Gen) => {
-  setGameMode('gen');
-  clearCurrentType();
-  setCurrentGen(gen);
-  resetPokemonState();
-  resetTimer();
-  startGame();
-};
-
-const setType = () => {
-  clearCurrentGen();
-  clearCurrentType();
-  resetPokemonState();
-  resetTimer();
-  setGameSelectionState('types');
-};
+const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
 </script>
 
 <template>
@@ -64,7 +28,7 @@ const setType = () => {
         class="cell rad-bl"
         v-for="(gen, id, i) in gens"
         :class="{ 'rad-bl': i % 3 === 0, rad: i % 3 === 1, 'rad-tr': i % 3 === 2 }"
-        @click="setGen(id as Gen)"
+        @click="setGenQuiz(id as Gen)"
         :key="id"
       >
         <div hidden>{{ id }}</div>
@@ -81,7 +45,7 @@ const setType = () => {
       <div>
         <CyclingType
           class="cell cell-type rad-bl-tr"
-          @click="setType"
+          @click="setTypeQuiz"
         />
       </div>
       <div></div>

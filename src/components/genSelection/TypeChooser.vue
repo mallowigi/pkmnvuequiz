@@ -3,39 +3,15 @@ import { computed } from 'vue';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { typesList } from '@/data/pokemonTypes';
-import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
-import { useState } from '@/stores/useState';
-import type { Type } from '@/types.ts';
-import { useTimer } from '@/stores/useTimer.ts';
+import { useQuiz } from '@/composables/useQuiz.ts';
 
-const { startGame, setGameSelectionState } = useGameFlow();
-const { setGameMode } = useState();
-const { setCurrentType, clearCurrentType, getSpecialType } = useCurrentType();
-const { clearCurrentGen } = useCurrentGen();
-const { resetPokemonState } = usePokemons();
-const { resetTimer } = useTimer();
+const { setGameSelectionState } = useGameFlow();
+const { getSpecialType } = useCurrentType();
+const { setTypeOrSpecial } = useQuiz();
 
 const specialType = computed(() => getSpecialType());
-
-const setTypeOrSpecial = (type: string) => {
-  clearCurrentGen();
-  switch (type) {
-    case 'special':
-      setGameMode('special');
-      clearCurrentType();
-      break;
-    default:
-      setGameMode('types');
-      setCurrentType(type as Type);
-  }
-  resetPokemonState();
-  resetTimer();
-  setGameSelectionState(null);
-  startGame();
-};
 
 const goBack = () => {
   setGameSelectionState('gen');
