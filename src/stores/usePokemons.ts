@@ -448,12 +448,10 @@ export const usePokemons = defineStore('pokemons', () => {
     });
   };
 
-  const isInRemaining = (pokemons: PokemonInfo[]) => {
-    return pokemons.some((pokemon) => {
-      const pokemonKey = normalizeName(pokemon.baseName);
-      return Array.from(remaining.value.values()).some((remainingKey) => {
-        return remainingKey.startsWith(pokemonKey) && remainingKey !== pokemonKey;
-      });
+  const isInRemaining = (pokemonName: string) => {
+    const pokemonKey = normalizeName(pokemonName);
+    return Array.from(remaining.value.values()).some((remainingKey) => {
+      return remainingKey.startsWith(pokemonKey) && remainingKey !== pokemonKey;
     });
   };
 

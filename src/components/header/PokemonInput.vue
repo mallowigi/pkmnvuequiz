@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useSound } from '@vueuse/sound';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import LastPokemon from '@/components/header/LastPokemon.vue';
@@ -32,9 +31,6 @@ const {
   isWrongOrder,
 } = usePokemons();
 const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
-
-const soundFile = ref();
-const { play } = useSound(soundFile, { interrupt: true, volume: 0.5 });
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -124,7 +120,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  const isPartOfAnotherPokemon = isInRemaining(foundPokemon);
+  const isPartOfAnotherPokemon = isInRemaining(value);
   if (isAlreadyFound(foundPokemon)) {
     if (isPartOfAnotherPokemon) {
       // Allow continue typing
