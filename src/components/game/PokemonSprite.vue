@@ -117,23 +117,36 @@ const isDitto = computed(() => {
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
-    <Transition name="sprite-swap">
-      <div
-        :key="displayedSprite.key"
-        class="sprite"
-        v-if="displayedSprite.kind !== 'cycle' && !isDitto"
-        :class="displayedSprite.kind"
-        :title="displayedSprite.title ?? undefined"
-        :style="{ '--bg-img': `url(${displayedSprite.image})` }"
-      />
+    <div
+      :key="displayedSprite.key"
+      class="sprite"
+      v-if="displayedSprite.kind !== 'cycle' && !isDitto"
+      :class="displayedSprite.kind"
+      :title="displayedSprite.title ?? undefined"
+      :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+    />
 
-      <CyclingSprite
-        :sprites="displayedSprite.sprites"
-        v-else-if="displayedSprite.sprites && !isDitto"
-      />
+    <CyclingSprite
+      :sprites="displayedSprite.sprites"
+      v-else-if="displayedSprite.sprites && !isDitto"
+    />
 
-      <LastPokemon v-else-if="isDitto && props.status.isFound" />
+    <Transition
+      name="sprite-swap"
+      v-else-if="isDitto && props.status.isFound && !props.status.isMissed"
+    >
+      <LastPokemon />
     </Transition>
+
+    <!-- Ditto not found -->
+    <div
+      :key="displayedSprite.key"
+      class="sprite"
+      v-else
+      :class="displayedSprite.kind"
+      :title="displayedSprite.title ?? undefined"
+      :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+    />
   </section>
 </template>
 
