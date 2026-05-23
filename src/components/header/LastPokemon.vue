@@ -5,6 +5,7 @@ import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { capitalize } from '@/utils/utils.ts';
+import MorphTransition from '@/components/common/MorphTransition.vue';
 
 const { unknownSprite } = useUnknownSprite();
 const { getLastPokemon, getStatus } = usePokemons();
@@ -51,7 +52,7 @@ const title = computed(() => (lastPokemon.value ? capitalize(lastPokemon.value.b
 
 <template>
   <div class="last-pokemon-container">
-    <Transition name="morph">
+    <MorphTransition>
       <div
         :key="lastPokemon?.id ?? 'unknown'"
         class="sprite"
@@ -59,7 +60,7 @@ const title = computed(() => (lastPokemon.value ? capitalize(lastPokemon.value.b
         :title="title"
         :style="{ '--bg-img': bgImg }"
       />
-    </Transition>
+    </MorphTransition>
   </div>
 </template>
 
@@ -97,20 +98,5 @@ const title = computed(() => (lastPokemon.value ? capitalize(lastPokemon.value.b
     pointer-events: none;
     z-index: 10;
   }
-}
-
-.morph-enter-active,
-.morph-leave-active {
-  transition: all 1s ease-in-out;
-}
-
-.morph-leave-active {
-  position: absolute;
-}
-
-.morph-enter-from,
-.morph-leave-to {
-  opacity: 0;
-  filter: blur(8px);
 }
 </style>

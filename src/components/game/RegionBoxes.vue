@@ -124,7 +124,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   margin: 10px;
   border: none;
 
-  transform: translate3d(0, 0, 0.1px);
+  /*transform: translate3d(0, 0, 0.1px);
   will-change: transform, visibility;
   transform-style: preserve-3d;
   transition: box-shadow 0.2s ease-in-out;
@@ -132,7 +132,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
 
   &:hover {
     --glow: var(--type-btn-color, var(--primary));
-  }
+  }*/
 
   &.full {
     border: 2px solid var(--type-btn-color, var(--primary));

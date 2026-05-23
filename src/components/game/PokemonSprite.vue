@@ -117,19 +117,22 @@ const isDitto = computed(() => {
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
-    <div
-      :key="displayedSprite.key"
-      class="sprite"
-      v-if="displayedSprite.kind !== 'cycle' && !isDitto"
-      :class="displayedSprite.kind"
-      :title="displayedSprite.title ?? undefined"
-      :style="{ '--bg-img': `url(${displayedSprite.image})` }"
-    />
+    <Transition
+      appear
+      v-if="displayedSprite.kind !== 'cycle' && displayedSprite.kind !== 'unknown' && !isDitto"
+    >
+      <div
+        :key="displayedSprite.key"
+        class="sprite"
+        :class="displayedSprite.kind"
+        :title="displayedSprite.title ?? undefined"
+        :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+      />
+    </Transition>
 
-    <CyclingSprite
-      :sprites="displayedSprite.sprites"
-      v-else-if="displayedSprite.sprites && !isDitto"
-    />
+    <Transition v-else-if="displayedSprite.sprites && !isDitto">
+      <CyclingSprite :sprites="displayedSprite.sprites" />
+    </Transition>
 
     <Transition
       name="sprite-swap"
@@ -138,14 +141,26 @@ const isDitto = computed(() => {
       <LastPokemon />
     </Transition>
 
-    <!-- Ditto not found -->
+    <Transition
+      name="sprite-swap"
+      v-else-if="isDitto && props.status.isShadowed && !props.status.isMissed"
+    >
+      <!-- Ditto not found -->
+      <div
+        :key="displayedSprite.key"
+        class="sprite"
+        :class="displayedSprite.kind"
+        :title="displayedSprite.title ?? undefined"
+        :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+      />
+    </Transition>
+
+    <!-- Unknown -->
     <div
       :key="displayedSprite.key"
-      class="sprite"
+      class="sprite unknown"
       v-else
-      :class="displayedSprite.kind"
-      :title="displayedSprite.title ?? undefined"
-      :style="{ '--bg-img': `url(${displayedSprite.image})` }"
+      :style="{ '--bg-img': `url(${unknownSprite})` }"
     />
   </section>
 </template>
@@ -191,17 +206,23 @@ const isDitto = computed(() => {
   opacity: 0.5;
 }
 
+.v-enter-active,
+.v-leave-active {
+  transition: all 1.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: scale(2);
+}
+
 .sprite {
   --bg-img: none;
   width: 28px;
   height: 32px;
   overflow: visible;
   position: relative;
-
-  &.found,
-  &.shadowed {
-    animation: revealZoom 1.5s ease forwards;
-  }
+  transition: transform 0.5s ease;
 
   &.sprite-swap-leave-active {
     position: absolute;
@@ -209,6 +230,10 @@ const isDitto = computed(() => {
 
   &.unknown {
     z-index: 0;
+  }
+
+  &:hover {
+    transform: scale(1.4);
   }
 
   &:before {
@@ -220,6 +245,7 @@ const isDitto = computed(() => {
     width: 44px;
     height: 56px;
     background-image: var(--bg-img);
+    pointer-events: none;
     background-size: auto;
     background-position: bottom center;
     z-index: 10;
