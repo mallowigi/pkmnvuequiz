@@ -62,7 +62,7 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
 
 const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   const pokemonByName = getCurrentGamePokemon(boxId);
-  return Array.from(pokemonByName.values()).flat();
+  return Array.from(pokemonByName.values()).map((pokemons) => pokemons[0]);
 };
 
 const isFull = (boxId: SpecialType | RegionBox) => {

@@ -1,49 +1,14 @@
 {
   "sprite_cycles": {
-    "burmy": [
-      "burmy",
-      "burmy-sandy",
-      "burmy-trash"
-    ],
-    "shellos": [
-      "shellos",
-      "shellos-east"
-    ],
-    "gastrodon": [
-      "gastrodon",
-      "gastrodon-east"
-    ],
-    "genesect": [
-      "genesect",
-      "genesect-burn",
-      "genesect-chill",
-      "genesect-shock",
-      "genesect-douse"
-    ],
-    "pumpkaboo": [
-      "pumpkaboo",
-      "pumpkaboo-large",
-      "pumpkaboo-super",
-      "pumpkaboo-small"
-    ],
-    "gourgeist": [
-      "gourgeist",
-      "gourgeist-large",
-      "gourgeist-super",
-      "gourgeist-small"
-    ],
-    "mimikyu": [
-      "mimikyu",
-      "mimikyu-busted"
-    ],
-    "aegislash": [
-      "aegislash",
-      "aegislash-blade"
-    ],
-    "xerneas": [
-      "xerneas",
-      "xerneas-inactive"
-    ],
+    "burmy": ["burmy", "burmy-sandy", "burmy-trash"],
+    "shellos": ["shellos", "shellos-east"],
+    "gastrodon": ["gastrodon", "gastrodon-east"],
+    "genesect": ["genesect", "genesect-burn", "genesect-chill", "genesect-shock", "genesect-douse"],
+    "pumpkaboo": ["pumpkaboo", "pumpkaboo-large", "pumpkaboo-super", "pumpkaboo-small"],
+    "gourgeist": ["gourgeist", "gourgeist-large", "gourgeist-super", "gourgeist-small"],
+    "mimikyu": ["mimikyu", "mimikyu-busted"],
+    "aegislash": ["aegislash", "aegislash-blade"],
+    "xerneas": ["xerneas", "xerneas-inactive"],
     "minior": [
       "minior",
       "minior-red",
@@ -54,19 +19,9 @@
       "minior-indigo",
       "minior-violet"
     ],
-    "cramorant": [
-      "cramorant",
-      "cramorant-gulping",
-      "cramorant-gorging"
-    ],
-    "eiscue": [
-      "eiscue",
-      "eiscue-noice"
-    ],
-    "morpeko": [
-      "morpeko",
-      "morpeko-hangry"
-    ],
+    "cramorant": ["cramorant", "cramorant-gulping", "cramorant-gorging"],
+    "eiscue": ["eiscue", "eiscue-noice"],
+    "morpeko": ["morpeko", "morpeko-hangry"],
     "unown": [
       "unown",
       "unown-g",
@@ -97,70 +52,18 @@
       "unown-d",
       "unown-e"
     ],
-    "hippopotas": [
-      "hippopotas",
-      "hippopotas-f"
-    ],
-    "hippowdon": [
-      "hippowdon",
-      "hippowdon-f"
-    ],
-    "unfezant": [
-      "unfezant",
-      "unfezant-f"
-    ],
-    "Basculin": [
-      "Basculin",
-      "Basculin-Blue-Striped"
-    ],
-    "frillish": [
-      "frillish",
-      "frillish-f"
-    ],
-    "jellicent": [
-      "jellicent",
-      "jellicent-f"
-    ],
-    "pyroar": [
-      "pyroar",
-      "pyroar-f"
-    ],
-    "deerling": [
-      "deerling",
-      "deerling-summer",
-      "deerling-autumn",
-      "deerling-winter"
-    ],
-    "sawsbuck": [
-      "sawsbuck",
-      "sawsbuck-summer",
-      "sawsbuck-autumn",
-      "sawsbuck-winter"
-    ],
-    "flabebe": [
-      "flabebe",
-      "flabebe-yellow",
-      "flabebe-orange",
-      "flabebe-blue",
-      "flabebe-white",
-      "flabebe"
-    ],
-    "floette": [
-      "floette",
-      "floette-yellow",
-      "floette-orange",
-      "floette-blue",
-      "floette-white",
-      "floette-eternal"
-    ],
-    "florges": [
-      "florges",
-      "florges-yellow",
-      "florges-orange",
-      "florges-blue",
-      "florges-white",
-      "florges"
-    ],
+    "hippopotas": ["hippopotas", "hippopotas-f"],
+    "hippowdon": ["hippowdon", "hippowdon-f"],
+    "unfezant": ["unfezant", "unfezant-f"],
+    "Basculin": ["Basculin", "Basculin-Blue-Striped"],
+    "frillish": ["frillish", "frillish-f"],
+    "jellicent": ["jellicent", "jellicent-f"],
+    "pyroar": ["pyroar", "pyroar-f", "pyroarmega"],
+    "deerling": ["deerling", "deerling-summer", "deerling-autumn", "deerling-winter"],
+    "sawsbuck": ["sawsbuck", "sawsbuck-summer", "sawsbuck-autumn", "sawsbuck-winter"],
+    "flabebe": ["flabebe", "flabebe-yellow", "flabebe-orange", "flabebe-blue", "flabebe-white"],
+    "floette": ["floette", "floette-yellow", "floette-orange", "floette-blue", "floette-white", "floette-eternal"],
+    "florges": ["florges", "florges-yellow", "florges-orange", "florges-blue", "florges-white"],
     "furfrou": [
       "furfrou",
       "furfrou-heart",
@@ -260,94 +163,100 @@
       "alcremie-rainbow-swirl-flower",
       "alcremie-rainbow-swirl-ribbon"
     ],
-    "magearna": [
-      "magearna",
-      "magearna-original"
+    "magearna": ["magearna", "magearna-original"],
+    "reshiram": ["reshiram", "reshiram-active"],
+    "zekrom": ["zekrom", "zekrom-active"],
+    "arceus": [
+      "arceus",
+      "arceusfairy",
+      "arceusfire",
+      "arceusfighting",
+      "arceusflying",
+      "arceuspoison",
+      "arceusground",
+      "arceusrock",
+      "arceusbug",
+      "arceusghost",
+      "arceussteel",
+      "arceuswater",
+      "arceusgrass",
+      "arceuselectric",
+      "arceuspsychic",
+      "arceusice",
+      "arceusdragon",
+      "arceusdark"
     ],
-    "reshiram": [
-      "reshiram",
-      "reshiram-active"
+    "kyurem-white": ["kyurem-white", "kyurem-white-active"],
+    "kyurem-black": ["kyurem-black", "kyurem-black-active"],
+    "keldeo": ["keldeo", "keldeo-resolute"],
+    "marshadow": ["marshadow", "marshadow-zenith"],
+    "zarude": ["zarude", "zarude-dada"],
+    "maushold": ["maushold", "maushold-of-three"],
+    "squawkabilly": ["squawkabilly", "squawkabilly-blue", "squawkabilly-yellow", "squawkabilly-white"],
+    "tatsugiri": ["tatsugiri", "tatsugiri-droopy", "tatsugiri-stretchy", "tatsugirimega"],
+    "dudunsparce": ["dudunsparce", "dudunsparce-three-segment"],
+    "koraidon": ["koraidon", "koraidon-limited"],
+    "miraidon": ["miraidon", "miraidon-low-power"],
+    "ogerpon": ["ogerpon", "ogerpon-teal-mask"],
+    "ogerpon-wellspring": ["ogerpon-wellspring", "ogerpon-wellspring-mask"],
+    "ogerpon-hearthflame": ["ogerpon-hearthflame", "ogerpon-hearthflame-mask"],
+    "ogerpon-cornerstone": ["ogerpon-cornerstone", "ogerpon-cornerstone-mask"],
+    "terapagos": ["terapagos", "terapagos-stellar", "terapagos-normal"],
+    "magearna-mega": ["magearna-mega", "magearna-original-mega"],
+    "tatsugiri-mega": ["tatsugiri-mega", "tatsugiri-droopy-mega", "tatsugiri-stretchy-mega"],
+    "castform": ["castform", "castformsunny", "castformrainy", "castformsnowy"],
+    "deoxys": ["deoxys", "deoxysattack", "deoxysdefense", "deoxysspeed"],
+    "wormadam": ["wormadam", "wormadamsandy", "wormadamtrash"],
+    "cherrim": ["cherrim", "cherrimsunshine"],
+    "rotom": ["rotom", "rotomheat", "rotomwash", "rotommow", "rotomfrost", "rotomfan"],
+    "shaymin": ["shaymin", "shayminsky"],
+    "basculin": ["basculin", "basculinbluestriped", "basculinwhitestriped"],
+    "darmanitan": ["darmanitan", "darmanitanzen"],
+    "tornadus": ["tornadus", "tornadustherian"],
+    "thundurus": ["thundurus", "thundurustherian"],
+    "landorus": ["landorus", "landorustherian"],
+    "kyurem": ["kyurem", "kyuremblack", "kyuremblackactive", "kyuremwhite", "kyuremwhiteactive"],
+    "meloetta": ["meloetta", "meloettapirouette"],
+    "meowstic": ["meowstic", "meowsticf"],
+    "zygarde": ["zygarde", "zygarde10", "zygardecomplete"],
+    "hoopa": ["hoopa", "hoopaunbound"],
+    "oricorio": ["oricorio", "oricoriopompom", "oricoriopau", "oricoriosensu"],
+    "lycanroc": ["lycanroc", "lycanrocmidnight", "lycanrocdusk"],
+    "wishiwashi": ["wishiwashi", "wishiwashischool"],
+    "silvally": [
+      "silvally",
+      "silvallywater",
+      "silvallygrass",
+      "silvallyfire",
+      "silvallyelectric",
+      "silvallyice",
+      "silvallyground",
+      "silvallyflying",
+      "silvallyfighting",
+      "silvallypoison",
+      "silvallypsychic",
+      "silvallydark",
+      "silvallybug",
+      "silvallyrock",
+      "silvallyghost",
+      "silvallysteel",
+      "silvallydragon",
+      "silvallyfairy"
     ],
-    "zekrom": [
-      "zekrom",
-      "zekrom-active"
-    ],
-    "kyurem-white": [
-      "kyurem-white",
-      "kyurem-white-active"
-    ],
-    "kyurem-black": [
-      "kyurem-black",
-      "kyurem-black-active"
-    ],
-    "keldeo": [
-      "keldeo",
-      "keldeo-resolute"
-    ],
-    "marshadow": [
-      "marshadow",
-      "marshadow-zenith"
-    ],
-    "zarude": [
-      "zarude",
-      "zarude-dada"
-    ],
-    "maushold": [
-      "maushold",
-      "maushold-of-three"
-    ],
-    "squawkabilly": [
-      "squawkabilly",
-      "squawkabilly-blue",
-      "squawkabilly-yellow",
-      "squawkabilly-white"
-    ],
-    "tatsugiri": [
-      "tatsugiri",
-      "tatsugiri-droopy",
-      "tatsugiri-stretchy"
-    ],
-    "dudunsparce": [
-      "dudunsparce",
-      "dudunsparce-three-segment"
-    ],
-    "koraidon": [
-      "koraidon",
-      "koraidon-limited"
-    ],
-    "miraidon": [
-      "miraidon",
-      "miraidon-low-power"
-    ],
-    "ogerpon": [
-      "ogerpon",
-      "ogerpon-teal-mask"
-    ],
-    "ogerpon-wellspring": [
-      "ogerpon-wellspring",
-      "ogerpon-wellspring-mask"
-    ],
-    "ogerpon-hearthflame": [
-      "ogerpon-hearthflame",
-      "ogerpon-hearthflame-mask"
-    ],
-    "ogerpon-cornerstone": [
-      "ogerpon-cornerstone",
-      "ogerpon-cornerstone-mask"
-    ],
-    "terapagos": [
-      "terapagos",
-      "terapagos-stellar",
-      "terapagos-normal"
-    ],
-    "magearna-mega": [
-      "magearna-mega",
-      "magearna-original-mega"
-    ],
-    "tatsugiri-mega": [
-      "tatsugiri-mega",
-      "tatsugiri-droopy-mega",
-      "tatsugiri-stretchy-mega"
-    ]
+    "necrozma": ["necrozma", "necrozmaduskmane", "necrozmadawnwings", "necrozmaultra"],
+    "toxtricity": ["toxtricity", "toxtricitylowkey"],
+    "indeedee": ["indeedee", "indeedeef"],
+    "zacian": ["zacian", "zaciancrowned"],
+    "zamazenta": ["zamazenta", "zamazentacrowned"],
+    "eternatus": ["eternatus", "eternatuseternamax"],
+    "urshifu": ["urshifu", "urshifurapidstrike"],
+    "calyrex": ["calyrex", "calyrexicerider", "calyrexshadowrider"],
+    "ursaluna": ["ursaluna", "ursalunabloodmoon"],
+    "basculegion": ["basculegion", "basculegionf"],
+    "enamorus": ["enamorus", "enamorustherian"],
+    "oinkologne": ["oinkologne", "oinkolognef"],
+    "palafin": ["palafin", "palafinhero"],
+    "gimmighoul": ["gimmighoul", "gimmighoulroaming"],
+    "pecharunt": ["pecharunt", "pecharuntshell"]
   }
 }
