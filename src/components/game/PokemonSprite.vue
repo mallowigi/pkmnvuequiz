@@ -132,16 +132,26 @@ const isDitto = computed(() => {
       />
     </RevealZoomTransition>
 
-    <RevealZoomTransition v-else-if="displayedSprite.sprites && !isDitto">
+    <RevealZoomTransition
+      appear
+      mode="out-in"
+      v-else-if="displayedSprite.sprites && !isDitto"
+    >
       <CyclingSprite :sprites="displayedSprite.sprites" />
     </RevealZoomTransition>
 
-    <RevealZoomTransition v-else-if="isDitto && props.status.isFound && !props.status.isMissed">
+    <RevealZoomTransition
+      appear
+      mode="out-in"
+      v-else-if="isDitto && props.status.isFound && !props.status.isMissed"
+    >
       <LastPokemon />
     </RevealZoomTransition>
 
     <Transition
       name="sprite-swap"
+      appear
+      mode="out-in"
       v-else-if="isDitto && props.status.isShadowed && !props.status.isMissed"
     >
       <!-- Ditto not found -->
