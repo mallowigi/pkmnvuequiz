@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDark } from '@vueuse/core';
+import { usePreferredDark } from '@vueuse/core';
 import { watchEffect, watch } from 'vue';
 
 import Background from '@/components/background/Background.vue';
@@ -46,7 +46,7 @@ watchEffect(() => {
   });
 });
 
-const isDark = useDark();
+const isDark = usePreferredDark();
 
 watch(
   isDark,
