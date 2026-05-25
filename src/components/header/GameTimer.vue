@@ -42,7 +42,7 @@ let stopInterval = () => {
 };
 
 let visibilityChangeListener = () => {
-  if (document.hidden) {
+  if (state.autoPause && document.hidden) {
     stopInterval();
   } else {
     startInterval();
@@ -50,8 +50,8 @@ let visibilityChangeListener = () => {
 };
 
 let onBlurListener = () => {
-  stopInterval();
   if (state.autoPause) {
+    stopInterval();
     pauseGame();
   }
 };
