@@ -78,7 +78,7 @@ export const useSavedData = () => {
 
   const autoSave = () => {
     const savedState = getSavedState();
-    localStorage.setItem(`pkmn_quiz_autosave`, JSON.stringify(savedState));
+    sessionStorage.setItem(`pkmn_quiz_autosave`, JSON.stringify(savedState));
   };
 
   const applyState = (loadedState: SaveData) => {
@@ -247,7 +247,7 @@ export const useSavedData = () => {
   };
 
   const loadAutoSave = () => {
-    const savedStateStr = localStorage.getItem(`pkmn_quiz_autosave`);
+    const savedStateStr = sessionStorage.getItem(`pkmn_quiz_autosave`);
     if (!savedStateStr) {
       return;
     }
