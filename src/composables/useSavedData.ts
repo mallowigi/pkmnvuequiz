@@ -8,6 +8,7 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
+import { useQuiz } from '@/composables/useQuiz.ts';
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
@@ -78,6 +79,7 @@ export const useSavedData = () => {
     const { pokemonState, resetPokemonState, findPokemon } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
     const { setLanguages, resetLanguages } = useLanguages();
+    const { setTitle } = useQuiz();
 
     const target = e.target as HTMLInputElement;
     const files = Array.from(target.files || []);
@@ -108,7 +110,7 @@ export const useSavedData = () => {
         } = loadedState as Partial<SaveData>;
 
         const { pokemonFound, pokemonShadowed, shinyPokemon } = pokemonProgress ?? {};
-        const { isLimited, minutes, startTime } = timer ?? {};
+        const { isLimited, minutes, startTime, elapsed } = timer ?? {};
 
         // Languages
         resetLanguages();
@@ -164,6 +166,7 @@ export const useSavedData = () => {
         // Timer
         resetTimer();
         setTimerState({
+          elapsed: elapsed ?? 0,
           isLimited: isLimited ?? false,
           minutes: minutes ?? 35,
           startTime: startTime ?? null,
@@ -187,6 +190,7 @@ export const useSavedData = () => {
         });
 
         showUserMessage('Successfully loaded quiz!');
+        setTitle();
       } catch (error) {
         console.error('Failed to load state: Invalid file format.', error);
         showUserMessage('Failed to load quiz: Invalid file format.');

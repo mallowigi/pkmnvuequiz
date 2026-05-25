@@ -16,10 +16,34 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   const { startGame, setGameSelectionState } = useGameFlow();
   const { setGameMode, state } = useState();
   const { setDialog } = useDialogs();
-  const { clearCurrentGen, setCurrentGen } = useCurrentGen();
-  const { clearCurrentType, setCurrentType } = useCurrentType();
+  const { currentGenState, clearCurrentGen, setCurrentGen } = useCurrentGen();
+  const { currentTypeState, clearCurrentType, setCurrentType } = useCurrentType();
   const { resetPokemonState } = usePokemons();
   const { resetTimer } = useTimer();
+
+  const setTitle = () => {
+    switch (state.gameMode) {
+      case 'full':
+        useTitle(`Full Quiz | ${TITLE}`);
+        break;
+      case 'gen':
+        const genName = gens[currentGenState.gen!]?.name || 'Unknown Gen';
+        useTitle(`${genName} Quiz | ${TITLE}`);
+        break;
+      case 'types':
+        if (currentTypeState.currentType) {
+          useTitle(`${capitalize(currentTypeState.currentType)} Type Quiz | ${TITLE}`);
+        } else {
+          useTitle(`Type Quiz | ${TITLE}`);
+        }
+        break;
+      case 'special':
+        useTitle(`Special Quiz | ${TITLE}`);
+        break;
+      default:
+        useTitle(TITLE);
+    }
+  };
 
   const setFullQuiz = () => {
     if (state.gameMode === 'full') return;
@@ -32,7 +56,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       resetTimer();
       startGame();
       scrollToTop();
-      useTitle(`Full Quiz | ${TITLE}`);
+      setTitle();
     };
 
     if (withDialog) {
@@ -46,7 +70,6 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   };
 
   const setGenQuiz = (gen: Gen) => {
-    const genName = gens[gen]?.name;
     const onQuizStart = () => {
       setGameMode('gen');
       clearCurrentType();
@@ -55,7 +78,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       resetTimer();
       startGame();
       scrollToTop();
-      useTitle(`${genName} Quiz | ${TITLE}`);
+      setTitle();
     };
 
     if (withDialog) {
@@ -95,14 +118,13 @@ export const useQuiz = ({ withDialog = false } = {}) => {
     switch (type) {
       case 'special':
         setGameMode('special');
-        useTitle(`Special Quiz | ${TITLE}`);
         break;
       default:
         setGameMode('types');
         setCurrentType(type as Type);
-        useTitle(`${capitalize(type)} Type Quiz | ${TITLE}`);
     }
 
+    setTitle();
     resetPokemonState();
     resetTimer();
     setGameSelectionState(null);
@@ -113,6 +135,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   return {
     setFullQuiz,
     setGenQuiz,
+    setTitle,
     setTypeOrSpecial,
     setTypeQuiz,
   };
