@@ -52,7 +52,7 @@ const title = computed(() => (lastPokemon.value ? capitalize(lastPokemon.value.b
 
 <template>
   <div class="last-pokemon-container">
-    <MorphTransition>
+    <MorphTransition mode="out-in">
       <div
         :key="lastPokemon?.id ?? 'unknown'"
         class="sprite"

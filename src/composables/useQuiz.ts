@@ -8,6 +8,7 @@ import { useTimer } from '@/stores/useTimer.ts';
 import { scrollToTop, capitalize } from '@/utils/utils.ts';
 import type { Type, Gen } from '@/types.ts';
 import { useTitle } from '@vueuse/core';
+import { gens } from '@/data/gens.ts';
 
 export const TITLE = 'Pkmn Vue Quiz';
 
@@ -45,6 +46,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   };
 
   const setGenQuiz = (gen: Gen) => {
+    const genName = gens[gen]?.name;
     const onQuizStart = () => {
       setGameMode('gen');
       clearCurrentType();
@@ -53,7 +55,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       resetTimer();
       startGame();
       scrollToTop();
-      useTitle(`Gen ${gen} Quiz | ${TITLE}`);
+      useTitle(`${genName} Quiz | ${TITLE}`);
     };
 
     if (withDialog) {

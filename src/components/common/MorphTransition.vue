@@ -16,7 +16,7 @@ defineProps<{
 <style scoped>
 .morph-enter-active,
 .morph-leave-active {
-  transition: all 1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .morph-leave-active {
