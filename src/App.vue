@@ -77,7 +77,9 @@ watch(
 
     <RoomMessageOverlay v-if="roomState.roomMessage !== null" />
 
-    <PauseOverlay v-if="flowState.isPaused" />
+    <FadeTransition>
+      <PauseOverlay v-if="flowState.isPaused" />
+    </FadeTransition>
 
     <FadeTransition>
       <GameSelection v-if="flowState.gameSelectionState" />

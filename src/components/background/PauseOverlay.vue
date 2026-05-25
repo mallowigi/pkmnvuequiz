@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import IconButton from '@/components/common/IconButton.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow';
+import SaveButtons from '@/components/background/SaveButtons.vue';
 
 const { resumeGame } = useGameFlow();
-const { saveState, loadState } = useSavedData();
 
 const resume = () => resumeGame();
 </script>
@@ -16,14 +14,6 @@ const resume = () => resumeGame();
     class="full-overlay"
     @close="resume"
   >
-    <input
-      type="file"
-      id="file-input"
-      @change="loadState"
-      hidden
-      accept="application/json"
-    />
-
     <div class="prompt">
       <h2 class="left-margin">Paused</h2>
 
@@ -34,25 +24,7 @@ const resume = () => resumeGame();
         Resume
       </RoundedButton>
 
-      <div class="top-margin">
-        <p class="left-margin">Save/Load Quiz State:</p>
-
-        <IconButton @click="saveState">
-          <img
-            src="@/assets/download.png"
-            alt="Download"
-          />
-        </IconButton>
-
-        <label for="file-input">
-          <IconButton>
-            <img
-              src="@/assets/upload.png"
-              alt="Upload"
-            />
-          </IconButton>
-        </label>
-      </div>
+      <SaveButtons />
     </div>
   </Overlay>
 </template>
@@ -65,9 +37,5 @@ const resume = () => resumeGame();
 
 .left-margin {
   margin-left: 10px;
-}
-
-.top-margin {
-  margin-top: 20px;
 }
 </style>

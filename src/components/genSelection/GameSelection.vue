@@ -6,6 +6,7 @@ import Loading from '@/components/genSelection/Loading.vue';
 import TypeChooser from '@/components/genSelection/TypeChooser.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
+import SaveButtons from '@/components/background/SaveButtons.vue';
 
 const { flowState, setGameSelectionState } = useGameFlow();
 const { data } = usePkmnData();
@@ -43,6 +44,8 @@ const close = () => {
             <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 
             <TypeChooser v-if="flowState.gameSelectionState === 'types'" />
+
+            <SaveButtons />
           </div>
         </FadeTransition>
       </div>
