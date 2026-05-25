@@ -33,7 +33,12 @@ const applyMode = (mode: Mode) => {
 };
 
 const isDisabled = computed(
-  () => flowState.isGivenUp || flowState.isEnded || state.withTypeShuffle || state.mode !== 'normal',
+  () =>
+    flowState.isGivenUp ||
+    flowState.isEnded ||
+    state.withTypeShuffle ||
+    state.gameMode === 'types' ||
+    state.gameMode === 'special',
 );
 </script>
 
