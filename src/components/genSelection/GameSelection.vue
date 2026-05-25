@@ -7,9 +7,12 @@ import TypeChooser from '@/components/genSelection/TypeChooser.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import SaveButtons from '@/components/background/SaveButtons.vue';
+import { watch } from 'vue';
+import { useMessages } from '@/stores/useMessages.ts';
 
 const { flowState, setGameSelectionState } = useGameFlow();
 const { data } = usePkmnData();
+const { showUserMessage } = useMessages();
 
 const close = () => {
   if (!flowState.isStarted) {
@@ -17,6 +20,13 @@ const close = () => {
   }
   setGameSelectionState(null);
 };
+
+watch(
+  () => data.isLoaded && !flowState.isStarted,
+  () => {
+    showUserMessage('Welcome to the Pokémon Quiz! Select a generation to begin.');
+  },
+);
 </script>
 
 <template>

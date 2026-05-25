@@ -1,15 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { useMessages } from '@/stores/useMessages';
-import { onMounted, computed } from 'vue';
 
 const { state, showUserMessage } = useMessages();
 
 const lastMessages = computed(() => {
   return state.messages.slice(-3);
-});
-
-onMounted(() => {
-  showUserMessage('Welcome to the Pokémon Quiz! Select a generation to begin.');
 });
 </script>
 
