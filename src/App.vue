@@ -14,6 +14,7 @@ import GameFooter from '@/components/footer/GameFooter.vue';
 import Game from '@/components/game/Game.vue';
 import GameSelection from '@/components/genSelection/GameSelection.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
+import { useSavedData } from '@/composables/useSavedData.ts';
 import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
 import { useCredits } from '@/stores/useCredits';
 import { useGameFlow } from '@/stores/useGameFlow';
@@ -25,6 +26,7 @@ const { flowState } = useGameFlow();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 const typeStyles = useTypeStyles();
+const { loadAutoSave, autoSave } = useSavedData();
 
 watchEffect(() => {
   if (typeof document === 'undefined') {

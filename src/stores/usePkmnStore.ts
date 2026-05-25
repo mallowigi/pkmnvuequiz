@@ -1,7 +1,13 @@
-import { reactive } from 'vue';
 import { defineStore, acceptHMRUpdate } from 'pinia';
+import { reactive } from 'vue';
 
+import { useSavedData } from '@/composables/useSavedData.ts';
+import { useCurrentGen } from '@/stores/useCurrentGen.ts';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useState } from '@/stores/useState.ts';
 import type { PkmnData, PokemonInfo, Translations } from '@/types';
 
 type PkmnDataState = {
@@ -18,6 +24,8 @@ type PkmnDataState = {
 };
 
 export const usePkmnData = defineStore('pkmnData', () => {
+  const { loadAutoSave, autoSave } = useSavedData();
+
   const data: PkmnData = reactive<PkmnDataState>({
     error: null,
     isLoaded: false,
@@ -75,6 +83,32 @@ export const usePkmnData = defineStore('pkmnData', () => {
     data.error = error;
   }
 
+  const initSavedState = () => {
+    // 1. Try to load progress first
+    loadAutoSave();
+
+    // 2. Debounce setup (wait 500ms after the last action to save)
+    let saveTimeout: ReturnType<typeof setTimeout>;
+    const triggerAutoSave = () => {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        autoSave();
+      }, 500);
+    };
+
+    // 3. Subscribe to the essential stores
+    const storesToWatch = [useState(), useCurrentGen(), useCurrentType(), usePokemons(), useLanguages(), useGameFlow()];
+
+    for (const store of storesToWatch) {
+      store.$subscribe(
+        () => {
+          triggerAutoSave();
+        },
+        { detached: true },
+      );
+    }
+  };
+
   async function loadData() {
     return Promise.all([
       loadPokemons(),
@@ -90,6 +124,7 @@ export const usePkmnData = defineStore('pkmnData', () => {
 
         setLoaded();
         initializePokemonMaps();
+        initSavedState();
       })
       .catch((error) => {
         console.error('Error loading data:', error);
