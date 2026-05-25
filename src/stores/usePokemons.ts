@@ -459,9 +459,21 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const isInRemaining = (pokemonName: string) => {
     const pokemonKey = normalizeName(pokemonName);
-    return Array.from(remaining.value.values()).some((remainingKey) => {
-      return remainingKey.startsWith(pokemonKey) && remainingKey !== pokemonKey;
-    });
+
+    for (const lang of languagesState.languages) {
+      const languageMap = pokemonMaps.languages[lang];
+      if (!languageMap) continue;
+
+      for (const [translatedKey, pokemons] of languageMap) {
+        if (translatedKey.startsWith(pokemonKey) && translatedKey !== pokemonKey) {
+          if (pokemons.some((p) => remaining.value.has(normalizeName(p.baseName)))) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
   };
 
   const getStatus = (pokemon: PokemonInfo): PokemonStatus => {
