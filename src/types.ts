@@ -201,6 +201,7 @@ export type PokemonProgress = {
 
 export type SaveData = {
   currentType: Type | null;
+  gameSelectionState: GameSelectionState | null;
   gameMode: GameMode | null;
   gen: Gen | null;
   isDark: boolean;

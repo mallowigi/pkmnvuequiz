@@ -20,6 +20,7 @@ export const useSavedData = () => {
     const { pokemonState } = usePokemons();
     const { timerState } = useTimer();
     const { languagesState } = useLanguages();
+    const { flowState } = useGameFlow();
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
     const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
@@ -40,6 +41,7 @@ export const useSavedData = () => {
     const savedState: SaveData = {
       ...state,
       currentType: currentTypeState.currentType,
+      gameSelectionState: flowState.gameSelectionState,
       gen: currentGenState.gen,
       languages: Array.from(languagesState.languages),
       pokemonProgress: {
@@ -105,6 +107,7 @@ export const useSavedData = () => {
           languages,
           pokemonProgress,
           timer,
+          gameSelectionState,
           version: _version,
           ...statePayload
         } = loadedState as Partial<SaveData>;
@@ -176,6 +179,7 @@ export const useSavedData = () => {
         resetFlowState();
 
         setFlowState({
+          gameSelectionState: gameSelectionState,
           isStarted: true,
         });
 

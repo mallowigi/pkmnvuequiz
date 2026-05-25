@@ -60,7 +60,6 @@ const currentType = computed(() => {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-blend-mode: hard-light;
   background-color: var(--type-bg-color, var(--primary));
   position: fixed;
   top: 0;
@@ -76,6 +75,7 @@ const currentType = computed(() => {
 
   &.typed {
     background-image: url(@/assets/background-50-grey.svg);
+    background-blend-mode: hard-light;
   }
 
   &.typed.dark {
