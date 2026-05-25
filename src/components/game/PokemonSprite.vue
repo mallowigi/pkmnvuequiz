@@ -120,6 +120,7 @@ const isDitto = computed(() => {
   >
     <RevealZoomTransition
       appear
+      mode="out-in"
       v-if="displayedSprite.kind !== 'cycle' && displayedSprite.kind !== 'unknown' && !isDitto"
     >
       <div

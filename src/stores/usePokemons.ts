@@ -269,7 +269,16 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addRandomShadow = () => {
-    const remainingArray = Array.from(remaining.value);
+    let remainingArray = Array.from(remaining.value);
+
+    const currentType = currentTypeStore.getCurrentType();
+    if (currentType) {
+      const typePokemon = pokemonMaps.types[currentType.id as Type];
+      if (typePokemon) {
+        remainingArray = remainingArray.filter((pokemon) => typePokemon.has(pokemon));
+      }
+    }
+
     if (remainingArray.length === 0) return;
 
     let nextShadowPokemon = null;
