@@ -60,6 +60,10 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.lastInput = null;
   };
 
+  const setFlowState = (state: Partial<GameFlowState>) => {
+    Object.assign(flowState, state);
+  };
+
   const updateInput = (input: string | null) => {
     flowState.lastInput = input;
   };
@@ -69,9 +73,9 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState,
     giveUp,
     pauseGame,
-    playFanfare,
     resetFlowState,
     resumeGame,
+    setFlowState,
     setGameSelectionState,
     startGame,
     updateInput,

@@ -75,7 +75,7 @@ export const useSavedData = () => {
     const { setState } = useState();
     const { setCurrentGen } = useCurrentGen();
     const { setCurrentType } = useCurrentType();
-    const { resetFlowState } = useGameFlow();
+    const { resetFlowState, setFlowState } = useGameFlow();
     const { pokemonState, resetPokemonState, findPokemon } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
     const { setLanguages, resetLanguages } = useLanguages();
@@ -174,6 +174,10 @@ export const useSavedData = () => {
 
         // Game flow
         resetFlowState();
+
+        setFlowState({
+          isStarted: true,
+        });
 
         // State
         setState({
