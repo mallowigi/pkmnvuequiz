@@ -29,7 +29,7 @@ const applyTypeShuffle = (value: boolean) => {
   showUserMessage(`Type Shuffle ${value ? 'enabled' : 'disabled'}`);
 };
 
-const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
+const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded || state.mode !== 'normal');
 </script>
 
 <template>
