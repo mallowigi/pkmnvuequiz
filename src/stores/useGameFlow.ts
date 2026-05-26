@@ -8,7 +8,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare } = usePlaySounds();
 
   const flowState = reactive<GameFlowState>({
-    gameSelectionState: 'gen',
+    gameSelectionState: 'new',
     isEnded: false,
     isGivenUp: false,
     isPaused: false,

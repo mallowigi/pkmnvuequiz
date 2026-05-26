@@ -6,13 +6,10 @@ import Loading from '@/components/genSelection/Loading.vue';
 import TypeChooser from '@/components/genSelection/TypeChooser.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import SaveButtons from '@/components/background/SaveButtons.vue';
-import { watch } from 'vue';
-import { useMessages } from '@/stores/useMessages.ts';
+import NewGameButtons from '@/components/genSelection/NewGameButtons.vue';
 
 const { flowState, setGameSelectionState } = useGameFlow();
 const { data } = usePkmnData();
-const { showUserMessage } = useMessages();
 
 const close = () => {
   if (!flowState.isStarted) {
@@ -20,13 +17,6 @@ const close = () => {
   }
   setGameSelectionState(null);
 };
-
-watch(
-  () => data.isLoaded && !flowState.isStarted,
-  () => {
-    showUserMessage('Welcome to the Pokémon Quiz! Select a generation to begin.');
-  },
-);
 </script>
 
 <template>
@@ -34,10 +24,7 @@ watch(
     <FadeTransition>
       <div class="prompt">
         <!-- Logo -->
-        <div
-          id="logo"
-          v-if="!flowState.isStarted && flowState.gameSelectionState === 'gen'"
-        >
+        <div v-if="!flowState.isStarted">
           <img
             src="@/assets/logo.gif"
             class="titlecard"
@@ -49,13 +36,14 @@ watch(
           <!-- Loader -->
           <Loading v-if="!data.isLoaded" />
 
+          <!-- New Game / Continue -->
+          <NewGameButtons v-else-if="data.isLoaded && flowState.gameSelectionState === 'new'" />
+
           <!-- Game selection -->
           <div v-else>
             <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 
             <TypeChooser v-if="flowState.gameSelectionState === 'types'" />
-
-            <SaveButtons />
           </div>
         </FadeTransition>
       </div>

@@ -149,7 +149,7 @@ export type TimerState = {
   startTime: number | null;
 };
 
-export type GameSelectionState = 'gen' | 'types' | null;
+export type GameSelectionState = 'new' | 'gen' | 'types' | null;
 
 export type GameFlowState = {
   gameSelectionState: GameSelectionState;
