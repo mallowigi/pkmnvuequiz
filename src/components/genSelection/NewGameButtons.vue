@@ -2,19 +2,19 @@
 import SaveButtons from '@/components/background/SaveButtons.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
 
-const { data } = usePkmnData();
-const { flowState, setGameSelectionState } = useGameFlow();
-const { loadAutoSave } = useSavedData();
+const { setGameSelectionState } = useGameFlow();
+const { loadAutoSave, setReady, hasSavedState } = useSavedData();
 
 const newGame = () => {
   setGameSelectionState('gen');
+  setReady();
 };
 
 const continueGame = () => {
   loadAutoSave();
+  setReady();
 };
 </script>
 
@@ -32,6 +32,7 @@ const continueGame = () => {
 
       <RoundedButton
         primary
+        v-if="hasSavedState()"
         @click="continueGame"
       >
         Continue

@@ -9,9 +9,32 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
+import { ref } from 'vue';
+
+const ready = ref(false);
+const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
+
+  const setReady = () => {
+    ready.value = true;
+  };
+
+  const hasSavedState = () => {
+    const savedStateStr = sessionStorage.getItem(LOCAL_STORAGE_KEY);
+    if (!savedStateStr) {
+      return false;
+    }
+
+    try {
+      const savedState = JSON.parse(savedStateStr);
+      return savedState && savedState.version === 1;
+    } catch (error) {
+      console.error('Failed to parse autosave data.', error);
+      return false;
+    }
+  };
 
   const getSavedState = (): SaveData => {
     const { state } = useState();
@@ -77,8 +100,11 @@ export const useSavedData = () => {
   };
 
   const autoSave = () => {
+    // Prevent autosaving until app is ready
+    if (!ready.value) return;
+
     const savedState = getSavedState();
-    sessionStorage.setItem(`pkmn_quiz_autosave`, JSON.stringify(savedState));
+    sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
   };
 
   const applyState = (loadedState: SaveData) => {
@@ -247,7 +273,7 @@ export const useSavedData = () => {
   };
 
   const loadAutoSave = () => {
-    const savedStateStr = sessionStorage.getItem(`pkmn_quiz_autosave`);
+    const savedStateStr = sessionStorage.getItem(LOCAL_STORAGE_KEY);
     if (!savedStateStr) {
       return;
     }
@@ -268,8 +294,10 @@ export const useSavedData = () => {
 
   return {
     autoSave,
+    hasSavedState,
     loadAutoSave,
     loadState,
     saveState,
+    setReady,
   };
 };
