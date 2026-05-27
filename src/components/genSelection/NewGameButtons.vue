@@ -5,6 +5,7 @@ import TextBox from '@/components/common/TextBox.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
+import { useFirebase } from '@/composables/useFirebase.ts';
 
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
@@ -19,6 +20,8 @@ const continueGame = () => {
   loadAutoSave();
   setReady();
 };
+
+const { leaderBoards } = useFirebase();
 </script>
 
 <template>
@@ -52,6 +55,18 @@ const continueGame = () => {
     </div>
 
     <SaveButtons />
+
+    <div class="leaderboard">
+      <h2>Top Players</h2>
+      <div v-if="leaderBoards">
+        <div
+          v-for="user in leaderBoards"
+          :key="user.id"
+        >
+          {{ user.name }} &mdash; {{ user.time }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
