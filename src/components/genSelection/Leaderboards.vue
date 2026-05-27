@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useFirebase } from '@/composables/useFirebase.ts';
+import RoundedButton from '@/components/common/RoundedButton.vue';
 
-const { leaderBoards } = useFirebase();
+const { leaderBoards, createRecord } = useFirebase();
 </script>
 
 <template>
@@ -15,5 +16,12 @@ const { leaderBoards } = useFirebase();
         {{ user.name }} &mdash; {{ user.time }}
       </div>
     </div>
+
+    <RoundedButton
+      primary
+      @click="createRecord"
+    >
+      Create Random Record
+    </RoundedButton>
   </div>
 </template>

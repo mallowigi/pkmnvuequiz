@@ -1,7 +1,7 @@
 import { useFirestore } from '@vueuse/firebase';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
-import { collection, getFirestore, limit, orderBy, query } from 'firebase/firestore';
+import { collection, doc, getFirestore, limit, orderBy, query, setDoc } from 'firebase/firestore';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -28,7 +28,32 @@ const leaderBoards = useFirestore(leaderBoardQuery, [], {
 });
 
 export const useFirebase = () => {
+  const createRecord = async () => {
+    const user = auth.currentUser;
+
+    const gameModes = ['full', 'gen', 'special', 'types'];
+    const modes = ['chaos', 'normal', 'order'];
+    const randomGameMode = gameModes[Math.floor(Math.random() * gameModes.length)];
+    const randomMode = modes[Math.floor(Math.random() * modes.length)];
+
+    const payload = {
+      gameMode: randomGameMode,
+      mode: randomMode,
+      name: 'Player' + Math.floor(Math.random() * 1000),
+      numShadows: Math.floor(Math.random() * 20),
+      time: 2000 + Math.floor(Math.random() * 50000),
+      uid: user ? user.uid : null,
+    };
+
+    if (!user) {
+      console.error('Cannot create record: no authenticated user.');
+      return;
+    }
+    await setDoc(doc(db, 'leaderboards', user.uid), payload);
+  };
+
   return {
+    createRecord,
     leaderBoards,
   };
 };
