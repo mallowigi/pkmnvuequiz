@@ -12,6 +12,7 @@ import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
+import TextBox from '@/components/common/TextBox.vue';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
@@ -59,7 +60,10 @@ const isDisabled = computed(() => {
   );
 });
 
-const inputRef = ref<HTMLInputElement | null>(null);
+const textBoxRef = ref<InstanceType<typeof TextBox> | null>(null);
+
+// We need to access the input element inside the TextBox component, so we use a computed property to get it
+const inputRef = computed(() => textBoxRef.value?.inputRef ?? null);
 
 const ensureFocus = () => {
   // Do not focus if the game is in paused or ended state, or if a dialog or room message is open
@@ -210,13 +214,13 @@ watch([isDisabled], () => {
     :class="{ shake: flowState.isStarted, disabled: isDisabled }"
   >
     <p>Name all {{ regionOrType }} Pokémon:</p>
-    <input
-      ref="inputRef"
-      type="text"
-      class="input-name"
+
+    <TextBox
+      ref="textBoxRef"
       maxlength="13"
       autocomplete="off"
     />
+
     <LastPokemon />
   </div>
 </template>
@@ -280,21 +284,6 @@ watch([isDisabled], () => {
   &.disabled {
     pointer-events: none;
     opacity: 0.6;
-  }
-}
-
-.input-name {
-  color: var(--input-text);
-  background-color: var(--secondary);
-  font-size: 20px;
-  width: 170px;
-  border-radius: 4px 10px 4px 4px;
-  border: 2px solid #444;
-  padding: 2px 2px 2px 4px;
-
-  &:focus {
-    outline: none;
-    background: white;
   }
 }
 </style>
