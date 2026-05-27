@@ -1,3 +1,5 @@
+import type { DocumentData } from 'firebase/firestore';
+
 export type Dialog = 'chaos' | 'order' | 'normal' | 'shadows' | 'switchQuiz' | 'timer' | 'giveup' | 'reset';
 
 export type GameMode = 'full' | 'gen' | 'special' | 'types';
@@ -228,3 +230,12 @@ export type Message = {
   text: string;
   type: MessageType;
 };
+
+export interface UserRecord extends DocumentData {
+  id: string;
+  name: string;
+  time: number;
+  numShadows: number;
+  gameMode: GameMode | null;
+  mode: Mode;
+}

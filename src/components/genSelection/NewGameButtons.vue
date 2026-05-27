@@ -2,10 +2,10 @@
 import SaveButtons from '@/components/background/SaveButtons.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import TextBox from '@/components/common/TextBox.vue';
+import Leaderboards from '@/components/genSelection/Leaderboards.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
-import { useFirebase } from '@/composables/useFirebase.ts';
 
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
@@ -20,8 +20,6 @@ const continueGame = () => {
   loadAutoSave();
   setReady();
 };
-
-const { leaderBoards } = useFirebase();
 </script>
 
 <template>
@@ -54,19 +52,11 @@ const { leaderBoards } = useFirebase();
       </RoundedButton>
     </div>
 
+    <!-- Save/Load -->
     <SaveButtons />
 
-    <div class="leaderboard">
-      <h2>Top Players</h2>
-      <div v-if="leaderBoards">
-        <div
-          v-for="user in leaderBoards"
-          :key="user.id"
-        >
-          {{ user.name }} &mdash; {{ user.time }}
-        </div>
-      </div>
-    </div>
+    <!-- Leaderboards -->
+    <Leaderboards />
   </div>
 </template>
 
