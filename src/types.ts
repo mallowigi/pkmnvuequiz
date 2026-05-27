@@ -109,6 +109,7 @@ export type PokemonInfo = {
 };
 
 export type State = {
+  name: string;
   autoPause: boolean;
   gameMode: GameMode | null;
   isDark: boolean;
@@ -201,12 +202,13 @@ export type PokemonProgress = {
 
 export type SaveData = {
   currentType: Type | null;
-  gameSelectionState: GameSelectionState | null;
   gameMode: GameMode | null;
+  gameSelectionState: GameSelectionState | null;
   gen: Gen | null;
   isDark: boolean;
   languages: Language[];
   mode: Mode;
+  name: string;
   pokemonProgress: PokemonProgress;
   timer: TimerState;
   version: number;

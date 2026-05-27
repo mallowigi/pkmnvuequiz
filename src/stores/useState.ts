@@ -9,6 +9,7 @@ export const useState = defineStore('state', () => {
     gameMode: null,
     isDark: false,
     mode: 'normal',
+    name: '',
     withCycleSprites: true,
     withShadowHelper: false,
     withShadows: false,
@@ -17,6 +18,10 @@ export const useState = defineStore('state', () => {
     withSpelling: false,
     withTypeShuffle: false,
   });
+
+  const setName = (name: string) => {
+    state.name = name;
+  };
 
   const setGameMode = (mode: GameMode | null) => {
     state.gameMode = mode;
@@ -94,6 +99,7 @@ export const useState = defineStore('state', () => {
     setGameMode,
     setGameOver,
     setMode,
+    setName,
     setSound,
     setState,
     setTypeShuffle,
