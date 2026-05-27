@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import SaveButtons from '@/components/background/SaveButtons.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useSavedData } from '@/composables/useSavedData.ts';
-import { useState } from '@/stores/useState.ts';
 import TextBox from '@/components/common/TextBox.vue';
+import { useSavedData } from '@/composables/useSavedData.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useState } from '@/stores/useState.ts';
 
 const { setGameSelectionState } = useGameFlow();
-const { state } = useState();
+const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
 
 const newGame = () => {
@@ -23,13 +23,13 @@ const continueGame = () => {
 
 <template>
   <div class="root">
-    <p>Welcome to the Pokémon Quiz! Select an option to begin.</p>
+    <p>Welcome to the Pokémon Quiz!</p>
 
     <div class="row">
       <TextBox
         type="text"
         placeholder="Enter your name"
-        v-model="state.name"
+        @input="setName"
       />
     </div>
 

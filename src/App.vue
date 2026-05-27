@@ -95,7 +95,7 @@ watch(
   </main>
 </template>
 
-<style global>
+<style>
 :root {
   --text: #333;
   --text-inverted: #eee;
@@ -107,6 +107,7 @@ watch(
   --danger: #d00;
   --secondary: rgba(255, 255, 255, 0.85);
   --input: #eee;
+  --input-bg: rgba(255, 255, 255, 0.85);
   --input-text: #333;
 
   --type-btn-color: var(--primary);

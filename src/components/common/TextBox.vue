@@ -17,7 +17,7 @@ defineExpose({ inputRef });
 <style scoped>
 .input-name {
   color: var(--input-text);
-  background-color: var(--secondary);
+  background-color: var(--input-bg);
   font-size: 20px;
   width: 170px;
   border-radius: 4px 10px 4px 4px;

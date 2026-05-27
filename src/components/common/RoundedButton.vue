@@ -2,6 +2,7 @@
 type Props = {
   primary?: boolean;
   selected?: boolean;
+  disabled?: boolean;
   text?: string;
 };
 
@@ -11,7 +12,7 @@ const props = defineProps<Props>();
 <template>
   <div
     class="cell rad-bl-tr transition-element"
-    :class="{ primary: props.primary, selected: props.selected }"
+    :class="{ primary: props.primary, selected: props.selected, disabled: props.disabled }"
     v-bind="$attrs"
   >
     <slot />
@@ -44,6 +45,13 @@ const props = defineProps<Props>();
     background: var(--type-btn-color, var(--darkPrimary));
     border: 2px solid var(--type-btn-color, var(--darkPrimary));
     color: var(--type-fg-color, var(--text));
+  }
+
+  &.disabled {
+    background: var(--type-bg-color, var(--darkPrimary));
+    border: 2px solid var(--type-btn-color, var(--darkPrimary));
+    color: var(--type-fg-color, var(--text));
+    cursor: not-allowed;
   }
 
   &:hover {
