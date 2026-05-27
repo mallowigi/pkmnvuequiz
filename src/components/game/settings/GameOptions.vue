@@ -15,7 +15,7 @@ import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
 </script>
 
-<template class="root">
+<template>
   <GameAbort />
 
   <div class="selection-row">

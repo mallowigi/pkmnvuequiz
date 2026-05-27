@@ -95,7 +95,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
     >
       <span class="region-name">{{ box.name }}</span>
 
-      <template class="sprite-container">
+      <div class="sprite-container">
         <PokemonSprite
           v-for="(pokemon, index) in getBoxPokemons(box.id)"
           :key="pokemon.id"
@@ -103,7 +103,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
           :status="getStatus(pokemon)"
           :index="index"
         />
-      </template>
+      </div>
     </RoundedBox>
   </div>
 </template>

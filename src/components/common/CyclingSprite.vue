@@ -25,7 +25,12 @@ const currentIndex = ref(props.start ?? 0);
 let interval: ReturnType<typeof setInterval> | null = null;
 
 const startCycle = () => {
-  if (interval || props.sprites.length === 0 || !state.withCycleSprites) {
+  if (interval) {
+    clearInterval(interval);
+    interval = null;
+  }
+
+  if (props.sprites.length === 0 || !state.withCycleSprites) {
     return;
   }
 

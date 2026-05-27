@@ -40,8 +40,8 @@ const { toggleShowCredits } = useCredits();
   min-width: 500px;
   height: 70%;
   contain: content;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #222;
+  background-color: var(--secondary);
+  color: var(--text);
   padding: 10px 10px;
   position: fixed;
   z-index: 10;
@@ -87,7 +87,7 @@ const { toggleShowCredits } = useCredits();
 
 .sprites {
   flex: 1;
-  border-right: 2px dotted #dcdcdc;
+  border-right: 2px dotted var(--primary);
   padding-right: 5px;
 }
 
