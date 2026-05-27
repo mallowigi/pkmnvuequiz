@@ -82,7 +82,7 @@ const { toggleShowCredits } = useCredits();
 
 <style scoped>
 .footer {
-  background: #111;
+  background: var(--black);
   color: #fff;
   margin: 10px 10px 0;
   padding: 11px 14px;

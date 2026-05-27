@@ -100,6 +100,7 @@ watch(
   --text: #333;
   --text-inverted: #eee;
   --full-overlay: rgba(16, 17, 14, 1);
+  --black: #111;
   --button: white;
   --button-hover: #666666;
   --primary: #8cc63f;

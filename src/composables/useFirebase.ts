@@ -1,7 +1,7 @@
 import { useFirestore } from '@vueuse/firebase';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
-import { collection, doc, getFirestore, limit, orderBy, query, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc } from 'firebase/firestore';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -46,7 +46,7 @@ export const useFirebase = () => {
     };
 
     if (!user) {
-      console.error('Cannot create record: no authenticated user.');
+      await addDoc(collection(db, 'leaderboards'), payload);
       return;
     }
     await setDoc(doc(db, 'leaderboards', user.uid), payload);
