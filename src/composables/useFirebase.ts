@@ -2,6 +2,15 @@ import { useFirestore } from '@vueuse/firebase';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc } from 'firebase/firestore';
+import { storeToRefs } from 'pinia';
+
+import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
+import { useState } from '@/stores/useState.ts';
+import { useTimer } from '@/stores/useTimer.ts';
+import type { UserRecord } from '@/types.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -29,21 +38,38 @@ const leaderBoards = useFirestore(leaderBoardQuery, [], {
 
 export const useFirebase = () => {
   const createRecord = async () => {
+    const { state } = useState();
+    const { flowState } = useGameFlow();
+    const { currentTypeState } = useCurrentType();
+    const { currentGenState } = useCurrentGen();
+    const pokemonStore = usePokemons();
+    const { numFound, numShadows } = storeToRefs(pokemonStore);
+    const { timerState } = useTimer();
+
     const user = auth.currentUser;
 
-    const gameModes = ['full', 'gen', 'special', 'types'];
-    const modes = ['chaos', 'normal', 'order'];
-    const randomGameMode = gameModes[Math.floor(Math.random() * gameModes.length)];
-    const randomMode = modes[Math.floor(Math.random() * modes.length)];
-
-    const payload = {
-      gameMode: randomGameMode,
-      mode: randomMode,
-      name: 'Player' + Math.floor(Math.random() * 1000),
-      numShadows: Math.floor(Math.random() * 20),
-      time: 2000 + Math.floor(Math.random() * 50000),
+    const payload: UserRecord = {
+      gameMode: state.gameMode!,
+      hasGivenUp: flowState.isGivenUp,
+      id: user?.uid,
+      mode: state.mode,
+      name: state.name,
+      numFound: numFound.value,
+      numShadows: numShadows.value,
+      time: timerState.elapsed,
       uid: user ? user.uid : null,
+      usedAutoPause: state.usedAutoPause,
+      usedDisplayShadows: state.usedDisplayShadows,
+      usedShadowHelper: state.usedShadowHelper,
+      usedSpelling: state.usedSpelling,
+      usedTypeShuffle: state.usedTypeShuffle,
     };
+
+    if (state.gameMode === 'types') {
+      payload.type = currentTypeState.currentType;
+    } else if (state.gameMode === 'gen') {
+      payload.gen = currentGenState.gen;
+    }
 
     if (!user) {
       await addDoc(collection(db, 'leaderboards'), payload);

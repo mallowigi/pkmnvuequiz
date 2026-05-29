@@ -10,6 +10,13 @@ export const useState = defineStore('state', () => {
     isDark: false,
     mode: 'normal',
     name: '',
+
+    usedAutoPause: false,
+    usedDisplayShadows: false,
+    usedShadowHelper: false,
+    usedSpelling: false,
+    usedTypeShuffle: false,
+
     withCycleSprites: true,
     withShadowHelper: false,
     withShadows: false,
@@ -46,10 +53,12 @@ export const useState = defineStore('state', () => {
 
   const toggleSpelling = () => {
     state.withSpelling = !state.withSpelling;
+    state.usedSpelling = true;
   };
 
   const displayShadows = () => {
     state.withShadows = true;
+    state.usedDisplayShadows = true;
   };
 
   const hideShadows = () => {
@@ -58,10 +67,12 @@ export const useState = defineStore('state', () => {
 
   const toggleShadowHelper = () => {
     state.withShadowHelper = !state.withShadowHelper;
+    state.usedShadowHelper = true;
   };
 
   const setTypeShuffle = (withTypeShuffle: boolean) => {
     state.withTypeShuffle = withTypeShuffle;
+    state.usedTypeShuffle = true;
   };
 
   const setCycleSprites = (withCycleSprites: boolean) => {
@@ -74,6 +85,7 @@ export const useState = defineStore('state', () => {
 
   const setAutoPause = (autoPause: boolean) => {
     state.autoPause = autoPause;
+    state.usedAutoPause = true;
   };
 
   const setState = (newState: Partial<State>) => {

@@ -116,6 +116,13 @@ export type State = {
   gameMode: GameMode | null;
   isDark: boolean;
   mode: Mode;
+
+  usedAutoPause: boolean;
+  usedShadowHelper: boolean;
+  usedSpelling: boolean;
+  usedTypeShuffle: boolean;
+  usedDisplayShadows: boolean;
+
   withCycleSprites: boolean;
   withShadowHelper: boolean;
   withShadows: boolean;
@@ -214,6 +221,13 @@ export type SaveData = {
   pokemonProgress: PokemonProgress;
   timer: TimerState;
   version: number;
+
+  usedAutoPause: boolean;
+  usedShadowHelper: boolean;
+  usedSpelling: boolean;
+  usedTypeShuffle: boolean;
+  usedDisplayShadows: boolean;
+
   withCycleSprites: boolean;
   withShadowHelper: boolean;
   withShadows: boolean;
@@ -232,10 +246,18 @@ export type Message = {
 };
 
 export interface UserRecord extends DocumentData {
-  id: string;
-  name: string;
-  time: number;
-  numShadows: number;
-  gameMode: GameMode | null;
+  gameMode: GameMode;
+  id?: string;
+  gen?: Gen | null;
   mode: Mode;
+  name: string;
+  hasGivenUp: boolean;
+  numShadows: number;
+  time: number;
+  type?: Type | null;
+  usedAutoPause: boolean;
+  usedDisplayShadows: boolean;
+  usedShadowHelper: boolean;
+  usedSpelling: boolean;
+  usedTypeShuffle: boolean;
 }
