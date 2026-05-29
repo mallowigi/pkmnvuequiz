@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useDocumentVisibility, useWindowFocus, useInterval } from '@vueuse/core';
+import { computed, watch } from 'vue';
 
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
@@ -8,6 +9,15 @@ import { useTimer } from '@/stores/useTimer.ts';
 const { state } = useState();
 const { timerState, incElapsed } = useTimer();
 const { flowState, pauseGame } = useGameFlow();
+
+const { pause, resume } = useInterval(1000, {
+  callback: () => {
+    if (!timerState.startTime || flowState.isPaused) return;
+
+    incElapsed();
+  },
+  controls: true,
+});
 
 const elapsedTime = computed(() => {
   if (!timerState.startTime) return '- - : - - : - -';
@@ -20,57 +30,33 @@ const elapsedTime = computed(() => {
   return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
 });
 
-const interval = ref<ReturnType<typeof setInterval> | null>(null);
+const visibility = useDocumentVisibility();
+const windowFocus = useWindowFocus();
 
-let updateElapsedTime = () => {
-  if (!timerState.startTime || flowState.isPaused) return;
-
-  incElapsed();
-};
-
-let startInterval = () => {
-  if (!interval.value) {
-    interval.value = setInterval(updateElapsedTime, 1000);
+// Stops the interval when the tab is not active
+watch(visibility, (current) => {
+  if (!state.autoPause) {
+    return;
   }
-};
 
-let stopInterval = () => {
-  if (interval.value) {
-    clearInterval(interval.value);
-    interval.value = null;
-  }
-};
-
-let visibilityChangeListener = () => {
-  if (state.autoPause && document.hidden) {
-    stopInterval();
+  if (current === 'visible') {
+    resume();
   } else {
-    startInterval();
+    pause();
   }
-};
-
-let onBlurListener = () => {
-  if (state.autoPause) {
-    stopInterval();
-    pauseGame();
-  }
-};
-
-onMounted(() => {
-  startInterval();
-
-  // Stops the interval when the tab is not active
-  document.addEventListener('visibilitychange', visibilityChangeListener);
-  window.addEventListener('blur', onBlurListener);
-  window.addEventListener('focus', startInterval);
 });
 
-onUnmounted(() => {
-  stopInterval();
+watch(windowFocus, (isFocused) => {
+  if (!state.autoPause) {
+    return;
+  }
 
-  document.removeEventListener('visibilitychange', visibilityChangeListener);
-  window.removeEventListener('blur', onBlurListener);
-  window.removeEventListener('focus', startInterval);
+  if (isFocused) {
+    resume();
+  } else {
+    pause();
+    pauseGame();
+  }
 });
 </script>
 
