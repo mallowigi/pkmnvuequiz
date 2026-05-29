@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useIntervalFn } from '@vueuse/core';
+import { computed, ref } from 'vue';
 
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import { useState } from '@/stores/useState.ts';
 import { normalizeName, capitalize } from '@/utils/utils.ts';
 
 const props = defineProps<{
@@ -11,7 +11,6 @@ const props = defineProps<{
 }>();
 
 const { data } = usePkmnData();
-const { state } = useState();
 
 const sprites = computed(() => {
   if (!data.sprites) {
@@ -22,41 +21,9 @@ const sprites = computed(() => {
 
 const currentIndex = ref(props.start ?? 0);
 
-let interval: ReturnType<typeof setInterval> | null = null;
-
-const startCycle = () => {
-  if (interval) {
-    clearInterval(interval);
-    interval = null;
-  }
-
-  if (props.sprites.length === 0 || !state.withCycleSprites) {
-    return;
-  }
-
-  interval = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % props.sprites.length;
-  }, 3000);
-};
-
-watch(
-  () => [props.sprites, state.withCycleSprites],
-  () => {
-    startCycle();
-  },
-  { immediate: true },
-);
-
-onMounted(() => {
-  startCycle();
-});
-
-onUnmounted(() => {
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = null;
-});
+useIntervalFn(() => {
+  currentIndex.value = (currentIndex.value + 1) % props.sprites.length;
+}, 3000);
 </script>
 
 <template>

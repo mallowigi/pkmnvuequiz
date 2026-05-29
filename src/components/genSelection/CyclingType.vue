@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { typesList } from '@/data/pokemonTypes';
+import { useIntervalFn } from '@vueuse/core';
 
 const currentIndex = ref(0);
 
@@ -12,25 +13,9 @@ const currentType = computed(() => {
   };
 });
 
-let interval: ReturnType<typeof setInterval> | null = null;
-
-const startCycle = () => {
-  if (interval) {
-    return;
-  }
-  interval = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % typesList.length;
-  }, 3000);
-};
-
-onMounted(() => {
-  startCycle();
-});
-
-onUnmounted(() => {
-  if (interval) clearInterval(interval);
-  interval = null;
-});
+useIntervalFn(() => {
+  currentIndex.value = (currentIndex.value + 1) % typesList.length;
+}, 3000);
 
 const emits = defineEmits(['typeSelected']);
 
