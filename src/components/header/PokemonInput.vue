@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onStartTyping } from '@vueuse/core';
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 
 import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
@@ -72,6 +72,13 @@ const handleKeydown = (e: KeyboardEvent) => {
   updateInput(inputRef.value!.value);
 
   const value = inputRef.value?.value || '';
+
+  // Shadow helper shortcut: ',' key
+  if (e.key === ',') {
+    activateNextShadow();
+    return;
+  }
+
   if (value === '') {
     return;
   }
@@ -95,6 +102,16 @@ onStartTyping((e) => {
   }
 
   ensureFocus();
+});
+
+// TODO remove this once vueuse adds the isTypedCharValid
+onMounted(() => {
+  ensureFocus();
+  window.addEventListener('keyup', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keyup', handleKeydown);
 });
 </script>
 

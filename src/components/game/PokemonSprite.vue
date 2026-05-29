@@ -254,13 +254,16 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   position: relative;
   transition: transform 0.5s ease;
 
-  &.found {
+  &.found,
+  &.cycle,
+  &.shadowed {
     image-rendering: high-quality;
     animation: appear 1.5s ease-in-out backwards;
     animation-delay: 0.1s;
 
     &:hover {
       transform: scale(2);
+      z-index: 10;
     }
   }
 

@@ -29,7 +29,7 @@ useIntervalFn(() => {
 <template>
   <div
     :hidden="sprites.length === 0"
-    class="sprite"
+    class="sprite cycle"
     :title="sprites[currentIndex] ? capitalize(props.sprites[currentIndex]) : ''"
     :style="{ '--bg-img': `url(${sprites[currentIndex]})` }"
   />
