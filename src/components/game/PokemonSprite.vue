@@ -70,7 +70,7 @@ const displayedSprite = computed<DisplayedSprite>(() => {
         image: spriteData.value.shiny,
         key: 'found-shiny',
         kind: 'found',
-        title: capitalize(props.pokemon.baseName),
+        title: `${capitalize(props.pokemon.baseName)} (Shiny)`,
       };
     }
 
@@ -102,7 +102,7 @@ const displayedSprite = computed<DisplayedSprite>(() => {
 });
 
 const spriteDelay = computed<string>(() => {
-  const rawDelay = (props.index ?? 0) * 20;
+  const rawDelay = (props.index ?? 0) * 50;
   // Make staggering animation when we need to display all found or all shadows
   if (state.withShadows || flowState.isGivenUp) {
     return `${rawDelay}ms`;
@@ -225,7 +225,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
 }
 
 .container.missed > * {
-  opacity: 0.5;
+  filter: grayscale(100%);
 }
 
 @keyframes appear {
@@ -259,7 +259,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   &.shadowed {
     image-rendering: high-quality;
     animation: appear 1.5s ease-in-out backwards;
-    animation-delay: 0.1s;
+    animation-delay: var(--sprite-delay, 0.1s);
 
     &:hover {
       transform: scale(2);

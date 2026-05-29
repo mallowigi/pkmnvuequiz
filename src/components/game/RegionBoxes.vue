@@ -159,7 +159,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 4px;
   width: 100%;
