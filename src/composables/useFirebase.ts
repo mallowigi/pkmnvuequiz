@@ -1,16 +1,16 @@
 import { useFirestore } from '@vueuse/firebase';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
-import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc } from 'firebase/firestore';
+import { addDoc, and, collection, doc, getFirestore, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs } from 'pinia';
 
+import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import type { UserRecord } from '@/types.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useCurrentGen } from '@/stores/useCurrentGen.ts';
+import type { UserRecord, GameMode } from '@/types.ts';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -27,13 +27,6 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 signInAnonymously(auth).catch((error) => {
   console.error('Auth failed:', error);
-});
-
-const leaderBoardQuery = query(collection(db, 'leaderboards'), orderBy('time', 'asc'), limit(10));
-
-const leaderBoards = useFirestore(leaderBoardQuery, [], {
-  autoDispose: false,
-  errorHandler: (error) => console.error('Firestore error:', error),
 });
 
 export const useFirebase = () => {
@@ -78,8 +71,37 @@ export const useFirebase = () => {
     await setDoc(doc(db, 'leaderboards', user.uid), payload);
   };
 
+  const getTopTrainers = () => {
+    const leaderBoardQuery = query(
+      collection(db, 'leaderboards'),
+      where('hasGivenUp', '==', false),
+      orderBy('time', 'asc'),
+      limit(3),
+    );
+
+    return useFirestore(leaderBoardQuery, [], {
+      autoDispose: false,
+      errorHandler: (error) => console.error('Firestore error:', error),
+    });
+  };
+
+  const getTopTrainersByMode = (mode: GameMode) => {
+    const modeQuery = query(
+      collection(db, 'leaderboards'),
+      and(where('gameMode', '==', mode), where('hasGivenUp', '==', false)),
+      orderBy('time', 'asc'),
+      limit(3),
+    );
+
+    return useFirestore(modeQuery, [], {
+      autoDispose: false,
+      errorHandler: (error) => console.error('Firestore error:', error),
+    });
+  };
+
   return {
     createRecord,
-    leaderBoards,
+    getTopTrainers,
+    getTopTrainersByMode,
   };
 };

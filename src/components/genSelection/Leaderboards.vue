@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { capitalize } from '@/utils/utils.ts';
 
-const { leaderBoards } = useFirebase();
+const { getTopTrainers } = useFirebase();
+
+const topTrainers = computed(() => getTopTrainers().value);
 
 const formatTime = (timeMs: number) => {
   const totalSeconds = Math.floor(timeMs / 1000);
@@ -13,6 +17,8 @@ const formatTime = (timeMs: number) => {
   const seconds = String(totalSeconds % 60).padStart(2, '0');
   return `${minutes}:${seconds}.${ms}`;
 };
+
+const toCapital = (str: string) => capitalize(str);
 </script>
 
 <template>
@@ -21,7 +27,7 @@ const formatTime = (timeMs: number) => {
 
     <div
       class="table-container"
-      v-if="leaderBoards?.length > 0"
+      v-if="topTrainers?.length > 0"
     >
       <table class="leaderboard-table">
         <thead>
@@ -36,14 +42,14 @@ const formatTime = (timeMs: number) => {
         </thead>
         <tbody>
           <tr
-            v-for="(user, index) in leaderBoards"
+            v-for="(user, index) in topTrainers"
             :key="user.id"
           >
             <td class="rank">{{ index + 1 }}</td>
             <td class="run-name">{{ user.name }}</td>
             <td class="run-time">{{ formatTime(user.time) }}</td>
-            <td>{{ capitalize(user.gameMode) }}</td>
-            <td>{{ capitalize(user.mode) }}</td>
+            <td>{{ toCapital(user.gameMode) }}</td>
+            <td>{{ toCapital(user.mode) }}</td>
             <td>{{ user.numShadows }}</td>
           </tr>
         </tbody>

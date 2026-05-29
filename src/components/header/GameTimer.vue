@@ -12,7 +12,7 @@ const { flowState, pauseGame } = useGameFlow();
 
 const { pause, resume } = useInterval(1000, {
   callback: () => {
-    if (!timerState.startTime || flowState.isPaused) return;
+    if (!timerState.startTime || flowState.isPaused || flowState.isGivenUp || flowState.isEnded) return;
 
     incElapsed();
   },
