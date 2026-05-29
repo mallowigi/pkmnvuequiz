@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { computed, capitalize, watch, useTemplateRef, nextTick } from 'vue';
 
+import CyclingSprite from '@/components/common/CyclingSprite.vue';
+import RevealZoomTransition from '@/components/common/RevealZoomTransition.vue';
+import LastPokemon from '@/components/header/LastPokemon.vue';
+import { useScrollState } from '@/composables/useScrollState.ts';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
-import CyclingSprite from '@/components/common/CyclingSprite.vue';
-import LastPokemon from '@/components/header/LastPokemon.vue';
-import RevealZoomTransition from '@/components/common/RevealZoomTransition.vue';
-import { useScrollState } from '@/composables/useScrollState.ts';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -228,6 +228,24 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   opacity: 0.5;
 }
 
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0); /* Start completely hidden and tiny */
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4); /* Scale up past normal size */
+  }
+  75% {
+    transform: scale(0.85); /* Descale below normal size */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1); /* Settle at native size */
+  }
+}
+
 .sprite {
   --bg-img: none;
   width: 28px;
@@ -236,16 +254,22 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   position: relative;
   transition: transform 0.5s ease;
 
+  &.found {
+    image-rendering: high-quality;
+    animation: appear 1.5s ease-in-out backwards;
+    animation-delay: 0.1s;
+
+    &:hover {
+      transform: scale(2);
+    }
+  }
+
   &.sprite-swap-leave-active {
     position: absolute;
   }
 
   &.unknown {
     z-index: 0;
-  }
-
-  &:hover {
-    transform: scale(1.4);
   }
 
   &:before {

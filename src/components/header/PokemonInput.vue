@@ -4,13 +4,13 @@ import { computed, ref } from 'vue';
 
 import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
+import { usePokemonInput } from '@/composables/usePokemonInput.ts';
 import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
-import { usePokemonInput } from '@/composables/usePokemonInput.ts';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
@@ -71,6 +71,17 @@ const { activateNextShadow, activateCheat, checkInput } = usePokemonInput({ clea
 const handleKeydown = (e: KeyboardEvent) => {
   updateInput(inputRef.value!.value);
 
+  const value = inputRef.value?.value || '';
+  if (value === '') {
+    return;
+  }
+
+  checkInput(value);
+  return;
+};
+
+// Listen to types on the document
+onStartTyping((e) => {
   // Cheat!
   if (e.key === '#') {
     activateCheat();
@@ -83,17 +94,6 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  const value = inputRef.value?.value || '';
-  if (value === '') {
-    return;
-  }
-
-  checkInput(value);
-  return;
-};
-
-// Listen to types on the document
-onStartTyping(() => {
   ensureFocus();
 });
 </script>
