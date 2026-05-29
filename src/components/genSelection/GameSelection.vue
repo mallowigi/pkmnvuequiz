@@ -3,11 +3,13 @@ import FadeTransition from '@/components/common/FadeTransition.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
 import Loading from '@/components/genSelection/Loading.vue';
+import NewGameButtons from '@/components/genSelection/NewGameButtons.vue';
 import TypeChooser from '@/components/genSelection/TypeChooser.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import NewGameButtons from '@/components/genSelection/NewGameButtons.vue';
+import { useState } from '@/stores/useState.ts';
 
+const { state } = useState();
 const { flowState, setGameSelectionState } = useGameFlow();
 const { data } = usePkmnData();
 
@@ -41,6 +43,8 @@ const close = () => {
 
           <!-- Game selection -->
           <div v-else>
+            <h3 class="title">Hello, {{ state.name }}</h3>
+
             <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 
             <TypeChooser v-if="flowState.gameSelectionState === 'types'" />

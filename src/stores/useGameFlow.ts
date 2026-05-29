@@ -1,12 +1,15 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
+
+import { useFirebase } from '@/composables/useFirebase.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
-import type { GameFlowState, GameSelectionState } from '@/types.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
+import type { GameFlowState, GameSelectionState } from '@/types.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare } = usePlaySounds();
   const { removeAutoSave } = useSavedData();
+  const { createRecord } = useFirebase();
 
   const flowState = reactive<GameFlowState>({
     gameSelectionState: 'new',
@@ -41,6 +44,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.lastInput = null;
 
     removeAutoSave();
+    createRecord();
     playFanfare();
   };
 
@@ -48,6 +52,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.isGivenUp = true;
     flowState.lastInput = null;
 
+    createRecord();
     removeAutoSave();
   };
 

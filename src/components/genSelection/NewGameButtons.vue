@@ -12,6 +12,10 @@ const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
 
 const newGame = () => {
+  if (!state.name) {
+    return;
+  }
+
   setGameSelectionState('gen');
   setReady();
 };
@@ -20,6 +24,11 @@ const continueGame = () => {
   loadAutoSave();
   setReady();
 };
+
+const editName = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  setName(target.value);
+};
 </script>
 
 <template>
@@ -27,11 +36,13 @@ const continueGame = () => {
     <p>Welcome to the Pokémon Quiz!</p>
 
     <div class="row">
-      <TextBox
-        type="text"
-        placeholder="Enter your name"
-        @input="setName"
-      />
+      <form @submit.prevent="newGame">
+        <TextBox
+          type="text"
+          placeholder="Enter your name"
+          @input="editName"
+        />
+      </form>
     </div>
 
     <div class="row">

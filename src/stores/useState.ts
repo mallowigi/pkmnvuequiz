@@ -27,7 +27,6 @@ export const useState = defineStore('state', () => {
   });
 
   const setName = (name: string) => {
-    console.log('here');
     state.name = name;
   };
 
