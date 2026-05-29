@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, capitalize } from 'vue';
+import { computed, capitalize, watch, useTemplateRef } from 'vue';
 
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -35,6 +35,8 @@ type DisplayedSprite = {
   kind: 'found' | 'shadowed' | 'cycle' | 'unknown';
   title: string | null;
 };
+
+const el = useTemplateRef('el');
 
 const props = defineProps<Props>();
 
@@ -110,14 +112,24 @@ const spriteDelay = computed<string>(() => {
 const isDitto = computed(() => {
   return props.pokemon.baseName === 'ditto';
 });
+
+watch(displayedSprite, () => {
+  // y.value = y.value + top.value - 150;
+  el.value?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+  });
+});
 </script>
 
 <template>
   <section
+    ref="el"
     class="container"
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
+    <!-- Sprite -->
     <RevealZoomTransition
       appear
       mode="out-in"
@@ -132,6 +144,7 @@ const isDitto = computed(() => {
       />
     </RevealZoomTransition>
 
+    <!-- Sprite Cycle -->
     <RevealZoomTransition
       appear
       mode="out-in"
@@ -140,6 +153,7 @@ const isDitto = computed(() => {
       <CyclingSprite :sprites="displayedSprite.sprites" />
     </RevealZoomTransition>
 
+    <!-- Ditto -->
     <RevealZoomTransition
       appear
       mode="out-in"
@@ -148,6 +162,7 @@ const isDitto = computed(() => {
       <LastPokemon />
     </RevealZoomTransition>
 
+    <!-- Shadow -->
     <Transition
       name="sprite-swap"
       appear
