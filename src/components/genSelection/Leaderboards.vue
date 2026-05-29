@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useFirebase } from '@/composables/useFirebase.ts';
-import RoundedButton from '@/components/common/RoundedButton.vue';
+import { capitalize } from '@/utils/utils.ts';
 
-const { leaderBoards, createRecord } = useFirebase();
+const { leaderBoards } = useFirebase();
 
 const formatTime = (timeMs: number) => {
   const totalSeconds = Math.floor(timeMs / 1000);
@@ -13,11 +13,6 @@ const formatTime = (timeMs: number) => {
   const seconds = String(totalSeconds % 60).padStart(2, '0');
   return `${minutes}:${seconds}.${ms}`;
 };
-
-const capitalize = (str: string | null) => {
-  if (!str) return '';
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
 </script>
 
 <template>
@@ -26,7 +21,7 @@ const capitalize = (str: string | null) => {
 
     <div
       class="table-container"
-      v-if="leaderBoards && leaderBoards.length > 0"
+      v-if="leaderBoards?.length > 0"
     >
       <table class="leaderboard-table">
         <thead>
@@ -36,7 +31,7 @@ const capitalize = (str: string | null) => {
             <th>Time</th>
             <th>Game Mode</th>
             <th>Mode</th>
-            <th>Shadows</th>
+            <th>Shadows Used</th>
           </tr>
         </thead>
         <tbody>
@@ -61,14 +56,6 @@ const capitalize = (str: string | null) => {
     >
       <p>No records yet. Be the first!</p>
     </div>
-
-    <RoundedButton
-      primary
-      @click="createRecord"
-      class="create-btn"
-    >
-      Create Random Record
-    </RoundedButton>
   </div>
 </template>
 
@@ -86,7 +73,7 @@ const capitalize = (str: string | null) => {
   max-width: 600px;
   overflow-x: auto;
   margin-bottom: 16px;
-  background-color: var(--black);
+  background-color: var(--text-inverted);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
