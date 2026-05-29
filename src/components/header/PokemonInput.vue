@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
 
+import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
@@ -10,9 +12,8 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import type { PokemonInfo } from '@/types.ts';
 import { capitalize } from '@/utils/utils.ts';
-import { usePlaySounds } from '@/composables/usePlaySounds.ts';
-import TextBox from '@/components/common/TextBox.vue';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
@@ -85,6 +86,75 @@ const clearInput = () => {
   updateInput(null);
 };
 
+const activateCheat = () => {
+  playFanfare();
+  showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
+  clearInput();
+};
+
+const activateNextShadow = () => {
+  if (state.withShadowHelper) {
+    addRandomShadow();
+  } else {
+    showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
+  }
+  clearInput();
+};
+
+const handleAlreadyFound = (pokemons: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+  if (isPartOfAnotherPokemon) {
+    // Allow continue typing
+    return;
+  }
+
+  showUserMessage(`${capitalize(pokemons[0].baseName)} already named.`);
+  playFailSound();
+  clearInput();
+};
+
+const handleNotInCurrentGameMode = (value: string, isPartOfAnotherPokemon: boolean) => {
+  if (isPartOfAnotherPokemon) {
+    // Allow continue typing
+    return;
+  }
+
+  showUserMessage(`${capitalize(value)} is not part of this game.`);
+  playFailSound();
+  clearInput();
+};
+
+const handleWrongOrder = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+  if (isPartOfAnotherPokemon) {
+    // Allow continue typing
+    return;
+  }
+
+  showUserMessage(`${capitalize(foundPokemon[0].baseName)} is not the next Pokemon.`);
+  playFailSound();
+  clearInput();
+};
+
+const handleTypeShuffle = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+  if (isPartOfAnotherPokemon) {
+    // Allow continue typing
+    return;
+  }
+
+  const currentType = getCurrentType();
+  const types = new Set();
+  for (const pokemon of foundPokemon) {
+    types.add(pokemon.primaryType);
+    types.add(pokemon.secondaryType);
+  }
+
+  if (currentType && !types.has(currentType.id)) {
+    showUserMessage(`${capitalize(foundPokemon[0].baseName)} is not of type ${capitalize(currentType.name)}.`);
+    playFailSound();
+    clearInput();
+    return;
+  }
+};
+
 const handleKeydown = (e: KeyboardEvent) => {
   // Every key down on the app will trigger focus on the input
   ensureFocus();
@@ -97,20 +167,13 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   // Cheat!
   if (e.key === '#') {
-    playFanfare();
-    showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
-    clearInput();
+    activateCheat();
     return;
   }
 
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
-    if (state.withShadowHelper) {
-      addRandomShadow();
-    } else {
-      showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
-    }
-    clearInput();
+    activateNextShadow();
     return;
   }
 
@@ -126,56 +189,24 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   const isPartOfAnotherPokemon = isInRemaining(value);
   if (isAlreadyFound(foundPokemon)) {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
-
-    showUserMessage(`${capitalize(value)} already named.`);
-    playFailSound();
-    clearInput();
+    handleAlreadyFound(foundPokemon, isPartOfAnotherPokemon);
     return;
   }
 
   if (!isPokemonInCurrentGameMode(foundPokemon)) {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
-
-    showUserMessage(`${capitalize(value)} is not part of this game.`);
-    playFailSound();
-    clearInput();
+    handleNotInCurrentGameMode(value, isPartOfAnotherPokemon);
     return;
   }
 
   // order mode
   if (state.mode === 'order' && isWrongOrder(foundPokemon)) {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
-
-    showUserMessage(`${capitalize(value)} is not the next Pokemon.`);
-    playFailSound();
-    clearInput();
+    handleWrongOrder(foundPokemon, isPartOfAnotherPokemon);
     return;
   }
 
   if (state.withTypeShuffle) {
-    const currentType = getCurrentType();
-    const types = new Set();
-    for (const pokemon of foundPokemon) {
-      types.add(pokemon.primaryType);
-      types.add(pokemon.secondaryType);
-    }
-
-    if (currentType && !types.has(currentType.id)) {
-      showUserMessage(`${capitalize(value)} is not of type ${capitalize(currentType.name)}.`);
-      playFailSound();
-      clearInput();
-      return;
-    }
+    handleTypeShuffle(foundPokemon, isPartOfAnotherPokemon);
+    return;
   }
 
   // Add the pokemon at last
@@ -194,6 +225,10 @@ const handleKeydown = (e: KeyboardEvent) => {
 const handleMousedown = () => {
   setTimeout(ensureFocus, 0);
 };
+
+// onStartTyping(() => {
+//   ensureFocus();
+// });
 
 onMounted(() => {
   ensureFocus();
