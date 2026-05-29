@@ -1,11 +1,12 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
-
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import type { GameFlowState, GameSelectionState } from '@/types.ts';
+import { useSavedData } from '@/composables/useSavedData.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare } = usePlaySounds();
+  const { removeAutoSave } = useSavedData();
 
   const flowState = reactive<GameFlowState>({
     gameSelectionState: 'new',
@@ -39,12 +40,15 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.isGivenUp = false;
     flowState.lastInput = null;
 
+    removeAutoSave();
     playFanfare();
   };
 
   const giveUp = () => {
     flowState.isGivenUp = true;
     flowState.lastInput = null;
+
+    removeAutoSave();
   };
 
   const setGameSelectionState = (state: GameSelectionState) => {

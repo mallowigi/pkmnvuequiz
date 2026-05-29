@@ -1,3 +1,5 @@
+import { ref } from 'vue';
+
 import { useQuiz } from '@/composables/useQuiz.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
@@ -9,7 +11,6 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
-import { ref } from 'vue';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
@@ -103,8 +104,18 @@ export const useSavedData = () => {
     // Prevent autosaving until app is ready
     if (!ready.value) return;
 
+    const { flowState } = useGameFlow();
+    if (flowState.isEnded || flowState.isGivenUp) {
+      removeAutoSave();
+      return;
+    }
+
     const savedState = getSavedState();
     sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
+  };
+
+  const removeAutoSave = () => {
+    sessionStorage.removeItem(LOCAL_STORAGE_KEY);
   };
 
   const applyState = (loadedState: SaveData) => {
@@ -297,6 +308,7 @@ export const useSavedData = () => {
     hasSavedState,
     loadAutoSave,
     loadState,
+    removeAutoSave,
     saveState,
     setReady,
   };
