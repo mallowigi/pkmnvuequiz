@@ -164,9 +164,13 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   if (state.withTypeShuffle) {
     const currentType = getCurrentType();
-    const types = [foundPokemon[0].primaryType, foundPokemon[0].secondaryType].filter(Boolean);
+    const types = new Set();
+    for (const pokemon of foundPokemon) {
+      types.add(pokemon.primaryType);
+      types.add(pokemon.secondaryType);
+    }
 
-    if (currentType && !types.includes(currentType.id)) {
+    if (currentType && !types.has(currentType.id)) {
       showUserMessage(`${capitalize(value)} is not of type ${capitalize(currentType.name)}.`);
       playFailSound();
       clearInput();
