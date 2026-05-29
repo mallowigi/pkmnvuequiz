@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, capitalize, watch, useTemplateRef } from 'vue';
+import { computed, capitalize, watch, useTemplateRef, nextTick } from 'vue';
 
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -9,6 +9,7 @@ import type { PokemonInfo, PokemonStatus } from '@/types.ts';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
 import RevealZoomTransition from '@/components/common/RevealZoomTransition.vue';
+import { useScrollState } from '@/composables/useScrollState.ts';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -39,6 +40,8 @@ type DisplayedSprite = {
 const el = useTemplateRef('el');
 
 const props = defineProps<Props>();
+
+const { isScrolling } = useScrollState();
 
 const spriteData = computed<SpriteData>(() => {
   const { silhouettes, sprites, spriteCycles, shinies } = data;
@@ -113,11 +116,24 @@ const isDitto = computed(() => {
   return props.pokemon.baseName === 'ditto';
 });
 
-watch(displayedSprite, () => {
-  // y.value = y.value + top.value - 150;
-  el.value?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'center',
+watch(displayedSprite, (newSprite, oldSprite) => {
+  if (newSprite.kind === 'unknown' || newSprite.kind === oldSprite?.kind) return;
+
+  // Do not scroll if already scrolling
+  if (isScrolling.value) return;
+
+  // Lock scrolling for a bit to allow smooth scroll to finish and prevent jitter
+  isScrolling.value = true;
+  setTimeout(() => {
+    isScrolling.value = false;
+  }, 1000);
+
+  // Use nextTick to ensure that the DOM has updated with the new sprite before scrolling
+  nextTick(() => {
+    el.value?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
   });
 });
 </script>
