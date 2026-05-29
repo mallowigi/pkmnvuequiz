@@ -1,38 +1,23 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
+import { onStartTyping } from '@vueuse/core';
+import { computed, ref } from 'vue';
 
 import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
-import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useMessages } from '@/stores/useMessages.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo } from '@/types.ts';
-import { capitalize } from '@/utils/utils.ts';
+import { usePokemonInput } from '@/composables/usePokemonInput.ts';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
 const { getCurrentRegion } = useCurrentRegion();
-const { getCurrentType, getCurrentTypeOrSpecial, setRandomCurrentType } = useCurrentType();
+const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
-const { showUserMessage } = useMessages();
 const { roomState } = useRoomMessages();
-const {
-  isPokemonInCurrentGameMode,
-  isInRemaining,
-  addRandomShadow,
-  findPokemon,
-  addFound,
-  isAlreadyFound,
-  getNextOrderedPokemon,
-  isWrongOrder,
-} = usePokemons();
-const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
 
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
@@ -53,6 +38,7 @@ const regionOrType = computed(() => {
 
 const isDisabled = computed(() => {
   return (
+    !flowState.isStarted ||
     flowState.isPaused ||
     flowState.isEnded ||
     flowState.isGivenUp ||
@@ -72,12 +58,6 @@ const ensureFocus = () => {
     return;
   }
 
-  // If the focused element is not our input, do nothing
-  const active = document.activeElement;
-  if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA') && active !== inputRef.value) {
-    return;
-  }
-
   inputRef.value?.focus();
 };
 
@@ -86,84 +66,10 @@ const clearInput = () => {
   updateInput(null);
 };
 
-const activateCheat = () => {
-  playFanfare();
-  showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
-  clearInput();
-};
-
-const activateNextShadow = () => {
-  if (state.withShadowHelper) {
-    addRandomShadow();
-  } else {
-    showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
-  }
-  clearInput();
-};
-
-const handleAlreadyFound = (pokemons: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-  if (isPartOfAnotherPokemon) {
-    // Allow continue typing
-    return;
-  }
-
-  showUserMessage(`${capitalize(pokemons[0].baseName)} already named.`);
-  playFailSound();
-  clearInput();
-};
-
-const handleNotInCurrentGameMode = (value: string, isPartOfAnotherPokemon: boolean) => {
-  if (isPartOfAnotherPokemon) {
-    // Allow continue typing
-    return;
-  }
-
-  showUserMessage(`${capitalize(value)} is not part of this game.`);
-  playFailSound();
-  clearInput();
-};
-
-const handleWrongOrder = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-  if (isPartOfAnotherPokemon) {
-    // Allow continue typing
-    return;
-  }
-
-  showUserMessage(`${capitalize(foundPokemon[0].baseName)} is not the next Pokemon.`);
-  playFailSound();
-  clearInput();
-};
-
-const handleTypeShuffle = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-  if (isPartOfAnotherPokemon) {
-    // Allow continue typing
-    return;
-  }
-
-  const currentType = getCurrentType();
-  const types = new Set();
-  for (const pokemon of foundPokemon) {
-    types.add(pokemon.primaryType);
-    types.add(pokemon.secondaryType);
-  }
-
-  if (currentType && !types.has(currentType.id)) {
-    showUserMessage(`${capitalize(foundPokemon[0].baseName)} is not of type ${capitalize(currentType.name)}.`);
-    playFailSound();
-    clearInput();
-    return;
-  }
-};
+const { activateNextShadow, activateCheat, checkInput } = usePokemonInput({ clearInput });
 
 const handleKeydown = (e: KeyboardEvent) => {
-  // Every key down on the app will trigger focus on the input
-  ensureFocus();
   updateInput(inputRef.value!.value);
-
-  // Make sure the user is not pressing ctrl or cmd or option or delete
-  if (e.ctrlKey || e.metaKey || e.altKey || e.key === 'Backspace' || e.key === 'Delete') {
-    return;
-  }
 
   // Cheat!
   if (e.key === '#') {
@@ -182,68 +88,13 @@ const handleKeydown = (e: KeyboardEvent) => {
     return;
   }
 
-  const foundPokemon = findPokemon(value);
-  if (!foundPokemon) {
-    return;
-  }
-
-  const isPartOfAnotherPokemon = isInRemaining(value);
-  if (isAlreadyFound(foundPokemon)) {
-    handleAlreadyFound(foundPokemon, isPartOfAnotherPokemon);
-    return;
-  }
-
-  if (!isPokemonInCurrentGameMode(foundPokemon)) {
-    handleNotInCurrentGameMode(value, isPartOfAnotherPokemon);
-    return;
-  }
-
-  // order mode
-  if (state.mode === 'order' && isWrongOrder(foundPokemon)) {
-    handleWrongOrder(foundPokemon, isPartOfAnotherPokemon);
-    return;
-  }
-
-  if (state.withTypeShuffle) {
-    handleTypeShuffle(foundPokemon, isPartOfAnotherPokemon);
-    return;
-  }
-
-  // Add the pokemon at last
-  addFound(foundPokemon);
-
-  if (state.withTypeShuffle) {
-    setRandomCurrentType();
-  }
-
-  playPokemonCry(foundPokemon[0].dexNum);
-  clearInput();
+  checkInput(value);
   return;
 };
 
-// Clicking anywhere on the app will trigger focus on the input
-const handleMousedown = () => {
-  setTimeout(ensureFocus, 0);
-};
-
-// onStartTyping(() => {
-//   ensureFocus();
-// });
-
-onMounted(() => {
+// Listen to types on the document
+onStartTyping(() => {
   ensureFocus();
-  window.addEventListener('keyup', handleKeydown);
-  window.addEventListener('mousedown', handleMousedown);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('keyup', handleKeydown);
-  window.removeEventListener('mousedown', handleMousedown);
-});
-
-// Make sure to refocus the input when the state changes
-watch([isDisabled], () => {
-  setTimeout(ensureFocus, 0);
 });
 </script>
 
@@ -257,6 +108,7 @@ watch([isDisabled], () => {
     <TextBox
       ref="textBoxRef"
       maxlength="13"
+      @input="handleKeydown"
       autocomplete="off"
     />
 
