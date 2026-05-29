@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { capitalize } from '@/utils/utils.ts';
+import type { DocumentData } from 'firebase/firestore';
 
 const { getTopTrainers } = useFirebase();
 
-const topTrainers = computed(() => getTopTrainers().value);
+const topTrainers = getTopTrainers();
 
-const formatTime = (timeMs: number) => {
-  const totalSeconds = Math.floor(timeMs / 1000);
-  const ms = String(timeMs % 1000)
-    .padStart(3, '0')
-    .slice(0, 2);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = String(totalSeconds % 60).padStart(2, '0');
-  return `${minutes}:${seconds}.${ms}`;
+const formatTime = (timeInSec: number) => {
+  const hours = String(Math.floor(timeInSec / 3600));
+  const minutes = String(Math.floor((timeInSec % 3600) / 60));
+  const seconds = String(timeInSec % 60);
+
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+};
+
+const subType = (user: DocumentData): string => {
+  if (user.gameMode === 'types') return user.type ?? '';
+  if (user.gameMode === 'gen') return user.gen ?? '';
+  return user.gameMode ?? '';
 };
 
 const toCapital = (str: string) => capitalize(str);
@@ -23,7 +26,7 @@ const toCapital = (str: string) => capitalize(str);
 
 <template>
   <div class="leaderboard">
-    <h2>Top 10 Fastest Trainers</h2>
+    <h2>Top 3 Fastest Trainers</h2>
 
     <div
       class="table-container"
@@ -36,7 +39,8 @@ const toCapital = (str: string) => capitalize(str);
             <th>Name</th>
             <th>Time</th>
             <th>Game Mode</th>
-            <th>Mode</th>
+            <th>Gen/Type</th>
+            <th>Order Mode</th>
             <th>Shadows Used</th>
           </tr>
         </thead>
@@ -49,6 +53,7 @@ const toCapital = (str: string) => capitalize(str);
             <td class="run-name">{{ user.name }}</td>
             <td class="run-time">{{ formatTime(user.time) }}</td>
             <td>{{ toCapital(user.gameMode) }}</td>
+            <td>{{ toCapital(subType(user)) }}</td>
             <td>{{ toCapital(user.mode) }}</td>
             <td>{{ user.numShadows }}</td>
           </tr>
@@ -76,7 +81,6 @@ const toCapital = (str: string) => capitalize(str);
 
 .table-container {
   width: 100%;
-  max-width: 600px;
   overflow-x: auto;
   margin-bottom: 16px;
   background-color: var(--text-inverted);
