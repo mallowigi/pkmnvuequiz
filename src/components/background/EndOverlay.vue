@@ -14,7 +14,7 @@ import { useTimer } from '@/stores/useTimer';
 const { setGameOver } = useState();
 const { setCurrentGen, currentGenState } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
-const { resetFlowState } = useGameFlow();
+const { resetFlowState, setGameSelectionState } = useGameFlow();
 const { resetTimer, timerState } = useTimer();
 
 const pokemonStore = usePokemons();
@@ -25,6 +25,7 @@ const closeOverlay = () => {
   clearCurrentType();
   setCurrentGen(null);
   resetFlowState();
+  setGameSelectionState(null);
   resetPokemonState();
   resetTimer();
   setGameOver();
