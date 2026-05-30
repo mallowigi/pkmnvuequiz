@@ -16,6 +16,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     isEnded: false,
     isGivenUp: false,
     isPaused: false,
+    isSettingsOpen: false,
     isStarted: false,
     lastInput: null,
   });
@@ -77,6 +78,10 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.lastInput = input;
   };
 
+  const toggleSettings = () => {
+    flowState.isSettingsOpen = !flowState.isSettingsOpen;
+  };
+
   return {
     endGame,
     flowState,
@@ -87,6 +92,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     setFlowState,
     setGameSelectionState,
     startGame,
+    toggleSettings,
     updateInput,
   };
 });

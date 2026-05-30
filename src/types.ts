@@ -175,9 +175,10 @@ export type GameSelectionState = 'new' | 'gen' | 'types' | null;
 export type GameFlowState = {
   gameSelectionState: GameSelectionState;
   isEnded: boolean;
-  isPaused: boolean;
-  isStarted: boolean;
   isGivenUp: boolean;
+  isPaused: boolean;
+  isSettingsOpen: boolean;
+  isStarted: boolean;
   lastInput: string | null;
 };
 

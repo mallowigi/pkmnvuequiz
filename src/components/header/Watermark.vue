@@ -3,8 +3,10 @@ import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import UserIcon from '@/components/common/icons/UserIcon.vue';
 import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { setDialog } = useDialogs();
+const { flowState, toggleSettings } = useGameFlow();
 
 const showLeaderBoards = () => {
   setDialog('leaderboards');
@@ -13,16 +15,29 @@ const showLeaderBoards = () => {
 const showChangeNameDialog = () => {
   setDialog('changeName');
 };
+
+const clickToggleSettings = () => {
+  toggleSettings();
+};
 </script>
 
 <template>
   <div class="root row">
     <div class="icons row">
-      <ChartIcon @click="showLeaderBoards" />
+      <ChartIcon
+        @click="showLeaderBoards"
+        title="Show Leaderboards"
+      />
 
-      <UserIcon @click="showChangeNameDialog" />
+      <UserIcon
+        @click="showChangeNameDialog"
+        title="Change Name"
+      />
 
-      <SettingsIcon />
+      <SettingsIcon
+        @click="clickToggleSettings"
+        title="Toggle Settings"
+      />
     </div>
 
     <div class="url">pkmnvuequiz.netlify.app</div>
