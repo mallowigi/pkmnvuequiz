@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import FadeTransition from '@/components/common/FadeTransition.vue';
 import Spacer from '@/components/common/Spacer.vue';
+import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import MissedNames from '@/components/game/MissedNames.vue';
 import RegionBoxes from '@/components/game/RegionBoxes.vue';
 import GameOptions from '@/components/game/settings/GameOptions.vue';

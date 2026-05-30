@@ -12,7 +12,7 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
-import SlideDownTransition from '@/components/common/SlideDownTransition.vue';
+import SlideDownTransition from '@/components/common/transitions/SlideDownTransition.vue';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();

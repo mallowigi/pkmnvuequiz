@@ -8,7 +8,7 @@ import EndOverlay from '@/components/background/EndOverlay.vue';
 import PauseOverlay from '@/components/background/PauseOverlay.vue';
 import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
-import FadeTransition from '@/components/common/FadeTransition.vue';
+import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
 import GameFooter from '@/components/footer/GameFooter.vue';
 import Game from '@/components/game/Game.vue';

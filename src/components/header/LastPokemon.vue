@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import MorphTransition from '@/components/common/transitions/MorphTransition.vue';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { capitalize } from '@/utils/utils.ts';
-import MorphTransition from '@/components/common/MorphTransition.vue';
 
 const { unknownSprite } = useUnknownSprite();
 const { getLastPokemon, getStatus } = usePokemons();

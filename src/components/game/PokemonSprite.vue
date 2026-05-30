@@ -2,7 +2,7 @@
 import { computed, capitalize, watch, useTemplateRef, nextTick } from 'vue';
 
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
-import RevealZoomTransition from '@/components/common/RevealZoomTransition.vue';
+import RevealZoomTransition from '@/components/common/transitions/RevealZoomTransition.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
 import { useScrollState } from '@/composables/useScrollState.ts';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';

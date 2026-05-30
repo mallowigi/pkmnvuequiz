@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import FadeTransition from '@/components/common/FadeTransition.vue';
 import Overlay from '@/components/common/Overlay.vue';
+import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import GenChooser from '@/components/genSelection/GenChooser.vue';
 import Loading from '@/components/genSelection/Loading.vue';
 import NewGameButtons from '@/components/genSelection/NewGameButtons.vue';
