@@ -8,6 +8,7 @@ import SwitchQuizDialog from '@/components/dialogs/SwitchQuizDialog.vue';
 import { useDialogs } from '@/stores/useDialogs';
 import LeaderBoardsDialog from '@/components/dialogs/LeaderBoardsDialog.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
+import ChangeNameDialog from '@/components/dialogs/ChangeNameDialog.vue';
 
 const { dialogs } = useDialogs();
 </script>
@@ -43,6 +44,8 @@ const { dialogs } = useDialogs();
     <ResetDialog v-if="dialogs.dialog === 'reset'" />
 
     <LeaderBoardsDialog v-if="dialogs.dialog === 'leaderboards'" />
+
+    <ChangeNameDialog v-if="dialogs.dialog === 'changeName'" />
   </FadeTransition>
 </template>
 

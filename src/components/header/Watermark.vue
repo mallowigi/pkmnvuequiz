@@ -9,6 +9,10 @@ const { setDialog } = useDialogs();
 const showLeaderBoards = () => {
   setDialog('leaderboards');
 };
+
+const showChangeNameDialog = () => {
+  setDialog('changeName');
+};
 </script>
 
 <template>
@@ -16,7 +20,7 @@ const showLeaderBoards = () => {
     <div class="icons row">
       <ChartIcon @click="showLeaderBoards" />
 
-      <UserIcon />
+      <UserIcon @click="showChangeNameDialog" />
 
       <SettingsIcon />
     </div>

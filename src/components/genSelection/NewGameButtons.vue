@@ -38,6 +38,7 @@ const editName = (event: Event) => {
     <div class="row">
       <form @submit.prevent="newGame">
         <TextBox
+          class="large-text"
           type="text"
           placeholder="Enter your name"
           @input="editName"
@@ -87,5 +88,9 @@ const editName = (event: Event) => {
   justify-content: center;
   margin-top: 8px;
   gap: 8px;
+}
+
+.large-text {
+  padding: 6px;
 }
 </style>
