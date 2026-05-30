@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Icon from '@/components/common/icons/Icon.vue';
+</script>
 
 <template>
-  <i class="icon">
+  <Icon>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="32"
@@ -17,11 +19,7 @@
       <path d="M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1" />
       <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
     </svg>
-  </i>
+  </Icon>
 </template>
 
-<style scoped>
-.chart-icon svg {
-  stroke: var(--type-fg-color, var(--text));
-}
-</style>
+<style scoped></style>
