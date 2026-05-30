@@ -2,8 +2,14 @@
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { capitalize } from '@/utils/utils.ts';
 import type { DocumentData } from 'firebase/firestore';
+import { useState } from '@/stores/useState.ts';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 
 const { getTopTrainers } = useFirebase();
+const { state } = useState();
+const { currentTypeState } = useCurrentType();
+const { currentGenState } = useCurrentGen();
 
 const topTrainers = getTopTrainers();
 
@@ -26,8 +32,6 @@ const toCapital = (str: string) => capitalize(str);
 
 <template>
   <div class="leaderboard">
-    <h2>Top 3 Fastest Trainers</h2>
-
     <div
       class="table-container"
       v-if="topTrainers?.length > 0"

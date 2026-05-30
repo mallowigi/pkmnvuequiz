@@ -2,13 +2,22 @@
 import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import UserIcon from '@/components/common/icons/UserIcon.vue';
 import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
+import { useDialogs } from '@/stores/useDialogs.ts';
+
+const { setDialog } = useDialogs();
+
+const showLeaderBoards = () => {
+  setDialog('leaderboards');
+};
 </script>
 
 <template>
   <div class="root row">
     <div class="icons row">
-      <ChartIcon />
+      <ChartIcon @click="showLeaderBoards" />
+
       <UserIcon />
+
       <SettingsIcon />
     </div>
 

@@ -1,6 +1,17 @@
 import type { DocumentData } from 'firebase/firestore';
 
-export type Dialog = 'chaos' | 'order' | 'normal' | 'shadows' | 'switchQuiz' | 'timer' | 'giveup' | 'reset';
+export type Dialog =
+  | 'changeName'
+  | 'chaos'
+  | 'giveup'
+  | 'leaderboards'
+  | 'normal'
+  | 'order'
+  | 'reset'
+  | 'settings'
+  | 'shadows'
+  | 'switchQuiz'
+  | 'timer';
 
 export type GameMode = 'full' | 'gen' | 'special' | 'types';
 
