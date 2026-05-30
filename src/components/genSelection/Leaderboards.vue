@@ -11,7 +11,11 @@ const { state } = useState();
 const { currentTypeState } = useCurrentType();
 const { currentGenState } = useCurrentGen();
 
-const topTrainers = getTopTrainers();
+const topTrainers = getTopTrainers({
+  gameMode: state.gameMode!,
+  gen: state.gameMode === 'gen' ? currentGenState.gen : undefined,
+  type: state.gameMode === 'types' ? currentTypeState.currentType : undefined,
+});
 
 const formatTime = (timeInSec: number) => {
   const hours = String(Math.floor(timeInSec / 3600));
@@ -135,7 +139,7 @@ const toCapital = (str: string) => capitalize(str);
 
 .no-records {
   padding: 20px;
-  color: var(--text);
+  color: var(--text-inverted);
 }
 
 .create-btn {

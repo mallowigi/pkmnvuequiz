@@ -67,6 +67,7 @@ const editName = (event: Event) => {
     <SaveButtons />
 
     <!-- Leaderboards -->
+    <h2>Top 3 Guessers</h2>
     <Leaderboards />
   </div>
 </template>
