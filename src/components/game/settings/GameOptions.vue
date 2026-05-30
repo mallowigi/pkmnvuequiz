@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SlideDownTransition from '@/components/common/transitions/SlideDownTransition.vue';
 import AutoPauseToggle from '@/components/game/settings/AutoPauseToggle.vue';
 import CycleSpritesToggle from '@/components/game/settings/CycleSpritesToggle.vue';
 import GameAbort from '@/components/game/settings/GameAbort.vue';
@@ -13,6 +14,9 @@ import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+
+const { flowState } = useGameFlow();
 </script>
 
 <template>
@@ -28,27 +32,33 @@ import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
     <TypeShuffle />
   </div>
 
-  <div class="selection-row">
-    <ShinyToggle />
+  <SlideDownTransition>
+    <div v-if="flowState.isSettingsOpen">
+      <div>
+        <div class="selection-row">
+          <ShinyToggle />
 
-    <SpellingToggle />
+          <SpellingToggle />
 
-    <ShadowsToggle />
+          <ShadowsToggle />
 
-    <ShadowHotkeyToggle />
+          <ShadowHotkeyToggle />
 
-    <CycleSpritesToggle />
+          <CycleSpritesToggle />
 
-    <SoundToggle />
+          <SoundToggle />
 
-    <AutoPauseToggle />
-  </div>
+          <AutoPauseToggle />
+        </div>
 
-  <div class="selection-row">
-    <LanguagesSelection />
+        <div class="selection-row">
+          <LanguagesSelection />
 
-    <MultiplayerInvite />
-  </div>
+          <MultiplayerInvite />
+        </div>
+      </div>
+    </div>
+  </SlideDownTransition>
 </template>
 
 <style scoped>
