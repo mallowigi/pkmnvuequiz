@@ -37,7 +37,7 @@ const isDisabled = computed(
 <template>
   <RoundedBox
     title="Guess the next Pokemon of a given type"
-    v-tooltip="'Hello'"
+    v-tooltip.disabled="'Type Shuffle can only be toggled in Regular mode'"
     :class="{ disabled: isDisabled }"
   >
     <SegmentButton

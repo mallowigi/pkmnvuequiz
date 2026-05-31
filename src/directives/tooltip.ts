@@ -10,23 +10,76 @@ declare module 'vue' {
   }
 }
 
+type Placement = 'top' | 'bottom' | 'left' | 'right';
+
+const SHOW_DELAY = 300;
+let timeout: ReturnType<typeof setTimeout> | null = null;
+
 export default {
-  mounted(el: HTMLElement, binding: { value: string }) {
+  mounted(el: HTMLElement, binding) {
     const { setTooltip } = useTooltips();
 
-    el.addEventListener('mouseenter', () => {
-      if (!el.className.includes('disabled')) {
-        return;
-      }
+    const mouseenter = () => {
+      if (timeout) clearTimeout(timeout);
 
-      const rect = el.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top - rect.height / 2;
-      setTooltip(binding.value, x, y);
-    });
+      timeout = setTimeout(() => {
+        // Specifies that the tooltip only shows when the element is disabled
+        const onlyWhenDisabled = binding.modifiers.disabled;
+        const isDisabled = el.classList.contains('disabled') || el.hasAttribute('disabled');
 
-    el.addEventListener('mouseleave', () => {
-      setTooltip(null, 0, 0);
-    });
+        if (onlyWhenDisabled && !isDisabled) {
+          return;
+        }
+
+        const rect = el.getBoundingClientRect();
+        const placement = (binding.arg as Placement) || 'top';
+
+        let x = rect.left + rect.width / 2;
+        let y = rect.top;
+
+        switch (placement) {
+          case 'bottom':
+            y = rect.bottom;
+            break;
+          case 'left':
+            x = rect.left;
+            y = rect.top + rect.height / 2;
+            break;
+          case 'right':
+            x = rect.right;
+            y = rect.top + rect.height / 2;
+            break;
+        }
+
+        setTooltip(binding.value, x, y, placement);
+      }, SHOW_DELAY);
+    };
+
+    const mouseleave = () => {
+      if (timeout) clearTimeout(timeout);
+      setTooltip(null);
+    };
+
+    el.addEventListener('mouseenter', mouseenter);
+    el.addEventListener('mouseleave', mouseleave);
+
+    if (binding.modifiers.disabled) {
+      el.style.pointerEvents = 'auto';
+    }
+
+    // Store handlers for cleanup
+    (el as any)._tooltipHandlers = { mouseenter, mouseleave };
+  },
+
+  unmounted(el: HTMLElement) {
+    const handlers = (el as any)._tooltipHandlers;
+    if (handlers) {
+      el.removeEventListener('mouseenter', handlers.mouseenter);
+      el.removeEventListener('mouseleave', handlers.mouseleave);
+      delete (el as any)._tooltipHandlers;
+    }
+    if (timeout) {
+      clearTimeout(timeout);
+    }
   },
 } satisfies TooltipDirective;
