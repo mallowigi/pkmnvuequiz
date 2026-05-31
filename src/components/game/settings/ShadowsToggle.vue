@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, displayShadows } = useState();
 const { setDialog } = useDialogs();
@@ -19,13 +21,15 @@ const toggle = () => {
     });
   }
 };
+
+const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
 </script>
 
 <template>
   <RoundedButton
     title="Toggle Pokemon Shadows (this action cannot be undone)"
     class="rad-br-tl shadows-toggle"
-    :class="{ selected: state.withShadows, disabled: flowState.isGivenUp || flowState.isEnded }"
+    :class="{ selected: state.withShadows, disabled: isDisabled }"
     @click="toggle"
   >
     Shadows

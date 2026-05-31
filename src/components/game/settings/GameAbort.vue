@@ -2,6 +2,7 @@
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { computed } from 'vue';
 
 const { setDialog } = useDialogs();
 const { flowState } = useGameFlow();
@@ -13,6 +14,8 @@ const giveUp = () => {
 const resetGame = () => {
   setDialog('reset');
 };
+
+const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
 </script>
 
 <template>
@@ -20,7 +23,7 @@ const resetGame = () => {
     <RoundedButton
       class="rad-br-tl danger-btn"
       @click="giveUp"
-      :class="{ disabled: flowState.isGivenUp || flowState.isEnded }"
+      :class="{ disabled: isDisabled }"
     >
       Give Up
     </RoundedButton>

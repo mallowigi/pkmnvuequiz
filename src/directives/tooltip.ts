@@ -1,8 +1,8 @@
-import type { Directive } from 'vue';
+import type { Directive, DirectiveBinding } from 'vue';
 
 import { useTooltips } from '@/stores/useTooltips.ts';
 
-export type TooltipDirective = Directive<HTMLElement, string>;
+export type TooltipDirective = Directive<HTMLElement, string | null>;
 
 declare module 'vue' {
   export interface GlobalDirectives {
@@ -15,12 +15,18 @@ type Placement = 'top' | 'bottom' | 'left' | 'right';
 const SHOW_DELAY = 300;
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
+let tooltipHandlers: {
+  mouseenter: () => void;
+  mouseleave: () => void;
+} | null = null;
+
 export default {
-  mounted(el: HTMLElement, binding) {
+  mounted(el: HTMLElement, binding: DirectiveBinding) {
     const { setTooltip } = useTooltips();
 
     const mouseenter = () => {
       if (timeout) clearTimeout(timeout);
+      if (!binding.value) return;
 
       timeout = setTimeout(() => {
         // Specifies that the tooltip only shows when the element is disabled
@@ -68,15 +74,15 @@ export default {
     }
 
     // Store handlers for cleanup
-    (el as any)._tooltipHandlers = { mouseenter, mouseleave };
+    tooltipHandlers = { mouseenter, mouseleave };
   },
 
   unmounted(el: HTMLElement) {
-    const handlers = (el as any)._tooltipHandlers;
+    const handlers = tooltipHandlers;
     if (handlers) {
       el.removeEventListener('mouseenter', handlers.mouseenter);
       el.removeEventListener('mouseleave', handlers.mouseleave);
-      delete (el as any)._tooltipHandlers;
+      tooltipHandlers = null;
     }
     if (timeout) {
       clearTimeout(timeout);

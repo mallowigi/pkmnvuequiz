@@ -40,10 +40,26 @@ const isDisabled = computed(
     state.gameMode === 'types' ||
     state.gameMode === 'special',
 );
+
+const disabledTooltip = computed(() => {
+  if (state.withTypeShuffle) {
+    return 'Mode cannot be changed when Type Shuffle is enabled or in Types game mode';
+  }
+  if (state.gameMode === 'types') {
+    return 'Mode cannot be changed in Types game mode';
+  }
+  if (state.gameMode === 'special') {
+    return 'Mode cannot be changed in Special game mode';
+  }
+  return null;
+});
 </script>
 
 <template>
-  <RoundedBox :class="{ disabled: isDisabled }">
+  <RoundedBox
+    :class="{ disabled: isDisabled }"
+    v-tooltip.disabled="disabledTooltip"
+  >
     <SegmentButton
       :active="{
         left: state.mode === 'chaos',

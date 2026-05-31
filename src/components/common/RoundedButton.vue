@@ -4,6 +4,7 @@ type Props = {
   selected?: boolean;
   disabled?: boolean;
   text?: string;
+  disabledTooltip?: string;
 };
 
 const props = defineProps<Props>();
@@ -13,6 +14,7 @@ const props = defineProps<Props>();
   <div
     class="cell rad-bl-tr transition-element"
     :class="{ primary: props.primary, selected: props.selected, disabled: props.disabled }"
+    v-tooltip.disabled="props.disabledTooltip ?? ''"
     v-bind="$attrs"
   >
     <slot />
