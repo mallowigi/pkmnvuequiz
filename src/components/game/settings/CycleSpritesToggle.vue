@@ -4,7 +4,6 @@ import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { computed } from 'vue';
 
 const { state, setCycleSprites } = useState();
 const { showUserMessage } = useMessages();
@@ -16,14 +15,12 @@ const applyCycleSprites = (value: boolean) => {
   setCycleSprites(value);
   showUserMessage(`Cycle Sprites ${value ? 'enabled' : 'disabled'}`);
 };
-
-const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
 </script>
 
 <template>
   <RoundedBox
     title="Toggle Cycle Sprites On/Off"
-    :class="{ disabled: isDisabled }"
+    v-game-ended
   >
     <SegmentButton
       :active="{

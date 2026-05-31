@@ -16,14 +16,12 @@ const sortedLanguages = computed(() => {
 const hasLanguage = (id: Language) => {
   return languagesState.languages.has(id);
 };
-
-const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
 </script>
 
 <template>
   <RoundedBox
     title="Guess Pokemon in other languages"
-    :class="{ disabled: isDisabled }"
+    v-game-ended
   >
     <div class="selection-content">
       <div

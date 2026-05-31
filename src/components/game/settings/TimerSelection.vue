@@ -55,15 +55,13 @@ const minutes = computed({
   get: () => timerState.minutes,
   set: (value) => setMinutes(value),
 });
-
-const isDisabled = computed(() => flowState.isGivenUp || flowState.isEnded);
 </script>
 
 <template>
   <RoundedBox
     class="timer-box"
     title="Set a timer for the game."
-    :class="{ disabled: isDisabled }"
+    v-game-ended
   >
     <SegmentButton
       :active="{
