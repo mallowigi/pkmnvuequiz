@@ -1,6 +1,17 @@
 export const normalizeName = (str: string) => {
   if (!str) return str;
-  return str.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+  return str
+    .toLowerCase()
+    .replace(/[éèêëẽ]/gu, 'e')
+    .replace(/[áàâäã]/gu, 'a')
+    .replace(/[ôòóöœõ]/gu, 'o')
+    .replace(/[ùúûüũ]/gu, 'u')
+    .replace(/[ìíîïĩ]/gu, 'i')
+    .replace(/[ñń]/gu, 'n')
+    .replace(/[ýÿ]/gu, 'y')
+    .replace(/[ßš]/gu, 's')
+    .replace(/[çč]/gu, 'c')
+    .replace(/[^\p{L}\p{N}]/gu, '');
 };
 
 export const capitalize = (str: string) => {
