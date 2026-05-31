@@ -20,6 +20,7 @@ import { useCredits } from '@/stores/useCredits';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
+import Tooltip from '@/components/background/Tooltip.vue';
 
 const { state, setDarkMode } = useState();
 const { flowState } = useGameFlow();
@@ -92,6 +93,8 @@ watch(
     <EndOverlay v-if="flowState.isEnded" />
 
     <SnackBar />
+
+    <Tooltip />
   </main>
 </template>
 

@@ -46,7 +46,7 @@ const { flowState } = useGameFlow();
 
           <CycleSpritesToggle />
 
-          <SoundToggle />
+          <SoundToggle v-highlight />
 
           <AutoPauseToggle />
         </div>

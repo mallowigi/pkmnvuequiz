@@ -37,6 +37,7 @@ const isDisabled = computed(
 <template>
   <RoundedBox
     title="Guess the next Pokemon of a given type"
+    v-tooltip="'Hello'"
     :class="{ disabled: isDisabled }"
   >
     <SegmentButton
