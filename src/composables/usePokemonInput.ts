@@ -5,6 +5,7 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { capitalize } from '@/utils/utils';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 type Props = {
   clearInput: () => void;
@@ -14,6 +15,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { state } = useState();
   const { getCurrentType, setRandomCurrentType } = useCurrentType();
   const { showUserMessage } = useMessages();
+  const { endGame } = useGameFlow();
   const {
     isPokemonInCurrentGameMode,
     isInRemaining,
@@ -25,6 +27,10 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     isWrongOrder,
   } = usePokemons();
   const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
+
+  const debugEnd = () => {
+    endGame();
+  };
 
   const activateCheat = () => {
     playFanfare();
@@ -96,6 +102,11 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const checkInput = (value: string) => {
+    if (value === 'debug') {
+      debugEnd();
+      return;
+    }
+
     const foundPokemon = findPokemon(value);
     if (!foundPokemon) {
       return;

@@ -25,7 +25,7 @@ const closeOverlay = () => {
   clearCurrentType();
   setCurrentGen(null);
   resetFlowState();
-  setGameSelectionState(null);
+  setGameSelectionState('new');
   resetPokemonState();
   resetTimer();
   setGameOver();
