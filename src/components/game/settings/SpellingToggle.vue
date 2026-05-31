@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, toggleSpelling } = useState();
 const { showUserMessage } = useMessages();
@@ -16,7 +16,7 @@ const toggle = () => {
 
 <template>
   <RoundedButton
-    title="Toggle spelling help"
+    v-tooltip="'Toggle spelling help'"
     class="spelling-toggle rad-br-tl"
     @click="toggle"
     v-game-ended

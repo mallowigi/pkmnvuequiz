@@ -1,13 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { languages } from '@/data/languages.ts';
-import { computed } from 'vue';
-import type { Language } from '@/types.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
+import type { Language } from '@/types.ts';
 
 const { languagesState, toggleLanguage } = useLanguages();
-const { flowState } = useGameFlow();
 
 const sortedLanguages = computed(() => {
   return Object.values(languages).sort((a, b) => a.index - b.index);
@@ -20,14 +19,14 @@ const hasLanguage = (id: Language) => {
 
 <template>
   <RoundedBox
-    title="Guess Pokemon in other languages"
+    v-tooltip="'Guess Pokemon in other languages'"
     v-game-ended
   >
     <div class="selection-content">
       <div
         v-for="language in sortedLanguages"
         :key="language.id"
-        :title="language.name"
+        v-tooltip="language.name"
         class="toggle transition-element"
         @click="toggleLanguage(language.id)"
         :class="{ active: hasLanguage(language.id) }"

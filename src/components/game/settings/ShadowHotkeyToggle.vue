@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useState } from '@/stores/useState.ts';
-import { useMessages } from '@/stores/useMessages.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useMessages } from '@/stores/useMessages.ts';
+import { useState } from '@/stores/useState.ts';
 
 const { state, toggleShadowHelper } = useState();
 const { showUserMessage } = useMessages();
@@ -17,7 +17,7 @@ const toggle = () => {
 
 <template>
   <RoundedBox
-    title="When enabled, press the , key to display the shadow of a Pokemon at random."
+    v-tooltip="'When enabled, press the , key to display the shadow of a Pokemon at random.'"
     v-game-ended
   >
     <SegmentButton

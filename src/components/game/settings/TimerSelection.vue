@@ -60,7 +60,7 @@ const minutes = computed({
 <template>
   <RoundedBox
     class="timer-box"
-    title="Set a timer for the game."
+    v-tooltip="'Set a timer for the game.'"
     v-game-ended
   >
     <SegmentButton

@@ -57,7 +57,7 @@ const title = computed(() => (lastPokemon.value ? capitalize(lastPokemon.value.b
         :key="lastPokemon?.id ?? 'unknown'"
         class="sprite"
         :class="{ unknown: isUnknown }"
-        :title="title"
+        v-tooltip:bottom="title"
         :style="{ '--bg-img': bgImg }"
       />
     </MorphTransition>

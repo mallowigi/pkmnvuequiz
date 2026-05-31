@@ -3,11 +3,9 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, setCycleSprites } = useState();
 const { showUserMessage } = useMessages();
-const { flowState } = useGameFlow();
 
 const applyCycleSprites = (value: boolean) => {
   if (state.withCycleSprites === value) return;
@@ -19,7 +17,7 @@ const applyCycleSprites = (value: boolean) => {
 
 <template>
   <RoundedBox
-    title="Toggle Cycle Sprites On/Off"
+    v-tooltip="'Toggle Cycle Sprites On/Off'"
     v-game-ended
   >
     <SegmentButton

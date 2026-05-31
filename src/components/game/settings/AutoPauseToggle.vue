@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
-import RoundedBox from '@/components/common/RoundedBox.vue';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 const { state, setAutoPause } = useState();
 const { showUserMessage } = useMessages();
-const { flowState } = useGameFlow();
 
 const applyAutoPause = (value: boolean) => {
   if (state.autoPause === value) return;
@@ -20,7 +18,7 @@ const applyAutoPause = (value: boolean) => {
 <template>
   <RoundedBox
     v-game-ended
-    title="Toggle Auto Pause On/Off"
+    v-tooltip="'Toggle Auto Pause On/Off'"
   >
     <SegmentButton
       :active="{

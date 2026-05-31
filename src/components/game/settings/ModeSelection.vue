@@ -73,15 +73,15 @@ const disabledTooltip = computed(() => {
       <template #prefix> Mode: </template>
 
       <template #left>
-        <span title="Chaos Mode: Find Pokemon in any order, without predefined placements">Chaos</span>
+        <span v-tooltip="'Chaos Mode: Find Pokemon in any order, without predefined placements'">Chaos</span>
       </template>
 
       <template #center>
-        <span title="Regular Mode: Find Pokemon in any order with predefined placements">Regular</span>
+        <span v-tooltip="'Regular Mode: Find Pokemon in any order with predefined placements'">Regular</span>
       </template>
 
       <template #right>
-        <span title="Dex Order Mode: Find Pokemon in Pokedex order">Dex Order</span>
+        <span v-tooltip="'Dex Order Mode: Find Pokemon in Pokedex order'">Dex Order</span>
       </template>
     </SegmentButton>
   </RoundedBox>

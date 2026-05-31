@@ -77,7 +77,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
       <div
         v-for="language in sortedLanguages"
         :key="language.id"
-        :title="language.name"
+        v-tooltip:bottom="language.name"
         class="toggle transition-element"
         @click="selectLanguage(language.id)"
         :class="{ active: currentLanguage === language.id }"

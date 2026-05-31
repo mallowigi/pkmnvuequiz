@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useCurrentType } from '@/stores/useCurrentType.ts';
-import { computed } from 'vue';
 
 const { state, setTypeShuffle } = useState();
 const { showUserMessage } = useMessages();
@@ -36,7 +37,7 @@ const isDisabled = computed(
 
 <template>
   <RoundedBox
-    title="Guess the next Pokemon of a given type"
+    v-tooltip="'Guess the next Pokemon of a given type'"
     v-tooltip.disabled="'Type Shuffle can only be toggled in Regular mode'"
     :class="{ disabled: isDisabled }"
   >

@@ -30,7 +30,7 @@ useIntervalFn(() => {
   <div
     :hidden="sprites.length === 0"
     class="sprite cycle"
-    :title="sprites[currentIndex] ? capitalize(props.sprites[currentIndex]) : ''"
+    v-tooltip:bottom="sprites[currentIndex] ? capitalize(props.sprites[currentIndex]) : ''"
     :style="{ '--bg-img': `url(${sprites[currentIndex]})` }"
   />
 </template>

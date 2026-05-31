@@ -39,6 +39,7 @@ export default {
 
         const rect = el.getBoundingClientRect();
         const placement = (binding.arg as Placement) || 'top';
+        console.log('Tooltip placement:', binding.arg, placement);
 
         let x = rect.left + rect.width / 2;
         let y = rect.top;

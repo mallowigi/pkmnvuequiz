@@ -155,7 +155,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
         :key="displayedSprite.key"
         class="sprite"
         :class="displayedSprite.kind"
-        :title="displayedSprite.title ?? undefined"
+        v-tooltip:bottom="displayedSprite.title ?? null"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
       />
     </RevealZoomTransition>
@@ -190,7 +190,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
         :key="displayedSprite.key"
         class="sprite"
         :class="displayedSprite.kind"
-        :title="displayedSprite.title ?? undefined"
+        v-tooltip:bottom="displayedSprite.title ?? null"
         :style="{ '--bg-img': `url(${displayedSprite.image})` }"
       />
     </Transition>

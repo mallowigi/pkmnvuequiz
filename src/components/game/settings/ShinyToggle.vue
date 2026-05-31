@@ -14,7 +14,7 @@ const toggleShiny = () => {
 
 <template>
   <RoundedButton
-    title="Toggle Shiny Charm On/Off"
+    v-tooltip="'Toggle Shiny Charm On/Off'"
     class="rad-br-tl shiny-toggle-icon"
     :class="{ selected: state.withShinies }"
     @click="toggleShiny"

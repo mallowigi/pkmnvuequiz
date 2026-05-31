@@ -26,17 +26,17 @@ const clickToggleSettings = () => {
     <div class="icons row">
       <ChartIcon
         @click="showLeaderBoards"
-        title="Show Leaderboards"
+        v-tooltip:bottom="'Show Leaderboards'"
       />
 
       <UserIcon
         @click="showChangeNameDialog"
-        title="Change Name"
+        v-tooltip:bottom="'Change Name'"
       />
 
       <SettingsIcon
         @click="clickToggleSettings"
-        title="Toggle Settings"
+        v-tooltip:bottom="'Toggle Settings'"
       />
     </div>
 
