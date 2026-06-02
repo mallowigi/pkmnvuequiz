@@ -228,26 +228,27 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addFound = (pokemons: PokemonInfo[]) => {
-    const firstPokemon = pokemons[0];
-    const normalizedPokemon = normalizeName(firstPokemon.baseName);
-    const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
+    pokemons.forEach((pokemon) => {
+      const normalizedPokemon = normalizeName(pokemon.baseName);
+      const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
 
-    if (status) {
-      status.isFound = true;
-      status.lastFoundAt = Date.now();
+      if (status && !status.isFound) {
+        status.isFound = true;
+        status.lastFoundAt = Date.now();
 
-      const shinyRandom = Math.random();
+        const shinyRandom = Math.random();
 
-      const shinyRate = state.withShinies ? 0.1 : 0.01;
-      if (shinyRandom < shinyRate) {
-        status!.isShiny = true;
-        playShiny(firstPokemon);
+        const shinyRate = state.withShinies ? 0.1 : 0.01;
+        if (shinyRandom < shinyRate) {
+          status.isShiny = true;
+          playShiny(pokemon);
+        }
+
+        startTimer();
       }
+    });
 
-      startTimer();
-    }
-
-    setLastPokemon(firstPokemon);
+    setLastPokemon(pokemons[0]);
 
     if (remaining.value.size === 0) {
       endGame();
@@ -493,7 +494,7 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const isAlreadyFound = (pokemons: PokemonInfo[]) => {
-    return pokemons.some((pokemon) => {
+    return pokemons.every((pokemon) => {
       const status = getStatus(pokemon);
       return status.isFound;
     });
