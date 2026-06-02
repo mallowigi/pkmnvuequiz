@@ -45,11 +45,11 @@ const disabledTooltip = computed(() => {
   if (state.withTypeShuffle) {
     return 'Mode cannot be changed when Type Shuffle is enabled or in Types game mode';
   }
-  if (state.gameMode === 'types') {
-    return 'Mode cannot be changed in Types game mode';
-  }
   if (state.gameMode === 'special') {
     return 'Mode cannot be changed in Special game mode';
+  }
+  if (state.gameMode === 'types') {
+    return 'Mode cannot be changed in Types game mode';
   }
   return null;
 });

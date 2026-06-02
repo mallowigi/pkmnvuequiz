@@ -32,6 +32,11 @@ export const useState = defineStore('state', () => {
 
   const setGameMode = (mode: GameMode | null) => {
     state.gameMode = mode;
+
+    if (mode === 'special' || mode === 'types') {
+      state.mode = 'normal';
+      state.withTypeShuffle = false;
+    }
   };
 
   const setMode = (mode: Mode) => {
