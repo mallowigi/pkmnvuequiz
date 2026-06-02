@@ -119,6 +119,6 @@ watch(windowFocus, (isFocused) => {
 
 .highlight {
   color: var(--text-inverted);
-  text-shadow: 0 0 5px var(--text-inverted);
+  text-shadow: 0 0 5px var(--text);
 }
 </style>
