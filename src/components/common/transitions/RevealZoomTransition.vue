@@ -23,8 +23,11 @@ defineProps<{
   position: absolute;
 }
 
-.reveal-zoom-enter-from,
-.reveal-zoom-leave-to {
+.reveal-zoom-enter-from {
   transform: scale(2);
+}
+
+.reveal-zoom-leave-to {
+  transform: scale(0);
 }
 </style>

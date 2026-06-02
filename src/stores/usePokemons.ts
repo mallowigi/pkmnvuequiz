@@ -270,7 +270,6 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const addRandomShadow = () => {
     let remainingArray = Array.from(remaining.value);
-
     const currentType = currentTypeStore.getCurrentType();
     if (currentType) {
       const typePokemon = pokemonMaps.types[currentType.id as Type];
@@ -284,6 +283,10 @@ export const usePokemons = defineStore('pokemons', () => {
     let nextShadowPokemon = null;
     let maxIterations = 100;
     let iterationCount = 0;
+
+    if (state.mode === 'order') {
+      nextShadowPokemon = remainingArray[0];
+    }
 
     while (!nextShadowPokemon && iterationCount < maxIterations) {
       const randomIndex = Math.floor(Math.random() * remainingArray.length);
