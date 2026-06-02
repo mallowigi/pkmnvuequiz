@@ -12,7 +12,7 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
-import SlideDownTransition from '@/components/common/transitions/SlideDownTransition.vue';
+import MissedNamesTransition from '@/components/common/transitions/MissedNamesTransition.vue';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
@@ -86,7 +86,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
       </div>
     </div>
 
-    <SlideDownTransition>
+    <MissedNamesTransition>
       <div
         class="missed-panel"
         :class="{ single: currentBoxes.length === 1 }"
@@ -110,7 +110,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
           </div>
         </div>
       </div>
-    </SlideDownTransition>
+    </MissedNamesTransition>
   </RoundedBox>
 </template>
 
