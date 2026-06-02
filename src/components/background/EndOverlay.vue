@@ -12,7 +12,7 @@ import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
 const { setGameOver } = useState();
-const { setCurrentGen, currentGenState } = useCurrentGen();
+const { setCurrentGen, currentGenState, getCurrentGen } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState, setGameSelectionState } = useGameFlow();
 const { resetTimer, timerState } = useTimer();
@@ -49,7 +49,7 @@ const elapsed = computed(() => {
       <div class="section rad-bl-tr welldone">
         <h1>Well done!</h1>
 
-        <h2>You named {{ numFound }} {{ currentGenState.gen }} Pokémon in {{ elapsed }} seconds in Pokédex order!</h2>
+        <h2>You named {{ numFound }} {{ getCurrentGen()?.name }} Pokémon in {{ elapsed }} seconds in Pokédex order!</h2>
 
         <p>Challenge yourself further, try naming them without shadows. <br />({{ numShadows }} shadows used)</p>
       </div>
