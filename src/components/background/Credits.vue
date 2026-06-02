@@ -37,7 +37,7 @@ const { toggleShowCredits } = useCredits();
 
 <style scoped>
 .popuptext {
-  min-width: 500px;
+  width: 75vw;
   height: 70%;
   contain: content;
   background-color: var(--secondary);
@@ -45,20 +45,17 @@ const { toggleShowCredits } = useCredits();
   padding: 10px 10px;
   position: fixed;
   z-index: 10;
-  left: calc(50% - 300px);
+  left: 0;
+  right: 0;
   top: 10%;
-  border: var(--primary) solid 2px;
-}
-
-.paragraph {
-  font-size: 1.15em;
-  padding-bottom: 10px;
+  margin-inline: auto;
+  border: var(--type-btn-color, var(--primary)) solid 2px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .close {
-  text-align: right;
-  color: var(--primary);
-  float: right;
+  color: var(--type-btn-color, var(--primary));
   font-size: 1.5em;
   line-height: 22px;
 }
@@ -66,34 +63,37 @@ const { toggleShowCredits } = useCredits();
 .paragraph {
   font-size: 1.15em;
   padding-bottom: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px;
 }
 
 .credits-popup {
   overflow: auto;
-  height: 95.5%;
+  min-height: 0;
 }
 .credits-list {
   font-size: 0.9em;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: minmax(0, auto);
   width: 100%;
 }
 
 .credit-item {
-  display: flex;
-  border-top: 2px dotted var(--primary);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  border-top: 2px dotted var(--type-btn-color, var(--primary));
   padding: 5px 0;
 }
 
 .sprites {
   flex: 1;
-  border-right: 2px dotted var(--primary);
+  border-right: 2px dotted var(--type-btn-color, var(--primary));
   padding-right: 5px;
 }
 
 .author {
-  width: 200px;
   padding-left: 5px;
-  vertical-align: baseline;
 }
 </style>

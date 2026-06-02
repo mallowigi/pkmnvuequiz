@@ -4,9 +4,12 @@ import UserIcon from '@/components/common/icons/UserIcon.vue';
 import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import CreditsIcon from '@/components/common/icons/CreditsIcon.vue';
+import { useCredits } from '@/stores/useCredits.ts';
 
 const { setDialog } = useDialogs();
-const { flowState, toggleSettings } = useGameFlow();
+const { toggleSettings } = useGameFlow();
+const { toggleShowCredits } = useCredits();
 
 const showLeaderBoards = () => {
   setDialog('leaderboards');
@@ -18,6 +21,10 @@ const showChangeNameDialog = () => {
 
 const clickToggleSettings = () => {
   toggleSettings();
+};
+
+const showCredits = () => {
+  toggleShowCredits();
 };
 </script>
 
@@ -37,6 +44,11 @@ const clickToggleSettings = () => {
       <SettingsIcon
         @click="clickToggleSettings"
         v-tooltip:bottom="'Toggle Settings'"
+      />
+
+      <CreditsIcon
+        @click="showCredits"
+        v-tooltip:bottom="'Show Credits'"
       />
     </div>
 
