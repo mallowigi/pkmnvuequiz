@@ -16,8 +16,9 @@ const SHOW_DELAY = 300;
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
 let tooltipHandlers: {
-  mouseenter: () => void;
-  mouseleave: () => void;
+  mouseenter: (e: MouseEvent) => void;
+  mouseleave: (e: MouseEvent) => void;
+  click?: (e: MouseEvent) => void;
 } | null = null;
 
 export default {
@@ -66,15 +67,26 @@ export default {
       setTooltip(null);
     };
 
+    // Trap clicks on disabled elements to prevent unintended interactions
+    const click = (e: MouseEvent) => {
+      const isDisabled = el.classList.contains('disabled') || el.hasAttribute('disabled');
+      if (binding.modifiers.disabled && isDisabled) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      }
+    };
+
     el.addEventListener('mouseenter', mouseenter);
     el.addEventListener('mouseleave', mouseleave);
 
     if (binding.modifiers.disabled) {
       el.style.pointerEvents = 'auto';
+      el.addEventListener('click', click, { capture: true });
     }
 
     // Store handlers for cleanup
-    tooltipHandlers = { mouseenter, mouseleave };
+    tooltipHandlers = { click, mouseenter, mouseleave };
   },
 
   unmounted(el: HTMLElement) {
@@ -82,6 +94,11 @@ export default {
     if (handlers) {
       el.removeEventListener('mouseenter', handlers.mouseenter);
       el.removeEventListener('mouseleave', handlers.mouseleave);
+
+      if (handlers.click) {
+        el.removeEventListener('click', handlers.click, { capture: true });
+      }
+
       tooltipHandlers = null;
     }
     if (timeout) {
