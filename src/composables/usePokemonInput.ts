@@ -47,58 +47,58 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     clearInput();
   };
 
-  const handleAlreadyFound = (pokemons: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
-
-    showUserMessage(`${capitalize(pokemons[0].baseName)} already named.`);
+  const notifyError = (message: string) => {
+    showUserMessage(message);
     playFailSound();
     clearInput();
+    return true;
   };
 
-  const handleNotInCurrentGameMode = (value: string, isPartOfAnotherPokemon: boolean) => {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
+  const handleAlreadyFound = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+    if (!isAlreadyFound(foundPokemon)) return false;
+    if (isPartOfAnotherPokemon) return true;
 
-    showUserMessage(`${capitalize(value)} is not part of this game.`);
-    playFailSound();
-    clearInput();
+    return notifyError(`${capitalize(foundPokemon[0].baseName)} already named.`);
+  };
+
+  const handleNotInCurrentGameMode = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+    if (isPokemonInCurrentGameMode(foundPokemon)) return false;
+    if (isPartOfAnotherPokemon) return true;
+
+    return notifyError(`${capitalize(foundPokemon[0].baseName)} is not part of this game.`);
   };
 
   const handleWrongOrder = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
+    if (state.mode !== 'order' || !isWrongOrder(foundPokemon)) return false;
+    if (isPartOfAnotherPokemon) return true;
 
-    showUserMessage(`${capitalize(foundPokemon[0].baseName)} is not the next Pokemon.`);
-    playFailSound();
-    clearInput();
+    return notifyError(`${capitalize(foundPokemon[0].baseName)} is not the next Pokemon.`);
   };
 
   const handleTypeShuffle = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (isPartOfAnotherPokemon) {
-      // Allow continue typing
-      return;
-    }
+    if (!state.withTypeShuffle) return false;
+    if (isPartOfAnotherPokemon) return true;
 
     const currentType = getCurrentType();
-    const types = new Set();
-    for (const pokemon of foundPokemon) {
-      types.add(pokemon.primaryType);
-      types.add(pokemon.secondaryType);
-    }
+    const types = new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
 
     if (currentType && !types.has(currentType.id)) {
-      showUserMessage(`${capitalize(foundPokemon[0].baseName)} is not of type ${capitalize(currentType.name)}.`);
-      playFailSound();
-      clearInput();
-      return;
+      return notifyError(`${capitalize(foundPokemon[0].baseName)} is not of type ${capitalize(currentType.name)}.`);
     }
+
+    return false;
+  };
+
+  const handleSuccess = (foundPokemon: PokemonInfo[]) => {
+    addFound(foundPokemon);
+
+    if (state.withTypeShuffle) {
+      setRandomCurrentType();
+    }
+
+    playPokemonCry(foundPokemon[0].dexNum);
+    clearInput();
+    return true;
   };
 
   const checkInput = (value: string) => {
@@ -113,36 +113,18 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     }
 
     const isPartOfAnotherPokemon = isInRemaining(value);
-    if (isAlreadyFound(foundPokemon)) {
-      handleAlreadyFound(foundPokemon, isPartOfAnotherPokemon);
-      return;
+
+    const handlers = [
+      () => handleAlreadyFound(foundPokemon, isPartOfAnotherPokemon),
+      () => handleNotInCurrentGameMode(foundPokemon, isPartOfAnotherPokemon),
+      () => handleWrongOrder(foundPokemon, isPartOfAnotherPokemon),
+      () => handleTypeShuffle(foundPokemon, isPartOfAnotherPokemon),
+      () => handleSuccess(foundPokemon),
+    ];
+
+    for (const handle of handlers) {
+      if (handle()) return;
     }
-
-    if (!isPokemonInCurrentGameMode(foundPokemon)) {
-      handleNotInCurrentGameMode(value, isPartOfAnotherPokemon);
-      return;
-    }
-
-    // order mode
-    if (state.mode === 'order' && isWrongOrder(foundPokemon)) {
-      handleWrongOrder(foundPokemon, isPartOfAnotherPokemon);
-      return;
-    }
-
-    if (state.withTypeShuffle) {
-      handleTypeShuffle(foundPokemon, isPartOfAnotherPokemon);
-      return;
-    }
-
-    // Add the pokemon at last
-    addFound(foundPokemon);
-
-    if (state.withTypeShuffle) {
-      setRandomCurrentType();
-    }
-
-    playPokemonCry(foundPokemon[0].dexNum);
-    clearInput();
   };
 
   return {
