@@ -29,6 +29,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
 
   const debugEnd = () => {
+    clearInput();
     endGame();
   };
 
