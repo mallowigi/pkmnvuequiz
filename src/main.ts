@@ -4,6 +4,7 @@ import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 
+import ellipsis from '@/directives/ellipsis.ts';
 import gameEnded from '@/directives/gameEnded.ts';
 import tooltip from '@/directives/tooltip.ts';
 import messages from '@/locales/messages.json';
@@ -29,6 +30,7 @@ app.use(MotionPlugin);
 app.use(i18n);
 app.directive('tooltip', tooltip);
 app.directive('game-ended', gameEnded);
+app.directive('ellipsis', ellipsis);
 
 pinia.use(piniaStorePlugin);
 

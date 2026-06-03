@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onStartTyping } from '@vueuse/core';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
+import vEllipsis from '@/directives/ellipsis.ts';
 
 import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
@@ -127,7 +128,12 @@ onUnmounted(() => {
     class="box rad-bl-tr"
     :class="{ shake: flowState.isStarted, disabled: isDisabled }"
   >
-    <p>{{ t(state.gameMode ? `nameAll.${state.gameMode}` : 'nameAllRegionPokemon', { name: regionOrType }) }}</p>
+    <p
+      class="instruction"
+      v-ellipsis:bottom
+    >
+      {{ t(state.gameMode ? `nameAll.${state.gameMode}` : 'nameAllRegionPokemon', { name: regionOrType }) }}
+    </p>
 
     <TextBox
       ref="textBoxRef"
@@ -181,6 +187,10 @@ onUnmounted(() => {
   animation: shake 0.5s;
   animation-iteration-count: 2;
   animation-delay: 0.3s;
+}
+
+.instruction {
+  max-width: 260px;
 }
 
 .box {
