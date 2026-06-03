@@ -11,6 +11,7 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
@@ -18,6 +19,7 @@ const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
+const { t } = useI18n();
 
 /** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
@@ -123,7 +125,7 @@ onUnmounted(() => {
     class="box rad-bl-tr"
     :class="{ shake: flowState.isStarted, disabled: isDisabled }"
   >
-    <p>{{ $t('nameAllRegionPokemon', { regionOrType }) }}</p>
+    <p>{{ t('nameAllRegionPokemon', { regionOrType }) }}</p>
 
     <TextBox
       ref="textBoxRef"
@@ -198,3 +200,26 @@ onUnmounted(() => {
   }
 }
 </style>
+
+<i18n>
+{
+  "en": {
+    "nameAllRegionPokemon": "Name all {regionOrType} Pokémon!"
+  },
+  "fr": {
+    "nameAllRegionPokemon": "Nomme tous les Pokémon de {regionOrType}!"
+  },
+  "de": {
+    "nameAllRegionPokemon": "Nenne alle {regionOrType}-Pokémon!"
+  },
+  "es": {
+    "nameAllRegionPokemon": "¡Nombra a todos los Pokémon de {regionOrType}!"
+  },
+  "it": {
+    "nameAllRegionPokemon": "Nomina tutti i Pokémon di {regionOrType}!"
+  },
+  "pt": {
+    "nameAllRegionPokemon": "Nomeie todos os Pokémon de {regionOrType}!"
+  }
+}
+</i18n>

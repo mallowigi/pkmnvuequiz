@@ -13,14 +13,19 @@ import App from './App.vue';
 
 const i18n = createI18n({
   fallbackLocale: 'en',
-  locale: 'fr',
+  legacy: false,
+  locale: 'en',
   messages: {
-    en: {
-      nameAllRegionPokemon: 'Name all {regionOrType} Pokémon:',
-    },
-    fr: {
-      nameAllRegionPokemon: 'Nommez tous les Pokémon de {regionOrType}:',
-    },
+    de: {},
+    en: {},
+    es: {},
+    fr: {},
+    it: {},
+    jp: {},
+    ko: {},
+    pt: {},
+    ru: {},
+    zh: {},
   },
   modifiers: {
     capitalize: (value) => capitalize(value.toString()),
