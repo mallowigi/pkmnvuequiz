@@ -10,11 +10,13 @@ import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
+import { useI18n } from 'vue-i18n';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
 const { state } = useState();
 const styles = useColumnLayout();
+const { t } = useI18n();
 
 const currentBoxes = computed(() => {
   if (state.gameMode !== 'special') {
@@ -93,7 +95,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
       :class="{ full: isFull(box.id) }"
       :key="box.id"
     >
-      <span class="region-name">{{ box.name }}</span>
+      <span class="region-name">{{ t(box.id) }}</span>
 
       <div class="sprite-container">
         <PokemonSprite
