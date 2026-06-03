@@ -6,6 +6,7 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import CreditsIcon from '@/components/common/icons/CreditsIcon.vue';
 import { useCredits } from '@/stores/useCredits.ts';
+import LocaleChanger from '@/components/header/LocaleChanger.vue';
 
 const { setDialog } = useDialogs();
 const { toggleSettings } = useGameFlow();
@@ -50,6 +51,8 @@ const showCredits = () => {
         @click="showCredits"
         v-tooltip:bottom="'Show Credits'"
       />
+
+      <LocaleChanger />
     </div>
 
     <div class="url">pkmnvuequiz.netlify.app</div>

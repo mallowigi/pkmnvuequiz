@@ -120,7 +120,7 @@ onUnmounted(() => {
     class="box rad-bl-tr"
     :class="{ shake: flowState.isStarted, disabled: isDisabled }"
   >
-    <p>Name all {{ regionOrType }} Pokémon:</p>
+    <p>{{ $t('nameAllRegionPokemon', { regionOrType }) }}</p>
 
     <TextBox
       ref="textBoxRef"
