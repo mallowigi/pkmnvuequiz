@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { credits } from '@/data/credits';
 import { useCredits } from '@/stores/useCredits';
+import { vOnClickOutside } from '@vueuse/components';
 
 const { toggleShowCredits } = useCredits();
 </script>
 
 <template>
-  <div class="popuptext rad">
+  <div
+    class="popuptext rad"
+    ref="target"
+    v-on-click-outside="toggleShowCredits"
+  >
     <div
       class="paragraph pointer"
       @click="toggleShowCredits()"
@@ -40,7 +45,7 @@ const { toggleShowCredits } = useCredits();
   width: 75vw;
   height: 70%;
   contain: content;
-  background-color: var(--secondary);
+  background-color: var(--button);
   color: var(--text);
   padding: 10px 10px;
   position: fixed;

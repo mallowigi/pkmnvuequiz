@@ -19,7 +19,28 @@ const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
-const { t } = useI18n();
+const { t } = useI18n({
+  messages: {
+    de: {
+      nameAllRegionPokemon: 'Nenne alle {regionOrType}-Pokémon!',
+    },
+    en: {
+      nameAllRegionPokemon: 'Name all {regionOrType} Pokémon!',
+    },
+    es: {
+      nameAllRegionPokemon: '¡Nombra a todos los Pokémon de {regionOrType}!',
+    },
+    fr: {
+      nameAllRegionPokemon: 'Nomme tous les Pokémon de {regionOrType}!',
+    },
+    it: {
+      nameAllRegionPokemon: 'Nomina tutti i Pokémon di {regionOrType}!',
+    },
+    pt: {
+      nameAllRegionPokemon: 'Nomeie todos os Pokémon de {regionOrType}!',
+    },
+  },
+});
 
 /** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
@@ -200,26 +221,3 @@ onUnmounted(() => {
   }
 }
 </style>
-
-<i18n>
-{
-  "en": {
-    "nameAllRegionPokemon": "Name all {regionOrType} Pokémon!"
-  },
-  "fr": {
-    "nameAllRegionPokemon": "Nomme tous les Pokémon de {regionOrType}!"
-  },
-  "de": {
-    "nameAllRegionPokemon": "Nenne alle {regionOrType}-Pokémon!"
-  },
-  "es": {
-    "nameAllRegionPokemon": "¡Nombra a todos los Pokémon de {regionOrType}!"
-  },
-  "it": {
-    "nameAllRegionPokemon": "Nomina tutti i Pokémon di {regionOrType}!"
-  },
-  "pt": {
-    "nameAllRegionPokemon": "Nomeie todos os Pokémon de {regionOrType}!"
-  }
-}
-</i18n>
