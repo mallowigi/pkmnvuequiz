@@ -6,6 +6,7 @@ import Leaderboards from '@/components/genSelection/Leaderboards.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
+import { onMounted } from 'vue';
 
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
@@ -27,8 +28,16 @@ const continueGame = () => {
 
 const editName = (event: Event) => {
   const target = event.target as HTMLInputElement;
+  localStorage.setItem('name', target.value);
   setName(target.value);
 };
+
+onMounted(() => {
+  const savedName = localStorage.getItem('name');
+  if (savedName) {
+    setName(savedName);
+  }
+});
 </script>
 
 <template>
@@ -42,6 +51,7 @@ const editName = (event: Event) => {
           type="text"
           placeholder="Enter your name"
           @input="editName"
+          :value="state.name"
         />
       </form>
     </div>

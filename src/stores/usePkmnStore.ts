@@ -22,7 +22,6 @@ export const usePkmnData = defineStore('pkmnData', () => {
   const { isLoading, progress } = useNProgress(undefined, {
     showSpinner: false,
   });
-  const { initializePokemonMaps } = usePokemons();
 
   const data: PkmnData = reactive<PkmnDataState>({
     error: null,
@@ -82,6 +81,7 @@ export const usePkmnData = defineStore('pkmnData', () => {
   }
 
   async function loadData() {
+    const { initializePokemonMaps } = usePokemons();
     if (data.isLoaded || isLoading.value) {
       return;
     }
