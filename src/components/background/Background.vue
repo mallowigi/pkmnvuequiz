@@ -25,12 +25,15 @@ const currentType = computed(() => {
         v-if="currentType"
         :key="currentType.id"
       >
+        <!-- First logo -->
         <img
           :alt="currentType?.name"
           :src="`/assets/types/${currentType?.icon}.svg`"
           id="bgpattern"
           class="bgpattern"
         />
+
+        <!-- Second logo -->
         <img
           :alt="currentType?.name"
           :src="`/assets/types/${currentType?.icon}.svg`"

@@ -46,8 +46,8 @@ const hasLanguage = (id: Language) => {
 }
 
 .toggle {
-  border: solid 2px var(--type-btn-color);
-  color: var(--type-btn-color);
+  border: solid 2px var(--type-btn-color, var(--primary));
+  color: var(--type-btn-color, var(--primary));
   border-radius: 6px 3px 6px 3px;
   text-align: center;
   text-decoration: none;
@@ -59,14 +59,14 @@ const hasLanguage = (id: Language) => {
   font-family: 'Roboto Condensed', sans-serif;
 
   &.active {
-    background: var(--type-btn-color);
-    color: var(--type-fg-color);
+    background: var(--type-btn-color, var(--primary));
+    color: var(--type-fg-color, var(--text));
   }
 
   &:hover {
-    background: var(--type-dark-color);
-    border-color: var(--type-dark-color);
-    color: var(--type-fg-color);
+    background: var(--type-dark-color, var(--darkPrimary));
+    border-color: var(--type-dark-color, var(--darkPrimary));
+    color: var(--type-fg-color, var(--text));
   }
 }
 </style>
