@@ -1,5 +1,7 @@
+import { useNProgress } from '@vueuse/integrations/useNProgress';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
+
 import { usePokemons } from '@/stores/usePokemons.ts';
 import type { PkmnData, PokemonInfo, Translations } from '@/types';
 
@@ -17,6 +19,11 @@ type PkmnDataState = {
 };
 
 export const usePkmnData = defineStore('pkmnData', () => {
+  const { isLoading, progress } = useNProgress(undefined, {
+    showSpinner: false,
+  });
+  const { initializePokemonMaps } = usePokemons();
+
   const data: PkmnData = reactive<PkmnDataState>({
     error: null,
     isLoaded: false,
@@ -75,25 +82,43 @@ export const usePkmnData = defineStore('pkmnData', () => {
   }
 
   async function loadData() {
-    return Promise.all([
-      loadPokemons(),
-      loadSprites(),
-      loadSpriteCycles(),
-      loadTranslations(),
-      loadNamings(),
-      loadSilhouettes(),
-      loadShinies(),
-    ])
-      .then(() => {
-        const { initializePokemonMaps } = usePokemons();
+    if (data.isLoaded || isLoading.value) {
+      return;
+    }
 
-        setLoaded();
-        initializePokemonMaps();
-      })
-      .catch((error) => {
-        console.error('Error loading data:', error);
-        setError(error);
-      });
+    const loaders = [
+      loadPokemons,
+      loadSprites,
+      loadSpriteCycles,
+      loadTranslations,
+      loadNamings,
+      loadSilhouettes,
+      loadShinies,
+    ];
+
+    let loadedCount = 0;
+
+    setError(null);
+    progress.value = 0;
+    isLoading.value = true;
+
+    try {
+      await Promise.all(
+        loaders.map(async (loader) => {
+          await loader();
+          loadedCount += 1;
+          progress.value = loadedCount / loaders.length;
+        }),
+      );
+
+      setLoaded();
+      initializePokemonMaps();
+    } catch (error) {
+      console.error('Error loading data:', error);
+      setError(error);
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   return {
