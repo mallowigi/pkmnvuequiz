@@ -19,6 +19,14 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
 
+/** Clears the input field and updates the game flow state with a null input. */
+const clearInput = () => {
+  inputRef.value!.value = '';
+  updateInput(null);
+};
+
+const { activateNextShadow, activateCheat, checkInput } = usePokemonInput({ clearInput });
+
 const regionOrType = computed(() => {
   const gameMode = state.gameMode;
 
@@ -47,6 +55,7 @@ const isDisabled = computed(() => {
   );
 });
 
+// Reference to the textbox
 const textBoxRef = ref<InstanceType<typeof TextBox> | null>(null);
 
 // We need to access the input element inside the TextBox component, so we use a computed property to get it
@@ -61,13 +70,7 @@ const ensureFocus = () => {
   inputRef.value?.focus();
 };
 
-const clearInput = () => {
-  inputRef.value!.value = '';
-  updateInput(null);
-};
-
-const { activateNextShadow, activateCheat, checkInput } = usePokemonInput({ clearInput });
-
+// Handle keydown events on the document to allow typing without focusing the input
 const handleKeydown = (e: KeyboardEvent) => {
   updateInput(inputRef.value!.value);
 
@@ -87,7 +90,7 @@ const handleKeydown = (e: KeyboardEvent) => {
   return;
 };
 
-// Listen to types on the document
+// Listen to types on the document using vueuse
 onStartTyping((e) => {
   // Cheat!
   if (e.key === '#') {

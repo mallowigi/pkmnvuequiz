@@ -20,7 +20,7 @@ onMounted(() => {
       <h2>Loading Quiz</h2>
     </div>
     <div
-      class="lds-ellipsis"
+      class="ellipsis"
       id="spinner"
     >
       <div></div>
@@ -32,7 +32,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@keyframes lds-ellipsis1 {
+@keyframes ellipsis1 {
   0% {
     transform: scale(0);
   }
@@ -41,7 +41,7 @@ onMounted(() => {
   }
 }
 
-@keyframes lds-ellipsis2 {
+@keyframes ellipsis2 {
   0% {
     transform: translate(0, 0);
   }
@@ -50,7 +50,7 @@ onMounted(() => {
   }
 }
 
-@keyframes lds-ellipsis3 {
+@keyframes ellipsis3 {
   0% {
     transform: scale(1);
   }
@@ -59,7 +59,7 @@ onMounted(() => {
   }
 }
 
-.lds-ellipsis {
+.ellipsis {
   display: inline-block;
   position: relative;
   width: 80px;
@@ -76,22 +76,22 @@ onMounted(() => {
 
     &:nth-child(1) {
       left: 8px;
-      animation: lds-ellipsis1 0.6s infinite;
+      animation: ellipsis1 0.6s infinite;
     }
 
     &:nth-child(2) {
       left: 8px;
-      animation: lds-ellipsis2 0.6s infinite;
+      animation: ellipsis2 0.6s infinite;
     }
 
     &:nth-child(3) {
       left: 32px;
-      animation: lds-ellipsis2 0.6s infinite;
+      animation: ellipsis2 0.6s infinite;
     }
 
     &:nth-child(4) {
       left: 56px;
-      animation: lds-ellipsis3 0.6s infinite;
+      animation: ellipsis3 0.6s infinite;
     }
   }
 }
