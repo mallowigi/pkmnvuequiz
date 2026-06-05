@@ -7,7 +7,7 @@ import { createI18n } from 'vue-i18n';
 import ellipsis from '@/directives/ellipsis.ts';
 import gameEnded from '@/directives/gameEnded.ts';
 import tooltip from '@/directives/tooltip.ts';
-import messages from '@/locales/messages.json';
+import messages from '@/locales/messages';
 import { piniaStorePlugin } from '@/stores/piniaStorePlugin.ts';
 import { capitalize } from '@/utils/utils.ts';
 
