@@ -45,7 +45,7 @@ const editName = (value: string) => {
       <TextBox
         type="text"
         class="large-text"
-        placeholder="Enter your name"
+        :placeholder="t('changeNameDialog.placeholder')"
         @input="editName"
       />
 

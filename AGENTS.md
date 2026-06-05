@@ -22,14 +22,13 @@ This document provides essential context and patterns to help AI agents be produ
 
 - **Centralized Dialogs**: Do not embed dialog/modal UI into random components. Dialog state is managed globally via `useDialogs.ts` and rendered centrally in `src/components/dialogs/Dialogs.vue`. To open a dialog, use `setDialog('dialogName', callback)`.
 - **CSS Theming**: Use CSS variables (e.g., `var(--text)`, `var(--primary)`) defined globally in `App.vue` for all styling. Dark mode swaps styles globally by toggling a `.dark` class on the `<main>` element; avoid hardcoding dark-mode hex codes in individual components.
-- **Import Paths**: 
+- **Import Paths**:
   - ALWAYS use the path alias `@/` for imports within `src`.
   - ALWAYS include `.vue` extensions for Vue component imports (e.g. `import GameHeader from '@/components/header/GameHeader.vue'`).
 
 ## 🛠 Developer Workflows
 
 - **Node Engine**: Requires Node `^20.19.0` or `>=22.12.0`.
-- **Scripts**: 
+- **Scripts**:
   - Use `npm run dev` to start the Vite dev server with Hot Module Replacement.
-  - Use `npm run format` to run code formatting before committing (uses Prettier).
   - Use `npm run build` to run `vue-tsc` type-checking before Vite build. No explicit test runner is configured.
