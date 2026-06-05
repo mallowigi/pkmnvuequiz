@@ -3,10 +3,20 @@
   "areazero": "エリアゼロ (パルデア)",
   "bug": "むし",
   "cancel": "キャンセル",
+  "enable": "有効にする",
+  "giveUp": "諦める",
   "changeNameDialog": {
     "description": "新しい名前を入力して、現在の名前を変更してください。",
     "placeholder": "名前を入力してください",
     "title": "名前を変更"
+  },
+  "changeTimerDialog": {
+    "description": "クイズとタイマーがリセットされます",
+    "title": "タイマーを変更しますか？"
+  },
+  "giveUpDialog": {
+    "description": "本当に諦めますか？",
+    "title": "諦めますか？"
   },
   "chaos": "カオス",
   "dark": "あく",
@@ -34,6 +44,12 @@
   "kanto": "カントー",
   "legendary": "伝説",
   "lumiose": "メガシンカ（ミアレシティ）",
+  "modeDialog": {
+    "chaosCaption": "あらかじめ決められた配置なしで推測できるようにする",
+    "description": "クイズとタイマーがリセットされます",
+    "normalCaption": "地域レイアウトの通常のクイズに切り替える",
+    "orderCaption": "ポケモン図鑑順に推測することを強制する"
+  },
   "mythical": "幻",
   "nameAll": {
     "full": "すべてのポケモンの名前を言って！",
@@ -46,6 +62,11 @@
   "order": "秩序",
   "paldea": "パルデア",
   "paradox": "パラドックス",
+  "resetDialog": {
+    "description": "本当にリセットしますか？",
+    "title": "リセットしますか？"
+  },
+  "reset": "リセット",
   "poison": "どく",
   "pokemongo": "Pokémon GO",
   "psychic": "エスパー",
@@ -55,6 +76,7 @@
   "steel": "はがね",
   "sublegendary": "準伝説",
   "submit": "送信",
+  "switch": "切り替え",
   "types": "タイプ",
   "ultrabeast": "ウルトラビースト",
   "unova": "イッシュ",

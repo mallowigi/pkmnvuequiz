@@ -4,9 +4,11 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState';
 import type { Mode } from '@/types.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useI18n } from 'vue-i18n';
 
 const { setMode } = useState();
 const { dialogs, closeDialog } = useDialogs();
+const { t } = useI18n();
 
 type Props = {
   caption: string;
@@ -36,20 +38,20 @@ const disableMode = () => {
   >
     <div class="prompt">
       <h2>{{ props.caption }}</h2>
-      <p class="desc">Quiz and timer will reset</p>
+      <p class="desc">{{ t('modeDialog.description') }}</p>
 
       <RoundedButton
         @click="enableMode"
         primary
       >
-        Enable
+        {{ t('enable') }}
       </RoundedButton>
 
       <RoundedButton
         @click.stop="disableMode"
         primary
       >
-        Cancel
+        {{ t('cancel') }}
       </RoundedButton>
     </div>
   </Overlay>

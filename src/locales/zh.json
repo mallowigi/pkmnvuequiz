@@ -3,10 +3,20 @@
   "areazero": "Area Zero (帕尔迪亚)",
   "bug": "虫",
   "cancel": "取消",
+  "enable": "启用",
+  "giveUp": "放弃",
   "changeNameDialog": {
     "description": "输入新名称以更改当前名称。",
     "placeholder": "输入你的名字",
     "title": "更改名称"
+  },
+  "changeTimerDialog": {
+    "description": "测验和计时器将重置",
+    "title": "更改计时器？"
+  },
+  "giveUpDialog": {
+    "description": "你确定要放弃吗？",
+    "title": "放弃？"
   },
   "chaos": "混亂",
   "dark": "恶",
@@ -34,6 +44,12 @@
   "kanto": "关都",
   "legendary": "传说",
   "lumiose": "超級進化（密阿雷市）",
+  "modeDialog": {
+    "chaosCaption": "启用无预定位置的猜测",
+    "description": "测验和计时器将重置",
+    "normalCaption": "切换到带有区域布局的常规测验",
+    "orderCaption": "强制按宝可梦图鉴顺序猜测"
+  },
   "mythical": "神话",
   "nameAll": {
     "full": "说出所有宝可梦的名字！",
@@ -46,6 +62,11 @@
   "order": "秩序",
   "paldea": "帕尔迪亚",
   "paradox": "悖论",
+  "resetDialog": {
+    "description": "你确定要重置吗？",
+    "title": "重置？"
+  },
+  "reset": "重置",
   "poison": "毒",
   "pokemongo": "Pokémon GO",
   "psychic": "超能力",
@@ -55,6 +76,7 @@
   "steel": "钢",
   "sublegendary": "准传说",
   "submit": "提交",
+  "switch": "切换",
   "types": "属性",
   "ultrabeast": "究极异兽",
   "unova": "合众",

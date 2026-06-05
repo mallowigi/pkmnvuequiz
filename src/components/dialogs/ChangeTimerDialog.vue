@@ -2,8 +2,10 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useI18n } from 'vue-i18n';
 
 const { dialogs, closeDialog } = useDialogs();
+const { t } = useI18n();
 
 const switchTimer = () => {
   closeDialog();
@@ -24,21 +26,21 @@ const cancel = () => {
     @close="cancel"
   >
     <div class="prompt">
-      <h2>Change timer?</h2>
-      <p class="desc">Quiz and timer will reset</p>
+      <h2>{{ t('changeTimerDialog.title') }}</h2>
+      <p class="desc">{{ t('changeTimerDialog.description') }}</p>
 
       <RoundedButton
         @click.stop="switchTimer"
         primary
       >
-        Switch
+        {{ t('switch') }}
       </RoundedButton>
 
       <RoundedButton
         @click.stop="cancel"
         primary
       >
-        Cancel
+        {{ t('cancel') }}
       </RoundedButton>
     </div>
   </Overlay>

@@ -3,10 +3,20 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Bug",
   "cancel": "Cancel",
+  "enable": "Enable",
+  "giveUp": "Give Up",
   "changeNameDialog": {
     "description": "Enter a new name to change your current name.",
     "placeholder": "Enter your name",
     "title": "Change Name"
+  },
+  "changeTimerDialog": {
+    "description": "Quiz and timer will reset",
+    "title": "Change timer?"
+  },
+  "giveUpDialog": {
+    "description": "Are you sure you want to give up?",
+    "title": "Give Up?"
   },
   "chaos": "Chaos",
   "dark": "Dark",
@@ -34,6 +44,12 @@
   "kanto": "Kanto",
   "legendary": "Legendary",
   "lumiose": "Mega Evolution (Lumiose)",
+  "modeDialog": {
+    "chaosCaption": "Enable guessing without predetermined placements",
+    "description": "Quiz and timer will reset",
+    "normalCaption": "Switch to regular quiz with Region Layout",
+    "orderCaption": "Enforce guessing in Pokédex order"
+  },
   "mythical": "Mythical",
   "nameAll": {
     "full": "Name all Pokémon!",
@@ -46,6 +62,11 @@
   "order": "Order",
   "paldea": "Paldea",
   "paradox": "Paradox",
+  "resetDialog": {
+    "description": "Are you sure you want to reset?",
+    "title": "Reset?"
+  },
+  "reset": "Reset",
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psychic",
@@ -55,6 +76,7 @@
   "steel": "Steel",
   "sublegendary": "Sub-Legendary",
   "submit": "Submit",
+  "switch": "Switch",
   "types": "Types",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",

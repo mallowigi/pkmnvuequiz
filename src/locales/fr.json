@@ -3,10 +3,20 @@
   "areazero": "Zone Zéro (Paldea)",
   "bug": "Insecte",
   "cancel": "Annuler",
+  "enable": "Activer",
+  "giveUp": "Abandonner",
   "changeNameDialog": {
     "description": "Entrez un nouveau nom pour changer votre nom actuel.",
     "placeholder": "Entrez votre nom",
     "title": "Changer de nom"
+  },
+  "changeTimerDialog": {
+    "description": "Le quiz et le minuteur seront réinitialisés",
+    "title": "Changer le minuteur ?"
+  },
+  "giveUpDialog": {
+    "description": "Êtes-vous sûr de vouloir abandonner ?",
+    "title": "Abandonner ?"
   },
   "chaos": "Chaos",
   "dark": "Ténèbres",
@@ -34,6 +44,12 @@
   "kanto": "Kanto",
   "legendary": "Légendaire",
   "lumiose": "Méga-Évolution (Illumis)",
+  "modeDialog": {
+    "chaosCaption": "Activer la saisie sans placements prédéterminés",
+    "description": "Le quiz et le minuteur seront réinitialisés",
+    "normalCaption": "Passer au quiz normal avec la disposition par région",
+    "orderCaption": "Forcer la saisie dans l'ordre du Pokédex"
+  },
   "mythical": "Mythique",
   "nameAll": {
     "full": "Nomme tous les Pokémon!",
@@ -46,6 +62,11 @@
   "order": "Ordre",
   "paldea": "Paldea",
   "paradox": "Paradoxe",
+  "resetDialog": {
+    "description": "Êtes-vous sûr de vouloir réinitialiser ?",
+    "title": "Réinitialiser ?"
+  },
+  "reset": "Réinitialiser",
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psy",
@@ -55,6 +76,7 @@
   "steel": "Acier",
   "sublegendary": "Sub-Légendaire",
   "submit": "Envoyer",
+  "switch": "Changer",
   "types": "Types",
   "ultrabeast": "Ultra-Chimère",
   "unova": "Unys",

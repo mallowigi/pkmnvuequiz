@@ -3,10 +3,20 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Coleottero",
   "cancel": "Annulla",
+  "enable": "Abilita",
+  "giveUp": "Rinuncia",
   "changeNameDialog": {
     "description": "Inserisci un nuovo nome per cambiare il tuo nome attuale.",
     "placeholder": "Inserisci il tuo nome",
     "title": "Cambia nome"
+  },
+  "changeTimerDialog": {
+    "description": "Il quiz e il timer verranno resettati",
+    "title": "Cambiare il timer?"
+  },
+  "giveUpDialog": {
+    "description": "Sei sicuro di voler rinunciare?",
+    "title": "Rinunciare?"
   },
   "chaos": "Caos",
   "dark": "Buio",
@@ -34,6 +44,12 @@
   "kanto": "Kanto",
   "legendary": "Leggendario",
   "lumiose": "Megaevoluzione (Luminopoli)",
+  "modeDialog": {
+    "chaosCaption": "Abilita l'indovinare senza posizionamenti predeterminati",
+    "description": "Il quiz e il timer verranno resettati",
+    "normalCaption": "Passa al quiz normale con il layout regionale",
+    "orderCaption": "Forza l'indovinare in ordine di Pokédex"
+  },
   "mythical": "Misterioso",
   "nameAll": {
     "full": "Nomina tutti i Pokémon!",
@@ -46,6 +62,11 @@
   "order": "Ordine",
   "paldea": "Paldea",
   "paradox": "Paradosso",
+  "resetDialog": {
+    "description": "Sei sicuro di voler resettare?",
+    "title": "Resettare?"
+  },
+  "reset": "Reset",
   "poison": "Veleno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psico",
@@ -55,6 +76,7 @@
   "steel": "Acciaio",
   "sublegendary": "Sub-leggendario",
   "submit": "Invia",
+  "switch": "Cambia",
   "types": "Tipi",
   "ultrabeast": "Ultracreatura",
   "unova": "Unima",

@@ -4,10 +4,12 @@ import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useI18n } from 'vue-i18n';
 
 const { giveUp } = useGameFlow();
 const { dialogs, closeDialog } = useDialogs();
 const { showRemaining } = usePokemons();
+const { t } = useI18n();
 
 const promptGiveUp = () => {
   closeDialog();
@@ -30,21 +32,21 @@ const cancel = () => {
     @close="cancel"
   >
     <div class="prompt">
-      <h2>Give Up?</h2>
-      <p class="desc">Are you sure you want to give up?</p>
+      <h2>{{ t('giveUpDialog.title') }}</h2>
+      <p class="desc">{{ t('giveUpDialog.description') }}</p>
 
       <RoundedButton
         @click.stop="promptGiveUp"
         primary
       >
-        Give Up
+        {{ t('giveUp') }}
       </RoundedButton>
 
       <RoundedButton
         @click.stop="cancel"
         primary
       >
-        Cancel
+        {{ t('cancel') }}
       </RoundedButton>
     </div>
   </Overlay>

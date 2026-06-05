@@ -9,27 +9,29 @@ import { useDialogs } from '@/stores/useDialogs';
 import LeaderBoardsDialog from '@/components/dialogs/LeaderBoardsDialog.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import ChangeNameDialog from '@/components/dialogs/ChangeNameDialog.vue';
+import { useI18n } from 'vue-i18n';
 
 const { dialogs } = useDialogs();
+const { t } = useI18n();
 </script>
 
 <template>
   <FadeTransition>
     <ModeDialog
       mode="chaos"
-      caption="Enable guessing without predetermined placements"
+      :caption="t('modeDialog.chaosCaption')"
       v-if="dialogs.dialog === 'chaos'"
     />
 
     <ModeDialog
       mode="order"
-      caption="Enforce guessing in Pokédex order"
+      :caption="t('modeDialog.orderCaption')"
       v-if="dialogs.dialog === 'order'"
     />
 
     <ModeDialog
       mode="normal"
-      caption="Switch to regular quiz with Region Layout"
+      :caption="t('modeDialog.normalCaption')"
       v-if="dialogs.dialog === 'normal'"
     />
 

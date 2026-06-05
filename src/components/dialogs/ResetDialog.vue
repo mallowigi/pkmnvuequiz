@@ -7,6 +7,7 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
+import { useI18n } from 'vue-i18n';
 
 const { resetFlowState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
@@ -14,6 +15,7 @@ const { resetState } = useState();
 const { setCurrentGen, currentGenState } = useCurrentGen();
 const { resetTimer } = useTimer();
 const { dialogs, closeDialog } = useDialogs();
+const { t } = useI18n();
 
 const reset = () => {
   const gen = currentGenState.gen;
@@ -41,21 +43,21 @@ const cancel = () => {
     @close="cancel"
   >
     <div class="prompt">
-      <h2>Reset?</h2>
-      <p class="desc">Are you sure you want to reset?</p>
+      <h2>{{ t('resetDialog.title') }}</h2>
+      <p class="desc">{{ t('resetDialog.description') }}</p>
 
       <RoundedButton
         @click.stop="reset"
         primary
       >
-        Reset
+        {{ t('reset') }}
       </RoundedButton>
 
       <RoundedButton
         @click.stop="cancel"
         primary
       >
-        Cancel
+        {{ t('cancel') }}
       </RoundedButton>
     </div>
   </Overlay>

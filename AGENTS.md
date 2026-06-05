@@ -32,3 +32,17 @@ This document provides essential context and patterns to help AI agents be produ
 - **Scripts**:
   - Use `npm run dev` to start the Vite dev server with Hot Module Replacement.
   - Use `npm run build` to run `vue-tsc` type-checking before Vite build. No explicit test runner is configured.
+
+## 🧩 Common Patterns
+
+- **Reusable Translation Keys**: For any text that appears in multiple places (e.g., "Start Game", "Next"), define a translation key in `src/locales` and use it consistently across components rather than nest it. For example, if you have a "Reset" text, use it as `{{ $t('reset') }}` everywhere instead of hardcoding "Reset" in multiple components.
+- **Consistent Naming**: Use consistent naming conventions for components, variables, and functions. For example, use `camelCase` for variables and functions, and `PascalCase` for components.
+- **Error Handling**: Always handle errors gracefully and provide meaningful error messages to users. Use try-catch blocks to catch and handle errors, and log errors to the console for debugging purposes.
+
+## 📚 Documentation
+
+- **Component Documentation**: Document each component with a brief description, props, and usage examples. Use JSDoc-style comments for Vue components.
+- **Code Comments**: Write clear and concise comments to explain complex logic or non-obvious code paths. Avoid excessive commenting; code should be self-explanatory.
+- **Version Control**: Use Git for version control. Follow a branching strategy (e.g., feature branches) and use meaningful commit messages.
+- **Code Formatting**: Use consistent code formatting with tools like Prettier. Configure Prettier to enforce your team's coding style and integrate it with your editor for automatic formatting on save.
+- **Code Review**: Conduct regular code reviews to ensure code quality, consistency, and adherence to coding standards. Use tools like Code Climate or SonarQube for automated code review and analysis.
