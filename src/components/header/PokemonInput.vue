@@ -22,7 +22,7 @@ const { getCurrentTypeOrSpecial } = useCurrentType();
 const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
 
-const { t } = useI18n({});
+const { t } = useI18n();
 
 /** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
@@ -212,98 +212,3 @@ onUnmounted(() => {
   }
 }
 </style>
-
-<i18n>
-{
-  "en": {
-    "nameAll": {
-      "full": "Name all Pokémon!",
-      "gen": "Name all {name} Pokémon!",
-      "special": "Name all {name} Pokémon!",
-      "types": "Name all {name} Pokémon!"
-    },
-    "nameAllRegionPokemon": "Name all Pokémon!"
-  },
-  "de": {
-    "nameAll": {
-      "full": "Nenne alle Pokémon!",
-      "gen": "Nenne alle {name}-Pokémon!",
-      "special": "Nenne alle {name}-Pokémon!",
-      "types": "Nenne alle {name}-Pokémon!"
-    },
-    "nameAllRegionPokemon": "Nenne alle Pokémon!"
-  },
-  "es": {
-    "nameAll": {
-      "full": "¡Nombra a todos los Pokémon!",
-      "gen": "¡Nombra a todos los Pokémon de {name}!",
-      "special": "¡Nombra a todos los Pokémon {name}!",
-      "types": "¡Nombra a todos los Pokémon de tipo {name}!"
-    },
-    "nameAllRegionPokemon": "¡Nombra a todos los Pokémon!"
-  },
-  "fr": {
-    "nameAll": {
-      "full": "Nomme tous les Pokémon!",
-      "gen": "Nomme tous les Pokémon de {name}!",
-      "special": "Nomme tous les Pokémon {name}!",
-      "types": "Nomme tous les Pokémon de type {name}!"
-    },
-    "nameAllRegionPokemon": "Nomme tous les Pokémon!"
-  },
-  "it": {
-    "nameAll": {
-      "full": "Nomina tutti i Pokémon!",
-      "gen": "Nomina tutti i Pokémon di {name}!",
-      "special": "Nomina tutti i Pokémon {name}!",
-      "types": "Nomina tutti i Pokémon di tipo {name}!"
-    },
-    "nameAllRegionPokemon": "Nomina tutti i Pokémon!"
-  },
-  "pt": {
-    "nameAll": {
-      "full": "Nomeie todos os Pokémon!",
-      "gen": "Nomeie todos os Pokémon de {name}!",
-      "special": "Nomeie todos os Pokémon {name}!",
-      "types": "Nomeie todos os Pokémon de tipo {name}!"
-    },
-    "nameAllRegionPokemon": "Nomeie todos os Pokémon!"
-  },
-  "ru": {
-    "nameAll": {
-      "full": "Назовите всех покемонов!",
-      "gen": "Назовите всех покемонов из {name}!",
-      "special": "Назовите всех {name} покемонов!",
-      "types": "Назовите всех покемонов типа {name}!"
-    },
-    "nameAllRegionPokemon": "Назовите всех покемонов!"
-  },
-  "zh": {
-    "nameAll": {
-      "full": "说出所有宝可梦的名字！",
-      "gen": "说出所有{name}的宝可梦的名字！",
-      "special": "说出所有{name}的宝可梦的名字！",
-      "types": "说出所有{name}类型的宝可梦的名字！"
-    },
-    "nameAllRegionPokemon": "说出所有宝可梦的名字！"
-  },
-  "ko": {
-    "nameAll": {
-      "full": "모든 포켓몬의 이름을 말해봐!",
-      "gen": "{name}의 포켓몬의 이름을 모두 말해봐!",
-      "special": "{name}의 포켓몬의 이름을 모두 말해봐!",
-      "types": "{name}타입의 포켓몬의 이름을 모두 말해봐!"
-    },
-    "nameAllRegionPokemon": "모든 포켓몬의 이름을 말해봐!"
-  },
-  "jp": {
-    "nameAll": {
-      "full": "すべてのポケモンの名前を言って！",
-      "gen": "{name}のポケモンの名前をすべて言って！",
-      "special": "{name}のポケモンの名前をすべて言って！",
-      "types": "{name}タイプのポケモンの名前をすべて言って！"
-    },
-    "nameAllRegionPokemon": "すべてのポケモンの名前を言って！"
-  }
-}
-</i18n>
