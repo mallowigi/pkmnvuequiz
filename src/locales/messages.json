@@ -35,9 +35,22 @@
     "dark": "恶",
     "steel": "钢",
     "fairy": "妖精",
-    "normal": "正常",
+    "normal": "一般",
+    "hoennmega": "超級進化（豐緣）",
+    "hyperspace": "超級進化（異次元）",
+    "kalosmega": "超級進化（卡洛斯）",
+    "lumiose": "超級進化（密阿雷市）",
+    "pokemongo": "Pokémon GO",
     "fullQuiz": "完整测验",
-    "types": "属性"
+    "types": "属性",
+    "gen": "世代",
+    "chaos": "混亂",
+    "order": "秩序",
+    "legendary": "传说",
+    "mythical": "神话",
+    "paradox": "悖论",
+    "sublegendary": "准传说",
+    "ultrabeast": "究极异兽"
   },
   "de": {
     "areazero": "Area Zero (Paldea)",
@@ -77,7 +90,15 @@
     "fairy": "Fee",
     "normal": "Normal",
     "fullQuiz": "Vollständiges Quiz",
-    "types": "Typen"
+    "types": "Typen",
+    "gen": "Generationen",
+    "chaos": "Chaos",
+    "order": "Ordnung",
+    "legendary": "Legendär",
+    "mythical": "Mythisch",
+    "paradox": "Paradox",
+    "sublegendary": "Sub-Legendär",
+    "ultrabeast": "Ultrabestie"
   },
   "en": {
     "alola": "Alola",
@@ -117,7 +138,15 @@
     "fairy": "Fairy",
     "normal": "Normal",
     "fullQuiz": "Full Quiz",
-    "types": "Types"
+    "types": "Types",
+    "gen": "Generations",
+    "chaos": "Chaos",
+    "order": "Order",
+    "legendary": "Legendary",
+    "mythical": "Mythical",
+    "paradox": "Paradox",
+    "sublegendary": "Sub-Legendary",
+    "ultrabeast": "Ultra Beast"
   },
   "es": {
     "areazero": "Área Cero (Paldea)",
@@ -157,7 +186,15 @@
     "fairy": "Hada",
     "normal": "Normal",
     "fullQuiz": "Cuestionario Completo",
-    "types": "Tipos"
+    "types": "Tipos",
+    "gen": "Generaciones",
+    "chaos": "Caos",
+    "order": "Orden",
+    "legendary": "Legendario",
+    "mythical": "Mítico",
+    "paradox": "Paradoja",
+    "sublegendary": "Sublegendario",
+    "ultrabeast": "Ultraente"
   },
   "fr": {
     "areazero": "Zone Zéro (Paldea)",
@@ -191,13 +228,21 @@
     "bug": "Insecte",
     "rock": "Roche",
     "ghost": "Spectre",
-    "dragon": "Dragon",
+    "dragon": "Dragón",
     "dark": "Ténèbres",
     "steel": "Acier",
     "fairy": "Fée",
     "normal": "Normal",
     "fullQuiz": "Quiz Complet",
-    "types": "Types"
+    "types": "Types",
+    "gen": "Générations",
+    "chaos": "Chaos",
+    "order": "Ordre",
+    "legendary": "Légendaire",
+    "mythical": "Mythique",
+    "paradox": "Paradoxe",
+    "sublegendary": "Sub-Légendaire",
+    "ultrabeast": "Ultra-Chimère"
   },
   "it": {
     "areazero": "Area Zero (Paldea)",
@@ -237,7 +282,15 @@
     "fairy": "Fata",
     "normal": "Normale",
     "fullQuiz": "Quiz Completo",
-    "types": "Tipi"
+    "types": "Tipi",
+    "gen": "Generazioni",
+    "chaos": "Caos",
+    "order": "Ordine",
+    "legendary": "Leggendario",
+    "mythical": "Misterioso",
+    "paradox": "Paradosso",
+    "sublegendary": "Sub-leggendario",
+    "ultrabeast": "Ultracreatura"
   },
   "jp": {
     "alola": "アローラ",
@@ -277,7 +330,15 @@
     "fairy": "フェアリー",
     "normal": "ノーマル",
     "fullQuiz": "フルクイズ",
-    "types": "タイプ"
+    "types": "タイプ",
+    "gen": "世代",
+    "chaos": "カオス",
+    "order": "秩序",
+    "legendary": "伝説",
+    "mythical": "幻",
+    "paradox": "パラドックス",
+    "sublegendary": "準伝説",
+    "ultrabeast": "ウルトラビースト"
   },
   "ko": {
     "alola": "알로라",
@@ -317,7 +378,15 @@
     "fairy": "페어리",
     "normal": "노말",
     "fullQuiz": "전체 퀴즈",
-    "types": "타입"
+    "types": "타입",
+    "gen": "세대",
+    "chaos": "혼돈",
+    "order": "질서",
+    "legendary": "전설",
+    "mythical": "환상",
+    "paradox": "패러독스",
+    "sublegendary": "준전설",
+    "ultrabeast": "울트라비스트"
   },
   "pt": {
     "special": "Especial",
@@ -357,7 +426,15 @@
     "fairy": "Fada",
     "normal": "Normal",
     "fullQuiz": "Quiz Completo",
-    "types": "Tipos"
+    "types": "Tipos",
+    "gen": "Gerações",
+    "chaos": "Caos",
+    "order": "Ordem",
+    "legendary": "Legendary",
+    "mythical": "Mythical",
+    "paradox": "Paradox",
+    "sublegendary": "Sub-Legendary",
+    "ultrabeast": "Ultra Beast"
   },
   "ru": {
     "alola": "Ало́ла",
@@ -397,7 +474,15 @@
     "fairy": "Фея",
     "normal": "Обычный",
     "fullQuiz": "Полный викторина",
-    "types": "Типы"
+    "types": "Типы",
+    "gen": "Поколения",
+    "chaos": "Хаос",
+    "order": "Порядок",
+    "legendary": "Легендарный",
+    "mythical": "Мифический",
+    "paradox": "Парадокс",
+    "sublegendary": "Суб-легендарный",
+    "ultrabeast": "Ультра-зверь"
   },
   "zh": {
     "areazero": "Area Zero (帕尔迪亚)",
@@ -437,6 +522,14 @@
     "lumiose": "超級進化（密阿雷市）",
     "pokemongo": "Pokémon GO",
     "fullQuiz": "完整测验",
-    "types": "属性"
+    "types": "属性",
+    "gen": "世代",
+    "chaos": "混亂",
+    "order": "秩序",
+    "legendary": "传说",
+    "mythical": "神话",
+    "paradox": "悖论",
+    "sublegendary": "准传说",
+    "ultrabeast": "究极异兽"
   }
 }
