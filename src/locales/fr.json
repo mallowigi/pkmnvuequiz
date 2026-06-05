@@ -3,6 +3,7 @@
   "areazero": "Zone Zéro (Paldea)",
   "bug": "Insecte",
   "cancel": "Annuler",
+  "close": "Fermer",
   "enable": "Activer",
   "giveUp": "Abandonner",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Combat",
   "fire": "Feu",
   "flying": "Vol",
+  "full": "Quiz Complet",
   "fullQuiz": "Quiz Complet",
   "galar": "Galar",
   "gen": "Générations",
@@ -42,6 +44,18 @@
   "kalos": "Kalos",
   "kalosmega": "Méga-Évolution (Kalos)",
   "kanto": "Kanto",
+  "leaderboards": {
+    "gameMode": "Mode de jeu",
+    "genType": "Gén/Type",
+    "name": "Nom",
+    "noRecords": "Aucun enregistrement pour le moment. Soyez le premier !",
+    "orderMode": "Mode d'ordre",
+    "shadowsUsed": "Ombres utilisées",
+    "time": "Temps"
+  },
+  "leaderboardsDialog": {
+    "title": "Top 3 des devins {mode}"
+  },
   "legendary": "Légendaire",
   "lumiose": "Méga-Évolution (Illumis)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "Réinitialiser ?"
   },
   "reset": "Réinitialiser",
+  "quiz": "Quiz",
+  "resetWarning": "Le quiz et le minuteur seront réinitialisés",
+  "reveal": "Révéler",
+  "shadowsDialog": {
+    "description": "Ne peut pas être annulé sans réinitialisation",
+    "title": "Révéler les ombres ?"
+  },
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psy",
   "rock": "Roche",
   "sinnoh": "Sinnoh",
   "special": "Spécial",
+  "specialQuiz": "Quiz Spécial",
   "steel": "Acier",
   "sublegendary": "Sub-Légendaire",
   "submit": "Envoyer",
   "switch": "Changer",
+  "switchQuizDialog": {
+    "title": "Changer de quiz ?"
+  },
   "types": "Types",
   "ultrabeast": "Ultra-Chimère",
   "unova": "Unys",

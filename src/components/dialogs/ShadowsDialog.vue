@@ -3,9 +3,11 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useI18n } from 'vue-i18n';
 
 const { displayShadows } = useState();
 const { dialogs, closeDialog } = useDialogs();
+const { t } = useI18n();
 
 const enableReveal = () => {
   closeDialog();
@@ -27,21 +29,21 @@ const cancel = () => {
     @close="cancel"
   >
     <div class="prompt">
-      <h2>Reveal Shadows?</h2>
-      <p class="desc">Cannot be undone without reset</p>
+      <h2>{{ t('shadowsDialog.title') }}</h2>
+      <p class="desc">{{ t('shadowsDialog.description') }}</p>
 
       <RoundedButton
         @click.stop="enableReveal"
         primary
       >
-        Reveal
+        {{ t('reveal') }}
       </RoundedButton>
 
       <RoundedButton
         @click.stop="cancel"
         primary
       >
-        Cancel
+        {{ t('cancel') }}
       </RoundedButton>
     </div>
   </Overlay>

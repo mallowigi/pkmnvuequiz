@@ -3,6 +3,7 @@
   "areazero": "エリアゼロ (パルデア)",
   "bug": "むし",
   "cancel": "キャンセル",
+  "close": "閉じる",
   "enable": "有効にする",
   "giveUp": "諦める",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "かくとう",
   "fire": "ほのお",
   "flying": "ひこう",
+  "full": "フルクイズ",
   "fullQuiz": "フルクイズ",
   "galar": "ガラル",
   "gen": "世代",
@@ -42,6 +44,18 @@
   "kalos": "カロス",
   "kalosmega": "メガシンカ（カロス）",
   "kanto": "カントー",
+  "leaderboards": {
+    "gameMode": "ゲームモード",
+    "genType": "世代/タイプ",
+    "name": "名前",
+    "noRecords": "まだ記録がありません。一番乗りを目指そう！",
+    "orderMode": "順序モード",
+    "shadowsUsed": "シャドウ使用",
+    "time": "時間"
+  },
+  "leaderboardsDialog": {
+    "title": "{mode}の正解者トップ3"
+  },
   "legendary": "伝説",
   "lumiose": "メガシンカ（ミアレシティ）",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "リセットしますか？"
   },
   "reset": "リセット",
+  "quiz": "クイズ",
+  "resetWarning": "クイズとタイマーがリセットされます",
+  "reveal": "表示",
+  "shadowsDialog": {
+    "description": "リセットしない限り元に戻せません",
+    "title": "シャドウを表示しますか？"
+  },
   "poison": "どく",
   "pokemongo": "Pokémon GO",
   "psychic": "エスパー",
   "rock": "いわ",
   "sinnoh": "シンオウ",
   "special": "スペシャル",
+  "specialQuiz": "スペシャルクイズ",
   "steel": "はがね",
   "sublegendary": "準伝説",
   "submit": "送信",
   "switch": "切り替え",
+  "switchQuizDialog": {
+    "title": "クイズを切り替えますか？"
+  },
   "types": "タイプ",
   "ultrabeast": "ウルトラビースト",
   "unova": "イッシュ",

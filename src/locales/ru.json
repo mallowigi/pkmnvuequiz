@@ -3,6 +3,7 @@
   "areazero": "Ареа Зеро (Палдея)",
   "bug": "Насекомое",
   "cancel": "Отмена",
+  "close": "Закрыть",
   "enable": "Включить",
   "giveUp": "Сдаться",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Бой",
   "fire": "Огонь",
   "flying": "Летающий",
+  "full": "Полный викторина",
   "fullQuiz": "Полный викторина",
   "galar": "Галар",
   "gen": "Поколения",
@@ -42,6 +44,18 @@
   "kalos": "Калос",
   "kalosmega": "Мегаэволюция (Калос)",
   "kanto": "Канто",
+  "leaderboards": {
+    "gameMode": "Игровой режим",
+    "genType": "Пок/Тип",
+    "name": "Имя",
+    "noRecords": "Рекордов пока нет. Будь первым!",
+    "orderMode": "Режим порядка",
+    "shadowsUsed": "Использовано теней",
+    "time": "Время"
+  },
+  "leaderboardsDialog": {
+    "title": "Топ-3 угадывателей {mode}"
+  },
   "legendary": "Легендарный",
   "lumiose": "Мегаэволюция (Люмиос-Сити)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "Сбросить?"
   },
   "reset": "Сброс",
+  "quiz": "Викторина",
+  "resetWarning": "Викторина и таймер будут сброшены",
+  "reveal": "Раскрыть",
+  "shadowsDialog": {
+    "description": "Нельзя отменить без сброса",
+    "title": "Раскрыть тени?"
+  },
   "poison": "Яд",
   "pokemongo": "Pokémon GO",
   "psychic": "Психический",
   "rock": "Камень",
   "sinnoh": "Синно",
   "special": "Специальный",
+  "specialQuiz": "Специальная викторина",
   "steel": "Сталь",
   "sublegendary": "Суб-легендарный",
   "submit": "Отправить",
   "switch": "Переключить",
+  "switchQuizDialog": {
+    "title": "Сменить викторину?"
+  },
   "types": "Типы",
   "ultrabeast": "Ультра-зверь",
   "unova": "Юнова",

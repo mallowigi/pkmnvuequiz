@@ -3,6 +3,7 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Bug",
   "cancel": "Cancel",
+  "close": "Close",
   "enable": "Enable",
   "giveUp": "Give Up",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Fighting",
   "fire": "Fire",
   "flying": "Flying",
+  "full": "Full Quiz",
   "fullQuiz": "Full Quiz",
   "galar": "Galar",
   "gen": "Generations",
@@ -42,6 +44,18 @@
   "kalos": "Kalos",
   "kalosmega": "Mega Evolution (Kalos)",
   "kanto": "Kanto",
+  "leaderboards": {
+    "gameMode": "Game Mode",
+    "genType": "Gen/Type",
+    "name": "Name",
+    "noRecords": "No records yet. Be the first!",
+    "orderMode": "Order Mode",
+    "shadowsUsed": "Shadows Used",
+    "time": "Time"
+  },
+  "leaderboardsDialog": {
+    "title": "Top 3 {mode} Guessers"
+  },
   "legendary": "Legendary",
   "lumiose": "Mega Evolution (Lumiose)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "Reset?"
   },
   "reset": "Reset",
+  "quiz": "Quiz",
+  "resetWarning": "Quiz and timer will reset",
+  "reveal": "Reveal",
+  "shadowsDialog": {
+    "description": "Cannot be undone without reset",
+    "title": "Reveal Shadows?"
+  },
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psychic",
   "rock": "Rock",
   "sinnoh": "Sinnoh",
   "special": "Special",
+  "specialQuiz": "Special Quiz",
   "steel": "Steel",
   "sublegendary": "Sub-Legendary",
   "submit": "Submit",
   "switch": "Switch",
+  "switchQuizDialog": {
+    "title": "Switch Quiz?"
+  },
   "types": "Types",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",

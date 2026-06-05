@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { useFirebase } from '@/composables/useFirebase.ts';
-import { capitalize } from '@/utils/utils.ts';
 import type { DocumentData } from 'firebase/firestore';
 import { useState } from '@/stores/useState.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
+import { useI18n } from 'vue-i18n';
 
 const { getTopTrainers } = useFirebase();
 const { state } = useState();
 const { currentTypeState } = useCurrentType();
 const { currentGenState } = useCurrentGen();
+const { t } = useI18n();
 
 const topTrainers = getTopTrainers({
   gameMode: state.gameMode!,
@@ -30,8 +31,6 @@ const subType = (user: DocumentData): string => {
   if (user.gameMode === 'gen') return user.gen ?? '';
   return user.gameMode ?? '';
 };
-
-const toCapital = (str: string) => capitalize(str);
 </script>
 
 <template>
@@ -44,12 +43,12 @@ const toCapital = (str: string) => capitalize(str);
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Time</th>
-            <th>Game Mode</th>
-            <th>Gen/Type</th>
-            <th>Order Mode</th>
-            <th>Shadows Used</th>
+            <th>{{ t('leaderboards.name') }}</th>
+            <th>{{ t('leaderboards.time') }}</th>
+            <th>{{ t('leaderboards.gameMode') }}</th>
+            <th>{{ t('leaderboards.genType') }}</th>
+            <th>{{ t('leaderboards.orderMode') }}</th>
+            <th>{{ t('leaderboards.shadowsUsed') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -60,9 +59,9 @@ const toCapital = (str: string) => capitalize(str);
             <td class="rank">{{ index + 1 }}</td>
             <td class="run-name">{{ user.name }}</td>
             <td class="run-time">{{ formatTime(user.time) }}</td>
-            <td>{{ toCapital(user.gameMode) }}</td>
-            <td>{{ toCapital(subType(user)) }}</td>
-            <td>{{ toCapital(user.mode) }}</td>
+            <td>{{ t(user.gameMode === 'full' ? 'fullQuiz' : user.gameMode) }}</td>
+            <td>{{ t(subType(user)) }}</td>
+            <td>{{ t(user.mode) }}</td>
             <td>{{ user.numShadows }}</td>
           </tr>
         </tbody>
@@ -73,7 +72,7 @@ const toCapital = (str: string) => capitalize(str);
       v-else
       class="no-records"
     >
-      <p>No records yet. Be the first!</p>
+      <p>{{ t('leaderboards.noRecords') }}</p>
     </div>
   </div>
 </template>

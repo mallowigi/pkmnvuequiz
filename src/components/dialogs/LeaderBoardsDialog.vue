@@ -10,21 +10,24 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
 
+import { useI18n } from 'vue-i18n';
+
 const { closeDialog } = useDialogs();
 const { state } = useState();
 const { getCurrentType } = useCurrentType();
 const { getCurrentGen } = useCurrentGen();
+const { t } = useI18n();
 
 const currentGameMode = computed(() => {
   switch (state.gameMode) {
     case 'gen':
-      return `${capitalize(getCurrentGen()?.name ?? '')} Quiz`;
+      return `${capitalize(t((getCurrentGen()?.name ?? '').toLowerCase()))} ${t('quiz')}`;
     case 'types':
-      return `${capitalize(getCurrentType()?.name ?? '')} Quiz`;
+      return `${capitalize(t((getCurrentType()?.name ?? '').toLowerCase()))} ${t('quiz')}`;
     case 'special':
-      return 'Special Quiz';
+      return t('specialQuiz');
     default:
-      return 'Full Quiz';
+      return t('fullQuiz');
   }
 });
 
@@ -39,7 +42,7 @@ const cancel = () => {
     @close="cancel"
   >
     <div class="prompt">
-      <h2>Top 3 {{ currentGameMode }} Guessers</h2>
+      <h2>{{ t('leaderboardsDialog.title', { mode: currentGameMode }) }}</h2>
 
       <Leaderboards />
 
@@ -47,7 +50,7 @@ const cancel = () => {
         @click.stop="cancel"
         primary
       >
-        Close
+        {{ t('close') }}
       </RoundedButton>
     </div>
   </Overlay>

@@ -3,6 +3,7 @@
   "areazero": "Área Cero (Paldea)",
   "bug": "Bicho",
   "cancel": "Cancelar",
+  "close": "Cerrar",
   "enable": "Habilitar",
   "giveUp": "Rendirse",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Lucha",
   "fire": "Fuego",
   "flying": "Volador",
+  "full": "Cuestionario Completo",
   "fullQuiz": "Cuestionario Completo",
   "galar": "Galar",
   "gen": "Generaciones",
@@ -42,6 +44,18 @@
   "kalos": "Kalos",
   "kalosmega": "Megaevolución (Kalos)",
   "kanto": "Kanto",
+  "leaderboards": {
+    "gameMode": "Modo de juego",
+    "genType": "Gen/Tipo",
+    "name": "Nombre",
+    "noRecords": "No hay registros todavía. ¡Sé el primero!",
+    "orderMode": "Modo de orden",
+    "shadowsUsed": "Sombras usadas",
+    "time": "Tiempo"
+  },
+  "leaderboardsDialog": {
+    "title": "Top 3 adivinadores de {mode}"
+  },
   "legendary": "Legendario",
   "lumiose": "Megaevolución (Ciudad Luminalia)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "¿Reiniciar?"
   },
   "reset": "Reiniciar",
+  "quiz": "Cuestionario",
+  "resetWarning": "El cuestionario y el temporizador se reiniciarán",
+  "reveal": "Revelar",
+  "shadowsDialog": {
+    "description": "No se puede deshacer sin reiniciar",
+    "title": "¿Revelar sombras?"
+  },
   "poison": "Veneno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psíquico",
   "rock": "Roca",
   "sinnoh": "Sinnoh",
   "special": "Especial",
+  "specialQuiz": "Cuestionario Especial",
   "steel": "Acero",
   "sublegendary": "Sublegendario",
   "submit": "Enviar",
   "switch": "Cambiar",
+  "switchQuizDialog": {
+    "title": "¿Cambiar cuestionario?"
+  },
   "types": "Tipos",
   "ultrabeast": "Ultraente",
   "unova": "Teselia",

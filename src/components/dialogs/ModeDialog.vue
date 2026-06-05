@@ -38,7 +38,7 @@ const disableMode = () => {
   >
     <div class="prompt">
       <h2>{{ props.caption }}</h2>
-      <p class="desc">{{ t('modeDialog.description') }}</p>
+      <p class="desc">{{ t('resetWarning') }}</p>
 
       <RoundedButton
         @click="enableMode"

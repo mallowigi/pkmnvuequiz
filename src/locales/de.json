@@ -3,6 +3,7 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Käfer",
   "cancel": "Abbrechen",
+  "close": "Schließen",
   "enable": "Aktivieren",
   "giveUp": "Aufgeben",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Kampf",
   "fire": "Feuer",
   "flying": "Flug",
+  "full": "Vollständiges Quiz",
   "fullQuiz": "Vollständiges Quiz",
   "galar": "Galar",
   "gen": "Generationen",
@@ -42,6 +44,18 @@
   "kalos": "Kalos",
   "kalosmega": "Mega-Entwicklung (Kalos)",
   "kanto": "Kanto",
+  "leaderboards": {
+    "gameMode": "Spielmodus",
+    "genType": "Gen/Typ",
+    "name": "Name",
+    "noRecords": "Noch keine Datensätze. Sei der Erste!",
+    "orderMode": "Ordnungsmodus",
+    "shadowsUsed": "Schatten verwendet",
+    "time": "Zeit"
+  },
+  "leaderboardsDialog": {
+    "title": "Top 3 {mode}-Rater"
+  },
   "legendary": "Legendär",
   "lumiose": "Mega-Entwicklung (Illumina City)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "Zurücksetzen?"
   },
   "reset": "Zurücksetzen",
+  "quiz": "Quiz",
+  "resetWarning": "Quiz und Timer werden zurückgesetzt",
+  "reveal": "Enthüllen",
+  "shadowsDialog": {
+    "description": "Kann ohne Zurücksetzen nicht rückgängig gemacht werden",
+    "title": "Schatten enthüllen?"
+  },
   "poison": "Gift",
   "pokemongo": "Pokémon GO",
   "psychic": "Psycho",
   "rock": "Gestein",
   "sinnoh": "Sinnoh",
   "special": "Spezial",
+  "specialQuiz": "Spezial-Quiz",
   "steel": "Stahl",
   "sublegendary": "Sub-Legendär",
   "submit": "Absenden",
   "switch": "Wechseln",
+  "switchQuizDialog": {
+    "title": "Quiz wechseln?"
+  },
   "types": "Typen",
   "ultrabeast": "Ultrabestie",
   "unova": "Einall",

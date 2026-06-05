@@ -3,6 +3,7 @@
   "areazero": "Área Zero (Paldea)",
   "bug": "Inseto",
   "cancel": "Cancelar",
+  "close": "Fechar",
   "enable": "Habilitar",
   "giveUp": "Desistir",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Lutador",
   "fire": "Fogo",
   "flying": "Voador",
+  "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
   "gen": "Gerações",
@@ -42,6 +44,18 @@
   "kalos": "Kalos",
   "kalosmega": "Mega Evolução (Kalos)",
   "kanto": "Kanto",
+  "leaderboards": {
+    "gameMode": "Modo de jogo",
+    "genType": "Ger/Tipo",
+    "name": "Nome",
+    "noRecords": "Ainda não há registros. Seja o primeiro!",
+    "orderMode": "Modo de ordem",
+    "shadowsUsed": "Sombras usadas",
+    "time": "Tempo"
+  },
+  "leaderboardsDialog": {
+    "title": "Top 3 adivinhadores de {mode}"
+  },
   "legendary": "Legendary",
   "lumiose": "Mega Evolution (Cidade de Lumiose)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "Reiniciar?"
   },
   "reset": "Reiniciar",
+  "quiz": "Quiz",
+  "resetWarning": "O quiz e o temporizador serão redefinidos",
+  "reveal": "Revelar",
+  "shadowsDialog": {
+    "description": "Não pode ser desfeito sem reiniciar",
+    "title": "Revelar sombras?"
+  },
   "poison": "Veneno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psíquico",
   "rock": "Pedra",
   "sinnoh": "Sinnoh",
   "special": "Especial",
+  "specialQuiz": "Quiz Especial",
   "steel": "Aço",
   "sublegendary": "Sub-Legendary",
   "submit": "Enviar",
   "switch": "Trocar",
+  "switchQuizDialog": {
+    "title": "Trocar quiz?"
+  },
   "types": "Tipos",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",

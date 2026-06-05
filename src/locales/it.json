@@ -3,6 +3,7 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Coleottero",
   "cancel": "Annulla",
+  "close": "Chiudi",
   "enable": "Abilita",
   "giveUp": "Rinuncia",
   "changeNameDialog": {
@@ -26,6 +27,7 @@
   "fighting": "Lotta",
   "fire": "Fuoco",
   "flying": "Volante",
+  "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
   "gen": "Generazioni",
@@ -42,6 +44,18 @@
   "kalos": "Kalos",
   "kalosmega": "Megaevoluzione (Kalos)",
   "kanto": "Kanto",
+  "leaderboards": {
+    "gameMode": "Modalità di gioco",
+    "genType": "Gen/Tipo",
+    "name": "Nome",
+    "noRecords": "Ancora nessun record. Sii il primo!",
+    "orderMode": "Modalità ordine",
+    "shadowsUsed": "Ombre usate",
+    "time": "Tempo"
+  },
+  "leaderboardsDialog": {
+    "title": "Top 3 indovini di {mode}"
+  },
   "legendary": "Leggendario",
   "lumiose": "Megaevoluzione (Luminopoli)",
   "modeDialog": {
@@ -67,16 +81,27 @@
     "title": "Resettare?"
   },
   "reset": "Reset",
+  "quiz": "Quiz",
+  "resetWarning": "Il quiz e il timer verranno resettati",
+  "reveal": "Rivela",
+  "shadowsDialog": {
+    "description": "Non può essere annullato senza reset",
+    "title": "Rivelare le ombre?"
+  },
   "poison": "Veleno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psico",
   "rock": "Roccia",
   "sinnoh": "Sinnoh",
   "special": "Speciale",
+  "specialQuiz": "Quiz Speciale",
   "steel": "Acciaio",
   "sublegendary": "Sub-leggendario",
   "submit": "Invia",
   "switch": "Cambia",
+  "switchQuizDialog": {
+    "title": "Cambiare quiz?"
+  },
   "types": "Tipi",
   "ultrabeast": "Ultracreatura",
   "unova": "Unima",

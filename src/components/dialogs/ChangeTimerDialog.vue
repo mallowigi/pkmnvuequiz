@@ -27,7 +27,7 @@ const cancel = () => {
   >
     <div class="prompt">
       <h2>{{ t('changeTimerDialog.title') }}</h2>
-      <p class="desc">{{ t('changeTimerDialog.description') }}</p>
+      <p class="desc">{{ t('resetWarning') }}</p>
 
       <RoundedButton
         @click.stop="switchTimer"
