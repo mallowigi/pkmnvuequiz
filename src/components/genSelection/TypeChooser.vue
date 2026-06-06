@@ -6,10 +6,14 @@ import { typesList } from '@/data/pokemonTypes';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
+import { useTranslations } from '@/composables/useTranslations.ts';
+import { useI18n } from 'vue-i18n';
 
 const { setGameSelectionState } = useGameFlow();
 const { getSpecialType } = useCurrentType();
 const { setTypeOrSpecial } = useQuiz();
+const { getTypeTranslation, getSpecialTypeTranslation } = useTranslations();
+const { t } = useI18n();
 
 const specialType = computed(() => getSpecialType());
 
@@ -34,7 +38,7 @@ const goBack = () => {
         class="symbol"
       />
       <div hidden>{{ typeMeta.symbol }}</div>
-      <div class="type-name">{{ typeMeta.name }}</div>
+      <div class="type-name">{{ getTypeTranslation(typeMeta.id) }}</div>
     </RoundedButton>
 
     <!-- Special -->
@@ -48,14 +52,14 @@ const goBack = () => {
         :alt="specialType.name"
         class="symbol"
       />
-      <div class="type-name">{{ specialType.name }}</div>
+      <div class="type-name">{{ getSpecialTypeTranslation(specialType.id) }}</div>
     </RoundedButton>
 
     <RoundedButton
       class="button-type button-back"
       @click="goBack"
     >
-      <div class="type-name">Back</div>
+      <div class="type-name">{{ t('back') }}</div>
     </RoundedButton>
   </div>
 </template>

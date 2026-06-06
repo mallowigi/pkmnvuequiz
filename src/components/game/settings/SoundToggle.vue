@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, setSound } = useState();
 const { showUserMessage } = useMessages();
-const { flowState } = useGameFlow();
+const { t } = useI18n();
 
 const applySound = (value: boolean) => {
   if (state.withSound === value) return;
 
   setSound(value);
-  showUserMessage(`Sound ${value ? 'enabled' : 'disabled'}`);
+  showUserMessage(t('soundSet', { status: value ? t('enabled') : t('disabled') }));
 };
 </script>
 
 <template>
   <RoundedBox
     v-game-ended
-    v-tooltip="'Toggle Sounds On/Off'"
+    v-tooltip="t('soundTooltip')"
   >
     <SegmentButton
       :active="{
@@ -33,10 +33,10 @@ const applySound = (value: boolean) => {
       @click:left="applySound(true)"
       @click:right="applySound(false)"
     >
-      <template #prefix> Sound: </template>
+      <template #prefix> {{ t('sound') }}: </template>
 
-      <template #left> On </template>
-      <template #right> Off </template>
+      <template #left> {{ t('on') }} </template>
+      <template #right> {{ t('off') }} </template>
     </SegmentButton>
   </RoundedBox>
 </template>

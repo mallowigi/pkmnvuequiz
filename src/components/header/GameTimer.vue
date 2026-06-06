@@ -5,10 +5,12 @@ import { computed, watch } from 'vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state } = useState();
 const { timerState, incElapsed } = useTimer();
 const { flowState, pauseGame } = useGameFlow();
+const { t } = useI18n();
 
 const { pause, resume } = useInterval(1000, {
   callback: () => {
@@ -62,7 +64,7 @@ watch(windowFocus, (isFocused) => {
 
 <template>
   <div class="box rad-bl-tr">
-    Timer: <span class="highlight">{{ elapsedTime }}</span>
+    {{ t('timer') }}: <span class="highlight">{{ elapsedTime }}</span>
   </div>
 </template>
 

@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, toggleShadowHelper } = useState();
 const { showUserMessage } = useMessages();
-const { flowState } = useGameFlow();
+const { t } = useI18n();
 
 const toggle = () => {
   toggleShadowHelper();
-  showUserMessage(`Next shadow hotkey ${state.withShadowHelper ? 'enabled' : 'disabled'}`);
+  showUserMessage(t('shadowHelperSet', { status: state.withShadowHelper ? t('enabled') : t('disabled') }));
 };
 </script>
 
 <template>
   <RoundedBox
-    v-tooltip="'When enabled, press the , key to display the shadow of a Pokemon at random.'"
+    v-tooltip="t('shadowHotkeyTooltip', { key: ',' })"
     v-game-ended
   >
     <SegmentButton
@@ -26,9 +26,9 @@ const toggle = () => {
       }"
       @click:left="toggle"
     >
-      <template #prefix> Next Shadow: press</template>
+      <template #prefix>{{ t('shadowHelperToggle') }}</template>
       <template #left>&nbsp;,&nbsp;</template>
-      <template #suffix> to see the next shadow</template>
+      <template #suffix> {{ t('shadowHelperToggleSuffix') }}</template>
     </SegmentButton>
   </RoundedBox>
 </template>

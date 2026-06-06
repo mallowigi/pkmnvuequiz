@@ -8,12 +8,14 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState.js';
 import { useTimer } from '@/stores/useTimer';
+import { useI18n } from 'vue-i18n';
 
 const { flowState, resetFlowState, pauseGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
 const { resetState } = useState();
 const { resetTimer, setMinutes, setIsLimited, timerState } = useTimer();
 const { setDialog } = useDialogs();
+const { t } = useI18n();
 
 const setInfinite = () => {
   if (!timerState.isLimited) return;
@@ -60,7 +62,7 @@ const minutes = computed({
 <template>
   <RoundedBox
     class="timer-box"
-    v-tooltip="'Set a timer for the game.'"
+    v-tooltip="t('timerTooltip')"
     v-game-ended
   >
     <SegmentButton
@@ -80,12 +82,15 @@ const minutes = computed({
       @click:right="setFinite"
       @click:suffix="togglePause"
     >
-      <template #prefix> Timer: </template>
+      <template #prefix> {{ t('timer') }} </template>
 
       <template #left> ∞ </template>
 
       <template #center>
-        <div class="input-timer-container">
+        <div
+          class="input-timer-container"
+          :data-unit="t('min')"
+        >
           <input
             type="number"
             name="timer"
@@ -99,7 +104,7 @@ const minutes = computed({
         </div>
       </template>
 
-      <template #right> set </template>
+      <template #right> {{ t('set') }} </template>
 
       <template #suffix> ⏸ </template>
     </SegmentButton>
@@ -121,7 +126,7 @@ const minutes = computed({
   flex: 1;
 
   &::after {
-    content: 'min';
+    content: attr(data-unit);
     position: absolute;
     right: 3px;
     color: var(--input-text);

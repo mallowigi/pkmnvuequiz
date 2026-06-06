@@ -7,17 +7,19 @@ import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.js';
 import { useState } from '@/stores/useState.js';
+import { useI18n } from 'vue-i18n';
 
 const { state, setTypeShuffle } = useState();
 const { showUserMessage } = useMessages();
 const { flowState } = useGameFlow();
 const { setRandomCurrentType, clearCurrentType } = useCurrentType();
+const { t } = useI18n();
 
 const applyTypeShuffle = (value: boolean) => {
   if (state.withTypeShuffle === value) return;
 
   if (state.mode !== 'normal') {
-    showUserMessage('Type Shuffle can only be toggled in Regular mode');
+    showUserMessage(t('typeShuffleOnlyInRegularMode'));
     return;
   }
 
@@ -27,7 +29,7 @@ const applyTypeShuffle = (value: boolean) => {
   } else {
     clearCurrentType();
   }
-  showUserMessage(`Type Shuffle ${value ? 'enabled' : 'disabled'}`);
+  showUserMessage(t('typeShuffleSet', { status: value ? t('enabled') : t('disabled') }));
 };
 
 const isDisabled = computed(
@@ -42,8 +44,8 @@ const isDisabled = computed(
 
 <template>
   <RoundedBox
-    v-tooltip="'Guess the next Pokemon of a given type'"
-    v-tooltip.disabled="'Type Shuffle can only be toggled in Regular mode'"
+    v-tooltip="t('typeShuffleTooltip')"
+    v-tooltip.disabled="t('typeShuffleOnlyInRegularModeTooltip')"
     :class="{ disabled: isDisabled }"
   >
     <SegmentButton
@@ -57,10 +59,10 @@ const isDisabled = computed(
       @click:left="applyTypeShuffle(true)"
       @click:right="applyTypeShuffle(false)"
     >
-      <template #prefix> Type Shuffle: </template>
+      <template #prefix> {{ t('typeShuffle') }}: </template>
 
-      <template #left> On </template>
-      <template #right> Off </template>
+      <template #left> {{ t('on') }} </template>
+      <template #right> {{ t('off') }} </template>
     </SegmentButton>
   </RoundedBox>
 </template>

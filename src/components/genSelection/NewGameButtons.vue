@@ -8,9 +8,10 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useLocalStorage } from '@vueuse/core';
 
 const { t } = useI18n();
-
+const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
@@ -31,12 +32,12 @@ const continueGame = () => {
 
 const editName = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  localStorage.setItem('name', target.value);
+  name.value = target.value;
   setName(target.value);
 };
 
 onMounted(() => {
-  const savedName = localStorage.getItem('name');
+  const savedName = name.value;
   if (savedName) {
     setName(savedName);
   }

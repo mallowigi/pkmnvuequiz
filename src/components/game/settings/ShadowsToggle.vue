@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, displayShadows } = useState();
 const { setDialog } = useDialogs();
 const { showRemainingShadows } = usePokemons();
-
-const { flowState } = useGameFlow();
+const { t } = useI18n();
 
 const toggle = () => {
   if (!state.withShadows) {
@@ -23,16 +22,16 @@ const toggle = () => {
 
 <template>
   <RoundedButton
-    v-tooltip="'Toggle Pokemon Shadows (this action cannot be undone)'"
+    v-tooltip="t('shadowsToggleTooltip')"
     class="rad-br-tl shadows-toggle"
     v-game-ended
     :class="{ selected: state.withShadows }"
     @click="toggle"
   >
-    Shadows
+    {{ t('shadows') }}
     <img
       src="@/assets/raichu.png"
-      alt="silhouette"
+      :alt="t('silhouette')"
     />
   </RoundedButton>
 </template>

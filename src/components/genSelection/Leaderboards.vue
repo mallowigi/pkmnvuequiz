@@ -5,12 +5,14 @@ import { useState } from '@/stores/useState.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useI18n } from 'vue-i18n';
+import { useTranslations } from '@/composables/useTranslations.ts';
 
 const { getTopTrainers } = useFirebase();
 const { state } = useState();
 const { currentTypeState } = useCurrentType();
 const { currentGenState } = useCurrentGen();
 const { t } = useI18n();
+const { getGenTranslation, getTypeTranslation, getGameModeTranslation } = useTranslations();
 
 const topTrainers = getTopTrainers({
   gameMode: state.gameMode!,
@@ -27,9 +29,9 @@ const formatTime = (timeInSec: number) => {
 };
 
 const subType = (user: DocumentData): string => {
-  if (user.gameMode === 'types') return user.type ?? '';
-  if (user.gameMode === 'gen') return user.gen ?? '';
-  return user.gameMode ?? '';
+  if (user.gameMode === 'types') return getTypeTranslation(user.type) ?? '';
+  if (user.gameMode === 'gen') return getGenTranslation(user.gen) ?? '';
+  return getGameModeTranslation(user.gameMode) ?? '';
 };
 </script>
 
