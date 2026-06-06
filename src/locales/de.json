@@ -3,9 +3,6 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Käfer",
   "cancel": "Abbrechen",
-  "close": "Schließen",
-  "enable": "Aktivieren",
-  "giveUp": "Aufgeben",
   "changeNameDialog": {
     "description": "Gib einen neuen Namen ein, um deinen aktuellen Namen zu ändern.",
     "placeholder": "Gib deinen Namen ein",
@@ -15,14 +12,12 @@
     "description": "Quiz und Timer werden zurückgesetzt",
     "title": "Timer ändern?"
   },
-  "giveUpDialog": {
-    "description": "Bist du sicher, dass du aufgeben möchtest?",
-    "title": "Aufgeben?"
-  },
   "chaos": "Chaos",
+  "close": "Schließen",
   "dark": "Unlicht",
   "dragon": "Drache",
   "electric": "Elektro",
+  "enable": "Aktivieren",
   "fairy": "Fee",
   "fighting": "Kampf",
   "fire": "Feuer",
@@ -32,6 +27,11 @@
   "galar": "Galar",
   "gen": "Generationen",
   "ghost": "Geist",
+  "giveUp": "Aufgeben",
+  "giveUpDialog": {
+    "description": "Bist du sicher, dass du aufgeben möchtest?",
+    "title": "Aufgeben?"
+  },
   "gmax": "Gigantamax",
   "grass": "Pflanze",
   "ground": "Boden",
@@ -76,22 +76,22 @@
   "order": "Ordnung",
   "paldea": "Paldea",
   "paradox": "Paradox",
+  "poison": "Gift",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Psycho",
+  "quiz": "Quiz",
+  "reset": "Zurücksetzen",
   "resetDialog": {
     "description": "Bist du sicher, dass du zurücksetzen möchtest?",
     "title": "Zurücksetzen?"
   },
-  "reset": "Zurücksetzen",
-  "quiz": "Quiz",
   "resetWarning": "Quiz und Timer werden zurückgesetzt",
   "reveal": "Enthüllen",
+  "rock": "Gestein",
   "shadowsDialog": {
     "description": "Kann ohne Zurücksetzen nicht rückgängig gemacht werden",
     "title": "Schatten enthüllen?"
   },
-  "poison": "Gift",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Psycho",
-  "rock": "Gestein",
   "sinnoh": "Sinnoh",
   "special": "Spezial",
   "specialQuiz": "Spezial-Quiz",

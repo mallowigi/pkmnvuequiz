@@ -3,9 +3,6 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Coleottero",
   "cancel": "Annulla",
-  "close": "Chiudi",
-  "enable": "Abilita",
-  "giveUp": "Rinuncia",
   "changeNameDialog": {
     "description": "Inserisci un nuovo nome per cambiare il tuo nome attuale.",
     "placeholder": "Inserisci il tuo nome",
@@ -15,14 +12,12 @@
     "description": "Il quiz e il timer verranno resettati",
     "title": "Cambiare il timer?"
   },
-  "giveUpDialog": {
-    "description": "Sei sicuro di voler rinunciare?",
-    "title": "Rinunciare?"
-  },
   "chaos": "Caos",
+  "close": "Chiudi",
   "dark": "Buio",
   "dragon": "Drago",
   "electric": "Elettro",
+  "enable": "Abilita",
   "fairy": "Fata",
   "fighting": "Lotta",
   "fire": "Fuoco",
@@ -32,6 +27,11 @@
   "galar": "Galar",
   "gen": "Generazioni",
   "ghost": "Spettro",
+  "giveUp": "Rinuncia",
+  "giveUpDialog": {
+    "description": "Sei sicuro di voler rinunciare?",
+    "title": "Rinunciare?"
+  },
   "gmax": "Gigantamax",
   "grass": "Erba",
   "ground": "Terra",
@@ -76,22 +76,22 @@
   "order": "Ordine",
   "paldea": "Paldea",
   "paradox": "Paradosso",
+  "poison": "Veleno",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Psico",
+  "quiz": "Quiz",
+  "reset": "Reset",
   "resetDialog": {
     "description": "Sei sicuro di voler resettare?",
     "title": "Resettare?"
   },
-  "reset": "Reset",
-  "quiz": "Quiz",
   "resetWarning": "Il quiz e il timer verranno resettati",
   "reveal": "Rivela",
+  "rock": "Roccia",
   "shadowsDialog": {
     "description": "Non può essere annullato senza reset",
     "title": "Rivelare le ombre?"
   },
-  "poison": "Veleno",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Psico",
-  "rock": "Roccia",
   "sinnoh": "Sinnoh",
   "special": "Speciale",
   "specialQuiz": "Quiz Speciale",

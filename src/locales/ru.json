@@ -3,9 +3,6 @@
   "areazero": "Ареа Зеро (Палдея)",
   "bug": "Насекомое",
   "cancel": "Отмена",
-  "close": "Закрыть",
-  "enable": "Включить",
-  "giveUp": "Сдаться",
   "changeNameDialog": {
     "description": "Введите новое имя, чтобы изменить ваше текущее имя.",
     "placeholder": "Введите ваше имя",
@@ -15,14 +12,12 @@
     "description": "Викторина и таймер будут сброшены",
     "title": "Изменить таймер?"
   },
-  "giveUpDialog": {
-    "description": "Вы уверены, что хотите сдаться?",
-    "title": "Сдаться?"
-  },
   "chaos": "Хаос",
+  "close": "Закрыть",
   "dark": "Тьма",
   "dragon": "Дракон",
   "electric": "Электричество",
+  "enable": "Включить",
   "fairy": "Фея",
   "fighting": "Бой",
   "fire": "Огонь",
@@ -32,6 +27,11 @@
   "galar": "Галар",
   "gen": "Поколения",
   "ghost": "Призрак",
+  "giveUp": "Сдаться",
+  "giveUpDialog": {
+    "description": "Вы уверены, что хотите сдаться?",
+    "title": "Сдаться?"
+  },
   "gmax": "Гигантмакс",
   "grass": "Трава",
   "ground": "Земля",
@@ -76,22 +76,22 @@
   "order": "Порядок",
   "paldea": "Палдея",
   "paradox": "Парадокс",
+  "poison": "Яд",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Психический",
+  "quiz": "Викторина",
+  "reset": "Сброс",
   "resetDialog": {
     "description": "Вы уверены, что хотите сбросить прогресс?",
     "title": "Сбросить?"
   },
-  "reset": "Сброс",
-  "quiz": "Викторина",
   "resetWarning": "Викторина и таймер будут сброшены",
   "reveal": "Раскрыть",
+  "rock": "Камень",
   "shadowsDialog": {
     "description": "Нельзя отменить без сброса",
     "title": "Раскрыть тени?"
   },
-  "poison": "Яд",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Психический",
-  "rock": "Камень",
   "sinnoh": "Синно",
   "special": "Специальный",
   "specialQuiz": "Специальная викторина",

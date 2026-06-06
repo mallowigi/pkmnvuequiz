@@ -3,9 +3,6 @@
   "areazero": "Área Zero (Paldea)",
   "bug": "Inseto",
   "cancel": "Cancelar",
-  "close": "Fechar",
-  "enable": "Habilitar",
-  "giveUp": "Desistir",
   "changeNameDialog": {
     "description": "Digite um novo nome para mudar seu nome atual.",
     "placeholder": "Insira o seu nome",
@@ -15,14 +12,12 @@
     "description": "O quiz e le temporizador serão redefinidos",
     "title": "Alterar temporizador?"
   },
-  "giveUpDialog": {
-    "description": "Você tem certeza que quer desistir?",
-    "title": "Desistir?"
-  },
   "chaos": "Caos",
+  "close": "Fechar",
   "dark": "Noturno",
   "dragon": "Dragão",
   "electric": "Elétrico",
+  "enable": "Habilitar",
   "fairy": "Fada",
   "fighting": "Lutador",
   "fire": "Fogo",
@@ -32,6 +27,11 @@
   "galar": "Galar",
   "gen": "Gerações",
   "ghost": "Fantasma",
+  "giveUp": "Desistir",
+  "giveUpDialog": {
+    "description": "Você tem certeza que quer desistir?",
+    "title": "Desistir?"
+  },
   "gmax": "Gigantamax",
   "grass": "Grama",
   "ground": "Terra",
@@ -76,22 +76,22 @@
   "order": "Ordem",
   "paldea": "Paldea",
   "paradox": "Paradox",
+  "poison": "Veneno",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Psíquico",
+  "quiz": "Quiz",
+  "reset": "Reiniciar",
   "resetDialog": {
     "description": "Você tem certeza que quer reiniciar?",
     "title": "Reiniciar?"
   },
-  "reset": "Reiniciar",
-  "quiz": "Quiz",
   "resetWarning": "O quiz e o temporizador serão redefinidos",
   "reveal": "Revelar",
+  "rock": "Pedra",
   "shadowsDialog": {
     "description": "Não pode ser desfeito sem reiniciar",
     "title": "Revelar sombras?"
   },
-  "poison": "Veneno",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Psíquico",
-  "rock": "Pedra",
   "sinnoh": "Sinnoh",
   "special": "Especial",
   "specialQuiz": "Quiz Especial",

@@ -3,9 +3,6 @@
   "areazero": "Zone Zéro (Paldea)",
   "bug": "Insecte",
   "cancel": "Annuler",
-  "close": "Fermer",
-  "enable": "Activer",
-  "giveUp": "Abandonner",
   "changeNameDialog": {
     "description": "Entrez un nouveau nom pour changer votre nom actuel.",
     "placeholder": "Entrez votre nom",
@@ -15,14 +12,12 @@
     "description": "Le quiz et le minuteur seront réinitialisés",
     "title": "Changer le minuteur ?"
   },
-  "giveUpDialog": {
-    "description": "Êtes-vous sûr de vouloir abandonner ?",
-    "title": "Abandonner ?"
-  },
   "chaos": "Chaos",
+  "close": "Fermer",
   "dark": "Ténèbres",
   "dragon": "Dragón",
   "electric": "Électrique",
+  "enable": "Activer",
   "fairy": "Fée",
   "fighting": "Combat",
   "fire": "Feu",
@@ -32,6 +27,11 @@
   "galar": "Galar",
   "gen": "Générations",
   "ghost": "Spectre",
+  "giveUp": "Abandonner",
+  "giveUpDialog": {
+    "description": "Êtes-vous sûr de vouloir abandonner ?",
+    "title": "Abandonner ?"
+  },
   "gmax": "Gigantamax",
   "grass": "Plante",
   "ground": "Sol",
@@ -76,22 +76,22 @@
   "order": "Ordre",
   "paldea": "Paldea",
   "paradox": "Paradoxe",
+  "poison": "Poison",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Psy",
+  "quiz": "Quiz",
+  "reset": "Réinitialiser",
   "resetDialog": {
     "description": "Êtes-vous sûr de vouloir réinitialiser ?",
     "title": "Réinitialiser ?"
   },
-  "reset": "Réinitialiser",
-  "quiz": "Quiz",
   "resetWarning": "Le quiz et le minuteur seront réinitialisés",
   "reveal": "Révéler",
+  "rock": "Roche",
   "shadowsDialog": {
     "description": "Ne peut pas être annulé sans réinitialisation",
     "title": "Révéler les ombres ?"
   },
-  "poison": "Poison",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Psy",
-  "rock": "Roche",
   "sinnoh": "Sinnoh",
   "special": "Spécial",
   "specialQuiz": "Quiz Spécial",

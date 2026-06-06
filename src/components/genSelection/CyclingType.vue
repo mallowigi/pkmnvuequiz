@@ -2,6 +2,9 @@
 import { computed, ref } from 'vue';
 import { typesList } from '@/data/pokemonTypes';
 import { useIntervalFn } from '@vueuse/core';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const currentIndex = ref(0);
 
@@ -33,7 +36,7 @@ const setType = () => {
     }"
     @click="setType"
   >
-    Types
+    {{ t('types') }}
     <img
       :alt="currentType.name"
       :src="currentType.iconUrl"

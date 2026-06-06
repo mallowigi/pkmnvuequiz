@@ -4,7 +4,9 @@ import { ref, watch } from 'vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const { flowState } = useGameFlow();
 const { findClosestPokemon } = usePokemons();
 
@@ -30,7 +32,7 @@ watch(
 <template>
   <RoundedBox class="cell">
     <div class="label rad-bl">
-      <div class="txt">Closest spelling:</div>
+      <div class="txt">{{ t('closestSpelling') }}</div>
     </div>
 
     <div class="button rad-tr transition-element">
@@ -38,7 +40,7 @@ watch(
         @click="toggle"
         :hidden="hintShown"
       >
-        click to reveal
+        {{ t('revealHint') }}
       </div>
 
       <div

@@ -7,6 +7,9 @@ import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
 import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
@@ -42,14 +45,14 @@ onMounted(() => {
 
 <template>
   <div class="root">
-    <p>Welcome to the Pokémon Quiz!</p>
+    <p>{{ t('welcome') }}</p>
 
     <div class="row">
       <form @submit.prevent="newGame">
         <TextBox
           class="large-text"
           type="text"
-          placeholder="Enter your name"
+          :placeholder="t('changeNameDialog.placeholder')"
           @input="editName"
           :value="state.name"
         />
@@ -62,7 +65,7 @@ onMounted(() => {
         :disabled="!state.name"
         @click="newGame"
       >
-        New Game
+        {{ t('newGame') }}
       </RoundedButton>
 
       <RoundedButton
@@ -70,7 +73,7 @@ onMounted(() => {
         v-if="hasSavedState()"
         @click="continueGame"
       >
-        Continue
+        {{ t('continue') }}
       </RoundedButton>
     </div>
 
@@ -78,7 +81,7 @@ onMounted(() => {
     <SaveButtons />
 
     <!-- Leaderboards -->
-    <h2>Top 3 Guessers</h2>
+    <h2>{{ t('topGuessers', { n: 3 }) }}</h2>
     <Leaderboards />
   </div>
 </template>

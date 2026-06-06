@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { usePkmnData } from '@/stores/usePkmnStore';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const { data, loadData } = usePkmnData();
 
@@ -17,7 +20,7 @@ onMounted(() => {
       class="loader"
       id="loader"
     >
-      <h2>Loading Quiz</h2>
+      <h2>{{ t('loadingQuiz') }}</h2>
     </div>
     <div
       class="ellipsis"

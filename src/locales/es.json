@@ -3,9 +3,6 @@
   "areazero": "Área Cero (Paldea)",
   "bug": "Bicho",
   "cancel": "Cancelar",
-  "close": "Cerrar",
-  "enable": "Habilitar",
-  "giveUp": "Rendirse",
   "changeNameDialog": {
     "description": "Ingresa un nuevo nombre para cambiar tu nombre actual.",
     "placeholder": "Introduce tu nombre",
@@ -15,14 +12,12 @@
     "description": "El cuestionario y el temporizador se reiniciarán",
     "title": "¿Cambiar temporizador?"
   },
-  "giveUpDialog": {
-    "description": "¿Estás seguro de que quieres rendirte?",
-    "title": "¿Rendirse?"
-  },
   "chaos": "Caos",
+  "close": "Cerrar",
   "dark": "Siniestro",
   "dragon": "Dragón",
   "electric": "Eléctrico",
+  "enable": "Habilitar",
   "fairy": "Hada",
   "fighting": "Lucha",
   "fire": "Fuego",
@@ -32,6 +27,11 @@
   "galar": "Galar",
   "gen": "Generaciones",
   "ghost": "Fantasma",
+  "giveUp": "Rendirse",
+  "giveUpDialog": {
+    "description": "¿Estás seguro de que quieres rendirte?",
+    "title": "¿Rendirse?"
+  },
   "gmax": "Gigantamax",
   "grass": "Planta",
   "ground": "Tierra",
@@ -76,22 +76,22 @@
   "order": "Orden",
   "paldea": "Paldea",
   "paradox": "Paradoja",
+  "poison": "Veneno",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Psíquico",
+  "quiz": "Cuestionario",
+  "reset": "Reiniciar",
   "resetDialog": {
     "description": "¿Estás seguro de que quieres reiniciar?",
     "title": "¿Reiniciar?"
   },
-  "reset": "Reiniciar",
-  "quiz": "Cuestionario",
   "resetWarning": "El cuestionario y el temporizador se reiniciarán",
   "reveal": "Revelar",
+  "rock": "Roca",
   "shadowsDialog": {
     "description": "No se puede deshacer sin reiniciar",
     "title": "¿Revelar sombras?"
   },
-  "poison": "Veneno",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Psíquico",
-  "rock": "Roca",
   "sinnoh": "Sinnoh",
   "special": "Especial",
   "specialQuiz": "Cuestionario Especial",

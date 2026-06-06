@@ -14,6 +14,8 @@
   },
   "chaos": "Chaos",
   "close": "Close",
+  "closestSpelling": "Closest spelling:",
+  "continue": "Continue",
   "dark": "Dark",
   "dragon": "Dragon",
   "electric": "Electric",
@@ -23,11 +25,11 @@
   "fire": "Fire",
   "flying": "Flying",
   "footer": {
+    "license": "This project is an unofficial derivative work based on Pokémon. Official sprites belong to © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "Original project found at {location}. {donation}",
     "projectBy": "Project by {charon}. Rewritten in Vue by {mallowigi}.",
-    "sprites": "Custom & modified sprites made by {artists} ≡ as part of the {project} project.",
     "resources": "Resource for data: {pokeapi}. Resources for sprites: {sprites}.",
-    "license": "This project is an unofficial derivative work based on Pokémon. Official sprites belong to © Nintendo/Creatures Inc./GAME FREAK Inc."
+    "sprites": "Custom & modified sprites made by {artists} ≡ as part of the {project} project."
   },
   "full": "Full Quiz",
   "fullQuiz": "Full Quiz",
@@ -42,6 +44,7 @@
   "gmax": "Gigantamax",
   "grass": "Grass",
   "ground": "Ground",
+  "hello": "Hello, {name}",
   "hisui": "Hisui",
   "hoenn": "Hoenn",
   "hoennmega": "Mega Evolution (Hoenn)",
@@ -64,7 +67,9 @@
     "title": "Top 3 {mode} Guessers"
   },
   "legendary": "Legendary",
+  "loadingQuiz": "Loading Quiz",
   "lumiose": "Mega Evolution (Lumiose)",
+  "missedNames": "Missed names:",
   "modeDialog": {
     "chaosCaption": "Enable guessing without predetermined placements",
     "description": "Quiz and timer will reset",
@@ -79,6 +84,7 @@
     "types": "Name all {name} Pokémon!"
   },
   "nameAllRegionPokemon": "Name all Pokémon!",
+  "newGame": "New Game",
   "normal": "Normal",
   "order": "Order",
   "paldea": "Paldea",
@@ -94,6 +100,7 @@
   },
   "resetWarning": "Quiz and timer will reset",
   "reveal": "Reveal",
+  "revealHint": "click to reveal",
   "rock": "Rock",
   "shadowsDialog": {
     "description": "Cannot be undone without reset",
@@ -109,9 +116,11 @@
   "switchQuizDialog": {
     "title": "Switch Quiz?"
   },
+  "topGuessers": "Top {n} Guessers",
   "types": "Types",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",
   "variousArtists": "various artists",
-  "water": "Water"
+  "water": "Water",
+  "welcome": "Welcome to the Pokémon Quiz!"
 }

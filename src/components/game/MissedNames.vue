@@ -13,9 +13,11 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
 import MissedNamesTransition from '@/components/common/transitions/MissedNamesTransition.vue';
+import { useI18n } from 'vue-i18n';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
+const { t } = useI18n();
 
 const { languagesState, getTranslation } = useLanguages();
 const pokemonStore = usePokemons();
@@ -65,7 +67,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
         class="accordion"
         @click="toggleAccordion"
       >
-        <p>Missed names:</p>
+        <p>{{ t('missedNames') }}</p>
         <i
           class="arrow"
           :class="{ up: isAccordionOpen }"

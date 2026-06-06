@@ -3,9 +3,6 @@
   "areazero": "エリアゼロ (パルデア)",
   "bug": "むし",
   "cancel": "キャンセル",
-  "close": "閉じる",
-  "enable": "有効にする",
-  "giveUp": "諦める",
   "changeNameDialog": {
     "description": "新しい名前を入力して、現在の名前を変更してください。",
     "placeholder": "名前を入力してください",
@@ -15,14 +12,12 @@
     "description": "クイズとタイマーがリセットされます",
     "title": "タイマーを変更しますか？"
   },
-  "giveUpDialog": {
-    "description": "本当に諦めますか？",
-    "title": "諦めますか？"
-  },
   "chaos": "カオス",
+  "close": "閉じる",
   "dark": "あく",
   "dragon": "ドラゴン",
   "electric": "でんき",
+  "enable": "有効にする",
   "fairy": "フェアリー",
   "fighting": "かくとう",
   "fire": "ほのお",
@@ -32,6 +27,11 @@
   "galar": "ガラル",
   "gen": "世代",
   "ghost": "ゴースト",
+  "giveUp": "諦める",
+  "giveUpDialog": {
+    "description": "本当に諦めますか？",
+    "title": "諦めますか？"
+  },
   "gmax": "キョダイ",
   "grass": "くさ",
   "ground": "じめん",
@@ -76,22 +76,22 @@
   "order": "秩序",
   "paldea": "パルデア",
   "paradox": "パラドックス",
+  "poison": "どく",
+  "pokemongo": "Pokémon GO",
+  "psychic": "エスパー",
+  "quiz": "クイズ",
+  "reset": "リセット",
   "resetDialog": {
     "description": "本当にリセットしますか？",
     "title": "リセットしますか？"
   },
-  "reset": "リセット",
-  "quiz": "クイズ",
   "resetWarning": "クイズとタイマーがリセットされます",
   "reveal": "表示",
+  "rock": "いわ",
   "shadowsDialog": {
     "description": "リセットしない限り元に戻せません",
     "title": "シャドウを表示しますか？"
   },
-  "poison": "どく",
-  "pokemongo": "Pokémon GO",
-  "psychic": "エスパー",
-  "rock": "いわ",
   "sinnoh": "シンオウ",
   "special": "スペシャル",
   "specialQuiz": "スペシャルクイズ",

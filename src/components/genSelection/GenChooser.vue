@@ -4,6 +4,9 @@ import CyclingType from '@/components/genSelection/CyclingType.vue';
 import { gens } from '@/data/gens';
 import type { Gen } from '@/types.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
 </script>
@@ -18,7 +21,7 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
           class="cell rad-bl-tr"
           @click="setFullQuiz"
         >
-          Full quiz
+          {{ t('fullQuiz') }}
         </div>
       </div>
       <div></div>
