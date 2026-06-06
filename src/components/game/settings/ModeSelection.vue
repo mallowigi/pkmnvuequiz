@@ -10,12 +10,14 @@ import { useState } from '@/stores/useState.js';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { Mode } from '@/types.js';
 import { scrollToTop } from '@/utils/utils.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, setMode } = useState();
 const { flowState } = useGameFlow();
 const { setDialog } = useDialogs();
 const { resetPokemonState } = usePokemons();
 const { resetTimer } = useTimer();
+const { t } = useI18n();
 
 const applyMode = (mode: Mode) => {
   if (state.mode === mode) return;
@@ -43,13 +45,13 @@ const isDisabled = computed(
 
 const disabledTooltip = computed(() => {
   if (state.withTypeShuffle) {
-    return 'Mode cannot be changed when Type Shuffle is enabled or in Types game mode';
+    return t('modeCannotChangeWithTypeShuffleTooltip');
   }
   if (state.gameMode === 'special') {
-    return 'Mode cannot be changed in Special game mode';
+    return t('modeCannotChangeInSpecialModeTooltip');
   }
   if (state.gameMode === 'types') {
-    return 'Mode cannot be changed in Types game mode';
+    return t('modeCannotChangeInTypesModeTooltip');
   }
   return null;
 });
@@ -70,18 +72,18 @@ const disabledTooltip = computed(() => {
       @click:center="applyMode('normal')"
       @click:right="applyMode('order')"
     >
-      <template #prefix> Mode: </template>
+      <template #prefix> {{ t('mode') }}: </template>
 
       <template #left>
-        <span v-tooltip="'Chaos Mode: Find Pokemon in any order, without predefined placements'">Chaos</span>
+        <span v-tooltip="t('chaosModeTooltip')">{{ t('chaos') }}</span>
       </template>
 
       <template #center>
-        <span v-tooltip="'Regular Mode: Find Pokemon in any order with predefined placements'">Regular</span>
+        <span v-tooltip="t('regularModeTooltip')">{{ t('regular') }}</span>
       </template>
 
       <template #right>
-        <span v-tooltip="'Dex Order Mode: Find Pokemon in Pokedex order'">Dex Order</span>
+        <span v-tooltip="t('dexOrderModeTooltip')">{{ t('dexOrder') }}</span>
       </template>
     </SegmentButton>
   </RoundedBox>

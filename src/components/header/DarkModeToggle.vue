@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, toggleDarkMode } = useState();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -11,11 +13,12 @@ const { state, toggleDarkMode } = useState();
     class="cell moon"
     v-if="!state.isDark"
     @click="toggleDarkMode"
+    v-tooltip:bottom="t('darkMode')"
   >
     <img
       src="@/assets/moon.svg"
       class="icon"
-      alt="Dark mode"
+      :alt="t('darkMode')"
     />
   </RoundedButton>
 
@@ -24,11 +27,12 @@ const { state, toggleDarkMode } = useState();
     class="cell sun"
     v-else
     @click="toggleDarkMode"
+    v-tooltip:bottom="t('lightMode')"
   >
     <img
       src="@/assets/sun.svg"
       class="icon"
-      alt="Light mode"
+      :alt="t('lightMode')"
     />
   </RoundedButton>
 </template>

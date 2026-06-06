@@ -1,35 +1,50 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { languages } from '@/data/languages.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
-import type { Language } from '@/types.ts';
+import type { LanguageInfo } from '@/types.ts';
+import { useMessages } from '@/stores/useMessages.ts';
+import { useTranslations } from '@/composables/useTranslations.ts';
 
 const { languagesState, toggleLanguage } = useLanguages();
+const { t } = useI18n();
+const { showUserMessage } = useMessages();
+const { getLanguageTranslation } = useTranslations();
 
 const sortedLanguages = computed(() => {
   return Object.values(languages).sort((a, b) => a.index - b.index);
 });
 
-const hasLanguage = (id: Language) => {
-  return languagesState.languages.has(id);
+const hasLanguage = (language: LanguageInfo) => {
+  return languagesState.languages.has(language.id);
+};
+
+const setLanguage = (language: LanguageInfo, value: boolean) => {
+  if (hasLanguage(language) === value) return;
+
+  toggleLanguage(language.id);
+  showUserMessage(
+    t('languageSet', { lang: getLanguageTranslation(language.id), status: value ? t('enabled') : t('disabled') }),
+  );
 };
 </script>
 
 <template>
   <RoundedBox
-    v-tooltip="'Guess Pokemon in other languages'"
+    v-tooltip="t('languagesTooltip')"
     v-game-ended
   >
     <div class="selection-content">
       <div
         v-for="language in sortedLanguages"
         :key="language.id"
-        v-tooltip="language.name"
+        v-tooltip="getLanguageTranslation(language.id)"
         class="toggle transition-element"
-        @click="toggleLanguage(language.id)"
-        :class="{ active: hasLanguage(language.id) }"
+        @click="setLanguage(language, !hasLanguage(language))"
+        :class="{ active: hasLanguage(language) }"
       >
         {{ language.symbol }}
       </div>

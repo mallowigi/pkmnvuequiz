@@ -1,6 +1,9 @@
 {
   "alola": "Alola",
   "areazero": "Area Zero (Paldea)",
+  "autoPause": "Auto Pause:",
+  "autoPauseSet": "Auto Pause {status}",
+  "autoPauseTooltip": "Toggle Auto Pause On/Off",
   "bug": "Bug",
   "cancel": "Cancel",
   "changeNameDialog": {
@@ -13,6 +16,7 @@
     "title": "Change timer?"
   },
   "chaos": "Chaos",
+  "chaosModeTooltip": "Chaos Mode: Find Pokemon in any order, without predefined placements",
   "close": "Close",
   "closestSpelling": "Closest spelling:",
   "cn": "Chinese (Simplified)",
@@ -20,13 +24,21 @@
   "credits": {
     "title": "Artist and quality control credits for custom sprites:"
   },
+  "cycleSprites": "Cycle sprites:",
+  "cycleSpritesSet": "Cycle Sprites {status}",
+  "cycleSpritesTooltip": "Toggle Cycle Sprites On/Off",
   "dark": "Dark",
+  "darkMode": "Dark Mode",
   "de": "German",
+  "dexOrder": "Dex Order",
+  "dexOrderModeTooltip": "Dex Order Mode: Find Pokemon in Pokedex order",
+  "disabled": "disabled",
   "download": "Download",
   "dragon": "Dragon",
   "electric": "Electric",
   "en": "English",
   "enable": "Enable",
+  "enabled": "enabled",
   "es": "Spanish",
   "exit": "Exit",
   "fairy": "Fairy",
@@ -60,6 +72,7 @@
   "hoennmega": "Mega Evolution (Hoenn)",
   "hyperspace": "Mega Evolution (Hyperspace)",
   "ice": "Ice",
+  "inviteLink": "Invite Link",
   "it": "Italian",
   "ja": "Japanese",
   "johto": "Johto",
@@ -67,6 +80,8 @@
   "kalosmega": "Mega Evolution (Kalos)",
   "kanto": "Kanto",
   "ko": "Korean",
+  "languageSet": "{lang} language {status}",
+  "languagesTooltip": "Guess Pokemon in other languages",
   "leaderboards": {
     "gameMode": "Game Mode",
     "genType": "Gen/Type",
@@ -80,15 +95,21 @@
     "title": "Top 3 {mode} Guessers"
   },
   "legendary": "Legendary",
+  "lightMode": "Light Mode",
   "loadingQuiz": "Loading Quiz",
   "lumiose": "Mega Evolution (Lumiose)",
   "missedNames": "Missed names:",
+  "mode": "Mode",
+  "modeCannotChangeInSpecialModeTooltip": "Mode cannot be changed in Special game mode",
+  "modeCannotChangeInTypesModeTooltip": "Mode cannot be changed in Types game mode",
+  "modeCannotChangeWithTypeShuffleTooltip": "Mode cannot be changed when Type Shuffle is enabled or in Types game mode",
   "modeDialog": {
     "chaosCaption": "Enable guessing without predetermined placements",
     "description": "Quiz and timer will reset",
     "normalCaption": "Switch to regular quiz with Region Layout",
     "orderCaption": "Enforce guessing in Pokédex order"
   },
+  "multiplayerInvite": "Multiplayer Invite",
   "mythical": "Mythical",
   "nameAll": {
     "full": "Name all Pokémon!",
@@ -99,6 +120,8 @@
   "nameAllRegionPokemon": "Name all Pokémon!",
   "newGame": "New Game",
   "normal": "Normal",
+  "off": "Off",
+  "on": "On",
   "order": "Order",
   "paldea": "Paldea",
   "paradox": "Paradox",
@@ -109,6 +132,8 @@
   "pt": "Portuguese",
   "quiz": "Quiz",
   "regionQuiz": "{region} Quiz",
+  "regular": "Regular",
+  "regularModeTooltip": "Regular Mode: Find Pokemon in any order with predefined placements",
   "reset": "Reset",
   "resetDialog": {
     "description": "Are you sure you want to reset?",
@@ -144,5 +169,6 @@
   "variousArtists": "various artists",
   "water": "Water",
   "welcome": "Welcome to the Pokémon Quiz!",
+
   "zh": "Chinese (Traditional)"
 }

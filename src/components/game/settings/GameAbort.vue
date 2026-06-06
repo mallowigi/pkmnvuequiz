@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useI18n } from 'vue-i18n';
 
 const { setDialog } = useDialogs();
-const { flowState } = useGameFlow();
+const { t } = useI18n();
 
 const giveUp = () => {
   setDialog('giveup');
@@ -22,14 +22,14 @@ const resetGame = () => {
       @click="giveUp"
       v-game-ended
     >
-      Give Up
+      {{ t('giveUp') }}
     </RoundedButton>
 
     <RoundedButton
       class="rad-br-tl danger-btn"
       @click="resetGame"
     >
-      Reset
+      {{ t('reset') }}
     </RoundedButton>
   </div>
 </template>

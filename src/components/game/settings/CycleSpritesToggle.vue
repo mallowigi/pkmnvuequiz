@@ -3,21 +3,23 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, setCycleSprites } = useState();
 const { showUserMessage } = useMessages();
+const { t } = useI18n();
 
 const applyCycleSprites = (value: boolean) => {
   if (state.withCycleSprites === value) return;
 
   setCycleSprites(value);
-  showUserMessage(`Cycle Sprites ${value ? 'enabled' : 'disabled'}`);
+  showUserMessage(t('cycleSpritesSet', { status: value ? t('enabled') : t('disabled') }));
 };
 </script>
 
 <template>
   <RoundedBox
-    v-tooltip="'Toggle Cycle Sprites On/Off'"
+    v-tooltip="t('cycleSpritesTooltip')"
     v-game-ended
   >
     <SegmentButton
@@ -31,10 +33,10 @@ const applyCycleSprites = (value: boolean) => {
       @click:left="applyCycleSprites(true)"
       @click:right="applyCycleSprites(false)"
     >
-      <template #prefix> Cycle sprites: </template>
+      <template #prefix> {{ t('cycleSprites') }} </template>
 
-      <template #left> On </template>
-      <template #right> Off </template>
+      <template #left> {{ t('on') }} </template>
+      <template #right> {{ t('off') }} </template>
     </SegmentButton>
   </RoundedBox>
 </template>

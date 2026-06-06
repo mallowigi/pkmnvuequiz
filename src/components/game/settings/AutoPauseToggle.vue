@@ -3,22 +3,24 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
 
 const { state, setAutoPause } = useState();
 const { showUserMessage } = useMessages();
+const { t } = useI18n();
 
 const applyAutoPause = (value: boolean) => {
   if (state.autoPause === value) return;
 
   setAutoPause(value);
-  showUserMessage(`Auto Pause ${value ? 'enabled' : 'disabled'}`);
+  showUserMessage(t('autoPauseSet', { status: value ? t('enabled') : t('disabled') }));
 };
 </script>
 
 <template>
   <RoundedBox
     v-game-ended
-    v-tooltip="'Toggle Auto Pause On/Off'"
+    v-tooltip="t('autoPauseTooltip')"
   >
     <SegmentButton
       :active="{
@@ -31,10 +33,10 @@ const applyAutoPause = (value: boolean) => {
       @click:left="applyAutoPause(true)"
       @click:right="applyAutoPause(false)"
     >
-      <template #prefix> Auto Pause: </template>
+      <template #prefix> {{ t('autoPause') }} </template>
 
-      <template #left> On </template>
-      <template #right> Off </template>
+      <template #left> {{ t('on') }} </template>
+      <template #right> {{ t('off') }} </template>
     </SegmentButton>
   </RoundedBox>
 </template>
