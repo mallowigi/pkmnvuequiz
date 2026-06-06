@@ -15,11 +15,15 @@
   "chaos": "Chaos",
   "close": "Schließen",
   "closestSpelling": "Nächste Schreibweise:",
+  "cn": "Chinesisch (Vereinfacht)",
   "continue": "Fortfahren",
   "dark": "Unlicht",
+  "de": "Deutsch",
   "dragon": "Drache",
   "electric": "Elektro",
+  "en": "Englisch",
   "enable": "Aktivieren",
+  "es": "Spanisch",
   "fairy": "Fee",
   "fighting": "Kampf",
   "fire": "Feuer",
@@ -31,6 +35,7 @@
     "resources": "Ressource für Daten: {pokeapi}. Ressourcen für Sprites: {sprites}.",
     "sprites": "Benutzerdefinierte und modifizierte Sprites erstellt von {artists} ≡ als Teil des Projekts {project}."
   },
+  "fr": "Französisch",
   "full": "Vollständiges Quiz",
   "fullQuiz": "Vollständiges Quiz",
   "galar": "Galar",
@@ -50,10 +55,13 @@
   "hoennmega": "Mega-Entwicklung (Hoenn)",
   "hyperspace": "Mega-Entwicklung (Hyperraum)",
   "ice": "Eis",
+  "it": "Italienisch",
+  "ja": "Japanisch",
   "johto": "Johto",
   "kalos": "Kalos",
   "kalosmega": "Mega-Entwicklung (Kalos)",
   "kanto": "Kanto",
+  "ko": "Koreanisch",
   "leaderboards": {
     "gameMode": "Spielmodus",
     "genType": "Gen/Typ",
@@ -92,7 +100,9 @@
   "poison": "Gift",
   "pokemongo": "Pokémon GO",
   "psychic": "Psycho",
+  "pt": "Portugiesisch",
   "quiz": "Quiz",
+  "regionQuiz": "{region}-Quiz",
   "reset": "Zurücksetzen",
   "resetDialog": {
     "description": "Bist du sicher, dass du zurücksetzen möchtest?",
@@ -102,6 +112,7 @@
   "reveal": "Enthüllen",
   "revealHint": "zum Anzeigen klicken",
   "rock": "Gestein",
+  "ru": "Russisch",
   "shadowsDialog": {
     "description": "Kann ohne Zurücksetzen nicht rückgängig gemacht werden",
     "title": "Schatten enthüllen?"
@@ -117,10 +128,12 @@
     "title": "Quiz wechseln?"
   },
   "topGuessers": "Top {n}-Rater",
+  "typeQuiz": "{type}-Quiz",
   "types": "Typen",
   "ultrabeast": "Ultrabestie",
   "unova": "Einall",
   "variousArtists": "verschiedene Künstler",
   "water": "Wasser",
-  "welcome": "Willkommen zum Pokémon-Quiz!"
+  "welcome": "Willkommen zum Pokémon-Quiz!",
+  "zh": "Chinesisch (Traditionell)"
 }

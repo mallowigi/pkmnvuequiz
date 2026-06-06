@@ -15,11 +15,15 @@
   "chaos": "カオス",
   "close": "閉じる",
   "closestSpelling": "最も近いスペル:",
+  "cn": "中国語（簡体字）",
   "continue": "続行",
   "dark": "あく",
+  "de": "ドイツ語",
   "dragon": "ドラゴン",
   "electric": "でんき",
+  "en": "英語",
   "enable": "有効にする",
+  "es": "スペイン語",
   "fairy": "フェアリー",
   "fighting": "かくとう",
   "fire": "ほのお",
@@ -31,6 +35,7 @@
     "resources": "データのリソース: {pokeapi}。スプライトのリソース: {sprites}。",
     "sprites": "{artists} ≡ によるカスタムおよび変更されたスプライトは、{project} プロジェクトの一部として作成されています。"
   },
+  "fr": "フランス語",
   "full": "フルクイズ",
   "fullQuiz": "フルクイズ",
   "galar": "ガラル",
@@ -50,10 +55,13 @@
   "hoennmega": "メガシンカ（ホウエン）",
   "hyperspace": "メガシンカ（異次元）",
   "ice": "こおり",
+  "it": "イタリア語",
+  "ja": "日本語",
   "johto": "ジョウト",
   "kalos": "カロス",
   "kalosmega": "メガシンカ（カロス）",
   "kanto": "カントー",
+  "ko": "韓国語",
   "leaderboards": {
     "gameMode": "ゲームモード",
     "genType": "世代/タイプ",
@@ -92,7 +100,9 @@
   "poison": "どく",
   "pokemongo": "Pokémon GO",
   "psychic": "エスパー",
+  "pt": "ポルトガル語",
   "quiz": "クイズ",
+  "regionQuiz": "{region}クイズ",
   "reset": "リセット",
   "resetDialog": {
     "description": "本当にリセットしますか？",
@@ -102,6 +112,7 @@
   "reveal": "表示",
   "revealHint": "クリックして表示",
   "rock": "いわ",
+  "ru": "ロシア語",
   "shadowsDialog": {
     "description": "リセットしない限り元に戻せません",
     "title": "シャドウを表示しますか？"
@@ -117,10 +128,12 @@
     "title": "クイズを切り替えますか？"
   },
   "topGuessers": "トップ {n} 正解者",
+  "typeQuiz": "{type}クイズ",
   "types": "タイプ",
   "ultrabeast": "ウルトラビースト",
   "unova": "イッシュ",
   "variousArtists": "様々なアーティスト",
   "water": "みず",
-  "welcome": "ポケモンクイズへようこそ！"
+  "welcome": "ポケモンクイズへようこそ！",
+  "zh": "中国語（繁体字）"
 }

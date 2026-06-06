@@ -15,11 +15,15 @@
   "chaos": "Caos",
   "close": "Cerrar",
   "closestSpelling": "Deletreo más cercano:",
+  "cn": "Chino (Simplificado)",
   "continue": "Continuar",
   "dark": "Siniestro",
+  "de": "Alemán",
   "dragon": "Dragón",
   "electric": "Eléctrico",
+  "en": "Inglés",
   "enable": "Habilitar",
+  "es": "Español",
   "fairy": "Hada",
   "fighting": "Lucha",
   "fire": "Fuego",
@@ -31,6 +35,7 @@
     "resources": "Recurso para datos: {pokeapi}. Recursos para sprites: {sprites}.",
     "sprites": "Sprites personalizados y modificados realizados por {artists} ≡ como parte del proyecto {project}."
   },
+  "fr": "Francés",
   "full": "Cuestionario Completo",
   "fullQuiz": "Cuestionario Completo",
   "galar": "Galar",
@@ -50,10 +55,13 @@
   "hoennmega": "Megaevolución (Hoenn)",
   "hyperspace": "Megaevolución (Hiperespacio)",
   "ice": "Hielo",
+  "it": "Italiano",
+  "ja": "Japonés",
   "johto": "Johto",
   "kalos": "Kalos",
   "kalosmega": "Megaevolución (Kalos)",
   "kanto": "Kanto",
+  "ko": "Coreano",
   "leaderboards": {
     "gameMode": "Modo de juego",
     "genType": "Gen/Tipo",
@@ -92,7 +100,9 @@
   "poison": "Veneno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psíquico",
+  "pt": "Portugués",
   "quiz": "Cuestionario",
+  "regionQuiz": "Quiz de {region}",
   "reset": "Reiniciar",
   "resetDialog": {
     "description": "¿Estás seguro de que quieres reiniciar?",
@@ -102,6 +112,7 @@
   "reveal": "Revelar",
   "revealHint": "haz clic para revelar",
   "rock": "Roca",
+  "ru": "Ruso",
   "shadowsDialog": {
     "description": "No se puede deshacer sin reiniciar",
     "title": "¿Revelar sombras?"
@@ -117,10 +128,12 @@
     "title": "¿Cambiar cuestionario?"
   },
   "topGuessers": "Top {n} Adivinadores",
+  "typeQuiz": "Quiz de {type}",
   "types": "Tipos",
   "ultrabeast": "Ultraente",
   "unova": "Teselia",
   "variousArtists": "varios artistas",
   "water": "Agua",
-  "welcome": "¡Bienvenido al Quiz de Pokémon!"
+  "welcome": "¡Bienvenido al Quiz de Pokémon!",
+  "zh": "Chino (Tradicional)"
 }

@@ -15,11 +15,15 @@
   "chaos": "Chaos",
   "close": "Close",
   "closestSpelling": "Closest spelling:",
+  "cn": "Chinese (Simplified)",
   "continue": "Continue",
   "dark": "Dark",
+  "de": "German",
   "dragon": "Dragon",
   "electric": "Electric",
+  "en": "English",
   "enable": "Enable",
+  "es": "Spanish",
   "fairy": "Fairy",
   "fighting": "Fighting",
   "fire": "Fire",
@@ -31,6 +35,7 @@
     "resources": "Resource for data: {pokeapi}. Resources for sprites: {sprites}.",
     "sprites": "Custom & modified sprites made by {artists} ≡ as part of the {project} project."
   },
+  "fr": "French",
   "full": "Full Quiz",
   "fullQuiz": "Full Quiz",
   "galar": "Galar",
@@ -50,10 +55,13 @@
   "hoennmega": "Mega Evolution (Hoenn)",
   "hyperspace": "Mega Evolution (Hyperspace)",
   "ice": "Ice",
+  "it": "Italian",
+  "ja": "Japanese",
   "johto": "Johto",
   "kalos": "Kalos",
   "kalosmega": "Mega Evolution (Kalos)",
   "kanto": "Kanto",
+  "ko": "Korean",
   "leaderboards": {
     "gameMode": "Game Mode",
     "genType": "Gen/Type",
@@ -92,7 +100,9 @@
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psychic",
+  "pt": "Portuguese",
   "quiz": "Quiz",
+  "regionQuiz": "{region} Quiz",
   "reset": "Reset",
   "resetDialog": {
     "description": "Are you sure you want to reset?",
@@ -102,6 +112,7 @@
   "reveal": "Reveal",
   "revealHint": "click to reveal",
   "rock": "Rock",
+  "ru": "Russian",
   "shadowsDialog": {
     "description": "Cannot be undone without reset",
     "title": "Reveal Shadows?"
@@ -117,10 +128,12 @@
     "title": "Switch Quiz?"
   },
   "topGuessers": "Top {n} Guessers",
+  "typeQuiz": "{type} Quiz",
   "types": "Types",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",
   "variousArtists": "various artists",
   "water": "Water",
-  "welcome": "Welcome to the Pokémon Quiz!"
+  "welcome": "Welcome to the Pokémon Quiz!",
+  "zh": "Chinese (Traditional)"
 }

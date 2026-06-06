@@ -15,11 +15,15 @@
   "chaos": "Caos",
   "close": "Fechar",
   "closestSpelling": "Ortografia mais próxima:",
+  "cn": "Chinês (Simplificado)",
   "continue": "Continuar",
   "dark": "Noturno",
+  "de": "Alemão",
   "dragon": "Dragão",
   "electric": "Elétrico",
+  "en": "Inglês",
   "enable": "Habilitar",
+  "es": "Espanhol",
   "fairy": "Fada",
   "fighting": "Lutador",
   "fire": "Fogo",
@@ -31,6 +35,7 @@
     "resources": "Recurso para dados: {pokeapi}. Recursos para sprites: {sprites}.",
     "sprites": "Sprites personalizados e modificados feitos por {artists} ≡ como parte do projeto {project}."
   },
+  "fr": "Francês",
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
@@ -50,10 +55,13 @@
   "hoennmega": "Mega Evolução (Hoenn)",
   "hyperspace": "Mega Evolução (Hiperespaço)",
   "ice": "Gelo",
+  "it": "Italiano",
+  "ja": "Japonês",
   "johto": "Johto",
   "kalos": "Kalos",
   "kalosmega": "Mega Evolução (Kalos)",
   "kanto": "Kanto",
+  "ko": "Coreano",
   "leaderboards": {
     "gameMode": "Modo de jogo",
     "genType": "Ger/Tipo",
@@ -92,7 +100,9 @@
   "poison": "Veneno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psíquico",
+  "pt": "Português",
   "quiz": "Quiz",
+  "regionQuiz": "Quiz de {region}",
   "reset": "Reiniciar",
   "resetDialog": {
     "description": "Você tem certeza que quer reiniciar?",
@@ -102,6 +112,7 @@
   "reveal": "Revelar",
   "revealHint": "clique para revelar",
   "rock": "Pedra",
+  "ru": "Russo",
   "shadowsDialog": {
     "description": "Não pode ser desfeito sem reiniciar",
     "title": "Revelar sombras?"
@@ -117,10 +128,12 @@
     "title": "Trocar quiz?"
   },
   "topGuessers": "Top {n} Adivinhos",
+  "typeQuiz": "Quiz de {type}",
   "types": "Tipos",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",
   "variousArtists": "vários artistas",
   "water": "Água",
-  "welcome": "Bem-vindo ao Quiz Pokémon!"
+  "welcome": "Bem-vindo ao Quiz Pokémon!",
+  "zh": "Chinês (Tradicional)"
 }

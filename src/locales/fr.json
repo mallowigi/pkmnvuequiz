@@ -15,11 +15,15 @@
   "chaos": "Chaos",
   "close": "Fermer",
   "closestSpelling": "Orthographe la plus proche :",
+  "cn": "Chinois (Simplifié)",
   "continue": "Continuer",
   "dark": "Ténèbres",
+  "de": "Allemand",
   "dragon": "Dragón",
   "electric": "Électrique",
+  "en": "Anglais",
   "enable": "Activer",
+  "es": "Espagnol",
   "fairy": "Fée",
   "fighting": "Combat",
   "fire": "Feu",
@@ -31,6 +35,7 @@
     "resources": "Ressource pour les données : {pokeapi}. Ressources pour les sprites : {sprites}.",
     "sprites": "Sprites personnalisés et modifiés réalisés par {artists} ≡ dans le cadre du projet {project}."
   },
+  "fr": "Français",
   "full": "Quiz Complet",
   "fullQuiz": "Quiz Complet",
   "galar": "Galar",
@@ -50,10 +55,13 @@
   "hoennmega": "Méga-Évolution (Hoenn)",
   "hyperspace": "Méga-Évolution (Hyperespace)",
   "ice": "Glace",
+  "it": "Italien",
+  "ja": "Japonais",
   "johto": "Johto",
   "kalos": "Kalos",
   "kalosmega": "Méga-Évolution (Kalos)",
   "kanto": "Kanto",
+  "ko": "Coréen",
   "leaderboards": {
     "gameMode": "Mode de jeu",
     "genType": "Gén/Type",
@@ -92,7 +100,9 @@
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psy",
+  "pt": "Portugais",
   "quiz": "Quiz",
+  "regionQuiz": "Quiz {region}",
   "reset": "Réinitialiser",
   "resetDialog": {
     "description": "Êtes-vous sûr de vouloir réinitialiser ?",
@@ -102,6 +112,7 @@
   "reveal": "Révéler",
   "revealHint": "cliquez pour révéler",
   "rock": "Roche",
+  "ru": "Russe",
   "shadowsDialog": {
     "description": "Ne peut pas être annulé sans réinitialisation",
     "title": "Révéler les ombres ?"
@@ -117,10 +128,12 @@
     "title": "Changer de quiz ?"
   },
   "topGuessers": "Top {n} Devineurs",
+  "typeQuiz": "Quiz {type}",
   "types": "Types",
   "ultrabeast": "Ultra-Chimère",
   "unova": "Unys",
   "variousArtists": "divers artistes",
   "water": "Eau",
-  "welcome": "Bienvenue au Quiz Pokémon!"
+  "welcome": "Bienvenue au Quiz Pokémon!",
+  "zh": "Chinois (Traditionnel)"
 }

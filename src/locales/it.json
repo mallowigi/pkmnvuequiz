@@ -15,11 +15,15 @@
   "chaos": "Caos",
   "close": "Chiudi",
   "closestSpelling": "Ortografia più vicina:",
+  "cn": "Cinese (Semplificato)",
   "continue": "Continua",
   "dark": "Buio",
+  "de": "Tedesco",
   "dragon": "Drago",
   "electric": "Elettro",
+  "en": "Inglese",
   "enable": "Abilita",
+  "es": "Spagnolo",
   "fairy": "Fata",
   "fighting": "Lotta",
   "fire": "Fuoco",
@@ -31,6 +35,7 @@
     "resources": "Risorsa per i dati: {pokeapi}. Risorse per gli sprite: {sprites}.",
     "sprites": "Sprite personalizzati e modificati realizzati da {artists} ≡ come parte del progetto {project}."
   },
+  "fr": "Francese",
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
@@ -50,10 +55,13 @@
   "hoennmega": "Megaevoluzione (Hoenn)",
   "hyperspace": "Megaevoluzione (Iperspazio)",
   "ice": "Ghiaccio",
+  "it": "Italiano",
+  "ja": "Giapponese",
   "johto": "Johto",
   "kalos": "Kalos",
   "kalosmega": "Megaevoluzione (Kalos)",
   "kanto": "Kanto",
+  "ko": "Coreano",
   "leaderboards": {
     "gameMode": "Modalità di gioco",
     "genType": "Gen/Tipo",
@@ -92,7 +100,9 @@
   "poison": "Veleno",
   "pokemongo": "Pokémon GO",
   "psychic": "Psico",
+  "pt": "Portoghese",
   "quiz": "Quiz",
+  "regionQuiz": "Quiz {region}",
   "reset": "Reset",
   "resetDialog": {
     "description": "Sei sicuro di voler resettare?",
@@ -102,6 +112,7 @@
   "reveal": "Rivela",
   "revealHint": "clicca per rivelare",
   "rock": "Roccia",
+  "ru": "Russo",
   "shadowsDialog": {
     "description": "Non può essere annullato senza reset",
     "title": "Rivelare le ombre?"
@@ -117,10 +128,12 @@
     "title": "Cambiare quiz?"
   },
   "topGuessers": "Top {n} Indovini",
+  "typeQuiz": "Quiz {type}",
   "types": "Tipi",
   "ultrabeast": "Ultracreatura",
   "unova": "Unima",
   "variousArtists": "vari artisti",
   "water": "Acqua",
-  "welcome": "Benvenuto nel Quiz Pokémon!"
+  "welcome": "Benvenuto nel Quiz Pokémon!",
+  "zh": "Cinese (Tradizionale)"
 }
