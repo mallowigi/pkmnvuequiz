@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
-import { useI18n } from 'vue-i18n';
 
 const { dialogs, closeDialog } = useDialogs();
 const { t } = useI18n();
@@ -46,12 +47,4 @@ const cancel = () => {
   </Overlay>
 </template>
 
-<style scoped>
-.overlay {
-  z-index: 4;
-}
-
-.desc {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>

@@ -70,14 +70,6 @@ const editName = (value: string) => {
 </template>
 
 <style scoped>
-.overlay {
-  z-index: 4;
-}
-
-.desc {
-  margin-bottom: 10px;
-}
-
 .large-text {
   padding: 6px;
   margin: 1em;

@@ -34,6 +34,14 @@
   border-radius: 0;
 }
 
+.overlay {
+  z-index: 4;
+}
+
+.desc {
+  margin-bottom: 10px;
+}
+
 .pointer {
   cursor: pointer;
 }

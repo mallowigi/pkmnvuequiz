@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useDialogs } from '@/stores/useDialogs.ts';
 import { useState } from '@/stores/useState';
 import type { Mode } from '@/types.ts';
-import { useDialogs } from '@/stores/useDialogs.ts';
-import { useI18n } from 'vue-i18n';
 
 const { setMode } = useState();
 const { dialogs, closeDialog } = useDialogs();
@@ -57,12 +58,4 @@ const disableMode = () => {
   </Overlay>
 </template>
 
-<style scoped>
-.overlay {
-  z-index: 4;
-}
-
-.desc {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>

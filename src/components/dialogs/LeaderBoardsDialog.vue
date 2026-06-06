@@ -1,29 +1,36 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import Leaderboards from '@/components/genSelection/Leaderboards.vue';
+import { useTranslations } from '@/composables/useTranslations.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useState } from '@/stores/useState.ts';
 import { capitalize } from '@/utils/utils.ts';
 
-import { useI18n } from 'vue-i18n';
-
 const { closeDialog } = useDialogs();
 const { state } = useState();
 const { getCurrentType } = useCurrentType();
 const { getCurrentGen } = useCurrentGen();
+const { getGenTranslation, getTypeTranslation } = useTranslations();
 const { t } = useI18n();
 
 const currentGameMode = computed(() => {
   switch (state.gameMode) {
     case 'gen':
-      return `${capitalize(t((getCurrentGen()?.name ?? '').toLowerCase()))} ${t('quiz')}`;
+      const currentGen = getCurrentGen();
+      return t('regionQuiz', {
+        region: capitalize(getGenTranslation(currentGen?.id)),
+      });
     case 'types':
-      return `${capitalize(t((getCurrentType()?.name ?? '').toLowerCase()))} ${t('quiz')}`;
+      const currentType = getCurrentType();
+      return t('typeQuiz', {
+        type: capitalize(getTypeTranslation(currentType?.id)),
+      });
     case 'special':
       return t('specialQuiz');
     default:
@@ -56,12 +63,4 @@ const cancel = () => {
   </Overlay>
 </template>
 
-<style scoped>
-.overlay {
-  z-index: 4;
-}
-
-.desc {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>

@@ -52,12 +52,4 @@ const cancel = () => {
   </Overlay>
 </template>
 
-<style scoped>
-.overlay {
-  z-index: 4;
-}
-
-.desc {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>

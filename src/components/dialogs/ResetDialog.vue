@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useCurrentGen } from '@/stores/useCurrentGen';
@@ -6,7 +8,6 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useTimer } from '@/stores/useTimer';
-import { useI18n } from 'vue-i18n';
 
 const { resetFlowState, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
@@ -61,12 +62,4 @@ const cancel = () => {
   </Overlay>
 </template>
 
-<style scoped>
-.overlay {
-  z-index: 4;
-}
-
-.desc {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>
