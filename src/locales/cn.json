@@ -38,6 +38,18 @@
   "download": "下载",
   "dragon": "龙",
   "electric": "电",
+  "endOverlay": {
+    "appreciation": "我们感谢每一份支持。",
+    "challenge": "进一步挑战自己，尝试在没有阴影的情况下命名它们。",
+    "clickToClose": "点击任意位置关闭",
+    "projectInfo1": "本项目免费开发和维护。",
+    "projectInfo2": "我们希望保持它的生命力且无广告。",
+    "projectInfo3": "如果您喜欢玩并想支持它，可以通过 Ko-Fi 进行支持：",
+    "shadowsUsed": "使用了 {numShadows} 个阴影",
+    "summary": "你按图鉴顺序在 {elapsed} 秒内命名了 {numFound} 个{gen}宝可梦！",
+    "supporters": "支持者：",
+    "wellDone": "做得好！"
+  },
   "en": "英语",
   "enable": "启用",
   "enabled": "已启用",

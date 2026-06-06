@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
+import { useTranslations } from '@/composables/useTranslations';
 import { donors } from '@/data/donors';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
@@ -16,6 +18,8 @@ const { setCurrentGen, getCurrentGen } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState, setGameSelectionState } = useGameFlow();
 const { resetTimer, timerState } = useTimer();
+const { t } = useI18n();
+const { getGenTranslation } = useTranslations();
 
 const pokemonStore = usePokemons();
 const { numFound, numShadows } = storeToRefs(pokemonStore);
@@ -38,6 +42,12 @@ const elapsed = computed(() => {
   if (!start) return 0;
   return Math.floor((current - start) / 1000);
 });
+
+const genName = computed(() => {
+  const gen = getCurrentGen();
+  if (!gen) return '';
+  return getGenTranslation(gen.id);
+});
 </script>
 
 <template>
@@ -47,18 +57,23 @@ const elapsed = computed(() => {
   >
     <div class="sidepanel">
       <div class="section rad-bl-tr welldone">
-        <h1>Well done!</h1>
+        <h1>{{ t('endOverlay.wellDone') }}</h1>
 
-        <h2>You named {{ numFound }} {{ getCurrentGen()?.name }} Pokémon in {{ elapsed }} seconds in Pokédex order!</h2>
+        <h2>
+          {{ t('endOverlay.summary', { numFound, gen: genName, elapsed }) }}
+        </h2>
 
-        <p>Challenge yourself further, try naming them without shadows. <br />({{ numShadows }} shadows used)</p>
+        <p>
+          {{ t('endOverlay.challenge') }}<br />
+          <span class="small">({{ t('endOverlay.shadowsUsed', { numShadows }) }})</span>
+        </p>
       </div>
 
       <div class="section rad-bl-tr supporters">
         <p class="small">
-          Project developed/maintained for free.<br />
-          We want to keep it alive and ad-free.<br />
-          If you enjoy playing and want to support it, you can do so via Ko-Fi:
+          {{ t('endOverlay.projectInfo1') }}<br />
+          {{ t('endOverlay.projectInfo2') }}<br />
+          {{ t('endOverlay.projectInfo3') }}
         </p>
 
         <p>
@@ -74,7 +89,7 @@ const elapsed = computed(() => {
           </a>
         </p>
 
-        <h2>Supporters:</h2>
+        <h2>{{ t('endOverlay.supporters') }}</h2>
         <div class="scrollbox">
           <ol>
             <li
@@ -86,10 +101,10 @@ const elapsed = computed(() => {
           </ol>
         </div>
 
-        <p class="small">We appreciate every bit of support.</p>
+        <p class="small">{{ t('endOverlay.appreciation') }}</p>
       </div>
 
-      <p class="small">Click anywhere to close</p>
+      <p class="small">{{ t('endOverlay.clickToClose') }}</p>
     </div>
   </Overlay>
 </template>

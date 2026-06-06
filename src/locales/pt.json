@@ -38,6 +38,18 @@
   "download": "Baixar",
   "dragon": "Dragão",
   "electric": "Elétrico",
+  "endOverlay": {
+    "appreciation": "Agradecemos cada contribuição.",
+    "challenge": "Desafie-se ainda mais, tente nomeá-los sem sombras.",
+    "clickToClose": "Clique em qualquer lugar para fechar",
+    "projectInfo1": "Projeto desenvolvido e mantido gratuitamente.",
+    "projectInfo2": "Queremos mantê-lo vivo e sem anúncios.",
+    "projectInfo3": "Se você gosta de jogar e quer apoiar, pode fazê-lo via Ko-Fi:",
+    "shadowsUsed": "{numShadows} sombras usadas",
+    "summary": "Você nomeou {numFound} Pokémon {gen} em {elapsed} segundos na ordem da Pokédex!",
+    "supporters": "Apoiadores:",
+    "wellDone": "Muito bem!"
+  },
   "en": "Inglês",
   "enable": "Habilitar",
   "enabled": "ativado",

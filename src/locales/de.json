@@ -38,6 +38,18 @@
   "download": "Herunterladen",
   "dragon": "Drache",
   "electric": "Elektro",
+  "endOverlay": {
+    "appreciation": "Wir freuen uns über jede Unterstützung.",
+    "challenge": "Fordere dich weiter heraus, versuche sie ohne Schatten zu benennen.",
+    "clickToClose": "Zum Schließen irgendwo klicken",
+    "projectInfo1": "Dieses Projekt wird kostenlos entwickelt und gepflegt.",
+    "projectInfo2": "Wir möchten es werbefrei und am Leben erhalten.",
+    "projectInfo3": "Wenn dir das Spiel gefällt und du es unterstützen möchtest, kannst du dies über Ko-Fi tun:",
+    "shadowsUsed": "{numShadows} Schatten verwendet",
+    "summary": "Du hast {numFound} {gen} Pokémon in {elapsed} Sekunden in Pokédex-Reihenfolge benannt!",
+    "supporters": "Unterstützer:",
+    "wellDone": "Gut gemacht!"
+  },
   "en": "Englisch",
   "enable": "Aktivieren",
   "enabled": "aktiviert",

@@ -38,6 +38,18 @@
   "download": "ダウンロード",
   "dragon": "ドラゴン",
   "electric": "でんき",
+  "endOverlay": {
+    "appreciation": "皆様のサポートに感謝いたします。",
+    "challenge": "さらに挑戦して、シルエットなしで名前を当ててみましょう。",
+    "clickToClose": "どこでもクリックして閉じる",
+    "projectInfo1": "このプロジェクトは無料で開発・維持されています。",
+    "projectInfo2": "広告なしで存続させたいと考えています。",
+    "projectInfo3": "楽しんでいただけて、サポートしたい場合は Ko-Fi からお願いします：",
+    "shadowsUsed": "シルエット使用数: {numShadows}",
+    "summary": "図鑑順に {elapsed} 秒で {numFound} 匹の{gen}ポケモンを答えました！",
+    "supporters": "サポーター:",
+    "wellDone": "よくできました！"
+  },
   "en": "英語",
   "enable": "有効にする",
   "enabled": "有効",

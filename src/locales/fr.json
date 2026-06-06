@@ -38,6 +38,18 @@
   "download": "Télécharger",
   "dragon": "Dragón",
   "electric": "Électrique",
+  "endOverlay": {
+    "appreciation": "Nous apprécions chaque petit geste de soutien.",
+    "challenge": "Relevez un nouveau défi, essayez de les nommer sans les ombres.",
+    "clickToClose": "Cliquez n'importe où pour fermer",
+    "projectInfo1": "Projet développé et maintenu gratuitement.",
+    "projectInfo2": "Nous voulons le garder vivant et sans publicité.",
+    "projectInfo3": "Si vous aimez jouer et que vous voulez nous soutenir, vous pouvez le faire via Ko-Fi :",
+    "shadowsUsed": "{numShadows} ombres utilisées",
+    "summary": "Vous avez nommé {numFound} Pokémon {gen} en {elapsed} secondes dans l'ordre du Pokédex !",
+    "supporters": "Contributeurs :",
+    "wellDone": "Bien joué !"
+  },
   "en": "Anglais",
   "enable": "Activer",
   "enabled": "activé",

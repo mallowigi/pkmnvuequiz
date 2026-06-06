@@ -38,6 +38,18 @@
   "download": "Download",
   "dragon": "Dragon",
   "electric": "Electric",
+  "endOverlay": {
+    "appreciation": "We appreciate every bit of support.",
+    "challenge": "Challenge yourself further, try naming them without shadows.",
+    "clickToClose": "Click anywhere to close",
+    "projectInfo1": "Project developed/maintained for free.",
+    "projectInfo2": "We want to keep it alive and ad-free.",
+    "projectInfo3": "If you enjoy playing and want to support it, you can do so via Ko-Fi:",
+    "shadowsUsed": "{numShadows} shadows used",
+    "summary": "You named {numFound} {gen} Pokémon in {elapsed} seconds in Pokédex order!",
+    "supporters": "Supporters:",
+    "wellDone": "Well done!"
+  },
   "en": "English",
   "enable": "Enable",
   "enabled": "enabled",

@@ -38,6 +38,18 @@
   "download": "다운로드",
   "dragon": "드래곤",
   "electric": "전기",
+  "endOverlay": {
+    "appreciation": "모든 지원에 감사드립니다.",
+    "challenge": "그림자 없이 맞히기에 도전해 보세요.",
+    "clickToClose": "닫으려면 아무 곳이나 클릭하세요",
+    "projectInfo1": "이 프로젝트는 무료로 개발 및 유지 관리됩니다.",
+    "projectInfo2": "광고 없이 프로젝트를 계속 유지하고 싶습니다.",
+    "projectInfo3": "게임을 즐기고 계시고 지원하고 싶으시다면 Ko-Fi를 통해 지원해 주세요:",
+    "shadowsUsed": "사용된 그림자: {numShadows}",
+    "summary": "포켓몬 도감 순서대로 {elapsed}초 만에 {numFound}마리의 {gen} 포켓몬 이름을 맞히셨습니다!",
+    "supporters": "후원자:",
+    "wellDone": "잘하셨습니다!"
+  },
   "en": "영어",
   "enable": "활성화",
   "enabled": "활성화됨",

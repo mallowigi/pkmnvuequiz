@@ -38,6 +38,18 @@
   "download": "下載",
   "dragon": "龙",
   "electric": "电",
+  "endOverlay": {
+    "appreciation": "我們感謝每一份支持。",
+    "challenge": "進一步挑戰自己，嘗試在沒有陰影的情況下命名它們。",
+    "clickToClose": "點擊任意位置關閉",
+    "projectInfo1": "本項目免費開發和維護。",
+    "projectInfo2": "我們希望保持它的生命力且無廣告。",
+    "projectInfo3": "如果您喜歡玩並想支持它，可以通過 Ko-Fi 進行支持：",
+    "shadowsUsed": "使用了 {numShadows} 個陰影",
+    "summary": "你按圖鑑順序在 {elapsed} 秒內命名了 {numFound} 個{gen}寶可夢！",
+    "supporters": "支持者：",
+    "wellDone": "做得好！"
+  },
   "en": "英語",
   "enable": "启用",
   "enabled": "已啟用",

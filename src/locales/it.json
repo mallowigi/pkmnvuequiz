@@ -38,6 +38,18 @@
   "download": "Scarica",
   "dragon": "Drago",
   "electric": "Elettro",
+  "endOverlay": {
+    "appreciation": "Apprezziamo ogni piccolo supporto.",
+    "challenge": "Sfida te stesso ancora di più, prova a nominarli senza ombre.",
+    "clickToClose": "Clicca ovunque per chiudere",
+    "projectInfo1": "Progetto sviluppato e mantenuto gratuitamente.",
+    "projectInfo2": "Vogliamo mantenerlo attivo e senza pubblicità.",
+    "projectInfo3": "Se ti diverti a giocare e vuoi sostenerlo, puoi farlo tramite Ko-Fi:",
+    "shadowsUsed": "{numShadows} ombre usate",
+    "summary": "Hai indovinato {numFound} Pokémon {gen} in {elapsed} secondi in ordine di Pokédex!",
+    "supporters": "Sostenitori:",
+    "wellDone": "Ben fatto!"
+  },
   "en": "Inglese",
   "enable": "Abilita",
   "enabled": "abilitato",
