@@ -14,6 +14,8 @@
   },
   "chaos": "Caos",
   "close": "Fechar",
+  "closestSpelling": "Ortografia mais próxima:",
+  "continue": "Continuar",
   "dark": "Noturno",
   "dragon": "Dragão",
   "electric": "Elétrico",
@@ -22,6 +24,13 @@
   "fighting": "Lutador",
   "fire": "Fogo",
   "flying": "Voador",
+  "footer": {
+    "license": "Este projeto é uma obra derivada não oficial baseada em Pokémon. Os sprites oficiais pertencem a © Nintendo/Creatures Inc./GAME FREAK Inc.",
+    "originalProject": "Projeto original encontrado em {location}. {donation}",
+    "projectBy": "Projeto por {charon}. Reescrito em Vue por {mallowigi}.",
+    "resources": "Recurso para dados: {pokeapi}. Recursos para sprites: {sprites}.",
+    "sprites": "Sprites personalizados e modificados feitos por {artists} ≡ como parte do projeto {project}."
+  },
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
@@ -35,6 +44,7 @@
   "gmax": "Gigantamax",
   "grass": "Grama",
   "ground": "Terra",
+  "hello": "Olá, {name}",
   "hisui": "Hisui",
   "hoenn": "Hoenn",
   "hoennmega": "Mega Evolução (Hoenn)",
@@ -57,7 +67,9 @@
     "title": "Top 3 adivinhadores de {mode}"
   },
   "legendary": "Legendary",
+  "loadingQuiz": "Carregando Quiz",
   "lumiose": "Mega Evolution (Cidade de Lumiose)",
+  "missedNames": "Nomes perdidos:",
   "modeDialog": {
     "chaosCaption": "Habilitar adivinhação sem posicionamentos predeterminados",
     "description": "O quiz e o temporizador serão redefinidos",
@@ -72,6 +84,7 @@
     "types": "Nomeie todos os Pokémon de tipo {name}!"
   },
   "nameAllRegionPokemon": "Nomeie todos os Pokémon!",
+  "newGame": "Novo Jogo",
   "normal": "Normal",
   "order": "Ordem",
   "paldea": "Paldea",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "O quiz e o temporizador serão redefinidos",
   "reveal": "Revelar",
+  "revealHint": "clique para revelar",
   "rock": "Pedra",
   "shadowsDialog": {
     "description": "Não pode ser desfeito sem reiniciar",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "Trocar quiz?"
   },
+  "topGuessers": "Top {n} Adivinhos",
   "types": "Tipos",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",
-  "water": "Água"
+  "variousArtists": "vários artistas",
+  "water": "Água",
+  "welcome": "Bem-vindo ao Quiz Pokémon!"
 }

@@ -14,6 +14,8 @@
   },
   "chaos": "Chaos",
   "close": "Schließen",
+  "closestSpelling": "Nächste Schreibweise:",
+  "continue": "Fortfahren",
   "dark": "Unlicht",
   "dragon": "Drache",
   "electric": "Elektro",
@@ -22,6 +24,13 @@
   "fighting": "Kampf",
   "fire": "Feuer",
   "flying": "Flug",
+  "footer": {
+    "license": "Dieses Projekt ist ein inoffizielles abgeleitetes Werk basierend auf Pokémon. Offizielle Sprites gehören © Nintendo/Creatures Inc./GAME FREAK Inc.",
+    "originalProject": "Originalprojekt gefunden auf {location}. {donation}",
+    "projectBy": "Projekt von {charon}. In Vue umgeschrieben von {mallowigi}.",
+    "resources": "Ressource für Daten: {pokeapi}. Ressourcen für Sprites: {sprites}.",
+    "sprites": "Benutzerdefinierte und modifizierte Sprites erstellt von {artists} ≡ als Teil des Projekts {project}."
+  },
   "full": "Vollständiges Quiz",
   "fullQuiz": "Vollständiges Quiz",
   "galar": "Galar",
@@ -35,6 +44,7 @@
   "gmax": "Gigantamax",
   "grass": "Pflanze",
   "ground": "Boden",
+  "hello": "Hallo, {name}",
   "hisui": "Hisui",
   "hoenn": "Hoenn",
   "hoennmega": "Mega-Entwicklung (Hoenn)",
@@ -57,7 +67,9 @@
     "title": "Top 3 {mode}-Rater"
   },
   "legendary": "Legendär",
+  "loadingQuiz": "Quiz wird geladen",
   "lumiose": "Mega-Entwicklung (Illumina City)",
+  "missedNames": "Fehlende Namen:",
   "modeDialog": {
     "chaosCaption": "Raten ohne vorgegebene Platzierungen aktivieren",
     "description": "Quiz und Timer werden zurückgesetzt",
@@ -72,6 +84,7 @@
     "types": "Nenne alle {name}-Pokémon!"
   },
   "nameAllRegionPokemon": "Nenne alle Pokémon!",
+  "newGame": "Neues Spiel",
   "normal": "Normal",
   "order": "Ordnung",
   "paldea": "Paldea",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "Quiz und Timer werden zurückgesetzt",
   "reveal": "Enthüllen",
+  "revealHint": "zum Anzeigen klicken",
   "rock": "Gestein",
   "shadowsDialog": {
     "description": "Kann ohne Zurücksetzen nicht rückgängig gemacht werden",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "Quiz wechseln?"
   },
+  "topGuessers": "Top {n}-Rater",
   "types": "Typen",
   "ultrabeast": "Ultrabestie",
   "unova": "Einall",
-  "water": "Wasser"
+  "variousArtists": "verschiedene Künstler",
+  "water": "Wasser",
+  "welcome": "Willkommen zum Pokémon-Quiz!"
 }

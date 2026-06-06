@@ -14,6 +14,8 @@
   },
   "chaos": "Chaos",
   "close": "Fermer",
+  "closestSpelling": "Orthographe la plus proche :",
+  "continue": "Continuer",
   "dark": "Ténèbres",
   "dragon": "Dragón",
   "electric": "Électrique",
@@ -22,6 +24,13 @@
   "fighting": "Combat",
   "fire": "Feu",
   "flying": "Vol",
+  "footer": {
+    "license": "Ce projet est une œuvre dérivée non officielle basée sur Pokémon. Les sprites officiels appartiennent à © Nintendo/Creatures Inc./GAME FREAK Inc.",
+    "originalProject": "Projet original trouvé à {location}. {donation}",
+    "projectBy": "Projet par {charon}. Réécrit en Vue par {mallowigi}.",
+    "resources": "Ressource pour les données : {pokeapi}. Ressources pour les sprites : {sprites}.",
+    "sprites": "Sprites personnalisés et modifiés réalisés par {artists} ≡ dans le cadre du projet {project}."
+  },
   "full": "Quiz Complet",
   "fullQuiz": "Quiz Complet",
   "galar": "Galar",
@@ -35,6 +44,7 @@
   "gmax": "Gigantamax",
   "grass": "Plante",
   "ground": "Sol",
+  "hello": "Bonjour, {name}",
   "hisui": "Hisui",
   "hoenn": "Hoenn",
   "hoennmega": "Méga-Évolution (Hoenn)",
@@ -57,7 +67,9 @@
     "title": "Top 3 des devins {mode}"
   },
   "legendary": "Légendaire",
+  "loadingQuiz": "Chargement du Quiz",
   "lumiose": "Méga-Évolution (Illumis)",
+  "missedNames": "Noms manqués:",
   "modeDialog": {
     "chaosCaption": "Activer la saisie sans placements prédéterminés",
     "description": "Le quiz et le minuteur seront réinitialisés",
@@ -72,6 +84,7 @@
     "types": "Nomme tous les Pokémon de type {name}!"
   },
   "nameAllRegionPokemon": "Nomme tous les Pokémon!",
+  "newGame": "Nouveau Jeu",
   "normal": "Normal",
   "order": "Ordre",
   "paldea": "Paldea",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "Le quiz et le minuteur seront réinitialisés",
   "reveal": "Révéler",
+  "revealHint": "cliquez pour révéler",
   "rock": "Roche",
   "shadowsDialog": {
     "description": "Ne peut pas être annulé sans réinitialisation",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "Changer de quiz ?"
   },
+  "topGuessers": "Top {n} Devineurs",
   "types": "Types",
   "ultrabeast": "Ultra-Chimère",
   "unova": "Unys",
-  "water": "Eau"
+  "variousArtists": "divers artistes",
+  "water": "Eau",
+  "welcome": "Bienvenue au Quiz Pokémon!"
 }

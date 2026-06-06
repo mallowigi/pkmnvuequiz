@@ -14,6 +14,8 @@
   },
   "chaos": "混亂",
   "close": "关闭",
+  "closestSpelling": "最接近的拼写:",
+  "continue": "继续",
   "dark": "恶",
   "dragon": "龙",
   "electric": "电",
@@ -22,6 +24,13 @@
   "fighting": "格斗",
   "fire": "火",
   "flying": "飞行",
+  "footer": {
+    "license": "本项目是基于宝可梦的非官方衍生作品。官方精灵属于 © Nintendo/Creatures Inc./GAME FREAK Inc.",
+    "originalProject": "在 {location} 找到的原始项目。{donation}",
+    "projectBy": "{charon} 的项目。由 {mallowigi} 用 Vue 重写。",
+    "resources": "数据资源: {pokeapi}。精灵资源: {sprites}。",
+    "sprites": "{artists} ≡ 制作的自定义和修改的精灵，作为 {project} 项目的一部分。"
+  },
   "full": "完整测验",
   "fullQuiz": "完整测验",
   "galar": "伽勒尔",
@@ -35,6 +44,7 @@
   "gmax": "极巨",
   "grass": "草",
   "ground": "地面",
+  "hello": "你好，{name}",
   "hisui": "洗翠",
   "hoenn": "丰缘",
   "hoennmega": "超級進化（豐緣）",
@@ -57,7 +67,9 @@
     "title": "{mode} 猜想者前 3 名"
   },
   "legendary": "传说",
+  "loadingQuiz": "加载测验中",
   "lumiose": "超級進化（密阿雷市）",
+  "missedNames": "错过的名字:",
   "modeDialog": {
     "chaosCaption": "启用无预定位置的猜测",
     "description": "测验和计时器将重置",
@@ -72,6 +84,7 @@
     "types": "说出所有{name}类型的宝可梦的名字！"
   },
   "nameAllRegionPokemon": "说出所有宝可梦的名字！",
+  "newGame": "新游戏",
   "normal": "一般",
   "order": "秩序",
   "paldea": "帕尔迪亚",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "测验和计时器将重置",
   "reveal": "揭晓",
+  "revealHint": "点击显示",
   "rock": "岩石",
   "shadowsDialog": {
     "description": "不重置无法撤销",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "切换测验？"
   },
+  "topGuessers": "前 {n} 名猜想者",
   "types": "属性",
   "ultrabeast": "究极异兽",
   "unova": "合众",
-  "water": "水"
+  "variousArtists": "多位艺术家",
+  "water": "水",
+  "welcome": "欢迎来到宝可梦问卷！"
 }

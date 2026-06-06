@@ -14,6 +14,8 @@
   },
   "chaos": "Caos",
   "close": "Cerrar",
+  "closestSpelling": "Deletreo más cercano:",
+  "continue": "Continuar",
   "dark": "Siniestro",
   "dragon": "Dragón",
   "electric": "Eléctrico",
@@ -22,6 +24,13 @@
   "fighting": "Lucha",
   "fire": "Fuego",
   "flying": "Volador",
+  "footer": {
+    "license": "Este proyecto es una obra derivada no oficial basada en Pokémon. Los sprites oficiales pertenecen a © Nintendo/Creatures Inc./GAME FREAK Inc.",
+    "originalProject": "Proyecto original encontrado en {location}. {donation}",
+    "projectBy": "Proyecto por {charon}. Reescrito en Vue por {mallowigi}.",
+    "resources": "Recurso para datos: {pokeapi}. Recursos para sprites: {sprites}.",
+    "sprites": "Sprites personalizados y modificados realizados por {artists} ≡ como parte del proyecto {project}."
+  },
   "full": "Cuestionario Completo",
   "fullQuiz": "Cuestionario Completo",
   "galar": "Galar",
@@ -35,6 +44,7 @@
   "gmax": "Gigantamax",
   "grass": "Planta",
   "ground": "Tierra",
+  "hello": "Hola, {name}",
   "hisui": "Hisui",
   "hoenn": "Hoenn",
   "hoennmega": "Megaevolución (Hoenn)",
@@ -57,7 +67,9 @@
     "title": "Top 3 adivinadores de {mode}"
   },
   "legendary": "Legendario",
+  "loadingQuiz": "Cargando Cuestionario",
   "lumiose": "Megaevolución (Ciudad Luminalia)",
+  "missedNames": "Nombres que faltaron:",
   "modeDialog": {
     "chaosCaption": "Habilitar adivinanzas sin ubicaciones predeterminadas",
     "description": "El cuestionario y el temporizador se reiniciarán",
@@ -72,6 +84,7 @@
     "types": "¡Nombra a todos los Pokémon de tipo {name}!"
   },
   "nameAllRegionPokemon": "¡Nombra a todos los Pokémon!",
+  "newGame": "Nuevo Juego",
   "normal": "Normal",
   "order": "Orden",
   "paldea": "Paldea",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "El cuestionario y el temporizador se reiniciarán",
   "reveal": "Revelar",
+  "revealHint": "haz clic para revelar",
   "rock": "Roca",
   "shadowsDialog": {
     "description": "No se puede deshacer sin reiniciar",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "¿Cambiar cuestionario?"
   },
+  "topGuessers": "Top {n} Adivinadores",
   "types": "Tipos",
   "ultrabeast": "Ultraente",
   "unova": "Teselia",
-  "water": "Agua"
+  "variousArtists": "varios artistas",
+  "water": "Agua",
+  "welcome": "¡Bienvenido al Quiz de Pokémon!"
 }

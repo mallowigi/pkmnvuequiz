@@ -14,6 +14,8 @@
   },
   "chaos": "カオス",
   "close": "閉じる",
+  "closestSpelling": "最も近いスペル:",
+  "continue": "続行",
   "dark": "あく",
   "dragon": "ドラゴン",
   "electric": "でんき",
@@ -22,6 +24,13 @@
   "fighting": "かくとう",
   "fire": "ほのお",
   "flying": "ひこう",
+  "footer": {
+    "license": "このプロジェクトはポケモンに基づいた非公式の派生作品です。公式スプライトは © Nintendo/Creatures Inc./GAME FREAK Inc. に属しています。",
+    "originalProject": "{location} で見つかったオリジナルプロジェクト。{donation}",
+    "projectBy": "{charon} によるプロジェクト。{mallowigi} による Vue での書き直し。",
+    "resources": "データのリソース: {pokeapi}。スプライトのリソース: {sprites}。",
+    "sprites": "{artists} ≡ によるカスタムおよび変更されたスプライトは、{project} プロジェクトの一部として作成されています。"
+  },
   "full": "フルクイズ",
   "fullQuiz": "フルクイズ",
   "galar": "ガラル",
@@ -35,6 +44,7 @@
   "gmax": "キョダイ",
   "grass": "くさ",
   "ground": "じめん",
+  "hello": "こんにちは、{name}",
   "hisui": "ヒスイ",
   "hoenn": "ホウエン",
   "hoennmega": "メガシンカ（ホウエン）",
@@ -57,7 +67,9 @@
     "title": "{mode}の正解者トップ3"
   },
   "legendary": "伝説",
+  "loadingQuiz": "クイズを読み込み中",
   "lumiose": "メガシンカ（ミアレシティ）",
+  "missedNames": "逃した名前:",
   "modeDialog": {
     "chaosCaption": "あらかじめ決められた配置なしで推測できるようにする",
     "description": "クイズとタイマーがリセットされます",
@@ -72,6 +84,7 @@
     "types": "{name}タイプのポケモンの名前をすべて言って！"
   },
   "nameAllRegionPokemon": "すべてのポケモンの名前を言って！",
+  "newGame": "新しいゲーム",
   "normal": "ノーマル",
   "order": "秩序",
   "paldea": "パルデア",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "クイズとタイマーがリセットされます",
   "reveal": "表示",
+  "revealHint": "クリックして表示",
   "rock": "いわ",
   "shadowsDialog": {
     "description": "リセットしない限り元に戻せません",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "クイズを切り替えますか？"
   },
+  "topGuessers": "トップ {n} 正解者",
   "types": "タイプ",
   "ultrabeast": "ウルトラビースト",
   "unova": "イッシュ",
-  "water": "みず"
+  "variousArtists": "様々なアーティスト",
+  "water": "みず",
+  "welcome": "ポケモンクイズへようこそ！"
 }

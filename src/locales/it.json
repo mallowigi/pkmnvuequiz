@@ -14,6 +14,8 @@
   },
   "chaos": "Caos",
   "close": "Chiudi",
+  "closestSpelling": "Ortografia più vicina:",
+  "continue": "Continua",
   "dark": "Buio",
   "dragon": "Drago",
   "electric": "Elettro",
@@ -22,6 +24,13 @@
   "fighting": "Lotta",
   "fire": "Fuoco",
   "flying": "Volante",
+  "footer": {
+    "license": "Questo progetto è un'opera derivata non ufficiale basata su Pokémon. Gli sprite ufficiali appartengono a © Nintendo/Creatures Inc./GAME FREAK Inc.",
+    "originalProject": "Progetto originale trovato su {location}. {donation}",
+    "projectBy": "Progetto di {charon}. Riscritto in Vue da {mallowigi}.",
+    "resources": "Risorsa per i dati: {pokeapi}. Risorse per gli sprite: {sprites}.",
+    "sprites": "Sprite personalizzati e modificati realizzati da {artists} ≡ come parte del progetto {project}."
+  },
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
@@ -35,6 +44,7 @@
   "gmax": "Gigantamax",
   "grass": "Erba",
   "ground": "Terra",
+  "hello": "Ciao, {name}",
   "hisui": "Hisui",
   "hoenn": "Hoenn",
   "hoennmega": "Megaevoluzione (Hoenn)",
@@ -57,7 +67,9 @@
     "title": "Top 3 indovini di {mode}"
   },
   "legendary": "Leggendario",
+  "loadingQuiz": "Caricamento Quiz",
   "lumiose": "Megaevoluzione (Luminopoli)",
+  "missedNames": "Nomi mancanti:",
   "modeDialog": {
     "chaosCaption": "Abilita l'indovinare senza posizionamenti predeterminati",
     "description": "Il quiz e il timer verranno resettati",
@@ -72,6 +84,7 @@
     "types": "Nomina tutti i Pokémon di tipo {name}!"
   },
   "nameAllRegionPokemon": "Nomina tutti i Pokémon!",
+  "newGame": "Nuovo Gioco",
   "normal": "Normale",
   "order": "Ordine",
   "paldea": "Paldea",
@@ -87,6 +100,7 @@
   },
   "resetWarning": "Il quiz e il timer verranno resettati",
   "reveal": "Rivela",
+  "revealHint": "clicca per rivelare",
   "rock": "Roccia",
   "shadowsDialog": {
     "description": "Non può essere annullato senza reset",
@@ -102,8 +116,11 @@
   "switchQuizDialog": {
     "title": "Cambiare quiz?"
   },
+  "topGuessers": "Top {n} Indovini",
   "types": "Tipi",
   "ultrabeast": "Ultracreatura",
   "unova": "Unima",
-  "water": "Acqua"
+  "variousArtists": "vari artisti",
+  "water": "Acqua",
+  "welcome": "Benvenuto nel Quiz Pokémon!"
 }
