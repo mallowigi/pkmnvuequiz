@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
@@ -9,7 +11,6 @@ import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
-import { useI18n } from 'vue-i18n';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
@@ -147,7 +148,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   }
 
   &.full {
-    border: 2px solid var(--type-btn-color, var(--primary));
+    box-shadow: 0 0 0 2px var(--type-btn-color, var(--primary)) inset;
   }
 }
 
