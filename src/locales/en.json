@@ -3,9 +3,6 @@
   "areazero": "Area Zero (Paldea)",
   "bug": "Bug",
   "cancel": "Cancel",
-  "close": "Close",
-  "enable": "Enable",
-  "giveUp": "Give Up",
   "changeNameDialog": {
     "description": "Enter a new name to change your current name.",
     "placeholder": "Enter your name",
@@ -15,23 +12,33 @@
     "description": "Quiz and timer will reset",
     "title": "Change timer?"
   },
-  "giveUpDialog": {
-    "description": "Are you sure you want to give up?",
-    "title": "Give Up?"
-  },
   "chaos": "Chaos",
+  "close": "Close",
   "dark": "Dark",
   "dragon": "Dragon",
   "electric": "Electric",
+  "enable": "Enable",
   "fairy": "Fairy",
   "fighting": "Fighting",
   "fire": "Fire",
   "flying": "Flying",
+  "footer": {
+    "originalProject": "Original project found at {location}. {donation}",
+    "projectBy": "Project by {charon}. Rewritten in Vue by {mallowigi}.",
+    "sprites": "Custom & modified sprites made by {artists} ≡ as part of the {project} project.",
+    "resources": "Resource for data: {pokeapi}. Resources for sprites: {sprites}.",
+    "license": "This project is an unofficial derivative work based on Pokémon. Official sprites belong to © Nintendo/Creatures Inc./GAME FREAK Inc."
+  },
   "full": "Full Quiz",
   "fullQuiz": "Full Quiz",
   "galar": "Galar",
   "gen": "Generations",
   "ghost": "Ghost",
+  "giveUp": "Give Up",
+  "giveUpDialog": {
+    "description": "Are you sure you want to give up?",
+    "title": "Give Up?"
+  },
   "gmax": "Gigantamax",
   "grass": "Grass",
   "ground": "Ground",
@@ -76,22 +83,22 @@
   "order": "Order",
   "paldea": "Paldea",
   "paradox": "Paradox",
+  "poison": "Poison",
+  "pokemongo": "Pokémon GO",
+  "psychic": "Psychic",
+  "quiz": "Quiz",
+  "reset": "Reset",
   "resetDialog": {
     "description": "Are you sure you want to reset?",
     "title": "Reset?"
   },
-  "reset": "Reset",
-  "quiz": "Quiz",
   "resetWarning": "Quiz and timer will reset",
   "reveal": "Reveal",
+  "rock": "Rock",
   "shadowsDialog": {
     "description": "Cannot be undone without reset",
     "title": "Reveal Shadows?"
   },
-  "poison": "Poison",
-  "pokemongo": "Pokémon GO",
-  "psychic": "Psychic",
-  "rock": "Rock",
   "sinnoh": "Sinnoh",
   "special": "Special",
   "specialQuiz": "Special Quiz",
@@ -105,5 +112,6 @@
   "types": "Types",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",
+  "variousArtists": "various artists",
   "water": "Water"
 }

@@ -1,80 +1,116 @@
 <script setup lang="ts">
 import { useCredits } from '@/stores/useCredits';
+import { useI18n } from 'vue-i18n';
 
 const { toggleShowCredits } = useCredits();
+
+const { t } = useI18n();
 </script>
 
 <template>
   <footer class="footer rad transition-element">
+    <!-- Authors -->
     <div class="footerRow">
-      <p class="p1">
-        Project by
-        <a
-          href="https://linktr.ee/adeptcharon"
-          target="_blank"
-          >Charon</a
-        >.&emsp; Rewritten in Vue by
-        <a
-          href="https://github.com/mallowigi"
-          target="_blank"
-          >Mallowigi</a
-        >.
-      </p>
+      <i18n-t
+        keypath="footer.projectBy"
+        class="p1"
+        tag="p"
+      >
+        <template #charon>
+          <a
+            href="https://linktr.ee/adeptcharon"
+            target="_blank"
+            >Charon</a
+          >
+        </template>
+
+        <template #mallowigi>
+          <a
+            href="https://github.com/mallowigi"
+            target="_blank"
+            >Mallowigi</a
+          >
+        </template>
+      </i18n-t>
     </div>
 
     <div class="footerRow">
-      <p class="p2">
-        Original Project found at
-        <a
-          href="https://pkmnquiz.com/"
-          target="_blank"
-          >https://pkmnquiz.com/</a
-        >.
+      <!-- Original Project -->
+      <i18n-t
+        keypath="footer.originalProject"
+        class="p2"
+        tag="p"
+      >
+        <template #location>
+          <a
+            href="https://pkmnquiz.com/"
+            target="_blank"
+            >https://pkmnquiz.com/</a
+          >
+        </template>
 
-        <a
-          href="https://ko-fi.com/pkmnquiz"
-          target="_blank"
-        >
-          <img
-            class="kofi"
-            src="@/assets/kofi-tag.webp"
-            alt="Ko-fi donation button"
-          />
-        </a>
-      </p>
+        <template #donation>
+          <a
+            href="https://ko-fi.com/pkmnquiz"
+            target="_blank"
+          >
+            <img
+              class="kofi"
+              src="@/assets/kofi-tag.webp"
+              alt="Ko-fi donation button"
+            />
+          </a>
+        </template>
+      </i18n-t>
+
+      <!-- Sprites -->
+      <i18n-t
+        keypath="footer.sprites"
+        class="p2"
+        tag="p"
+      >
+        <template #artists>
+          <span
+            class="link"
+            @click="toggleShowCredits()"
+            >{{ t('variousArtists') }}
+          </span>
+        </template>
+
+        <template #project>
+          <a
+            href="https://www.deviantart.com/pikafan2000/art/National-Pokedex-Version-Delta-Icon-Dex-824897934"
+            target="_blank"
+            >Icon Dex Project</a
+          >
+        </template>
+      </i18n-t>
+
+      <!-- Resources -->
+      <i18n-t
+        keypath="footer.resources"
+        class="p2"
+        tag="p"
+      >
+        <template #pokeapi>
+          <a
+            href="https://github.com/PokeAPI/"
+            target="_blank"
+            >PokéAPI</a
+          >
+        </template>
+
+        <template #sprites>
+          <a
+            href="https://msikma.github.io/pokesprite/overview/dex-gen8.html"
+            target="_blank"
+            >Pokésprite Database</a
+          >
+        </template>
+      </i18n-t>
 
       <p class="p2">
-        Custom &amp; modified sprites made by
-        <span
-          class="link"
-          @click="toggleShowCredits()"
-          >various artists ≡</span
-        >
-        as part of the
-        <a
-          href="https://www.deviantart.com/pikafan2000/art/National-Pokedex-Version-Delta-Icon-Dex-824897934"
-          target="_blank"
-          >Icon Dex Project</a
-        >.
-      </p>
-
-      <p class="p2">
-        Resource for data:
-        <a
-          href="https://github.com/PokeAPI/"
-          target="_blank"
-          >PokéAPI</a
-        >.&emsp; Resource for sprites:
-        <a
-          href="https://msikma.github.io/pokesprite/overview/dex-gen8.html"
-          target="_blank"
-          >Pokésprite Database</a
-        >.
-      </p>
-
-      <p class="p2">
-        This project is an unofficial derivative work based on Pokémon. Official sprites belong to © Nintendo/Creatures
-        Inc./GAME FREAK Inc.
+        {{ t('footer.license') }}
       </p>
     </div>
   </footer>
@@ -103,7 +139,7 @@ const { toggleShowCredits } = useCredits();
 
 .link {
   cursor: pointer;
-  color: var(--primary);
+  color: var(--type-inline-color, var(--primary));
 }
 
 .kofi {
