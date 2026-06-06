@@ -4,6 +4,7 @@ import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 
+import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 import ellipsis from '@/directives/ellipsis.ts';
 import gameEnded from '@/directives/gameEnded.ts';
 import tooltip from '@/directives/tooltip.ts';
@@ -23,9 +24,11 @@ import { capitalize } from '@/utils/utils.ts';
 
 import App from './App.vue';
 
+const { savedLocale } = useSavedLocale();
+
 const i18n = createI18n({
   fallbackLocale: 'en',
-  locale: 'en',
+  locale: savedLocale.value,
   messages: { cn, de, en, es, fr, it, jp, ko, pt, ru, zh },
   modifiers: {
     capitalize: (value) => capitalize(value.toString()),

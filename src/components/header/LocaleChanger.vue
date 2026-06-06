@@ -1,10 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSavedLocale } from '@/composables/useSavedLocale.ts';
+import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { savedLocale } = useSavedLocale();
+const { locale } = useI18n();
+
+watch(savedLocale, (val) => {
+  locale.value = val;
+});
+</script>
 
 <template>
   <div class="locale-changer">
     <select
       id="locale"
-      v-model="$i18n.locale"
+      v-model="savedLocale"
       class="select"
       aria-label="Select language"
     >

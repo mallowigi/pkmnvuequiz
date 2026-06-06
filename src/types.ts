@@ -273,3 +273,5 @@ export interface UserRecord extends DocumentData {
   usedSpelling: boolean;
   usedTypeShuffle: boolean;
 }
+
+export const availableLanguages = ['en', 'cn', 'de', 'es', 'fr', 'it', 'jp', 'ko', 'pt', 'ru', 'zh'];
