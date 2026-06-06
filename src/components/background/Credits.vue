@@ -2,8 +2,10 @@
 import { credits } from '@/data/credits';
 import { useCredits } from '@/stores/useCredits';
 import { vOnClickOutside } from '@vueuse/components';
+import { useI18n } from 'vue-i18n';
 
 const { toggleShowCredits } = useCredits();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -16,7 +18,7 @@ const { toggleShowCredits } = useCredits();
       class="paragraph pointer"
       @click="toggleShowCredits()"
     >
-      Artist and quality control credits for custom sprites:
+      {{ t('credits.title') }}
       <div class="close pointer">🞬</div>
     </div>
 

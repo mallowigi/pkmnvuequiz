@@ -196,6 +196,18 @@ export const useTranslations = () => {
     }
   };
 
+  const getTypeOrSpecialTranslation = (typeId: Type | SpecialType | undefined): string => {
+    if (!typeId) return '';
+
+    const typeTranslation = getTypeTranslation(typeId as Type);
+    if (typeTranslation) return typeTranslation;
+
+    const specialTypeTranslation = getSpecialTypeTranslation(typeId as SpecialType);
+    if (specialTypeTranslation) return specialTypeTranslation;
+
+    return '';
+  };
+
   return {
     getBoxTranslation,
     getGameModeTranslation,
@@ -203,6 +215,7 @@ export const useTranslations = () => {
     getLanguageTranslation,
     getModeTranslation,
     getSpecialTypeTranslation,
+    getTypeOrSpecialTranslation,
     getTypeTranslation,
   };
 };

@@ -3,8 +3,10 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import SaveButtons from '@/components/background/SaveButtons.vue';
+import { useI18n } from 'vue-i18n';
 
 const { resumeGame } = useGameFlow();
+const { t } = useI18n();
 
 const resume = () => resumeGame();
 </script>
@@ -15,13 +17,13 @@ const resume = () => resumeGame();
     @close="resume"
   >
     <div class="prompt">
-      <h2 class="left-margin">Paused</h2>
+      <h2 class="left-margin">{{ t('paused') }}</h2>
 
       <RoundedButton
         :primary="true"
         @click.stop="resume"
       >
-        Resume
+        {{ t('resume') }}
       </RoundedButton>
 
       <SaveButtons />

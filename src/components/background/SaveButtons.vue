@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import IconButton from '@/components/common/IconButton.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const { saveState, loadState } = useSavedData();
 </script>
@@ -15,12 +18,12 @@ const { saveState, loadState } = useSavedData();
       accept="application/json"
     />
 
-    <p class="left-margin">Save/Load Quiz State:</p>
+    <p class="left-margin">{{ t('saveLoadState') }}</p>
 
     <IconButton @click="saveState">
       <img
         src="@/assets/download.png"
-        alt="Download"
+        :alt="t('download')"
       />
     </IconButton>
 
@@ -28,7 +31,7 @@ const { saveState, loadState } = useSavedData();
       <IconButton>
         <img
           src="@/assets/upload.png"
-          alt="Upload"
+          :alt="t('upload')"
         />
       </IconButton>
     </label>

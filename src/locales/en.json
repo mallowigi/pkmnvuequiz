@@ -17,13 +17,18 @@
   "closestSpelling": "Closest spelling:",
   "cn": "Chinese (Simplified)",
   "continue": "Continue",
+  "credits": {
+    "title": "Artist and quality control credits for custom sprites:"
+  },
   "dark": "Dark",
   "de": "German",
+  "download": "Download",
   "dragon": "Dragon",
   "electric": "Electric",
   "en": "English",
   "enable": "Enable",
   "es": "Spanish",
+  "exit": "Exit",
   "fairy": "Fairy",
   "fighting": "Fighting",
   "fire": "Fire",
@@ -97,6 +102,7 @@
   "order": "Order",
   "paldea": "Paldea",
   "paradox": "Paradox",
+  "paused": "Paused",
   "poison": "Poison",
   "pokemongo": "Pokémon GO",
   "psychic": "Psychic",
@@ -109,10 +115,12 @@
     "title": "Reset?"
   },
   "resetWarning": "Quiz and timer will reset",
+  "resume": "Resume",
   "reveal": "Reveal",
   "revealHint": "click to reveal",
   "rock": "Rock",
   "ru": "Russian",
+  "saveLoadState": "Save/Load Quiz State",
   "shadowsDialog": {
     "description": "Cannot be undone without reset",
     "title": "Reveal Shadows?"
@@ -132,6 +140,7 @@
   "types": "Types",
   "ultrabeast": "Ultra Beast",
   "unova": "Unova",
+  "upload": "Upload",
   "variousArtists": "various artists",
   "water": "Water",
   "welcome": "Welcome to the Pokémon Quiz!",

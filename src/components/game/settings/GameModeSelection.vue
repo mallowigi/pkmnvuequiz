@@ -9,14 +9,16 @@ import { useState } from '@/stores/useState.js';
 import { scrollToTop } from '@/utils/utils.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
+import { useI18n } from 'vue-i18n';
 
 const { setDialog } = useDialogs();
 const { clearCurrentType } = useCurrentType();
 const { clearCurrentGen } = useCurrentGen();
 const { setGameMode, state, setMode } = useState();
-const { setGameSelectionState, startGame } = useGameFlow();
+const { setGameSelectionState } = useGameFlow();
 const { resetPokemonState } = usePokemons();
 const { resetTimer } = useTimer();
+const { t } = useI18n();
 
 const { setFullQuiz } = useQuiz({ withDialog: true });
 
@@ -54,10 +56,10 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'full'"
       @click="setFullQuiz"
     >
-      Full Quiz
+      {{ t('fullQuiz') }}
       <img
         src="@/assets/FullQuiz.png"
-        alt="Full Quiz"
+        :alt="t('fullQuiz')"
       />
     </RoundedButton>
 
@@ -66,10 +68,10 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'gen'"
       @click="setGenQuiz"
     >
-      Generations
+      {{ t('gen') }}
       <img
         src="@/assets/GenQuiz.png"
-        alt="Generations"
+        :alt="t('gen')"
       />
     </RoundedButton>
 
@@ -78,10 +80,10 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'types'"
       @click="setTypeQuiz"
     >
-      Types
+      {{ t('types') }}
       <img
         src="@/assets/TypeQuiz.png"
-        alt="Types"
+        :alt="t('types')"
       />
     </RoundedButton>
 
@@ -90,10 +92,10 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'special'"
       @click="setSpecialQuiz"
     >
-      Special Quiz
+      {{ t('specialQuiz') }}
       <img
         src="@/assets/special.png"
-        alt="Special Quiz"
+        :alt="t('specialQuiz')"
       />
     </RoundedButton>
   </div>

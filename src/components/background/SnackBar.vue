@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 import { useMessages } from '@/stores/useMessages';
 
-const { state, showUserMessage } = useMessages();
+const { state } = useMessages();
 
 const lastMessages = computed(() => {
   return state.messages.slice(-3);

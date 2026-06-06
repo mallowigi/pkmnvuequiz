@@ -14,6 +14,7 @@ import { useRoomMessages } from '@/stores/useRoomMessages.ts';
 import { useState } from '@/stores/useState.ts';
 import { useI18n } from 'vue-i18n';
 import { capitalize } from '@/utils/utils.ts';
+import { useTranslations } from '@/composables/useTranslations.ts';
 
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
@@ -23,6 +24,7 @@ const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
 
 const { t } = useI18n();
+const { getBoxTranslation, getTypeOrSpecialTranslation } = useTranslations();
 
 /** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
@@ -38,10 +40,10 @@ const regionOrType = computed(() => {
   switch (gameMode) {
     case 'gen':
       const currentRegion = getCurrentRegion();
-      return currentRegion ? capitalize(t(currentRegion.id)) : '';
+      return currentRegion ? capitalize(getBoxTranslation(currentRegion.id)) : '';
     case 'types':
       const currentType = getCurrentTypeOrSpecial();
-      return currentType ? capitalize(t(currentType.id)) : '';
+      return currentType ? capitalize(getTypeOrSpecialTranslation(currentType?.id)) : '';
     case 'special':
       return capitalize(t('special'));
     default:
@@ -65,6 +67,19 @@ const textBoxRef = ref<InstanceType<typeof TextBox> | null>(null);
 
 // We need to access the input element inside the TextBox component, so we use a computed property to get it
 const inputRef = computed(() => textBoxRef.value?.inputRef ?? null);
+
+const nameAllText = computed(() => {
+  switch (state.gameMode) {
+    case 'gen':
+      return t('nameAll.gen', { name: regionOrType.value });
+    case 'types':
+      return t('nameAll.types', { name: regionOrType.value });
+    case 'special':
+      return t('nameAll.special', { name: regionOrType.value });
+    default:
+      return t('nameAll.full');
+  }
+});
 
 const ensureFocus = () => {
   // Do not focus if the game is in paused or ended state, or if a dialog or room message is open
@@ -132,7 +147,7 @@ onUnmounted(() => {
       class="instruction"
       v-ellipsis:bottom
     >
-      {{ t(state.gameMode ? `nameAll.${state.gameMode}` : 'nameAllRegionPokemon', { name: regionOrType }) }}
+      {{ nameAllText }}
     </p>
 
     <TextBox

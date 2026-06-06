@@ -12,7 +12,7 @@ import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
 const { setGameOver } = useState();
-const { setCurrentGen, currentGenState, getCurrentGen } = useCurrentGen();
+const { setCurrentGen, getCurrentGen } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState, setGameSelectionState } = useGameFlow();
 const { resetTimer, timerState } = useTimer();

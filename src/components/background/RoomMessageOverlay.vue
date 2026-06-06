@@ -2,8 +2,10 @@
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useRoomMessages } from '@/stores/useRoomMessages';
+import { useI18n } from 'vue-i18n';
 
 const { setRoomMessage } = useRoomMessages();
+const { t } = useI18n();
 
 defineProps(['message']);
 </script>
@@ -15,7 +17,7 @@ defineProps(['message']);
   >
     <div class="prompt">
       <h2>{{ message }}</h2>
-      <RoundedButton @click="setRoomMessage(null)"> Exit </RoundedButton>
+      <RoundedButton @click="setRoomMessage(null)"> {{ t('exit') }} </RoundedButton>
     </div>
   </Overlay>
 </template>
