@@ -1,11 +1,13 @@
-import type { PokemonInfo } from '@/types.ts';
-import { useState } from '@/stores/useState.ts';
+import { useI18n } from 'vue-i18n';
+
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
-import { usePlaySounds } from '@/composables/usePlaySounds.ts';
+import { useState } from '@/stores/useState.ts';
+import type { PokemonInfo } from '@/types.ts';
 import { capitalize } from '@/utils/utils';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 
 type Props = {
   clearInput: () => void;
@@ -16,6 +18,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { getCurrentType, setRandomCurrentType } = useCurrentType();
   const { showUserMessage } = useMessages();
   const { endGame } = useGameFlow();
+  const { t } = useI18n();
   const {
     isPokemonInCurrentGameMode,
     isInRemaining,
@@ -35,7 +38,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
   const activateCheat = () => {
     playFanfare();
-    showUserMessage(`Next Pokemon: ${capitalize(getNextOrderedPokemon()?.baseName ?? '???')}`);
+    showUserMessage(t('nextPokemon', { name: capitalize(getNextOrderedPokemon()?.baseName ?? '???') }));
     clearInput();
   };
 
@@ -43,7 +46,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     if (state.withShadowHelper) {
       addRandomShadow();
     } else {
-      showUserMessage('Shadow helper is disabled. Enable it in settings to use this shortcut.');
+      showUserMessage(t('shadowHelperDisabled'));
     }
     clearInput();
   };

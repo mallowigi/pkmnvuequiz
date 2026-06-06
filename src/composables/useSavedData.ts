@@ -11,12 +11,14 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
+import { useI18n } from 'vue-i18n';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
+  const { t } = useI18n();
 
   const setReady = () => {
     ready.value = true;
@@ -255,7 +257,7 @@ export const useSavedData = () => {
       withTypeShuffle: statePayload.withTypeShuffle ?? false,
     });
 
-    showUserMessage('Successfully loaded quiz!');
+    showUserMessage(t('quizLoaded'));
     setTitle();
   };
 
@@ -274,7 +276,7 @@ export const useSavedData = () => {
         const loadedState = JSON.parse(result);
         if (loadedState.version !== 1) {
           console.error('Unsupported save version.');
-          showUserMessage('Unsupported save version.');
+          showUserMessage(t('failedToLoadQuizVersion'));
           return;
         }
 
@@ -282,7 +284,7 @@ export const useSavedData = () => {
         applyState(loadedState);
       } catch (error) {
         console.error('Failed to load state: Invalid file format.', error);
-        showUserMessage('Failed to load quiz: Invalid file format.');
+        showUserMessage(t('failedToLoadQuizFormat'));
       }
     };
     reader.readAsText(file);
@@ -304,7 +306,7 @@ export const useSavedData = () => {
       applyState(savedState);
     } catch (error) {
       console.error('Failed to load autosave: Invalid data.', error);
-      showUserMessage('Failed to load autosave: Invalid data.');
+      showUserMessage(t('failedToLoadQuizInvalid'));
     }
   };
 
