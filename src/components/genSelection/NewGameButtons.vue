@@ -20,7 +20,7 @@ const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
-const { authenticateWithGoogle } = useFirebase();
+const { authenticateWithGoogle, loginState, signout } = useFirebase();
 
 const newGame = () => {
   if (!state.name) {
@@ -58,9 +58,13 @@ onMounted(() => {
   <div class="root">
     <p>{{ t('welcome') }}</p>
 
-    <div class="top-section">
+    <div
+      class="top-section"
+      v-if="!loginState.user"
+    >
       <div class="login-column">
         <span class="login-with">{{ t('loginWith') }}</span>
+
         <div class="login-providers">
           <RoundedButton
             class="provider-btn google"
@@ -70,6 +74,7 @@ onMounted(() => {
           >
             <GoogleIcon />
           </RoundedButton>
+
           <RoundedButton
             class="provider-btn facebook"
             primary
@@ -78,6 +83,7 @@ onMounted(() => {
           >
             <FacebookIcon />
           </RoundedButton>
+
           <RoundedButton
             class="provider-btn x"
             primary
@@ -86,6 +92,7 @@ onMounted(() => {
           >
             <XIcon />
           </RoundedButton>
+
           <RoundedButton
             class="provider-btn bluesky"
             primary
@@ -114,6 +121,24 @@ onMounted(() => {
             :value="state.name"
           />
         </form>
+      </div>
+    </div>
+
+    <div
+      class="top-section"
+      v-else-if="loginState.user"
+    >
+      <div>
+        <h1>{{ t('welcomeBack', { name: loginState.user.displayName }) }}</h1>
+
+        <RoundedButton
+          primary
+          class="danger-btn"
+          :aria-label="t('signout')"
+          @click="signout"
+        >
+          {{ t('signout') }}
+        </RoundedButton>
       </div>
     </div>
 
@@ -215,6 +240,11 @@ onMounted(() => {
   --type-bg-color: #0085ff;
   --type-btn-color: #0085ff;
   --type-fg-color: white;
+}
+
+.danger-btn:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
 }
 
 .provider-btn.disabled {

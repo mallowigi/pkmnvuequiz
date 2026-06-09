@@ -25,7 +25,7 @@ export const useState = defineStore('state', () => {
     withTypeShuffle: false,
   });
 
-  const setName = (name: string) => {
+  const setName = (name: string | null) => {
     state.name = name;
   };
 

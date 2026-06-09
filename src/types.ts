@@ -127,7 +127,7 @@ export type UserData = {
 };
 
 export type State = {
-  name: string;
+  name: string | null;
   autoPause: boolean;
   gameMode: GameMode | null;
   isDark: boolean;

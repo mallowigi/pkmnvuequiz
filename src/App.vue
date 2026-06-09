@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { usePreferredDark } from '@vueuse/core';
-import { watchEffect, watch } from 'vue';
+import { watchEffect, watch, onMounted } from 'vue';
 
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
@@ -20,11 +20,13 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
 import Tooltip from '@/components/background/Tooltip.vue';
+import { useFirebase } from '@/composables/useFirebase.ts';
 
 const { state, setDarkMode } = useState();
 const { flowState } = useGameFlow();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
+const { initAuth } = useFirebase();
 const typeStyles = useTypeStyles();
 
 watchEffect(() => {
@@ -56,6 +58,10 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(() => {
+  initAuth();
+});
 </script>
 
 <template>
