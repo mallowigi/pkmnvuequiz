@@ -7,11 +7,11 @@
   "back": "返回",
   "bug": "虫",
   "cancel": "取消",
-  "changeName": "更改名称",
+  "changeName": "更改昵称",
   "changeNameDialog": {
-    "description": "输入一个新名字来修改你当前的名字。",
-    "placeholder": "输入你的名字",
-    "title": "修改名字"
+    "description": "更改你当前的昵称。",
+    "placeholder": "输入你的昵称",
+    "title": "更改昵称"
   },
   "changeTimerDialog": {
     "description": "测验和计时器将重置",
@@ -118,9 +118,9 @@
   "min": "分钟",
   "missedNames": "错过的名字:",
   "mode": "模式",
-  "modeCannotChangeInSpecialModeTooltip": "无法在特殊游戏模式中更改模式",
-  "modeCannotChangeInTypesModeTooltip": "无法在属性游戏模式中更改模式",
-  "modeCannotChangeWithTypeShuffleTooltip": "启用属性混洗或在属性游戏模式中时无法更改模式",
+  "modeCannotChangeInSpecialModeTooltip": "在特殊模式中无法更改顺序",
+  "modeCannotChangeInTypesModeTooltip": "在属性模式中无法更改顺序",
+  "modeCannotChangeWithTypeShuffleTooltip": "在属性模式或启用随机类型时无法更改顺序",
   "modeDialog": {
     "chaosCaption": "启用无预定位置的猜测",
     "description": "测验和计时器将重置",
@@ -206,7 +206,6 @@
   "topGuessers": "前 {n} 名猜想者",
   "typeQuiz": "{type} 测验",
   "typeShuffle": "类型洗牌",
-  "typeShuffleOnlyInRegularMode": "类型洗牌只能在常规模式下切换",
   "typeShuffleOnlyInRegularModeTooltip": "类型洗牌只能在常规模式下切换",
   "typeShuffleSet": "类型洗牌 {status}",
   "typeShuffleTooltip": "猜测给定类型的下一个宝可梦",
