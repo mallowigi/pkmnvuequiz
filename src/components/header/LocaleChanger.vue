@@ -57,7 +57,7 @@ watch(savedLocale, (val) => {
   border-radius: 4px;
   font-size: 24px;
   font-family: 'Roboto Condensed', sans-serif;
-  color: var(--type-fg-color, var(--text));
+  color: var(--text);
   padding: 6px 4px 4px 3px;
   text-align: center;
   text-decoration: none;
@@ -69,7 +69,7 @@ watch(savedLocale, (val) => {
 
   &:hover {
     background-color: var(--type-dark-color, var(--darkPrimary));
-    color: var(--type-fg-color, var(--text));
+    color: var(--text);
   }
 
   &:focus-visible {
@@ -87,7 +87,7 @@ watch(savedLocale, (val) => {
     border: none;
     box-shadow: none;
     outline: none;
-    color: var(--type-fg-color, var(--text));
+    color: var(--text);
     padding: 0 12px;
     cursor: pointer;
     transition:
@@ -106,12 +106,12 @@ watch(savedLocale, (val) => {
     &:focus,
     &:active {
       background-color: var(--type-dark-color, var(--darkPrimary));
-      color: var(--type-fg-color, var(--text));
+      color: var(--text);
     }
 
     &:checked {
       background: var(--type-btn-color, var(--primary));
-      color: var(--type-fg-color, var(--text));
+      color: var(--text);
     }
   }
 
@@ -124,7 +124,7 @@ watch(savedLocale, (val) => {
   background: var(--button);
   border: 1px solid var(--type-btn-color, var(--primary));
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  color: var(--type-fg-color, var(--text));
+  color: var(--text);
   overflow: visible;
   border-radius: 3px 20px;
   margin-top: 8px;
