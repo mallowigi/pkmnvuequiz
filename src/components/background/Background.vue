@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-
+import BackgroundPreload from '@/components/background/BackgroundPreload.vue';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
 
@@ -17,6 +17,9 @@ const currentType = computed(() => {
     class="background"
     :class="{ typed: currentType, dark: state.isDark }"
   >
+    <!-- Preload background images and type icons -->
+    <BackgroundPreload />
+
     <Transition
       name="fade"
       mode="out-in"
