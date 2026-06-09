@@ -5,6 +5,7 @@
   "autoPauseSet": "Auto Pause {status}",
   "autoPauseTooltip": "Toggle Auto Pause On/Off",
   "back": "Back",
+  "bluesky": "BlueSky",
   "bug": "Bug",
   "cancel": "Cancel",
   "changeName": "Change Nickname",
@@ -55,6 +56,7 @@
   },
   "es": "Spanish",
   "exit": "Exit",
+  "facebook": "Facebook",
   "failedToLoadQuizFormat": "Failed to load quiz: Invalid file format",
   "failedToLoadQuizInvalid": "Failed to load autosave: Invalid data.",
   "failedToLoadQuizVersion": "Unsupported save version.",
@@ -81,6 +83,7 @@
     "title": "Give Up?"
   },
   "gmax": "Gigantamax",
+  "google": "Google",
   "grass": "Grass",
   "ground": "Ground",
   "hello": "Hello, {name}",
@@ -115,6 +118,8 @@
   "lightMode": "Light Mode",
   "loadingQuiz": "Loading Quiz",
   "login": "Login",
+  "loginAnonymously": "Login Anonymously",
+  "loginWith": "Keep your progress, login with:",
   "lumiose": "Mega Evolution (Lumiose)",
   "min": "min",
   "missedNames": "Missed names:",
@@ -143,6 +148,7 @@
   "normal": "Normal",
   "off": "Off",
   "on": "On",
+  "or": "OR",
   "order": "Order",
   "paldea": "Paldea",
   "paradox": "Paradox",
@@ -218,6 +224,6 @@
   "variousArtists": "various artists",
   "water": "Water",
   "welcome": "Welcome to the Pokémon Quiz!",
-
+  "x": "X",
   "zh": "Chinese (Traditional)"
 }
