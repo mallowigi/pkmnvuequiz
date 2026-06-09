@@ -469,12 +469,7 @@ export const usePokemons = defineStore('pokemons', () => {
       if (!languageMap) continue;
 
       for (const [translatedKey, pokemons] of languageMap) {
-        if (translatedKey.startsWith(pokemonKey)) {
-          // Skip current pokemon
-          // const pokemon = pokemons[0];
-          // if (normalizeName(pokemon.baseName) === pokemonName) {
-          //   continue;
-          // }
+        if (translatedKey.startsWith(pokemonKey) && translatedKey !== pokemonKey) {
           if (pokemons.some((p) => remaining.value.has(normalizeName(p.baseName)))) {
             return true;
           }

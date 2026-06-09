@@ -24,6 +24,7 @@ export const useCurrentType = defineStore('currentType', () => {
 
   const clearCurrentType = () => {
     currentTypeState.currentType = null;
+    state.withTypeShuffle = false;
   };
 
   const getCurrentType = () => {

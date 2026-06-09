@@ -79,9 +79,9 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     return notifyError(`${capitalize(foundPokemon[0].baseName)} is not the next Pokemon.`);
   };
 
-  const handleTypeShuffle = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+  const handleTypeShuffle = (foundPokemon: PokemonInfo[], _isPartOfAnotherPokemon: boolean) => {
     if (!state.withTypeShuffle) return false;
-    if (isPartOfAnotherPokemon) return true;
+    // if (isPartOfAnotherPokemon) return true;
 
     const currentType = getCurrentType();
     const types = new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
