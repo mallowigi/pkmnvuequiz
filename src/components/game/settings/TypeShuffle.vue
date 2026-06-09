@@ -19,7 +19,7 @@ const applyTypeShuffle = (value: boolean) => {
   if (state.withTypeShuffle === value) return;
 
   if (state.mode !== 'normal') {
-    showUserMessage(t('typeShuffleOnlyInRegularMode'));
+    showUserMessage(t('typeShuffleOnlyInRegularModeTooltip'));
     return;
   }
 
