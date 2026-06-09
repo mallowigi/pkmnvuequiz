@@ -46,15 +46,15 @@ const lastMessages = computed(() => {
   margin-bottom: 16px;
 
   &.error {
-    background-color: rgba(255, 0, 0, 0.3);
+    background-color: rgb(117, 27, 27);
   }
 
   &.warning {
-    background-color: rgba(255, 255, 0, 0.3);
+    background-color: rgb(129, 77, 33);
   }
 
   &.success {
-    background-color: rgba(0, 255, 0, 0.3);
+    background-color: rgb(10, 98, 10);
   }
 }
 

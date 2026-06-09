@@ -24,7 +24,7 @@ defineProps(['message']);
 
 <style scoped>
 .full-overlay {
-  z-index: 9;
+  z-index: 99;
   --overlay-bg: var(--full-overlay);
 }
 </style>

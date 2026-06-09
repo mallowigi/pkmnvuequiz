@@ -20,7 +20,7 @@ const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
-const { authenticate } = useFirebase();
+const { authenticateWithGoogle } = useFirebase();
 
 const newGame = () => {
   if (!state.name) {
@@ -43,7 +43,7 @@ const editName = (event: Event) => {
 };
 
 const login = () => {
-  authenticate();
+  authenticateWithGoogle();
 };
 
 onMounted(() => {

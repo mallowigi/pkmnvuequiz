@@ -1,17 +1,19 @@
 import { useFirestore } from '@vueuse/firebase';
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, type User } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, type User, signInAnonymously } from 'firebase/auth';
 import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs } from 'pinia';
+import { reactive } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, GameMode, Gen, Type, UserData } from '@/types.ts';
-import { reactive } from 'vue';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -23,13 +25,14 @@ const app = initializeApp({
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
 });
 const db = getFirestore(app);
-
-// Allow anonymous authentication (no stored progress)
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 export const useFirebase = () => {
   const { setName } = useState();
+  const { showUserMessage } = useMessages();
+  const { t } = useI18n();
+
   const loginState = reactive<UserData>({
     user: null,
   });
@@ -38,19 +41,33 @@ export const useFirebase = () => {
     loginState.user = data;
   };
 
-  const authenticate = async () => {
-    signInWithPopup(auth, googleProvider)
+  const authenticateAnonymously = async () => {
+    signInAnonymously(auth)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const _token = credential?.accessToken;
-        // The signed-in user info.
         const user = result.user;
         setUser(user);
-        setName(user.displayName ?? 'Unknown Trainer');
+        setName('Trainer');
+        showUserMessage(t('welcomeBack', { name: 'Trainer' }));
       })
       .catch((error) => {
         console.error('Auth failed:', error);
+        const errorMessage = error.message;
+        showUserMessage(errorMessage, 'error');
+      });
+  };
+
+  const authenticateWithGoogle = async () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        setName(user.displayName ?? 'Trainer');
+        showUserMessage(t('welcomeBack', { name: user.displayName ?? 'Trainer' }));
+      })
+      .catch((error) => {
+        console.error('Auth failed:', error);
+        const errorMessage = error.message;
+        showUserMessage(errorMessage, 'error');
       });
   };
 
@@ -124,7 +141,8 @@ export const useFirebase = () => {
   };
 
   return {
-    authenticate,
+    authenticateAnonymously,
+    authenticateWithGoogle,
     createRecord,
     getTopTrainers,
     loginState,
