@@ -9,12 +9,14 @@ import { useState } from '@/stores/useState.ts';
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useLocalStorage } from '@vueuse/core';
+import { useFirebase } from '@/composables/useFirebase.ts';
 
 const { t } = useI18n();
 const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
+const { authenticate } = useFirebase();
 
 const newGame = () => {
   if (!state.name) {
@@ -36,6 +38,10 @@ const editName = (event: Event) => {
   setName(target.value);
 };
 
+const login = () => {
+  authenticate();
+};
+
 onMounted(() => {
   const savedName = name.value;
   if (savedName) {
@@ -47,6 +53,15 @@ onMounted(() => {
 <template>
   <div class="root">
     <p>{{ t('welcome') }}</p>
+
+    <div class="row">
+      <RoundedButton
+        primary
+        @click="login"
+      >
+        {{ t('login') }}
+      </RoundedButton>
+    </div>
 
     <div class="row">
       <form @submit.prevent="newGame">

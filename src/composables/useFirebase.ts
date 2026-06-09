@@ -1,6 +1,6 @@
 import { useFirestore } from '@vueuse/firebase';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, type User } from 'firebase/auth';
 import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs } from 'pinia';
 
@@ -10,7 +10,8 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import type { UserRecord, GameMode, Gen, Type } from '@/types.ts';
+import type { UserRecord, GameMode, Gen, Type, UserData } from '@/types.ts';
+import { reactive } from 'vue';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -25,11 +26,34 @@ const db = getFirestore(app);
 
 // Allow anonymous authentication (no stored progress)
 const auth = getAuth(app);
-signInAnonymously(auth).catch((error) => {
-  console.error('Auth failed:', error);
-});
+const googleProvider = new GoogleAuthProvider();
 
 export const useFirebase = () => {
+  const { setName } = useState();
+  const loginState = reactive<UserData>({
+    user: null,
+  });
+
+  const setUser = (data: User) => {
+    loginState.user = data;
+  };
+
+  const authenticate = async () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const _token = credential?.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        setUser(user);
+        setName(user.displayName ?? 'Unknown Trainer');
+      })
+      .catch((error) => {
+        console.error('Auth failed:', error);
+      });
+  };
+
   const createRecord = async () => {
     const { state } = useState();
     const { flowState } = useGameFlow();
@@ -100,7 +124,9 @@ export const useFirebase = () => {
   };
 
   return {
+    authenticate,
     createRecord,
     getTopTrainers,
+    loginState,
   };
 };

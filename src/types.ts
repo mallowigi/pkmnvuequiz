@@ -1,4 +1,5 @@
 import type { DocumentData } from 'firebase/firestore';
+import { type User } from 'firebase/auth';
 
 export type Dialog =
   | 'changeName'
@@ -119,6 +120,10 @@ export type PokemonInfo = {
   secondaryType: Type | null;
   specialType: SpecialType;
   sprites?: string[];
+};
+
+export type UserData = {
+  user: User | null;
 };
 
 export type State = {

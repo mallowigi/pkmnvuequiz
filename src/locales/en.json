@@ -114,6 +114,7 @@
   "legendary": "Legendary",
   "lightMode": "Light Mode",
   "loadingQuiz": "Loading Quiz",
+  "login": "Login",
   "lumiose": "Mega Evolution (Lumiose)",
   "min": "min",
   "missedNames": "Missed names:",
@@ -217,5 +218,6 @@
   "variousArtists": "various artists",
   "water": "Water",
   "welcome": "Welcome to the Pokémon Quiz!",
+
   "zh": "Chinese (Traditional)"
 }
