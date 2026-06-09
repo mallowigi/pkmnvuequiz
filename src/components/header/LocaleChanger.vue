@@ -69,7 +69,7 @@ watch(savedLocale, (val) => {
 
   &:hover {
     background-color: var(--type-dark-color, var(--darkPrimary));
-    color: var(--text);
+    color: var(--text-inverted);
   }
 
   &:focus-visible {
@@ -106,12 +106,12 @@ watch(savedLocale, (val) => {
     &:focus,
     &:active {
       background-color: var(--type-dark-color, var(--darkPrimary));
-      color: var(--text);
+      color: var(--text-inverted);
     }
 
     &:checked {
       background: var(--type-btn-color, var(--primary));
-      color: var(--text);
+      color: var(--text-inverted);
     }
   }
 
