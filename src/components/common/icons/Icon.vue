@@ -8,6 +8,8 @@
 
 <style scoped>
 .icon {
+  display: flex;
+
   &:hover :deep(svg) {
     filter: drop-shadow(0 0 2px var(--type-dark-color, var(--secondary)))
       drop-shadow(0 0 4px var(--type-dark-color, var(--secondary)))
@@ -17,7 +19,7 @@
 
   & :deep(svg) {
     cursor: pointer;
-    stroke: var(--text);
+    stroke: currentColor;
     will-change: filter;
     transition: filter 0.1s ease-in-out;
   }
