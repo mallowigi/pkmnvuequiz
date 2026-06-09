@@ -48,7 +48,7 @@ const login = () => {
 
 onMounted(() => {
   const savedName = name.value;
-  if (savedName) {
+  if (savedName && !loginState.user) {
     setName(savedName);
   }
 });
@@ -129,7 +129,7 @@ onMounted(() => {
       v-else-if="loginState.user"
     >
       <div>
-        <h1>{{ t('welcomeBack', { name: loginState.user.displayName }) }}</h1>
+        <h1>{{ t('welcomeBack', { name: loginState.user.displayName ?? 'Trainer' }) }}</h1>
 
         <RoundedButton
           primary

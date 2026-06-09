@@ -46,16 +46,21 @@ export const useFirebase = defineStore('firebase', () => {
     user: null,
   });
 
+  let unsubscribeAuth: (() => void) | null = null;
+
   const setUser = (data: User | null) => {
     loginState.user = data;
   };
 
   const initAuth = () => {
-    auth.onAuthStateChanged((user) => {
+    if (unsubscribeAuth) {
+      unsubscribeAuth();
+    }
+
+    unsubscribeAuth = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
         setName(user.displayName ?? 'Trainer');
-        showUserMessage(t('welcomeBack', { name: user.displayName ?? 'Trainer' }));
       }
     });
   };
@@ -76,14 +81,13 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const authenticateWithGoogle = async () => {
-    setPersistence(auth, browserLocalPersistence)
+    await setPersistence(auth, browserLocalPersistence)
       .then(() => {
         signInWithPopup(auth, googleProvider)
           .then((result) => {
             const user = result.user;
             setUser(user);
             setName(user.displayName ?? 'Trainer');
-            showUserMessage(t('welcomeBack', { name: user.displayName ?? 'Trainer' }));
           })
           .catch((error) => {
             console.error('Auth failed:', error);
