@@ -38,6 +38,9 @@
   "download": "Télécharger",
   "dragon": "Dragon",
   "electric": "Électrik",
+  "en": "Anglais",
+  "enable": "Activer",
+  "enabled": "activé",
   "endOverlay": {
     "appreciation": "Nous apprécions chaque geste de soutien.",
     "challenge": "Améliorez vous, essayez de les nommer sans ombres.",
@@ -50,9 +53,6 @@
     "supporters": "Contributeurs:",
     "wellDone": "Bien joué!"
   },
-  "en": "Anglais",
-  "enable": "Activer",
-  "enabled": "activé",
   "es": "Espagnol",
   "exit": "Quitter",
   "failedToLoadQuizFormat": "Échec du chargement du quiz: format de fichier invalide",

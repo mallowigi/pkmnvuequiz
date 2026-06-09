@@ -15,6 +15,7 @@ type Props = {
 
 export const usePokemonInput = ({ clearInput }: Props) => {
   const { state } = useState();
+  const { setRandomCurrentPokemon } = usePokemons();
   const { getCurrentType, setRandomCurrentType } = useCurrentType();
   const { showUserMessage } = useMessages();
   const { endGame } = useGameFlow();
@@ -98,6 +99,10 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
     if (state.withTypeShuffle) {
       setRandomCurrentType();
+    }
+
+    if (state.withCriesShuffle) {
+      setRandomCurrentPokemon();
     }
 
     playPokemonCry(foundPokemon[0].dexNum);

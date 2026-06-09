@@ -38,6 +38,9 @@
   "download": "Scarica",
   "dragon": "Drago",
   "electric": "Elettro",
+  "en": "Inglese",
+  "enable": "Abilita",
+  "enabled": "abilitato",
   "endOverlay": {
     "appreciation": "Apprezziamo ogni piccolo supporto.",
     "challenge": "Sfida te stesso ancora di più, prova a nominarli senza ombre.",
@@ -50,9 +53,6 @@
     "supporters": "Sostenitori:",
     "wellDone": "Ben fatto!"
   },
-  "en": "Inglese",
-  "enable": "Abilita",
-  "enabled": "abilitato",
   "es": "Spagnolo",
   "exit": "Esci",
   "failedToLoadQuizFormat": "Impossibile caricare il quiz: formato file non valido",

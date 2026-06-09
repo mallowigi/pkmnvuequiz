@@ -141,6 +141,7 @@ export type State = {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
+  withCriesShuffle: boolean;
 };
 
 export type LanguagesState = {
@@ -159,6 +160,7 @@ export type PokemonStatus = {
 export type PokemonProgressState = {
   lastIndex: number | null;
   lastPokemon: PokemonInfo | null;
+  currentPokemon: PokemonInfo | null;
   pokemonStatuses: Map<string, PokemonStatus>;
 };
 
@@ -247,6 +249,7 @@ export type SaveData = {
   withSound: boolean;
   withSpelling: boolean;
   withTypeShuffle: boolean;
+  withCriesShuffle: boolean;
 };
 
 export type MessageType = 'success' | 'error' | 'info' | 'warning';

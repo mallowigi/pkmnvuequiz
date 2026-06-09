@@ -38,6 +38,9 @@
   "download": "下载",
   "dragon": "龙",
   "electric": "电",
+  "en": "英语",
+  "enable": "启用",
+  "enabled": "已启用",
   "endOverlay": {
     "appreciation": "我们感谢每一份支持。",
     "challenge": "进一步挑战自己，尝试在没有阴影的情况下命名它们。",
@@ -50,9 +53,6 @@
     "supporters": "支持者：",
     "wellDone": "做得好！"
   },
-  "en": "英语",
-  "enable": "启用",
-  "enabled": "已启用",
   "es": "西班牙语",
   "exit": "退出",
   "failedToLoadQuizFormat": "加载测验失败：文件格式无效",

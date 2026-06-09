@@ -38,6 +38,9 @@
   "download": "Descargar",
   "dragon": "Dragón",
   "electric": "Eléctrico",
+  "en": "Inglés",
+  "enable": "Habilitar",
+  "enabled": "activado",
   "endOverlay": {
     "appreciation": "Agradecemos cada muestra de apoyo.",
     "challenge": "Ponte a prueba, intenta nombrarlos sin sombras.",
@@ -50,9 +53,6 @@
     "supporters": "Colaboradores:",
     "wellDone": "¡Bien hecho!"
   },
-  "en": "Inglés",
-  "enable": "Habilitar",
-  "enabled": "activado",
   "es": "Español",
   "exit": "Salir",
   "failedToLoadQuizFormat": "Error al cargar cuestionario: formato de archivo inválido",

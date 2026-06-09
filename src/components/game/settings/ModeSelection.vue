@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
@@ -10,7 +11,6 @@ import { useState } from '@/stores/useState.js';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { Mode } from '@/types.js';
 import { scrollToTop } from '@/utils/utils.ts';
-import { useI18n } from 'vue-i18n';
 
 const { state, setMode } = useState();
 const { flowState } = useGameFlow();
@@ -39,6 +39,7 @@ const isDisabled = computed(
     flowState.isGivenUp ||
     flowState.isEnded ||
     state.withTypeShuffle ||
+    state.withCriesShuffle ||
     state.gameMode === 'types' ||
     state.gameMode === 'special',
 );
@@ -46,6 +47,9 @@ const isDisabled = computed(
 const disabledTooltip = computed(() => {
   if (state.withTypeShuffle) {
     return t('modeCannotChangeWithTypeShuffleTooltip');
+  }
+  if (state.withCriesShuffle) {
+    return t('modeCannotChangeWithCriesShuffleTooltip');
   }
   if (state.gameMode === 'special') {
     return t('modeCannotChangeInSpecialModeTooltip');

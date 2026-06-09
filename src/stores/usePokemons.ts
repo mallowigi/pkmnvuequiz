@@ -95,6 +95,7 @@ const pokemonMaps: PokemonMaps = {
 
 export const usePokemons = defineStore('pokemons', () => {
   const pokemonState = reactive<PokemonProgressState>({
+    currentPokemon: null,
     lastIndex: null,
     lastPokemon: null,
     pokemonStatuses: new Map<string, PokemonStatus>(),
@@ -540,6 +541,11 @@ export const usePokemons = defineStore('pokemons', () => {
     return randomPokemon ? randomPokemon[0] : null;
   };
 
+  const setRandomCurrentPokemon = () => {
+    const randomPokemon = getRandomRemainingPokemon();
+    pokemonState.currentPokemon = randomPokemon;
+  };
+
   const findClosestPokemon = (input: string): string | null => {
     const pokemonKey = normalizeName(input);
     const names = Array.from(getCurrentGameModePokemon().values()).map((pokemons) =>
@@ -573,6 +579,7 @@ export const usePokemons = defineStore('pokemons', () => {
     pokemonState,
     resetPokemonState,
     setLastPokemon,
+    setRandomCurrentPokemon,
     showRemaining,
     showRemainingShadows,
   };

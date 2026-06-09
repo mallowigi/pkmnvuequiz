@@ -10,13 +10,12 @@ export const useState = defineStore('state', () => {
     isDark: false,
     mode: 'normal',
     name: '',
-
     usedAutoPause: false,
     usedDisplayShadows: false,
     usedShadowHelper: false,
     usedSpelling: false,
     usedTypeShuffle: false,
-
+    withCriesShuffle: false,
     withCycleSprites: true,
     withShadowHelper: false,
     withShadows: false,
@@ -36,6 +35,7 @@ export const useState = defineStore('state', () => {
     if (mode === 'special' || mode === 'types') {
       state.mode = 'normal';
       state.withTypeShuffle = false;
+      state.withCriesShuffle = false;
     }
   };
 
@@ -79,6 +79,10 @@ export const useState = defineStore('state', () => {
     state.usedTypeShuffle = true;
   };
 
+  const setCriesShuffle = (withCriesShuffle: boolean) => {
+    state.withCriesShuffle = withCriesShuffle;
+  };
+
   const setCycleSprites = (withCycleSprites: boolean) => {
     state.withCycleSprites = withCycleSprites;
   };
@@ -111,6 +115,7 @@ export const useState = defineStore('state', () => {
     hideShadows,
     resetState,
     setAutoPause,
+    setCriesShuffle,
     setCycleSprites,
     setDarkMode,
     setGameMode,

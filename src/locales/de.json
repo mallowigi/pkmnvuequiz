@@ -38,6 +38,9 @@
   "download": "Herunterladen",
   "dragon": "Drache",
   "electric": "Elektro",
+  "en": "Englisch",
+  "enable": "Aktivieren",
+  "enabled": "aktiviert",
   "endOverlay": {
     "appreciation": "Wir freuen uns über jede Unterstützung.",
     "challenge": "Fordere dich weiter heraus, versuche sie ohne Schatten zu benennen.",
@@ -50,9 +53,6 @@
     "supporters": "Unterstützer:",
     "wellDone": "Gut gemacht!"
   },
-  "en": "Englisch",
-  "enable": "Aktivieren",
-  "enabled": "aktiviert",
   "es": "Spanisch",
   "exit": "Beenden",
   "failedToLoadQuizFormat": "Fehler beim Laden des Quiz: Ungültiges Dateiformat",

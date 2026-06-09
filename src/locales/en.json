@@ -38,6 +38,9 @@
   "download": "Download",
   "dragon": "Dragon",
   "electric": "Electric",
+  "en": "English",
+  "enable": "Enable",
+  "enabled": "enabled",
   "endOverlay": {
     "appreciation": "We appreciate every bit of support.",
     "challenge": "Challenge yourself further, try naming them without shadows.",
@@ -50,9 +53,6 @@
     "supporters": "Supporters:",
     "wellDone": "Well done!"
   },
-  "en": "English",
-  "enable": "Enable",
-  "enabled": "enabled",
   "es": "Spanish",
   "exit": "Exit",
   "failedToLoadQuizFormat": "Failed to load quiz: Invalid file format",
@@ -120,6 +120,7 @@
   "mode": "Mode",
   "modeCannotChangeInSpecialModeTooltip": "Order cannot be changed in Special mode",
   "modeCannotChangeInTypesModeTooltip": "Order cannot be changed in Types mode",
+  "modeCannotChangeWithCriesShuffleTooltip": "Order cannot be changed in Types mode or when Cries Shuffle is enabled",
   "modeCannotChangeWithTypeShuffleTooltip": "Order cannot be changed in Types mode or when Type Shuffle is enabled",
   "modeDialog": {
     "chaosCaption": "Enable guessing without predetermined placements",

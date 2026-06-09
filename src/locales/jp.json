@@ -38,6 +38,9 @@
   "download": "ダウンロード",
   "dragon": "ドラゴン",
   "electric": "でんき",
+  "en": "英語",
+  "enable": "有効にする",
+  "enabled": "有効",
   "endOverlay": {
     "appreciation": "皆様のサポートに感謝いたします。",
     "challenge": "さらに挑戦して、シルエットなしで名前を当ててみましょう。",
@@ -50,9 +53,6 @@
     "supporters": "サポーター:",
     "wellDone": "よくできました！"
   },
-  "en": "英語",
-  "enable": "有効にする",
-  "enabled": "有効",
   "es": "スペイン語",
   "exit": "終了",
   "failedToLoadQuizFormat": "クイズの読み込みに失敗しました：ファイル形式が無効です",

@@ -248,6 +248,7 @@ export const useSavedData = () => {
       usedShadowHelper: statePayload.usedShadowHelper ?? false,
       usedSpelling: statePayload.usedSpelling ?? false,
       usedTypeShuffle: statePayload.usedTypeShuffle ?? false,
+      withCriesShuffle: statePayload.withCriesShuffle ?? false,
       withCycleSprites: statePayload.withCycleSprites ?? true,
       withShadowHelper: statePayload.withShadowHelper ?? false,
       withShadows: statePayload.withShadows ?? false,
