@@ -56,10 +56,6 @@ watch(
   },
   { immediate: true },
 );
-
-// onMounted(() => {
-//   initAuth();
-// });
 </script>
 
 <template>
