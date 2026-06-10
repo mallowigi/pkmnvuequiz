@@ -14,13 +14,15 @@ import GoogleIcon from '@/components/common/icons/GoogleIcon.vue';
 import FacebookIcon from '@/components/common/icons/FacebookIcon.vue';
 import XIcon from '@/components/common/icons/XIcon.vue';
 import BlueskyIcon from '@/components/common/icons/BlueskyIcon.vue';
+import { useAuth } from '@vueuse/firebase';
 
 const { t } = useI18n();
 const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
 const { state, setName } = useState();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
-const { authenticateWithGoogle, loginState, signout } = useFirebase();
+const { authenticateWithGoogle, signout, auth } = useFirebase();
+const { user, isAuthenticated } = useAuth(auth);
 
 const newGame = () => {
   if (!state.name) {
@@ -48,7 +50,7 @@ const login = () => {
 
 onMounted(() => {
   const savedName = name.value;
-  if (savedName && !loginState.user) {
+  if (savedName && !isAuthenticated) {
     setName(savedName);
   }
 });
@@ -60,7 +62,7 @@ onMounted(() => {
 
     <div
       class="top-section"
-      v-if="!loginState.user"
+      v-if="!isAuthenticated"
     >
       <div class="login-column">
         <span class="login-with">{{ t('loginWith') }}</span>
@@ -126,10 +128,10 @@ onMounted(() => {
 
     <div
       class="top-section"
-      v-else-if="loginState.user"
+      v-else-if="isAuthenticated"
     >
       <div>
-        <h1>{{ t('welcomeBack', { name: loginState.user.displayName ?? 'Trainer' }) }}</h1>
+        <h1>{{ t('welcomeBack', { name: user?.displayName ?? 'Trainer' }) }}</h1>
 
         <RoundedButton
           primary
