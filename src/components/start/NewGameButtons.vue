@@ -6,12 +6,11 @@ import { useI18n } from 'vue-i18n';
 
 import SaveButtons from '@/components/background/SaveButtons.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import TextBox from '@/components/common/TextBox.vue';
-import Leaderboards from '@/components/start/Leaderboards.vue';
-import Socials from '@/components/start/Socials.vue';
+import LoginControls from '@/components/start/LoginControls.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 import { useSavedData } from '@/composables/useSavedData.js';
-import { useGameFlow } from '@/stores/useGameFlow.js';
+import Leaderboards from '@/components/start/Leaderboards.vue';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useSettings } from '@/stores/useSettings.js';
 
 const { t } = useI18n();
@@ -19,7 +18,7 @@ const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
 const { settingsState, setName } = useSettings();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
-const { authenticateWithGoogle, signout, auth } = useFirebase();
+const { signout, auth } = useFirebase();
 const { user, isAuthenticated } = useAuth(auth);
 
 const newGame = () => {
@@ -36,12 +35,6 @@ const continueGame = () => {
   setReady();
 };
 
-const editName = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  name.value = target.value;
-  setName(target.value);
-};
-
 onMounted(() => {
   const savedName = name.value;
   if (savedName && !isAuthenticated) {
@@ -54,33 +47,10 @@ onMounted(() => {
   <div class="root">
     <p>{{ t('welcome') }}</p>
 
-    <!-- Logged Out -->
-    <div
-      class="top-section"
-      v-if="!isAuthenticated"
-    >
-      <Socials />
+    <!-- Legged Out -->
+    <LoginControls v-if="!isAuthenticated" />
 
-      <div class="separator-vertical">
-        <div class="line"></div>
-        <span class="or-text">{{ t('or') }}</span>
-        <div class="line"></div>
-      </div>
-
-      <div class="login-column name-column">
-        <span class="login-with">{{ t('loginAnonymously') }}</span>
-        <form @submit.prevent="newGame">
-          <TextBox
-            class="large-text"
-            type="text"
-            :placeholder="t('changeNameDialog.placeholder')"
-            @input="editName"
-            :value="settingsState.name"
-          />
-        </form>
-      </div>
-    </div>
-
+    <!-- Logged In -->
     <div
       class="top-section"
       v-else-if="isAuthenticated"
@@ -149,46 +119,9 @@ onMounted(() => {
   padding: 16px 0;
 }
 
-.login-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.login-with {
-  font-weight: bold;
-}
-
 .danger-btn:hover {
   background-color: var(--danger);
   border-color: var(--danger);
-}
-
-.name-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.separator-vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: stretch;
-}
-
-.separator-vertical .line {
-  width: 1px;
-  background-color: var(--text);
-  flex-grow: 1;
-  opacity: 0.3;
-}
-
-.or-text {
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: 8px 0;
 }
 
 .separator-horizontal {
@@ -212,9 +145,5 @@ onMounted(() => {
   justify-content: center;
   margin-top: 8px;
   gap: 8px;
-}
-
-.large-text {
-  padding: 6px;
 }
 </style>
