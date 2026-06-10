@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-
-import BlueskyIcon from '@/components/common/icons/BlueskyIcon.vue';
 import FacebookIcon from '@/components/common/icons/FacebookIcon.vue';
 import GoogleIcon from '@/components/common/icons/GoogleIcon.vue';
 import XIcon from '@/components/common/icons/XIcon.vue';
@@ -46,15 +44,6 @@ const login = () => {
         :aria-label="t('x')"
       >
         <XIcon />
-      </RoundedButton>
-
-      <RoundedButton
-        class="provider-btn bluesky"
-        primary
-        disabled
-        :aria-label="t('bluesky')"
-      >
-        <BlueskyIcon />
       </RoundedButton>
     </div>
   </div>
@@ -104,12 +93,6 @@ const login = () => {
 .provider-btn.x {
   --type-bg-color: #000000;
   --type-btn-color: #000000;
-  --type-fg-color: white;
-}
-
-.provider-btn.bluesky {
-  --type-bg-color: #0085ff;
-  --type-btn-color: #0085ff;
   --type-fg-color: white;
 }
 </style>
