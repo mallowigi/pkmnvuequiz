@@ -21,6 +21,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, GameMode, Gen, Type } from '@/types.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -36,7 +37,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 export const useFirebase = defineStore('firebase', () => {
-  const { setName } = useState();
+  const { setName } = useSettings();
   const { showUserMessage } = useMessages();
   const { t } = useI18n();
 
@@ -75,6 +76,7 @@ export const useFirebase = defineStore('firebase', () => {
 
   const createRecord = async () => {
     const { state } = useState();
+    const { settingsState } = useSettings();
     const { flowState } = useGameFlow();
     const { currentTypeState } = useCurrentType();
     const { currentGenState } = useCurrentGen();
@@ -89,7 +91,7 @@ export const useFirebase = defineStore('firebase', () => {
       hasGivenUp: flowState.isGivenUp,
       id: user?.uid,
       mode: state.mode,
-      name: state.name!,
+      name: settingsState.name!,
       numFound: numFound.value,
       numShadows: numShadows.value,
       time: timerState.elapsed,

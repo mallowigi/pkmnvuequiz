@@ -6,10 +6,10 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import TextBox from '@/components/common/TextBox.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
-import { useState } from '@/stores/useState.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 
 const { dialogs, closeDialog } = useDialogs();
-const { state, setName } = useState();
+const { settingsState, setName } = useSettings();
 
 const { t } = useI18n();
 

@@ -7,12 +7,12 @@ import NewGameButtons from '@/components/genSelection/NewGameButtons.vue';
 import TypeChooser from '@/components/genSelection/TypeChooser.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import { useState } from '@/stores/useState.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-const { state } = useState();
+const { settingsState } = useSettings();
 const { flowState, setGameSelectionState } = useGameFlow();
 const { data } = usePkmnData();
 
@@ -46,7 +46,7 @@ const close = () => {
 
           <!-- Game selection -->
           <div v-else>
-            <h3 class="title">{{ t('hello', { name: state.name }) }}</h3>
+            <h3 class="title">{{ t('hello', { name: settingsState.name }) }}</h3>
 
             <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 

@@ -8,7 +8,6 @@ import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer.ts';
@@ -22,6 +21,7 @@ import type {
   PokemonStatus,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -104,7 +104,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const { endGame } = useGameFlow();
   const { getCurrentGen } = useCurrentGen();
   const currentTypeStore = useCurrentType();
-  const { languagesState } = useLanguages();
+  const { settingsState } = useSettings();
   const { startTimer } = useTimer();
   const { playShiny } = usePlaySounds();
 
@@ -239,7 +239,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
         const shinyRandom = Math.random();
 
-        const shinyRate = state.withShinies ? 0.1 : 0.01;
+        const shinyRate = settingsState.withShinies ? 0.1 : 0.01;
         if (shinyRandom < shinyRate) {
           status.isShiny = true;
           playShiny(pokemon);
@@ -465,7 +465,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const isInRemaining = (pokemonName: string) => {
     const pokemonKey = normalizeName(pokemonName);
 
-    for (const lang of languagesState.languages) {
+    for (const lang of settingsState.languages) {
       const languageMap = pokemonMaps.languages[lang];
       if (!languageMap) continue;
 
@@ -504,7 +504,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const findPokemon = (input: string) => {
     const pokemonKey = normalizeName(input);
 
-    for (const lang of languagesState.languages) {
+    for (const lang of settingsState.languages) {
       const foundPokemon = pokemonMaps.languages[lang].get(pokemonKey);
       if (foundPokemon) {
         return foundPokemon;

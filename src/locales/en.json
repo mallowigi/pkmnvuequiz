@@ -146,6 +146,7 @@
   "newGame": "New Game",
   "nextPokemon": "Next Pokemon: {name}",
   "normal": "Normal",
+  "notFound": "Not found",
   "off": "Off",
   "on": "On",
   "or": "OR",
@@ -228,6 +229,5 @@
   "welcome": "Welcome to the Pokémon Quiz!",
   "welcomeBack": "Welcome back, {name} !",
   "x": "X",
-
   "zh": "Chinese (Traditional)"
 }

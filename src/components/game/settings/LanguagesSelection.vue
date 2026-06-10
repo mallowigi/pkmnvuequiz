@@ -4,12 +4,12 @@ import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { languages } from '@/data/languages.ts';
-import { useLanguages } from '@/stores/useLanguages.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import type { LanguageInfo } from '@/types.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
 
-const { languagesState, toggleLanguage } = useLanguages();
+const { settingsState, toggleLanguage } = useSettings();
 const { t } = useI18n();
 const { showUserMessage } = useMessages();
 const { getLanguageTranslation } = useTranslations();
@@ -19,7 +19,7 @@ const sortedLanguages = computed(() => {
 });
 
 const hasLanguage = (language: LanguageInfo) => {
-  return languagesState.languages.has(language.id);
+  return settingsState.languages.has(language.id);
 };
 
 const setLanguage = (language: LanguageInfo, value: boolean) => {

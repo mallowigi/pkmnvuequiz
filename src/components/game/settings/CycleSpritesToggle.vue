@@ -2,15 +2,15 @@
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
-import { useState } from '@/stores/useState.ts';
 import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state, setCycleSprites } = useState();
+const { settingsState, setCycleSprites } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const applyCycleSprites = (value: boolean) => {
-  if (state.withCycleSprites === value) return;
+  if (settingsState.withCycleSprites === value) return;
 
   setCycleSprites(value);
   showUserMessage(t('cycleSpritesSet', { status: value ? t('enabled') : t('disabled') }));
@@ -24,8 +24,8 @@ const applyCycleSprites = (value: boolean) => {
   >
     <SegmentButton
       :active="{
-        left: state.withCycleSprites,
-        right: !state.withCycleSprites,
+        left: settingsState.withCycleSprites,
+        right: !settingsState.withCycleSprites,
       }"
       :attached="{
         right: true,

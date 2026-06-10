@@ -11,7 +11,7 @@ const { flowState } = useGameFlow();
 const { findClosestPokemon } = usePokemons();
 
 const hintShown = ref(false);
-const hint = ref('not found');
+const hint = ref(t('notFound'));
 
 const toggle = () => {
   hintShown.value = !hintShown.value;

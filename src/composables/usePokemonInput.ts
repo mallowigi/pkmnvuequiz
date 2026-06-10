@@ -8,6 +8,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo } from '@/types.ts';
 import { capitalize } from '@/utils/utils';
+import { useSettings } from '@/stores/useSettings.ts';
 
 type Props = {
   clearInput: () => void;
@@ -15,6 +16,7 @@ type Props = {
 
 export const usePokemonInput = ({ clearInput }: Props) => {
   const { state } = useState();
+  const { settingsState } = useSettings();
   const { setRandomCurrentPokemon } = usePokemons();
   const { getCurrentType, setRandomCurrentType } = useCurrentType();
   const { showUserMessage } = useMessages();
@@ -44,7 +46,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const activateNextShadow = () => {
-    if (state.withShadowHelper) {
+    if (settingsState.withShadowHelper) {
       addRandomShadow();
     } else {
       showUserMessage(t('shadowHelperDisabled'));

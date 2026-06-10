@@ -1,17 +1,17 @@
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { useQuiz } from '@/composables/useQuiz.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useLanguages } from '@/stores/useLanguages.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
-import { useI18n } from 'vue-i18n';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
@@ -41,11 +41,11 @@ export const useSavedData = () => {
 
   const getSavedState = (): SaveData => {
     const { state } = useState();
+    const { settingsState } = useSettings();
     const { currentGenState } = useCurrentGen();
     const { currentTypeState } = useCurrentType();
     const { pokemonState } = usePokemons();
     const { timerState } = useTimer();
-    const { languagesState } = useLanguages();
     const { flowState } = useGameFlow();
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
@@ -66,10 +66,11 @@ export const useSavedData = () => {
 
     return {
       ...state,
+      ...settingsState,
       currentType: currentTypeState.currentType,
       gameSelectionState: flowState.gameSelectionState,
       gen: currentGenState.gen,
-      languages: Array.from(languagesState.languages),
+      languages: Array.from(settingsState.languages),
       pokemonProgress: {
         pokemonFound,
         pokemonShadowed,
@@ -127,7 +128,7 @@ export const useSavedData = () => {
     const { resetFlowState, setFlowState } = useGameFlow();
     const { pokemonState, resetPokemonState, findPokemon } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
-    const { setLanguages, resetLanguages } = useLanguages();
+    const { setLanguages, resetLanguages, setSettingsState } = useSettings();
     const { setTitle } = useQuiz();
 
     const {
@@ -249,13 +250,16 @@ export const useSavedData = () => {
       usedSpelling: statePayload.usedSpelling ?? false,
       usedTypeShuffle: statePayload.usedTypeShuffle ?? false,
       withCriesShuffle: statePayload.withCriesShuffle ?? false,
+      withShadows: statePayload.withShadows ?? false,
+      withTypeShuffle: statePayload.withTypeShuffle ?? false,
+    });
+
+    setSettingsState({
       withCycleSprites: statePayload.withCycleSprites ?? true,
       withShadowHelper: statePayload.withShadowHelper ?? false,
-      withShadows: statePayload.withShadows ?? false,
       withShinies: statePayload.withShinies ?? false,
       withSound: statePayload.withSound ?? true,
       withSpelling: statePayload.withSpelling ?? false,
-      withTypeShuffle: statePayload.withTypeShuffle ?? false,
     });
 
     showUserMessage(t('quizLoaded'));

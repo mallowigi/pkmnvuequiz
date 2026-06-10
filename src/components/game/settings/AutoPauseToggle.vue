@@ -2,15 +2,15 @@
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
-import { useState } from '@/stores/useState.ts';
 import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state, setAutoPause } = useState();
+const { settingsState, setAutoPause } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const applyAutoPause = (value: boolean) => {
-  if (state.autoPause === value) return;
+  if (settingsState.autoPause === value) return;
 
   setAutoPause(value);
   showUserMessage(t('autoPauseSet', { status: value ? t('enabled') : t('disabled') }));
@@ -24,8 +24,8 @@ const applyAutoPause = (value: boolean) => {
   >
     <SegmentButton
       :active="{
-        left: state.autoPause,
-        right: !state.autoPause,
+        left: settingsState.autoPause,
+        right: !settingsState.autoPause,
       }"
       :attached="{
         right: true,

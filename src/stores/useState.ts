@@ -5,29 +5,18 @@ import type { State, GameMode, Mode } from '@/types';
 
 export const useState = defineStore('state', () => {
   const state = reactive<State>({
-    autoPause: false,
     gameMode: null,
     isDark: false,
     mode: 'normal',
-    name: '',
     usedAutoPause: false,
     usedDisplayShadows: false,
     usedShadowHelper: false,
     usedSpelling: false,
     usedTypeShuffle: false,
     withCriesShuffle: false,
-    withCycleSprites: true,
-    withShadowHelper: false,
     withShadows: false,
-    withShinies: false,
-    withSound: true,
-    withSpelling: false,
     withTypeShuffle: false,
   });
-
-  const setName = (name: string | null) => {
-    state.name = name;
-  };
 
   const setGameMode = (mode: GameMode | null) => {
     state.gameMode = mode;
@@ -51,15 +40,6 @@ export const useState = defineStore('state', () => {
     state.isDark = isDark;
   };
 
-  const toggleShowShinies = () => {
-    state.withShinies = !state.withShinies;
-  };
-
-  const toggleSpelling = () => {
-    state.withSpelling = !state.withSpelling;
-    state.usedSpelling = true;
-  };
-
   const displayShadows = () => {
     state.withShadows = true;
     state.usedDisplayShadows = true;
@@ -69,11 +49,6 @@ export const useState = defineStore('state', () => {
     state.withShadows = false;
   };
 
-  const toggleShadowHelper = () => {
-    state.withShadowHelper = !state.withShadowHelper;
-    state.usedShadowHelper = true;
-  };
-
   const setTypeShuffle = (withTypeShuffle: boolean) => {
     state.withTypeShuffle = withTypeShuffle;
     state.usedTypeShuffle = true;
@@ -81,19 +56,6 @@ export const useState = defineStore('state', () => {
 
   const setCriesShuffle = (withCriesShuffle: boolean) => {
     state.withCriesShuffle = withCriesShuffle;
-  };
-
-  const setCycleSprites = (withCycleSprites: boolean) => {
-    state.withCycleSprites = withCycleSprites;
-  };
-
-  const setSound = (withSound: boolean) => {
-    state.withSound = withSound;
-  };
-
-  const setAutoPause = (autoPause: boolean) => {
-    state.autoPause = autoPause;
-    state.usedAutoPause = true;
   };
 
   const setState = (newState: Partial<State>) => {
@@ -114,22 +76,15 @@ export const useState = defineStore('state', () => {
     displayShadows,
     hideShadows,
     resetState,
-    setAutoPause,
     setCriesShuffle,
-    setCycleSprites,
     setDarkMode,
     setGameMode,
     setGameOver,
     setMode,
-    setName,
-    setSound,
     setState,
     setTypeShuffle,
     state,
     toggleDarkMode,
-    toggleShadowHelper,
-    toggleShowShinies,
-    toggleSpelling,
   };
 });
 

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useMessages } from '@/stores/useMessages.js';
-import { useState } from '@/stores/useState.js';
 import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state, toggleShowShinies } = useState();
+const { settingsState, toggleShowShinies } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const toggleShiny = () => {
   toggleShowShinies();
-  showUserMessage(t('shinyCharmSet', { status: state.withShinies ? t('enabled') : t('disabled') }));
+  showUserMessage(t('shinyCharmSet', { status: settingsState.withShinies ? t('enabled') : t('disabled') }));
 };
 </script>
 
@@ -18,7 +18,7 @@ const toggleShiny = () => {
   <RoundedButton
     v-tooltip="t('shinyCharmTooltip')"
     class="rad-br-tl shiny-toggle-icon"
-    :class="{ selected: state.withShinies }"
+    :class="{ selected: settingsState.withShinies }"
     @click="toggleShiny"
   >
     <img

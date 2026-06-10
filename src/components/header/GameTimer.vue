@@ -3,11 +3,11 @@ import { useDocumentVisibility, useWindowFocus, useInterval } from '@vueuse/core
 import { computed, watch } from 'vue';
 
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state } = useState();
+const { settingsState } = useSettings();
 const { timerState, incElapsed } = useTimer();
 const { flowState, pauseGame } = useGameFlow();
 const { t } = useI18n();
@@ -37,7 +37,7 @@ const windowFocus = useWindowFocus();
 
 // Stops the interval when the tab is not active
 watch(visibility, (current) => {
-  if (!state.autoPause) {
+  if (!settingsState.autoPause) {
     return;
   }
 
@@ -49,7 +49,7 @@ watch(visibility, (current) => {
 });
 
 watch(windowFocus, (isFocused) => {
-  if (!state.autoPause) {
+  if (!settingsState.autoPause) {
     return;
   }
 

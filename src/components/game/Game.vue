@@ -7,8 +7,10 @@ import GameOptions from '@/components/game/settings/GameOptions.vue';
 import SpellingChecker from '@/components/game/SpellingChecker.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
+import { useSettings } from '@/stores/useSettings.ts';
 
 const { state } = useState();
+const { settingsState } = useSettings();
 const { flowState } = useGameFlow();
 </script>
 
@@ -19,7 +21,7 @@ const { flowState } = useGameFlow();
     </FadeTransition>
 
     <FadeTransition>
-      <SpellingChecker v-if="state.withSpelling" />
+      <SpellingChecker v-if="settingsState.withSpelling" />
     </FadeTransition>
 
     <RegionBoxes />

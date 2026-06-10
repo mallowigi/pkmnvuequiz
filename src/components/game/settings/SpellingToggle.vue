@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useMessages } from '@/stores/useMessages.js';
-import { useState } from '@/stores/useState.js';
 import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state, toggleSpelling } = useState();
+const { settingsState, toggleSpelling } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const toggle = () => {
   toggleSpelling();
-  showUserMessage(t('spellingHelpSet', { status: state.withSpelling ? t('enabled') : t('disabled') }));
+  showUserMessage(t('spellingHelpSet', { status: settingsState.withSpelling ? t('enabled') : t('disabled') }));
 };
 </script>
 
@@ -20,7 +20,7 @@ const toggle = () => {
     class="spelling-toggle rad-br-tl"
     @click="toggle"
     v-game-ended
-    :class="{ selected: state.withSpelling }"
+    :class="{ selected: settingsState.withSpelling }"
   >
     {{ t('spellingHelp') }}
     <img

@@ -5,7 +5,6 @@ import TextBox from '@/components/common/TextBox.vue';
 import Leaderboards from '@/components/genSelection/Leaderboards.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useState } from '@/stores/useState.ts';
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useLocalStorage } from '@vueuse/core';
@@ -15,17 +14,18 @@ import FacebookIcon from '@/components/common/icons/FacebookIcon.vue';
 import XIcon from '@/components/common/icons/XIcon.vue';
 import BlueskyIcon from '@/components/common/icons/BlueskyIcon.vue';
 import { useAuth } from '@vueuse/firebase';
+import { useSettings } from '@/stores/useSettings.ts';
 
 const { t } = useI18n();
 const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { setGameSelectionState } = useGameFlow();
-const { state, setName } = useState();
+const { settingsState, setName } = useSettings();
 const { loadAutoSave, setReady, hasSavedState } = useSavedData();
 const { authenticateWithGoogle, signout, auth } = useFirebase();
 const { user, isAuthenticated } = useAuth(auth);
 
 const newGame = () => {
-  if (!state.name) {
+  if (!settingsState.name) {
     return;
   }
 
@@ -120,7 +120,7 @@ onMounted(() => {
             type="text"
             :placeholder="t('changeNameDialog.placeholder')"
             @input="editName"
-            :value="state.name"
+            :value="settingsState.name"
           />
         </form>
       </div>
@@ -150,7 +150,7 @@ onMounted(() => {
       <div class="row">
         <RoundedButton
           primary
-          :disabled="!state.name"
+          :disabled="!settingsState.name"
           @click="newGame"
         >
           {{ t('newGame') }}

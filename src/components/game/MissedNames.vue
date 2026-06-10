@@ -15,19 +15,21 @@ import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
 import MissedNamesTransition from '@/components/common/transitions/MissedNamesTransition.vue';
 import { useI18n } from 'vue-i18n';
 import { useTranslations } from '@/composables/useTranslations.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { t } = useI18n();
 const { getLanguageTranslation } = useTranslations();
 
-const { languagesState, getTranslation } = useLanguages();
+const { getTranslation } = useLanguages();
+const { settingsState } = useSettings();
 const pokemonStore = usePokemons();
 const { missed } = storeToRefs(pokemonStore);
 const { data } = usePkmnData();
 
 const currentLanguage = ref<Language | null>(
-  languagesState.languages.size > 0 ? Array.from(languagesState.languages)[0] : null,
+  settingsState.languages.size > 0 ? Array.from(settingsState.languages)[0] : null,
 );
 const isAccordionOpen = ref(false);
 

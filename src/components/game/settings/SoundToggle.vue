@@ -2,15 +2,15 @@
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
-import { useState } from '@/stores/useState.ts';
 import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state, setSound } = useState();
+const { settingsState, setSound } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const applySound = (value: boolean) => {
-  if (state.withSound === value) return;
+  if (settingsState.withSound === value) return;
 
   setSound(value);
   showUserMessage(t('soundSet', { status: value ? t('enabled') : t('disabled') }));
@@ -24,8 +24,8 @@ const applySound = (value: boolean) => {
   >
     <SegmentButton
       :active="{
-        left: state.withSound,
-        right: !state.withSound,
+        left: settingsState.withSound,
+        right: !settingsState.withSound,
       }"
       :attached="{
         right: true,

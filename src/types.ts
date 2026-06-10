@@ -127,8 +127,6 @@ export type UserData = {
 };
 
 export type State = {
-  name: string | null;
-  autoPause: boolean;
   gameMode: GameMode | null;
   isDark: boolean;
   mode: Mode;
@@ -139,17 +137,19 @@ export type State = {
   usedTypeShuffle: boolean;
   usedDisplayShadows: boolean;
 
-  withCycleSprites: boolean;
-  withShadowHelper: boolean;
   withShadows: boolean;
-  withShinies: boolean;
-  withSound: boolean;
-  withSpelling: boolean;
   withTypeShuffle: boolean;
   withCriesShuffle: boolean;
 };
 
-export type LanguagesState = {
+export type Settings = {
+  name: string | null;
+  autoPause: boolean;
+  withCycleSprites: boolean;
+  withShadowHelper: boolean;
+  withShinies: boolean;
+  withSound: boolean;
+  withSpelling: boolean;
   languages: Set<Language>;
 };
 
@@ -236,7 +236,7 @@ export type SaveData = {
   isDark: boolean;
   languages: Language[];
   mode: Mode;
-  name: string;
+  name: string | null;
   pokemonProgress: PokemonProgress;
   timer: TimerState;
   version: number;

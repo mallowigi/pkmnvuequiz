@@ -1,17 +1,17 @@
 import { useSound } from '@vueuse/sound';
 import { ref } from 'vue';
 
-import { useState } from '@/stores/useState.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import type { PokemonInfo } from '@/types.ts';
 
 export const usePlaySounds = () => {
-  const { state } = useState();
+  const { settingsState } = useSettings();
   const soundFile = ref();
 
   const { play } = useSound(soundFile, { interrupt: true, volume: 0.5 });
 
   const playFanfare = () => {
-    if (!state.withSound) return;
+    if (!settingsState.withSound) return;
 
     soundFile.value = 'assets/sounds/finish.mp3';
     setTimeout(() => {
@@ -20,7 +20,7 @@ export const usePlaySounds = () => {
   };
 
   const playFailSound = () => {
-    if (!state.withSound) return;
+    if (!settingsState.withSound) return;
 
     soundFile.value = 'assets/sounds/wrong.mp3';
     setTimeout(() => {
@@ -29,7 +29,7 @@ export const usePlaySounds = () => {
   };
 
   const playPokemonCry = (pokemonId: number) => {
-    if (!state.withSound) return;
+    if (!settingsState.withSound) return;
 
     soundFile.value = `assets/sounds/latest/${pokemonId}.ogg`;
     setTimeout(() => {
@@ -38,7 +38,7 @@ export const usePlaySounds = () => {
   };
 
   const playShiny = (pokemon: PokemonInfo) => {
-    if (!state.withSound) return;
+    if (!settingsState.withSound) return;
 
     switch (true) {
       case ['kanto', 'johto'].includes(pokemon.box):

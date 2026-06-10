@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
-import { useState } from '@/stores/useState.ts';
-import { useI18n } from 'vue-i18n';
+import { useSettings } from '@/stores/useSettings.ts';
 
-const { state, toggleShadowHelper } = useState();
+const { settingsState, toggleShadowHelper } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const toggle = () => {
   toggleShadowHelper();
-  showUserMessage(t('shadowHelperSet', { status: state.withShadowHelper ? t('enabled') : t('disabled') }));
+  showUserMessage(t('shadowHelperSet', { status: settingsState.withShadowHelper ? t('enabled') : t('disabled') }));
 };
 </script>
 
@@ -22,7 +23,7 @@ const toggle = () => {
   >
     <SegmentButton
       :active="{
-        left: state.withShadowHelper,
+        left: settingsState.withShadowHelper,
       }"
       @click:left="toggle"
     >
