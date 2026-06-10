@@ -8,7 +8,7 @@ import XIcon from '@/components/common/icons/XIcon.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 
-const { authenticateWithGoogle, signout, auth } = useFirebase();
+const { authenticateWithGoogle } = useFirebase();
 const { t } = useI18n();
 
 const login = () => {
@@ -18,14 +18,14 @@ const login = () => {
 
 <template>
   <div class="login-column">
-    <span class="login-with">{{ t }}</span>
+    <span class="login-with">{{ t('loginWith') }}</span>
 
     <div class="login-providers">
       <RoundedButton
         class="provider-btn google"
         primary
         @click="login"
-        :aria-label="t"
+        :aria-label="t('google')"
       >
         <GoogleIcon />
       </RoundedButton>
@@ -34,7 +34,7 @@ const login = () => {
         class="provider-btn facebook"
         primary
         disabled
-        :aria-label="t"
+        :aria-label="t('facebook')"
       >
         <FacebookIcon />
       </RoundedButton>
@@ -43,7 +43,7 @@ const login = () => {
         class="provider-btn x"
         primary
         disabled
-        :aria-label="t"
+        :aria-label="t('x')"
       >
         <XIcon />
       </RoundedButton>
@@ -52,7 +52,7 @@ const login = () => {
         class="provider-btn bluesky"
         primary
         disabled
-        :aria-label="t"
+        :aria-label="t('bluesky')"
       >
         <BlueskyIcon />
       </RoundedButton>
@@ -70,6 +70,8 @@ const login = () => {
 
 .login-with {
   font-weight: bold;
+  max-width: 250px;
+  line-height: 1.4;
 }
 
 .login-providers {

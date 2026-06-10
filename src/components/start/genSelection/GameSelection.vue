@@ -6,7 +6,7 @@ import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import GenChooser from '@/components/start/genSelection/GenChooser.vue';
 import TypeChooser from '@/components/start/genSelection/TypeChooser.vue';
 import Loading from '@/components/start/Loading.vue';
-import NewGameButtons from '@/components/start/NewGameButtons.vue';
+import StartScreen from '@/components/start/StartScreen.vue';
 import { useGameFlow } from '@/stores/useGameFlow.js';
 import { usePkmnData } from '@/stores/usePkmnStore.js';
 import { useSettings } from '@/stores/useSettings.js';
@@ -43,7 +43,7 @@ const close = () => {
           <Loading v-if="!data.isLoaded" />
 
           <!-- New Game / Continue -->
-          <NewGameButtons v-else-if="data.isLoaded && flowState.gameSelectionState === 'new'" />
+          <StartScreen v-else-if="data.isLoaded && flowState.gameSelectionState === 'new'" />
 
           <!-- Game selection -->
           <div v-else>

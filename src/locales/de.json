@@ -9,9 +9,9 @@
   "bug": "Käfer",
   "cancel": "Abbrechen",
   "changeName": "Spitznamen ändern",
+  "enterName": "Gib deinen Spitznamen ein",
   "changeNameDialog": {
     "description": "Ändere deinen aktuellen Spitznamen.",
-    "placeholder": "Gib deinen Spitznamen ein",
     "title": "Spitznamen ändern"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Heller Modus",
   "loadingQuiz": "Quiz wird geladen",
   "login": "Anmelden",
-  "loginAnonymously": "Anonym anmelden",
   "loginWith": "Melden Sie sich an, um Ihren Fortschritt zu speichern:",
   "lumiose": "Mega-Entwicklung (Illumina City)",
   "min": "min",

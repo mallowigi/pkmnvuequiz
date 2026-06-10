@@ -9,9 +9,9 @@
   "bug": "Bicho",
   "cancel": "Cancelar",
   "changeName": "Cambiar apodo",
+  "enterName": "Introduce tu apodo",
   "changeNameDialog": {
     "description": "Cambia tu apodo actual.",
-    "placeholder": "Introduce tu apodo",
     "title": "Cambiar apodo"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Modo Claro",
   "loadingQuiz": "Cargando Cuestionario",
   "login": "Iniciar Sesión",
-  "loginAnonymously": "Iniciar Sesión Anónimamente",
   "loginWith": "Inicia sesión para guardar tu progreso:",
   "lumiose": "Megaevolución (Ciudad Luminalia)",
   "min": "min",

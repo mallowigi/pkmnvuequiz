@@ -9,9 +9,9 @@
   "bug": "Насекомое",
   "cancel": "Отмена",
   "changeName": "Изменить никнейм",
+  "enterName": "Введите никнейм",
   "changeNameDialog": {
     "description": "Измените ваш текущий никнейм.",
-    "placeholder": "Введите никнейм",
     "title": "Изменить никнейм"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Светлый режим",
   "loadingQuiz": "Загрузка Квиз",
   "login": "Вход",
-  "loginAnonymously": "Вход анонимно",
   "loginWith": "Войдите, чтобы сохранить свой прогресс:",
   "lumiose": "Мегаэволюция (Люмиос-Сити)",
   "min": "мин",

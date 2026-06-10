@@ -9,9 +9,9 @@
   "bug": "むし",
   "cancel": "キャンセル",
   "changeName": "ニックネームを変更",
+  "enterName": "ニックネームを入力してください",
   "changeNameDialog": {
     "description": "現在のニックネームを変更します。",
-    "placeholder": "ニックネームを入力してください",
     "title": "ニックネームを変更"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "ライトモード",
   "loadingQuiz": "クイズを読み込み中",
   "login": "ログイン",
-  "loginAnonymously": "匿名でログイン",
   "loginWith": "進捗を保存するためにログインしてください:",
   "lumiose": "メガシンカ（ミアレシティ）",
   "min": "分",

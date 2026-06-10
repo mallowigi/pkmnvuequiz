@@ -9,9 +9,9 @@
   "bug": "Bug",
   "cancel": "Cancel",
   "changeName": "Change Nickname",
+  "enterName": "Enter your nickname",
   "changeNameDialog": {
     "description": "Change your current nickname.",
-    "placeholder": "Enter your nickname",
     "title": "Change Nickname"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Light Mode",
   "loadingQuiz": "Loading Quiz",
   "login": "Login",
-  "loginAnonymously": "Login Anonymously",
   "loginWith": "Login to keep your progress:",
   "lumiose": "Mega Evolution (Lumiose)",
   "min": "min",

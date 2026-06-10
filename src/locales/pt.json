@@ -9,9 +9,9 @@
   "bug": "Inseto",
   "cancel": "Cancelar",
   "changeName": "Mudar apelido",
+  "enterName": "Insira o seu apelido",
   "changeNameDialog": {
     "description": "Mude o seu apelido atual.",
-    "placeholder": "Insira o seu apelido",
     "title": "Mudar apelido"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Modo Claro",
   "loadingQuiz": "Carregando Quiz",
   "login": "Fazer Login",
-  "loginAnonymously": "Fazer Login Anonimamente",
   "loginWith": "Faça login para manter seu progresso:",
   "lumiose": "Mega Evolution (Cidade de Lumiose)",
   "min": "min",

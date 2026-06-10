@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import Socials from '@/components/start/Socials.vue';
-import TextBox from '@/components/common/TextBox.vue';
-import { useI18n } from 'vue-i18n';
 import { useLocalStorage } from '@vueuse/core';
-import { useSettings } from '@/stores/useSettings.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useI18n } from 'vue-i18n';
+
+import TextBox from '@/components/common/TextBox.vue';
+import Socials from '@/components/start/Socials.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 
 const { t } = useI18n();
 const name = useLocalStorage('pkmnQuizPlayerName', '');
@@ -30,41 +31,31 @@ const newGame = () => {
 </script>
 
 <template>
-  <div class="top-section">
-    <Socials />
+  <!-- Socials Login -->
+  <Socials />
 
-    <div class="separator-vertical">
-      <div class="line"></div>
-      <span class="or-text">{{ t }}</span>
-      <div class="line"></div>
-    </div>
+  <div class="separator-vertical">
+    <div class="line"></div>
+    <span class="or-text">{{ t('or') }}</span>
+    <div class="line"></div>
+  </div>
 
-    <div class="login-column name-column">
-      <span class="login-with">{{ t }}</span>
-      <form @submit.prevent="newGame">
-        <TextBox
-          class="large-text"
-          type="text"
-          :placeholder="t"
-          @input="editName"
-          :value="settingsState.name"
-        />
-      </form>
-    </div>
+  <!-- Anonymous Login -->
+  <div class="login-column name-column">
+    <span class="login-with">{{ t('enterName') }}</span>
+    <form @submit.prevent="newGame">
+      <TextBox
+        class="large-text"
+        type="text"
+        :placeholder="t('enterName')"
+        @input="editName"
+        :value="settingsState.name"
+      />
+    </form>
   </div>
 </template>
 
 <style scoped>
-.top-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 32px;
-  width: 100%;
-  justify-content: center;
-  padding: 16px 0;
-}
-
 .login-column {
   display: flex;
   flex-direction: column;
@@ -87,13 +78,13 @@ const newGame = () => {
   flex-direction: column;
   align-items: center;
   align-self: stretch;
-}
 
-.separator-vertical .line {
-  width: 1px;
-  background-color: var(--text);
-  flex-grow: 1;
-  opacity: 0.3;
+  & .line {
+    width: 1px;
+    background-color: var(--text);
+    flex-grow: 1;
+    opacity: 0.3;
+  }
 }
 
 .or-text {

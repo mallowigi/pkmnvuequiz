@@ -9,9 +9,9 @@
   "bug": "Insecte",
   "cancel": "Annuler",
   "changeName": "Changer de Pseudo",
+  "enterName": "Entrez votre pseudo",
   "changeNameDialog": {
     "description": "Changez votre pseudo actuel.",
-    "placeholder": "Entrez votre pseudo",
     "title": "Changer de pseudo"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Mode Jour",
   "loadingQuiz": "Chargement du Quiz",
   "login": "Connexion",
-  "loginAnonymously": "Se connecter anonymement",
   "loginWith": "Connectez-vous pour conserver votre progression:",
   "lumiose": "Méga-Évolution (Illumis)",
   "min": "min",

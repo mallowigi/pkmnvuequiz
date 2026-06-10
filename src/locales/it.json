@@ -9,9 +9,9 @@
   "bug": "Coleottero",
   "cancel": "Annulla",
   "changeName": "Cambia soprannome",
+  "enterName": "Inserisci il tuo soprannome",
   "changeNameDialog": {
     "description": "Cambia il tuo soprannome attuale.",
-    "placeholder": "Inserisci il tuo soprannome",
     "title": "Cambia soprannome"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "Modalità Chiara",
   "loadingQuiz": "Caricamento Quiz",
   "login": "Accedi",
-  "loginAnonymously": "Accedi in modo anonimo",
   "loginWith": "Accedi per mantenere i tuoi progressi:",
   "lumiose": "Megaevoluzione (Luminopoli)",
   "min": "min",

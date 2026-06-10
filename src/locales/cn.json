@@ -9,9 +9,9 @@
   "bug": "虫",
   "cancel": "取消",
   "changeName": "更改昵称",
+  "enterName": "输入你的昵称",
   "changeNameDialog": {
     "description": "更改你当前的昵称。",
-    "placeholder": "输入你的昵称",
     "title": "更改昵称"
   },
   "changeTimerDialog": {
@@ -118,7 +118,6 @@
   "lightMode": "浅色模式",
   "loadingQuiz": "加载测验中",
   "login": "登录",
-  "loginAnonymously": "匿名登录",
   "loginWith": "登录以保存您的进度:",
   "lumiose": "超級進化（密阿雷市）",
   "min": "分钟",
