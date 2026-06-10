@@ -1,0 +1,84 @@
+:root {
+  --text: #333;
+  --text-inverted: #eee;
+  --full-overlay: rgba(16, 17, 14, 1);
+  --black: #111;
+  --button: white;
+  --button-hover: #666666;
+  --primary: #8cc63f;
+  --darkPrimary: #65ae04;
+  --danger: #d00;
+  --secondary: rgba(255, 255, 255, 0.85);
+  --input: #eee;
+  --input-bg: rgba(255, 255, 255, 0.85);
+  --input-text: #333;
+
+  --type-btn-color: var(--primary);
+  --type-dark-color: var(--darkPrimary);
+  --type-inline-color: inherit;
+  --type-fg-color: var(--text);
+
+  --max-width: 66%;
+  --num-cols: 5;
+  --sprite-width: 64px;
+  --text-padding: 10px;
+
+  --glow: #333;
+  --animate-duration: 0.5s;
+  --animate-delay: 0;
+  --animate-repeat: 1;
+}
+
+.dark {
+  --text: #fff;
+  --text-inverted: #333;
+  --button: #111;
+  --button-hover: #444444;
+
+  --type-btn-color: var(--primary);
+  --type-dark-color: var(--darkPrimary);
+  --type-inline-color: inherit;
+  --type-fg-color: var(--text);
+
+  --glow: black;
+}
+
+.main {
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  margin: 2rem;
+}
+
+.background {
+  background-image: url(@/assets/background-50.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: var(--type-bg-color, var(--primary));
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: all 0.2s ease-in-out;
+
+  &.dark {
+    background-image: url(background-dark.svg);
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  background: var(--black);
+  color: #fff;
+  padding: 11px 14px;
+}
