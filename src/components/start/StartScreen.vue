@@ -10,6 +10,7 @@ import LoggedInInfo from '@/components/start/LoggedInInfo.vue';
 import LoginControls from '@/components/start/LoginControls.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 import { useSettings } from '@/stores/useSettings.js';
+import NewGameButtons from '@/components/start/NewGameButtons.vue';
 
 const { t } = useI18n();
 const name = useLocalStorage('pkmnQuizPlayerName', '');
