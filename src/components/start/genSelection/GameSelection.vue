@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import Overlay from '@/components/common/Overlay.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
-import GenChooser from '@/components/genSelection/GenChooser.vue';
-import Loading from '@/components/genSelection/Loading.vue';
-import NewGameButtons from '@/components/genSelection/NewGameButtons.vue';
-import TypeChooser from '@/components/genSelection/TypeChooser.vue';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import { useSettings } from '@/stores/useSettings.ts';
-import { useI18n } from 'vue-i18n';
+import GenChooser from '@/components/start/genSelection/GenChooser.vue';
+import TypeChooser from '@/components/start/genSelection/TypeChooser.vue';
+import Loading from '@/components/start/Loading.vue';
+import NewGameButtons from '@/components/start/NewGameButtons.vue';
+import { useGameFlow } from '@/stores/useGameFlow.js';
+import { usePkmnData } from '@/stores/usePkmnStore.js';
+import { useSettings } from '@/stores/useSettings.js';
 
 const { t } = useI18n();
 
@@ -31,7 +32,7 @@ const close = () => {
         <!-- Logo -->
         <div v-if="!flowState.isStarted">
           <img
-            src="@/assets/logo.gif"
+            src="../../../assets/logo.gif"
             class="titlecard"
             alt="Logo"
           />

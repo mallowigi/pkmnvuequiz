@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { useFirebase } from '@/composables/useFirebase.ts';
 import type { DocumentData } from 'firebase/firestore';
-import { useState } from '@/stores/useState.ts';
-import { useCurrentType } from '@/stores/useCurrentType.ts';
-import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useI18n } from 'vue-i18n';
-import { useTranslations } from '@/composables/useTranslations.ts';
+
+import { useFirebase } from '@/composables/useFirebase.js';
+import { useTranslations } from '@/composables/useTranslations.js';
+import { useCurrentGen } from '@/stores/useCurrentGen.js';
+import { useCurrentType } from '@/stores/useCurrentType.js';
+import { useState } from '@/stores/useState.js';
 
 const { getTopTrainers } = useFirebase();
 const { state } = useState();

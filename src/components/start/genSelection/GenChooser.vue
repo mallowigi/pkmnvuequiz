@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import CyclingStarters from '@/components/genSelection/CyclingStarters.vue';
-import CyclingType from '@/components/genSelection/CyclingType.vue';
-import { gens } from '@/data/gens';
-import type { Gen } from '@/types.ts';
-import { useQuiz } from '@/composables/useQuiz.ts';
 import { useI18n } from 'vue-i18n';
+
+import CyclingStarters from '@/components/start/genSelection/CyclingStarters.vue';
+import CyclingType from '@/components/start/genSelection/CyclingType.vue';
+import { useQuiz } from '@/composables/useQuiz.js';
+import { gens } from '@/data/gens';
+import type { Gen } from '@/types.js';
 
 const { t } = useI18n();
 

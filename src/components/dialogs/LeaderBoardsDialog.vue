@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import Leaderboards from '@/components/genSelection/Leaderboards.vue';
+import Leaderboards from '@/components/start/Leaderboards.vue';
 import { useTranslations } from '@/composables/useTranslations.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';

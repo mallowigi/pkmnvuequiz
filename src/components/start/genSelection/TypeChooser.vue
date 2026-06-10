@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useQuiz } from '@/composables/useQuiz.js';
+import { useTranslations } from '@/composables/useTranslations.js';
 import { typesList } from '@/data/pokemonTypes';
 import { useCurrentType } from '@/stores/useCurrentType';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useQuiz } from '@/composables/useQuiz.ts';
-import { useTranslations } from '@/composables/useTranslations.ts';
-import { useI18n } from 'vue-i18n';
+import { useGameFlow } from '@/stores/useGameFlow.js';
 
 const { setGameSelectionState } = useGameFlow();
 const { getSpecialType } = useCurrentType();
