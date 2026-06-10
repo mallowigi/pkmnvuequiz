@@ -9,6 +9,7 @@
 <style scoped>
 .icon {
   display: flex;
+  color: var(--text);
 
   &:hover :deep(svg) {
     filter: drop-shadow(0 0 2px var(--type-dark-color, var(--secondary)))
