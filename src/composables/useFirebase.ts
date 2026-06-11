@@ -8,6 +8,7 @@ import {
   setPersistence,
   browserLocalPersistence,
   signOut,
+  FacebookAuthProvider,
 } from 'firebase/auth';
 import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
@@ -18,10 +19,10 @@ import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, GameMode, Gen, Type } from '@/types.ts';
-import { useSettings } from '@/stores/useSettings.ts';
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -59,6 +60,26 @@ export const useFirebase = defineStore('firebase', () => {
     await setPersistence(auth, browserLocalPersistence)
       .then(() => {
         signInWithPopup(auth, googleProvider)
+          .then((result) => {
+            const user = result.user;
+            setName(user.displayName ?? 'Trainer');
+          })
+          .catch((error) => {
+            console.error('Auth failed:', error);
+            const errorMessage = error.message;
+            showUserMessage(errorMessage, 'error');
+          });
+      })
+      .catch((error) => {
+        console.error('Persistence failed:', error);
+      });
+  };
+
+  const authenticateWithFacebook = async () => {
+    await setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        const provider = new FacebookAuthProvider();
+        signInWithPopup(auth, provider)
           .then((result) => {
             const user = result.user;
             setName(user.displayName ?? 'Trainer');
@@ -158,6 +179,7 @@ export const useFirebase = defineStore('firebase', () => {
   return {
     auth,
     authenticateAnonymously,
+    authenticateWithFacebook,
     authenticateWithGoogle,
     createRecord,
     getTopTrainers,

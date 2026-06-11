@@ -6,11 +6,15 @@ import XIcon from '@/components/common/icons/XIcon.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 
-const { authenticateWithGoogle } = useFirebase();
+const { authenticateWithGoogle, authenticateWithFacebook } = useFirebase();
 const { t } = useI18n();
 
-const login = () => {
+const loginWithGoogle = () => {
   authenticateWithGoogle();
+};
+
+const loginFacebook = () => {
+  authenticateWithFacebook();
 };
 </script>
 
@@ -22,7 +26,7 @@ const login = () => {
       <RoundedButton
         class="provider-btn google"
         primary
-        @click="login"
+        @click="loginWithGoogle"
         :aria-label="t('google')"
       >
         <GoogleIcon />
@@ -31,7 +35,7 @@ const login = () => {
       <RoundedButton
         class="provider-btn facebook"
         primary
-        disabled
+        @click="loginFacebook"
         :aria-label="t('facebook')"
       >
         <FacebookIcon />
