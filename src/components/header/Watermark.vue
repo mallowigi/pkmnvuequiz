@@ -1,24 +1,19 @@
 <script setup lang="ts">
-import { useAuth } from '@vueuse/firebase';
 import { useI18n } from 'vue-i18n';
 
 import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import CreditsIcon from '@/components/common/icons/CreditsIcon.vue';
 import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
 import LocaleChanger from '@/components/header/LocaleChanger.vue';
-import { useFirebase } from '@/composables/useFirebase.ts';
 import { useCredits } from '@/stores/useCredits.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { useSettings } from '@/stores/useSettings.ts';
+import Avatar from '@/components/header/Avatar.vue';
 
 const { setDialog } = useDialogs();
 const { toggleSettings } = useGameFlow();
 const { toggleShowCredits } = useCredits();
 const { t } = useI18n();
-const { auth } = useFirebase();
-const { user } = useAuth(auth);
-const { settingsState } = useSettings();
 
 const showLeaderBoards = () => {
   setDialog('leaderboards');
@@ -53,11 +48,7 @@ const showCredits = () => {
 
       <LocaleChanger />
 
-      <div
-        class="avatar"
-        v-tooltip:bottom="user?.displayName || settingsState.name"
-        :style="{ '--avatar-url': `url(${user?.photoURL})` }"
-      />
+      <Avatar />
     </div>
 
     <div class="url">pkmnvuequiz.netlify.app</div>
@@ -81,16 +72,5 @@ const showCredits = () => {
   z-index: 10;
   padding: 4px 0 10px 40px;
   color: var(--text);
-}
-
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid var(--text);
-  background: var(--avatar-url);
-  background-size: cover;
-  cursor: pointer;
 }
 </style>
