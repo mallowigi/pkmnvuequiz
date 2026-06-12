@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onClickOutside, onKeyStroke } from '@vueuse/core';
 import { useAuth } from '@vueuse/firebase';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useFirebase } from '@/composables/useFirebase.ts';
@@ -43,6 +43,14 @@ onClickOutside(avatarContainer, () => {
 onKeyStroke('Escape', () => {
   isMenuOpen.value = false;
 });
+
+const initials = computed(() => {
+  const parts = (settingsState.name || '').trim().split(' ').slice(0, 2);
+  return parts
+    .map((p) => p[0])
+    .join('')
+    .toUpperCase();
+});
 </script>
 
 <template>
@@ -53,7 +61,8 @@ onKeyStroke('Escape', () => {
     <div
       class="avatar"
       v-tooltip:bottom="settingsState.name"
-      :style="{ '--avatar-url': `url(${user?.photoURL})` }"
+      :style="user?.photoURL ? { '--avatar-url': `url('${user.photoURL}')` } : {}"
+      :data-name="user?.photoURL ? '' : initials"
       @click="toggleMenu"
     />
 
@@ -112,10 +121,22 @@ onKeyStroke('Escape', () => {
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--text);
-  background: var(--avatar-url);
+  background-color: var(--darkPrimary, #333);
+  background-image: var(--avatar-url);
   background-size: cover;
+  background-position: center;
   cursor: pointer;
+  position: relative;
   anchor-name: --avatar;
+
+  &::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
 }
 
 .avatar-menu {
