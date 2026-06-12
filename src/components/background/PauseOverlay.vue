@@ -14,6 +14,7 @@ const resume = () => resumeGame();
 <template>
   <Overlay
     class="full-overlay"
+    :prevent-closing="true"
     @close="resume"
   >
     <div class="prompt">

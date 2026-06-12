@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
 
+const props = defineProps<{
+  preventClosing?: boolean;
+}>();
+
 const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
+const close = () => {
+  if (!props.preventClosing) {
+    emit('close');
+  }
+};
+
 const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Escape') {
-    emit('close');
+    close();
   }
 };
 
@@ -23,7 +33,7 @@ onUnmounted(() => {
 <template>
   <div
     :class="['overlay', $attrs.class]"
-    @click.self="emit('close')"
+    @click.self="close"
   >
     <slot />
   </div>
