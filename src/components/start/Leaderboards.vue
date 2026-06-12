@@ -138,7 +138,8 @@ const subType = (user: DocumentData): string => {
 
 .no-records {
   padding: 20px;
-  color: var(--text-inverted);
+  filter: brightness(0.5);
+  color: var(--text);
 }
 
 .create-btn {

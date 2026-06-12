@@ -9,6 +9,16 @@ const { settingsState } = useSettings();
 const { auth } = useFirebase();
 const { user } = useAuth(auth);
 
+const props = defineProps<{
+  size?: number;
+}>();
+
+const emits = defineEmits(['clickPicture']);
+
+const toggleMenu = () => {
+  emits('clickPicture');
+};
+
 const initials = computed(() => {
   const parts = (settingsState.name || '').trim().split(' ').slice(0, 2);
   return parts
@@ -17,18 +27,20 @@ const initials = computed(() => {
     .toUpperCase();
 });
 
-const emits = defineEmits(['clickPicture']);
-
-const toggleMenu = () => {
-  emits('clickPicture');
-};
+const styles = computed(() => {
+  return {
+    '--avatar-url': user.value?.photoURL ? `url('${user.value.photoURL}')` : '',
+    '--height': props.size ? `${props.size}px` : '32px',
+    '--width': props.size ? `${props.size}px` : '32px',
+  };
+});
 </script>
 
 <template>
   <div
     class="avatar"
     v-tooltip:bottom="settingsState.name"
-    :style="user?.photoURL ? { '--avatar-url': `url('${user.photoURL}')` } : {}"
+    :style="styles"
     :data-name="user?.photoURL ? '' : initials"
     @click="toggleMenu"
   />
@@ -48,8 +60,8 @@ const toggleMenu = () => {
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  width: var(--width);
+  height: var(--height);
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--text);

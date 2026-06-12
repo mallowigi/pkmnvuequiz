@@ -9,6 +9,7 @@ import Leaderboards from '@/components/start/Leaderboards.vue';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useSettings } from '@/stores/useSettings.ts';
+import ProfilePic from '@/components/header/ProfilePic.vue';
 
 const { closeDialog } = useDialogs();
 const { auth } = useFirebase();
@@ -39,15 +40,21 @@ const initials = computed(() => {
       <h2>{{ t('userProfile') }}</h2>
 
       <div class="profile-content">
-        <div
+        <!--<div-->
+        <!--  class="profile-avatar"-->
+        <!--  :style="user?.photoURL ? { '&#45;&#45;avatar-url': `url('${user.photoURL}')` } : {}"-->
+        <!--  :data-name="user?.photoURL ? '' : initials"-->
+        <!--/>-->
+
+        <ProfilePic
           class="profile-avatar"
-          :style="user?.photoURL ? { '--avatar-url': `url('${user.photoURL}')` } : {}"
-          :data-name="user?.photoURL ? '' : initials"
+          :size="100"
         />
+
         <h3 class="profile-name">{{ settingsState.name }}</h3>
 
         <div class="profile-records">
-          <h4>{{ t('topGuessers') }}</h4>
+          <h4>{{ t('topPlays', { n: 3 }) }}</h4>
 
           <Leaderboards
             :uid="user?.uid"
