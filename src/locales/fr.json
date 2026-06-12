@@ -112,7 +112,7 @@
     "time": "Temps"
   },
   "leaderboardsDialog": {
-    "title": "Top 3 devineurs {mode}"
+    "title": "Top 3 Joueurs {mode}"
   },
   "legendary": "Légendaire",
   "lightMode": "Mode Jour",
@@ -213,7 +213,7 @@
   "timer": "Chrono",
   "timerTooltip": "Définissez un temps limité pour le jeu.",
   "toggleSettings": "Afficher les options",
-  "topGuessers": "Top {n} Devineurs",
+  "topGuessers": "Top {n} Joueurs",
   "typeQuiz": "Quiz {type}",
   "typeShuffle": "Type Aléatoire",
   "typeShuffleOnlyInRegularModeTooltip": "Le Type Aléatoire ne peut être activé qu'en mode normal",

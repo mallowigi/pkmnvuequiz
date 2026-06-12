@@ -23,14 +23,12 @@ export const useLeaderboards = () => {
     const type = props.type ?? currentTypeState.currentType;
     const uid = props.uid;
 
-    const topTrainers = getTopTrainers({
+    return getTopTrainers({
       gameMode,
       gen,
       type,
       uid,
     });
-
-    return topTrainers;
   };
 
   return {

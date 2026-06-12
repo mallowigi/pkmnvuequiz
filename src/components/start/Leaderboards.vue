@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import type { DocumentData } from 'firebase/firestore';
 import { useI18n } from 'vue-i18n';
-
-import { useFirebase } from '@/composables/useFirebase.js';
 import { useTranslations } from '@/composables/useTranslations.js';
-import { useCurrentGen } from '@/stores/useCurrentGen.js';
-import { useCurrentType } from '@/stores/useCurrentType.js';
-import { useState } from '@/stores/useState.js';
+import type { GameMode, Gen, Type } from '@/types.ts';
+import { useLeaderboards } from '@/composables/useLeaderboards.ts';
 
-const { getTopTrainers } = useFirebase();
-const { state } = useState();
-const { currentTypeState } = useCurrentType();
-const { currentGenState } = useCurrentGen();
+const props = defineProps<{
+  uid?: string | null;
+  gameMode?: GameMode | null;
+  gen?: Gen | null;
+  type?: Type | null;
+}>();
+
+const { getLeaderboards } = useLeaderboards();
 const { t } = useI18n();
 const { getGenTranslation, getTypeTranslation, getGameModeTranslation } = useTranslations();
 
-const topTrainers = getTopTrainers({
-  gameMode: state.gameMode!,
-  gen: state.gameMode === 'gen' ? currentGenState.gen : undefined,
-  type: state.gameMode === 'types' ? currentTypeState.currentType : undefined,
-});
+const topTrainers = getLeaderboards(props);
 
 const formatTime = (timeInSec: number) => {
   const hours = String(Math.floor(timeInSec / 3600));
