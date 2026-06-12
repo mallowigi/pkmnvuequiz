@@ -16,7 +16,7 @@
   },
   "changeTimerDialog": {
     "description": "Le quiz et le chrono seront réinitialisés",
-    "title": "Changer le chronomètre?"
+    "title": "Changer le chrono?"
   },
   "chaos": "Chaos",
   "chaosModeTooltip": "Mode Chaos: Trouvez les Pokémon dans n'importe quel ordre, sans placements prédéfinis",
@@ -210,7 +210,7 @@
   "switchQuizDialog": {
     "title": "Changer de quiz?"
   },
-  "timer": "Chronomètre",
+  "timer": "Chrono",
   "timerTooltip": "Définissez un temps limité pour le jeu.",
   "toggleSettings": "Afficher les options",
   "topGuessers": "Top {n} Devineurs",

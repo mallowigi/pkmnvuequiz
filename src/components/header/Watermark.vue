@@ -51,17 +51,13 @@ const showCredits = () => {
         v-tooltip:bottom="t('toggleSettings')"
       />
 
-      <div class="avatar">
-        <img
-          v-if="user?.photoURL"
-          :src="user?.photoURL"
-          :alt="user.displayName ?? 'avatar'"
-          class="avatar-img"
-        />
-        <small>{{ settingsState.name }}</small>
-      </div>
-
       <LocaleChanger />
+
+      <div
+        class="avatar"
+        v-tooltip:bottom="user?.displayName || settingsState.name"
+        :style="{ '--avatar-url': `url(${user?.photoURL})` }"
+      />
     </div>
 
     <div class="url">pkmnvuequiz.netlify.app</div>
@@ -85,5 +81,16 @@ const showCredits = () => {
   z-index: 10;
   padding: 4px 0 10px 40px;
   color: var(--text);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--text);
+  background: var(--avatar-url);
+  background-size: cover;
+  cursor: pointer;
 }
 </style>
