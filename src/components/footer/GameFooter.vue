@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { useCredits } from '@/stores/useCredits';
 import { useI18n } from 'vue-i18n';
+
+import GitHubIcon from '@/components/common/icons/GitHubIcon.vue';
+import { useCredits } from '@/stores/useCredits';
 
 const { toggleShowCredits } = useCredits();
 
@@ -10,7 +12,7 @@ const { t } = useI18n();
 <template>
   <footer class="footer rad transition-element">
     <!-- Authors -->
-    <div class="footerRow">
+    <div class="footerRow first">
       <i18n-t
         keypath="footer.projectBy"
         class="p1"
@@ -20,18 +22,27 @@ const { t } = useI18n();
           <a
             href="https://linktr.ee/adeptcharon"
             target="_blank"
-            >Charon</a
           >
+            Charon
+          </a>
         </template>
 
         <template #mallowigi>
           <a
             href="https://github.com/mallowigi"
             target="_blank"
-            >Mallowigi</a
           >
+            Mallowigi
+          </a>
         </template>
       </i18n-t>
+
+      <a
+        href="https://github.com/mallowigi/pkmnvuequiz"
+        target="_blank"
+      >
+        <GitHubIcon class="github" />
+      </a>
     </div>
 
     <div class="footerRow">
@@ -104,8 +115,8 @@ const { t } = useI18n();
           <a
             href="https://msikma.github.io/pokesprite/overview/dex-gen8.html"
             target="_blank"
-            >Pokésprite Database</a
-          >
+            >Pokésprite Database
+          </a>
         </template>
       </i18n-t>
 
@@ -135,6 +146,12 @@ const { t } = useI18n();
 
 .footerRow {
   line-height: 30px;
+
+  &.first {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 .link {
@@ -146,5 +163,9 @@ const { t } = useI18n();
   height: 24px;
   vertical-align: middle;
   margin: 0 8px;
+}
+
+.github {
+  display: inline-flex;
 }
 </style>
