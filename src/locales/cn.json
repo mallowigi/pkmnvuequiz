@@ -1,6 +1,6 @@
 {
   "alola": "阿罗拉",
-  "areazero": "Area Zero (帕尔迪亚)",
+  "areazero": "第零区 (帕底亚)",
   "autoPause": "自动暂停:",
   "autoPauseSet": "自动暂停 {status}",
   "autoPauseTooltip": "切换自动暂停开/关",
@@ -9,7 +9,6 @@
   "bug": "虫",
   "cancel": "取消",
   "changeName": "更改昵称",
-  "enterName": "输入你的昵称",
   "changeNameDialog": {
     "description": "更改你当前的昵称。",
     "title": "更改昵称"
@@ -54,6 +53,7 @@
     "supporters": "支持者：",
     "wellDone": "做得好！"
   },
+  "enterName": "输入你的昵称",
   "es": "西班牙语",
   "exit": "退出",
   "facebook": "Facebook",
@@ -134,7 +134,7 @@
     "orderCaption": "强制按宝可梦图鉴顺序猜测"
   },
   "multiplayerInvite": "多人游戏邀请",
-  "mythical": "神话",
+  "mythical": "幻",
   "nameAll": {
     "full": "说出所有宝可梦的名字！",
     "gen": "说出所有{name}的宝可梦的名字！",
@@ -223,6 +223,7 @@
   "ultrabeast": "究极异兽",
   "unova": "合众",
   "upload": "上传",
+  "userProfile": "用户资料",
   "variousArtists": "多位艺术家",
   "water": "水",
   "welcome": "欢迎来到宝可梦问卷！",

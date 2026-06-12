@@ -9,13 +9,12 @@
   "bug": "Inseto",
   "cancel": "Cancelar",
   "changeName": "Mudar apelido",
-  "enterName": "Insira o seu apelido",
   "changeNameDialog": {
     "description": "Mude o seu apelido atual.",
     "title": "Mudar apelido"
   },
   "changeTimerDialog": {
-    "description": "O quiz e le temporizador serão redefinidos",
+    "description": "O quiz e o temporizador serão redefinidos",
     "title": "Alterar temporizador?"
   },
   "chaos": "Caos",
@@ -54,6 +53,7 @@
     "supporters": "Apoiadores:",
     "wellDone": "Muito bem!"
   },
+  "enterName": "Insira o seu apelido",
   "es": "Espanhol",
   "exit": "Sair",
   "facebook": "Facebook",
@@ -82,7 +82,7 @@
     "description": "Você tem certeza que quer desistir?",
     "title": "Desistir?"
   },
-  "gmax": "Gigantamax",
+  "gmax": "Gigamax",
   "google": "Google",
   "grass": "Grama",
   "ground": "Terra",
@@ -114,12 +114,12 @@
   "leaderboardsDialog": {
     "title": "Top 3 adivinhadores de {mode}"
   },
-  "legendary": "Legendary",
+  "legendary": "Lendário",
   "lightMode": "Modo Claro",
   "loadingQuiz": "Carregando Quiz",
   "login": "Fazer Login",
   "loginWith": "Faça login para manter seu progresso:",
-  "lumiose": "Mega Evolution (Cidade de Lumiose)",
+  "lumiose": "Mega Evolução (Cidade de Lumiose)",
   "min": "min",
   "missedNames": "Nomes perdidos:",
   "mode": "Modo",
@@ -134,7 +134,7 @@
     "orderCaption": "Forçar adivinhação na ordem da Pokédex"
   },
   "multiplayerInvite": "Convite Multijogador",
-  "mythical": "Mythical",
+  "mythical": "Mítico",
   "nameAll": {
     "full": "Nomeie todos os Pokémon!",
     "gen": "Nomeie todos os Pokémon de {name}!",
@@ -151,7 +151,7 @@
   "or": "OU",
   "order": "Ordem",
   "paldea": "Paldea",
-  "paradox": "Paradox",
+  "paradox": "Paradoxo",
   "paused": "Pausado",
   "poison": "Veneno",
   "pokemongo": "Pokémon GO",
@@ -204,7 +204,7 @@
   "spellingHelpSet": "Ajuda de ortografia {status}",
   "spellingHelpTooltip": "Ativar/Desativar ajuda de ortografia",
   "steel": "Aço",
-  "sublegendary": "Sub-Legendary",
+  "sublegendary": "Sub-legendário",
   "submit": "Enviar",
   "switch": "Trocar",
   "switchQuizDialog": {
@@ -220,9 +220,10 @@
   "typeShuffleSet": "Tipo aleatório {status}",
   "typeShuffleTooltip": "Adivinhe o próximo Pokémon de um certo tipo",
   "types": "Tipos",
-  "ultrabeast": "Ultra Beast",
+  "ultrabeast": "Ultrafera",
   "unova": "Unova",
   "upload": "Enviar",
+  "userProfile": "Perfil de Usuário",
   "variousArtists": "vários artistas",
   "water": "Água",
   "welcome": "Bem-vindo ao Quiz Pokémon!",

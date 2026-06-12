@@ -1,15 +1,14 @@
 {
   "alola": "Alola",
   "areazero": "Zone Zéro (Paldea)",
-  "autoPause": "Auto Pause:",
-  "autoPauseSet": "Auto Pause {status}",
+  "autoPause": "Pause Auto:",
+  "autoPauseSet": "Pause Auto {status}",
   "autoPauseTooltip": "Activer/Désactiver la Pause Auto",
   "back": "Retour",
   "bluesky": "BlueSky",
   "bug": "Insecte",
   "cancel": "Annuler",
   "changeName": "Changer de Pseudo",
-  "enterName": "Entrez votre pseudo",
   "changeNameDialog": {
     "description": "Changez votre pseudo actuel.",
     "title": "Changer de pseudo"
@@ -54,6 +53,7 @@
     "supporters": "Contributeurs:",
     "wellDone": "Bien joué!"
   },
+  "enterName": "Entrez votre pseudo",
   "es": "Espagnol",
   "exit": "Quitter",
   "facebook": "Facebook",
@@ -82,7 +82,7 @@
     "description": "Êtes-vous sûr de vouloir abandonner?",
     "title": "Abandonner?"
   },
-  "gmax": "Gigantamax",
+  "gmax": "Gigamax",
   "google": "Google",
   "grass": "Plante",
   "ground": "Sol",
@@ -134,7 +134,7 @@
     "orderCaption": "Activer le mode Ordre du Pokédex"
   },
   "multiplayerInvite": "Invitation Multijoueur",
-  "mythical": "Mythique",
+  "mythical": "Fabuleux",
   "nameAll": {
     "full": "Nommez tous les Pokémon!",
     "gen": "Nommez les Pokémon de {name}!",
@@ -223,6 +223,7 @@
   "ultrabeast": "Ultra-Chimère",
   "unova": "Unys",
   "upload": "Télécharger",
+  "userProfile": "Profil Utilisateur",
   "variousArtists": "divers artistes",
   "water": "Eau",
   "welcome": "Bienvenue sur le Quiz Pokémon!",

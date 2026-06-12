@@ -9,7 +9,6 @@
   "bug": "벌레",
   "cancel": "취소",
   "changeName": "닉네임 변경",
-  "enterName": "닉네임을 입력하세요",
   "changeNameDialog": {
     "description": "현재 닉네임을 변경합니다.",
     "title": "닉네임 변경"
@@ -54,6 +53,7 @@
     "supporters": "후원자:",
     "wellDone": "잘하셨습니다!"
   },
+  "enterName": "닉네임을 입력하세요",
   "es": "스페인어",
   "exit": "종료",
   "facebook": "Facebook",
@@ -82,7 +82,7 @@
     "description": "정말로 포기하시겠습니까?",
     "title": "포기하시겠습니까?"
   },
-  "gmax": "기가맥스",
+  "gmax": "거다이맥스",
   "google": "Google",
   "grass": "풀",
   "ground": "땅",
@@ -223,6 +223,7 @@
   "ultrabeast": "울트라비스트",
   "unova": "하나",
   "upload": "업로드",
+  "userProfile": "사용자 프로필",
   "variousArtists": "여러 아티스트",
   "water": "물",
   "welcome": "포켓몬 퀴즈에 오신 것을 환영합니다!",

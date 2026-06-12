@@ -1,6 +1,6 @@
 {
   "alola": "Alola",
-  "areazero": "Area Zero (Paldea)",
+  "areazero": "Zone Null (Paldea)",
   "autoPause": "Automatische Pause:",
   "autoPauseSet": "Automatische Pause {status}",
   "autoPauseTooltip": "Automatische Pause Ein/Aus",
@@ -82,7 +82,7 @@
     "description": "Bist du sicher, dass du aufgeben möchtest?",
     "title": "Aufgeben?"
   },
-  "gmax": "Gigantamax",
+  "gmax": "Gigadynamax",
   "google": "Google",
   "grass": "Pflanze",
   "ground": "Boden",
@@ -134,7 +134,7 @@
     "orderCaption": "Raten in Pokédex-Reihenfolge erzwingen"
   },
   "multiplayerInvite": "Multiplayer-Einladung",
-  "mythical": "Mythisch",
+  "mythical": "Mysteriös",
   "nameAll": {
     "full": "Nenne alle Pokémon!",
     "gen": "Nenne alle {name}-Pokémon!",
@@ -228,5 +228,6 @@
   "welcome": "Willkommen zum Pokémon-Quiz!",
   "welcomeBack": "Willkommen zurück, {name}!",
   "x": "X",
-  "zh": "Chinesisch (Traditionell)"
+  "zh": "Chinesisch (Traditionell)",
+  "userProfile": "Benutzerprofil"
 }

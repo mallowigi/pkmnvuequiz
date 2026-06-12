@@ -9,7 +9,6 @@
   "bug": "Coleottero",
   "cancel": "Annulla",
   "changeName": "Cambia soprannome",
-  "enterName": "Inserisci il tuo soprannome",
   "changeNameDialog": {
     "description": "Cambia il tuo soprannome attuale.",
     "title": "Cambia soprannome"
@@ -54,6 +53,7 @@
     "supporters": "Sostenitori:",
     "wellDone": "Ben fatto!"
   },
+  "enterName": "Inserisci il tuo soprannome",
   "es": "Spagnolo",
   "exit": "Esci",
   "facebook": "Facebook",
@@ -82,7 +82,7 @@
     "description": "Sei sicuro di voler rinunciare?",
     "title": "Rinunciare?"
   },
-  "gmax": "Gigantamax",
+  "gmax": "Gigamax",
   "google": "Google",
   "grass": "Erba",
   "ground": "Terra",
@@ -223,6 +223,7 @@
   "ultrabeast": "Ultracreatura",
   "unova": "Unima",
   "upload": "Carica",
+  "userProfile": "Profilo Utente",
   "variousArtists": "vari artisti",
   "water": "Acqua",
   "welcome": "Benvenuto nel Quiz Pokémon!",

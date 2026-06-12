@@ -9,7 +9,6 @@
   "bug": "むし",
   "cancel": "キャンセル",
   "changeName": "ニックネームを変更",
-  "enterName": "ニックネームを入力してください",
   "changeNameDialog": {
     "description": "現在のニックネームを変更します。",
     "title": "ニックネームを変更"
@@ -54,6 +53,7 @@
     "supporters": "サポーター:",
     "wellDone": "よくできました！"
   },
+  "enterName": "ニックネームを入力してください",
   "es": "スペイン語",
   "exit": "終了",
   "facebook": "Facebook",
@@ -223,6 +223,7 @@
   "ultrabeast": "ウルトラビースト",
   "unova": "イッシュ",
   "upload": "アップロード",
+  "userProfile": "ユーザープロフィール",
   "variousArtists": "様々なアーティスト",
   "water": "みず",
   "welcome": "ポケモンクイズへようこそ！",

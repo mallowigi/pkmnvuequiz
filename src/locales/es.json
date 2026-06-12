@@ -82,7 +82,7 @@
     "description": "¿Estás seguro de que quieres rendirte?",
     "title": "¿Rendirse?"
   },
-  "gmax": "Gigantamax",
+  "gmax": "Gigamax",
   "google": "Google",
   "grass": "Planta",
   "ground": "Tierra",
@@ -134,7 +134,7 @@
     "orderCaption": "Forzar adivinanzas en orden de la Pokédex"
   },
   "multiplayerInvite": "Invitación Multijugador",
-  "mythical": "Mítico",
+  "mythical": "Singular",
   "nameAll": {
     "full": "¡Nombra a todos los Pokémon!",
     "gen": "¡Nombra a todos los Pokémon de {name}!",
@@ -228,5 +228,6 @@
   "welcome": "¡Bienvenido al Quiz de Pokémon!",
   "welcomeBack": "¡Bienvenido de vuelta, {name}!",
   "x": "X",
-  "zh": "Chino (Tradicional)"
+  "zh": "Chino (Tradicional)",
+  "userProfile": "Perfil de usuario"
 }
