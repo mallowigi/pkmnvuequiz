@@ -89,8 +89,12 @@ export const useFirebase = defineStore('firebase', () => {
     gameMode,
     gen,
     type,
-  }: { gameMode?: GameMode | null; gen?: Gen | null; type?: Type | null } = {}) => {
+    uid,
+  }: { gameMode?: GameMode | null; gen?: Gen | null; type?: Type | null; uid?: string | null } = {}) => {
     const andCondition = [where('hasGivenUp', '==', false)];
+    if (uid) {
+      andCondition.push(where('uid', '==', uid));
+    }
     if (gameMode) {
       andCondition.push(where('gameMode', '==', gameMode));
 
