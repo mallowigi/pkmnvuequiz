@@ -66,7 +66,7 @@
   "flying": "Vol",
   "footer": {
     "license": "Ce projet est une œuvre dérivée non officielle basée sur Pokémon. Les sprites officiels appartiennent à © Nintendo/Creatures Inc./GAME FREAK Inc.",
-    "originalProject": "Projet original à {location}. {donation}",
+    "originalProject": "Projet original: {location}. {donation}",
     "projectBy": "Projet par {charon}. Réécrit avec Vue par {mallowigi}.",
     "resources": "Sources de données: {pokeapi}. Ressources des sprites: {sprites}.",
     "sprites": "Sprites personnalisés et modifiés réalisés par {artists} ≡ dans le cadre du projet {project}."
