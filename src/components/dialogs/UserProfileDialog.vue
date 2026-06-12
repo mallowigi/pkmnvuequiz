@@ -47,7 +47,8 @@ const initials = computed(() => {
         <h3 class="profile-name">{{ settingsState.name }}</h3>
 
         <div class="profile-records">
-          <h4>{{ t('top3Plays') }}</h4>
+          <h4>{{ t('topGuessers') }}</h4>
+
           <Leaderboards
             :uid="user?.uid"
             :gameMode="null"
