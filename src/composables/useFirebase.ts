@@ -9,6 +9,7 @@ import {
   browserLocalPersistence,
   signOut,
   FacebookAuthProvider,
+  updateProfile,
 } from 'firebase/auth';
 import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
@@ -38,7 +39,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 export const useFirebase = defineStore('firebase', () => {
-  const { setName } = useSettings();
+  const { setName, setAvatar } = useSettings();
   const { showUserMessage } = useMessages();
   const { t } = useI18n();
 
@@ -63,6 +64,7 @@ export const useFirebase = defineStore('firebase', () => {
           .then((result) => {
             const user = result.user;
             setName(user.displayName ?? 'Trainer');
+            setAvatar(user.photoURL);
           })
           .catch((error) => {
             console.error('Auth failed:', error);
@@ -80,9 +82,17 @@ export const useFirebase = defineStore('firebase', () => {
       .then(() => {
         const provider = new FacebookAuthProvider();
         signInWithPopup(auth, provider)
-          .then((result) => {
+          .then(async (result) => {
             const user = result.user;
+            const facebookId = user.providerData.find((p) => p.providerId === 'facebook.com')?.uid;
+            const photoURL = facebookId ? `https://graph.facebook.com/${facebookId}/picture?type=large` : user.photoURL;
+
+            if (photoURL && user.photoURL !== photoURL) {
+              await updateProfile(user, { photoURL });
+            }
+
             setName(user.displayName ?? 'Trainer');
+            setAvatar(photoURL);
           })
           .catch((error) => {
             console.error('Auth failed:', error);
@@ -108,6 +118,7 @@ export const useFirebase = defineStore('firebase', () => {
     const user = auth.currentUser;
 
     const payload: UserRecord = {
+      avatar: settingsState.avatar,
       gameMode: state.gameMode!,
       hasGivenUp: flowState.isGivenUp,
       id: user?.uid,
@@ -167,6 +178,7 @@ export const useFirebase = defineStore('firebase', () => {
     try {
       await signOut(auth);
       setName(null);
+      setAvatar(null);
       resetFlowState();
       showUserMessage(t('signedOut'));
     } catch (error) {

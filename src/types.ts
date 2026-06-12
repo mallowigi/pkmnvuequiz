@@ -145,6 +145,7 @@ export type State = {
 
 export type Settings = {
   name: string | null;
+  avatar: string | null;
   autoPause: boolean;
   withCycleSprites: boolean;
   withShadowHelper: boolean;
@@ -238,6 +239,7 @@ export type SaveData = {
   languages: Language[];
   mode: Mode;
   name: string | null;
+  avatar: string | null;
   pokemonProgress: PokemonProgress;
   timer: TimerState;
   version: number;
@@ -269,6 +271,7 @@ export type Message = {
 export interface UserRecord extends DocumentData {
   gameMode: GameMode;
   id?: string;
+  avatar?: string | null;
   gen?: Gen | null;
   mode: Mode;
   name: string;

@@ -9,6 +9,7 @@ export const useSettings = defineStore('settings', () => {
 
   const settingsState = reactive<Settings>({
     autoPause: false,
+    avatar: null,
     languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
     name: '',
     withCycleSprites: true,
@@ -36,6 +37,10 @@ export const useSettings = defineStore('settings', () => {
 
   const setName = (name: string | null) => {
     settingsState.name = name;
+  };
+
+  const setAvatar = (avatar: string | null) => {
+    settingsState.avatar = avatar;
   };
 
   const toggleShowShinies = () => {
@@ -72,6 +77,7 @@ export const useSettings = defineStore('settings', () => {
   return {
     resetLanguages,
     setAutoPause,
+    setAvatar,
     setCycleSprites,
     setLanguages,
     setName,

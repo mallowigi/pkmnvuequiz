@@ -268,6 +268,8 @@ export const useSavedData = () => {
     });
 
     setSettingsState({
+      name: statePayload.name ?? null,
+      avatar: statePayload.avatar ?? null,
       withCycleSprites: statePayload.withCycleSprites ?? true,
       withShadowHelper: statePayload.withShadowHelper ?? false,
       withShinies: statePayload.withShinies ?? false,
