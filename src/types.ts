@@ -8,6 +8,7 @@ export type Dialog =
   | 'leaderboards'
   | 'normal'
   | 'order'
+  | 'login'
   | 'reset'
   | 'settings'
   | 'shadows'

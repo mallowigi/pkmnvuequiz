@@ -36,32 +36,43 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Socials Login -->
-  <Socials />
+  <div class="twocols">
+    <!-- Socials Login -->
+    <Socials />
 
-  <div class="separator-vertical">
-    <div class="line"></div>
-    <span class="or-text">{{ t('or') }}</span>
-    <div class="line"></div>
-  </div>
+    <div class="separator-vertical">
+      <div class="line"></div>
+      <span class="or-text">{{ t('or') }}</span>
+      <div class="line"></div>
+    </div>
 
-  <!-- Anonymous Login -->
-  <div class="login-column name-column">
-    <span class="login-with">{{ t('enterName') }}</span>
-    <form @submit.prevent="newGame">
-      <TextBox
-        class="large-text"
-        maxlength="50"
-        type="text"
-        :placeholder="t('enterName')"
-        @input="editName"
-        :value="settingsState.name"
-      />
-    </form>
+    <!-- Anonymous Login -->
+    <div class="login-column name-column">
+      <span class="login-with">{{ t('enterName') }}</span>
+      <form @submit.prevent="newGame">
+        <TextBox
+          class="large-text"
+          maxlength="50"
+          type="text"
+          :placeholder="t('enterName')"
+          @input="editName"
+          :value="settingsState.name"
+        />
+      </form>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.twocols {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  justify-content: center;
+  padding: 16px 0;
+}
 .login-column {
   display: flex;
   flex-direction: column;
@@ -101,5 +112,6 @@ onMounted(() => {
 
 .large-text {
   padding: 6px;
+  width: 200px;
 }
 </style>

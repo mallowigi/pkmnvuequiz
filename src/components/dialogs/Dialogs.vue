@@ -10,6 +10,7 @@ import LeaderBoardsDialog from '@/components/dialogs/LeaderBoardsDialog.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import ChangeNameDialog from '@/components/dialogs/ChangeNameDialog.vue';
 import { useI18n } from 'vue-i18n';
+import LoginDialog from '@/components/dialogs/LoginDialog.vue';
 
 const { dialogs } = useDialogs();
 const { t } = useI18n();
@@ -48,6 +49,8 @@ const { t } = useI18n();
     <LeaderBoardsDialog v-if="dialogs.dialog === 'leaderboards'" />
 
     <ChangeNameDialog v-if="dialogs.dialog === 'changeName'" />
+
+    <LoginDialog v-if="dialogs.dialog === 'login'" />
   </FadeTransition>
 </template>
 

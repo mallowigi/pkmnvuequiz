@@ -9,7 +9,7 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 
 const { auth, signout } = useFirebase();
-const { user } = useAuth(auth);
+const { user, isAuthenticated } = useAuth(auth);
 const { settingsState } = useSettings();
 const { setDialog } = useDialogs();
 const { t } = useI18n();
@@ -23,6 +23,11 @@ const toggleMenu = () => {
 
 const openProfile = () => {
   setDialog('changeName');
+  isMenuOpen.value = false;
+};
+
+const openLogin = () => {
+  setDialog('login');
   isMenuOpen.value = false;
 };
 
@@ -51,21 +56,38 @@ onKeyStroke('Escape', () => {
       :style="{ '--avatar-url': `url(${user?.photoURL})` }"
       @click="toggleMenu"
     />
-    <div
-      v-if="isMenuOpen"
-      class="avatar-menu"
-    >
+
+    <div v-if="isAuthenticated">
       <div
-        class="menu-item"
-        @click="openProfile"
+        v-if="isMenuOpen"
+        class="avatar-menu"
       >
-        {{ t('userProfile') }}
+        <div
+          class="menu-item"
+          @click="openProfile"
+        >
+          {{ t('userProfile') }}
+        </div>
+        <div
+          class="menu-item"
+          @click="handleLogout"
+        >
+          {{ t('signout') }}
+        </div>
       </div>
+    </div>
+
+    <div v-else>
       <div
-        class="menu-item"
-        @click="handleLogout"
+        v-if="isMenuOpen"
+        class="avatar-menu"
       >
-        {{ t('signout') }}
+        <div
+          class="menu-item"
+          @click="openLogin"
+        >
+          {{ t('login') }}
+        </div>
       </div>
     </div>
   </div>
@@ -98,8 +120,8 @@ onKeyStroke('Escape', () => {
 
 .avatar-menu {
   position: absolute;
-  top: anchor(--avatar bottom);
-  left: anchor(--avatar left);
+  top: calc(anchor(--avatar bottom) + 8px);
+  right: anchor(--avatar right);
 
   background: var(--button);
   border: 1px solid var(--type-btn-color, var(--primary));
