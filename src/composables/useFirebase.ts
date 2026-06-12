@@ -99,7 +99,7 @@ export const useFirebase = defineStore('firebase', () => {
 
             if (facebookUid && accessToken) {
               // 3. Assemble the authenticated high-resolution image URL
-              const authenticatedPhotoUrl = `https://facebook.com{facebookUid}/picture?type=large&access_token=${accessToken}`;
+              const authenticatedPhotoUrl = `https://facebook.com${facebookUid}/picture?type=large&access_token=${accessToken}`;
 
               console.log('Authenticated Profile Picture URL:', authenticatedPhotoUrl);
               // Pass this authenticatedPhotoUrl directly to your image element/state
