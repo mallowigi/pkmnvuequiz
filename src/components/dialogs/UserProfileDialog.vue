@@ -40,12 +40,6 @@ const initials = computed(() => {
       <h2>{{ t('userProfile') }}</h2>
 
       <div class="profile-content">
-        <!--<div-->
-        <!--  class="profile-avatar"-->
-        <!--  :style="user?.photoURL ? { '&#45;&#45;avatar-url': `url('${user.photoURL}')` } : {}"-->
-        <!--  :data-name="user?.photoURL ? '' : initials"-->
-        <!--/>-->
-
         <ProfilePic
           class="profile-avatar"
           :size="100"

@@ -9,7 +9,6 @@
   "bug": "Bug",
   "cancel": "Cancel",
   "changeName": "Change Nickname",
-  "enterName": "Enter your nickname",
   "changeNameDialog": {
     "description": "Change your current nickname.",
     "title": "Change Nickname"
@@ -54,6 +53,7 @@
     "supporters": "Supporters:",
     "wellDone": "Well done!"
   },
+  "enterName": "Enter your nickname",
   "es": "Spanish",
   "exit": "Exit",
   "facebook": "Facebook",
@@ -214,6 +214,7 @@
   "timerTooltip": "Set a timer for the game.",
   "toggleSettings": "Toggle Settings",
   "topGuessers": "Top {n} Guessers",
+  "topPlays": "Top {n} Plays",
   "typeQuiz": "{type} Quiz",
   "typeShuffle": "Type Shuffle",
   "typeShuffleOnlyInRegularModeTooltip": "Type Shuffle can only be toggled in Regular mode",
