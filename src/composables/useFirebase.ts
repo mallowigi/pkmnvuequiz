@@ -1,20 +1,15 @@
 import { useFirestore } from '@vueuse/firebase';
-import { initializeApp } from 'firebase/app';
 import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
   signInAnonymously,
-  setPersistence,
-  browserLocalPersistence,
   signOut,
-  FacebookAuthProvider,
-  updateProfile,
 } from 'firebase/auth';
-import { addDoc, collection, doc, getFirestore, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
 import { useI18n } from 'vue-i18n';
 
+import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
+import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
+import { auth, db } from '@/firebase.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -25,23 +20,13 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, GameMode, Gen, Type } from '@/types.ts';
 
-const app = initializeApp({
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-});
-const db = getFirestore(app);
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
-
 export const useFirebase = defineStore('firebase', () => {
   const { setName, setAvatar } = useSettings();
   const { showUserMessage } = useMessages();
   const { t } = useI18n();
+
+  const { authenticateWithGoogle } = useGoogleAuth();
+  const { authenticateWithFacebook } = useFacebookAuth();
 
   const authenticateAnonymously = async () => {
     signInAnonymously(auth)
@@ -54,54 +39,6 @@ export const useFirebase = defineStore('firebase', () => {
         console.error('Auth failed:', error);
         const errorMessage = error.message;
         showUserMessage(errorMessage, 'error');
-      });
-  };
-
-  const authenticateWithGoogle = async () => {
-    await setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        signInWithPopup(auth, googleProvider)
-          .then((result) => {
-            const user = result.user;
-            setName(user.displayName ?? 'Trainer');
-            setAvatar(user.photoURL);
-          })
-          .catch((error) => {
-            console.error('Auth failed:', error);
-            const errorMessage = error.message;
-            showUserMessage(errorMessage, 'error');
-          });
-      })
-      .catch((error) => {
-        console.error('Persistence failed:', error);
-      });
-  };
-
-  const authenticateWithFacebook = async () => {
-    await setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        const provider = new FacebookAuthProvider();
-        signInWithPopup(auth, provider)
-          .then(async (result) => {
-            const user = result.user;
-            const facebookId = user.providerData.find((p) => p.providerId === 'facebook.com')?.uid;
-            const photoURL = facebookId ? `https://graph.facebook.com/${facebookId}/picture?type=large` : user.photoURL;
-
-            if (photoURL && user.photoURL !== photoURL) {
-              await updateProfile(user, { photoURL });
-            }
-
-            setName(user.displayName ?? 'Trainer');
-            setAvatar(photoURL);
-          })
-          .catch((error) => {
-            console.error('Auth failed:', error);
-            const errorMessage = error.message;
-            showUserMessage(errorMessage, 'error');
-          });
-      })
-      .catch((error) => {
-        console.error('Persistence failed:', error);
       });
   };
 
