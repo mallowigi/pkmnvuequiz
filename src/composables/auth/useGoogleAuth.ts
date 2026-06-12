@@ -1,8 +1,10 @@
 import { browserLocalPersistence, setPersistence, signInWithPopup, updateProfile } from 'firebase/auth';
 
-import { auth, googleProvider } from '@/firebase';
+import { auth } from '@/firebase';
 import { useMessages } from '@/stores/useMessages';
 import { useSettings } from '@/stores/useSettings';
+import firebase from 'firebase/compat/app';
+import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 
 export const useGoogleAuth = () => {
   const { setName, setAvatar } = useSettings();
@@ -11,7 +13,9 @@ export const useGoogleAuth = () => {
   const authenticateWithGoogle = async () => {
     await setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        signInWithPopup(auth, googleProvider)
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
           .then(async (result) => {
             const user = result.user;
             const photoURL = user.photoURL?.replace(/=s\d+-c/, '=s500-c') || user.photoURL;
