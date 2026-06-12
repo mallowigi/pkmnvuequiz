@@ -2,7 +2,6 @@
 import { useI18n } from 'vue-i18n';
 import FacebookIcon from '@/components/common/icons/FacebookIcon.vue';
 import GoogleIcon from '@/components/common/icons/GoogleIcon.vue';
-import XIcon from '@/components/common/icons/XIcon.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 
@@ -39,15 +38,6 @@ const loginFacebook = () => {
         :aria-label="t('facebook')"
       >
         <FacebookIcon />
-      </RoundedButton>
-
-      <RoundedButton
-        class="provider-btn x"
-        primary
-        disabled
-        :aria-label="t('x')"
-      >
-        <XIcon />
       </RoundedButton>
     </div>
   </div>
@@ -91,12 +81,6 @@ const loginFacebook = () => {
 .provider-btn.facebook {
   --type-bg-color: #1877f2;
   --type-btn-color: #1877f2;
-  --type-fg-color: white;
-}
-
-.provider-btn.x {
-  --type-bg-color: #000000;
-  --type-btn-color: #000000;
   --type-fg-color: white;
 }
 </style>
