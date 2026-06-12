@@ -51,6 +51,8 @@ const initials = computed(() => {
     .join('')
     .toUpperCase();
 });
+
+const profilePic = computed(() => settingsState.profilePic);
 </script>
 
 <template>
@@ -61,7 +63,7 @@ const initials = computed(() => {
     <div
       class="avatar"
       v-tooltip:bottom="settingsState.name"
-      :style="user?.photoURL ? { '--avatar-url': `url('${user.photoURL}')` } : {}"
+      :style="user?.photoURL ? { '--avatar-url': `url('${profilePic ?? user.photoURL}')` } : {}"
       :data-name="user?.photoURL ? '' : initials"
       @click="toggleMenu"
     />

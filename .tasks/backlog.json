@@ -524,5 +524,21 @@
     "done": false,
     "createdAt": "2026-06-06T17:21:09.383Z",
     "updatedAt": "2026-06-06T17:21:09.383Z"
+  },
+  {
+    "id": "local-d6372eb9-6b8f-4ed3-ab90-6b7a4ab0a666",
+    "connectorId": "local",
+    "title": "Fix Facebook profile picture",
+    "done": false,
+    "createdAt": "2026-06-12T17:23:51.793Z",
+    "updatedAt": "2026-06-12T17:23:51.793Z"
+  },
+  {
+    "id": "local-049d9c0b-6a7c-4483-9a58-9a05fe0188f9",
+    "connectorId": "local",
+    "title": "Save settings in firebase",
+    "done": false,
+    "createdAt": "2026-06-12T17:24:14.077Z",
+    "updatedAt": "2026-06-12T17:24:14.077Z"
   }
 ]

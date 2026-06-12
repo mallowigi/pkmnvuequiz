@@ -150,6 +150,7 @@ export type Settings = {
   withShadowHelper: boolean;
   withShinies: boolean;
   withSound: boolean;
+  profilePic: string;
   withSpelling: boolean;
   languages: Set<Language>;
 };

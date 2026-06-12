@@ -11,6 +11,7 @@ export const useSettings = defineStore('settings', () => {
     autoPause: false,
     languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
     name: '',
+    profilePic: '',
     withCycleSprites: true,
     withShadowHelper: false,
     withShinies: false,
@@ -69,12 +70,17 @@ export const useSettings = defineStore('settings', () => {
     Object.assign(settingsState, settings);
   };
 
+  const setProfilePic = (myPhotoUrl: string) => {
+    settingsState.profilePic = myPhotoUrl;
+  };
+
   return {
     resetLanguages,
     setAutoPause,
     setCycleSprites,
     setLanguages,
     setName,
+    setProfilePic,
     setSettingsState,
     setSound,
     settingsState,

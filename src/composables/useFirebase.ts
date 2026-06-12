@@ -38,7 +38,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 export const useFirebase = defineStore('firebase', () => {
-  const { setName } = useSettings();
+  const { setName, setProfilePic } = useSettings();
   const { showUserMessage } = useMessages();
   const { t } = useI18n();
 
@@ -81,7 +81,31 @@ export const useFirebase = defineStore('firebase', () => {
         const provider = new FacebookAuthProvider();
         signInWithPopup(auth, provider)
           .then((result) => {
+            // const user = result.user;
+
+            // 1. Extract the Facebook Access Token from the credential object
+            const credential = FacebookAuthProvider.credentialFromResult(result);
+            const accessToken = credential?.accessToken;
+
+            // 2. Locate the user's explicit Facebook UID from providerData
             const user = result.user;
+            let facebookUid = '';
+
+            user.providerData.forEach((profile) => {
+              if (profile.providerId === 'facebook.com') {
+                facebookUid = profile.uid;
+              }
+            });
+
+            if (facebookUid && accessToken) {
+              // 3. Assemble the authenticated high-resolution image URL
+              const authenticatedPhotoUrl = `https://facebook.com{facebookUid}/picture?type=large&access_token=${accessToken}`;
+
+              console.log('Authenticated Profile Picture URL:', authenticatedPhotoUrl);
+              // Pass this authenticatedPhotoUrl directly to your image element/state
+              setProfilePic(authenticatedPhotoUrl);
+            }
+
             setName(user.displayName ?? 'Trainer');
           })
           .catch((error) => {
