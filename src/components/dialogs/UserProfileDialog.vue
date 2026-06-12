@@ -3,8 +3,6 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
-import RoundedButton from '@/components/common/RoundedButton.vue';
-import TextBox from '@/components/common/TextBox.vue';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 
@@ -41,30 +39,6 @@ const editName = (value: string) => {
     <div class="prompt">
       <h2>{{ t('changeNameDialog.title') }}</h2>
       <p class="desc">{{ t('changeNameDialog.description') }}</p>
-
-      <TextBox
-        type="text"
-        class="large-text"
-        :placeholder="t('enterName')"
-        @input="editName"
-      />
-
-      <div class="row">
-        <RoundedButton
-          @click.stop="submit"
-          primary
-          :disabled="!name"
-        >
-          {{ t('submit') }}
-        </RoundedButton>
-
-        <RoundedButton
-          @click.stop="cancel"
-          primary
-        >
-          {{ t('cancel') }}
-        </RoundedButton>
-      </div>
     </div>
   </Overlay>
 </template>

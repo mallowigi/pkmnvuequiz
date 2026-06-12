@@ -1,19 +1,20 @@
-import type { DocumentData } from 'firebase/firestore';
 import { type User } from 'firebase/auth';
+import type { DocumentData } from 'firebase/firestore';
 
 export type Dialog =
   | 'changeName'
   | 'chaos'
   | 'giveup'
   | 'leaderboards'
+  | 'login'
   | 'normal'
   | 'order'
-  | 'login'
   | 'reset'
   | 'settings'
   | 'shadows'
   | 'switchQuiz'
-  | 'timer';
+  | 'timer'
+  | 'userProfile';
 
 export type GameMode = 'full' | 'gen' | 'special' | 'types';
 

@@ -8,7 +8,7 @@ import SwitchQuizDialog from '@/components/dialogs/SwitchQuizDialog.vue';
 import { useDialogs } from '@/stores/useDialogs';
 import LeaderBoardsDialog from '@/components/dialogs/LeaderBoardsDialog.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
-import ChangeNameDialog from '@/components/dialogs/ChangeNameDialog.vue';
+import UserProfileDialog from '@/components/dialogs/UserProfileDialog.vue';
 import { useI18n } from 'vue-i18n';
 import LoginDialog from '@/components/dialogs/LoginDialog.vue';
 
@@ -48,7 +48,7 @@ const { t } = useI18n();
 
     <LeaderBoardsDialog v-if="dialogs.dialog === 'leaderboards'" />
 
-    <ChangeNameDialog v-if="dialogs.dialog === 'changeName'" />
+    <UserProfileDialog v-if="dialogs.dialog === 'userProfile'" />
 
     <LoginDialog v-if="dialogs.dialog === 'login'" />
   </FadeTransition>

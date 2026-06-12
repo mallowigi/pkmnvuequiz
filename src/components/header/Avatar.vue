@@ -22,7 +22,7 @@ const toggleMenu = () => {
 };
 
 const openProfile = () => {
-  setDialog('changeName');
+  setDialog('userProfile');
   isMenuOpen.value = false;
 };
 
