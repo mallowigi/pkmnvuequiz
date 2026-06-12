@@ -84,6 +84,18 @@
       "taskId": "local-4492b7f5-64f0-4c2a-8bf1-46a62edd111e",
       "addedAt": "2026-06-06T17:21:09.393Z",
       "order": 14
+    },
+    {
+      "connectorId": "local",
+      "taskId": "local-049d9c0b-6a7c-4483-9a58-9a05fe0188f9",
+      "addedAt": "2026-06-12T17:24:14.080Z",
+      "order": 13
+    },
+    {
+      "connectorId": "local",
+      "taskId": "local-fd5121aa-36ac-40cb-95a1-e67b24257acc",
+      "addedAt": "2026-06-12T20:42:41.655Z",
+      "order": 12
     }
   ],
   "activeTask": null

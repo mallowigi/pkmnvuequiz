@@ -14,8 +14,8 @@ import { capitalize } from '@/utils/utils.ts';
 
 const { closeDialog } = useDialogs();
 const { state } = useState();
-const { getCurrentType } = useCurrentType();
-const { getCurrentGen } = useCurrentGen();
+const { currentTypeState, getCurrentType } = useCurrentType();
+const { currentGenState, getCurrentGen } = useCurrentGen();
 const { getGenTranslation, getTypeTranslation } = useTranslations();
 const { t } = useI18n();
 
@@ -51,7 +51,11 @@ const cancel = () => {
     <div class="prompt">
       <h2>{{ t('leaderboardsDialog.title', { mode: currentGameMode }) }}</h2>
 
-      <Leaderboards />
+      <Leaderboards
+        :gameMode="state.gameMode"
+        :gen="currentGenState.gen"
+        :type="currentTypeState.currentType"
+      />
 
       <RoundedButton
         @click.stop="cancel"
