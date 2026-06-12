@@ -137,9 +137,9 @@
   "mythical": "Mythique",
   "nameAll": {
     "full": "Nommez tous les Pokémon!",
-    "gen": "Nommez tous les Pokémon de {name}!",
-    "special": "Nommez tous les Pokémon {name}!",
-    "types": "Nommez tous les Pokémon de type {name}!"
+    "gen": "Nommez les Pokémon de {name}!",
+    "special": "Nommez les Pokémon {name}!",
+    "types": "Nommez les Pokémon de type {name}!"
   },
   "nameAllRegionPokemon": "Nommez tous les Pokémon!",
   "newGame": "Nouveau Jeu",
