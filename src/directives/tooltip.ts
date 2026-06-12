@@ -15,23 +15,39 @@ type Placement = 'top' | 'bottom' | 'left' | 'right';
 const SHOW_DELAY = 300;
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
-let tooltipHandlers: {
-  mouseenter: (e: MouseEvent) => void;
-  mouseleave: (e: MouseEvent) => void;
-  click?: (e: MouseEvent) => void;
-} | null = null;
+interface TooltipState {
+  value: string | null;
+  placement: Placement;
+  modifiers: Partial<Record<string, boolean>>;
+  handlers?: {
+    mouseenter: (e: MouseEvent) => void;
+    mouseleave: (e: MouseEvent) => void;
+    click?: (e: MouseEvent) => void;
+  };
+}
+
+const tooltipMap = new WeakMap<HTMLElement, TooltipState>();
 
 export default {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
+    const state: TooltipState = {
+      modifiers: binding.modifiers,
+      placement: (binding.arg as Placement) || 'top',
+      value: binding.value,
+    };
+    tooltipMap.set(el, state);
+
     const { setTooltip } = useTooltips();
 
     const mouseenter = () => {
       if (timeout) clearTimeout(timeout);
-      if (!binding.value) return;
+
+      // Keep a weakmap of elements
+      const currentState = tooltipMap.get(el);
+      if (!currentState?.value) return;
 
       timeout = setTimeout(() => {
-        // Specifies that the tooltip only shows when the element is disabled
-        const onlyWhenDisabled = binding.modifiers.disabled;
+        const onlyWhenDisabled = currentState.modifiers.disabled;
         const isDisabled = el.classList.contains('disabled') || el.hasAttribute('disabled');
 
         if (onlyWhenDisabled && !isDisabled) {
@@ -39,7 +55,7 @@ export default {
         }
 
         const rect = el.getBoundingClientRect();
-        const placement = (binding.arg as Placement) || 'top';
+        const placement = currentState.placement;
 
         let x = rect.left + rect.width / 2;
         let y = rect.top;
@@ -58,7 +74,7 @@ export default {
             break;
         }
 
-        setTooltip(binding.value, x, y, placement);
+        setTooltip(currentState.value, x, y, placement);
       }, SHOW_DELAY);
     };
 
@@ -67,10 +83,12 @@ export default {
       setTooltip(null);
     };
 
-    // Trap clicks on disabled elements to prevent unintended interactions
     const click = (e: MouseEvent) => {
+      const currentState = tooltipMap.get(el);
+      if (!currentState) return;
+
       const isDisabled = el.classList.contains('disabled') || el.hasAttribute('disabled');
-      if (binding.modifiers.disabled && isDisabled) {
+      if (currentState.modifiers.disabled && isDisabled) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -85,24 +103,32 @@ export default {
       el.addEventListener('click', click, { capture: true });
     }
 
-    // Store handlers for cleanup
-    tooltipHandlers = { click, mouseenter, mouseleave };
+    state.handlers = { click, mouseenter, mouseleave };
   },
 
   unmounted(el: HTMLElement) {
-    const handlers = tooltipHandlers;
-    if (handlers) {
-      el.removeEventListener('mouseenter', handlers.mouseenter);
-      el.removeEventListener('mouseleave', handlers.mouseleave);
+    const state = tooltipMap.get(el);
+    if (state?.handlers) {
+      el.removeEventListener('mouseenter', state.handlers.mouseenter);
+      el.removeEventListener('mouseleave', state.handlers.mouseleave);
 
-      if (handlers.click) {
-        el.removeEventListener('click', handlers.click, { capture: true });
+      if (state.handlers.click) {
+        el.removeEventListener('click', state.handlers.click, { capture: true });
       }
-
-      tooltipHandlers = null;
     }
+    tooltipMap.delete(el);
+
     if (timeout) {
       clearTimeout(timeout);
+    }
+  },
+
+  updated(el: HTMLElement, binding: DirectiveBinding) {
+    const state = tooltipMap.get(el);
+    if (state) {
+      state.value = binding.value;
+      state.placement = (binding.arg as Placement) || 'top';
+      state.modifiers = binding.modifiers;
     }
   },
 } satisfies TooltipDirective;

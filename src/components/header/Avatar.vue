@@ -52,7 +52,7 @@ onKeyStroke('Escape', () => {
   >
     <div
       class="avatar"
-      v-tooltip:bottom="user?.displayName || settingsState.name"
+      v-tooltip:bottom="settingsState.name"
       :style="{ '--avatar-url': `url(${user?.photoURL})` }"
       @click="toggleMenu"
     />
