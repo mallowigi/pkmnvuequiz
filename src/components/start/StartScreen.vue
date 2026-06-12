@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useLocalStorage } from '@vueuse/core';
 import { useAuth } from '@vueuse/firebase';
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -11,17 +10,23 @@ import LoginControls from '@/components/start/LoginControls.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 import { useSettings } from '@/stores/useSettings.js';
 import NewGameButtons from '@/components/start/NewGameButtons.vue';
+import { useNameGenerator } from '@/composables/useNameGenerator.ts';
+import { useSavedData } from '@/composables/useSavedData.ts';
 
 const { t } = useI18n();
-const name = useLocalStorage('pkmnQuizPlayerName', '');
+const { getSavedName } = useSavedData();
 const { setName } = useSettings();
 const { auth } = useFirebase();
-const { isAuthenticated } = useAuth(auth);
+const { user, isAuthenticated } = useAuth(auth);
+const { generateName } = useNameGenerator();
 
 onMounted(() => {
-  const savedName = name.value;
-  if (savedName && !isAuthenticated) {
-    setName(savedName);
+  const savedName = getSavedName();
+  const randomName = generateName();
+  if (!isAuthenticated) {
+    setName(savedName || randomName);
+  } else {
+    setName(user.value?.displayName || savedName || randomName);
   }
 });
 </script>

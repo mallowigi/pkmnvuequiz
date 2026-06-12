@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useLocalStorage } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
 
 import TextBox from '@/components/common/TextBox.vue';
@@ -7,16 +6,18 @@ import Socials from '@/components/start/Socials.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useSettings } from '@/stores/useSettings.ts';
+import { onMounted } from 'vue';
+import { useNameGenerator } from '@/composables/useNameGenerator.ts';
 
 const { t } = useI18n();
-const name = useLocalStorage('pkmnQuizPlayerName', '');
 const { settingsState, setName } = useSettings();
 const { setGameSelectionState } = useGameFlow();
-const { setReady } = useSavedData();
+const { setReady, setSavedName, getSavedName } = useSavedData();
+const { generateName } = useNameGenerator();
 
 const editName = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  name.value = target.value;
+  setSavedName(target.value);
   setName(target.value);
 };
 
@@ -28,6 +29,10 @@ const newGame = () => {
   setGameSelectionState('gen');
   setReady();
 };
+
+onMounted(() => {
+  setName(getSavedName() || generateName());
+});
 </script>
 
 <template>
@@ -46,6 +51,7 @@ const newGame = () => {
     <form @submit.prevent="newGame">
       <TextBox
         class="large-text"
+        maxlength="50"
         type="text"
         :placeholder="t('enterName')"
         @input="editName"

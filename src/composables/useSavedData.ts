@@ -15,6 +15,7 @@ import { normalizeName } from '@/utils/utils.ts';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
+const LOCAL_STORAGE_NAME_KEY = 'pkmn_quiz_saved_name';
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
@@ -22,6 +23,18 @@ export const useSavedData = () => {
 
   const setReady = () => {
     ready.value = true;
+  };
+
+  const getSavedName = () => {
+    const savedStateStr = sessionStorage.getItem(LOCAL_STORAGE_NAME_KEY);
+    if (!savedStateStr) {
+      return null;
+    }
+    return sessionStorage.getItem(LOCAL_STORAGE_NAME_KEY);
+  };
+
+  const setSavedName = (name: string) => {
+    sessionStorage.setItem(LOCAL_STORAGE_NAME_KEY, name);
   };
 
   const hasSavedState = () => {
@@ -317,11 +330,13 @@ export const useSavedData = () => {
 
   return {
     autoSave,
+    getSavedName,
     hasSavedState,
     loadAutoSave,
     loadState,
     removeAutoSave,
     saveState,
     setReady,
+    setSavedName,
   };
 };
