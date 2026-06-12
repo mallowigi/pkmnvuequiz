@@ -1,10 +1,14 @@
-import { browserLocalPersistence, setPersistence, signInWithPopup, updateProfile } from 'firebase/auth';
+import {
+  browserLocalPersistence,
+  GoogleAuthProvider,
+  setPersistence,
+  signInWithPopup,
+  updateProfile,
+} from 'firebase/auth';
 
 import { auth } from '@/firebase';
 import { useMessages } from '@/stores/useMessages';
 import { useSettings } from '@/stores/useSettings';
-import firebase from 'firebase/compat/app';
-import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 
 export const useGoogleAuth = () => {
   const { setName, setAvatar } = useSettings();
