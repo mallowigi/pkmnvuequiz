@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onClickOutside, onKeyStroke } from '@vueuse/core';
 import { useAuth } from '@vueuse/firebase';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import ProfilePic from '@/components/header/ProfilePic.vue';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useSettings } from '@/stores/useSettings.ts';
@@ -43,14 +44,6 @@ onClickOutside(avatarContainer, () => {
 onKeyStroke('Escape', () => {
   isMenuOpen.value = false;
 });
-
-const initials = computed(() => {
-  const parts = (settingsState.name || '').trim().split(' ').slice(0, 2);
-  return parts
-    .map((p) => p[0])
-    .join('')
-    .toUpperCase();
-});
 </script>
 
 <template>
@@ -58,12 +51,9 @@ const initials = computed(() => {
     class="avatar-container"
     ref="avatarContainer"
   >
-    <div
+    <ProfilePic
       class="avatar"
-      v-tooltip:bottom="settingsState.name"
-      :style="user?.photoURL ? { '--avatar-url': `url('${user.photoURL}')` } : {}"
-      :data-name="user?.photoURL ? '' : initials"
-      @click="toggleMenu"
+      @click-picture="toggleMenu"
     />
 
     <div v-if="isAuthenticated">
@@ -116,33 +106,13 @@ const initials = computed(() => {
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid var(--text);
-  background-color: var(--darkPrimary, #333);
-  background-image: var(--avatar-url);
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
   position: relative;
-  anchor-name: --avatar;
-
-  &::after {
-    content: attr(data-name);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
 }
 
 .avatar-menu {
   position: absolute;
   top: calc(anchor(--avatar bottom) + 8px);
-  right: anchor(--avatar right);
+  right: calc(anchor(--avatar right) - 80px);
 
   background: var(--button);
   border: 1px solid var(--type-btn-color, var(--primary));
