@@ -42,23 +42,22 @@ onUnmounted(() => {
 <style scoped>
 .overlay {
   position: fixed;
-  inset: 0;
-  display: block;
-  width: 100dvw;
-  min-height: 100dvh;
   background-color: var(--overlay-bg, rgba(16, 17, 14, 0.8));
   z-index: 4;
-  overflow-y: auto;
+  inset: 0;
+  display: flex;
+  width: 100dvw;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
   overscroll-behavior: contain;
 }
 
 :deep .prompt {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -70%);
   text-align: center;
   color: white;
-  width: min(100% - 32px, 480px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 </style>
