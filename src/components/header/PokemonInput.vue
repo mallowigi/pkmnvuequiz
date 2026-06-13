@@ -151,6 +151,7 @@ onUnmounted(() => {
     </p>
 
     <TextBox
+      class="pokemon-input"
       ref="textBoxRef"
       maxlength="13"
       @input="handleKeydown"
@@ -204,10 +205,6 @@ onUnmounted(() => {
   animation-delay: 0.3s;
 }
 
-.instruction {
-  max-width: 260px;
-}
-
 .box {
   background: var(--type-bg-color, var(--primary));
   color: var(--type-fg-color, var(--text));
@@ -224,6 +221,22 @@ onUnmounted(() => {
   &.disabled {
     pointer-events: none;
     opacity: 0.6;
+  }
+}
+
+.pokemon-input input {
+  width: 170px;
+
+  .mobile & {
+    width: 100%;
+  }
+}
+
+.instruction {
+  max-width: 260px;
+
+  .laptop & {
+    display: none;
   }
 }
 </style>

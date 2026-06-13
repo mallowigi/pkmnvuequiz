@@ -126,6 +126,11 @@ const isFull = (boxId: SpecialType | RegionBox) => {
     break-inside: avoid;
     border-radius: 3px 20px;
   }
+
+  .laptop & {
+    max-width: 100%;
+    columns: 1;
+  }
 }
 
 .region-box {

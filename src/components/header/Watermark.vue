@@ -51,15 +51,17 @@ const showCredits = () => {
       <AvatarMenu />
     </div>
 
-    <div class="url">pkmnvuequiz.netlify.app</div>
+    <div class="watermark-url">pkmnvuequiz.netlify.app</div>
   </div>
 </template>
 
 <style scoped>
 .root {
   border-top: 3px dotted var(--type-bg-color, var(--primary));
+  position: absolute;
+  right: 0;
 
-  .mobile & {
+  .laptop & {
     display: none;
   }
 }
@@ -71,10 +73,18 @@ const showCredits = () => {
   gap: 8px;
 }
 
-.url {
+.watermark-url {
   font-size: 20px;
   z-index: 10;
   padding: 4px 0 10px 40px;
   color: var(--text);
+
+  .desktop & {
+    width: 0;
+  }
+}
+
+.icons {
+  padding: 4px;
 }
 </style>
