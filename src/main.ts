@@ -7,6 +7,7 @@ import { createI18n } from 'vue-i18n';
 import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 import ellipsis from '@/directives/ellipsis.ts';
 import gameEnded from '@/directives/gameEnded.ts';
+import hideMobile from '@/directives/hideMobile.ts';
 import tooltip from '@/directives/tooltip.ts';
 import cn from '@/locales/cn.json';
 import de from '@/locales/de.json';
@@ -44,6 +45,7 @@ app.use(i18n);
 app.directive('tooltip', tooltip);
 app.directive('game-ended', gameEnded);
 app.directive('ellipsis', ellipsis);
+app.directive('hide-mobile', hideMobile);
 
 pinia.use(piniaStorePlugin);
 
