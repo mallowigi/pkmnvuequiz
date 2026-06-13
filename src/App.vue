@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePreferredDark, breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+import { usePreferredDark, useBreakpoints } from '@vueuse/core';
 import { watchEffect, watch } from 'vue';
 
 import Background from '@/components/background/Background.vue';
@@ -27,9 +27,17 @@ const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 const typeStyles = useTypeStyles();
 
-const breakpoints = useBreakpoints(breakpointsTailwind, {
-  strategy: 'max-width',
-});
+const breakpoints = useBreakpoints(
+  {
+    desktop: 1320,
+    laptop: 1024,
+    mobile: 640,
+    tablet: 768,
+  },
+  {
+    strategy: 'max-width',
+  },
+);
 
 watchEffect(() => {
   if (typeof document === 'undefined') {
@@ -65,7 +73,12 @@ watch(
 <template>
   <main
     class="main"
-    :class="{ dark: state.isDark, mobile: breakpoints.md.value }"
+    :class="{
+      dark: state.isDark,
+      mobile: breakpoints.mobile.value,
+      laptop: breakpoints.laptop.value,
+      desktop: breakpoints.desktop.value,
+    }"
     :style="typeStyles"
   >
     <!-- Background images -->
@@ -114,8 +127,8 @@ watch(
 
 <style scoped>
 .main {
-  min-height: 100vh;
-  max-width: 1600px;
+  min-height: 100dvh;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;

@@ -30,7 +30,7 @@ const goBack = () => {
       :key="typeMeta.id"
       class="button-type"
       @click="setTypeOrSpecial(typeMeta.id)"
-      :style="{ backgroundColor: typeMeta.bgColor, color: typeMeta.fgColor }"
+      :style="{ '--bgColor': typeMeta.bgColor, '--fgColor': typeMeta.fgColor }"
     >
       <img
         :src="`/assets/types/${typeMeta.icon}.svg`"
@@ -45,7 +45,7 @@ const goBack = () => {
     <RoundedButton
       class="button-type button-special"
       @click="setTypeOrSpecial('special')"
-      :style="{ backgroundColor: specialType.bgColor, color: specialType.fgColor }"
+      :style="{ '--bgColor': specialType.bgColor, '--fgColor': specialType.fgColor }"
     >
       <img
         :src="`/assets/types/${specialType.icon}.svg`"
@@ -58,6 +58,7 @@ const goBack = () => {
     <RoundedButton
       class="button-type button-back"
       @click="goBack"
+      :style="{ '--bgColor': '#111', '--fgColor': '#fff' }"
     >
       <div class="type-name">{{ t('back') }}</div>
     </RoundedButton>
@@ -72,9 +73,17 @@ const goBack = () => {
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   gap: 2px;
+
+  .mobile & {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(11, auto);
+    grid-auto-flow: row;
+  }
 }
 
 .button-type {
+  background-color: var(--bgColor);
+  color: var(--fgColor);
   border: 2px solid #333;
   border-radius: 35px 5px 15px 35px;
   padding: 14px 20px;
@@ -88,6 +97,10 @@ const goBack = () => {
 
   &:hover {
     border-color: white;
+  }
+
+  .mobile & {
+    border-radius: 6px;
   }
 }
 
@@ -110,5 +123,13 @@ const goBack = () => {
   display: inline-block;
   min-width: 65px;
   vertical-align: top;
+
+  .mobile & {
+    display: none;
+  }
+
+  .mobile .button-back & {
+    display: inline-block;
+  }
 }
 </style>

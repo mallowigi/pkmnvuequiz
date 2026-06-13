@@ -33,6 +33,7 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
         v-for="(gen, id, i) in gens"
         :class="{ 'rad-bl': i % 3 === 0, rad: i % 3 === 1, 'rad-tr': i % 3 === 2 }"
         @click="setGenQuiz(id as Gen)"
+        :style="{ '--gen-color': gen.color }"
         :key="id"
       >
         <div hidden>{{ id }}</div>
@@ -69,10 +70,14 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
   gap: 6px;
   margin: 3px;
   text-align: center;
+
+  .mobile & {
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+  }
 }
 
 .cell {
-  background: var(--primary);
+  background: var(--gen-color, var(--type-btn-color, var(--primary)));
   color: var(--type-fg-color, var(--text));
   padding: 16px 20px;
   text-align: center;
@@ -90,6 +95,13 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
 
   &:hover {
     opacity: 0.9;
+  }
+
+  .mobile & {
+    padding: 8px;
+    font-size: 16px;
+    min-width: 60px;
+    min-height: 64px;
   }
 }
 

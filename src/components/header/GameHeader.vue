@@ -9,13 +9,17 @@ import Watermark from '@/components/header/Watermark.vue';
 <template>
   <header class="header">
     <section class="controls">
-      <DarkModeToggle />
+      <div class="header-row first">
+        <DarkModeToggle class="dark-mode-toggle" />
 
-      <PokemonInput />
+        <PokemonInput class="pokemon-input" />
+      </div>
 
-      <PokemonCounts />
+      <div class="header-row second">
+        <PokemonCounts />
 
-      <GameTimer />
+        <GameTimer />
+      </div>
     </section>
 
     <Watermark />
@@ -34,11 +38,25 @@ import Watermark from '@/components/header/Watermark.vue';
   padding: 10px;
 }
 
+.header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  .mobile & {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 .controls {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  flex-wrap: wrap;
 }
 </style>

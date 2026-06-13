@@ -146,6 +146,11 @@ const { t } = useI18n();
   color: #fff;
   margin: 10px 10px 0;
   padding: 11px 14px;
+
+  .mobile & {
+    font-size: 12px;
+    margin: 0;
+  }
 }
 
 .p1 {
@@ -163,6 +168,11 @@ const { t } = useI18n();
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+
+  .mobile & {
+    line-height: 16px;
+    text-align: center;
+  }
 }
 
 .link {
