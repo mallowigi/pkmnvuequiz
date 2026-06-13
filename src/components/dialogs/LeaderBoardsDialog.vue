@@ -49,9 +49,8 @@ const cancel = () => {
     @close="cancel"
   >
     <div class="prompt">
-      <h2>{{ t('leaderboardsDialog.title', { mode: currentGameMode }) }}</h2>
-
       <Leaderboards
+        :caption="t('leaderboardsDialog.title', { mode: currentGameMode })"
         :gameMode="state.gameMode"
         :gen="currentGenState.gen"
         :type="currentTypeState.currentType"

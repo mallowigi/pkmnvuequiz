@@ -52,8 +52,7 @@ onMounted(() => {
       <SaveButtons />
 
       <!-- Leaderboards -->
-      <h2>{{ t('topGuessers', { n: 3 }) }}</h2>
-      <Leaderboards />
+      <Leaderboards :caption="t('topGuessers', { n: 3 })" />
     </div>
   </div>
 </template>
