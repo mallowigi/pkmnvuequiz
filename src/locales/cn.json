@@ -67,6 +67,7 @@
   "footer": {
     "license": "本项目是基于宝可梦的非官方衍生作品。官方精灵属于 © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "在 {location} 找到的原始项目。{donation}",
+    "privacy": "隐私政策",
     "projectBy": "{charon} 的项目。由 {mallowigi} 用 Vue 重写。",
     "resources": "数据资源: {pokeapi}。精灵资源: {sprites}。",
     "sprites": "{artists} ≡ 制作的自定义和修改的精灵，作为 {project} 项目的一部分。"

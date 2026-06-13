@@ -67,6 +67,7 @@
   "footer": {
     "license": "Este projeto é uma obra derivada não oficial baseada em Pokémon. Os sprites oficiais pertencem a © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "Projeto original encontrado em {location}. {donation}",
+    "privacy": "Política de Privacidade",
     "projectBy": "Projeto por {charon}. Reescrito em Vue por {mallowigi}.",
     "resources": "Recurso para dados: {pokeapi}. Recursos para sprites: {sprites}.",
     "sprites": "Sprites personalizados e modificados feitos por {artists} ≡ como parte do projeto {project}."
