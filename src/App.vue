@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePreferredDark } from '@vueuse/core';
+import { usePreferredDark, breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { watchEffect, watch } from 'vue';
 
 import Background from '@/components/background/Background.vue';
@@ -26,6 +26,10 @@ const { flowState } = useGameFlow();
 const { credits } = useCredits();
 const { roomState } = useRoomMessages();
 const typeStyles = useTypeStyles();
+
+const breakpoints = useBreakpoints(breakpointsTailwind, {
+  strategy: 'max-width',
+});
 
 watchEffect(() => {
   if (typeof document === 'undefined') {
@@ -61,42 +65,52 @@ watch(
 <template>
   <main
     class="main"
-    :class="{ dark: state.isDark }"
+    :class="{ dark: state.isDark, mobile: breakpoints.md.value }"
     :style="typeStyles"
   >
+    <!-- Background images -->
     <Background />
 
+    <!-- Header -->
     <GameHeader />
 
+    <!-- Game Contents -->
     <Game />
 
+    <!-- Footer -->
     <GameFooter />
 
+    <!-- Credits-->
     <FadeTransition>
       <Credits v-if="credits.showCredits" />
     </FadeTransition>
 
+    <!-- Room messages -->
     <RoomMessageOverlay v-if="roomState.roomMessage !== null" />
 
+    <!-- Pause -->
     <FadeTransition>
       <PauseOverlay v-if="flowState.isPaused" />
     </FadeTransition>
 
+    <!-- Game Selection -->
     <FadeTransition>
       <GameSelection v-if="flowState.gameSelectionState" />
     </FadeTransition>
 
+    <!-- Dialogs container -->
     <Dialogs />
 
+    <!-- Ended Game -->
     <EndOverlay v-if="flowState.isEnded" />
 
+    <!-- Notifications -->
     <SnackBar />
 
+    <!-- Tooltips -->
     <Tooltip />
   </main>
 </template>
-
-<style></style>
 
 <style scoped>
 .main {

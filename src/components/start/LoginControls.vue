@@ -8,12 +8,17 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { onMounted } from 'vue';
 import { useNameGenerator } from '@/composables/useNameGenerator.ts';
+import { useBreakpoints, breakpointsTailwind } from '@vueuse/core';
 
 const { t } = useI18n();
 const { settingsState, setName } = useSettings();
 const { setGameSelectionState } = useGameFlow();
 const { setReady, setSavedName, getSavedName } = useSavedData();
 const { generateName } = useNameGenerator();
+
+const breakpoints = useBreakpoints(breakpointsTailwind, {
+  strategy: 'max-width',
+});
 
 const editName = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -36,11 +41,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="twocols">
+  <div
+    class="twocols"
+    :class="{ vertical: breakpoints.md.value }"
+  >
     <!-- Socials Login -->
     <Socials />
 
-    <div class="separator-vertical">
+    <div class="separator">
       <div class="line"></div>
       <span class="or-text">{{ t('or') }}</span>
       <div class="line"></div>
@@ -49,6 +57,7 @@ onMounted(() => {
     <!-- Anonymous Login -->
     <div class="login-column name-column">
       <span class="login-with">{{ t('enterName') }}</span>
+
       <form @submit.prevent="newGame">
         <TextBox
           class="large-text"
@@ -72,7 +81,12 @@ onMounted(() => {
   width: 100%;
   justify-content: center;
   padding: 16px 0;
+
+  &.vertical {
+    flex-direction: column;
+  }
 }
+
 .login-column {
   display: flex;
   flex-direction: column;
@@ -90,17 +104,28 @@ onMounted(() => {
   justify-content: center;
 }
 
-.separator-vertical {
+.separator {
   display: flex;
   flex-direction: column;
   align-items: center;
   align-self: stretch;
+  gap: 8px;
 
-  & .line {
-    width: 1px;
-    background-color: var(--text-inverted);
-    flex-grow: 1;
-    opacity: 0.3;
+  .vertical & {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.line {
+  width: 1px;
+  background-color: var(--secondary);
+  flex-grow: 1;
+  opacity: 0.3;
+
+  .vertical & {
+    height: 1px;
+    width: 100%;
   }
 }
 

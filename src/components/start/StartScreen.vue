@@ -43,18 +43,18 @@ onMounted(() => {
       <LoggedInInfo v-else />
     </div>
 
-    <hr class="separator-horizontal" />
+    <hr class="separator" />
 
     <div class="bottom-section">
       <NewGameButtons />
 
       <!-- Save/Load -->
-      <SaveButtons v-breakpoint:md />
+      <SaveButtons class="save-buttons" />
 
       <!-- Leaderboards -->
       <Leaderboards
+        class="leaderboards-table"
         :caption="t('topGuessers', { n: 3 })"
-        v-breakpoint:md
       />
     </div>
   </div>
@@ -77,9 +77,14 @@ onMounted(() => {
   width: 100%;
   justify-content: center;
   padding: 16px 0;
+
+  .mobile & {
+    gap: 16px;
+    padding: 8px 0;
+  }
 }
 
-.separator-horizontal {
+.separator {
   width: 100%;
   border: 0;
   border-top: 1px solid var(--text);
@@ -100,5 +105,13 @@ onMounted(() => {
   justify-content: center;
   margin-top: 8px;
   gap: 8px;
+}
+
+.mobile {
+  .separator,
+  .save-buttons,
+  .leaderboards-table {
+    display: none;
+  }
 }
 </style>
