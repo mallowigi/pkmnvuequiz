@@ -49,10 +49,13 @@ onMounted(() => {
       <NewGameButtons />
 
       <!-- Save/Load -->
-      <SaveButtons />
+      <SaveButtons v-breakpoint:md />
 
       <!-- Leaderboards -->
-      <Leaderboards :caption="t('topGuessers', { n: 3 })" />
+      <Leaderboards
+        :caption="t('topGuessers', { n: 3 })"
+        v-breakpoint:md
+      />
     </div>
   </div>
 </template>

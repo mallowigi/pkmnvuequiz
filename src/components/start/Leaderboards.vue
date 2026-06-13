@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { DocumentData } from 'firebase/firestore';
 import { useI18n } from 'vue-i18n';
+
+import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
+import { useLeaderboards } from '@/composables/useLeaderboards.ts';
 import { useTranslations } from '@/composables/useTranslations.js';
 import type { GameMode, Gen, Type } from '@/types.ts';
-import { useLeaderboards } from '@/composables/useLeaderboards.ts';
-import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 
 const props = defineProps<{
   caption?: string;
@@ -36,9 +37,9 @@ const subType = (user: DocumentData): string => {
 </script>
 
 <template>
-  <h2>{{ props.caption }}</h2>
-
   <div class="leaderboard">
+    <h2>{{ props.caption }}</h2>
+
     <FadeTransition :mode="'out-in'">
       <Suspense>
         <div
@@ -110,35 +111,35 @@ const subType = (user: DocumentData): string => {
   border-collapse: collapse;
   color: var(--text);
   font-size: 15px;
-}
 
-.leaderboard-table th,
-.leaderboard-table td {
-  padding: 10px 14px;
-  text-align: left;
-  white-space: nowrap;
-}
+  & th,
+  & td {
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
 
-.leaderboard-table thead {
-  background-color: var(--type-btn-color, var(--primary));
-  color: white;
-}
+  & thead {
+    background-color: var(--type-btn-color, var(--primary));
+    color: white;
+  }
 
-.leaderboard-table th {
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
+  & th {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
 
-.leaderboard-table tbody tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
+  & tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
 
-.leaderboard-table tbody tr:last-child {
-  border-bottom: none;
-}
+  & tbody tr:last-child {
+    border-bottom: none;
+  }
 
-.leaderboard-table tbody tr:nth-of-type(even) {
-  background-color: rgba(0, 0, 0, 0.04);
+  & tbody tr:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 }
 
 .rank {
