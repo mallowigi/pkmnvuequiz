@@ -12,7 +12,7 @@ const { t } = useI18n();
 <template>
   <footer class="footer rad transition-element">
     <!-- Authors -->
-    <div class="footerRow first">
+    <div class="footerRow">
       <i18n-t
         keypath="footer.projectBy"
         class="p1"
@@ -22,18 +22,16 @@ const { t } = useI18n();
           <a
             href="https://linktr.ee/adeptcharon"
             target="_blank"
+            >Charon</a
           >
-            Charon
-          </a>
         </template>
 
         <template #mallowigi>
           <a
             href="https://github.com/mallowigi"
             target="_blank"
+            >Mallowigi</a
           >
-            Mallowigi
-          </a>
         </template>
       </i18n-t>
 
@@ -73,7 +71,9 @@ const { t } = useI18n();
           </a>
         </template>
       </i18n-t>
+    </div>
 
+    <div class="footerRow">
       <!-- Sprites -->
       <i18n-t
         keypath="footer.sprites"
@@ -96,7 +96,9 @@ const { t } = useI18n();
           >
         </template>
       </i18n-t>
+    </div>
 
+    <div class="footerRow">
       <!-- Resources -->
       <i18n-t
         keypath="footer.resources"
@@ -113,13 +115,24 @@ const { t } = useI18n();
 
         <template #sprites>
           <a
-            href="https://msikma.github.io/pokesprite/overview/dex-gen8.html"
+            href="https://github.com/msikma/pokesprite"
             target="_blank"
-            >Pokésprite Database
-          </a>
+            >Pokésprite Database</a
+          >
         </template>
       </i18n-t>
 
+      <a
+        href="/privacy.html"
+        target="_blank"
+      >
+        <p class="p2">
+          {{ t('footer.privacy') }}
+        </p>
+      </a>
+    </div>
+
+    <div class="footerRow">
       <p class="p2">
         {{ t('footer.license') }}
       </p>
@@ -146,12 +159,9 @@ const { t } = useI18n();
 
 .footerRow {
   line-height: 30px;
-
-  &.first {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .link {
