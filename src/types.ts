@@ -99,6 +99,7 @@ export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' |
 
 export type GenerationInfo = {
   boxes: RegionBox[];
+  color: string;
   id: Gen;
   name: string;
   sprites: string[];
