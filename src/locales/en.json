@@ -67,6 +67,7 @@
   "footer": {
     "license": "This project is an unofficial derivative work based on Pokémon. Official sprites belong to © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "Original project found at {location}. {donation}",
+    "privacy": "Privacy Policy",
     "projectBy": "Project by {charon}. Rewritten in Vue by {mallowigi}.",
     "resources": "Resource for data: {pokeapi}. Resources for sprites: {sprites}.",
     "sprites": "Custom & modified sprites made by {artists} ≡ as part of the {project} project."
@@ -230,5 +231,6 @@
   "welcome": "Welcome to the Pokémon Quiz!",
   "welcomeBack": "Welcome back, {name} !",
   "x": "X",
+
   "zh": "Chinese (Traditional)"
 }

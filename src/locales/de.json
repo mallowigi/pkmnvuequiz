@@ -9,7 +9,6 @@
   "bug": "Käfer",
   "cancel": "Abbrechen",
   "changeName": "Spitznamen ändern",
-  "enterName": "Gib deinen Spitznamen ein",
   "changeNameDialog": {
     "description": "Ändere deinen aktuellen Spitznamen.",
     "title": "Spitznamen ändern"
@@ -54,6 +53,7 @@
     "supporters": "Unterstützer:",
     "wellDone": "Gut gemacht!"
   },
+  "enterName": "Gib deinen Spitznamen ein",
   "es": "Spanisch",
   "exit": "Beenden",
   "facebook": "Facebook",
@@ -223,11 +223,11 @@
   "ultrabeast": "Ultrabestie",
   "unova": "Einall",
   "upload": "Hochladen",
+  "userProfile": "Benutzerprofil",
   "variousArtists": "verschiedene Künstler",
   "water": "Wasser",
   "welcome": "Willkommen zum Pokémon-Quiz!",
   "welcomeBack": "Willkommen zurück, {name}!",
   "x": "X",
-  "zh": "Chinesisch (Traditionell)",
-  "userProfile": "Benutzerprofil"
+  "zh": "Chinesisch (Traditionell)"
 }
