@@ -67,6 +67,7 @@
   "footer": {
     "license": "このプロジェクトはポケモンに基づいた非公式の派生作品です。公式スプライトは © Nintendo/Creatures Inc./GAME FREAK Inc. に属しています。",
     "originalProject": "{location} で見つかったオリジナルプロジェクト。{donation}",
+    "privacy": "プライバシーポリシー",
     "projectBy": "{charon} によるプロジェクト。{mallowigi} による Vue での書き直し。",
     "resources": "データのリソース: {pokeapi}。スプライトのリソース: {sprites}。",
     "sprites": "{artists} ≡ によるカスタムおよび変更されたスプライトは、{project} プロジェクトの一部として作成されています。"

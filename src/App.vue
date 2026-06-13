@@ -96,52 +96,7 @@ watch(
   </main>
 </template>
 
-<style>
-:root {
-  --text: #333;
-  --text-inverted: #eee;
-  --full-overlay: rgba(16, 17, 14, 1);
-  --black: #111;
-  --button: white;
-  --button-hover: #666666;
-  --primary: #8cc63f;
-  --darkPrimary: #65ae04;
-  --danger: #d00;
-  --secondary: rgba(255, 255, 255, 0.85);
-  --input: #eee;
-  --input-bg: rgba(255, 255, 255, 0.85);
-  --input-text: #333;
-
-  --type-btn-color: var(--primary);
-  --type-dark-color: var(--darkPrimary);
-  --type-inline-color: inherit;
-  --type-fg-color: var(--text);
-
-  --max-width: 66%;
-  --num-cols: 5;
-  --sprite-width: 64px;
-  --text-padding: 10px;
-
-  --glow: #333;
-  --animate-duration: 0.5s;
-  --animate-delay: 0;
-  --animate-repeat: 1;
-}
-
-.dark {
-  --text: #fff;
-  --text-inverted: #333;
-  --button: #111;
-  --button-hover: #444444;
-
-  --type-btn-color: var(--primary);
-  --type-dark-color: var(--darkPrimary);
-  --type-inline-color: inherit;
-  --type-fg-color: var(--text);
-
-  --glow: black;
-}
-</style>
+<style></style>
 
 <style scoped>
 .main {

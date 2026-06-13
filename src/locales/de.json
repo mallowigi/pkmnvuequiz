@@ -9,7 +9,6 @@
   "bug": "Käfer",
   "cancel": "Abbrechen",
   "changeName": "Spitznamen ändern",
-  "enterName": "Gib deinen Spitznamen ein",
   "changeNameDialog": {
     "description": "Ändere deinen aktuellen Spitznamen.",
     "title": "Spitznamen ändern"
@@ -54,6 +53,7 @@
     "supporters": "Unterstützer:",
     "wellDone": "Gut gemacht!"
   },
+  "enterName": "Gib deinen Spitznamen ein",
   "es": "Spanisch",
   "exit": "Beenden",
   "facebook": "Facebook",
@@ -67,6 +67,7 @@
   "footer": {
     "license": "Dieses Projekt ist ein inoffizielles abgeleitetes Werk basierend auf Pokémon. Offizielle Sprites gehören © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "Originalprojekt gefunden auf {location}. {donation}",
+    "privacy": "Datenschutzrichtlinie",
     "projectBy": "Projekt von {charon}. In Vue umgeschrieben von {mallowigi}.",
     "resources": "Ressource für Daten: {pokeapi}. Ressourcen für Sprites: {sprites}.",
     "sprites": "Benutzerdefinierte und modifizierte Sprites erstellt von {artists} ≡ als Teil des Projekts {project}."
@@ -223,11 +224,11 @@
   "ultrabeast": "Ultrabestie",
   "unova": "Einall",
   "upload": "Hochladen",
+  "userProfile": "Benutzerprofil",
   "variousArtists": "verschiedene Künstler",
   "water": "Wasser",
   "welcome": "Willkommen zum Pokémon-Quiz!",
   "welcomeBack": "Willkommen zurück, {name}!",
   "x": "X",
-  "zh": "Chinesisch (Traditionell)",
-  "userProfile": "Benutzerprofil"
+  "zh": "Chinesisch (Traditionell)"
 }

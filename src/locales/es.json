@@ -9,7 +9,6 @@
   "bug": "Bicho",
   "cancel": "Cancelar",
   "changeName": "Cambiar apodo",
-  "enterName": "Introduce tu apodo",
   "changeNameDialog": {
     "description": "Cambia tu apodo actual.",
     "title": "Cambiar apodo"
@@ -54,6 +53,7 @@
     "supporters": "Colaboradores:",
     "wellDone": "¡Bien hecho!"
   },
+  "enterName": "Introduce tu apodo",
   "es": "Español",
   "exit": "Salir",
   "facebook": "Facebook",
@@ -67,6 +67,7 @@
   "footer": {
     "license": "Este proyecto es una obra derivada no oficial basada en Pokémon. Los sprites oficiales pertenecen a © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "Proyecto original encontrado en {location}. {donation}",
+    "privacy": "Política de Privacidad",
     "projectBy": "Proyecto por {charon}. Reescrito en Vue por {mallowigi}.",
     "resources": "Recurso para datos: {pokeapi}. Recursos para sprites: {sprites}.",
     "sprites": "Sprites personalizados y modificados realizados por {artists} ≡ como parte del proyecto {project}."
@@ -134,7 +135,7 @@
     "orderCaption": "Forzar adivinanzas en orden de la Pokédex"
   },
   "multiplayerInvite": "Invitación Multijugador",
-  "mythical": "Singular",
+  "mythical": "Mítico",
   "nameAll": {
     "full": "¡Nombra a todos los Pokémon!",
     "gen": "¡Nombra a todos los Pokémon de {name}!",
@@ -223,11 +224,11 @@
   "ultrabeast": "Ultraente",
   "unova": "Teselia",
   "upload": "Subir",
+  "userProfile": "Perfil de usuario",
   "variousArtists": "varios artistas",
   "water": "Agua",
   "welcome": "¡Bienvenido al Quiz de Pokémon!",
   "welcomeBack": "¡Bienvenido de vuelta, {name}!",
   "x": "X",
-  "zh": "Chino (Tradicional)",
-  "userProfile": "Perfil de usuario"
+  "zh": "Chino (Tradicional)"
 }

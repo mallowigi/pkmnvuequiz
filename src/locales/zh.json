@@ -67,6 +67,7 @@
   "footer": {
     "license": "本項目是基於寶可夢的非官方衍生作品。官方精靈屬於 © Nintendo/Creatures Inc./GAME FREAK Inc.",
     "originalProject": "在 {location} 找到的原始項目。{donation}",
+    "privacy": "隱私政策",
     "projectBy": "{charon} 的項目。由 {mallowigi} 用 Vue 重寫。",
     "resources": "數據資源: {pokeapi}。精靈資源: {sprites}。",
     "sprites": "{artists} ≡ 製作的自訂和修改的精靈，作為 {project} 項目的一部分。"

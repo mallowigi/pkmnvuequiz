@@ -67,6 +67,7 @@
   "footer": {
     "license": "이 프로젝트는 Pokémon을 기반으로 한 비공식 파생 작품입니다. 공식 스프라이트는 © Nintendo/Creatures Inc./GAME FREAK Inc.에 속합니다.",
     "originalProject": "{location}에서 찾은 원본 프로젝트입니다. {donation}",
+    "privacy": "개인정보 보호정책",
     "projectBy": "{charon}의 프로젝트입니다. {mallowigi}에 의해 Vue로 다시 작성되었습니다.",
     "resources": "데이터 리소스: {pokeapi}. 스프라이트 리소스: {sprites}.",
     "sprites": "{project} 프로젝트의 일부로 {artists} ≡에서 만든 사용자 정의 및 수정된 스프라이트입니다."
