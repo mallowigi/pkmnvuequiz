@@ -35,6 +35,16 @@ const resetGame = () => {
 </template>
 
 <style scoped>
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  .mobile & {
+    justify-content: center;
+    align-self: center;
+  }
+}
+
 .danger-btn:hover {
   background-color: var(--danger);
   border-color: var(--danger);

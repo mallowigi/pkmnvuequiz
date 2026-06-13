@@ -52,6 +52,10 @@ onUnmounted(() => {
   justify-content: center;
   padding: 16px;
   overscroll-behavior: contain;
+
+  .mobile & {
+    overflow: hidden;
+  }
 }
 
 :deep .prompt {
