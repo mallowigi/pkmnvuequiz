@@ -162,6 +162,7 @@ const { t } = useI18n();
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .link {
