@@ -98,7 +98,7 @@ onMounted(() => {
 
   & .line {
     width: 1px;
-    background-color: var(--text);
+    background-color: var(--text-inverted);
     flex-grow: 1;
     opacity: 0.3;
   }
