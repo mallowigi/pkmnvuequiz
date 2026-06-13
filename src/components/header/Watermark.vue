@@ -58,6 +58,10 @@ const showCredits = () => {
 <style scoped>
 .root {
   border-top: 3px dotted var(--type-bg-color, var(--primary));
+
+  .mobile & {
+    display: none;
+  }
 }
 
 .row {
