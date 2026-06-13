@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { DocumentData } from 'firebase/firestore';
 import { useI18n } from 'vue-i18n';
+
+import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
+import { useLeaderboards } from '@/composables/useLeaderboards.ts';
 import { useTranslations } from '@/composables/useTranslations.js';
 import type { GameMode, Gen, Type } from '@/types.ts';
-import { useLeaderboards } from '@/composables/useLeaderboards.ts';
 
 const props = defineProps<{
+  caption?: string;
   uid?: string | null;
   gameMode?: GameMode | null;
   gen?: Gen | null;
@@ -35,45 +38,53 @@ const subType = (user: DocumentData): string => {
 
 <template>
   <div class="leaderboard">
-    <div
-      class="table-container"
-      v-if="topTrainers?.length > 0"
-    >
-      <table class="leaderboard-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{{ t('leaderboards.name') }}</th>
-            <th>{{ t('leaderboards.time') }}</th>
-            <th>{{ t('leaderboards.gameMode') }}</th>
-            <th>{{ t('leaderboards.genType') }}</th>
-            <th>{{ t('leaderboards.orderMode') }}</th>
-            <th>{{ t('leaderboards.shadowsUsed') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(user, index) in topTrainers"
-            :key="user.id"
-          >
-            <td class="rank">{{ index + 1 }}</td>
-            <td class="run-name">{{ user.name }}</td>
-            <td class="run-time">{{ formatTime(user.time) }}</td>
-            <td>{{ t(user.gameMode === 'full' ? 'fullQuiz' : user.gameMode) }}</td>
-            <td>{{ t(subType(user)) }}</td>
-            <td>{{ t(user.mode) }}</td>
-            <td>{{ user.numShadows }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h2>{{ props.caption }}</h2>
 
-    <div
-      v-else
-      class="no-records"
-    >
-      <p>{{ t('leaderboards.noRecords') }}</p>
-    </div>
+    <FadeTransition :mode="'out-in'">
+      <Suspense>
+        <div
+          class="table-container"
+          v-if="topTrainers?.length > 0"
+        >
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{{ t('leaderboards.name') }}</th>
+                <th>{{ t('leaderboards.time') }}</th>
+                <th>{{ t('leaderboards.gameMode') }}</th>
+                <th>{{ t('leaderboards.genType') }}</th>
+                <th>{{ t('leaderboards.orderMode') }}</th>
+                <th>{{ t('leaderboards.shadowsUsed') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(user, index) in topTrainers"
+                :key="user.id"
+              >
+                <td class="rank">{{ index + 1 }}</td>
+                <td class="run-name">{{ user.name }}</td>
+                <td class="run-time">{{ formatTime(user.time) }}</td>
+                <td>{{ t(user.gameMode === 'full' ? 'fullQuiz' : user.gameMode) }}</td>
+                <td>{{ t(subType(user)) }}</td>
+                <td>{{ t(user.mode) }}</td>
+                <td>{{ user.numShadows }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          v-else
+          class="no-records"
+        >
+          <p>{{ t('leaderboards.noRecords') }}</p>
+        </div>
+
+        <template #fallback> {{ t('loadingQuiz') }} </template>
+      </Suspense>
+    </FadeTransition>
   </div>
 </template>
 
@@ -100,35 +111,35 @@ const subType = (user: DocumentData): string => {
   border-collapse: collapse;
   color: var(--text);
   font-size: 15px;
-}
 
-.leaderboard-table th,
-.leaderboard-table td {
-  padding: 10px 14px;
-  text-align: left;
-  white-space: nowrap;
-}
+  & th,
+  & td {
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
 
-.leaderboard-table thead {
-  background-color: var(--type-btn-color, var(--primary));
-  color: white;
-}
+  & thead {
+    background-color: var(--type-btn-color, var(--primary));
+    color: white;
+  }
 
-.leaderboard-table th {
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
+  & th {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
 
-.leaderboard-table tbody tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
+  & tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
 
-.leaderboard-table tbody tr:last-child {
-  border-bottom: none;
-}
+  & tbody tr:last-child {
+    border-bottom: none;
+  }
 
-.leaderboard-table tbody tr:nth-of-type(even) {
-  background-color: rgba(0, 0, 0, 0.04);
+  & tbody tr:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 }
 
 .rank {

@@ -48,9 +48,8 @@ const initials = computed(() => {
         <h3 class="profile-name">{{ settingsState.name }}</h3>
 
         <div class="profile-records">
-          <h4>{{ t('topPlays', { n: 3 }) }}</h4>
-
           <Leaderboards
+            :caption="t('topPlays', { n: 3 })"
             :uid="user?.uid"
             :gameMode="null"
           />
