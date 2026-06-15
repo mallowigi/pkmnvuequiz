@@ -78,25 +78,13 @@ const showCredits = () => {
   z-index: 10;
   padding: 4px 10px 10px 40px;
   color: var(--text);
-<<<<<<< New base: 📱 Improve mobile responsiveness
-
-  .desktop & {
-    width: 0;
-  }
 }
 
 .icons {
   padding: 4px;
-||||||| Common ancestor
-=======
 
   .desktop & {
     display: none;
   }
-}
-
-.icons {
-  padding: 4px;
->>>>>>> Current commit: Merge `refs/remotes/origin/master` into `mobile`
 }
 </style>

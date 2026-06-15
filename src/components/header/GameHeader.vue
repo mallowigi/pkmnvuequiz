@@ -27,12 +27,6 @@ const openSettings = () => {
       <div class="header-row second">
         <PokemonCounts />
 
-<<<<<<< New base: 📱 Improve mobile responsiveness
-        <GameTimer />
-      </div>
-||||||| Common ancestor
-      <GameTimer />
-=======
         <GameTimer />
 
         <RoundedButton
@@ -43,7 +37,6 @@ const openSettings = () => {
           <SettingsIcon />
         </RoundedButton>
       </div>
->>>>>>> Current commit: Merge `refs/remotes/origin/master` into `mobile`
     </section>
 
     <Watermark />
@@ -81,10 +74,6 @@ const openSettings = () => {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-<<<<<<< New base: 📱 Improve mobile responsiveness
-  flex-wrap: wrap;
-||||||| Common ancestor
-=======
   flex-wrap: wrap;
 }
 
@@ -96,6 +85,5 @@ const openSettings = () => {
   .mobile & {
     display: block;
   }
->>>>>>> Current commit: Merge `refs/remotes/origin/master` into `mobile`
 }
 </style>
