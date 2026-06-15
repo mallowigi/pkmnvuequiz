@@ -60,5 +60,12 @@ const props = defineProps<Props>();
     background: var(--button-hover);
     border: 2px solid var(--button-hover);
   }
+
+  &.danger-btn {
+    &:hover {
+      background-color: var(--danger);
+      border-color: var(--danger);
+    }
+  }
 }
 </style>

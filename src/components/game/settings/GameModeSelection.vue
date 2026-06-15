@@ -56,7 +56,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'full'"
       @click="setFullQuiz"
     >
-      <span class="mode">{{ t('fullQuiz') }}</span>
+      <span class="hide-mobile">{{ t('fullQuiz') }}</span>
       <img
         src="@/assets/FullQuiz.png"
         :alt="t('fullQuiz')"
@@ -68,7 +68,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'gen'"
       @click="setGenQuiz"
     >
-      <span class="mode">{{ t('gen') }}</span>
+      <span class="hide-mobile">{{ t('gen') }}</span>
       <img
         src="@/assets/GenQuiz.png"
         :alt="t('gen')"
@@ -80,7 +80,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'types'"
       @click="setTypeQuiz"
     >
-      <span class="mode">{{ t('types') }}</span>
+      <span class="hide-mobile">{{ t('types') }}</span>
       <img
         src="@/assets/TypeQuiz.png"
         :alt="t('types')"
@@ -92,7 +92,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'special'"
       @click="setSpecialQuiz"
     >
-      <span class="mode">{{ t('specialQuiz') }}</span>
+      <span class="hide-mobile">{{ t('specialQuiz') }}</span>
       <img
         src="@/assets/special.png"
         :alt="t('specialQuiz')"

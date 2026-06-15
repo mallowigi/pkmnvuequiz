@@ -18,6 +18,7 @@ const toggle = () => {
 
 <template>
   <RoundedBox
+    class="hotkey-toggle"
     v-tooltip="t('shadowHotkeyTooltip', { key: ',' })"
     v-game-ended
   >
@@ -33,3 +34,11 @@ const toggle = () => {
     </SegmentButton>
   </RoundedBox>
 </template>
+
+<style scoped>
+.hotkey-toggle {
+  .mobile & {
+    display: none;
+  }
+}
+</style>

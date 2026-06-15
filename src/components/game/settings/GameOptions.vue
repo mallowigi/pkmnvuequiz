@@ -66,5 +66,9 @@ const { flowState } = useGameFlow();
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
+  .mobile & {
+    justify-content: center;
+  }
 }
 </style>

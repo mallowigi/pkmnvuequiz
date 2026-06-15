@@ -112,6 +112,12 @@ const minutes = computed({
 </template>
 
 <style scoped>
+.timer-box {
+  .mobile & {
+    display: none;
+  }
+}
+
 :deep(.input-segment) {
   padding: 0;
   display: flex;

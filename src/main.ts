@@ -1,13 +1,13 @@
-import './assets/main.css';
+import './assets/base.css';
 import { MotionPlugin } from '@vueuse/motion';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 
 import { useSavedLocale } from '@/composables/useSavedLocale.ts';
+import hideMobile from '@/directives/breakpoint.ts';
 import ellipsis from '@/directives/ellipsis.ts';
 import gameEnded from '@/directives/gameEnded.ts';
-import hideMobile from '@/directives/breakpoint.ts';
 import tooltip from '@/directives/tooltip.ts';
 import cn from '@/locales/cn.json';
 import de from '@/locales/de.json';
