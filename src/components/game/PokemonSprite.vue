@@ -4,17 +4,19 @@ import { computed, capitalize, watch, useTemplateRef, nextTick } from 'vue';
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
 import RevealZoomTransition from '@/components/common/transitions/RevealZoomTransition.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
-import { useScrollState } from '@/composables/useScrollState.ts';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
+import { useScroll } from '@vueuse/core';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
 const { data } = usePkmnData();
 const { unknownSprite } = useUnknownSprite();
+const el = useTemplateRef('el');
+const { isScrolling } = useScroll(el);
 
 type Props = {
   pokemon: PokemonInfo;
@@ -37,11 +39,7 @@ type DisplayedSprite = {
   title: string | null;
 };
 
-const el = useTemplateRef('el');
-
 const props = defineProps<Props>();
-
-const { isScrolling } = useScrollState();
 
 const spriteData = computed<SpriteData>(() => {
   const { silhouettes, sprites, spriteCycles, shinies } = data;
