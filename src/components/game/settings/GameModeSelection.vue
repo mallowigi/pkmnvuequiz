@@ -56,7 +56,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'full'"
       @click="setFullQuiz"
     >
-      {{ t('fullQuiz') }}
+      <span class="mode">{{ t('fullQuiz') }}</span>
       <img
         src="@/assets/FullQuiz.png"
         :alt="t('fullQuiz')"
@@ -68,7 +68,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'gen'"
       @click="setGenQuiz"
     >
-      {{ t('gen') }}
+      <span class="mode">{{ t('gen') }}</span>
       <img
         src="@/assets/GenQuiz.png"
         :alt="t('gen')"
@@ -80,7 +80,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'types'"
       @click="setTypeQuiz"
     >
-      {{ t('types') }}
+      <span class="mode">{{ t('types') }}</span>
       <img
         src="@/assets/TypeQuiz.png"
         :alt="t('types')"
@@ -92,7 +92,7 @@ const setSpecialQuiz = () => {
       :selected="state.gameMode === 'special'"
       @click="setSpecialQuiz"
     >
-      {{ t('specialQuiz') }}
+      <span class="mode">{{ t('specialQuiz') }}</span>
       <img
         src="@/assets/special.png"
         :alt="t('specialQuiz')"
@@ -111,25 +111,37 @@ const setSpecialQuiz = () => {
   border-right-style: dotted;
   border-left: none;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   padding: 9px 14px;
+  min-width: 90px;
+
+  & > .mode {
+    .mobile & {
+      display: none;
+    }
+  }
 
   &:hover {
-    background-color: var(--type-dark-color);
-    border-color: var(--type-dark-color);
+    background-color: var(--type-dark-color, var(--darkPrimary));
+    border-color: var(--type-dark-color, var(--darkPrimary));
     border-left: none;
   }
 
   &.selected {
-    background-color: var(--type-btn-color);
-    border-color: var(--type-btn-color);
+    background-color: var(--type-btn-color, var(--primary));
+    border-color: var(--type-btn-color, var(--primary));
     border-left: none;
-    color: var(--type-fg-color);
+    color: var(--type-fg-color, var(--text));
+
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
 
   &:first-child {
-    border-left: 2px solid var(--type-btn-color);
+    border-left: 2px solid var(--type-btn-color, var(--primary));
   }
 
   &:last-child {
