@@ -41,7 +41,7 @@ const isDisabled = computed(() => {
   position: fixed;
   background-color: var(--type-btn-color, var(--primary));
   color: white;
-  display: inline-flex;
+  display: none;
   appearance: none;
   align-items: center;
   justify-content: center;
@@ -69,6 +69,10 @@ const isDisabled = computed(() => {
   &.inverted {
     transform: rotate(0deg);
     transform-origin: center;
+  }
+
+  .laptop & {
+    display: inline-flex;
   }
 }
 </style>
