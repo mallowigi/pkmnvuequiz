@@ -5,7 +5,6 @@ import { useI18n } from 'vue-i18n';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
-import { useColumnLayout } from '@/composables/useColumnLayout.ts';
 import { boxes } from '@/data/boxes.js';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
@@ -15,7 +14,6 @@ import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
 const { state } = useState();
-const styles = useColumnLayout();
 const { t } = useI18n();
 
 const currentBoxes = computed(() => {
@@ -74,40 +72,37 @@ const isFull = (boxId: SpecialType | RegionBox) => {
 </script>
 
 <template>
-  <div
+  <TransitionGroup
+    name="boxes"
+    tag="div"
     class="region-boxes"
-    :style="styles"
+    :class="state.gameMode"
+    appear
   >
     <RoundedBox
-      v-motion
-      :initial="{ opacity: 0, y: 50 }"
-      :enter="{
-        opacity: 1,
-        y: 0,
-        transition: {
-          delay: index * 100, // Staggers manually by index
-          duration: 400,
-        },
-      }"
-      :delay="index * 50"
-      class="region-box"
       v-for="(box, index) in currentBoxes"
-      :class="{ full: isFull(box.id) }"
       :key="box.id"
+      class="region-box"
+      :class="{ full: isFull(box.id) }"
+      :style="{ '--index': index }"
     >
       <span class="region-name">{{ t(box.id) }}</span>
 
-      <div class="sprite-container">
+      <TransitionGroup
+        name="sprites"
+        tag="div"
+        class="sprite-container"
+      >
         <PokemonSprite
-          v-for="(pokemon, index) in getBoxPokemons(box.id)"
+          v-for="(pokemon, spriteIndex) in getBoxPokemons(box.id)"
           :key="pokemon.id"
           :pokemon="pokemon"
           :status="getStatus(pokemon)"
-          :index="index"
+          :index="spriteIndex"
         />
-      </div>
+      </TransitionGroup>
     </RoundedBox>
-  </div>
+  </TransitionGroup>
 </template>
 
 <style scoped>
@@ -115,7 +110,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   display: block;
   margin: 10px;
   max-width: var(--max-width);
-  columns: var(--num-cols);
+  columns: var(--col-width, auto) var(--num-cols, auto);
   column-gap: 10px;
 
   & .region-box {
@@ -125,6 +120,29 @@ const isFull = (boxId: SpecialType | RegionBox) => {
     padding: 12px 12px 12px 10px;
     break-inside: avoid;
     border-radius: 3px 20px;
+  }
+
+  &.types,
+  &.full {
+    --max-width: none;
+    --num-cols: auto;
+    --col-width: 25vh;
+    --sprite-width: 57px;
+    --text-padding: 0;
+  }
+
+  &.special {
+    --max-width: 66%;
+    --num-cols: 2;
+    --sprite-width: 62px;
+    --text-padding: 10px;
+  }
+
+  &.gen {
+    --max-width: 66%;
+    --num-cols: 1;
+    --sprite-width: 64px;
+    --text-padding: 10px;
   }
 
   .laptop & {
@@ -145,15 +163,31 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   transform: translate3d(0, 0, 0.1px);
   will-change: transform, visibility;
   transform-style: preserve-3d;
-  transition: box-shadow 0.2s ease-in-out;
+  transition:
+    box-shadow 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
   box-shadow: 0 10px 20px -5px var(--glow);
 
   &:hover {
     --glow: var(--type-btn-color, var(--primary));
+    transform: scale(1.01) translate3d(0, 0, 0.1px);
   }
 
   &.full {
     box-shadow: 0 0 0 2px var(--type-btn-color, var(--primary)) inset;
+    animation: pop 0.4s ease-out;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -176,5 +210,29 @@ const isFull = (boxId: SpecialType | RegionBox) => {
 
 .sprite-container > *:has(.shadowed) {
   filter: brightness(calc(0.9 + 0.2 * cos(sibling-index() * 1.5)));
+}
+
+.boxes-move,
+.sprites-move {
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.boxes-enter-active {
+  transition: all 0.4s ease-out;
+  transition-delay: calc(var(--index) * 40ms);
+}
+
+.boxes-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.boxes-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.boxes-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
 }
 </style>
