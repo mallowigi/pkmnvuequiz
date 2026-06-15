@@ -20,6 +20,7 @@ import { useCredits } from '@/stores/useCredits';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
+import ScrollTop from '@/ScrollTop.vue';
 
 const { state, setDarkMode } = useState();
 const { flowState } = useGameFlow();
@@ -122,6 +123,9 @@ watch(
 
     <!-- Tooltips -->
     <Tooltip />
+
+    <!-- Scroll Top -->
+    <ScrollTop />
   </main>
 </template>
 
