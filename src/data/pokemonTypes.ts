@@ -17,7 +17,7 @@ export const pokemonTypes: Record<Type, TypeInfo> = {
   },
   dark: {
     bgColor: '#334466',
-    buttonColor: '#28394d',
+    buttonColor: '#446688',
     darkBgColor: '#1c2a3b',
     fgColor: '#ffffff',
     icon: 'DARK',
@@ -31,7 +31,7 @@ export const pokemonTypes: Record<Type, TypeInfo> = {
   },
   dragon: {
     bgColor: '#1144aa',
-    buttonColor: '#0d3a91',
+    buttonColor: '#3377cc',
     darkBgColor: '#0b2c7e',
     fgColor: '#ffffff',
     icon: 'DRAGON',

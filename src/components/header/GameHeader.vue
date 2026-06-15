@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
+import RoundedButton from '@/components/common/RoundedButton.vue';
 import DarkModeToggle from '@/components/header/DarkModeToggle.vue';
 import GameTimer from '@/components/header/GameTimer.vue';
 import PokemonCounts from '@/components/header/PokemonCounts.vue';
 import PokemonInput from '@/components/header/PokemonInput.vue';
 import Watermark from '@/components/header/Watermark.vue';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+
+const { toggleSettings } = useGameFlow();
+
+const openSettings = () => {
+  toggleSettings();
+};
 </script>
 
 <template>
@@ -19,6 +28,14 @@ import Watermark from '@/components/header/Watermark.vue';
         <PokemonCounts />
 
         <GameTimer />
+
+        <RoundedButton
+          class="settings"
+          primary
+          @click="openSettings"
+        >
+          <SettingsIcon />
+        </RoundedButton>
       </div>
     </section>
 
@@ -58,5 +75,15 @@ import Watermark from '@/components/header/Watermark.vue';
   align-items: flex-start;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.settings {
+  display: none;
+  min-width: 0;
+  margin: 0;
+
+  .mobile & {
+    display: block;
+  }
 }
 </style>

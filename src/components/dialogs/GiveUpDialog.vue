@@ -36,20 +36,15 @@ const cancel = () => {
       <p class="desc">{{ t('giveUpDialog.description') }}</p>
 
       <RoundedButton
+        class="danger-btn"
         @click.stop="promptGiveUp"
-        primary
       >
         {{ t('giveUp') }}
       </RoundedButton>
 
-      <RoundedButton
-        @click.stop="cancel"
-        primary
-      >
+      <RoundedButton @click.stop="cancel">
         {{ t('cancel') }}
       </RoundedButton>
     </div>
   </Overlay>
 </template>
-
-<style scoped></style>

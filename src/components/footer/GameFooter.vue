@@ -170,8 +170,9 @@ const { t } = useI18n();
   flex-wrap: wrap;
 
   .mobile & {
-    line-height: 16px;
     text-align: center;
+    line-height: 1.5;
+    justify-content: center;
   }
 }
 

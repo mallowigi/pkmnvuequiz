@@ -1,3 +1,4 @@
+@import 'main.css';
 @import 'nprogress.css';
 
 .notxt {
@@ -84,6 +85,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.hide-mobile {
+  .mobile & {
+    display: none;
+  }
 }
 
 ::search-text {

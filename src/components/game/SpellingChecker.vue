@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
-import { useI18n } from 'vue-i18n';
+import { capitalize } from '@/utils/utils.ts';
 
 const { t } = useI18n();
 const { flowState } = useGameFlow();
@@ -17,7 +18,7 @@ const toggle = () => {
   hintShown.value = !hintShown.value;
 
   if (hintShown.value) {
-    hint.value = findClosestPokemon(flowState.lastInput!) || 'not found';
+    hint.value = capitalize(findClosestPokemon(flowState.lastInput!) || 'not found');
   }
 };
 
@@ -32,7 +33,7 @@ watch(
 <template>
   <RoundedBox class="cell">
     <div class="label rad-bl">
-      <div class="txt">{{ t('closestSpelling') }}</div>
+      <span class="txt">{{ t('closestSpelling') }}</span>
     </div>
 
     <div class="button rad-tr transition-element">
@@ -64,12 +65,24 @@ watch(
   border-radius: 3px 20px;
   padding: 0;
   gap: 0;
+
+  .mobile & {
+    align-self: center;
+    min-width: 0;
+    position: sticky;
+    top: 134px;
+    z-index: 3;
+  }
 }
 
 .label {
   background: var(--type-btn-color, var(--primary));
   color: var(--type-fg-color, var(--text));
   padding: 10px 18px;
+
+  .mobile & {
+    display: none;
+  }
 }
 
 .button {
@@ -79,6 +92,10 @@ watch(
   &:hover {
     background-color: var(--type-dark-color, var(--darkPrimary));
     border-color: var(--type-dark-color, var(--darkPrimary));
+  }
+
+  .mobile & {
+    border-radius: 3px 20px;
   }
 }
 

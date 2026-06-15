@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
-import { useI18n } from 'vue-i18n';
 
 const { setDialog } = useDialogs();
 const { t } = useI18n();
@@ -35,8 +36,13 @@ const resetGame = () => {
 </template>
 
 <style scoped>
-.danger-btn:hover {
-  background-color: var(--danger);
-  border-color: var(--danger);
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  .mobile & {
+    justify-content: center;
+    align-self: center;
+  }
 }
 </style>

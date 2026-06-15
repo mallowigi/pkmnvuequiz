@@ -28,7 +28,7 @@ const toggle = () => {
     :class="{ selected: state.withShadows }"
     @click="toggle"
   >
-    {{ t('shadows') }}
+    <span class="hide-mobile">{{ t('shadows') }}</span>
     <img
       src="@/assets/raichu.png"
       :alt="t('silhouette')"

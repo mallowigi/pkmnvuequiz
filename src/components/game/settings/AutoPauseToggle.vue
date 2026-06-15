@@ -19,6 +19,7 @@ const applyAutoPause = (value: boolean) => {
 
 <template>
   <RoundedBox
+    class="auto-pause-toggle"
     v-game-ended
     v-tooltip="t('autoPauseTooltip')"
   >
@@ -41,4 +42,10 @@ const applyAutoPause = (value: boolean) => {
   </RoundedBox>
 </template>
 
-<style scoped></style>
+<style scoped>
+.auto-pause-toggle {
+  .mobile & {
+    display: none;
+  }
+}
+</style>

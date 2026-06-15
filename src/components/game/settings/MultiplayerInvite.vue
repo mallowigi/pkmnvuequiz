@@ -6,7 +6,10 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <RoundedBox v-game-ended>
+  <RoundedBox
+    v-game-ended
+    class="multi-toggle"
+  >
     {{ t('multiplayerInvite') }}
     <img
       src="@/assets/HostQuiz.png"
@@ -14,3 +17,11 @@ const { t } = useI18n();
     />
   </RoundedBox>
 </template>
+
+<style scoped>
+.multi-toggle {
+  .mobile & {
+    display: none;
+  }
+}
+</style>

@@ -22,7 +22,7 @@ const toggle = () => {
     v-game-ended
     :class="{ selected: settingsState.withSpelling }"
   >
-    {{ t('spellingHelp') }}
+    <span class="hide-mobile">{{ t('spellingHelp') }}</span>
     <img
       src="@/assets/spellcheck.png"
       :alt="t('spellingHelp')"

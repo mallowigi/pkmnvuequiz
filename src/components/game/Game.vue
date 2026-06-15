@@ -37,5 +37,10 @@ const { flowState } = useGameFlow();
   justify-content: flex-end;
   align-items: flex-start;
   flex: 1;
+  margin-bottom: 1rem;
+
+  /*.mobile & {
+    overflow: hidden;
+  }*/
 }
 </style>

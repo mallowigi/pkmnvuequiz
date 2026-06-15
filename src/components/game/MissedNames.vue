@@ -71,7 +71,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
         class="accordion"
         @click="toggleAccordion"
       >
-        <p>{{ t('missedNames') }}</p>
+        <span class="hide-mobile">{{ t('missedNames') }}</span>
         <i
           class="arrow"
           :class="{ up: isAccordionOpen }"
@@ -128,6 +128,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   align-items: flex-start;
   min-height: initial;
   max-height: initial;
+  align-self: stretch;
 }
 
 .selection-content {
@@ -198,6 +199,10 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
     column-span: all;
     width: 100%;
     min-width: 800px;
+
+    .mobile & {
+      min-width: 0;
+    }
   }
 }
 
@@ -228,6 +233,10 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 
   &:empty {
     display: none;
+  }
+
+  .mobile & {
+    grid-template-columns: repeat(2, auto);
   }
 }
 

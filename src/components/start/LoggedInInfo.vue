@@ -25,10 +25,3 @@ const { user } = useAuth(auth);
     </RoundedButton>
   </div>
 </template>
-
-<style scoped>
-.danger-btn:hover {
-  background-color: var(--danger);
-  border-color: var(--danger);
-}
-</style>
