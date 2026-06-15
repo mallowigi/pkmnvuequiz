@@ -168,12 +168,21 @@ const { t } = useI18n();
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+<<<<<<< New base: 📱 Improve mobile responsiveness
+
+  .mobile & {
+    line-height: 16px;
+    text-align: center;
+  }
+||||||| Common ancestor
+=======
 
   .mobile & {
     line-height: 1.5;
     text-align: center;
     justify-content: center;
   }
+>>>>>>> Current commit: Merge `refs/remotes/origin/master` into `mobile`
 }
 
 .link {

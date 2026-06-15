@@ -44,9 +44,16 @@
 }
 
 html {
+<<<<<<< New base: 📱 Improve mobile responsiveness
+  max-width: 100vw;
+  min-height: 100vh;
+||||||| Common ancestor
+  min-height: 100%;
+=======
   max-width: 100vw;
   min-height: 100vh;
   scroll-behavior: smooth;
+>>>>>>> Current commit: Merge `refs/remotes/origin/master` into `mobile`
 
   * {
     box-sizing: border-box;

@@ -121,6 +121,14 @@ const isFull = (boxId: SpecialType | RegionBox) => {
     break-inside: avoid;
     border-radius: 3px 20px;
   }
+<<<<<<< New base: 📱 Improve mobile responsiveness
+
+  .laptop & {
+    max-width: 100%;
+    columns: 1;
+  }
+||||||| Common ancestor
+=======
 
   &.types,
   &.full {
@@ -149,6 +157,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
     max-width: 100%;
     columns: 1;
   }
+>>>>>>> Current commit: Merge `refs/remotes/origin/master` into `mobile`
 }
 
 .region-box {
