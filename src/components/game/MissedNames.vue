@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import Spacer from '@/components/common/Spacer.vue';
+import MissedNamesTransition from '@/components/common/transitions/MissedNamesTransition.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
+import { useTranslations } from '@/composables/useTranslations.ts';
 import { boxes } from '@/data/boxes.ts';
 import { languages } from '@/data/languages.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
-import MissedNamesTransition from '@/components/common/transitions/MissedNamesTransition.vue';
-import { useI18n } from 'vue-i18n';
-import { useTranslations } from '@/composables/useTranslations.ts';
-import { useSettings } from '@/stores/useSettings.ts';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
@@ -65,6 +66,10 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 </script>
 
 <template>
+  <h1 class="gameover">{{ t('gameOver') }}</h1>
+
+  <h2 class="gameover">{{ t('thanksForPlaying') }}</h2>
+
   <RoundedBox class="root">
     <div class="selection-content">
       <div
@@ -121,6 +126,14 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 </template>
 
 <style scoped>
+.gameover {
+  font-weight: bold;
+  margin: 0;
+  line-height: 2;
+  align-self: center;
+  color: var(--type-fg-color, var(--text));
+}
+
 .root {
   display: flex;
   flex-direction: column;
@@ -223,6 +236,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   grid-template-rows: 36px;
   gap: 10px;
   align-items: flex-start;
+  overscroll-behavior: contain;
 
   & .pokemon {
     display: flex;

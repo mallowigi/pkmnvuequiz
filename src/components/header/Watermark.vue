@@ -3,7 +3,6 @@ import { useI18n } from 'vue-i18n';
 
 import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import CreditsIcon from '@/components/common/icons/CreditsIcon.vue';
-import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
 import AvatarMenu from '@/components/header/AvatarMenu.vue';
 import LocaleChanger from '@/components/header/LocaleChanger.vue';
 import { useCredits } from '@/stores/useCredits.ts';
@@ -32,26 +31,23 @@ const showCredits = () => {
   <div class="root row">
     <div class="icons row">
       <ChartIcon
+        class="hide-laptop"
         @click="showLeaderBoards"
         v-tooltip:bottom="t('showLeaderBoards')"
       />
 
       <CreditsIcon
+        class="hide-laptop"
         @click="showCredits"
         v-tooltip:bottom="t('showCredits')"
       />
 
-      <SettingsIcon
-        @click="clickToggleSettings"
-        v-tooltip:bottom="t('toggleSettings')"
-      />
+      <LocaleChanger class="hide-laptop" />
 
-      <LocaleChanger />
-
-      <AvatarMenu />
+      <AvatarMenu class="hide-laptop" />
     </div>
 
-    <div class="watermark-url">pkmnvuequiz.netlify.app</div>
+    <div class="watermark-url hide-laptop">pkmnvuequiz.netlify.app</div>
   </div>
 </template>
 
@@ -60,8 +56,10 @@ const showCredits = () => {
   border-top: 3px dotted var(--type-bg-color, var(--primary));
   position: absolute;
   right: 0;
+}
 
-  .laptop & {
+.hide-laptop {
+  .desktop & {
     display: none;
   }
 }
@@ -82,9 +80,5 @@ const showCredits = () => {
 
 .icons {
   padding: 4px;
-
-  .desktop & {
-    display: none;
-  }
 }
 </style>
