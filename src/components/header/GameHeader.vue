@@ -82,7 +82,7 @@ const openSettings = () => {
   min-width: 0;
   margin: 0;
 
-  .mobile & {
+  .desktop & {
     display: block;
   }
 }

@@ -6,13 +6,11 @@ import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
-import { useState } from '@/stores/useState.js';
 import { useTimer } from '@/stores/useTimer';
 import { useI18n } from 'vue-i18n';
 
-const { flowState, resetFlowState, pauseGame } = useGameFlow();
+const { flowState, resetFlowState, pauseGame, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
-const { resetState } = useState();
 const { resetTimer, setMinutes, setIsLimited, timerState } = useTimer();
 const { setDialog } = useDialogs();
 const { t } = useI18n();
@@ -26,28 +24,26 @@ const setInfinite = () => {
   }
 
   setDialog('timer', () => {
-    resetState();
     resetFlowState();
     resetPokemonState();
     resetTimer();
     setIsLimited(false);
+    startGame();
   });
 };
 
 const setFinite = () => {
-  if (timerState.isLimited) return;
-
   if (!flowState.isStarted) {
     setIsLimited(true);
     return;
   }
 
   setDialog('timer', () => {
-    resetState();
     resetFlowState();
     resetPokemonState();
     resetTimer();
     setIsLimited(true);
+    startGame();
   });
 };
 

@@ -5,11 +5,13 @@ import { useFirebase } from '@/composables/useFirebase.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import type { GameFlowState, GameSelectionState } from '@/types.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare } = usePlaySounds();
   const { removeAutoSave } = useSavedData();
   const { createRecord } = useFirebase();
+  const { showRemaining } = usePokemons();
 
   const flowState = reactive<GameFlowState>({
     gameSelectionState: 'new',
@@ -55,6 +57,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
 
     createRecord();
     removeAutoSave();
+    showRemaining();
   };
 
   const setGameSelectionState = (state: GameSelectionState) => {

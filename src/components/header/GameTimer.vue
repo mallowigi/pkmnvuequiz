@@ -9,7 +9,7 @@ import { useSettings } from '@/stores/useSettings.ts';
 
 const { settingsState } = useSettings();
 const { timerState, incElapsed } = useTimer();
-const { flowState, pauseGame } = useGameFlow();
+const { flowState, pauseGame, endGame, giveUp } = useGameFlow();
 const { t } = useI18n();
 
 const { pause, resume } = useInterval(1000, {
@@ -17,6 +17,10 @@ const { pause, resume } = useInterval(1000, {
     if (!timerState.startTime || flowState.isPaused || flowState.isGivenUp || flowState.isEnded) return;
 
     incElapsed();
+
+    if (timerState.isLimited && timerState.elapsed! >= timerState.minutes! * 5) {
+      giveUp();
+    }
   },
   controls: true,
 });
@@ -69,42 +73,6 @@ watch(windowFocus, (isFocused) => {
 </template>
 
 <style scoped>
-@keyframes shake {
-  0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
-}
-
 .box {
   background: var(--type-bg-color, var(--primary));
   color: var(--type-fg-color, var(--text));

@@ -32,26 +32,29 @@ const showCredits = () => {
   <div class="root row">
     <div class="icons row">
       <ChartIcon
+        class="hide-laptop"
         @click="showLeaderBoards"
         v-tooltip:bottom="t('showLeaderBoards')"
       />
 
       <CreditsIcon
+        class="hide-laptop"
         @click="showCredits"
         v-tooltip:bottom="t('showCredits')"
       />
 
       <SettingsIcon
+        class="hide-laptop"
         @click="clickToggleSettings"
         v-tooltip:bottom="t('toggleSettings')"
       />
 
-      <LocaleChanger />
+      <LocaleChanger class="hide-laptop" />
 
-      <AvatarMenu />
+      <AvatarMenu class="hide-laptop" />
     </div>
 
-    <div class="watermark-url">pkmnvuequiz.netlify.app</div>
+    <div class="watermark-url hide-laptop">pkmnvuequiz.netlify.app</div>
   </div>
 </template>
 
@@ -60,8 +63,10 @@ const showCredits = () => {
   border-top: 3px dotted var(--type-bg-color, var(--primary));
   position: absolute;
   right: 0;
+}
 
-  .laptop & {
+.hide-laptop {
+  .desktop & {
     display: none;
   }
 }
@@ -82,9 +87,5 @@ const showCredits = () => {
 
 .icons {
   padding: 4px;
-
-  .desktop & {
-    display: none;
-  }
 }
 </style>

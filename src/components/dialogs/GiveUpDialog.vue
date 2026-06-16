@@ -3,18 +3,15 @@ import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useDialogs } from '@/stores/useDialogs.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useI18n } from 'vue-i18n';
 
 const { giveUp } = useGameFlow();
 const { dialogs, closeDialog } = useDialogs();
-const { showRemaining } = usePokemons();
 const { t } = useI18n();
 
 const promptGiveUp = () => {
   closeDialog();
   giveUp();
-  showRemaining();
 
   if (dialogs.callback) {
     dialogs.callback();
