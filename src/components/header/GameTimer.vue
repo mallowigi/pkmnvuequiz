@@ -6,6 +6,7 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useI18n } from 'vue-i18n';
 import { useSettings } from '@/stores/useSettings.ts';
+import CountdownOverlay from '@/components/game/CountdownOverlay.vue';
 
 const { settingsState } = useSettings();
 const { timerState, incElapsed } = useTimer();
@@ -18,7 +19,7 @@ const { pause, resume } = useInterval(1000, {
 
     incElapsed();
 
-    if (timerState.isLimited && timerState.elapsed! >= timerState.minutes! * 5) {
+    if (timerState.isLimited && timerState.elapsed! >= timerState.minutes! * 60) {
       giveUp();
     }
   },
@@ -70,6 +71,8 @@ watch(windowFocus, (isFocused) => {
   <div class="box rad-bl-tr">
     {{ t('timer') }}: <span class="highlight">{{ elapsedTime }}</span>
   </div>
+
+  <CountdownOverlay />
 </template>
 
 <style scoped>

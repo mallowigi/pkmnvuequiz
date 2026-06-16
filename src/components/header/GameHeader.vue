@@ -25,10 +25,13 @@ const openSettings = () => {
       </div>
 
       <div class="header-row second">
+        <!-- Counts -->
         <PokemonCounts />
 
+        <!-- Timer -->
         <GameTimer />
 
+        <!-- Settings -->
         <RoundedButton
           class="settings"
           primary

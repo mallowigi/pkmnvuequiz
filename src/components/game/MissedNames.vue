@@ -236,6 +236,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   grid-template-rows: 36px;
   gap: 10px;
   align-items: flex-start;
+  overscroll-behavior: contain;
 
   & .pokemon {
     display: flex;

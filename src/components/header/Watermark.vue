@@ -3,7 +3,6 @@ import { useI18n } from 'vue-i18n';
 
 import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import CreditsIcon from '@/components/common/icons/CreditsIcon.vue';
-import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
 import AvatarMenu from '@/components/header/AvatarMenu.vue';
 import LocaleChanger from '@/components/header/LocaleChanger.vue';
 import { useCredits } from '@/stores/useCredits.ts';
@@ -41,12 +40,6 @@ const showCredits = () => {
         class="hide-laptop"
         @click="showCredits"
         v-tooltip:bottom="t('showCredits')"
-      />
-
-      <SettingsIcon
-        class="hide-laptop"
-        @click="clickToggleSettings"
-        v-tooltip:bottom="t('toggleSettings')"
       />
 
       <LocaleChanger class="hide-laptop" />
