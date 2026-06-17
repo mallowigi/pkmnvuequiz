@@ -230,5 +230,7 @@
   "welcome": "Bem-vindo ao Quiz Pokémon!",
   "welcomeBack": "Bem-vindo de volta, {name}!",
   "x": "X",
-  "zh": "Chinês (Tradicional)"
+  "zh": "Chinês (Tradicional)",
+  "gameOver": "Fim de Jogo!",
+  "thanksForPlaying": "Obrigado por jogar!"
 }

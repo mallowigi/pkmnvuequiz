@@ -230,5 +230,7 @@
   "welcome": "歡迎來到寶可夢問卷！",
   "welcomeBack": "歡迎回來，{name}!",
   "x": "X",
-  "zh": "中文（繁體）"
+  "zh": "中文（繁體）",
+  "gameOver": "遊戲結束!",
+  "thanksForPlaying": "感謝您的遊玩!"
 }
