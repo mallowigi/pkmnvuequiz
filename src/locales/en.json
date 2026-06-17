@@ -76,6 +76,7 @@
   "full": "Full Quiz",
   "fullQuiz": "Full Quiz",
   "galar": "Galar",
+  "gameOver": "Game Over!",
   "gen": "Generations",
   "ghost": "Ghost",
   "giveUp": "Give Up",
@@ -211,6 +212,7 @@
   "switchQuizDialog": {
     "title": "Switch Quiz?"
   },
+  "thanksForPlaying": "Thanks for Playing!",
   "timer": "Timer",
   "timerTooltip": "Set a timer for the game.",
   "toggleSettings": "Toggle Settings",
@@ -231,6 +233,5 @@
   "welcome": "Welcome to the Pokémon Quiz!",
   "welcomeBack": "Welcome back, {name} !",
   "x": "X",
-
   "zh": "Chinese (Traditional)"
 }

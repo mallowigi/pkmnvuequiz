@@ -230,5 +230,7 @@
   "welcome": "欢迎来到宝可梦问卷！",
   "welcomeBack": "欢迎回来，{name}!",
   "x": "X",
-  "zh": "中文（繁体）"
+  "zh": "中文（繁体）",
+  "gameOver": "游戏结束!",
+  "thanksForPlaying": "感谢您的游玩!"
 }
