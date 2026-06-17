@@ -72,37 +72,41 @@ const isFull = (boxId: SpecialType | RegionBox) => {
 </script>
 
 <template>
-  <TransitionGroup
-    name="boxes"
-    tag="div"
+  <div
     class="region-boxes"
     :class="state.gameMode"
-    appear
   >
     <RoundedBox
       v-for="(box, index) in currentBoxes"
       :key="box.id"
+      v-motion
+      :initial="{ opacity: 0, y: 50 }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: index * 100, // Staggers manually by index
+          duration: 400,
+        },
+      }"
+      :delay="index * 50"
       class="region-box"
       :class="{ full: isFull(box.id) }"
       :style="{ '--index': index }"
     >
       <span class="region-name">{{ t(box.id) }}</span>
 
-      <TransitionGroup
-        name="sprites"
-        tag="div"
-        class="sprite-container"
-      >
+      <div class="sprite-container">
         <PokemonSprite
-          v-for="(pokemon, spriteIndex) in getBoxPokemons(box.id)"
+          v-for="(pokemon, index) in getBoxPokemons(box.id)"
           :key="pokemon.id"
           :pokemon="pokemon"
           :status="getStatus(pokemon)"
-          :index="spriteIndex"
+          :index="index"
         />
-      </TransitionGroup>
+      </div>
     </RoundedBox>
-  </TransitionGroup>
+  </div>
 </template>
 
 <style scoped>
@@ -170,24 +174,10 @@ const isFull = (boxId: SpecialType | RegionBox) => {
 
   &:hover {
     --glow: var(--type-btn-color, var(--primary));
-    transform: scale(1.01) translate3d(0, 0, 0.1px);
   }
 
   &.full {
     box-shadow: 0 0 0 2px var(--type-btn-color, var(--primary)) inset;
-    animation: pop 0.4s ease-out;
-  }
-}
-
-@keyframes pop {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
   }
 }
 
@@ -210,29 +200,5 @@ const isFull = (boxId: SpecialType | RegionBox) => {
 
 .sprite-container > *:has(.shadowed) {
   filter: brightness(calc(0.9 + 0.2 * cos(sibling-index() * 1.5)));
-}
-
-.boxes-move,
-.sprites-move {
-  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
-}
-
-.boxes-enter-active {
-  transition: all 0.4s ease-out;
-  transition-delay: calc(var(--index) * 40ms);
-}
-
-.boxes-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.boxes-leave-active {
-  transition: all 0.3s ease-in;
-}
-
-.boxes-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
 }
 </style>
