@@ -81,12 +81,8 @@ const openSettings = () => {
 }
 
 .settings {
-  display: none;
+  display: block;
   min-width: 0;
   margin: 0;
-
-  .desktop & {
-    display: block;
-  }
 }
 </style>

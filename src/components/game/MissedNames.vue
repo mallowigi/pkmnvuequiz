@@ -22,7 +22,6 @@ const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { t } = useI18n();
 const { getLanguageTranslation } = useTranslations();
-
 const { getTranslation } = useLanguages();
 const { settingsState } = useSettings();
 const pokemonStore = usePokemons();
@@ -70,7 +69,10 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
 
   <h2 class="gameover">{{ t('thanksForPlaying') }}</h2>
 
-  <RoundedBox class="root">
+  <RoundedBox
+    class="root"
+    :class="state.gameMode"
+  >
     <div class="selection-content">
       <div
         class="accordion"
@@ -131,7 +133,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   margin: 0;
   line-height: 2;
   align-self: center;
-  color: var(--type-fg-color, var(--text));
+  color: var(--text);
 }
 
 .root {
@@ -142,6 +144,32 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   min-height: initial;
   max-height: initial;
   align-self: stretch;
+  margin: 10px;
+  max-width: var(--max-width);
+  columns: var(--col-width, auto) var(--num-cols, auto);
+
+  &.types,
+  &.full {
+    --max-width: none;
+    --num-cols: auto;
+    --col-width: 25vh;
+    --sprite-width: 57px;
+    --text-padding: 0;
+  }
+
+  &.special {
+    --max-width: 66%;
+    --num-cols: 2;
+    --sprite-width: 62px;
+    --text-padding: 10px;
+  }
+
+  &.gen {
+    --max-width: 66%;
+    --num-cols: 1;
+    --sprite-width: 64px;
+    --text-padding: 10px;
+  }
 }
 
 .selection-content {

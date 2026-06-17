@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useScroll } from '@vueuse/core';
 import { computed, capitalize, watch, useTemplateRef, nextTick } from 'vue';
 
 import CyclingSprite from '@/components/common/CyclingSprite.vue';
@@ -9,7 +10,6 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo, PokemonStatus } from '@/types.ts';
-import { useScroll } from '@vueuse/core';
 
 const { state } = useState();
 const { flowState } = useGameFlow();
@@ -171,7 +171,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     <RevealZoomTransition
       appear
       mode="out-in"
-      v-else-if="isDitto && props.status.isFound && !props.status.isMissed"
+      v-else-if="isDitto && props.status.isFound"
     >
       <LastPokemon />
     </RevealZoomTransition>
