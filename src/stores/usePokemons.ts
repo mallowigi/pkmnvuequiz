@@ -22,6 +22,7 @@ import type {
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
 import { useSettings } from '@/stores/useSettings.ts';
+import { useVibrate } from '@vueuse/core';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -107,6 +108,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const { settingsState } = useSettings();
   const { startTimer } = useTimer();
   const { playShiny } = usePlaySounds();
+  const { vibrate } = useVibrate();
 
   const numFound = computed(() => {
     const currentGameModePokemon = getCurrentGameModePokemon();
@@ -236,13 +238,14 @@ export const usePokemons = defineStore('pokemons', () => {
       if (status && !status.isFound) {
         status.isFound = true;
         status.lastFoundAt = Date.now();
+        vibrate(300);
 
         const shinyRandom = Math.random();
-
         const shinyRate = settingsState.withShinies ? 0.1 : 0.01;
         if (shinyRandom < shinyRate) {
           status.isShiny = true;
           playShiny(pokemon);
+          vibrate(700);
         }
 
         startTimer();
