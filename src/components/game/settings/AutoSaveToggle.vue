@@ -6,15 +6,15 @@ import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 
-const { settingsState, setAutoPause } = useSettings();
+const { settingsState, setSaveToCloud } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
-const applyAutoPause = (value: boolean) => {
-  if (settingsState.autoPause === value) return;
+const applyAutoSave = (value: boolean) => {
+  if (settingsState.saveToCloud === value) return;
 
-  setAutoPause(value);
-  showUserMessage(t('autoPauseSet', { status: value ? t('enabled') : t('disabled') }));
+  setSaveToCloud(value);
+  showUserMessage(t('autoSaveSet', { status: value ? t('enabled') : t('disabled') }));
 };
 </script>
 
@@ -22,20 +22,20 @@ const applyAutoPause = (value: boolean) => {
   <RoundedBox
     class="auto-save-toggle"
     v-game-ended
-    v-tooltip="t('autoPauseTooltip')"
+    v-tooltip="t('autoSaveTooltip')"
   >
     <SegmentButton
       :active="{
-        left: settingsState.autoPause,
-        right: !settingsState.autoPause,
+        left: settingsState.saveToCloud,
+        right: !settingsState.saveToCloud,
       }"
       :attached="{
         right: true,
       }"
-      @click:left="applyAutoPause(true)"
-      @click:right="applyAutoPause(false)"
+      @click:left="applyAutoSave(true)"
+      @click:right="applyAutoSave(false)"
     >
-      <template #prefix> {{ t('autoPause') }} </template>
+      <template #prefix> {{ t('autoSave') }} </template>
 
       <template #left> {{ t('on') }} </template>
       <template #right> {{ t('off') }} </template>

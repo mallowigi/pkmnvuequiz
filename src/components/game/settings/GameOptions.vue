@@ -14,6 +14,7 @@ import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import AutoSaveToggle from '@/components/game/settings/AutoSaveToggle.vue';
 
 const { flowState } = useGameFlow();
 </script>
@@ -46,6 +47,8 @@ const { flowState } = useGameFlow();
           <SoundToggle />
 
           <AutoPauseToggle />
+
+          <AutoSaveToggle />
         </div>
 
         <div class="selection-row">
