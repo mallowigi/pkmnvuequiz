@@ -1,4 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang='ts'>
+</script>
 
 <template>
   <i class="icon">
@@ -22,7 +23,16 @@
     cursor: pointer;
     stroke: currentColor;
     will-change: filter;
-    transition: filter 0.1s ease-in-out;
+    transition: filter 0.3s ease-in-out;
+  }
+
+  &.accent-icon :deep(svg) {
+    color: var(--type-btn-color, var(--primary));
+    stroke: var(--type-btn-color, var(--primary));
+  }
+
+  &.accent-icon:hover :deep(svg) {
+    filter: brightness(0) invert(1);
   }
 }
 </style>

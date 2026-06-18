@@ -84,5 +84,10 @@ const openSettings = () => {
   display: block;
   min-width: 0;
   margin: 0;
+
+  * {
+    color: var(--type-fg-color, var(--text));
+    stroke: var(--type-fg-color, var(--text));
+  }
 }
 </style>

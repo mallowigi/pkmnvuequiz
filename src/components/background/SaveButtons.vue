@@ -1,7 +1,9 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 import IconButton from '@/components/common/IconButton.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { useI18n } from 'vue-i18n';
+import SaveIcon from '@/components/common/icons/SaveIcon.vue';
+import LoadIcon from '@/components/common/icons/LoadIcon.vue';
 
 const { t } = useI18n();
 
@@ -9,32 +11,26 @@ const { saveState, loadState } = useSavedData();
 </script>
 
 <template>
-  <div class="top-margin">
+  <div class='top-margin'>
     <input
-      type="file"
-      id="file-input"
-      @change="loadState"
-      hidden
-      accept="application/json"
+        type='file'
+        id='file-input'
+        @change='loadState'
+        hidden
+        accept='application/json'
     />
 
-    <p class="left-margin">{{ t('saveLoadState') }}</p>
+    <p class='left-margin'>{{ t('saveLoadState') }}</p>
 
-    <IconButton @click="saveState">
-      <img
-        src="@/assets/download.png"
-        :alt="t('download')"
-      />
+    <IconButton @click='saveState'>
+      <SaveIcon class='accent-icon' />
     </IconButton>
 
-    <label for="file-input">
-      <IconButton>
-        <img
-          src="@/assets/upload.png"
-          :alt="t('upload')"
-        />
-      </IconButton>
-    </label>
+    <IconButton>
+      <label for='file-input'>
+        <LoadIcon class='accent-icon' />
+      </label>
+    </IconButton>
   </div>
 </template>
 
