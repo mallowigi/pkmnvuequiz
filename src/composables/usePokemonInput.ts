@@ -31,15 +31,18 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     isAlreadyFound,
     getNextOrderedPokemon,
     isWrongOrder,
+    prefillRemaining,
   } = usePokemons();
   const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
 
   const debugEnd = () => {
+    if (!import.meta.env.DEV) return;
     clearInput();
     endGame();
   };
 
   const activateCheat = () => {
+    if (!import.meta.env.DEV) return;
     playFanfare();
     showUserMessage(t('nextPokemon', { name: capitalize(getNextOrderedPokemon()?.baseName ?? '???') }));
     clearInput();
@@ -113,9 +116,18 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const checkInput = (value: string) => {
-    if (value === 'debug') {
-      debugEnd();
-      return;
+    if (import.meta.env.DEV) {
+      if (value === 'endGame') {
+        debugEnd();
+        return;
+      }
+
+      if (value === 'prefill') {
+        prefillRemaining();
+        showUserMessage('Cheat activated: Prefilled all but one.');
+        clearInput();
+        return;
+      }
     }
 
     const foundPokemon = findPokemon(value);
