@@ -333,6 +333,7 @@ export const useSavedData = () => {
   return {
     autoSave,
     getSavedName,
+    getSavedState,
     hasSavedState,
     loadAutoSave,
     loadState,

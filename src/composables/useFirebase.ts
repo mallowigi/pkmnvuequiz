@@ -1,8 +1,5 @@
 import { useFirestore } from '@vueuse/firebase';
-import {
-  signInAnonymously,
-  signOut,
-} from 'firebase/auth';
+import { signInAnonymously, signOut } from 'firebase/auth';
 import { addDoc, collection, doc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -18,7 +15,14 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import type { UserRecord, GameMode, Gen, Type } from '@/types.ts';
+import type { UserRecord, GameMode, Gen, Type, SaveData } from '@/types.ts';
+
+type TopTrainersOptions = {
+  gameMode?: GameMode | null;
+  gen?: Gen | null;
+  type?: Type | null;
+  uid?: string | null;
+};
 
 export const useFirebase = defineStore('firebase', () => {
   const { setName, setAvatar } = useSettings();
@@ -85,16 +89,18 @@ export const useFirebase = defineStore('firebase', () => {
     await setDoc(doc(db, 'leaderboards', user.uid), payload);
   };
 
-  const getTopTrainers = ({
-    gameMode,
-    gen,
-    type,
-    uid,
-  }: { gameMode?: GameMode | null; gen?: Gen | null; type?: Type | null; uid?: string | null } = {}) => {
+  const saveStateToFirebase = async (data: SaveData) => {
+    const user = auth.currentUser;
+    if (!user) return;
+    await setDoc(doc(db, 'users', user.uid, 'data', 'savedState'), data);
+  };
+
+  const getTopTrainers = ({ gameMode, gen, type, uid, }: TopTrainersOptions = {}) => {
     const andCondition = [where('hasGivenUp', '==', false)];
     if (uid) {
       andCondition.push(where('uid', '==', uid));
     }
+
     if (gameMode) {
       andCondition.push(where('gameMode', '==', gameMode));
 
@@ -105,7 +111,12 @@ export const useFirebase = defineStore('firebase', () => {
       }
     }
 
-    const leaderBoardQuery = query(collection(db, 'leaderboards'), ...andCondition, orderBy('time', 'asc'), limit(3));
+    const leaderBoardQuery = query(
+      collection(db, 'leaderboards'),
+      ...andCondition,
+      orderBy('time', 'asc'),
+      limit(3)
+    );
 
     return useFirestore(leaderBoardQuery, [], {
       autoDispose: false,
@@ -136,6 +147,7 @@ export const useFirebase = defineStore('firebase', () => {
     authenticateWithGoogle,
     createRecord,
     getTopTrainers,
+    saveStateToFirebase,
     signout,
   };
 });

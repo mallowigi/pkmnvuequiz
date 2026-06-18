@@ -15,6 +15,7 @@ export const useAutoSave = () => {
 
     // 2. Debounce setup (wait 500ms after the last action to save)
     let saveTimeout: ReturnType<typeof setTimeout>;
+
     const triggerAutoSave = () => {
       clearTimeout(saveTimeout);
       saveTimeout = setTimeout(() => {
