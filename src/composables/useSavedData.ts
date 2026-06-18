@@ -1,6 +1,8 @@
+import { useDebounceFn } from '@vueuse/core';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useFirebase } from '@/composables/useFirebase.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
@@ -12,8 +14,6 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
-import { useDebounceFn } from '@vueuse/core';
-import { useFirebase } from '@/composables/useFirebase.ts';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
@@ -21,8 +21,8 @@ const LOCAL_STORAGE_NAME_KEY = 'pkmn_quiz_saved_name';
 
 const debouncedSaveToFirebase = useDebounceFn(
   (savedState: SaveData) => {
-    const { saveStateToFirebase } = useFirebase();
-    saveStateToFirebase(savedState);
+    const { saveUserState } = useFirebase();
+    saveUserState(savedState);
   },
   5000,
   { maxWait: 15000 },
@@ -127,7 +127,7 @@ export const useSavedData = () => {
     URL.revokeObjectURL(url);
   };
 
-  const autoSave = (_force = false) => {
+  const autoSave = (saveToFirebase = false) => {
     // Prevent autosaving until app is ready
     if (!ready.value) return;
 
@@ -140,10 +140,13 @@ export const useSavedData = () => {
     const savedState = getSavedState();
     sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
 
-    debouncedSaveToFirebase(savedState);
-    // if (force) {
-    //   debouncedSaveToFirebase.flush();
-    // }
+    if (saveToFirebase) {
+      const { settingsState } = useSettings();
+
+      if (settingsState.saveToCloud) {
+        debouncedSaveToFirebase(savedState);
+      }
+    }
   };
 
   const removeAutoSave = () => {
@@ -326,7 +329,35 @@ export const useSavedData = () => {
     reader.readAsText(file);
   };
 
-  const loadAutoSave = () => {
+  const loadFromFirebase = async () => {
+    const { loadUserState } = useFirebase();
+    const userState = await loadUserState();
+    if (!userState) {
+      return false;
+    }
+
+    try {
+      if (userState.version !== 1) {
+        console.error('Unsupported save version in cloud save.');
+        return;
+      }
+
+      applyState(userState as SaveData);
+    } catch (error) {
+      console.error('Failed to load cloud save: Invalid data.', error);
+      showUserMessage(t('failedToLoadQuizInvalid'));
+      return false;
+    }
+    return true;
+  };
+
+  const loadAutoSave = async () => {
+    const { settingsState } = useSettings();
+    if (settingsState.saveToCloud) {
+      const result = await loadFromFirebase();
+      if (result) return;
+    }
+
     const savedStateStr = sessionStorage.getItem(LOCAL_STORAGE_KEY);
     if (!savedStateStr) {
       return;
@@ -352,6 +383,7 @@ export const useSavedData = () => {
     getSavedState,
     hasSavedState,
     loadAutoSave,
+    loadFromFirebase,
     loadState,
     removeAutoSave,
     saveState,

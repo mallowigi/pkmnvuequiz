@@ -1,6 +1,6 @@
 import { useFirestore } from '@vueuse/firebase';
 import { signInAnonymously, signOut } from 'firebase/auth';
-import { addDoc, collection, doc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
 
 import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
@@ -87,10 +87,23 @@ export const useFirebase = defineStore('firebase', () => {
     await setDoc(doc(db, 'leaderboards', user.uid), payload);
   };
 
-  const saveStateToFirebase = async (data: SaveData) => {
+  const saveUserState = async (data: SaveData) => {
     const user = auth.currentUser;
     if (!user) return;
-    await setDoc(doc(db, 'users', user.uid, 'data', 'savedState'), data);
+    await setDoc(doc(db, 'users', user.uid), data);
+  };
+
+  const loadUserState = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const docRef = doc(db, 'users', user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    return null;
   };
 
   const getTopTrainers = ({ gameMode, gen, type, uid }: TopTrainersOptions = {}) => {
@@ -140,7 +153,8 @@ export const useFirebase = defineStore('firebase', () => {
     authenticateWithGoogle,
     createRecord,
     getTopTrainers,
-    saveStateToFirebase,
+    loadUserState,
+    saveUserState,
     signout,
   };
 });
