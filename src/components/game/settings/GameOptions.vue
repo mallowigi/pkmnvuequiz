@@ -8,7 +8,6 @@ import LanguagesSelection from '@/components/game/settings/LanguagesSelection.vu
 import ModeSelection from '@/components/game/settings/ModeSelection.vue';
 import MultiplayerInvite from '@/components/game/settings/MultiplayerInvite.vue';
 import ShadowHotkeyToggle from '@/components/game/settings/ShadowHotkeyToggle.vue';
-import ShadowsToggle from '@/components/game/settings/ShadowsToggle.vue';
 import ShinyToggle from '@/components/game/settings/ShinyToggle.vue';
 import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
@@ -39,8 +38,6 @@ const { flowState } = useGameFlow();
           <ShinyToggle />
 
           <SpellingToggle />
-
-          <ShadowsToggle />
 
           <ShadowHotkeyToggle />
 
