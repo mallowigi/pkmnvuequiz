@@ -12,10 +12,21 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
+import { useDebounceFn } from '@vueuse/core';
+import { useFirebase } from '@/composables/useFirebase.ts';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
 const LOCAL_STORAGE_NAME_KEY = 'pkmn_quiz_saved_name';
+
+const debouncedSaveToFirebase = useDebounceFn(
+  (savedState: SaveData) => {
+    const { saveStateToFirebase } = useFirebase();
+    saveStateToFirebase(savedState);
+  },
+  5000,
+  { maxWait: 15000 },
+);
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
@@ -116,7 +127,7 @@ export const useSavedData = () => {
     URL.revokeObjectURL(url);
   };
 
-  const autoSave = () => {
+  const autoSave = (_force = false) => {
     // Prevent autosaving until app is ready
     if (!ready.value) return;
 
@@ -128,6 +139,11 @@ export const useSavedData = () => {
 
     const savedState = getSavedState();
     sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
+
+    debouncedSaveToFirebase(savedState);
+    // if (force) {
+    //   debouncedSaveToFirebase.flush();
+    // }
   };
 
   const removeAutoSave = () => {
@@ -268,8 +284,8 @@ export const useSavedData = () => {
     });
 
     setSettingsState({
-      name: statePayload.name ?? null,
       avatar: statePayload.avatar ?? null,
+      name: statePayload.name ?? null,
       withCycleSprites: statePayload.withCycleSprites ?? true,
       withShadowHelper: statePayload.withShadowHelper ?? false,
       withShinies: statePayload.withShinies ?? false,

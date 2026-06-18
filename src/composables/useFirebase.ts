@@ -2,11 +2,11 @@ import { useFirestore } from '@vueuse/firebase';
 import { signInAnonymously, signOut } from 'firebase/auth';
 import { addDoc, collection, doc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
-import { useI18n } from 'vue-i18n';
 
 import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
 import { auth, db } from '@/firebase.ts';
+import { i18n } from '@/main.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -27,8 +27,6 @@ type TopTrainersOptions = {
 export const useFirebase = defineStore('firebase', () => {
   const { setName, setAvatar } = useSettings();
   const { showUserMessage } = useMessages();
-  const { t } = useI18n();
-
   const { authenticateWithGoogle } = useGoogleAuth();
   const { authenticateWithFacebook } = useFacebookAuth();
 
@@ -37,7 +35,7 @@ export const useFirebase = defineStore('firebase', () => {
       .then((result) => {
         let userName = result.user.displayName ?? 'Trainer';
         setName(userName);
-        showUserMessage(t('welcomeBack', { name: userName }));
+        showUserMessage(i18n.global.t('welcomeBack', { name: userName }));
       })
       .catch((error) => {
         console.error('Auth failed:', error);
@@ -95,7 +93,7 @@ export const useFirebase = defineStore('firebase', () => {
     await setDoc(doc(db, 'users', user.uid, 'data', 'savedState'), data);
   };
 
-  const getTopTrainers = ({ gameMode, gen, type, uid, }: TopTrainersOptions = {}) => {
+  const getTopTrainers = ({ gameMode, gen, type, uid }: TopTrainersOptions = {}) => {
     const andCondition = [where('hasGivenUp', '==', false)];
     if (uid) {
       andCondition.push(where('uid', '==', uid));
@@ -111,12 +109,7 @@ export const useFirebase = defineStore('firebase', () => {
       }
     }
 
-    const leaderBoardQuery = query(
-      collection(db, 'leaderboards'),
-      ...andCondition,
-      orderBy('time', 'asc'),
-      limit(3)
-    );
+    const leaderBoardQuery = query(collection(db, 'leaderboards'), ...andCondition, orderBy('time', 'asc'), limit(3));
 
     return useFirestore(leaderBoardQuery, [], {
       autoDispose: false,
@@ -132,7 +125,7 @@ export const useFirebase = defineStore('firebase', () => {
       setName(null);
       setAvatar(null);
       resetFlowState();
-      showUserMessage(t('signedOut'));
+      showUserMessage(i18n.global.t('signedOut'));
     } catch (error) {
       console.error('Sign out failed:', error);
       const errorMessage = error instanceof Error ? error.message : String(error);
