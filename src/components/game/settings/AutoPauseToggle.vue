@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
 import { useMessages } from '@/stores/useMessages.ts';
+import { useI18n } from 'vue-i18n';
 import { useSettings } from '@/stores/useSettings.ts';
 
 const { settingsState, setAutoPause } = useSettings();
@@ -20,7 +19,7 @@ const applyAutoPause = (value: boolean) => {
 
 <template>
   <RoundedBox
-    class="auto-save-toggle"
+    class="auto-pause-toggle"
     v-game-ended
     v-tooltip="t('autoPauseTooltip')"
   >
@@ -44,7 +43,7 @@ const applyAutoPause = (value: boolean) => {
 </template>
 
 <style scoped>
-.auto-save-toggle {
+.auto-pause-toggle {
   .mobile & {
     display: none;
   }
