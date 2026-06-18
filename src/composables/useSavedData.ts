@@ -329,11 +329,17 @@ export const useSavedData = () => {
     reader.readAsText(file);
   };
 
+  const hasFirebaseData = async () => {
+    const { loadUserState } = useFirebase();
+    const userState = await loadUserState();
+    return !!userState;
+  };
+
   const loadFromFirebase = async () => {
     const { loadUserState } = useFirebase();
     const userState = await loadUserState();
     if (!userState) {
-      return false;
+      return;
     }
 
     try {
@@ -346,18 +352,16 @@ export const useSavedData = () => {
     } catch (error) {
       console.error('Failed to load cloud save: Invalid data.', error);
       showUserMessage(t('failedToLoadQuizInvalid'));
-      return false;
     }
-    return true;
+  };
+
+  const saveToFirebase = () => {
+    const savedState = getSavedState();
+    const { saveUserState } = useFirebase();
+    saveUserState(savedState);
   };
 
   const loadAutoSave = async () => {
-    const { settingsState } = useSettings();
-    if (settingsState.saveToCloud) {
-      const result = await loadFromFirebase();
-      if (result) return;
-    }
-
     const savedStateStr = sessionStorage.getItem(LOCAL_STORAGE_KEY);
     if (!savedStateStr) {
       return;
@@ -381,12 +385,14 @@ export const useSavedData = () => {
     autoSave,
     getSavedName,
     getSavedState,
+    hasFirebaseData,
     hasSavedState,
     loadAutoSave,
     loadFromFirebase,
     loadState,
     removeAutoSave,
     saveState,
+    saveToFirebase,
     setReady,
     setSavedName,
   };
