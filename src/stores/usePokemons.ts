@@ -102,7 +102,6 @@ export const usePokemons = defineStore('pokemons', () => {
     pokemonStatuses: new Map<string, PokemonStatus>(),
   });
   const { state, hideShadows } = useState();
-  const { endGame } = useGameFlow();
   const { getCurrentGen } = useCurrentGen();
   const currentTypeStore = useCurrentType();
   const { settingsState } = useSettings();
@@ -231,6 +230,8 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const addFound = (pokemons: PokemonInfo[]) => {
+    const { endGame } = useGameFlow();
+
     pokemons.forEach((pokemon) => {
       const normalizedPokemon = normalizeName(pokemon.baseName);
       const status = pokemonState.pokemonStatuses.get(normalizedPokemon);
@@ -327,6 +328,27 @@ export const usePokemons = defineStore('pokemons', () => {
         pokemonStatus.isFound = true;
         pokemonStatus.lastFoundAt = Date.now();
       }
+    }
+  };
+
+  const prefillRemaining = () => {
+    if (!import.meta.env.DEV) return;
+    const remainingArray = Array.from(remaining.value);
+    if (remainingArray.length <= 1) return;
+
+    for (let i = 0; i < remainingArray.length - 1; i++) {
+      const pokemonKey = remainingArray[i];
+      const status = pokemonState.pokemonStatuses.get(pokemonKey);
+      if (status) {
+        status.isFound = true;
+        status.lastFoundAt = Date.now();
+      }
+    }
+
+    const lastPrefilledKey = remainingArray[remainingArray.length - 2];
+    const lastPrefilled = getCurrentGameModePokemon().get(lastPrefilledKey);
+    if (lastPrefilled) {
+      setLastPokemon(lastPrefilled[0]);
     }
   };
 
@@ -580,6 +602,7 @@ export const usePokemons = defineStore('pokemons', () => {
     numFound,
     numShadows,
     pokemonState,
+    prefillRemaining,
     resetPokemonState,
     setLastPokemon,
     setRandomCurrentPokemon,
