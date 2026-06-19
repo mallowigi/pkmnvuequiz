@@ -2,6 +2,7 @@ import { useFirestore } from '@vueuse/firebase';
 import { signInAnonymously, signOut } from 'firebase/auth';
 import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
+import { reactive } from 'vue';
 
 import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
@@ -27,6 +28,12 @@ export const useFirebase = defineStore('firebase', () => {
   const { showUserMessage } = useMessages();
   const { authenticateWithGoogle } = useGoogleAuth();
   const { authenticateWithFacebook } = useFacebookAuth();
+
+  const firebaseState = reactive({
+    isSaving: false,
+  });
+
+  let saveTimeout: ReturnType<typeof setTimeout> | null = null;
 
   const authenticateAnonymously = async () => {
     signInAnonymously(auth)
@@ -71,6 +78,17 @@ export const useFirebase = defineStore('firebase', () => {
   const saveUserState = async (data: SaveData) => {
     const user = auth.currentUser;
     if (!user) return;
+
+    firebaseState.isSaving = true;
+    if (saveTimeout) {
+      clearTimeout(saveTimeout);
+    }
+
+    saveTimeout = setTimeout(() => {
+      firebaseState.isSaving = false;
+      saveTimeout = null;
+    }, 3000);
+
     await setDoc(doc(db, 'users', user.uid), data);
   };
 
@@ -133,6 +151,7 @@ export const useFirebase = defineStore('firebase', () => {
     authenticateWithFacebook,
     authenticateWithGoogle,
     createRecord,
+    firebaseState,
     getTopTrainers,
     loadUserState,
     saveUserState,
