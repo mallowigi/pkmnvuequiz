@@ -21,10 +21,14 @@ const LOCAL_STORAGE_NAME_KEY = 'pkmn_quiz_saved_name';
 
 const debouncedSaveToFirebase = useDebounceFn(
   (savedState: SaveData) => {
+    const { settingsState } = useSettings();
+    if (!settingsState.saveToCloud) {
+      return;
+    }
     const { saveUserState } = useFirebase();
     saveUserState(savedState);
   },
-  5000,
+  1000,
   { maxWait: 15000 },
 );
 
@@ -141,11 +145,7 @@ export const useSavedData = () => {
     sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
 
     if (saveToFirebase) {
-      const { settingsState } = useSettings();
-
-      if (settingsState.saveToCloud) {
-        debouncedSaveToFirebase(savedState);
-      }
+      debouncedSaveToFirebase(savedState);
     }
   };
 

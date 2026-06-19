@@ -9,15 +9,23 @@ import { useSavedData } from '@/composables/useSavedData.ts';
 import CloudDownIcon from '@/components/common/icons/CloudDownIcon.vue';
 import CloudUpIcon from '@/components/common/icons/CloudUpIcon.vue';
 import { useFirebase } from '@/composables/useFirebase.ts';
+import { useMessages } from '@/stores/useMessages.ts';
 
 const { t } = useI18n();
 
 const { saveState, loadState, loadFromFirebase, hasFirebaseData, saveToFirebase } = useSavedData();
 const { auth } = useFirebase();
+const { showUserMessage } = useMessages();
 
 const { state, isReady } = useAsyncState(() => {
   return hasFirebaseData();
 }, false);
+
+const saveToCloud = async () => {
+  if (!isReady.value || !state.value) return;
+  await saveToFirebase();
+  showUserMessage(t('saveToCloudSuccess'));
+};
 </script>
 
 <template>
@@ -61,7 +69,7 @@ const { state, isReady } = useAsyncState(() => {
       </IconButton>
 
       <IconButton
-        @click="saveToFirebase()"
+        @click="saveToCloud()"
         v-tooltip="t('saveFromCloudTooltip')"
         v-if="auth.currentUser"
         :class="{ disabled: !isReady || !state }"
