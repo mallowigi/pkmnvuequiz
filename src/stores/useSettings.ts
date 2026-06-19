@@ -1,8 +1,8 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import type { Settings, Language } from '@/types';
 import { useState } from '@/stores/useState.ts';
+import type { Settings, Language } from '@/types';
 
 export const useSettings = defineStore('settings', () => {
   const { state } = useState();
@@ -12,6 +12,7 @@ export const useSettings = defineStore('settings', () => {
     avatar: null,
     languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
     name: '',
+    saveToCloud: true,
     withCycleSprites: true,
     withShadowHelper: false,
     withShinies: false,
@@ -70,6 +71,10 @@ export const useSettings = defineStore('settings', () => {
     state.usedAutoPause = true;
   };
 
+  const setSaveToCloud = (saveToCloud: boolean) => {
+    settingsState.saveToCloud = saveToCloud;
+  };
+
   const setSettingsState = (settings: Partial<Settings>) => {
     Object.assign(settingsState, settings);
   };
@@ -81,6 +86,7 @@ export const useSettings = defineStore('settings', () => {
     setCycleSprites,
     setLanguages,
     setName,
+    setSaveToCloud,
     setSettingsState,
     setSound,
     settingsState,

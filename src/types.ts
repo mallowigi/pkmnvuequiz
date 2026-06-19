@@ -155,6 +155,7 @@ export type Settings = {
   withSound: boolean;
   withSpelling: boolean;
   languages: Set<Language>;
+  saveToCloud: boolean;
 };
 
 export type PokemonStatus = {

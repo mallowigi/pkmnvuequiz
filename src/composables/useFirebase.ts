@@ -1,15 +1,12 @@
 import { useFirestore } from '@vueuse/firebase';
-import {
-  signInAnonymously,
-  signOut,
-} from 'firebase/auth';
-import { addDoc, collection, doc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { signInAnonymously, signOut } from 'firebase/auth';
+import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
-import { useI18n } from 'vue-i18n';
 
 import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
 import { auth, db } from '@/firebase.ts';
+import { i18n } from '@/main.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -18,13 +15,18 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import type { UserRecord, GameMode, Gen, Type } from '@/types.ts';
+import type { UserRecord, GameMode, Gen, Type, SaveData } from '@/types.ts';
+
+type TopTrainersOptions = {
+  gameMode?: GameMode | null;
+  gen?: Gen | null;
+  type?: Type | null;
+  uid?: string | null;
+};
 
 export const useFirebase = defineStore('firebase', () => {
   const { setName, setAvatar } = useSettings();
   const { showUserMessage } = useMessages();
-  const { t } = useI18n();
-
   const { authenticateWithGoogle } = useGoogleAuth();
   const { authenticateWithFacebook } = useFacebookAuth();
 
@@ -33,7 +35,7 @@ export const useFirebase = defineStore('firebase', () => {
       .then((result) => {
         let userName = result.user.displayName ?? 'Trainer';
         setName(userName);
-        showUserMessage(t('welcomeBack', { name: userName }));
+        showUserMessage(i18n.global.t('welcomeBack', { name: userName }));
       })
       .catch((error) => {
         console.error('Auth failed:', error);
@@ -85,16 +87,31 @@ export const useFirebase = defineStore('firebase', () => {
     await setDoc(doc(db, 'leaderboards', user.uid), payload);
   };
 
-  const getTopTrainers = ({
-    gameMode,
-    gen,
-    type,
-    uid,
-  }: { gameMode?: GameMode | null; gen?: Gen | null; type?: Type | null; uid?: string | null } = {}) => {
+  const saveUserState = async (data: SaveData) => {
+    const user = auth.currentUser;
+    if (!user) return;
+    await setDoc(doc(db, 'users', user.uid), data);
+  };
+
+  const loadUserState = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const docRef = doc(db, 'users', user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    return null;
+  };
+
+  const getTopTrainers = ({ gameMode, gen, type, uid }: TopTrainersOptions = {}) => {
     const andCondition = [where('hasGivenUp', '==', false)];
     if (uid) {
       andCondition.push(where('uid', '==', uid));
     }
+
     if (gameMode) {
       andCondition.push(where('gameMode', '==', gameMode));
 
@@ -121,7 +138,7 @@ export const useFirebase = defineStore('firebase', () => {
       setName(null);
       setAvatar(null);
       resetFlowState();
-      showUserMessage(t('signedOut'));
+      showUserMessage(i18n.global.t('signedOut'));
     } catch (error) {
       console.error('Sign out failed:', error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -136,6 +153,8 @@ export const useFirebase = defineStore('firebase', () => {
     authenticateWithGoogle,
     createRecord,
     getTopTrainers,
+    loadUserState,
+    saveUserState,
     signout,
   };
 });

@@ -6,7 +6,7 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
   const { autoSave } = useSavedData();
   let saveTimeout: ReturnType<typeof setTimeout>;
 
-  const excludedStores = ['dialogs', 'messages', 'roomMessages', 'pkmnData'];
+  const excludedStores = ['dialogs', 'messages', 'roomMessages', 'pkmnData', 'firebase', 'tooltips', 'credits'];
   if (excludedStores.includes(store.$id)) {
     return;
   }
@@ -15,7 +15,7 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
     () => {
       clearTimeout(saveTimeout);
       saveTimeout = setTimeout(() => {
-        autoSave();
+        autoSave(store.$id !== 'timer');
       }, 500);
     },
     { detached: true },

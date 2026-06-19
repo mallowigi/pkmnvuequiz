@@ -27,7 +27,7 @@ import App from './App.vue';
 
 const { savedLocale } = useSavedLocale();
 
-const i18n = createI18n({
+export const i18n = createI18n({
   fallbackLocale: 'en',
   locale: savedLocale.value,
   messages: { cn, de, en, es, fr, it, jp, ko, pt, ru, zh },

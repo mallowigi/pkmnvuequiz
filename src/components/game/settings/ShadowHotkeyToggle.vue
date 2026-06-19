@@ -51,7 +51,7 @@ const tooltipMessage = `${t('shadowHotkeyTooltip', { key: ',' })}`;
 
   &.selected {
     & img {
-      filter: brightness(0) invert(0.3);
+      filter: brightness(0) invert(1);
     }
   }
 
