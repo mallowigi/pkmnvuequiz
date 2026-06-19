@@ -8,10 +8,12 @@ import SaveIcon from '@/components/common/icons/SaveIcon.vue';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import CloudDownIcon from '@/components/common/icons/CloudDownIcon.vue';
 import CloudUpIcon from '@/components/common/icons/CloudUpIcon.vue';
+import { useFirebase } from '@/composables/useFirebase.ts';
 
 const { t } = useI18n();
 
 const { saveState, loadState, loadFromFirebase, hasFirebaseData, saveToFirebase } = useSavedData();
+const { auth } = useFirebase();
 
 const { state, isReady } = useAsyncState(() => {
   return hasFirebaseData();
@@ -28,7 +30,7 @@ const { state, isReady } = useAsyncState(() => {
       accept="application/json"
     />
 
-    <h3>{{ t('saveLoadState') }}</h3>
+    <h3 class="caption">{{ t('saveLoadState') }}</h3>
 
     <div class="buttons">
       <IconButton
@@ -44,11 +46,15 @@ const { state, isReady } = useAsyncState(() => {
         </label>
       </IconButton>
 
-      <div class="separator" />
+      <div
+        class="separator"
+        v-if="auth.currentUser"
+      />
 
       <IconButton
         @click="loadFromFirebase()"
         v-tooltip="t('loadFromCloudTooltip')"
+        v-if="auth.currentUser"
         :class="{ disabled: !isReady || !state }"
       >
         <CloudDownIcon class="accent-icon" />
@@ -57,6 +63,7 @@ const { state, isReady } = useAsyncState(() => {
       <IconButton
         @click="saveToFirebase()"
         v-tooltip="t('saveFromCloudTooltip')"
+        v-if="auth.currentUser"
         :class="{ disabled: !isReady || !state }"
       >
         <CloudUpIcon class="accent-icon" />
@@ -71,6 +78,10 @@ const { state, isReady } = useAsyncState(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.caption {
+  margin: 4px;
 }
 
 .buttons {
