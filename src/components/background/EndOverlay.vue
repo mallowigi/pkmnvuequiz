@@ -11,6 +11,8 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
+import { Temporal } from 'temporal-polyfill';
+import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 
 const { setGameOver } = useState();
 const { setCurrentGen } = useCurrentGen();
@@ -22,6 +24,7 @@ const { t } = useI18n();
 const pokemonStore = usePokemons();
 const { numFound, numShadows } = storeToRefs(pokemonStore);
 const { resetPokemonState } = pokemonStore;
+const { savedLocale } = useSavedLocale();
 
 const closeOverlay = () => {
   clearCurrentType();
@@ -34,11 +37,17 @@ const closeOverlay = () => {
 };
 
 const elapsed = computed(() => {
-  const start = timerState.startTime;
-  const current = Date.now();
+  const elapsedTime = timerState.elapsed;
 
-  if (!start) return 0;
-  return Math.floor((current - start) / 1000);
+  const duration = Temporal.Duration.from({ seconds: elapsedTime }).round({
+    largestUnit: 'hours',
+    roundingMode: 'trunc',
+    smallestUnit: 'seconds',
+  });
+
+  return duration.toLocaleString(savedLocale.value, {
+    style: 'long',
+  });
 });
 </script>
 
