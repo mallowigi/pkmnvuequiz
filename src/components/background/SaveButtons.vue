@@ -19,7 +19,7 @@ const { state, isReady } = useAsyncState(() => {
 </script>
 
 <template>
-  <div class="top-margin">
+  <div class="root">
     <input
       type="file"
       id="file-input"
@@ -28,45 +28,63 @@ const { state, isReady } = useAsyncState(() => {
       accept="application/json"
     />
 
-    <p class="left-margin">{{ t('saveLoadState') }}</p>
+    <h3>{{ t('saveLoadState') }}</h3>
 
-    <IconButton
-      @click="saveState"
-      v-tooltip="t('saveToDiskTooltip')"
-    >
-      <SaveIcon class="accent-icon" />
-    </IconButton>
+    <div class="buttons">
+      <IconButton
+        @click="saveState"
+        v-tooltip="t('saveToDiskTooltip')"
+      >
+        <SaveIcon class="accent-icon" />
+      </IconButton>
 
-    <IconButton v-tooltip="t('loadFromDiskTooltip')">
-      <label for="file-input">
-        <LoadIcon class="accent-icon" />
-      </label>
-    </IconButton>
+      <IconButton v-tooltip="t('loadFromDiskTooltip')">
+        <label for="file-input">
+          <LoadIcon class="accent-icon" />
+        </label>
+      </IconButton>
 
-    <IconButton
-      @click="loadFromFirebase()"
-      v-tooltip="t('loadFromCloudTooltip')"
-      :class="{ disabled: !isReady || !state }"
-    >
-      <CloudDownIcon class="accent-icon" />
-    </IconButton>
+      <div class="separator" />
 
-    <IconButton
-      @click="saveToFirebase()"
-      v-tooltip="t('saveFromCloudTooltip')"
-      :class="{ disabled: !isReady || !state }"
-    >
-      <CloudUpIcon class="accent-icon" />
-    </IconButton>
+      <IconButton
+        @click="loadFromFirebase()"
+        v-tooltip="t('loadFromCloudTooltip')"
+        :class="{ disabled: !isReady || !state }"
+      >
+        <CloudDownIcon class="accent-icon" />
+      </IconButton>
+
+      <IconButton
+        @click="saveToFirebase()"
+        v-tooltip="t('saveFromCloudTooltip')"
+        :class="{ disabled: !isReady || !state }"
+      >
+        <CloudUpIcon class="accent-icon" />
+      </IconButton>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.left-margin {
-  margin-left: 10px;
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.top-margin {
-  margin-top: 20px;
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.separator {
+  display: inline-block;
+  width: 1px;
+  margin: 0 0 -10px 10px;
+  border: 1px dashed var(--secondary);
+  align-self: stretch;
 }
 </style>
