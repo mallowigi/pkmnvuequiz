@@ -7,15 +7,13 @@ import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
 import { auth, db } from '@/firebase.ts';
 import { i18n } from '@/main.ts';
-import { useCurrentGen } from '@/stores/useCurrentGen.ts';
-import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useSettings } from '@/stores/useSettings.ts';
-import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, GameMode, Gen, Type, SaveData } from '@/types.ts';
+import { useSavedData } from '@/composables/useSavedData.ts';
 
 type TopTrainersOptions = {
   gameMode?: GameMode | null;
@@ -45,40 +43,23 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const createRecord = async () => {
-    const { state } = useState();
-    const { settingsState } = useSettings();
     const { flowState } = useGameFlow();
-    const { currentTypeState } = useCurrentType();
-    const { currentGenState } = useCurrentGen();
     const pokemonStore = usePokemons();
     const { numFound, numShadows } = storeToRefs(pokemonStore);
     const { timerState } = useTimer();
+    const { getSavedState } = useSavedData();
 
     const user = auth.currentUser;
 
     const payload: UserRecord = {
-      avatar: settingsState.avatar,
-      gameMode: state.gameMode!,
+      ...getSavedState(),
       hasGivenUp: flowState.isGivenUp,
       id: user?.uid,
-      mode: state.mode,
-      name: settingsState.name!,
       numFound: numFound.value,
       numShadows: numShadows.value,
       time: timerState.elapsed,
       uid: user ? user.uid : null,
-      usedAutoPause: state.usedAutoPause,
-      usedDisplayShadows: state.usedDisplayShadows,
-      usedShadowHelper: state.usedShadowHelper,
-      usedSpelling: state.usedSpelling,
-      usedTypeShuffle: state.usedTypeShuffle,
     };
-
-    if (state.gameMode === 'types') {
-      payload.type = currentTypeState.currentType;
-    } else if (state.gameMode === 'gen') {
-      payload.gen = currentGenState.gen;
-    }
 
     if (!user) {
       await addDoc(collection(db, 'leaderboards'), payload);

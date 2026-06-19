@@ -95,6 +95,8 @@ export const useSavedData = () => {
     return {
       ...state,
       ...settingsState,
+      autoPause: settingsState.autoPause,
+      autoSync: settingsState.saveToCloud,
       currentType: currentTypeState.currentType,
       gameSelectionState: flowState.gameSelectionState,
       gen: currentGenState.gen,
@@ -276,19 +278,16 @@ export const useSavedData = () => {
       gameMode: statePayload.gameMode ?? null,
       isDark: statePayload.isDark ?? false,
       mode: statePayload.mode ?? 'normal',
-      usedAutoPause: statePayload.usedAutoPause ?? false,
-      usedDisplayShadows: statePayload.usedDisplayShadows ?? false,
-      usedShadowHelper: statePayload.usedShadowHelper ?? false,
-      usedSpelling: statePayload.usedSpelling ?? false,
-      usedTypeShuffle: statePayload.usedTypeShuffle ?? false,
       withCriesShuffle: statePayload.withCriesShuffle ?? false,
       withShadows: statePayload.withShadows ?? false,
       withTypeShuffle: statePayload.withTypeShuffle ?? false,
     });
 
     setSettingsState({
+      autoPause: statePayload.autoPause ?? false,
       avatar: statePayload.avatar ?? null,
       name: statePayload.name ?? null,
+      saveToCloud: statePayload.autoSync ?? false,
       withCycleSprites: statePayload.withCycleSprites ?? true,
       withShadowHelper: statePayload.withShadowHelper ?? false,
       withShinies: statePayload.withShinies ?? false,
