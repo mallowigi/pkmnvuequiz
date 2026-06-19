@@ -4,6 +4,9 @@
   "autoPause": "Pausa Automática:",
   "autoPauseSet": "Pausa Automática {status}",
   "autoPauseTooltip": "Ativar/Desativar Pausa Automática",
+  "autoSave": "Sync",
+  "autoSaveSet": "Sync {status}",
+  "autoSaveTooltip": "Sincronização com a nuvem",
   "back": "Voltar",
   "bluesky": "BlueSky",
   "bug": "Inseto",
@@ -76,6 +79,7 @@
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
+  "gameOver": "Fim de Jogo!",
   "gen": "Gerações",
   "ghost": "Fantasma",
   "giveUp": "Desistir",
@@ -117,6 +121,8 @@
   },
   "legendary": "Lendário",
   "lightMode": "Modo Claro",
+  "loadFromCloudTooltip": "Carregar da nuvem",
+  "loadFromDiskTooltip": "Carregar de arquivo",
   "loadingQuiz": "Carregando Quiz",
   "login": "Fazer Login",
   "loginWith": "Faça login para manter seu progresso:",
@@ -175,7 +181,9 @@
   "revealShadows": "Revelar silhuetas",
   "rock": "Pedra",
   "ru": "Russo",
+  "saveFromCloudTooltip": "Salvar dados na nuvem",
   "saveLoadState": "Salvar/Carregar Estado do Quiz",
+  "saveToDiskTooltip": "Salvar em arquivo",
   "set": "definir",
   "shadowHelperDisabled": "A ajuda de silhuetas está desabilitada. Ative-a nas configurações para usar este atalho.",
   "shadowHelperSet": "Ajuda de silhuetas {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "Trocar quiz?"
   },
+  "thanksForPlaying": "Obrigado por jogar!",
   "timer": "Cronômetro",
   "timerTooltip": "Defina um cronômetro para o jogo.",
   "toggleSettings": "Ativar/Desativar Configurações",
   "topGuessers": "Top {n} Adivinhos",
+  "topPlays": "Top {n} Partidas",
   "typeQuiz": "Quiz de {type}",
   "typeShuffle": "Tipo aleatório",
   "typeShuffleOnlyInRegularModeTooltip": "O Tipo aleatório só pode ser ativado no modo normal",
@@ -231,7 +241,5 @@
   "welcome": "Bem-vindo ao Quiz Pokémon!",
   "welcomeBack": "Bem-vindo de volta, {name}!",
   "x": "X",
-  "zh": "Chinês (Tradicional)",
-  "gameOver": "Fim de Jogo!",
-  "thanksForPlaying": "Obrigado por jogar!"
+  "zh": "Chinês (Tradicional)"
 }

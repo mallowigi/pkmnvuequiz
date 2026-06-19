@@ -4,6 +4,9 @@
   "autoPause": "Pause Auto:",
   "autoPauseSet": "Pause Auto {status}",
   "autoPauseTooltip": "Activer/Désactiver la Pause Auto",
+  "autoSave": "Sync",
+  "autoSaveSet": "Sync {status}",
+  "autoSaveTooltip": "Synchronisation avec le cloud",
   "back": "Retour",
   "bluesky": "BlueSky",
   "bug": "Insecte",
@@ -76,6 +79,7 @@
   "full": "Quiz Entier",
   "fullQuiz": "Quiz Entier",
   "galar": "Galar",
+  "gameOver": "Partie Terminée!",
   "gen": "Générations",
   "ghost": "Spectre",
   "giveUp": "Abandonner",
@@ -117,6 +121,8 @@
   },
   "legendary": "Légendaire",
   "lightMode": "Mode Jour",
+  "loadFromCloudTooltip": "Charger depuis le Cloud",
+  "loadFromDiskTooltip": "Charger depuis un fichier",
   "loadingQuiz": "Chargement du Quiz",
   "login": "Connexion",
   "loginWith": "Connectez-vous pour conserver votre progression:",
@@ -175,7 +181,9 @@
   "revealShadows": "Révéler les silhouettes",
   "rock": "Roche",
   "ru": "Russe",
+  "saveFromCloudTooltip": "Enregistrer vers le Cloud",
   "saveLoadState": "Sauvegarder/Charger Partie",
+  "saveToDiskTooltip": "Enregistrer sur le disque",
   "set": "définir",
   "shadowHelperDisabled": "L'Aide-Silhouette est désactivée. Activez-la dans les paramètres pour utiliser le raccourci.",
   "shadowHelperSet": "Aide-Silhouette {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "Changer de quiz?"
   },
+  "thanksForPlaying": "Merci d'avoir joué!",
   "timer": "Chrono",
   "timerTooltip": "Définissez un temps limité pour le jeu.",
   "toggleSettings": "Afficher les options",
   "topGuessers": "Top {n} Joueurs",
+  "topPlays": "Top {n} Parties",
   "typeQuiz": "Quiz {type}",
   "typeShuffle": "Type Aléatoire",
   "typeShuffleOnlyInRegularModeTooltip": "Le Type Aléatoire ne peut être activé qu'en mode normal",
@@ -231,7 +241,5 @@
   "welcome": "Bienvenue sur le Quiz Pokémon!",
   "welcomeBack": "Bienvenue, {name}!",
   "x": "X",
-  "zh": "Chinois (Traditionnel)",
-  "gameOver": "Jeu Terminé!",
-  "thanksForPlaying": "Merci d'avoir joué!"
+  "zh": "Chinois (Traditionnel)"
 }

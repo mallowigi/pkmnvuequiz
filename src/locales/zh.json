@@ -4,6 +4,9 @@
   "autoPause": "自動暫停:",
   "autoPauseSet": "自動暫停 {status}",
   "autoPauseTooltip": "切換自動暫停開/關",
+  "autoSave": "同步",
+  "autoSaveSet": "同步 {status}",
+  "autoSaveTooltip": "雲端同步",
   "back": "返回",
   "bluesky": "BlueSky",
   "bug": "虫",
@@ -76,6 +79,7 @@
   "full": "完整测验",
   "fullQuiz": "完整测验",
   "galar": "伽勒尔",
+  "gameOver": "遊戲結束!",
   "gen": "世代",
   "ghost": "幽灵",
   "giveUp": "放弃",
@@ -117,6 +121,8 @@
   },
   "legendary": "传说",
   "lightMode": "淺色模式",
+  "loadFromCloudTooltip": "從雲端載入",
+  "loadFromDiskTooltip": "從檔案載入",
   "loadingQuiz": "加載測驗中",
   "login": "登錄",
   "loginWith": "登錄以保存您的進度:",
@@ -175,7 +181,9 @@
   "revealShadows": "揭曉陰影",
   "rock": "岩石",
   "ru": "俄語",
+  "saveFromCloudTooltip": "將資料儲存到雲端",
   "saveLoadState": "保存/加載測驗狀態",
+  "saveToDiskTooltip": "儲存到檔案",
   "set": "設置",
   "shadowHelperDisabled": "陰影助手已禁用。在設置中啟用它以使用此快捷方式。",
   "shadowHelperSet": "下一個陰影快捷鍵 {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "切换测验？"
   },
+  "thanksForPlaying": "感謝您的遊玩!",
   "timer": "計時器",
   "timerTooltip": "為遊戲設置計時器。",
   "toggleSettings": "切換設置",
   "topGuessers": "前 {n} 名猜想者",
+  "topPlays": "前 {n} 次遊玩",
   "typeQuiz": "{type} 測驗",
   "typeShuffle": "類型洗牌",
   "typeShuffleOnlyInRegularModeTooltip": "類型洗牌只能在常規模式下切換",
@@ -231,7 +241,5 @@
   "welcome": "歡迎來到寶可夢問卷！",
   "welcomeBack": "歡迎回來，{name}!",
   "x": "X",
-  "zh": "中文（繁體）",
-  "gameOver": "遊戲結束!",
-  "thanksForPlaying": "感謝您的遊玩!"
+  "zh": "中文（繁體）"
 }
