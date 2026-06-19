@@ -4,6 +4,9 @@
   "autoPause": "Pausa Automatica:",
   "autoPauseSet": "Pausa Automatica {status}",
   "autoPauseTooltip": "Attiva/Disattiva Pausa Automatica",
+  "autoSave": "Sync",
+  "autoSaveSet": "Sync {status}",
+  "autoSaveTooltip": "Sincronizzazione cloud",
   "back": "Indietro",
   "bluesky": "BlueSky",
   "bug": "Coleottero",
@@ -76,6 +79,7 @@
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
   "galar": "Galar",
+  "gameOver": "Gioco Finito!",
   "gen": "Generazioni",
   "ghost": "Spettro",
   "giveUp": "Rinuncia",
@@ -117,6 +121,8 @@
   },
   "legendary": "Leggendario",
   "lightMode": "Modalità Chiara",
+  "loadFromCloudTooltip": "Carica dal cloud",
+  "loadFromDiskTooltip": "Carica da file",
   "loadingQuiz": "Caricamento Quiz",
   "login": "Accedi",
   "loginWith": "Accedi per mantenere i tuoi progressi:",
@@ -175,7 +181,9 @@
   "revealShadows": "Rivela le silhouette",
   "rock": "Roccia",
   "ru": "Russo",
+  "saveFromCloudTooltip": "Salva dati nel cloud",
   "saveLoadState": "Salva/Carica Stato Quiz",
+  "saveToDiskTooltip": "Salva su file",
   "set": "impostare",
   "shadowHelperDisabled": "L'aiuto silhouette è disabilitato. Abilitalo nelle impostazioni per utilizzare questo collegamento.",
   "shadowHelperSet": "Aiuto silhouette {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "Cambiare quiz?"
   },
+  "thanksForPlaying": "Grazie per aver giocato!",
   "timer": "Timer",
   "timerTooltip": "Imposta un timer per il gioco.",
   "toggleSettings": "Attiva/Disattiva Impostazioni",
   "topGuessers": "Top {n} Indovini",
+  "topPlays": "Top {n} Partite",
   "typeQuiz": "Quiz {type}",
   "typeShuffle": "Tipo casuale",
   "typeShuffleOnlyInRegularModeTooltip": "Il Tipo casuale può essere attivato solo in modalità normale",
@@ -231,7 +241,5 @@
   "welcome": "Benvenuto nel Quiz Pokémon!",
   "welcomeBack": "Bentornato, {name}!",
   "x": "X",
-  "zh": "Cinese (Tradizionale)",
-  "gameOver": "Gioco Finito!",
-  "thanksForPlaying": "Grazie per aver giocato!"
+  "zh": "Cinese (Tradizionale)"
 }

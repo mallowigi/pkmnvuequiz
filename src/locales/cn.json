@@ -4,6 +4,9 @@
   "autoPause": "自动暂停:",
   "autoPauseSet": "自动暂停 {status}",
   "autoPauseTooltip": "切换自动暂停开/关",
+  "autoSave": "同步",
+  "autoSaveSet": "同步 {status}",
+  "autoSaveTooltip": "云端同步",
   "back": "返回",
   "bluesky": "BlueSky",
   "bug": "虫",
@@ -76,6 +79,7 @@
   "full": "完整测验",
   "fullQuiz": "完整测验",
   "galar": "伽勒尔",
+  "gameOver": "游戏结束!",
   "gen": "世代",
   "ghost": "幽灵",
   "giveUp": "放弃",
@@ -117,6 +121,8 @@
   },
   "legendary": "传说",
   "lightMode": "浅色模式",
+  "loadFromCloudTooltip": "从云端加载",
+  "loadFromDiskTooltip": "从文件加载",
   "loadingQuiz": "加载测验中",
   "login": "登录",
   "loginWith": "登录以保存您的进度:",
@@ -175,7 +181,9 @@
   "revealShadows": "揭晓阴影",
   "rock": "岩石",
   "ru": "俄语",
+  "saveFromCloudTooltip": "将数据保存到云端",
   "saveLoadState": "保存/加载测验状态",
+  "saveToDiskTooltip": "保存到文件",
   "set": "设置",
   "shadowHelperDisabled": "阴影助手已禁用。在设置中启用它以使用此快捷方式。",
   "shadowHelperSet": "下一个阴影快捷键 {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "切换测验？"
   },
+  "thanksForPlaying": "感谢您的游玩!",
   "timer": "计时器",
   "timerTooltip": "为游戏设置计时器。",
   "toggleSettings": "切换设置",
   "topGuessers": "前 {n} 名猜想者",
+  "topPlays": "前 {n} 次游玩",
   "typeQuiz": "{type} 测验",
   "typeShuffle": "类型洗牌",
   "typeShuffleOnlyInRegularModeTooltip": "类型洗牌只能在常规模式下切换",
@@ -231,7 +241,5 @@
   "welcome": "欢迎来到宝可梦问卷！",
   "welcomeBack": "欢迎回来，{name}!",
   "x": "X",
-  "zh": "中文（繁体）",
-  "gameOver": "游戏结束!",
-  "thanksForPlaying": "感谢您的游玩!"
+  "zh": "中文（繁体）"
 }

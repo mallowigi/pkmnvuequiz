@@ -4,6 +4,9 @@
   "autoPause": "자동 일시 중지:",
   "autoPauseSet": "자동 일시 중지 {status}",
   "autoPauseTooltip": "자동 일시 중지 켜기/끄기",
+  "autoSave": "동기화",
+  "autoSaveSet": "동기화 {status}",
+  "autoSaveTooltip": "클라우드 동기화",
   "back": "뒤로",
   "bluesky": "BlueSky",
   "bug": "벌레",
@@ -76,6 +79,7 @@
   "full": "전체 퀴즈",
   "fullQuiz": "전체 퀴즈",
   "galar": "가라르",
+  "gameOver": "게임 오버!",
   "gen": "세대",
   "ghost": "고스트",
   "giveUp": "포기하기",
@@ -117,6 +121,8 @@
   },
   "legendary": "전설",
   "lightMode": "라이트 모드",
+  "loadFromCloudTooltip": "클라우드에서 로드",
+  "loadFromDiskTooltip": "파일에서 로드",
   "loadingQuiz": "퀴즈 로드 중",
   "login": "로그인",
   "loginWith": "진행 상황을 유지하려면 로그인하세요:",
@@ -175,7 +181,9 @@
   "revealShadows": "실루엣 드러내기",
   "rock": "바위",
   "ru": "러시아어",
+  "saveFromCloudTooltip": "클라우드에 데이터 저장",
   "saveLoadState": "퀴즈 상태 저장/로드",
+  "saveToDiskTooltip": "파일에 저장",
   "set": "설정",
   "shadowHelperDisabled": "실루엣 도우미가 비활성화되어 있습니다. 이 단축키를 사용하려면 설정에서 활성화하세요.",
   "shadowHelperSet": "실루엣 도우미 {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "퀴즈를 변경하시겠습니까?"
   },
+  "thanksForPlaying": "플레이해주셔서 감사합니다!",
   "timer": "타이머",
   "timerTooltip": "게임의 타이머를 설정합니다.",
   "toggleSettings": "설정 켜기/끄기",
   "topGuessers": "상위 {n} 맞추기",
+  "topPlays": "상위 {n} 플레이",
   "typeQuiz": "{type} 퀴즈",
   "typeShuffle": "랜덤 타입",
   "typeShuffleOnlyInRegularModeTooltip": "랜덤 타입은 일반 모드에서만 켤 수 있습니다",
@@ -231,7 +241,5 @@
   "welcome": "포켓몬 퀴즈에 오신 것을 환영합니다!",
   "welcomeBack": "돌아오신 것을 환영합니다, {name}!",
   "x": "X",
-  "zh": "중국어 (정체)",
-  "gameOver": "게임 오버!",
-  "thanksForPlaying": "플레이해주셔서 감사합니다!"
+  "zh": "중국어 (정체)"
 }

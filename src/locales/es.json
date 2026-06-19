@@ -4,6 +4,9 @@
   "autoPause": "Pausa Automática:",
   "autoPauseSet": "Pausa Automática {status}",
   "autoPauseTooltip": "Alternar Pausa Automática Activada/Desactivada",
+  "autoSave": "Sync",
+  "autoSaveSet": "Sync {status}",
+  "autoSaveTooltip": "Sincronización con la nube",
   "back": "Atrás",
   "bluesky": "BlueSky",
   "bug": "Bicho",
@@ -76,6 +79,7 @@
   "full": "Cuestionario Completo",
   "fullQuiz": "Cuestionario Completo",
   "galar": "Galar",
+  "gameOver": "¡Juego Terminado!",
   "gen": "Generaciones",
   "ghost": "Fantasma",
   "giveUp": "Rendirse",
@@ -117,6 +121,8 @@
   },
   "legendary": "Legendario",
   "lightMode": "Modo Claro",
+  "loadFromCloudTooltip": "Cargar desde la nube",
+  "loadFromDiskTooltip": "Cargar desde archivo",
   "loadingQuiz": "Cargando Cuestionario",
   "login": "Iniciar Sesión",
   "loginWith": "Inicia sesión para guardar tu progreso:",
@@ -175,7 +181,9 @@
   "revealShadows": "Revelar siluetas",
   "rock": "Roca",
   "ru": "Ruso",
+  "saveFromCloudTooltip": "Guardar datos en la nube",
   "saveLoadState": "Guardar/Cargar Estado del Cuestionario",
+  "saveToDiskTooltip": "Guardar en archivo",
   "set": "configurar",
   "shadowHelperDisabled": "La ayuda de siluetas está deshabilitada. Habilítala en configuración para usar este atajo.",
   "shadowHelperSet": "Ayuda de siluetas {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "¿Cambiar cuestionario?"
   },
+  "thanksForPlaying": "¡Gracias por jugar!",
   "timer": "Temporizador",
   "timerTooltip": "Establece un temporizador para el juego.",
   "toggleSettings": "Alternar Configuración",
   "topGuessers": "Top {n} Adivinadores",
+  "topPlays": "Top {n} Partidas",
   "typeQuiz": "Quiz de {type}",
   "typeShuffle": "Tipo aleatorio",
   "typeShuffleOnlyInRegularModeTooltip": "Tipo aleatorio solo se puede activar en modo normal",
@@ -231,7 +241,5 @@
   "welcome": "¡Bienvenido al Quiz de Pokémon!",
   "welcomeBack": "¡Bienvenido de vuelta, {name}!",
   "x": "X",
-  "zh": "Chino (Tradicional)",
-  "gameOver": "¡Juego Terminado!",
-  "thanksForPlaying": "¡Gracias por jugar!"
+  "zh": "Chino (Tradicional)"
 }

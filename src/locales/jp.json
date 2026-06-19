@@ -4,6 +4,9 @@
   "autoPause": "自動一時停止:",
   "autoPauseSet": "自動一時停止 {status}",
   "autoPauseTooltip": "自動一時停止のオン/オフを切り替え",
+  "autoSave": "同期",
+  "autoSaveSet": "同期 {status}",
+  "autoSaveTooltip": "クラウド同期",
   "back": "戻る",
   "bluesky": "BlueSky",
   "bug": "むし",
@@ -76,6 +79,7 @@
   "full": "フルクイズ",
   "fullQuiz": "フルクイズ",
   "galar": "ガラル",
+  "gameOver": "ゲームオーバー!",
   "gen": "世代",
   "ghost": "ゴースト",
   "giveUp": "諦める",
@@ -117,6 +121,8 @@
   },
   "legendary": "伝説",
   "lightMode": "ライトモード",
+  "loadFromCloudTooltip": "クラウドからロード",
+  "loadFromDiskTooltip": "ファイルからロード",
   "loadingQuiz": "クイズを読み込み中",
   "login": "ログイン",
   "loginWith": "進捗を保存するためにログインしてください:",
@@ -175,7 +181,9 @@
   "revealShadows": "シルエットを表示",
   "rock": "いわ",
   "ru": "ロシア語",
+  "saveFromCloudTooltip": "クラウドにデータを保存",
   "saveLoadState": "クイズ状態を保存/読み込む",
+  "saveToDiskTooltip": "ファイルに保存",
   "set": "設定",
   "shadowHelperDisabled": "シルエットヘルパーは無効です。このショートカットを使用するには、設定で有効にしてください。",
   "shadowHelperSet": "シルエットヘルパー {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "クイズを切り替えますか？"
   },
+  "thanksForPlaying": "プレイしてくれてありがとう!",
   "timer": "タイマー",
   "timerTooltip": "ゲーム用のタイマーを設定します。",
   "toggleSettings": "設定を切り替え",
   "topGuessers": "トップ {n} 正解者",
+  "topPlays": "トップ {n} プレイ",
   "typeQuiz": "{type}クイズ",
   "typeShuffle": "ランダムタイプ",
   "typeShuffleOnlyInRegularModeTooltip": "ランダムタイプは通常モードでのみ切り替えることができます",
@@ -231,7 +241,5 @@
   "welcome": "ポケモンクイズへようこそ！",
   "welcomeBack": "おかえりなさい、{name}!",
   "x": "X",
-  "zh": "中国語（繁体字）",
-  "gameOver": "ゲームオーバー!",
-  "thanksForPlaying": "プレイしてくれてありがとう!"
+  "zh": "中国語（繁体字）"
 }

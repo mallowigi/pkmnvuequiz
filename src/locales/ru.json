@@ -4,6 +4,9 @@
   "autoPause": "Автоматическая пауза:",
   "autoPauseSet": "Автоматическая пауза {status}",
   "autoPauseTooltip": "Включить/выключить автоматическую паузу",
+  "autoSave": "Синхр.",
+  "autoSaveSet": "Синхр. {status}",
+  "autoSaveTooltip": "Синхронизация с облаком",
   "back": "Назад",
   "bluesky": "BlueSky",
   "bug": "Насекомое",
@@ -76,6 +79,7 @@
   "full": "Полный Квиз",
   "fullQuiz": "Полный Квиз",
   "galar": "Галар",
+  "gameOver": "Игра окончена!",
   "gen": "Поколения",
   "ghost": "Призрак",
   "giveUp": "Сдаться",
@@ -117,6 +121,8 @@
   },
   "legendary": "Легендарный",
   "lightMode": "Светлый режим",
+  "loadFromCloudTooltip": "Загрузить из облака",
+  "loadFromDiskTooltip": "Загрузить из файла",
   "loadingQuiz": "Загрузка Квиз",
   "login": "Вход",
   "loginWith": "Войдите, чтобы сохранить свой прогресс:",
@@ -175,7 +181,9 @@
   "revealShadows": "Открыть силуэты",
   "rock": "Камень",
   "ru": "Русский",
+  "saveFromCloudTooltip": "Сохранить данные в облако",
   "saveLoadState": "Сохранить/загрузить состояние Квиза",
+  "saveToDiskTooltip": "Сохранить в файл",
   "set": "задать",
   "shadowHelperDisabled": "Помощник силуэтов отключён. Включите его в настройках, чтобы использовать это сочетание.",
   "shadowHelperSet": "Помощник силуэтов {status}",
@@ -212,10 +220,12 @@
   "switchQuizDialog": {
     "title": "Сменить викторину?"
   },
+  "thanksForPlaying": "Спасибо за игру!",
   "timer": "Таймер",
   "timerTooltip": "Установите таймер для игры.",
   "toggleSettings": "Переключить Параметры",
   "topGuessers": "Топ {n} Угадывателей",
+  "topPlays": "Топ-{n} игр",
   "typeQuiz": "Квиз {type}",
   "typeShuffle": "Случайный тип",
   "typeShuffleOnlyInRegularModeTooltip": "Случайный тип можно включить только в обычном режиме",
@@ -231,7 +241,5 @@
   "welcome": "Добро пожаловать в Викторину Покемонов!",
   "welcomeBack": "Добро пожаловать, {name}!",
   "x": "X",
-  "zh": "Китайский (Традиционный)",
-  "gameOver": "Игра окончена!",
-  "thanksForPlaying": "Спасибо за игру!"
+  "zh": "Китайский (Традиционный)"
 }
