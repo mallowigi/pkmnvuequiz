@@ -1,12 +1,10 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import { useState } from '@/stores/useState.ts';
+import { useTouches } from '@/stores/useTouches.ts';
 import type { Settings, Language } from '@/types';
 
 export const useSettings = defineStore('settings', () => {
-  const { state } = useState();
-
   const settingsState = reactive<Settings>({
     autoPause: false,
     avatar: null,
@@ -20,6 +18,14 @@ export const useSettings = defineStore('settings', () => {
     withSpelling: false,
   });
 
+  const {
+    toggleSpelling: toggleSpellingHelper,
+    toggleShinyCharm: toggleShinyHelper,
+    toggleShadowHelper: toggleShadowsHelper,
+    toggleAutoPause: toggleAutoPauseHelper,
+    toggleLanguage: toggleLanguageHelper,
+  } = useTouches();
+
   const toggleLanguage = (language: Language) => {
     if (settingsState.languages.has(language)) {
       settingsState.languages.delete(language);
@@ -30,6 +36,7 @@ export const useSettings = defineStore('settings', () => {
 
   const setLanguages = (languages: Language[]) => {
     settingsState.languages = new Set<Language>(languages);
+    toggleLanguageHelper(!!languages?.length);
   };
 
   const resetLanguages = () => {
@@ -46,16 +53,17 @@ export const useSettings = defineStore('settings', () => {
 
   const toggleShowShinies = () => {
     settingsState.withShinies = !settingsState.withShinies;
+    toggleShinyHelper(settingsState.withShinies);
   };
 
   const toggleSpelling = () => {
     settingsState.withSpelling = !settingsState.withSpelling;
-    state.usedSpelling = true;
+    toggleSpellingHelper(settingsState.withSpelling);
   };
 
   const toggleShadowHelper = () => {
     settingsState.withShadowHelper = !settingsState.withShadowHelper;
-    state.usedShadowHelper = true;
+    toggleShadowsHelper(settingsState.withShadowHelper);
   };
 
   const setCycleSprites = (withCycleSprites: boolean) => {
@@ -66,9 +74,9 @@ export const useSettings = defineStore('settings', () => {
     settingsState.withSound = withSound;
   };
 
-  const setAutoPause = (autoPause: boolean) => {
+  const toggleAutoPause = (autoPause: boolean) => {
     settingsState.autoPause = autoPause;
-    state.usedAutoPause = true;
+    toggleAutoPauseHelper(autoPause);
   };
 
   const setSaveToCloud = (saveToCloud: boolean) => {
@@ -81,7 +89,6 @@ export const useSettings = defineStore('settings', () => {
 
   return {
     resetLanguages,
-    setAutoPause,
     setAvatar,
     setCycleSprites,
     setLanguages,
@@ -90,6 +97,7 @@ export const useSettings = defineStore('settings', () => {
     setSettingsState,
     setSound,
     settingsState,
+    toggleAutoPause,
     toggleLanguage,
     toggleShadowHelper,
     toggleShowShinies,

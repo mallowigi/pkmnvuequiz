@@ -5,14 +5,14 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { useI18n } from 'vue-i18n';
 import { useSettings } from '@/stores/useSettings.ts';
 
-const { settingsState, setAutoPause } = useSettings();
+const { settingsState, toggleAutoPause } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
 const applyAutoPause = (value: boolean) => {
   if (settingsState.autoPause === value) return;
 
-  setAutoPause(value);
+  toggleAutoPause(value);
   showUserMessage(t('autoPauseSet', { status: value ? t('enabled') : t('disabled') }));
 };
 </script>
