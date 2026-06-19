@@ -41,4 +41,8 @@ const resume = () => resumeGame();
 .left-margin {
   margin-left: 10px;
 }
+
+.prompt {
+  overflow: hidden;
+}
 </style>
