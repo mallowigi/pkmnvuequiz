@@ -52,7 +52,7 @@
     "projectInfo2": "광고 없이 프로젝트를 계속 유지하고 싶습니다.",
     "projectInfo3": "게임을 즐기고 계시고 지원하고 싶으시다면 Ko-Fi를 통해 지원해 주세요:",
     "shadowsUsed": "사용된 그림자: {numShadows}",
-    "summary": "포켓몬 도감 순서대로 {elapsed}초 만에 {numFound}마리의 {gen} 포켓몬 이름을 맞히셨습니다!",
+    "summary": "{elapsed} 만에 {numFound}마리의 포켓몬 이름을 맞히셨습니다!",
     "supporters": "후원자:",
     "wellDone": "잘하셨습니다!"
   },
@@ -152,8 +152,8 @@
   "newGame": "새 게임",
   "nextPokemon": "다음 포켓몬: {name}",
   "normal": "노말",
-  "nowSaving": "저장 중...",
   "notFound": "찾을 수 없음",
+  "nowSaving": "저장 중...",
   "off": "꺼짐",
   "on": "켜짐",
   "or": "또는",

@@ -52,7 +52,7 @@
     "projectInfo2": "Queremos mantenerlo vivo y sin publicidad.",
     "projectInfo3": "Si disfrutas jugando y quieres apoyarlo, puedes hacerlo a través de Ko-Fi:",
     "shadowsUsed": "{numShadows} sombras usadas",
-    "summary": "¡Has nombrado {numFound} Pokémon {gen} en {elapsed} segundos en orden de la Pokédex!",
+    "summary": "¡Has nombrado {numFound} Pokémon en {elapsed}!",
     "supporters": "Colaboradores:",
     "wellDone": "¡Bien hecho!"
   },
@@ -152,8 +152,8 @@
   "newGame": "Nuevo Juego",
   "nextPokemon": "Siguiente Pokémon: {name}",
   "normal": "Normal",
-  "nowSaving": "Guardando...",
   "notFound": "No encontrado",
+  "nowSaving": "Guardando...",
   "off": "Desactivado",
   "on": "Activado",
   "or": "O",

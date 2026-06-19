@@ -52,7 +52,7 @@
     "projectInfo2": "我们希望保持它的生命力且无广告。",
     "projectInfo3": "如果您喜欢玩并想支持它，可以通过 Ko-Fi 进行支持：",
     "shadowsUsed": "使用了 {numShadows} 个阴影",
-    "summary": "你按图鉴顺序在 {elapsed} 秒内命名了 {numFound} 个{gen}宝可梦！",
+    "summary": "你在 {elapsed} 内命名了 {numFound} 个宝可梦！",
     "supporters": "支持者：",
     "wellDone": "做得好！"
   },
@@ -152,8 +152,8 @@
   "newGame": "新游戏",
   "nextPokemon": "下一个宝可梦：{name}",
   "normal": "一般",
-  "nowSaving": "正在保存...",
   "notFound": "未找到",
+  "nowSaving": "正在保存...",
   "off": "关闭",
   "on": "开启",
   "or": "或",
