@@ -19,7 +19,7 @@ const tooltipMessage = `${t('shadowHotkeyTooltip', { key: ',' })}`;
 
 <template>
   <RoundedButton
-    class="hotkey-toggle"
+    class="hotkey-toggle rad-br-tl"
     v-tooltip="tooltipMessage"
     v-game-ended
     :selected="settingsState.withShadowHelper"

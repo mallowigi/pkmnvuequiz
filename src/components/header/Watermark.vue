@@ -76,6 +76,7 @@ const showCredits = () => {
   z-index: 10;
   padding: 4px 10px 10px 40px;
   color: var(--text);
+  anchor-name: --watermark-url;
 }
 
 .icons {

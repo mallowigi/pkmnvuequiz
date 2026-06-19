@@ -8,6 +8,7 @@ import EndOverlay from '@/components/background/EndOverlay.vue';
 import PauseOverlay from '@/components/background/PauseOverlay.vue';
 import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
+import SavingIndicator from '@/components/background/SavingIndicator.vue';
 import Tooltip from '@/components/background/Tooltip.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
@@ -120,6 +121,9 @@ watch(
 
     <!-- Notifications -->
     <SnackBar />
+
+    <!-- Saving Indicator -->
+    <SavingIndicator />
 
     <!-- Tooltips -->
     <Tooltip />
