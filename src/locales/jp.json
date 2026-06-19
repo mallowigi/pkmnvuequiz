@@ -52,7 +52,7 @@
     "projectInfo2": "広告なしで存続させたいと考えています。",
     "projectInfo3": "楽しんでいただけて、サポートしたい場合は Ko-Fi からお願いします：",
     "shadowsUsed": "シルエット使用数: {numShadows}",
-    "summary": "図鑑順に {elapsed} 秒で {numFound} 匹の{gen}ポケモンを答えました！",
+    "summary": "{elapsed} で {numFound} 匹のポケモンを答えました！",
     "supporters": "サポーター:",
     "wellDone": "よくできました！"
   },
@@ -152,8 +152,8 @@
   "newGame": "新しいゲーム",
   "nextPokemon": "次のポケモン: {name}",
   "normal": "ノーマル",
-  "nowSaving": "保存中...",
   "notFound": "見つかりません",
+  "nowSaving": "保存中...",
   "off": "オフ",
   "on": "オン",
   "or": "または",

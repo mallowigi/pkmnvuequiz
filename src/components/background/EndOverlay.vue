@@ -4,7 +4,6 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
-import { useTranslations } from '@/composables/useTranslations';
 import { donors } from '@/data/donors';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
@@ -14,12 +13,11 @@ import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
 const { setGameOver } = useState();
-const { setCurrentGen, getCurrentGen } = useCurrentGen();
+const { setCurrentGen } = useCurrentGen();
 const { clearCurrentType } = useCurrentType();
 const { resetFlowState, setGameSelectionState } = useGameFlow();
 const { resetTimer, timerState } = useTimer();
 const { t } = useI18n();
-const { getGenTranslation } = useTranslations();
 
 const pokemonStore = usePokemons();
 const { numFound, numShadows } = storeToRefs(pokemonStore);
@@ -42,12 +40,6 @@ const elapsed = computed(() => {
   if (!start) return 0;
   return Math.floor((current - start) / 1000);
 });
-
-const genName = computed(() => {
-  const gen = getCurrentGen();
-  if (!gen) return '';
-  return getGenTranslation(gen.id);
-});
 </script>
 
 <template>
@@ -60,7 +52,7 @@ const genName = computed(() => {
         <h1>{{ t('endOverlay.wellDone') }}</h1>
 
         <h2>
-          {{ t('endOverlay.summary', { numFound, gen: genName, elapsed }) }}
+          {{ t('endOverlay.summary', { numFound, elapsed }) }}
         </h2>
 
         <p>

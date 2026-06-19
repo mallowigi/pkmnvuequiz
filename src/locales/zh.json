@@ -52,7 +52,7 @@
     "projectInfo2": "我們希望保持它的生命力且無廣告。",
     "projectInfo3": "如果您喜歡玩並想支持它，可以通過 Ko-Fi 進行支持：",
     "shadowsUsed": "使用了 {numShadows} 個陰影",
-    "summary": "你按圖鑑順序在 {elapsed} 秒內命名了 {numFound} 個{gen}寶可夢！",
+    "summary": "你在 {elapsed} 內命名了 {numFound} 個寶可夢！",
     "supporters": "支持者：",
     "wellDone": "做得好！"
   },
@@ -152,8 +152,8 @@
   "newGame": "新遊戲",
   "nextPokemon": "下一個寶可夢：{name}",
   "normal": "一般",
-  "nowSaving": "正在儲存...",
   "notFound": "未找到",
+  "nowSaving": "正在儲存...",
   "off": "關閉",
   "on": "開啟",
   "or": "或",
