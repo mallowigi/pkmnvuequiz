@@ -129,16 +129,20 @@ export type UserData = {
   user: User | null;
 };
 
+export type Touches = {
+  toggledAutoPause: boolean;
+  toggledDisplayShadows: boolean;
+  toggledLanguage: boolean;
+  toggledShadowHelper: boolean;
+  toggledShinyCharm: boolean;
+  toggledSpelling: boolean;
+  typeShuffleClicks: number;
+};
+
 export type State = {
   gameMode: GameMode | null;
   isDark: boolean;
   mode: Mode;
-
-  usedAutoPause: boolean;
-  usedShadowHelper: boolean;
-  usedSpelling: boolean;
-  usedTypeShuffle: boolean;
-  usedDisplayShadows: boolean;
 
   withShadows: boolean;
   withTypeShuffle: boolean;

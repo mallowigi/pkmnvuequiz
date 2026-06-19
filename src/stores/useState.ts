@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { useTouches } from '@/stores/useTouches.ts';
 import type { State, GameMode, Mode } from '@/types';
 
 export const useState = defineStore('state', () => {
@@ -8,15 +9,12 @@ export const useState = defineStore('state', () => {
     gameMode: null,
     isDark: false,
     mode: 'normal',
-    usedAutoPause: false,
-    usedDisplayShadows: false,
-    usedShadowHelper: false,
-    usedSpelling: false,
-    usedTypeShuffle: false,
     withCriesShuffle: false,
     withShadows: false,
     withTypeShuffle: false,
   });
+
+  const { toggleDisplayShadows, toggleTypeShuffle } = useTouches();
 
   const setGameMode = (mode: GameMode | null) => {
     state.gameMode = mode;
@@ -42,16 +40,17 @@ export const useState = defineStore('state', () => {
 
   const displayShadows = () => {
     state.withShadows = true;
-    state.usedDisplayShadows = true;
+    toggleDisplayShadows(true);
   };
 
   const hideShadows = () => {
     state.withShadows = false;
+    toggleDisplayShadows(false);
   };
 
   const setTypeShuffle = (withTypeShuffle: boolean) => {
     state.withTypeShuffle = withTypeShuffle;
-    state.usedTypeShuffle = true;
+    toggleTypeShuffle(withTypeShuffle);
   };
 
   const setCriesShuffle = (withCriesShuffle: boolean) => {
