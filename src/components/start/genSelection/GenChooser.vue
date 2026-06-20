@@ -6,17 +6,28 @@ import CyclingType from '@/components/start/genSelection/CyclingType.vue';
 import { useQuiz } from '@/composables/useQuiz.js';
 import { gens } from '@/data/gens';
 import type { Gen } from '@/types.js';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+import RoundedButton from '@/components/common/RoundedButton.vue';
 
 const { t } = useI18n();
+const { setGameSelectionState } = useGameFlow();
 
 const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
+
+const goBack = () => {
+  setGameSelectionState('new');
+};
+
+const openSpecialChooser = () => {
+  setGameSelectionState('special');
+};
 </script>
 
 <template>
   <div class="container">
     <div class="gens-grid">
       <!-- Full quiz-->
-      <div></div>
+      <div />
       <div class="cell-full">
         <div
           class="cell rad-bl-tr"
@@ -25,7 +36,7 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
           {{ t('fullQuiz') }}
         </div>
       </div>
-      <div></div>
+      <div />
 
       <!-- Gens -->
       <div
@@ -46,14 +57,26 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
       </div>
 
       <!-- Types -->
-      <div></div>
       <div>
         <CyclingType
-          class="cell cell-type rad-bl-tr"
+          class="cell cell-type rad-bl"
           @click="setTypeQuiz"
         />
       </div>
-      <div></div>
+
+      <RoundedButton
+        class="cell button-type button-back rad"
+        @click="goBack"
+      >
+        <div class="type-name">{{ t('back') }}</div>
+      </RoundedButton>
+
+      <div>
+        <CyclingType
+          class="cell cell-type rad-tr"
+          @click="openSpecialChooser"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -115,5 +138,12 @@ const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
 
 .gen-name {
   display: inline-block;
+}
+
+.button-back {
+  margin: 0;
+  background-color: #111;
+  border-color: #111;
+  color: #fff;
 }
 </style>

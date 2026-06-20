@@ -20,6 +20,10 @@ const specialType = computed(() => getSpecialType());
 const goBack = () => {
   setGameSelectionState('gen');
 };
+
+const openSpecialChooser = () => {
+  setGameSelectionState('special');
+};
 </script>
 
 <template>
@@ -44,7 +48,7 @@ const goBack = () => {
     <!-- Special -->
     <RoundedButton
       class="button-type button-special"
-      @click="setTypeOrSpecial('special')"
+      @click="openSpecialChooser"
       :style="{ '--bgColor': specialType.bgColor, '--fgColor': specialType.fgColor }"
     >
       <img
