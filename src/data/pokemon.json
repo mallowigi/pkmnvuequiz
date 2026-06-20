@@ -9790,7 +9790,8 @@
       "dexNum": 3,
       "primaryType": "grass",
       "secondaryType": "poison",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "charizardmegax",
@@ -9798,7 +9799,8 @@
       "dexNum": 6,
       "primaryType": "fire",
       "secondaryType": "dragon",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "charizardmegay",
@@ -9806,7 +9808,8 @@
       "dexNum": 6,
       "primaryType": "fire",
       "secondaryType": "flying",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "blastoisemega",
@@ -9814,7 +9817,8 @@
       "dexNum": 9,
       "primaryType": "water",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "beedrillmega",
@@ -9822,7 +9826,8 @@
       "dexNum": 15,
       "primaryType": "bug",
       "secondaryType": "poison",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "pidgeotmega",
@@ -9830,7 +9835,8 @@
       "dexNum": 18,
       "primaryType": "normal",
       "secondaryType": "flying",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "alakazammega",
@@ -9838,7 +9844,8 @@
       "dexNum": 65,
       "primaryType": "psychic",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "slowbromega",
@@ -9846,7 +9853,8 @@
       "dexNum": 80,
       "primaryType": "water",
       "secondaryType": "psychic",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "gengarmega",
@@ -9854,7 +9862,8 @@
       "dexNum": 94,
       "primaryType": "ghost",
       "secondaryType": "poison",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "kangaskhanmega",
@@ -9862,7 +9871,8 @@
       "dexNum": 115,
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "pinsirmega",
@@ -9870,7 +9880,8 @@
       "dexNum": 127,
       "primaryType": "bug",
       "secondaryType": "flying",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "gyaradosmega",
@@ -9878,7 +9889,8 @@
       "dexNum": 130,
       "primaryType": "water",
       "secondaryType": "dark",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "aerodactylmega",
@@ -9886,7 +9898,8 @@
       "dexNum": 142,
       "primaryType": "rock",
       "secondaryType": "flying",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "mewtwomegax",
@@ -9895,7 +9908,8 @@
       "primaryType": "psychic",
       "secondaryType": "fighting",
       "box": "kalosmega",
-      "specialType": "legendary"
+      "specialType": "legendary",
+      "megaType": "mega"
     },
     {
       "id": "mewtwomegay",
@@ -9904,7 +9918,8 @@
       "primaryType": "psychic",
       "secondaryType": null,
       "box": "kalosmega",
-      "specialType": "legendary"
+      "specialType": "legendary",
+      "megaType": "mega"
     },
     {
       "id": "ampharosmega",
@@ -9912,7 +9927,8 @@
       "dexNum": 181,
       "primaryType": "electric",
       "secondaryType": "dragon",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "steelixmega",
@@ -9920,7 +9936,8 @@
       "dexNum": 208,
       "primaryType": "steel",
       "secondaryType": "ground",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "scizormega",
@@ -9928,7 +9945,8 @@
       "dexNum": 212,
       "primaryType": "bug",
       "secondaryType": "steel",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "heracrossmega",
@@ -9936,7 +9954,8 @@
       "dexNum": 214,
       "primaryType": "bug",
       "secondaryType": "fighting",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "houndoommega",
@@ -9944,7 +9963,8 @@
       "dexNum": 229,
       "primaryType": "dark",
       "secondaryType": "fire",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "tyranitarmega",
@@ -9952,7 +9972,8 @@
       "dexNum": 248,
       "primaryType": "rock",
       "secondaryType": "dark",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "sceptilemega",
@@ -9960,7 +9981,8 @@
       "dexNum": 254,
       "primaryType": "grass",
       "secondaryType": "dragon",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "blazikenmega",
@@ -9968,7 +9990,8 @@
       "dexNum": 257,
       "primaryType": "fire",
       "secondaryType": "fighting",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "swampertmega",
@@ -9976,7 +9999,8 @@
       "dexNum": 260,
       "primaryType": "water",
       "secondaryType": "ground",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "gardevoirmega",
@@ -9984,7 +10008,8 @@
       "dexNum": 282,
       "primaryType": "psychic",
       "secondaryType": "fairy",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "sableyemega",
@@ -9992,7 +10017,8 @@
       "dexNum": 302,
       "primaryType": "dark",
       "secondaryType": "ghost",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "mawilemega",
@@ -10000,7 +10026,8 @@
       "dexNum": 303,
       "primaryType": "steel",
       "secondaryType": "fairy",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "aggronmega",
@@ -10008,7 +10035,8 @@
       "dexNum": 306,
       "primaryType": "steel",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "medichammega",
@@ -10016,7 +10044,8 @@
       "dexNum": 308,
       "primaryType": "fighting",
       "secondaryType": "psychic",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "manectricmega",
@@ -10024,7 +10053,8 @@
       "dexNum": 310,
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "sharpedomega",
@@ -10032,7 +10062,8 @@
       "dexNum": 319,
       "primaryType": "water",
       "secondaryType": "dark",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "cameruptmega",
@@ -10040,7 +10071,8 @@
       "dexNum": 323,
       "primaryType": "fire",
       "secondaryType": "ground",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "altariamega",
@@ -10048,7 +10080,8 @@
       "dexNum": 334,
       "primaryType": "dragon",
       "secondaryType": "fairy",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "banettemega",
@@ -10056,7 +10089,8 @@
       "dexNum": 354,
       "primaryType": "ghost",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "absolmega",
@@ -10064,7 +10098,8 @@
       "dexNum": 359,
       "primaryType": "dark",
       "secondaryType": null,
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "glaliemega",
@@ -10072,7 +10107,8 @@
       "dexNum": 362,
       "primaryType": "ice",
       "secondaryType": null,
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "salamencemega",
@@ -10080,7 +10116,8 @@
       "dexNum": 373,
       "primaryType": "dragon",
       "secondaryType": "flying",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "metagrossmega",
@@ -10088,7 +10125,8 @@
       "dexNum": 376,
       "primaryType": "steel",
       "secondaryType": "psychic",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "latiasmega",
@@ -10097,7 +10135,8 @@
       "primaryType": "dragon",
       "secondaryType": "psychic",
       "box": "hoennmega",
-      "specialType": "sublegendary"
+      "specialType": "sublegendary",
+      "megaType": "mega"
     },
     {
       "id": "latiosmega",
@@ -10106,7 +10145,8 @@
       "primaryType": "dragon",
       "secondaryType": "psychic",
       "box": "hoennmega",
-      "specialType": "sublegendary"
+      "specialType": "sublegendary",
+      "megaType": "mega"
     },
     {
       "id": "kyogreprimal",
@@ -10115,7 +10155,8 @@
       "primaryType": "water",
       "secondaryType": null,
       "box": "hoennmega",
-      "specialType": "legendary"
+      "specialType": "legendary",
+      "megaType": "mega"
     },
     {
       "id": "groudonprimal",
@@ -10124,7 +10165,8 @@
       "primaryType": "ground",
       "secondaryType": "fire",
       "box": "hoennmega",
-      "specialType": "legendary"
+      "specialType": "legendary",
+      "megaType": "mega"
     },
     {
       "id": "rayquazamega",
@@ -10133,7 +10175,8 @@
       "primaryType": "dragon",
       "secondaryType": "flying",
       "box": "hoennmega",
-      "specialType": "legendary"
+      "specialType": "legendary",
+      "megaType": "mega"
     },
     {
       "id": "lopunnymega",
@@ -10141,7 +10184,8 @@
       "dexNum": 428,
       "primaryType": "normal",
       "secondaryType": "fighting",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "garchompmega",
@@ -10149,7 +10193,8 @@
       "dexNum": 445,
       "primaryType": "dragon",
       "secondaryType": "ground",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "lucariomega",
@@ -10157,7 +10202,8 @@
       "dexNum": 448,
       "primaryType": "fighting",
       "secondaryType": "steel",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "abomasnowmega",
@@ -10165,7 +10211,8 @@
       "dexNum": 460,
       "primaryType": "grass",
       "secondaryType": "ice",
-      "box": "kalosmega"
+      "box": "kalosmega",
+      "megaType": "mega"
     },
     {
       "id": "gallademega",
@@ -10173,7 +10220,8 @@
       "dexNum": 475,
       "primaryType": "psychic",
       "secondaryType": "fighting",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "audinomega",
@@ -10181,7 +10229,8 @@
       "dexNum": 531,
       "primaryType": "normal",
       "secondaryType": "fairy",
-      "box": "hoennmega"
+      "box": "hoennmega",
+      "megaType": "mega"
     },
     {
       "id": "dianciemega",
@@ -10190,7 +10239,8 @@
       "primaryType": "rock",
       "secondaryType": "fairy",
       "box": "hoennmega",
-      "specialType": "mythical"
+      "specialType": "mythical",
+      "megaType": "mega"
     },
     {
       "id": "venusaurgmax",
@@ -10198,7 +10248,8 @@
       "dexNum": 3,
       "primaryType": "grass",
       "secondaryType": "poison",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "charizardgmax",
@@ -10206,7 +10257,8 @@
       "dexNum": 6,
       "primaryType": "fire",
       "secondaryType": "flying",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "blastoisegmax",
@@ -10214,7 +10266,8 @@
       "dexNum": 9,
       "primaryType": "water",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "butterfreegmax",
@@ -10222,7 +10275,8 @@
       "dexNum": 12,
       "primaryType": "bug",
       "secondaryType": "flying",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "pikachugmax",
@@ -10230,7 +10284,8 @@
       "dexNum": 25,
       "primaryType": "electric",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "meowthgmax",
@@ -10238,7 +10293,8 @@
       "dexNum": 52,
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "machampgmax",
@@ -10246,7 +10302,8 @@
       "dexNum": 68,
       "primaryType": "fighting",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "gengargmax",
@@ -10254,7 +10311,8 @@
       "dexNum": 94,
       "primaryType": "ghost",
       "secondaryType": "poison",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "kinglergmax",
@@ -10262,7 +10320,8 @@
       "dexNum": 99,
       "primaryType": "water",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "laprasgmax",
@@ -10270,7 +10329,8 @@
       "dexNum": 131,
       "primaryType": "water",
       "secondaryType": "ice",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "eeveegmax",
@@ -10278,7 +10338,8 @@
       "dexNum": 133,
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "snorlaxgmax",
@@ -10286,7 +10347,8 @@
       "dexNum": 143,
       "primaryType": "normal",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "garbodorgmax",
@@ -10294,7 +10356,8 @@
       "dexNum": 569,
       "primaryType": "poison",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "melmetalgmax",
@@ -10303,7 +10366,8 @@
       "primaryType": "steel",
       "secondaryType": null,
       "box": "gmax",
-      "specialType": "mythical"
+      "specialType": "mythical",
+      "megaType": "gmax"
     },
     {
       "id": "rillaboomgmax",
@@ -10311,7 +10375,8 @@
       "dexNum": 812,
       "primaryType": "grass",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "cinderacegmax",
@@ -10319,7 +10384,8 @@
       "dexNum": 815,
       "primaryType": "fire",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "inteleongmax",
@@ -10327,7 +10393,8 @@
       "dexNum": 818,
       "primaryType": "water",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "corviknightgmax",
@@ -10335,7 +10402,8 @@
       "dexNum": 823,
       "primaryType": "flying",
       "secondaryType": "steel",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "orbeetlegmax",
@@ -10343,7 +10411,8 @@
       "dexNum": 826,
       "primaryType": "bug",
       "secondaryType": "psychic",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "drednawgmax",
@@ -10351,7 +10420,8 @@
       "dexNum": 834,
       "primaryType": "water",
       "secondaryType": "rock",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "coalossalgmax",
@@ -10359,7 +10429,8 @@
       "dexNum": 839,
       "primaryType": "rock",
       "secondaryType": "fire",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "flapplegmax",
@@ -10367,7 +10438,8 @@
       "dexNum": 841,
       "primaryType": "grass",
       "secondaryType": "dragon",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "appletungmax",
@@ -10375,7 +10447,8 @@
       "dexNum": 842,
       "primaryType": "grass",
       "secondaryType": "dragon",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "sandacondagmax",
@@ -10383,7 +10456,8 @@
       "dexNum": 844,
       "primaryType": "ground",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "toxtricitygmax",
@@ -10391,7 +10465,8 @@
       "dexNum": 849,
       "primaryType": "electric",
       "secondaryType": "poison",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "centiskorchgmax",
@@ -10399,7 +10474,8 @@
       "dexNum": 851,
       "primaryType": "fire",
       "secondaryType": "bug",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "hatterenegmax",
@@ -10407,7 +10483,8 @@
       "dexNum": 858,
       "primaryType": "psychic",
       "secondaryType": "fairy",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "grimmsnarlgmax",
@@ -10415,7 +10492,8 @@
       "dexNum": 861,
       "primaryType": "dark",
       "secondaryType": "fairy",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "alcremiegmax",
@@ -10423,7 +10501,8 @@
       "dexNum": 869,
       "primaryType": "fairy",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "copperajahgmax",
@@ -10431,7 +10510,8 @@
       "dexNum": 879,
       "primaryType": "steel",
       "secondaryType": null,
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "duraludongmax",
@@ -10439,7 +10519,8 @@
       "dexNum": 884,
       "primaryType": "steel",
       "secondaryType": "dragon",
-      "box": "gmax"
+      "box": "gmax",
+      "megaType": "gmax"
     },
     {
       "id": "urshifugmax",
@@ -10448,7 +10529,8 @@
       "primaryType": "fighting",
       "secondaryType": "dark",
       "box": "gmax",
-      "specialType": "sublegendary"
+      "specialType": "sublegendary",
+      "megaType": "gmax"
     },
     {
       "id": "urshifurapidstrikegmax",
@@ -10457,7 +10539,8 @@
       "primaryType": "fighting",
       "secondaryType": "water",
       "box": "gmax",
-      "specialType": "sublegendary"
+      "specialType": "sublegendary",
+      "megaType": "gmax"
     },
     {
       "id": "eternatuseternamax",
@@ -10466,7 +10549,8 @@
       "primaryType": "poison",
       "secondaryType": "dragon",
       "box": "gmax",
-      "specialType": "legendary"
+      "specialType": "legendary",
+      "megaType": "gmax"
     },
     {
       "id": "clefablemega",
