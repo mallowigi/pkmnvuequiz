@@ -128,6 +128,8 @@
   "login": "Iniciar Sesión",
   "loginWith": "Inicia sesión para guardar tu progreso:",
   "lumiose": "Megaevolución (Ciudad Luminalia)",
+  "mega": "Mega",
+  "megaQuiz": "Cuestionario Mega",
   "min": "min",
   "missedNames": "Nombres que faltaron:",
   "mode": "Modo",
@@ -146,6 +148,7 @@
   "nameAll": {
     "full": "¡Nombra a todos los Pokémon!",
     "gen": "¡Nombra a todos los Pokémon de {name}!",
+    "mega": "¡Nombra a todos los Pokémon Mega!",
     "special": "¡Nombra a todos los Pokémon {name}!",
     "types": "¡Nombra a todos los Pokémon de tipo {name}!"
   },

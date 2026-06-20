@@ -128,6 +128,8 @@
   "login": "Connexion",
   "loginWith": "Connectez-vous pour conserver votre progression:",
   "lumiose": "Méga-Évolution (Illumis)",
+  "mega": "Méga",
+  "megaQuiz": "Quiz Méga",
   "min": "min",
   "missedNames": "Noms manqués:",
   "mode": "Mode",
@@ -146,6 +148,7 @@
   "nameAll": {
     "full": "Nommez tous les Pokémon!",
     "gen": "Nommez les Pokémon de {name}!",
+    "mega": "Nommez tous les Pokémon Méga !",
     "special": "Nommez les Pokémon {name}!",
     "types": "Nommez les Pokémon de type {name}!"
   },

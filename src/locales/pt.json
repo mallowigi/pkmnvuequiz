@@ -128,6 +128,8 @@
   "login": "Fazer Login",
   "loginWith": "Faça login para manter seu progresso:",
   "lumiose": "Mega Evolução (Cidade de Lumiose)",
+  "mega": "Mega",
+  "megaQuiz": "Mega Quiz",
   "min": "min",
   "missedNames": "Nomes perdidos:",
   "mode": "Modo",
@@ -146,6 +148,7 @@
   "nameAll": {
     "full": "Nomeie todos os Pokémon!",
     "gen": "Nomeie todos os Pokémon de {name}!",
+    "mega": "Nomeie todos os Pokémon Mega!",
     "special": "Nomeie todos os Pokémon {name}!",
     "types": "Nomeie todos os Pokémon de tipo {name}!"
   },

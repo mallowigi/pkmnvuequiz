@@ -128,6 +128,8 @@
   "login": "Anmelden",
   "loginWith": "Melden Sie sich an, um Ihren Fortschritt zu speichern:",
   "lumiose": "Mega-Entwicklung (Illumina City)",
+  "mega": "Mega",
+  "megaQuiz": "Mega-Quiz",
   "min": "min",
   "missedNames": "Fehlende Namen:",
   "mode": "Modus",
@@ -146,6 +148,7 @@
   "nameAll": {
     "full": "Nenne alle Pokémon!",
     "gen": "Nenne alle {name}-Pokémon!",
+    "mega": "Nenne alle Mega-Pokémon!",
     "special": "Nenne alle {name}-Pokémon!",
     "types": "Nenne alle {name}-Pokémon!"
   },

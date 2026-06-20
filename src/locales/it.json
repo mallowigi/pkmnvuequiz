@@ -128,6 +128,8 @@
   "login": "Accedi",
   "loginWith": "Accedi per mantenere i tuoi progressi:",
   "lumiose": "Megaevoluzione (Luminopoli)",
+  "mega": "Mega",
+  "megaQuiz": "Quiz Mega",
   "min": "min",
   "missedNames": "Nomi mancanti:",
   "mode": "Modalità",
@@ -146,6 +148,7 @@
   "nameAll": {
     "full": "Nomina tutti i Pokémon!",
     "gen": "Nomina tutti i Pokémon di {name}!",
+    "mega": "Nomina tutti i Pokémon Mega!",
     "special": "Nomina tutti i Pokémon {name}!",
     "types": "Nomina tutti i Pokémon di tipo {name}!"
   },
