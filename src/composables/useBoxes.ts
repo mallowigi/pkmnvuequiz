@@ -57,6 +57,8 @@ export const useBoxes = () => {
         return getAllBoxes();
       case 'types':
         return getCurrentTypeBoxes();
+      case 'mega':
+        return getMegaBoxes();
       default:
         return [];
     }

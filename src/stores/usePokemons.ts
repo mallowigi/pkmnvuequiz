@@ -436,7 +436,19 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const getMegaPokemon = (boxId?: RegionBox): Map<string, PokemonInfo[]> => {
     if (boxId) {
-      return pokemonMaps.boxes[boxId] ?? new Map();
+      const boxPokemon = pokemonMaps.boxes[boxId];
+      if (!boxPokemon) return new Map();
+
+      const result = new Map<string, PokemonInfo[]>();
+
+      for (const [key, pokemons] of boxPokemon) {
+        const filtered = pokemons.filter((p) => p.megaType !== undefined);
+        if (filtered.length > 0) {
+          result.set(key, filtered);
+        }
+      }
+
+      return result;
     }
     return pokemonMaps.allMega ?? new Map();
   };
@@ -477,6 +489,8 @@ export const usePokemons = defineStore('pokemons', () => {
 
         return getTypedBoxPokemon(typeId, boxId);
       }
+      case 'mega':
+        return getMegaPokemon(boxId);
       case 'full':
         return getGenPokemon(boxId);
       default:
