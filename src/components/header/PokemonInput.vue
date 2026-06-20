@@ -19,12 +19,11 @@ import { useTranslations } from '@/composables/useTranslations.ts';
 const { state } = useState();
 const { flowState, updateInput } = useGameFlow();
 const { getCurrentRegion } = useCurrentRegion();
-const { getCurrentTypeOrSpecial } = useCurrentType();
+const { getCurrentType } = useCurrentType();
 const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
-
 const { t } = useI18n();
-const { getBoxTranslation, getTypeOrSpecialTranslation } = useTranslations();
+const { getBoxTranslation, getTypeTranslation } = useTranslations();
 
 /** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
@@ -42,10 +41,12 @@ const regionOrType = computed(() => {
       const currentRegion = getCurrentRegion();
       return currentRegion ? capitalize(getBoxTranslation(currentRegion.id)) : '';
     case 'types':
-      const currentType = getCurrentTypeOrSpecial();
-      return currentType ? capitalize(getTypeOrSpecialTranslation(currentType?.id)) : '';
+      const currentType = getCurrentType();
+      return currentType ? capitalize(getTypeTranslation(currentType?.id)) : '';
     case 'special':
       return capitalize(t('special'));
+    case 'mega':
+      return capitalize(t('mega'));
     default:
       return '';
   }

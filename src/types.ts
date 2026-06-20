@@ -128,6 +128,7 @@ export type PokemonInfo = {
   primaryType: Type;
   secondaryType: Type | null;
   specialType: SpecialType;
+  megaType: MegaType;
   sprites?: string[];
 };
 

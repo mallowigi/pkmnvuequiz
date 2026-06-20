@@ -48,6 +48,8 @@ export const useCurrentType = defineStore('currentType', () => {
     switch (gameMode) {
       case 'special':
         return getSpecialType();
+      case 'mega':
+        return getMegaType();
       default:
         return getCurrentType();
     }
