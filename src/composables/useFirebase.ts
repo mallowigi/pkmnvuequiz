@@ -1,6 +1,6 @@
 import { useFirestore } from '@vueuse/firebase';
 import { signInAnonymously, signOut } from 'firebase/auth';
-import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where, deleteDoc } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
 import { reactive } from 'vue';
 
@@ -92,6 +92,13 @@ export const useFirebase = defineStore('firebase', () => {
     await setDoc(doc(db, 'users', user.uid), data);
   };
 
+  const deleteUserState = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    await deleteDoc(doc(db, 'users', user.uid));
+  };
+
   const loadUserState = async () => {
     const user = auth.currentUser;
     if (!user) return;
@@ -151,6 +158,7 @@ export const useFirebase = defineStore('firebase', () => {
     authenticateWithFacebook,
     authenticateWithGoogle,
     createRecord,
+    deleteUserState,
     firebaseState,
     getTopTrainers,
     loadUserState,

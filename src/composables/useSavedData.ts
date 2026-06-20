@@ -1,6 +1,5 @@
 import { useDebounceFn } from '@vueuse/core';
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
@@ -15,6 +14,7 @@ import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
 import { useTouches } from '@/stores/useTouches.ts';
+import { i18n } from '@/main.ts';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
@@ -35,7 +35,7 @@ const debouncedSaveToFirebase = useDebounceFn(
 
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
-  const { t } = useI18n();
+  const { deleteUserState } = useFirebase();
 
   const setReady = () => {
     ready.value = true;
@@ -141,6 +141,7 @@ export const useSavedData = () => {
     const { flowState } = useGameFlow();
     if (flowState.isEnded || flowState.isGivenUp) {
       removeAutoSave();
+      deleteUserState();
       return;
     }
 
@@ -296,7 +297,7 @@ export const useSavedData = () => {
       withSpelling: statePayload.withSpelling ?? false,
     });
 
-    showUserMessage(t('quizLoaded'));
+    showUserMessage(i18n.global.t('quizLoaded'));
     setTitle();
   };
 
@@ -315,7 +316,7 @@ export const useSavedData = () => {
         const loadedState = JSON.parse(result);
         if (loadedState.version !== 1) {
           console.error('Unsupported save version.');
-          showUserMessage(t('failedToLoadQuizVersion'));
+          showUserMessage(i18n.global.t('failedToLoadQuizVersion'));
           return;
         }
 
@@ -323,7 +324,7 @@ export const useSavedData = () => {
         applyState(loadedState);
       } catch (error) {
         console.error('Failed to load state: Invalid file format.', error);
-        showUserMessage(t('failedToLoadQuizFormat'));
+        showUserMessage(i18n.global.t('failedToLoadQuizFormat'));
       }
     };
     reader.readAsText(file);
@@ -351,7 +352,7 @@ export const useSavedData = () => {
       applyState(userState as SaveData);
     } catch (error) {
       console.error('Failed to load cloud save: Invalid data.', error);
-      showUserMessage(t('failedToLoadQuizInvalid'));
+      showUserMessage(i18n.global.t('failedToLoadQuizInvalid'));
     }
   };
 
@@ -377,7 +378,7 @@ export const useSavedData = () => {
       applyState(savedState);
     } catch (error) {
       console.error('Failed to load autosave: Invalid data.', error);
-      showUserMessage(t('failedToLoadQuizInvalid'));
+      showUserMessage(i18n.global.t('failedToLoadQuizInvalid'));
     }
   };
 
