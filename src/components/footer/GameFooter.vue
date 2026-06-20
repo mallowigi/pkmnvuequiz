@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n';
 
 import GitHubIcon from '@/components/common/icons/GitHubIcon.vue';
 import { useCredits } from '@/stores/useCredits';
+import KofiButton from '@/components/common/KofiButton.vue';
 
 const { toggleShowCredits } = useCredits();
 
@@ -59,16 +60,17 @@ const { t } = useI18n();
         </template>
 
         <template #donation>
-          <a
-            href="https://ko-fi.com/pkmnquiz"
-            target="_blank"
-          >
-            <img
-              class="kofi"
-              src="@/assets/kofi-tag.webp"
-              alt="Ko-fi donation button"
-            />
-          </a>
+          <KofiButton
+            id="pkmnquiz"
+            color="teal"
+            text="AdeptCharon on Ko-Fi"
+          />
+
+          <KofiButton
+            id="mallowigi"
+            color="purple"
+            text="Mallowigi on Ko-Fi"
+          />
         </template>
       </i18n-t>
     </div>

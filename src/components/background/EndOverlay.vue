@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { Temporal } from 'temporal-polyfill';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
+import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 import { donors } from '@/data/donors';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
@@ -11,8 +13,6 @@ import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
-import { Temporal } from 'temporal-polyfill';
-import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 
 const { setGameOver } = useState();
 const { setCurrentGen } = useCurrentGen();
@@ -64,7 +64,7 @@ const elapsed = computed(() => {
           {{ t('endOverlay.summary', { numFound, elapsed }) }}
         </h2>
 
-        <p>
+        <p v-if="numShadows > 0">
           {{ t('endOverlay.challenge') }}<br />
           <span class="small">({{ t('endOverlay.shadowsUsed', { numShadows }) }})</span>
         </p>
@@ -79,12 +79,12 @@ const elapsed = computed(() => {
 
         <p>
           <a
-            href="https://ko-fi.com/pkmnquiz"
+            href="https://ko-fi.com/mallowigi"
             target="_blank"
           >
             <img
               class="kofi2"
-              src="@/assets/kofi-tag.webp"
+              src="@/assets/ko-fi.webp"
               alt="Ko-Fi"
             />
           </a>
@@ -144,6 +144,10 @@ const elapsed = computed(() => {
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
+  cursor: default;
+  * {
+    cursor: default;
+  }
 }
 
 .section {
