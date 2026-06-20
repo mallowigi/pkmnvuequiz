@@ -2,10 +2,11 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
 import { pokemonTypes } from '@/data/pokemonTypes.ts';
-import { useState } from '@/stores/useState';
-import type { Type } from '@/types.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useState } from '@/stores/useState';
+import type { Type } from '@/types.ts';
+import { megaTypes } from '@/data/megaTypes.ts';
 
 type CurrentTypeState = {
   currentType: Type | null;
@@ -36,6 +37,10 @@ export const useCurrentType = defineStore('currentType', () => {
 
   const getSpecialType = () => {
     return specialTypes.no;
+  };
+
+  const getMegaType = () => {
+    return megaTypes.mega;
   };
 
   const getCurrentTypeOrSpecial = () => {
@@ -69,6 +74,7 @@ export const useCurrentType = defineStore('currentType', () => {
     currentTypeState,
     getCurrentType,
     getCurrentTypeOrSpecial,
+    getMegaType,
     getSpecialType,
     setCurrentType,
     setRandomCurrentType,

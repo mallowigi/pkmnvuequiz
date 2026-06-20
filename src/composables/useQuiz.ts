@@ -1,3 +1,6 @@
+import { useTitle } from '@vueuse/core';
+
+import { gens } from '@/data/gens.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
@@ -5,10 +8,8 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
-import { scrollToTop, capitalize } from '@/utils/utils.ts';
 import type { Type, Gen } from '@/types.ts';
-import { useTitle } from '@vueuse/core';
-import { gens } from '@/data/gens.ts';
+import { scrollToTop, capitalize } from '@/utils/utils.ts';
 
 export const TITLE = 'Pkmn Vue Quiz';
 
@@ -118,6 +119,9 @@ export const useQuiz = ({ withDialog = false } = {}) => {
     switch (type) {
       case 'special':
         setGameMode('special');
+        break;
+      case 'mega':
+        setGameMode('mega');
         break;
       default:
         setGameMode('types');
