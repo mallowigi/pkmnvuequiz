@@ -8,6 +8,7 @@ import { gens } from '@/data/gens';
 import type { Gen } from '@/types.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import CyclingSpecial from '@/components/start/genSelection/CyclingSpecial.vue';
 
 const { t } = useI18n();
 const { setGameSelectionState } = useGameFlow();
@@ -57,12 +58,10 @@ const openSpecialChooser = () => {
       </div>
 
       <!-- Types -->
-      <div>
-        <CyclingType
-          class="cell cell-type rad-bl"
-          @click="setTypeQuiz"
-        />
-      </div>
+      <CyclingType
+        class="cell cell-type rad-bl"
+        @click="setTypeQuiz"
+      />
 
       <RoundedButton
         class="cell button-type button-back rad"
@@ -71,12 +70,10 @@ const openSpecialChooser = () => {
         <div class="type-name">{{ t('back') }}</div>
       </RoundedButton>
 
-      <div>
-        <CyclingType
-          class="cell cell-type rad-tr"
-          @click="openSpecialChooser"
-        />
-      </div>
+      <CyclingSpecial
+        class="cell cell-type rad-tr"
+        @click="openSpecialChooser"
+      />
     </div>
   </div>
 </template>

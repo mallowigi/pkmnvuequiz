@@ -30,3 +30,5 @@ export const megaTypes: Record<MegaType, MegaTypeInfo> = {
     symbol: '★',
   },
 };
+
+export const megaTypesList = Object.values(megaTypes).sort((a, b) => a.index - b.index);
