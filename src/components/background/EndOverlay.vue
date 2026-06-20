@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { Temporal } from 'temporal-polyfill';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import Overlay from '@/components/common/Overlay.vue';
+import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 import { donors } from '@/data/donors';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
@@ -22,6 +24,7 @@ const { t } = useI18n();
 const pokemonStore = usePokemons();
 const { numFound, numShadows } = storeToRefs(pokemonStore);
 const { resetPokemonState } = pokemonStore;
+const { savedLocale } = useSavedLocale();
 
 const closeOverlay = () => {
   clearCurrentType();
@@ -34,11 +37,17 @@ const closeOverlay = () => {
 };
 
 const elapsed = computed(() => {
-  const start = timerState.startTime;
-  const current = Date.now();
+  const elapsedTime = timerState.elapsed;
 
-  if (!start) return 0;
-  return Math.floor((current - start) / 1000);
+  const duration = Temporal.Duration.from({ seconds: elapsedTime }).round({
+    largestUnit: 'hours',
+    roundingMode: 'trunc',
+    smallestUnit: 'seconds',
+  });
+
+  return duration.toLocaleString(savedLocale.value, {
+    style: 'long',
+  });
 });
 </script>
 
@@ -55,7 +64,7 @@ const elapsed = computed(() => {
           {{ t('endOverlay.summary', { numFound, elapsed }) }}
         </h2>
 
-        <p>
+        <p v-if="numShadows > 0">
           {{ t('endOverlay.challenge') }}<br />
           <span class="small">({{ t('endOverlay.shadowsUsed', { numShadows }) }})</span>
         </p>
@@ -70,12 +79,12 @@ const elapsed = computed(() => {
 
         <p>
           <a
-            href="https://ko-fi.com/pkmnquiz"
+            href="https://ko-fi.com/mallowigi"
             target="_blank"
           >
             <img
               class="kofi2"
-              src="@/assets/kofi-tag.webp"
+              src="@/assets/ko-fi.webp"
               alt="Ko-Fi"
             />
           </a>
@@ -135,6 +144,10 @@ const elapsed = computed(() => {
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
+  cursor: default;
+  * {
+    cursor: default;
+  }
 }
 
 .section {

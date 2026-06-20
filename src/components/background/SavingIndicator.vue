@@ -37,7 +37,7 @@ const { t } = useI18n();
 <style scoped>
 .saving-indicator {
   position: fixed;
-  top: anchor(--watermark-url bottom);
+  top: anchor(--watermark-url bottom, 1.5rem);
   right: 8px;
   z-index: 9999;
   display: flex;
