@@ -1,5 +1,6 @@
 // noinspection JSUnfilteredForInLoop
 
+import { useVibrate } from '@vueuse/core';
 import { closest } from 'fastest-levenshtein';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
@@ -9,6 +10,7 @@ import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer.ts';
 import type {
@@ -22,8 +24,6 @@ import type {
   MegaType,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
-import { useSettings } from '@/stores/useSettings.ts';
-import { useVibrate } from '@vueuse/core';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -434,9 +434,9 @@ export const usePokemons = defineStore('pokemons', () => {
     return pokemonMaps.allSpecials ?? new Map();
   };
 
-  const getMegaPokemon = (megaTypeId?: MegaType): Map<string, PokemonInfo[]> => {
-    if (megaTypeId) {
-      return pokemonMaps.mega[megaTypeId] ?? new Map();
+  const getMegaPokemon = (boxId?: RegionBox): Map<string, PokemonInfo[]> => {
+    if (boxId) {
+      return pokemonMaps.boxes[boxId] ?? new Map();
     }
     return pokemonMaps.allMega ?? new Map();
   };

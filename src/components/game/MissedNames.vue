@@ -17,7 +17,6 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
-import { megaTypes } from '@/data/megaTypes.ts';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes, getMegaBoxes } = useBoxes();
@@ -55,7 +54,7 @@ const currentBoxes = computed(() => {
     case 'special':
       return getSpecialBoxes()?.map((box) => specialTypes[box]);
     case 'mega':
-      return getMegaBoxes()?.map((box) => megaTypes[box]);
+      return getMegaBoxes()?.map((box) => boxes[box]);
     default:
       return getCurrentGameModeBoxes()?.map((box) => boxes[box]);
   }

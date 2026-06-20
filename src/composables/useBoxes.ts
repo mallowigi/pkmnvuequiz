@@ -1,5 +1,4 @@
 import { gens } from '@/data/gens.ts';
-import { megaTypes } from '@/data/megaTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
@@ -43,9 +42,11 @@ export const useBoxes = () => {
   };
 
   const getMegaBoxes = () => {
-    return Object.values(megaTypes)
-      .sort((a, b) => a.index - b.index)
-      .flatMap((type) => type.id);
+    return getAllBoxes().filter((box) => {
+      return data.pokemon?.some((pkmn) => {
+        return pkmn.box === box && !!pkmn.megaType;
+      });
+    });
   };
 
   const getCurrentGameModeBoxes = () => {

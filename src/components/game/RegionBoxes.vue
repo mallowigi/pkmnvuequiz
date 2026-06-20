@@ -6,11 +6,10 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
 import { boxes } from '@/data/boxes.js';
-import { megaTypes } from '@/data/megaTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { SpecialType, RegionBox, PokemonInfo, MegaType } from '@/types.ts';
+import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes, getMegaBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus, getMegaPokemon } = usePokemons();
@@ -24,7 +23,7 @@ const currentBoxes = computed(() => {
       return specialGameModeBoxes?.map((box) => specialTypes[box]);
     case 'mega':
       const megaGameModeBoxes = getMegaBoxes();
-      return megaGameModeBoxes?.map((box) => megaTypes[box]);
+      return megaGameModeBoxes?.map((box) => boxes[box]);
     default:
       const currentGameModeBoxes = getCurrentGameModeBoxes();
       return currentGameModeBoxes?.map((box) => boxes[box]);
@@ -54,7 +53,7 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
       result = getSpecialTypePokemon(boxId as SpecialType);
       break;
     case 'mega':
-      result = getMegaPokemon(boxId as MegaType);
+      result = getMegaPokemon(boxId as RegionBox);
       break;
     default:
       result = getCurrentGameModeBoxPokemon(boxId as RegionBox);
