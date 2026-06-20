@@ -14,6 +14,7 @@ import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { SaveData, PokemonProgress } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
+import { useTouches } from '@/stores/useTouches.ts';
 
 const ready = ref(false);
 const LOCAL_STORAGE_KEY = 'pkmn_quiz_saved_state';
@@ -22,7 +23,7 @@ const LOCAL_STORAGE_NAME_KEY = 'pkmn_quiz_saved_name';
 const debouncedSaveToFirebase = useDebounceFn(
   (savedState: SaveData) => {
     const { settingsState } = useSettings();
-    if (!settingsState.saveToCloud) {
+    if (!settingsState.autoSync) {
       return;
     }
     const { saveUserState } = useFirebase();
@@ -75,6 +76,7 @@ export const useSavedData = () => {
     const { pokemonState } = usePokemons();
     const { timerState } = useTimer();
     const { flowState } = useGameFlow();
+    const { touchesState } = useTouches();
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
     const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
@@ -95,8 +97,7 @@ export const useSavedData = () => {
     return {
       ...state,
       ...settingsState,
-      autoPause: settingsState.autoPause,
-      autoSync: settingsState.saveToCloud,
+      ...touchesState,
       currentType: currentTypeState.currentType,
       gameSelectionState: flowState.gameSelectionState,
       gen: currentGenState.gen,
@@ -285,9 +286,9 @@ export const useSavedData = () => {
 
     setSettingsState({
       autoPause: statePayload.autoPause ?? false,
+      autoSync: statePayload.autoSync ?? false,
       avatar: statePayload.avatar ?? null,
       name: statePayload.name ?? null,
-      saveToCloud: statePayload.autoSync ?? false,
       withCycleSprites: statePayload.withCycleSprites ?? true,
       withShadowHelper: statePayload.withShadowHelper ?? false,
       withShinies: statePayload.withShinies ?? false,

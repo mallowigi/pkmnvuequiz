@@ -7,10 +7,10 @@ import type { Settings, Language } from '@/types';
 export const useSettings = defineStore('settings', () => {
   const settingsState = reactive<Settings>({
     autoPause: false,
+    autoSync: true,
     avatar: null,
     languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
     name: '',
-    saveToCloud: true,
     withCycleSprites: true,
     withShadowHelper: false,
     withShinies: false,
@@ -80,7 +80,7 @@ export const useSettings = defineStore('settings', () => {
   };
 
   const setSaveToCloud = (saveToCloud: boolean) => {
-    settingsState.saveToCloud = saveToCloud;
+    settingsState.autoSync = saveToCloud;
   };
 
   const setSettingsState = (settings: Partial<Settings>) => {

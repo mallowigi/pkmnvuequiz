@@ -159,7 +159,7 @@ export type Settings = {
   withSound: boolean;
   withSpelling: boolean;
   languages: Set<Language>;
-  saveToCloud: boolean;
+  autoSync: boolean;
 };
 
 export type PokemonStatus = {
@@ -237,31 +237,17 @@ export type PokemonProgress = {
   }[];
 };
 
-export type SaveData = {
-  currentType: Type | null;
-  gameMode: GameMode | null;
-  gameSelectionState: GameSelectionState | null;
-  gen: Gen | null;
-  isDark: boolean;
-  languages: Language[];
-  mode: Mode;
-  name: string | null;
-  avatar: string | null;
-  pokemonProgress: PokemonProgress;
-  timer: TimerState;
-  version: number;
-  autoPause: boolean;
-  autoSync: boolean;
-
-  withCycleSprites: boolean;
-  withShadowHelper: boolean;
-  withShadows: boolean;
-  withShinies: boolean;
-  withSound: boolean;
-  withSpelling: boolean;
-  withTypeShuffle: boolean;
-  withCriesShuffle: boolean;
-};
+export type SaveData = State &
+  Omit<Settings, 'languages'> &
+  Touches & {
+    currentType: Type | null;
+    gameSelectionState: GameSelectionState | null;
+    gen: Gen | null;
+    languages: Language[];
+    pokemonProgress: PokemonProgress;
+    timer: TimerState;
+    version: number;
+  };
 
 export type MessageType = 'success' | 'error' | 'info' | 'warning';
 
