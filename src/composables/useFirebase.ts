@@ -61,12 +61,15 @@ export const useFirebase = defineStore('firebase', () => {
     const payload: UserRecord = {
       ...getSavedState(),
       hasGivenUp: flowState.isGivenUp,
-      id: user?.uid,
       numFound: numFound.value,
       numShadows: numShadows.value,
       time: timerState.elapsed,
       uid: user ? user.uid : null,
     };
+
+    if (user?.uid) {
+      payload.id = user.uid;
+    }
 
     if (!user) {
       await addDoc(collection(db, 'leaderboards'), payload);

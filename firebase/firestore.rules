@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Rules for the 'users' collection
+    // Stores the persistent save data for authenticated users
+    match /users/{userId} {
+      allow read, write, delete: if isOwner(userId);
+    }
+
+    // Rules for the 'leaderboards' collection
+    // Stores game results/records
+    match /leaderboards/{recordId} {
+      // Anyone can read the leaderboards
+      allow read: if true;
+
+      // Allow creating a new record
+      allow create: if (
+        // For authenticated users: the document ID must match their UID
+        // OR it's a new document where they are the owner
+        (isSignedIn() && (recordId == request.auth.uid || request.resource.data.uid == request.auth.uid)) ||
+        // For guests: allowed (matching current application logic)
+        (!isSignedIn() && (request.resource.data.uid == null || request.resource.data.uid == ""))
+      );
+
+      // Only the owner of the record can update or delete it
+      allow update, delete: if isSignedIn() && (
+        recordId == request.auth.uid ||
+        resource.data.uid == request.auth.uid
+      );
+
+      // Additional safety for update: don't allow changing ownership
+      allow update: if request.resource.data.uid == resource.data.uid;
+    }
+
+    // Default deny for everything else
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}
