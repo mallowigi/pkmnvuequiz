@@ -67,7 +67,7 @@ const url = computed(() => `https://ko-fi.com/${props.id}`);
 .btn-container {
   display: inline-block;
   white-space: nowrap;
-  margin: 0 4px;
+  margin: 4px;
 }
 
 .kofi-button {
