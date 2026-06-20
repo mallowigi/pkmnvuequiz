@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 
 import ArrowIcon from '@/components/common/icons/ArrowIcon.vue';
 import { computed } from 'vue';
@@ -7,7 +8,8 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { y } = useScroll(window);
-const { flowState } = useGameFlow();
+const gameFlowStore = useGameFlow();
+const { isInGame } = storeToRefs(gameFlowStore);
 const { dialogs } = useDialogs();
 
 const scrollToTop = () => {
@@ -19,9 +21,7 @@ const scrollToTop = () => {
 };
 
 const isDisabled = computed(() => {
-  return (
-    !flowState.isStarted || flowState.isPaused || flowState.isEnded || flowState.isGivenUp || dialogs.dialog !== null
-  );
+  return !isInGame.value || dialogs.dialog !== null;
 });
 </script>
 

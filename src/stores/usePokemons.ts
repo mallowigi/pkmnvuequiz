@@ -111,7 +111,7 @@ export const usePokemons = defineStore('pokemons', () => {
   });
   const { state, hideShadows } = useState();
   const { getCurrentGen } = useCurrentGen();
-  const currentTypeStore = useCurrentType();
+  const { getCurrentType } = useCurrentType();
   const { settingsState } = useSettings();
   const { startTimer } = useTimer();
   const { playShiny } = usePlaySounds();
@@ -289,7 +289,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const addRandomShadow = () => {
     let remainingArray = Array.from(remaining.value);
-    const currentType = currentTypeStore.getCurrentType();
+    const currentType = getCurrentType();
     if (currentType) {
       const typePokemon = pokemonMaps.types[currentType.id as Type];
       if (typePokemon) {
@@ -421,7 +421,7 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const getCurrentTypePokemon = (): Map<string, PokemonInfo[]> => {
-    const currentType = currentTypeStore.getCurrentType();
+    const currentType = getCurrentType();
     if (!currentType) return new Map();
 
     return getTypePokemon(currentType.id as Type);
@@ -482,7 +482,7 @@ export const usePokemons = defineStore('pokemons', () => {
         return getGenPokemon(boxId);
       }
       case 'types': {
-        const typeId = currentTypeStore.getCurrentType()?.id;
+        const typeId = getCurrentType()?.id;
         if (!typeId) {
           return getGenPokemon(boxId);
         }
@@ -507,7 +507,7 @@ export const usePokemons = defineStore('pokemons', () => {
           return currentGen ? currentGen.boxes.includes(pokemon.box) : false;
         }
         case 'types': {
-          const currentType = currentTypeStore.getCurrentType();
+          const currentType = getCurrentType();
           if (!currentType) return false;
 
           const types = [pokemon.primaryType, pokemon.secondaryType].filter(Boolean);

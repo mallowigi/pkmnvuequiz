@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onStartTyping } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import vEllipsis from '@/directives/ellipsis.ts';
 
@@ -17,7 +18,9 @@ import { capitalize } from '@/utils/utils.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
 
 const { state } = useState();
-const { flowState, updateInput } = useGameFlow();
+const gameFlowStore = useGameFlow();
+const { flowState, isInGame } = storeToRefs(gameFlowStore);
+const { updateInput } = gameFlowStore;
 const { getCurrentRegion } = useCurrentRegion();
 const { getCurrentType } = useCurrentType();
 const { dialogs } = useDialogs();
@@ -53,14 +56,7 @@ const regionOrType = computed(() => {
 });
 
 const isDisabled = computed(() => {
-  return (
-    !flowState.isStarted ||
-    flowState.isPaused ||
-    flowState.isEnded ||
-    flowState.isGivenUp ||
-    dialogs.dialog !== null ||
-    roomState.roomMessage !== null
-  );
+  return !isInGame.value || dialogs.dialog !== null || roomState.roomMessage !== null;
 });
 
 // Reference to the textbox
