@@ -6,7 +6,7 @@ export const megaTypes: Record<MegaType, MegaTypeInfo> = {
     buttonColor: '#7049b0',
     darkBgColor: '#593d91',
     fgColor: '#ffffff',
-    icon: 'DARK',
+    icon: 'GMAX',
     id: 'gmax',
     index: 1,
     inlineColor: '#a178e6',
