@@ -1,6 +1,6 @@
 import { useFirestore } from '@vueuse/firebase';
 import { signInAnonymously, signOut } from 'firebase/auth';
-import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where, deleteDoc } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
 import { reactive } from 'vue';
 
@@ -61,12 +61,15 @@ export const useFirebase = defineStore('firebase', () => {
     const payload: UserRecord = {
       ...getSavedState(),
       hasGivenUp: flowState.isGivenUp,
-      id: user?.uid,
       numFound: numFound.value,
       numShadows: numShadows.value,
       time: timerState.elapsed,
       uid: user ? user.uid : null,
     };
+
+    if (user?.uid) {
+      payload.id = user.uid;
+    }
 
     if (!user) {
       await addDoc(collection(db, 'leaderboards'), payload);
@@ -90,6 +93,13 @@ export const useFirebase = defineStore('firebase', () => {
     }, 3000);
 
     await setDoc(doc(db, 'users', user.uid), data);
+  };
+
+  const deleteUserState = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    await deleteDoc(doc(db, 'users', user.uid));
   };
 
   const loadUserState = async () => {
@@ -151,6 +161,7 @@ export const useFirebase = defineStore('firebase', () => {
     authenticateWithFacebook,
     authenticateWithGoogle,
     createRecord,
+    deleteUserState,
     firebaseState,
     getTopTrainers,
     loadUserState,

@@ -150,7 +150,9 @@ const subType = (user: DocumentData): string => {
 .no-records {
   padding: 20px;
   filter: brightness(0.5);
-  color: var(--text);
+  p {
+    color: var(--type-fg-color, var(--text));
+  }
 }
 
 .create-btn {

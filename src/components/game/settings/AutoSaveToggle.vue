@@ -13,7 +13,7 @@ const { t } = useI18n();
 const { auth } = useFirebase();
 
 const applyAutoSave = (value: boolean) => {
-  if (settingsState.saveToCloud === value) return;
+  if (settingsState.autoSync === value) return;
 
   setSaveToCloud(value);
   showUserMessage(t('autoSaveSet', { status: value ? t('enabled') : t('disabled') }));
@@ -29,8 +29,8 @@ const applyAutoSave = (value: boolean) => {
   >
     <SegmentButton
       :active="{
-        left: settingsState.saveToCloud,
-        right: !settingsState.saveToCloud,
+        left: settingsState.autoSync,
+        right: !settingsState.autoSync,
       }"
       :attached="{
         right: true,
