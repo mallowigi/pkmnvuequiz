@@ -41,6 +41,9 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       case 'special':
         useTitle(`Special Quiz | ${TITLE}`);
         break;
+      case 'mega':
+        useTitle(`Mega Quiz | ${TITLE}`);
+        break;
       default:
         useTitle(TITLE);
     }

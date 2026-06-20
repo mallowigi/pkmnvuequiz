@@ -72,7 +72,7 @@ const setSpecialQuiz = () => {
 
     <RoundedButton
       class="rad-br cell-btn"
-      :selected="state.gameMode === 'special'"
+      :selected="state.gameMode === 'special' || state.gameMode === 'mega'"
       @click="setSpecialQuiz"
     >
       <span class="hide-mobile">{{ t('specialQuiz') }}</span>

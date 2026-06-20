@@ -6,23 +6,28 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
 import { boxes } from '@/data/boxes.js';
+import { megaTypes } from '@/data/megaTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { SpecialType, RegionBox, PokemonInfo } from '@/types.ts';
+import type { SpecialType, RegionBox, PokemonInfo, MegaType } from '@/types.ts';
 
-const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
-const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus } = usePokemons();
+const { getCurrentGameModeBoxes, getSpecialBoxes, getMegaBoxes } = useBoxes();
+const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus, getMegaPokemon } = usePokemons();
 const { state } = useState();
 const { t } = useI18n();
 
 const currentBoxes = computed(() => {
-  if (state.gameMode !== 'special') {
-    const currentGameModeBoxes = getCurrentGameModeBoxes();
-    return currentGameModeBoxes?.map((box) => boxes[box]);
-  } else {
-    const specialGameModeBoxes = getSpecialBoxes();
-    return specialGameModeBoxes?.map((box) => specialTypes[box]);
+  switch (state.gameMode) {
+    case 'special':
+      const specialGameModeBoxes = getSpecialBoxes();
+      return specialGameModeBoxes?.map((box) => specialTypes[box]);
+    case 'mega':
+      const megaGameModeBoxes = getMegaBoxes();
+      return megaGameModeBoxes?.map((box) => megaTypes[box]);
+    default:
+      const currentGameModeBoxes = getCurrentGameModeBoxes();
+      return currentGameModeBoxes?.map((box) => boxes[box]);
   }
 });
 
@@ -44,10 +49,16 @@ function orderByFoundAt(pokemonA: PokemonInfo, pokemonB: PokemonInfo): number {
 const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, PokemonInfo[]> => {
   let result;
 
-  if (state.gameMode !== 'special') {
-    result = getCurrentGameModeBoxPokemon(boxId as RegionBox);
-  } else {
-    result = getSpecialTypePokemon(boxId as SpecialType);
+  switch (state.gameMode) {
+    case 'special':
+      result = getSpecialTypePokemon(boxId as SpecialType);
+      break;
+    case 'mega':
+      result = getMegaPokemon(boxId as MegaType);
+      break;
+    default:
+      result = getCurrentGameModeBoxPokemon(boxId as RegionBox);
+      break;
   }
 
   // Apply chaos mode sorting
@@ -138,6 +149,13 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   &.special {
     --max-width: 66%;
     --num-cols: 2;
+    --sprite-width: 62px;
+    --text-padding: 10px;
+  }
+
+  &.mega {
+    --max-width: 66%;
+    --num-cols: 1;
     --sprite-width: 62px;
     --text-padding: 10px;
   }

@@ -501,6 +501,8 @@ export const usePokemons = defineStore('pokemons', () => {
         }
         case 'special':
           return pokemon.specialType !== undefined && pokemon.specialType !== 'no';
+        case 'mega':
+          return pokemon.megaType !== undefined;
         case 'full':
           return true;
         default:

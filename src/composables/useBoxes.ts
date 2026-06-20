@@ -1,9 +1,10 @@
 import { gens } from '@/data/gens.ts';
+import { megaTypes } from '@/data/megaTypes.ts';
+import { specialTypes } from '@/data/specialTypes.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
-import { specialTypes } from '@/data/specialTypes.ts';
 
 export const useBoxes = () => {
   const { state } = useState();
@@ -41,6 +42,12 @@ export const useBoxes = () => {
       .flatMap((type) => type.id);
   };
 
+  const getMegaBoxes = () => {
+    return Object.values(megaTypes)
+      .sort((a, b) => a.index - b.index)
+      .flatMap((type) => type.id);
+  };
+
   const getCurrentGameModeBoxes = () => {
     switch (state.gameMode) {
       case 'gen':
@@ -58,6 +65,7 @@ export const useBoxes = () => {
     getAllBoxes,
     getCurrentGameModeBoxes,
     getCurrentGenBoxes,
+    getMegaBoxes,
     getSpecialBoxes,
   };
 };

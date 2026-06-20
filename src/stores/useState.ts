@@ -19,7 +19,7 @@ export const useState = defineStore('state', () => {
   const setGameMode = (mode: GameMode | null) => {
     state.gameMode = mode;
 
-    if (mode === 'special' || mode === 'types') {
+    if (mode === 'special' || mode === 'types' || mode === 'mega') {
       state.mode = 'normal';
       state.withTypeShuffle = false;
       state.withCriesShuffle = false;

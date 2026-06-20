@@ -77,6 +77,8 @@ const nameAllText = computed(() => {
       return t('nameAll.types', { name: regionOrType.value });
     case 'special':
       return t('nameAll.special', { name: regionOrType.value });
+    case 'mega':
+      return t('nameAll.mega', { name: regionOrType.value });
     default:
       return t('nameAll.full');
   }
