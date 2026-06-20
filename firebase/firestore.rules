@@ -12,10 +12,54 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
+    // Validation functions
+    function isValidString(val, min, max) {
+      return val is string && val.size() >= min && val.size() <= max;
+    }
+
+    function isValidInt(val, min) {
+      return val is int && val >= min;
+    }
+
+    function isValidGameMode(mode) {
+      return mode in ['full', 'gen', 'special', 'types', 'special', 'mega'];
+    }
+
+    function isValidGen(gen) {
+      return gen == null || gen in ['gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9'];
+    }
+
+    function isValidMode(mode) {
+      return mode in ['chaos', 'normal', 'order'];
+    }
+
+    function isValidPokemonProgress(progress) {
+      return progress is map &&
+             progress.pokemonFound is list &&
+             progress.pokemonShadowed is list &&
+             progress.shinyPokemon is list;
+    }
+
+    function isValidLeaderboardRecord(data) {
+      return isValidString(data.name, 1, 100) &&
+             isValidInt(data.time, 0) &&
+             isValidInt(data.numFound, 0) &&
+             isValidInt(data.numShadows, 0) &&
+             data.hasGivenUp is bool &&
+             isValidGameMode(data.gameMode) &&
+             isValidGen(data.gen) &&
+             isValidMode(data.mode) &&
+             (data.uid == null || data.uid is string) &&
+             isValidPokemonProgress(data.pokemonProgress);
+    }
+
     // Rules for the 'users' collection
     // Stores the persistent save data for authenticated users
     match /users/{userId} {
-      allow read, write, delete: if isOwner(userId);
+      allow read, delete: if isOwner(userId);
+      allow write: if isOwner(userId) &&
+                   request.resource.data.version is int &&
+                   isValidPokemonProgress(request.resource.data.pokemonProgress);
     }
 
     // Rules for the 'leaderboards' collection
@@ -26,11 +70,14 @@ service cloud.firestore {
 
       // Allow creating a new record
       allow create: if (
-        // For authenticated users: the document ID must match their UID
-        // OR it's a new document where they are the owner
-        (isSignedIn() && (recordId == request.auth.uid || request.resource.data.uid == request.auth.uid)) ||
-        // For guests: allowed (matching current application logic)
-        (!isSignedIn() && (request.resource.data.uid == null || request.resource.data.uid == ""))
+        // Validation of data integrity
+        isValidLeaderboardRecord(request.resource.data) &&
+        (
+          // For authenticated users: must use their UID as recordId and in data
+          (isSignedIn() && request.resource.data.uid == request.auth.uid && recordId == request.auth.uid) ||
+          // For guests: uid must be null (recordId is auto-generated)
+          (!isSignedIn() && request.resource.data.uid == null)
+        )
       );
 
       // Only the owner of the record can update or delete it
@@ -39,8 +86,9 @@ service cloud.firestore {
         resource.data.uid == request.auth.uid
       );
 
-      // Additional safety for update: don't allow changing ownership
-      allow update: if request.resource.data.uid == resource.data.uid;
+      // Additional safety for update: don't allow changing ownership and validate data
+      allow update: if request.resource.data.uid == resource.data.uid &&
+                    isValidLeaderboardRecord(request.resource.data);
     }
 
     // Default deny for everything else
