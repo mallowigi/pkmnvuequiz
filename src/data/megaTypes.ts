@@ -20,7 +20,7 @@ export const megaTypes: Record<MegaType, MegaTypeInfo> = {
     buttonColor: '#008a8a',
     darkBgColor: '#006666',
     fgColor: '#ffffff',
-    icon: 'DRAGON',
+    icon: 'MEGA',
     id: 'mega',
     index: 0,
     inlineColor: '#00cfcf',
