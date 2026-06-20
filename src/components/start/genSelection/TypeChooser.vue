@@ -20,10 +20,6 @@ const specialType = computed(() => getSpecialType());
 const goBack = () => {
   setGameSelectionState('gen');
 };
-
-const openSpecialChooser = () => {
-  setGameSelectionState('special');
-};
 </script>
 
 <template>
@@ -48,7 +44,7 @@ const openSpecialChooser = () => {
     <!-- Special -->
     <RoundedButton
       class="button-type button-special"
-      @click="openSpecialChooser"
+      @click="setTypeOrSpecial('special')"
       :style="{ '--bgColor': specialType.bgColor, '--fgColor': specialType.fgColor }"
     >
       <img
@@ -88,7 +84,7 @@ const openSpecialChooser = () => {
 .button-type {
   background-color: var(--bgColor);
   color: var(--fgColor);
-  border: 2px solid var(--border);
+  border: 2px solid #333;
   border-radius: 35px 5px 15px 35px;
   padding: 14px 20px;
   font-size: 18px;

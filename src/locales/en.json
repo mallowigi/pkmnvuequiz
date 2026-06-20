@@ -128,6 +128,7 @@
   "login": "Login",
   "loginWith": "Login to keep your progress:",
   "lumiose": "Mega Evolution (Lumiose)",
+  "mega": "Mega",
   "min": "min",
   "missedNames": "Missed names:",
   "mode": "Mode",
@@ -244,5 +245,6 @@
   "welcome": "Welcome to the Pokémon Quiz!",
   "welcomeBack": "Welcome back, {name} !",
   "x": "X",
+
   "zh": "Chinese (Traditional)"
 }
