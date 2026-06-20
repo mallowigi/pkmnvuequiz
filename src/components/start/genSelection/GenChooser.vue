@@ -140,7 +140,7 @@ const openSpecialChooser = () => {
 .button-back {
   margin: 0;
   background-color: #111;
-  border-color: #111;
+  border-color: var(--border);
   color: #fff;
 }
 </style>

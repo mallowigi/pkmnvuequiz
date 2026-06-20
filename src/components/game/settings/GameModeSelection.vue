@@ -1,23 +1,14 @@
 <script setup lang="ts">
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import { useCurrentGen } from '@/stores/useCurrentGen';
-import { useCurrentType } from '@/stores/useCurrentType';
 import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.js';
-import { scrollToTop } from '@/utils/utils.ts';
-import { useTimer } from '@/stores/useTimer.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
 import { useI18n } from 'vue-i18n';
 
 const { setDialog } = useDialogs();
-const { clearCurrentType } = useCurrentType();
-const { clearCurrentGen } = useCurrentGen();
-const { setGameMode, state, setMode } = useState();
+const { state } = useState();
 const { setGameSelectionState } = useGameFlow();
-const { resetPokemonState } = usePokemons();
-const { resetTimer } = useTimer();
 const { t } = useI18n();
 
 const { setFullQuiz } = useQuiz({ withDialog: true });
@@ -35,16 +26,8 @@ const setTypeQuiz = () => {
 };
 
 const setSpecialQuiz = () => {
-  if (state.gameMode === 'special') return;
-
   setDialog('switchQuiz', () => {
-    setGameMode('special');
-    setMode('normal');
-    clearCurrentGen();
-    clearCurrentType();
-    resetPokemonState();
-    resetTimer();
-    scrollToTop();
+    setGameSelectionState('special');
   });
 };
 </script>

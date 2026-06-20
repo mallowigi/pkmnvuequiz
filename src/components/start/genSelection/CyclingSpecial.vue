@@ -19,12 +19,6 @@ const currentType = computed(() => {
 useIntervalFn(() => {
   currentIndex.value = (currentIndex.value + 1) % megaTypesList.length;
 }, 3000);
-
-const emits = defineEmits(['typeSelected']);
-
-const setType = () => {
-  emits('typeSelected');
-};
 </script>
 
 <template>
@@ -34,7 +28,6 @@ const setType = () => {
       border: `2px solid ${currentType.bgColor}`,
       color: currentType.fgColor,
     }"
-    @click="setType"
   >
     {{ t('special') }}
     <img

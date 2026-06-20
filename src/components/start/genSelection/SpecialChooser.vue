@@ -79,7 +79,7 @@ const goBack = () => {
 .button-type {
   background-color: var(--bgColor);
   color: var(--fgColor);
-  border: 2px solid #333;
+  border: 2px solid var(--border);
   border-radius: 35px 5px 15px 35px;
   padding: 14px 20px;
   font-size: 18px;

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { typesList } from '@/data/pokemonTypes';
 import { useIntervalFn } from '@vueuse/core';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { typesList } from '@/data/pokemonTypes';
 
 const { t } = useI18n();
 
@@ -19,12 +20,6 @@ const currentType = computed(() => {
 useIntervalFn(() => {
   currentIndex.value = (currentIndex.value + 1) % typesList.length;
 }, 3000);
-
-const emits = defineEmits(['typeSelected']);
-
-const setType = () => {
-  emits('typeSelected');
-};
 </script>
 
 <template>
@@ -34,7 +29,6 @@ const setType = () => {
       border: `2px solid ${currentType.bgColor}`,
       color: currentType.fgColor,
     }"
-    @click="setType"
   >
     {{ t('types') }}
     <img
