@@ -10,6 +10,7 @@ import StartScreen from '@/components/start/StartScreen.vue';
 import { useGameFlow } from '@/stores/useGameFlow.js';
 import { usePkmnData } from '@/stores/usePkmnStore.js';
 import { useSettings } from '@/stores/useSettings.js';
+import SpecialChooser from '@/components/start/genSelection/SpecialChooser.vue';
 
 const { t } = useI18n();
 
@@ -48,10 +49,13 @@ const close = () => {
           <!-- Game selection -->
           <div v-else>
             <h3 class="title">{{ t('hello', { name: settingsState.name }) }}</h3>
+            <FadeTransition mode="out-in">
+              <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 
-            <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
+              <TypeChooser v-if="flowState.gameSelectionState === 'types'" />
 
-            <TypeChooser v-if="flowState.gameSelectionState === 'types'" />
+              <SpecialChooser v-if="flowState.gameSelectionState === 'special'" />
+            </FadeTransition>
           </div>
         </FadeTransition>
       </div>

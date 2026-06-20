@@ -38,7 +38,8 @@ const isDisabled = computed(
     flowState.isEnded ||
     state.mode !== 'normal' ||
     state.gameMode === 'types' ||
-    state.gameMode === 'special',
+    state.gameMode === 'special' ||
+    state.gameMode === 'mega',
 );
 </script>
 

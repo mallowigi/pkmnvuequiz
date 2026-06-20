@@ -16,7 +16,7 @@ export type Dialog =
   | 'timer'
   | 'userProfile';
 
-export type GameMode = 'full' | 'gen' | 'special' | 'types';
+export type GameMode = 'full' | 'gen' | 'special' | 'mega' | 'types';
 
 export type GameModeInfo = {
   id: GameMode;
@@ -95,6 +95,12 @@ export type SpecialTypeInfo = Omit<TypeInfo, 'id'> & {
   id: SpecialType;
 };
 
+export type MegaType = 'mega' | 'gmax';
+
+export type MegaTypeInfo = Omit<TypeInfo, 'id'> & {
+  id: MegaType;
+};
+
 export type Gen = 'gen1' | 'gen2' | 'gen3' | 'gen4' | 'gen5' | 'gen6' | 'gen7' | 'gen8' | 'gen9';
 
 export type GenerationInfo = {
@@ -122,6 +128,7 @@ export type PokemonInfo = {
   primaryType: Type;
   secondaryType: Type | null;
   specialType: SpecialType;
+  megaType: MegaType;
   sprites?: string[];
 };
 
@@ -186,7 +193,7 @@ export type TimerState = {
   startTime: number | null;
 };
 
-export type GameSelectionState = 'new' | 'gen' | 'types' | null;
+export type GameSelectionState = 'new' | 'gen' | 'types' | 'special' | null;
 
 export type GameFlowState = {
   gameSelectionState: GameSelectionState;

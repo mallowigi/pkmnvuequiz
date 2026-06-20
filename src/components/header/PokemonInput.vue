@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onStartTyping } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import vEllipsis from '@/directives/ellipsis.ts';
 
@@ -17,14 +18,15 @@ import { capitalize } from '@/utils/utils.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
 
 const { state } = useState();
-const { flowState, updateInput } = useGameFlow();
+const gameFlowStore = useGameFlow();
+const { flowState, isInGame } = storeToRefs(gameFlowStore);
+const { updateInput } = gameFlowStore;
 const { getCurrentRegion } = useCurrentRegion();
-const { getCurrentTypeOrSpecial } = useCurrentType();
+const { getCurrentType } = useCurrentType();
 const { dialogs } = useDialogs();
 const { roomState } = useRoomMessages();
-
 const { t } = useI18n();
-const { getBoxTranslation, getTypeOrSpecialTranslation } = useTranslations();
+const { getBoxTranslation, getTypeTranslation } = useTranslations();
 
 /** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
@@ -42,24 +44,19 @@ const regionOrType = computed(() => {
       const currentRegion = getCurrentRegion();
       return currentRegion ? capitalize(getBoxTranslation(currentRegion.id)) : '';
     case 'types':
-      const currentType = getCurrentTypeOrSpecial();
-      return currentType ? capitalize(getTypeOrSpecialTranslation(currentType?.id)) : '';
+      const currentType = getCurrentType();
+      return currentType ? capitalize(getTypeTranslation(currentType?.id)) : '';
     case 'special':
       return capitalize(t('special'));
+    case 'mega':
+      return capitalize(t('mega'));
     default:
       return '';
   }
 });
 
 const isDisabled = computed(() => {
-  return (
-    !flowState.isStarted ||
-    flowState.isPaused ||
-    flowState.isEnded ||
-    flowState.isGivenUp ||
-    dialogs.dialog !== null ||
-    roomState.roomMessage !== null
-  );
+  return !isInGame.value || dialogs.dialog !== null || roomState.roomMessage !== null;
 });
 
 // Reference to the textbox
@@ -76,6 +73,8 @@ const nameAllText = computed(() => {
       return t('nameAll.types', { name: regionOrType.value });
     case 'special':
       return t('nameAll.special', { name: regionOrType.value });
+    case 'mega':
+      return t('nameAll.mega', { name: regionOrType.value });
     default:
       return t('nameAll.full');
   }

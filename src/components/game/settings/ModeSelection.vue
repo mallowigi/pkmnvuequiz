@@ -41,7 +41,8 @@ const isDisabled = computed(
     state.withTypeShuffle ||
     state.withCriesShuffle ||
     state.gameMode === 'types' ||
-    state.gameMode === 'special',
+    state.gameMode === 'special' ||
+    state.gameMode === 'mega',
 );
 
 const disabledTooltip = computed(() => {
@@ -51,7 +52,7 @@ const disabledTooltip = computed(() => {
   if (state.withCriesShuffle) {
     return t('modeCannotChangeWithCriesShuffleTooltip');
   }
-  if (state.gameMode === 'special') {
+  if (state.gameMode === 'special' || state.gameMode === 'mega') {
     return t('modeCannotChangeInSpecialModeTooltip');
   }
   if (state.gameMode === 'types') {

@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
@@ -85,10 +85,16 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.isSettingsOpen = !flowState.isSettingsOpen;
   };
 
+  const isInGame = computed(() => {
+    if (flowState.isEnded || flowState.isGivenUp || flowState.isPaused) return false;
+    return flowState.isStarted;
+  });
+
   return {
     endGame,
     flowState,
     giveUp,
+    isInGame,
     pauseGame,
     resetFlowState,
     resumeGame,

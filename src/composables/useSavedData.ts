@@ -1,4 +1,5 @@
 import { useDebounceFn } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import { useFirebase } from '@/composables/useFirebase.ts';
@@ -23,7 +24,8 @@ const LOCAL_STORAGE_NAME_KEY = 'pkmn_quiz_saved_name';
 const debouncedSaveToFirebase = useDebounceFn(
   (savedState: SaveData) => {
     const { settingsState } = useSettings();
-    if (!settingsState.autoSync) {
+    const { isInGame } = storeToRefs(useGameFlow());
+    if (!settingsState.autoSync || !isInGame.value) {
       return;
     }
     const { saveUserState } = useFirebase();

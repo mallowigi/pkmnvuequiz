@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDocumentVisibility, useWindowFocus, useInterval } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 import { computed, watch } from 'vue';
 
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -10,12 +11,14 @@ import CountdownOverlay from '@/components/game/CountdownOverlay.vue';
 
 const { settingsState } = useSettings();
 const { timerState, incElapsed } = useTimer();
-const { flowState, pauseGame, endGame, giveUp } = useGameFlow();
+const gameFlowStore = useGameFlow();
+const { isInGame } = storeToRefs(gameFlowStore);
+const { pauseGame, giveUp } = gameFlowStore;
 const { t } = useI18n();
 
 const { pause, resume } = useInterval(1000, {
   callback: () => {
-    if (!timerState.startTime || flowState.isPaused || flowState.isGivenUp || flowState.isEnded) return;
+    if (!timerState.startTime || !isInGame.value) return;
 
     incElapsed();
 

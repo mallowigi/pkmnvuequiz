@@ -1,9 +1,9 @@
 import { gens } from '@/data/gens.ts';
+import { specialTypes } from '@/data/specialTypes.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
-import { specialTypes } from '@/data/specialTypes.ts';
 
 export const useBoxes = () => {
   const { state } = useState();
@@ -41,6 +41,14 @@ export const useBoxes = () => {
       .flatMap((type) => type.id);
   };
 
+  const getMegaBoxes = () => {
+    return getAllBoxes().filter((box) => {
+      return data.pokemon?.some((pkmn) => {
+        return pkmn.box === box && !!pkmn.megaType;
+      });
+    });
+  };
+
   const getCurrentGameModeBoxes = () => {
     switch (state.gameMode) {
       case 'gen':
@@ -49,6 +57,8 @@ export const useBoxes = () => {
         return getAllBoxes();
       case 'types':
         return getCurrentTypeBoxes();
+      case 'mega':
+        return getMegaBoxes();
       default:
         return [];
     }
@@ -58,6 +68,7 @@ export const useBoxes = () => {
     getAllBoxes,
     getCurrentGameModeBoxes,
     getCurrentGenBoxes,
+    getMegaBoxes,
     getSpecialBoxes,
   };
 };

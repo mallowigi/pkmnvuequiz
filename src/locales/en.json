@@ -128,10 +128,12 @@
   "login": "Login",
   "loginWith": "Login to keep your progress:",
   "lumiose": "Mega Evolution (Lumiose)",
+  "mega": "Mega",
+  "megaQuiz": "Mega Quiz",
   "min": "min",
   "missedNames": "Missed names:",
   "mode": "Mode",
-  "modeCannotChangeInSpecialModeTooltip": "Order cannot be changed in Special mode",
+  "modeCannotChangeInSpecialModeTooltip": "Order cannot be changed in Special or Mega mode",
   "modeCannotChangeInTypesModeTooltip": "Order cannot be changed in Types mode",
   "modeCannotChangeWithCriesShuffleTooltip": "Order cannot be changed in Types mode or when Cries Shuffle is enabled",
   "modeCannotChangeWithTypeShuffleTooltip": "Order cannot be changed in Types mode or when Type Shuffle is enabled",
@@ -146,6 +148,7 @@
   "nameAll": {
     "full": "Name all Pokémon!",
     "gen": "Name all {name} Pokémon!",
+    "mega": "Name all Mega Pokémon!",
     "special": "Name all {name} Pokémon!",
     "types": "Name all {name} Pokémon!"
   },

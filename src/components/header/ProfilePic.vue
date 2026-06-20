@@ -65,7 +65,7 @@ const styles = computed(() => {
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--text);
-  background-color: var(--darkPrimary, #333);
+  background-color: var(--darkPrimary, var(--border));
   background-image: var(--avatar-url);
   background-size: cover;
   background-position: center;

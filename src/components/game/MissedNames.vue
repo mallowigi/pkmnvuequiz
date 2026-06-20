@@ -19,7 +19,7 @@ import { useState } from '@/stores/useState.ts';
 import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
 
 const { state } = useState();
-const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
+const { getCurrentGameModeBoxes, getSpecialBoxes, getMegaBoxes } = useBoxes();
 const { t } = useI18n();
 const { getLanguageTranslation } = useTranslations();
 const { getTranslation } = useLanguages();
@@ -50,12 +50,13 @@ const pokemonSprite = (pokemonId: string) => {
 };
 
 const currentBoxes = computed(() => {
-  if (state.gameMode !== 'special') {
-    const currentGameModeBoxes = getCurrentGameModeBoxes();
-    return currentGameModeBoxes?.map((box) => boxes[box]);
-  } else {
-    const specialGameModeBoxes = getSpecialBoxes();
-    return specialGameModeBoxes?.map((box) => specialTypes[box]);
+  switch (state.gameMode) {
+    case 'special':
+      return getSpecialBoxes()?.map((box) => specialTypes[box]);
+    case 'mega':
+      return getMegaBoxes()?.map((box) => boxes[box]);
+    default:
+      return getCurrentGameModeBoxes()?.map((box) => boxes[box]);
   }
 });
 

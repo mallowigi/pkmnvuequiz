@@ -1,5 +1,6 @@
 // noinspection JSUnfilteredForInLoop
 
+import { useVibrate } from '@vueuse/core';
 import { closest } from 'fastest-levenshtein';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
@@ -9,6 +10,7 @@ import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer.ts';
 import type {
@@ -19,22 +21,24 @@ import type {
   Type,
   Language,
   PokemonStatus,
+  MegaType,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
-import { useSettings } from '@/stores/useSettings.ts';
-import { useVibrate } from '@vueuse/core';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
+  allMega: Map<string, Array<PokemonInfo>>;
   allSpecials: Map<string, Array<PokemonInfo>>;
-  special: Record<SpecialType, Map<string, Array<PokemonInfo>>>;
-  languages: Record<Language, Map<string, Array<PokemonInfo>>>;
-  types: Record<Type, Map<string, Array<PokemonInfo>>>;
   boxes: Record<RegionBox, Map<string, Array<PokemonInfo>>>;
+  languages: Record<Language, Map<string, Array<PokemonInfo>>>;
+  mega: Record<MegaType, Map<string, Array<PokemonInfo>>>;
+  special: Record<SpecialType, Map<string, Array<PokemonInfo>>>;
+  types: Record<Type, Map<string, Array<PokemonInfo>>>;
 };
 
 const pokemonMaps: PokemonMaps = {
   all: new Map<string, Array<PokemonInfo>>(),
+  allMega: new Map<string, Array<PokemonInfo>>(),
   allSpecials: new Map<string, Array<PokemonInfo>>(),
   boxes: {
     alola: new Map<string, Array<PokemonInfo>>(),
@@ -63,6 +67,10 @@ const pokemonMaps: PokemonMaps = {
     ja: new Map<string, Array<PokemonInfo>>(),
     ko: new Map<string, Array<PokemonInfo>>(),
     zh: new Map<string, Array<PokemonInfo>>(),
+  },
+  mega: {
+    gmax: new Map<string, Array<PokemonInfo>>(),
+    mega: new Map<string, Array<PokemonInfo>>(),
   },
   special: {
     legendary: new Map<string, Array<PokemonInfo>>(),
@@ -103,7 +111,7 @@ export const usePokemons = defineStore('pokemons', () => {
   });
   const { state, hideShadows } = useState();
   const { getCurrentGen } = useCurrentGen();
-  const currentTypeStore = useCurrentType();
+  const { getCurrentType } = useCurrentType();
   const { settingsState } = useSettings();
   const { startTimer } = useTimer();
   const { playShiny } = usePlaySounds();
@@ -208,6 +216,11 @@ export const usePokemons = defineStore('pokemons', () => {
         upsert(pokemonMaps.special.no, pokemonKey, pokemon);
       }
 
+      if (pokemon.megaType) {
+        upsert(pokemonMaps.mega[pokemon.megaType], pokemonKey, pokemon);
+        upsert(pokemonMaps.allMega, pokemonKey, pokemon);
+      }
+
       if (pokemon.primaryType) {
         upsert(pokemonMaps.types[pokemon.primaryType], pokemonKey, pokemon);
       }
@@ -276,7 +289,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const addRandomShadow = () => {
     let remainingArray = Array.from(remaining.value);
-    const currentType = currentTypeStore.getCurrentType();
+    const currentType = getCurrentType();
     if (currentType) {
       const typePokemon = pokemonMaps.types[currentType.id as Type];
       if (typePokemon) {
@@ -408,7 +421,7 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const getCurrentTypePokemon = (): Map<string, PokemonInfo[]> => {
-    const currentType = currentTypeStore.getCurrentType();
+    const currentType = getCurrentType();
     if (!currentType) return new Map();
 
     return getTypePokemon(currentType.id as Type);
@@ -419,6 +432,25 @@ export const usePokemons = defineStore('pokemons', () => {
       return pokemonMaps.special[specialTypeId] ?? new Map();
     }
     return pokemonMaps.allSpecials ?? new Map();
+  };
+
+  const getMegaPokemon = (boxId?: RegionBox): Map<string, PokemonInfo[]> => {
+    if (boxId) {
+      const boxPokemon = pokemonMaps.boxes[boxId];
+      if (!boxPokemon) return new Map();
+
+      const result = new Map<string, PokemonInfo[]>();
+
+      for (const [key, pokemons] of boxPokemon) {
+        const filtered = pokemons.filter((p) => p.megaType !== undefined);
+        if (filtered.length > 0) {
+          result.set(key, filtered);
+        }
+      }
+
+      return result;
+    }
+    return pokemonMaps.allMega ?? new Map();
   };
 
   const getAllPokemon = (): Map<string, PokemonInfo[]> => {
@@ -434,6 +466,8 @@ export const usePokemons = defineStore('pokemons', () => {
         return getCurrentTypePokemon();
       case 'special':
         return getSpecialTypePokemon();
+      case 'mega':
+        return getMegaPokemon();
       case 'full':
         return getAllPokemon();
       default:
@@ -448,13 +482,15 @@ export const usePokemons = defineStore('pokemons', () => {
         return getGenPokemon(boxId);
       }
       case 'types': {
-        const typeId = currentTypeStore.getCurrentType()?.id;
+        const typeId = getCurrentType()?.id;
         if (!typeId) {
           return getGenPokemon(boxId);
         }
 
         return getTypedBoxPokemon(typeId, boxId);
       }
+      case 'mega':
+        return getMegaPokemon(boxId);
       case 'full':
         return getGenPokemon(boxId);
       default:
@@ -471,7 +507,7 @@ export const usePokemons = defineStore('pokemons', () => {
           return currentGen ? currentGen.boxes.includes(pokemon.box) : false;
         }
         case 'types': {
-          const currentType = currentTypeStore.getCurrentType();
+          const currentType = getCurrentType();
           if (!currentType) return false;
 
           const types = [pokemon.primaryType, pokemon.secondaryType].filter(Boolean);
@@ -479,6 +515,8 @@ export const usePokemons = defineStore('pokemons', () => {
         }
         case 'special':
           return pokemon.specialType !== undefined && pokemon.specialType !== 'no';
+        case 'mega':
+          return pokemon.megaType !== undefined;
         case 'full':
           return true;
         default:
@@ -567,8 +605,7 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const setRandomCurrentPokemon = () => {
-    const randomPokemon = getRandomRemainingPokemon();
-    pokemonState.currentPokemon = randomPokemon;
+    pokemonState.currentPokemon = getRandomRemainingPokemon();
   };
 
   const findClosestPokemon = (input: string): string | null => {
@@ -589,6 +626,7 @@ export const usePokemons = defineStore('pokemons', () => {
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
     getLastPokemon,
+    getMegaPokemon,
     getNextOrderedPokemon,
     getRandomRemainingPokemon,
     getSpecialTypePokemon,

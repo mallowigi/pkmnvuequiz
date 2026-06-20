@@ -33,6 +33,8 @@ const currentGameMode = computed(() => {
       });
     case 'special':
       return t('specialQuiz');
+    case 'mega':
+      return t('megaQuiz');
     default:
       return t('fullQuiz');
   }

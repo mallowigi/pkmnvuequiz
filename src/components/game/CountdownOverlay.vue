@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 
 const { timerState } = useTimer();
-const { flowState } = useGameFlow();
+const gameFlowStore = useGameFlow();
+const { isInGame } = storeToRefs(gameFlowStore);
 
 const remainingSeconds = computed(() => {
   if (!timerState.isLimited) return 0;
@@ -15,7 +17,7 @@ const remainingSeconds = computed(() => {
 const showCountdown = computed(() => {
   if (!timerState.isLimited) return false;
 
-  if (flowState.isPaused || flowState.isEnded || flowState.isGivenUp) {
+  if (!isInGame.value) {
     return false;
   }
 

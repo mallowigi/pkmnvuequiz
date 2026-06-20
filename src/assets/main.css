@@ -1,5 +1,6 @@
 :root {
   --text: #333;
+  --border: #333;
   --text-inverted: #eee;
   --full-overlay: rgba(16, 17, 14, 1);
   --black: #111;
@@ -56,7 +57,7 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #333;
+  color: var(--text);
   margin: 0;
   min-height: 100%;
 }
