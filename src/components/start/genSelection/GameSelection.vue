@@ -4,13 +4,13 @@ import { useI18n } from 'vue-i18n';
 import Overlay from '@/components/common/Overlay.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import GenChooser from '@/components/start/genSelection/GenChooser.vue';
+import SpecialChooser from '@/components/start/genSelection/SpecialChooser.vue';
 import TypeChooser from '@/components/start/genSelection/TypeChooser.vue';
 import Loading from '@/components/start/Loading.vue';
 import StartScreen from '@/components/start/StartScreen.vue';
 import { useGameFlow } from '@/stores/useGameFlow.js';
 import { usePkmnData } from '@/stores/usePkmnStore.js';
 import { useSettings } from '@/stores/useSettings.js';
-import SpecialChooser from '@/components/start/genSelection/SpecialChooser.vue';
 
 const { t } = useI18n();
 
@@ -69,5 +69,13 @@ const close = () => {
   width: 100%;
   height: 100%;
   max-width: 600px;
+}
+
+.prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 </style>
