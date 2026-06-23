@@ -1,5 +1,5 @@
 import './assets/base.css';
-import { MotionPlugin } from '@vueuse/motion';
+import { MotionPlugin } from 'motion-v';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
@@ -40,7 +40,7 @@ const app = createApp(App);
 const pinia = createPinia();
 
 app.use(pinia);
-app.use(MotionPlugin);
+app.use(MotionPlugin, {});
 app.use(i18n);
 app.directive('tooltip', tooltip);
 app.directive('game-ended', gameEnded);
