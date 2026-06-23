@@ -88,18 +88,16 @@ const isFull = (boxId: SpecialType | RegionBox) => {
       :key="box.id"
       v-motion
       :initial="{ opacity: 0, y: 50 }"
-      :enter="{
+      :animate="{
         opacity: 1,
         y: 0,
         transition: {
-          delay: index * 100, // Staggers manually by index
-          duration: 400,
+          delay: index * 0.05,
+          duration: 0.4,
         },
       }"
-      :delay="index * 50"
       class="region-box"
       :class="{ full: isFull(box.id) }"
-      :style="{ '--index': index }"
     >
       <span class="region-name">{{ t(box.id) }}</span>
 
@@ -181,9 +179,7 @@ const isFull = (boxId: SpecialType | RegionBox) => {
   transform: translate3d(0, 0, 0.1px);
   will-change: transform, visibility;
   transform-style: preserve-3d;
-  transition:
-    box-shadow 0.2s ease-in-out,
-    transform 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
   box-shadow: 0 10px 20px -5px var(--glow);
 
   &:hover {

@@ -7,12 +7,6 @@ import PokemonCounts from '@/components/header/PokemonCounts.vue';
 import PokemonInput from '@/components/header/PokemonInput.vue';
 import Watermark from '@/components/header/Watermark.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-
-const { toggleSettings } = useGameFlow();
-
-const openSettings = () => {
-  toggleSettings();
-};
 </script>
 
 <template>
@@ -30,15 +24,6 @@ const openSettings = () => {
 
         <!-- Timer -->
         <GameTimer />
-
-        <!-- Settings -->
-        <RoundedButton
-          class="settings"
-          primary
-          @click="openSettings"
-        >
-          <SettingsIcon />
-        </RoundedButton>
       </div>
     </section>
 
@@ -78,16 +63,5 @@ const openSettings = () => {
   align-items: flex-start;
   gap: 10px;
   flex-wrap: wrap;
-}
-
-.settings {
-  display: block;
-  min-width: 0;
-  margin: 0;
-
-  * {
-    color: var(--type-fg-color, var(--text));
-    stroke: var(--type-fg-color, var(--text));
-  }
 }
 </style>

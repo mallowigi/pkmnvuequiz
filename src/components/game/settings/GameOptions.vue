@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import SlideDownTransition from '@/components/common/transitions/SlideDownTransition.vue';
+import { AnimatePresence, motion } from 'motion-v';
+
+import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
+import RoundedButton from '@/components/common/RoundedButton.vue';
 import AutoPauseToggle from '@/components/game/settings/AutoPauseToggle.vue';
+import AutoSaveToggle from '@/components/game/settings/AutoSaveToggle.vue';
 import CycleSpritesToggle from '@/components/game/settings/CycleSpritesToggle.vue';
 import GameAbort from '@/components/game/settings/GameAbort.vue';
 import GameModeSelection from '@/components/game/settings/GameModeSelection.vue';
@@ -14,51 +18,66 @@ import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import AutoSaveToggle from '@/components/game/settings/AutoSaveToggle.vue';
 
-const { flowState } = useGameFlow();
+const { flowState, toggleSettings } = useGameFlow();
+const openSettings = () => {
+  toggleSettings();
+};
 </script>
 
 <template>
-  <GameAbort />
-
   <div class="selection-row">
-    <GameModeSelection />
+    <GameAbort />
 
-    <TimerSelection />
-
-    <ModeSelection />
-
-    <TypeShuffle />
+    <!-- Settings -->
+    <RoundedButton
+      class="settings rad-br-tl"
+      @click="openSettings"
+    >
+      <SettingsIcon />
+    </RoundedButton>
   </div>
 
-  <SlideDownTransition>
-    <div v-if="flowState.isSettingsOpen">
-      <div>
-        <div class="selection-row">
-          <ShinyToggle />
+  <AnimatePresence>
+    <motion.div
+      v-if="flowState.isSettingsOpen"
+      :initial="{ transform: 'translateY(100%)', opacity: 0 }"
+      :animate="{ transform: 'translateY(0px)', opacity: 1 }"
+      :exit="{ transform: 'translateY(100%)', opacity: 0 }"
+    >
+      <div class="selection-row">
+        <GameModeSelection />
 
-          <SpellingToggle />
+        <TimerSelection />
 
-          <ShadowHotkeyToggle />
+        <ModeSelection />
 
-          <CycleSpritesToggle />
-
-          <SoundToggle />
-
-          <AutoPauseToggle />
-
-          <AutoSaveToggle />
-        </div>
-
-        <div class="selection-row">
-          <LanguagesSelection />
-
-          <MultiplayerInvite />
-        </div>
+        <TypeShuffle />
       </div>
-    </div>
-  </SlideDownTransition>
+
+      <div class="selection-row">
+        <ShinyToggle />
+
+        <SpellingToggle />
+
+        <ShadowHotkeyToggle />
+
+        <CycleSpritesToggle />
+
+        <SoundToggle />
+
+        <AutoPauseToggle />
+
+        <AutoSaveToggle />
+      </div>
+
+      <div class="selection-row">
+        <LanguagesSelection />
+
+        <MultiplayerInvite />
+      </div>
+    </motion.div>
+  </AnimatePresence>
 </template>
 
 <style scoped>
@@ -69,6 +88,15 @@ const { flowState } = useGameFlow();
 
   .mobile & {
     justify-content: center;
+  }
+}
+
+.settings {
+  min-width: 0;
+
+  * {
+    color: var(--type-fg-color, var(--text));
+    stroke: var(--type-fg-color, var(--text));
   }
 }
 </style>

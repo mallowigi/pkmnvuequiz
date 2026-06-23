@@ -4,6 +4,8 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import Components from 'unplugin-vue-components/vite';
+import MotionResolver from 'motion-v/resolver';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,6 +13,12 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     VueI18nPlugin({
+    }),
+    Components({
+      dts: true,
+      resolvers: [
+        MotionResolver()
+      ],
     }),
   ],
   resolve: {
