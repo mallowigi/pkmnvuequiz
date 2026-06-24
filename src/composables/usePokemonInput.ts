@@ -5,10 +5,10 @@ import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { PokemonInfo } from '@/types.ts';
 import { capitalize } from '@/utils/utils';
-import { useSettings } from '@/stores/useSettings.ts';
 
 type Props = {
   clearInput: () => void;
@@ -116,19 +116,19 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const checkInput = (value: string) => {
-    if (import.meta.env.DEV) {
-      if (value === 'endGame') {
-        debugEnd();
-        return;
-      }
-
-      if (value === 'prefill') {
-        prefillRemaining();
-        showUserMessage('Cheat activated: Prefilled all but one.');
-        clearInput();
-        return;
-      }
+    // if (import.meta.env.DEV) {
+    if (value === 'endGame') {
+      debugEnd();
+      return;
     }
+
+    if (value === 'prefill') {
+      prefillRemaining();
+      showUserMessage('Cheat activated: Prefilled all but one.');
+      clearInput();
+      return;
+    }
+    // }
 
     const foundPokemon = findPokemon(value);
     if (!foundPokemon) {

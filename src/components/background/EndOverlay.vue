@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useShare } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { Temporal } from 'temporal-polyfill';
 import { computed } from 'vue';
@@ -25,6 +26,19 @@ const pokemonStore = usePokemons();
 const { numFound, numShadows } = storeToRefs(pokemonStore);
 const { resetPokemonState } = pokemonStore;
 const { savedLocale } = useSavedLocale();
+
+const { share, isSupported } = useShare();
+
+const startShare = () => {
+  share({
+    text: t('endOverlay.summary', {
+      elapsed: elapsed.value,
+      numFound: numFound.value,
+    }),
+    title: 'Pokémon Quiz',
+    url: window.location.href,
+  });
+};
 
 const closeOverlay = () => {
   clearCurrentType();
@@ -72,6 +86,14 @@ const elapsed = computed(() => {
           {{ t('endOverlay.challenge') }}<br />
           <span class="small">({{ t('endOverlay.shadowsUsed', { numShadows }) }})</span>
         </p>
+      </div>
+
+      <div
+        v-if="isSupported"
+        class="section rad-bl-tr share"
+        @click="startShare"
+      >
+        {{ t('share') }}
       </div>
 
       <div class="section rad-bl-tr supporters">
@@ -158,6 +180,10 @@ const elapsed = computed(() => {
   background: rgba(0, 0, 0, 0.1);
   cursor: pointer;
   padding: 16px 20px;
+  transition: background 0.2s ease;
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
 }
 
 h1,
@@ -194,5 +220,10 @@ h2 {
 
 li {
   list-style-type: none;
+}
+
+.share {
+  background: var(--button);
+  color: var(--text);
 }
 </style>
