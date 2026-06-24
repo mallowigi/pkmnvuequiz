@@ -42,7 +42,7 @@ service cloud.firestore {
 
     function isValidLeaderboardRecord(data) {
       return isValidString(data.name, 1, 100) &&
-             isValidInt(data.time, 0) &&
+             isValidInt(data.time, 60) &&
              isValidInt(data.numFound, 0) &&
              isValidInt(data.numShadows, 0) &&
              data.hasGivenUp is bool &&
