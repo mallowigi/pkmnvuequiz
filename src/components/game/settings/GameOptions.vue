@@ -102,8 +102,8 @@ const openSettings = () => {
   min-width: 0;
 
   * {
-    color: var(--type-fg-color, var(--text));
-    stroke: var(--type-fg-color, var(--text));
+    color: var(--text);
+    stroke: var(--text);
   }
 }
 </style>
