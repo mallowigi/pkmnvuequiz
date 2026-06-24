@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import SegmentButton from '@/components/common/SegmentButton.vue';
@@ -7,7 +8,6 @@ import { useDialogs } from '@/stores/useDialogs.js';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { usePokemons } from '@/stores/usePokemons';
 import { useTimer } from '@/stores/useTimer';
-import { useI18n } from 'vue-i18n';
 
 const { flowState, resetFlowState, pauseGame, startGame } = useGameFlow();
 const { resetPokemonState } = usePokemons();
@@ -108,12 +108,6 @@ const minutes = computed({
 </template>
 
 <style scoped>
-.timer-box {
-  .mobile & {
-    display: none;
-  }
-}
-
 :deep(.input-segment) {
   padding: 0;
   display: flex;
