@@ -1,3 +1,4 @@
+import { useOnline } from '@vueuse/core';
 import { useFirestore } from '@vueuse/firebase';
 import { signInAnonymously, signOut } from 'firebase/auth';
 import { addDoc, collection, doc, getDoc, limit, orderBy, query, setDoc, where, deleteDoc } from 'firebase/firestore';
@@ -6,6 +7,7 @@ import { reactive } from 'vue';
 
 import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
+import { useSavedData } from '@/composables/useSavedData.ts';
 import { auth, db } from '@/firebase.ts';
 import { i18n } from '@/main.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -14,7 +16,6 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, GameMode, Gen, Type, SaveData } from '@/types.ts';
-import { useSavedData } from '@/composables/useSavedData.ts';
 
 type TopTrainersOptions = {
   gameMode?: GameMode | null;
@@ -35,7 +36,17 @@ export const useFirebase = defineStore('firebase', () => {
 
   let saveTimeout: ReturnType<typeof setTimeout> | null = null;
 
+  const checkOnline = (feature: string) => {
+    const online = useOnline();
+    if (!online.value) {
+      console.warn(i18n.global.t('offlineMode', { feature }), 'error');
+      return;
+    }
+  };
+
   const authenticateAnonymously = async () => {
+    checkOnline('auth');
+
     signInAnonymously(auth)
       .then((result) => {
         let userName = result.user.displayName ?? 'Trainer';
@@ -50,6 +61,8 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const createRecord = async () => {
+    checkOnline('saveLeaderboard');
+
     const { flowState } = useGameFlow();
     const pokemonStore = usePokemons();
     const { numFound, numShadows } = storeToRefs(pokemonStore);
@@ -79,6 +92,8 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const saveUserState = async (data: SaveData) => {
+    checkOnline('saveUserState');
+
     const user = auth.currentUser;
     if (!user) return;
 
@@ -96,6 +111,8 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const deleteUserState = async () => {
+    checkOnline('deleteUserState');
+
     const user = auth.currentUser;
     if (!user) return;
 
@@ -103,6 +120,8 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const loadUserState = async () => {
+    checkOnline('loadUserState');
+
     const user = auth.currentUser;
     if (!user) return;
 
@@ -116,6 +135,8 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const getTopTrainers = ({ gameMode, gen, type, uid }: TopTrainersOptions = {}) => {
+    checkOnline('getTopTrainers');
+
     const andCondition = [where('hasGivenUp', '==', false)];
     if (uid) {
       andCondition.push(where('uid', '==', uid));
@@ -140,6 +161,8 @@ export const useFirebase = defineStore('firebase', () => {
   };
 
   const signout = async () => {
+    checkOnline('signout');
+
     const { resetFlowState } = useGameFlow();
 
     try {

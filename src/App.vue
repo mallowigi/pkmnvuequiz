@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { usePreferredDark, useBreakpoints } from '@vueuse/core';
+import { usePreferredDark, useBreakpoints, useOnline } from '@vueuse/core';
 import { watchEffect, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
 import EndOverlay from '@/components/background/EndOverlay.vue';
 import PauseOverlay from '@/components/background/PauseOverlay.vue';
 import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
-import SnackBar from '@/components/background/SnackBar.vue';
 import SavingIndicator from '@/components/background/SavingIndicator.vue';
+import SnackBar from '@/components/background/SnackBar.vue';
 import Tooltip from '@/components/background/Tooltip.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
@@ -17,11 +18,12 @@ import Game from '@/components/game/Game.vue';
 import GameHeader from '@/components/header/GameHeader.vue';
 import GameSelection from '@/components/start/genSelection/GameSelection.vue';
 import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
+import OfflineBanner from '@/OfflineBanner.vue';
+import ScrollTop from '@/ScrollTop.vue';
 import { useCredits } from '@/stores/useCredits';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useRoomMessages } from '@/stores/useRoomMessages';
 import { useState } from '@/stores/useState';
-import ScrollTop from '@/ScrollTop.vue';
 
 const { state, setDarkMode } = useState();
 const { flowState } = useGameFlow();
@@ -83,6 +85,8 @@ watch(
     }"
     :style="typeStyles"
   >
+    <OfflineBanner />
+
     <!-- Background images -->
     <Background />
 
