@@ -171,6 +171,11 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
     --sprite-width: 64px;
     --text-padding: 10px;
   }
+
+  .laptop & {
+    max-width: 100%;
+    columns: 1;
+  }
 }
 
 .selection-content {
