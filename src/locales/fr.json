@@ -84,6 +84,7 @@
   "gameOver": "Partie Terminée!",
   "gen": "Générations",
   "ghost": "Spectre",
+  "github": "GitHub",
   "giveUp": "Abandonner",
   "giveUpDialog": {
     "description": "Êtes-vous sûr de vouloir abandonner?",

@@ -84,6 +84,7 @@
   "gameOver": "¡Juego Terminado!",
   "gen": "Generaciones",
   "ghost": "Fantasma",
+  "github": "GitHub",
   "giveUp": "Rendirse",
   "giveUpDialog": {
     "description": "¿Estás seguro de que quieres rendirte?",

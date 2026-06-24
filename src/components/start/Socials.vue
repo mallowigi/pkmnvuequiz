@@ -2,12 +2,13 @@
 import { useI18n } from 'vue-i18n';
 
 import FacebookIcon from '@/components/common/icons/FacebookIcon.vue';
+import GitHubIcon from '@/components/common/icons/GitHubIcon.vue';
 import GoogleIcon from '@/components/common/icons/GoogleIcon.vue';
 import XIcon from '@/components/common/icons/XIcon.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useFirebase } from '@/composables/useFirebase.js';
 
-const { authenticateWithGoogle, authenticateWithFacebook, authenticateWithX } = useFirebase();
+const { authenticateWithGoogle, authenticateWithFacebook, authenticateWithX, authenticateWithGithub } = useFirebase();
 const { t } = useI18n();
 
 const loginWithGoogle = () => {
@@ -20,6 +21,10 @@ const loginFacebook = () => {
 
 const loginWithX = () => {
   authenticateWithX();
+};
+
+const loginWithGithub = () => {
+  authenticateWithGithub();
 };
 </script>
 
@@ -53,6 +58,15 @@ const loginWithX = () => {
         :aria-label="t('x')"
       >
         <XIcon />
+      </RoundedButton>
+
+      <RoundedButton
+        class="provider-btn github"
+        primary
+        @click="loginWithGithub"
+        :aria-label="t('github')"
+      >
+        <GitHubIcon />
       </RoundedButton>
     </div>
   </div>
@@ -102,6 +116,12 @@ const loginWithX = () => {
 .provider-btn.x {
   --type-bg-color: #000000;
   --type-btn-color: #000000;
+  --type-fg-color: white;
+}
+
+.provider-btn.github {
+  --type-bg-color: #24292e;
+  --type-btn-color: #24292e;
   --type-fg-color: white;
 }
 </style>

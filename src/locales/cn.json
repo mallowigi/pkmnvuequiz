@@ -83,6 +83,7 @@
   "gameOver": "游戏结束!",
   "gen": "世代",
   "ghost": "幽灵",
+  "github": "GitHub",
   "giveUp": "放弃",
   "giveUpDialog": {
     "description": "你确定要放弃吗？",
