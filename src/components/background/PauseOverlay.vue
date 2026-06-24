@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+import SaveButtons from '@/components/background/SaveButtons.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useGameFlow } from '@/stores/useGameFlow';
-import SaveButtons from '@/components/background/SaveButtons.vue';
-import { useI18n } from 'vue-i18n';
 
 const { resumeGame } = useGameFlow();
 const { t } = useI18n();
@@ -44,5 +45,9 @@ const resume = () => resumeGame();
 
 .prompt {
   overflow: hidden;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 </style>

@@ -55,7 +55,7 @@ const goBack = () => {
       @click="goBack"
       :style="{ '--bgColor': '#111', '--fgColor': '#fff' }"
     >
-      <div class="type-name">{{ t('back') }}</div>
+      <div>{{ t('back') }}</div>
     </RoundedButton>
   </div>
 </template>
@@ -63,14 +63,14 @@ const goBack = () => {
 <style scoped>
 .type-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   gap: 2px;
 
   .mobile & {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
     grid-auto-flow: row;
   }
@@ -110,7 +110,7 @@ const goBack = () => {
 
   &.back {
     grid-row: 2;
-    grid-column: 2;
+    grid-column: span 2;
   }
 }
 

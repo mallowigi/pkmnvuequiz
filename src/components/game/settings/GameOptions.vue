@@ -41,9 +41,11 @@ const openSettings = () => {
   <AnimatePresence>
     <motion.div
       v-if="flowState.isSettingsOpen"
-      :initial="{ transform: 'translateY(100%)', opacity: 0 }"
-      :animate="{ transform: 'translateY(0px)', opacity: 1 }"
-      :exit="{ transform: 'translateY(100%)', opacity: 0 }"
+      class="options-container"
+      :initial="{ height: 0, opacity: 0 }"
+      :animate="{ height: 'auto', opacity: 1 }"
+      :exit="{ height: 0, opacity: 0 }"
+      :transition="{ duration: 0.3, ease: 'easeInOut' }"
     >
       <div class="selection-row">
         <GameModeSelection />
@@ -81,6 +83,10 @@ const openSettings = () => {
 </template>
 
 <style scoped>
+.options-container {
+  overflow: hidden;
+}
+
 .selection-row {
   display: flex;
   flex-wrap: wrap;
@@ -88,6 +94,7 @@ const openSettings = () => {
 
   .mobile & {
     justify-content: center;
+    align-self: center;
   }
 }
 

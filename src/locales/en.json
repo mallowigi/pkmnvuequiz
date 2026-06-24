@@ -53,6 +53,7 @@
     "projectInfo2": "We want to keep it alive and ad-free.",
     "projectInfo3": "If you enjoy playing and want to support it, you can do so via Ko-Fi:",
     "shadowsUsed": "{numShadows} shadows used",
+    "share": "Share",
     "summary": "You named {numFound} Pokémon in {elapsed}!",
     "supporters": "Supporters:",
     "wellDone": "Well done!"
@@ -205,6 +206,7 @@
     "title": "Reveal Shadows?"
   },
   "shadowsToggleTooltip": "Reveal Pokémon shadows (this action cannot be undone)",
+  "share": "Share your results!",
   "shinyCharm": "Shiny Charm",
   "shinyCharmSet": "Shiny Charm {status}",
   "shinyCharmTooltip": "Toggle Shiny Charm On/Off",
@@ -250,5 +252,6 @@
   "welcome": "Welcome to the Pokémon Quiz!",
   "welcomeBack": "Welcome back, {name} !",
   "x": "X",
+
   "zh": "Chinese (Traditional)"
 }
