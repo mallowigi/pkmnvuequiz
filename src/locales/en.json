@@ -84,6 +84,7 @@
   "gameOver": "Game Over!",
   "gen": "Generations",
   "ghost": "Ghost",
+  "github": "GitHub",
   "giveUp": "Give Up",
   "giveUpDialog": {
     "description": "Are you sure you want to give up?",

@@ -7,6 +7,8 @@ import { reactive } from 'vue';
 
 import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
+import { useGithubAuth } from '@/composables/auth/useGithubAuth.ts';
+import { useXAuth } from '@/composables/auth/useXAuth.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { auth, db } from '@/firebase.ts';
 import { i18n } from '@/main.ts';
@@ -28,7 +30,9 @@ export const useFirebase = defineStore('firebase', () => {
   const { setName, setAvatar } = useSettings();
   const { showUserMessage } = useMessages();
   const { authenticateWithGoogle } = useGoogleAuth();
+  const { authenticateWithGithub } = useGithubAuth();
   const { authenticateWithFacebook } = useFacebookAuth();
+  const { authenticateWithX } = useXAuth();
 
   const firebaseState = reactive({
     isSaving: false,
@@ -182,7 +186,9 @@ export const useFirebase = defineStore('firebase', () => {
     auth,
     authenticateAnonymously,
     authenticateWithFacebook,
+    authenticateWithGithub,
     authenticateWithGoogle,
+    authenticateWithX,
     createRecord,
     deleteUserState,
     firebaseState,

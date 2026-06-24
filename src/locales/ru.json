@@ -83,6 +83,7 @@
   "gameOver": "Игра окончена!",
   "gen": "Поколения",
   "ghost": "Призрак",
+  "github": "GitHub",
   "giveUp": "Сдаться",
   "giveUpDialog": {
     "description": "Вы уверены, что хотите сдаться?",
