@@ -13,6 +13,7 @@ import { usePkmnData } from '@/stores/usePkmnStore';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer.ts';
+import { useTouches } from '@/stores/useTouches.ts';
 import type {
   PokemonInfo,
   PokemonProgressState,
@@ -114,6 +115,7 @@ export const usePokemons = defineStore('pokemons', () => {
   const { getCurrentType } = useCurrentType();
   const { settingsState } = useSettings();
   const { startTimer } = useTimer();
+  const { addShinyDiscovered } = useTouches();
   const { playShiny } = usePlaySounds();
   const { vibrate } = useVibrate();
 
@@ -258,6 +260,7 @@ export const usePokemons = defineStore('pokemons', () => {
         const shinyRate = settingsState.withShinies ? 0.1 : 0.01;
         if (shinyRandom < shinyRate) {
           status.isShiny = true;
+          addShinyDiscovered();
           playShiny(pokemon);
           vibrate(700);
         }
