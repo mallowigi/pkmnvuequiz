@@ -37,7 +37,11 @@ const closeOverlay = () => {
 };
 
 const elapsed = computed(() => {
-  const elapsedTime = timerState.elapsed;
+  let elapsedTime = timerState.elapsed;
+
+  if (elapsedTime === 0) {
+    elapsedTime = 86400; // 24 hours in seconds
+  }
 
   const duration = Temporal.Duration.from({ seconds: elapsedTime }).round({
     largestUnit: 'hours',
