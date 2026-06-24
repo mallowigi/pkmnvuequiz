@@ -1,3 +1,4 @@
+import { useOnline } from '@vueuse/core';
 import {
   browserLocalPersistence,
   GoogleAuthProvider,
@@ -7,6 +8,7 @@ import {
 } from 'firebase/auth';
 
 import { auth } from '@/firebase';
+import { i18n } from '@/main.ts';
 import { useMessages } from '@/stores/useMessages';
 import { useSettings } from '@/stores/useSettings';
 
@@ -15,6 +17,12 @@ export const useGoogleAuth = () => {
   const { showUserMessage } = useMessages();
 
   const authenticateWithGoogle = async () => {
+    const online = useOnline();
+    if (!online) {
+      showUserMessage(i18n.global.t('offlineModeAuthenticate'), 'error');
+      return;
+    }
+
     await setPersistence(auth, browserLocalPersistence)
       .then(() => {
         const provider = new GoogleAuthProvider();

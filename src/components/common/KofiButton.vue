@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useOnline } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -11,10 +12,14 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const url = computed(() => `https://ko-fi.com/${props.id}`);
+const online = useOnline();
 </script>
 
 <template>
-  <div class="btn-container">
+  <div
+    class="btn-container"
+    v-if="online"
+  >
     <a
       :title="text"
       class="kofi-button"
