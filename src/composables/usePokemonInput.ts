@@ -1,5 +1,6 @@
 import { useI18n } from 'vue-i18n';
 
+import { useFeatureFlags } from '@/composables/useFeatureFlags.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -34,15 +35,14 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     prefillRemaining,
   } = usePokemons();
   const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
+  const { isDebugMode } = useFeatureFlags();
 
   const debugEnd = () => {
-    // if (!import.meta.env.DEV) return;
     clearInput();
     endGame();
   };
 
   const activateCheat = () => {
-    // if (!import.meta.env.DEV) return;
     playFanfare();
     showUserMessage(t('nextPokemon', { name: capitalize(getNextOrderedPokemon()?.baseName ?? '???') }));
     clearInput();
@@ -87,7 +87,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
   const handleTypeShuffle = (foundPokemon: PokemonInfo[], _isPartOfAnotherPokemon: boolean) => {
     if (!state.withTypeShuffle) return false;
-    // if (isPartOfAnotherPokemon) return true;
 
     const currentType = getCurrentType();
     const types = new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
@@ -116,19 +115,19 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const checkInput = (value: string) => {
-    // if (import.meta.env.DEV) {
-    if (value === 'endGame') {
-      debugEnd();
-      return;
-    }
+    if (isDebugMode.value) {
+      if (value === 'endGame') {
+        debugEnd();
+        return;
+      }
 
-    if (value === 'prefill') {
-      prefillRemaining();
-      showUserMessage('Cheat activated: Prefilled all but one.');
-      clearInput();
-      return;
+      if (value === 'prefill') {
+        prefillRemaining();
+        showUserMessage('Cheat activated: Prefilled all but one.');
+        clearInput();
+        return;
+      }
     }
-    // }
 
     const foundPokemon = findPokemon(value);
     if (!foundPokemon) {

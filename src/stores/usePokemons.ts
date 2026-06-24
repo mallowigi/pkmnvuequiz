@@ -345,7 +345,6 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const prefillRemaining = () => {
-    // if (!import.meta.env.DEV) return;
     const remainingArray = Array.from(remaining.value);
     if (remainingArray.length <= 1) return;
 
