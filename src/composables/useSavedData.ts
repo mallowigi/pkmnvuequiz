@@ -167,6 +167,7 @@ export const useSavedData = () => {
     const { pokemonState, resetPokemonState, findPokemon } = usePokemons();
     const { resetTimer, setTimerState } = useTimer();
     const { setLanguages, resetLanguages, setSettingsState } = useSettings();
+    const { setTouchesState } = useTouches();
     const { setTitle } = useQuiz();
 
     const {
@@ -297,6 +298,18 @@ export const useSavedData = () => {
       withShinies: statePayload.withShinies ?? false,
       withSound: statePayload.withSound ?? true,
       withSpelling: statePayload.withSpelling ?? false,
+    });
+
+    setTouchesState({
+      toggledAutoPause: statePayload.toggledAutoPause ?? false,
+      toggledDisplayShadows: statePayload.toggledDisplayShadows ?? false,
+      toggledLanguage: statePayload.toggledLanguage ?? false,
+      toggledShadowHelper: statePayload.toggledShadowHelper ?? false,
+      toggledShinyCharm: statePayload.toggledShinyCharm ?? false,
+      toggledSpelling: statePayload.toggledSpelling ?? false,
+      typeShuffleClicks: statePayload.typeShuffleClicks ?? 0,
+      spellingClicks: statePayload.spellingClicks ?? 0,
+      shiniesDiscovered: statePayload.shiniesDiscovered ?? 0,
     });
 
     showUserMessage(i18n.global.t('quizLoaded'));

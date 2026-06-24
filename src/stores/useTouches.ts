@@ -12,6 +12,8 @@ export const useTouches = defineStore('touches', () => {
     toggledShinyCharm: false,
     toggledSpelling: false,
     typeShuffleClicks: 0,
+    spellingClicks: 0,
+    shiniesDiscovered: 0,
   });
 
   const toggleAutoPause = (usedAutoPause: boolean) => {
@@ -32,6 +34,13 @@ export const useTouches = defineStore('touches', () => {
 
   const toggleSpelling = (usedSpelling: boolean) => {
     touchesState.toggledSpelling = usedSpelling;
+    if (usedSpelling) {
+      touchesState.spellingClicks += 1;
+    }
+  };
+
+  const addShinyDiscovered = () => {
+    touchesState.shiniesDiscovered += 1;
   };
 
   const toggleShinyCharm = (usedShinyCharm: boolean) => {
@@ -44,7 +53,13 @@ export const useTouches = defineStore('touches', () => {
     }
   };
 
+  const setTouchesState = (touches: Partial<Touches>) => {
+    Object.assign(touchesState, touches);
+  };
+
   return {
+    addShinyDiscovered,
+    setTouchesState,
     toggleAutoPause,
     toggleDisplayShadows,
     toggleLanguage,

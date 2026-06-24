@@ -144,6 +144,8 @@ export type Touches = {
   toggledShinyCharm: boolean;
   toggledSpelling: boolean;
   typeShuffleClicks: number;
+  spellingClicks: number;
+  shiniesDiscovered: number;
 };
 
 export type State = {
