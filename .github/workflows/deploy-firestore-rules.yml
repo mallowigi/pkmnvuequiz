@@ -1,0 +1,25 @@
+name: Deploy Firestore Rules
+
+on:
+  workflow_dispatch:
+    
+  push:
+    branches:
+      - master
+    paths:
+      - 'firebase/firestore.rules'
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v7
+
+      - name: Deploy Firestore Rules
+        uses: w9jds/firebase-action@v15.22.1
+        with:
+          args: deploy --only firestore:rules
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
