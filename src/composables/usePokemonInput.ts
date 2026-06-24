@@ -36,13 +36,13 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
 
   const debugEnd = () => {
-    if (!import.meta.env.DEV) return;
+    // if (!import.meta.env.DEV) return;
     clearInput();
     endGame();
   };
 
   const activateCheat = () => {
-    if (!import.meta.env.DEV) return;
+    // if (!import.meta.env.DEV) return;
     playFanfare();
     showUserMessage(t('nextPokemon', { name: capitalize(getNextOrderedPokemon()?.baseName ?? '???') }));
     clearInput();
