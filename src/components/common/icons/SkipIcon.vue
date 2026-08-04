@@ -10,7 +10,7 @@ import Icon from '@/components/common/icons/Icon.vue';
       height="32"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="currentColor"
+      stroke="#607d8b"
       stroke-width="1"
       stroke-linecap="round"
       stroke-linejoin="round"
