@@ -2,10 +2,9 @@
 import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import MultiplayerInvite from '@/components/game/settings/MultiplayerInvite.vue';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
-import { useDialogs } from '@/stores/useDialogs.ts';
+import { useAttackDexSelection } from '@/stores/useAttackDexSelection.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 
@@ -15,6 +14,7 @@ const { setGameSelectionState, setChallengeMode } = useGameFlow();
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
 const { showUserMessage } = useMessages();
+const { clear: clearAttackDexSelection } = useAttackDexSelection();
 
 const selectFreeMode = () => {
   setGameSelectionState('gen');
@@ -24,6 +24,12 @@ const selectFreeMode = () => {
 const selectChallengeMode = () => {
   setGameSelectionState('challengeSetup');
   setChallengeMode('challenge');
+};
+
+const selectAttackDex = (mode: 'free' | 'challenge') => {
+  setChallengeMode(mode);
+  clearAttackDexSelection();
+  setGameSelectionState('attackdex');
 };
 
 const selectMultiplayerMode = () => {
@@ -56,6 +62,9 @@ const selectMultiplayerMode = () => {
           <p class="description">
             {{ t('freeModeDescription') }}
           </p>
+          <RoundedButton @click="selectAttackDex('free')">
+            {{ t('attackDex') }}
+          </RoundedButton>
         </div>
 
         <div class="separator" />
@@ -72,6 +81,9 @@ const selectMultiplayerMode = () => {
           <p class="description">
             {{ t('challengeModeDescription') }}
           </p>
+          <RoundedButton @click="selectAttackDex('challenge')">
+            {{ t('attackDex') }}
+          </RoundedButton>
         </div>
 
         <div
