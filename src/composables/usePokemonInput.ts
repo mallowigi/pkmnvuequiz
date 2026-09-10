@@ -2,6 +2,7 @@ import { useI18n } from 'vue-i18n';
 
 import { useFeatureFlags } from '@/composables/useFeatureFlags.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
+import { useQuizInput } from '@/composables/useQuizInput.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
@@ -158,52 +159,44 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
     playPokemonCry(foundPokemon[0].dexNum);
     clearInput();
-    return true;
   };
 
-  const checkInput = (value: string) => {
-    if (isDebugMode.value) {
-      if (value === 'endGame') {
-        debugEnd();
-        return;
-      }
-
-      if (value === 'prefill') {
-        prefillRemaining();
-        showUserMessage(t('cheatPrefill'));
-        clearInput();
-        return;
-      }
-    }
-
-    if (value === 'missingno') {
-      toggleMissingno(true);
-      clearInput();
-      return;
-    }
-
-    const foundPokemon = findPokemon(value);
-    if (!foundPokemon) {
-      return;
-    }
-
-    sendMessage(value);
-
-    const isPartOfAnotherPokemon = isInRemaining(value);
-
-    const handlers = [
-      () => handleAlreadyFound(foundPokemon, isPartOfAnotherPokemon),
-      () => handleNotInCurrentGameMode(foundPokemon, isPartOfAnotherPokemon),
-      () => handleWrongOrder(foundPokemon, isPartOfAnotherPokemon),
-      () => handleTypeShuffle(foundPokemon, isPartOfAnotherPokemon),
-      () => handleBoxShuffle(foundPokemon, isPartOfAnotherPokemon),
-      () => handleSuccess(foundPokemon),
-    ];
-
-    for (const handle of handlers) {
-      if (handle()) return;
-    }
-  };
+  const { checkInput } = useQuizInput<PokemonInfo>({
+    commands: [
+      {
+        isEnabled: () => isDebugMode.value,
+        keyword: 'endGame',
+        run: debugEnd,
+      },
+      {
+        isEnabled: () => isDebugMode.value,
+        keyword: 'prefill',
+        run: () => {
+          prefillRemaining();
+          showUserMessage(t('cheatPrefill'));
+          clearInput();
+        },
+      },
+      {
+        keyword: 'missingno',
+        run: () => {
+          toggleMissingno(true);
+          clearInput();
+        },
+      },
+    ],
+    constraints: [
+      handleAlreadyFound,
+      handleNotInCurrentGameMode,
+      handleWrongOrder,
+      handleTypeShuffle,
+      handleBoxShuffle,
+    ],
+    findEntries: findPokemon,
+    isPartOfAnotherEntry: isInRemaining,
+    onRecognized: sendMessage,
+    onSuccess: handleSuccess,
+  });
 
   return {
     activateCheat,
