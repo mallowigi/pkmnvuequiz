@@ -3,7 +3,6 @@ import Overlay from '@/components/common/Overlay.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import ChallengeModeChooser from '@/components/start/challenge/ChallengeModeChooser.vue';
 import ChallengeSetup from '@/components/start/challenge/ChallengeSetup.vue';
-import AttackDexChooser from '@/components/start/attackDex/AttackDexChooser.vue';
 import GenChooser from '@/components/start/genSelection/GenChooser.vue';
 import Logo from '@/components/start/genSelection/Logo.vue';
 import SpecialChooser from '@/components/start/genSelection/SpecialChooser.vue';
@@ -41,8 +40,6 @@ const close = () => {
               <ChallengeModeChooser v-if="flowState.gameSelectionState === 'challenge'" />
 
               <ChallengeSetup v-if="flowState.gameSelectionState === 'challengeSetup'" />
-
-              <AttackDexChooser v-if="flowState.gameSelectionState === 'attackdex'" />
 
               <GenChooser v-if="flowState.gameSelectionState === 'gen'" />
 
