@@ -15,11 +15,11 @@
   "atk": "Attack",
   "attackDex": "AttackDex",
   "attackDexQuiz": {
-    "description": "Name every move, grouped by source generation or Special family.",
+    "description": "Try to name every Pokémon move, by generation or by type.",
     "familySelection": "Choose one or more Special families.",
     "noSelection": "Choose at least one option.",
     "notReady": "AttackDex gameplay is not available yet.",
-    "title": "AttackDex Selection"
+    "title": "AttackDex"
   },
   "autoPause": "Auto Pause:",
   "autoPauseSet": "Auto Pause {status}",

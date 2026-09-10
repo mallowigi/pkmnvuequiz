@@ -105,12 +105,28 @@ const selectAttackDex = () => {
     </div>
 
     <div class="attackdex-section">
-      <RoundedButton
-        @click="selectAttackDex"
-        primary
-      >
-        {{ t('attackDex') }}
-      </RoundedButton>
+      <div class="side">
+        <h3
+          v-if="!isMobile"
+          class="attackdex-heading"
+        >
+          {{ t('attackDexQuiz.title') }}
+        </h3>
+
+        <RoundedButton
+          @click="selectAttackDex"
+          primary
+        >
+          {{ t('attackDex') }}
+        </RoundedButton>
+
+        <p
+          v-if="!isMobile"
+          class="description"
+        >
+          {{ t('attackDexQuiz.description') }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -144,6 +160,10 @@ const selectAttackDex = () => {
   justify-content: center;
   width: 100%;
   padding: 8px 0 16px;
+}
+
+.attackdex-heading {
+  margin: 0;
 }
 
 .separator {

@@ -13,11 +13,11 @@
   "atk": "공격",
   "attackDex": "AttackDex",
   "attackDexQuiz": {
-    "description": "등장 세대 또는 스페셜 분류별로 모든 기술의 이름을 맞히세요.",
+    "description": "세대 또는 타입별로 모든 포켓몬 기술의 이름을 맞혀보세요.",
     "familySelection": "하나 이상의 스페셜 분류를 선택하세요.",
     "noSelection": "하나 이상의 항목을 선택하세요.",
     "notReady": "AttackDex 게임은 아직 이용할 수 없습니다.",
-    "title": "AttackDex 선택"
+    "title": "AttackDex"
   },
   "autoPause": "자동 일시 중지:",
   "autoPauseSet": "자동 일시 중지 {status}",

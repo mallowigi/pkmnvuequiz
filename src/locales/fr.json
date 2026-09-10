@@ -13,11 +13,11 @@
   "atk": "Attaque",
   "attackDex": "AttackDex",
   "attackDexQuiz": {
-    "description": "Nommez toutes les capacites, regroupees par generation d'origine ou famille speciale.",
+    "description": "Essayez de nommer toutes les capacites Pokemon, par generation ou par type.",
     "familySelection": "Choisissez une ou plusieurs familles speciales.",
     "noSelection": "Choisissez au moins une option.",
     "notReady": "Le jeu AttackDex n'est pas encore disponible.",
-    "title": "Selection AttackDex"
+    "title": "AttackDex"
   },
   "autoPause": "Pause Auto:",
   "autoPauseSet": "Pause Auto {status}",

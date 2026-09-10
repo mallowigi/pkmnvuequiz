@@ -13,11 +13,11 @@
   "atk": "攻擊",
   "attackDex": "AttackDex",
   "attackDexQuiz": {
-    "description": "按來源世代或特殊類別為所有招式命名。",
+    "description": "嘗試按世代或屬性為所有寶可夢招式命名。",
     "familySelection": "選擇一個或多個特殊類別。",
     "noSelection": "至少選擇一個選項。",
     "notReady": "AttackDex 遊戲尚未開放。",
-    "title": "AttackDex 選擇"
+    "title": "AttackDex"
   },
   "autoPause": "自動暫停:",
   "autoPauseSet": "自動暫停 {status}",

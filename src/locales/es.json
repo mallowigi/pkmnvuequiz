@@ -13,11 +13,11 @@
   "atk": "Ataque",
   "attackDex": "AttackDex",
   "attackDexQuiz": {
-    "description": "Nombra todos los movimientos, agrupados por generacion de origen o familia especial.",
+    "description": "Intenta nombrar todos los movimientos Pokémon, por generacion o por tipo.",
     "familySelection": "Elige una o mas familias especiales.",
     "noSelection": "Elige al menos una opcion.",
     "notReady": "El juego AttackDex aun no esta disponible.",
-    "title": "Seleccion de AttackDex"
+    "title": "AttackDex"
   },
   "autoPause": "Pausa Automática:",
   "autoPauseSet": "Pausa Automática {status}",
