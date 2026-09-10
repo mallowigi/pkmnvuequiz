@@ -11,6 +11,14 @@
   "appReadyOffline": "O aplicativo está pronto para funcionar offline",
   "areazero": "Área Zero (Paldea)",
   "atk": "Ataque",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "Nomeie todos os movimentos, agrupados por geracao de origem ou familia especial.",
+    "familySelection": "Escolha uma ou mais familias especiais.",
+    "noSelection": "Escolha pelo menos uma opcao.",
+    "notReady": "O jogo AttackDex ainda nao esta disponivel.",
+    "title": "Selecao do AttackDex"
+  },
   "autoPause": "Pausa Automática:",
   "autoPauseSet": "Pausa Automática {status}",
   "autoPauseTooltip": "Ativar/Desativar Pausa Automática",
@@ -127,6 +135,7 @@
   "freeModeDescription": "Modo de jogo livre. Alterne quaisquer opções, use quaisquer ajudas, salve sua progressão, etc.",
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
+  "gMaxMoves": "Movimentos Gigamax",
   "galar": "Galar",
   "gameModes": "Modos de Jogo",
   "gameOver": "Fim de Jogo!",
@@ -365,6 +374,7 @@
   "loginWith": "Faça login para manter seu progresso:",
   "lumiose": "Mega Evolução (Cidade de Lumiose)",
   "male": "Macho",
+  "maxMoves": "Movimentos Dynamax",
   "mega": "Mega",
   "megaQuiz": "Mega Quiz",
   "min": "min",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "Rolagem automática {status}",
   "scrollIntoViewTooltip": "Alternar rolagem automática Ativado/Desativado",
   "selectColor": "Cor do Tema",
+  "selection": "Selecao",
   "set": "definir",
   "shadowHelperDisabled": "A ajuda de silhuetas está desabilitada. Ative-a nas configurações para usar este atalho.",
   "shadowHelperSet": "Ajuda de silhuetas {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "Vitórias (Sem Sombras)",
   "x": "X",
   "yellow": "Amarelo",
+  "zMoves": "Movimentos Z",
   "zh": "Chinês (Tradicional)"
 }

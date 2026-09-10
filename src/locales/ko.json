@@ -11,6 +11,14 @@
   "appReadyOffline": "앱이 오프라인에서 사용할 준비가 되었습니다",
   "areazero": "에리어 제로 (팔데아)",
   "atk": "공격",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "등장 세대 또는 스페셜 분류별로 모든 기술의 이름을 맞히세요.",
+    "familySelection": "하나 이상의 스페셜 분류를 선택하세요.",
+    "noSelection": "하나 이상의 항목을 선택하세요.",
+    "notReady": "AttackDex 게임은 아직 이용할 수 없습니다.",
+    "title": "AttackDex 선택"
+  },
   "autoPause": "자동 일시 중지:",
   "autoPauseSet": "자동 일시 중지 {status}",
   "autoPauseTooltip": "자동 일시 중지 켜기/끄기",
@@ -127,6 +135,7 @@
   "freeModeDescription": "자유 플레이 모드. 설정을 자유롭게 변경하고, 도움말을 사용하며, 진행 상황을 저장할 수 있습니다.",
   "full": "전체 퀴즈",
   "fullQuiz": "전체 퀴즈",
+  "gMaxMoves": "거다이맥스 기술",
   "galar": "가라르",
   "gameModes": "게임 모드",
   "gameOver": "게임 오버!",
@@ -365,6 +374,7 @@
   "loginWith": "진행 상황을 유지하려면 로그인하세요:",
   "lumiose": "메가진화 (미르시티)",
   "male": "수컷",
+  "maxMoves": "다이맥스 기술",
   "mega": "메가",
   "megaQuiz": "메가 퀴즈",
   "min": "분",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "자동 스크롤 {status}",
   "scrollIntoViewTooltip": "자동 스크롤 켜기/끄기",
   "selectColor": "테마 색상",
+  "selection": "선택",
   "set": "설정",
   "shadowHelperDisabled": "실루엣 도우미가 비활성화되어 있습니다. 이 단축키를 사용하려면 설정에서 활성화하세요.",
   "shadowHelperSet": "실루엣 도우미 {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "승리 (실루엣 없음)",
   "x": "X",
   "yellow": "노란색",
+  "zMoves": "Z기술",
   "zh": "중국어 (정체)"
 }

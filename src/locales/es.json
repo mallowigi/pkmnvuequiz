@@ -11,6 +11,14 @@
   "appReadyOffline": "La aplicación está lista para funcionar sin conexión",
   "areazero": "Área Cero (Paldea)",
   "atk": "Ataque",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "Nombra todos los movimientos, agrupados por generacion de origen o familia especial.",
+    "familySelection": "Elige una o mas familias especiales.",
+    "noSelection": "Elige al menos una opcion.",
+    "notReady": "El juego AttackDex aun no esta disponible.",
+    "title": "Seleccion de AttackDex"
+  },
   "autoPause": "Pausa Automática:",
   "autoPauseSet": "Pausa Automática {status}",
   "autoPauseTooltip": "Alternar Pausa Automática Activada/Desactivada",
@@ -127,6 +135,7 @@
   "freeModeDescription": "Modo de juego libre. Cambia cualquier opción, usa cualquier ayuda, guarda tu progreso, etc.",
   "full": "Cuestionario Completo",
   "fullQuiz": "Cuestionario Completo",
+  "gMaxMoves": "Movimientos Gigamax",
   "galar": "Galar",
   "gameModes": "Modos de juego",
   "gameOver": "¡Juego Terminado!",
@@ -365,6 +374,7 @@
   "loginWith": "Inicia sesión para guardar tu progreso:",
   "lumiose": "Megaevolución (Ciudad Luminalia)",
   "male": "Macho",
+  "maxMoves": "Movimientos Dinamax",
   "mega": "Mega",
   "megaQuiz": "Cuestionario Mega",
   "min": "min",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "Auto-desplazamiento {status}",
   "scrollIntoViewTooltip": "Activar/desactivar auto-desplazamiento",
   "selectColor": "Color del Tema",
+  "selection": "Seleccion",
   "set": "configurar",
   "shadowHelperDisabled": "La ayuda de siluetas está deshabilitada. Habilítala en configuración para usar este atajo.",
   "shadowHelperSet": "Ayuda de siluetas {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "Victorias (sin siluetas)",
   "x": "X",
   "yellow": "Amarillo",
+  "zMoves": "Movimientos Z",
   "zh": "Chino (Tradicional)"
 }

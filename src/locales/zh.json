@@ -11,6 +11,14 @@
   "appReadyOffline": "應用已可離線使用",
   "areazero": "第零區 (帕底亞)",
   "atk": "攻擊",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "按來源世代或特殊類別為所有招式命名。",
+    "familySelection": "選擇一個或多個特殊類別。",
+    "noSelection": "至少選擇一個選項。",
+    "notReady": "AttackDex 遊戲尚未開放。",
+    "title": "AttackDex 選擇"
+  },
   "autoPause": "自動暫停:",
   "autoPauseSet": "自動暫停 {status}",
   "autoPauseTooltip": "切換自動暫停開/關",
@@ -127,6 +135,7 @@
   "freeModeDescription": "自由遊戲模式。切換任何選項，使用任何助手，保存你的進度等。",
   "full": "完整测验",
   "fullQuiz": "完整测验",
+  "gMaxMoves": "超極巨招式",
   "galar": "伽勒尔",
   "gameModes": "遊戲模式",
   "gameOver": "遊戲結束!",
@@ -365,6 +374,7 @@
   "loginWith": "登錄以保存您的進度:",
   "lumiose": "超級進化（密阿雷市）",
   "male": "雄性",
+  "maxMoves": "極巨招式",
   "mega": "超級",
   "megaQuiz": "超級問答",
   "min": "分鐘",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "自動捲動 {status}",
   "scrollIntoViewTooltip": "開啟/關閉自動捲動",
   "selectColor": "主題顏色",
+  "selection": "選擇",
   "set": "設置",
   "shadowHelperDisabled": "陰影助手已禁用。在設置中啟用它以使用此快捷方式。",
   "shadowHelperSet": "下一個陰影快捷鍵 {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "勝場（無影子）",
   "x": "X",
   "yellow": "黃色",
+  "zMoves": "Z招式",
   "zh": "中文（繁體）"
 }

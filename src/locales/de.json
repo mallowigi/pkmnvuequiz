@@ -11,6 +11,14 @@
   "appReadyOffline": "Die App ist bereit, offline zu funktionieren",
   "areazero": "Zone Null (Paldea)",
   "atk": "Angriff",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "Benenne alle Attacken, gruppiert nach Herkunftsgeneration oder Spezialfamilie.",
+    "familySelection": "Waehle eine oder mehrere Spezialfamilien.",
+    "noSelection": "Waehle mindestens eine Option.",
+    "notReady": "Das AttackDex-Spiel ist noch nicht verfuegbar.",
+    "title": "AttackDex-Auswahl"
+  },
   "autoPause": "Automatische Pause:",
   "autoPauseSet": "Automatische Pause {status}",
   "autoPauseTooltip": "Automatische Pause Ein/Aus",
@@ -127,6 +135,7 @@
   "freeModeDescription": "Freier Spielmodus. Schalte beliebige Optionen um, nutze alle Hilfen, speichere deinen Fortschritt usw.",
   "full": "Vollständiges Quiz",
   "fullQuiz": "Vollständiges Quiz",
+  "gMaxMoves": "Gigadynamax-Attacken",
   "galar": "Galar",
   "gameModes": "Spielmodi",
   "gameOver": "Spiel Vorbei!",
@@ -365,6 +374,7 @@
   "loginWith": "Melden Sie sich an, um Ihren Fortschritt zu speichern:",
   "lumiose": "Mega-Entwicklung (Illumina City)",
   "male": "Männlich",
+  "maxMoves": "Dynamax-Attacken",
   "mega": "Mega",
   "megaQuiz": "Mega-Quiz",
   "min": "min",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "Autoscroll {status}",
   "scrollIntoViewTooltip": "Autoscroll ein-/ausschalten",
   "selectColor": "Design-Farbe",
+  "selection": "Auswahl",
   "set": "setzen",
   "shadowHelperDisabled": "Die Silhouettenhilfe ist deaktiviert. Aktivieren Sie sie in den Einstellungen, um diese Verknüpfung zu verwenden.",
   "shadowHelperSet": "Silhouettenhilfe {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "Siege (ohne Silhouetten)",
   "x": "X",
   "yellow": "Gelb",
+  "zMoves": "Z-Attacken",
   "zh": "Chinesisch (Traditionell)"
 }

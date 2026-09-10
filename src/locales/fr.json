@@ -11,6 +11,14 @@
   "appReadyOffline": "L'application est prête à fonctionner hors ligne",
   "areazero": "Zone Zéro (Paldea)",
   "atk": "Attaque",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "Nommez toutes les capacites, regroupees par generation d'origine ou famille speciale.",
+    "familySelection": "Choisissez une ou plusieurs familles speciales.",
+    "noSelection": "Choisissez au moins une option.",
+    "notReady": "Le jeu AttackDex n'est pas encore disponible.",
+    "title": "Selection AttackDex"
+  },
   "autoPause": "Pause Auto:",
   "autoPauseSet": "Pause Auto {status}",
   "autoPauseTooltip": "Activer/Désactiver la Pause Auto",
@@ -127,6 +135,7 @@
   "freeModeDescription": "Mode de jeu libre. Modifiez n'importe quelle option, utilisez toutes les aides, sauvegardez votre progression, etc.",
   "full": "Quiz Entier",
   "fullQuiz": "Quiz Entier",
+  "gMaxMoves": "Capacites Gigamax",
   "galar": "Galar",
   "gameModes": "Modes de Jeu",
   "gameOver": "Partie Terminée!",
@@ -365,6 +374,7 @@
   "loginWith": "Connectez-vous pour conserver votre progression:",
   "lumiose": "Méga-Évolution (Illumis)",
   "male": "Mâle",
+  "maxMoves": "Capacites Dynamax",
   "mega": "Méga",
   "megaQuiz": "Quiz Méga",
   "min": "min",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "Auto-Défilement {status}",
   "scrollIntoViewTooltip": "Activer/Désactiver l'auto-défilement",
   "selectColor": "Couleur du Thème",
+  "selection": "Selection",
   "set": "définir",
   "shadowHelperDisabled": "L'Aide-Silhouette est désactivée. Activez-la dans les paramètres pour utiliser le raccourci.",
   "shadowHelperSet": "Aide-Silhouette {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "Victoires (sans ombres)",
   "x": "X",
   "yellow": "Jaune",
+  "zMoves": "Capacites Z",
   "zh": "Chinois (Traditionnel)"
 }

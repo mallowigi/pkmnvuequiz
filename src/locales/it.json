@@ -11,6 +11,14 @@
   "appReadyOffline": "L'app è pronta per funzionare offline",
   "areazero": "Area Zero (Paldea)",
   "atk": "Attacco",
+  "attackDex": "AttackDex",
+  "attackDexQuiz": {
+    "description": "Nomina tutte le mosse, raggruppate per generazione di origine o famiglia speciale.",
+    "familySelection": "Scegli una o piu famiglie speciali.",
+    "noSelection": "Scegli almeno un'opzione.",
+    "notReady": "Il gioco AttackDex non e ancora disponibile.",
+    "title": "Selezione AttackDex"
+  },
   "autoPause": "Pausa Automatica:",
   "autoPauseSet": "Pausa Automatica {status}",
   "autoPauseTooltip": "Attiva/Disattiva Pausa Automatica",
@@ -127,6 +135,7 @@
   "freeModeDescription": "Modalità di gioco libera. Cambia qualsiasi opzione, usa qualsiasi aiuto, salva i tuoi progressi, ecc.",
   "full": "Quiz Completo",
   "fullQuiz": "Quiz Completo",
+  "gMaxMoves": "Mosse Gigamax",
   "galar": "Galar",
   "gameModes": "Modalità di gioco",
   "gameOver": "Gioco Finito!",
@@ -365,6 +374,7 @@
   "loginWith": "Accedi per mantenere i tuoi progressi:",
   "lumiose": "Megaevoluzione (Luminopoli)",
   "male": "Maschio",
+  "maxMoves": "Mosse Dynamax",
   "mega": "Mega",
   "megaQuiz": "Quiz Mega",
   "min": "min",
@@ -452,6 +462,7 @@
   "scrollIntoViewSet": "Auto-scorrimento {status}",
   "scrollIntoViewTooltip": "Attiva/disattiva auto-scorrimento",
   "selectColor": "Colore del Tema",
+  "selection": "Selezione",
   "set": "impostare",
   "shadowHelperDisabled": "L'aiuto silhouette è disabilitato. Abilitalo nelle impostazioni per utilizzare questo collegamento.",
   "shadowHelperSet": "Aiuto silhouette {status}",
@@ -529,5 +540,6 @@
   "winsNoShadows": "Vittorie (senza silhouette)",
   "x": "X",
   "yellow": "Giallo",
+  "zMoves": "Mosse Z",
   "zh": "Cinese (Tradizionale)"
 }
