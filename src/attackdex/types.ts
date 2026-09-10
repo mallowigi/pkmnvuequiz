@@ -1,55 +1,42 @@
 import type { ChallengeMode, Gen, Type } from '@/types.ts';
 
-/**
- * The catalog boundary is intentionally separate from the Pokemon game mode.
- * Standard moves are grouped by source generation; Special moves are grouped
- * by their move family.
- */
 export type AttackDexScope = 'standard' | 'special';
 
-export type AttackDexSelectionKind = 'generation' | 'type' | 'family';
+export type AttackDexGameMode = 'gen' | 'types' | 'special';
 
-export type AttackDexSpecialFamily = 'zmove' | 'max' | 'gmax';
+export type MoveType = 'zmove' | 'max' | 'gmax';
 
-export type MoveDamageCategory = 'physical' | 'special' | 'status';
+export type DamageCategory = 'physical' | 'special' | 'status';
 
-export type AttackDexPlaystyle = 'normal';
-
-export type AttackDexStandardSelection =
+export type AttackDexStandardGame =
   | {
-      kind: 'generation';
+      kind: 'gen';
       scope: 'standard';
-      generations: Gen[];
+      gens: Gen[];
     }
   | {
-      kind: 'type';
+      kind: 'types';
       scope: 'standard';
       types: Type[];
     };
 
-export type AttackDexSpecialSelection = {
-  families: AttackDexSpecialFamily[];
-  kind: 'family';
+export type AttackDexSpecialGame = {
+  kind: 'special';
   scope: 'special';
+  moveTypes: MoveType[];
 };
 
-export type AttackDexSelection = AttackDexStandardSelection | AttackDexSpecialSelection;
+export type AttackDexGame = AttackDexStandardGame | AttackDexSpecialGame;
 
 export type AttackDexSessionOptions = {
   challengeMode: ChallengeMode;
-  playstyle: AttackDexPlaystyle;
-  selection: AttackDexSelection;
+  selection: AttackDexGame;
 };
 
-/**
- * A named move can have multiple source records while remaining one guessable
- * entry. For example, same-name Physical and Special records stay available
- * as variants in the details view.
- */
-export type AttackDexMoveVariant = {
+export type MoveVariant = {
   accuracy: number | null;
   apiId: number | null;
-  category: MoveDamageCategory;
+  category: DamageCategory;
   description: string | null;
   effect: string | null;
   name: string;
@@ -58,13 +45,13 @@ export type AttackDexMoveVariant = {
   type: Type;
 };
 
-export type AttackDexMovePlacement =
+export type MovePlacement =
   | {
-      generation: Gen;
+      gen: Gen;
       scope: 'standard';
     }
   | {
-      family: AttackDexSpecialFamily;
+      moveType: MoveType;
       scope: 'special';
     };
 
@@ -72,11 +59,11 @@ export type AttackDexMove = {
   aliases: string[];
   id: string;
   name: string;
-  placement: AttackDexMovePlacement;
-  variants: AttackDexMoveVariant[];
+  placement: MovePlacement;
+  variants: MoveVariant[];
 };
 
-export type AttackDexMoveStatus = {
+export type MoveStatus = {
   isFound: boolean;
   isMissed: boolean;
   isShadowed: boolean;
@@ -85,6 +72,6 @@ export type AttackDexMoveStatus = {
 };
 
 export type AttackDexProgress = {
-  moves: Record<string, AttackDexMoveStatus>;
+  moves: Record<string, MoveStatus>;
   lastFoundMoveId: string | null;
 };
