@@ -45,6 +45,6 @@ export const specialTypeSchema = z.enum(['no', 'sublegendary', 'legendary', 'myt
 export const languageSchema = z.enum(['cn', 'de', 'en', 'fr', 'ja', 'ko', 'zh']);
 export const generationSchema = z.enum(['gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9']);
 export const gameSelectionStateSchema = z
-  .enum(['new', 'gen', 'types', 'special', 'challenge', 'challengeSetup', 'createRoom'])
+  .enum(['new', 'gen', 'types', 'special', 'challenge', 'challengeSetup', 'attackdex', 'createRoom'])
   .nullable();
 export const challengeModeSchema = z.enum(['free', 'challenge']);
