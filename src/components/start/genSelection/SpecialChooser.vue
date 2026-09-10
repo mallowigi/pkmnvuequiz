@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useQuiz } from '@/composables/useQuiz.js';
+import { moveTypeInfo } from '@/data/moveTypes.ts';
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.js';
@@ -28,8 +29,14 @@ const goBack = () => {
     <template v-if="attackDexState.isAttackDex">
       <RoundedButton
         class="button-type movetype"
-        :style="{ '--bgColor': '#333', '--fgColor': '#fff' }"
+        @click="setTypeOrSpecial('movetype')"
+        :style="{ '--bgColor': moveTypeInfo.bgColor, '--fgColor': moveTypeInfo.fgColor }"
       >
+        <img
+          :src="`/assets/types/${moveTypeInfo.icon}.svg`"
+          :alt="t('moveType')"
+          class="symbol"
+        />
         <div class="type-name">{{ t('moveType') }}</div>
       </RoundedButton>
 

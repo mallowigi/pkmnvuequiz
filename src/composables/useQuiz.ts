@@ -148,6 +148,9 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       case 'mega':
         setGameMode('mega');
         break;
+      case 'movetype':
+        setGameMode('movetype');
+        break;
       default:
         setCurrentTypes([type as Type]);
         setGameMode('types');
