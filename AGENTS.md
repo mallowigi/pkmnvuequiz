@@ -50,3 +50,17 @@ This document provides essential context and patterns to help AI agents be produ
 ## 🌐 Localization & Internationalization
 
 Maintain localized JSON files in `src/locales/`. For detailed instructions, scripts, and workflows, refer to the **localization** skill.
+
+## Agent skills
+
+### Issue tracker
+
+Track issues and specs in GitHub Issues. Before creating, reading, or updating tickets, read `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five canonical triage labels. Before triaging or labelling tickets, read `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context repo. Before exploring domain behavior or proposing changes, read `docs/agents/domain.md`.
