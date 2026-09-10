@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
-import { useAttackDexSelection } from '@/stores/useAttackDexSelection.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 
@@ -14,7 +14,7 @@ const { setGameSelectionState, setChallengeMode } = useGameFlow();
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
 const { showUserMessage } = useMessages();
-const { clear: clearAttackDexSelection } = useAttackDexSelection();
+const { clear: clearAttackDexSelection } = useAttackDexState();
 
 const selectFreeMode = () => {
   setGameSelectionState('gen');

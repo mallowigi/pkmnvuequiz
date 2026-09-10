@@ -10,7 +10,7 @@ type AttackDexState = {
   scope: AttackDexScope;
 };
 
-export const useAttackDexSelection = defineStore('attackDexSelection', () => {
+export const useAttackDexState = defineStore('attackDexState', () => {
   const attackDexState = reactive<AttackDexState>({
     gens: new Set(),
     moveTypes: new Set(),
@@ -90,5 +90,5 @@ export const useAttackDexSelection = defineStore('attackDexSelection', () => {
 });
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useAttackDexSelection, import.meta.hot));
+  import.meta.hot.accept(acceptHMRUpdate(useAttackDexState, import.meta.hot));
 }
