@@ -4,11 +4,13 @@ import { useI18n } from 'vue-i18n';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 
 const { t } = useI18n();
 const { setGameSelectionState, setChallengeMode } = useGameFlow();
+const { enterAttackDex } = useAttackDexState();
 
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
@@ -31,6 +33,12 @@ const selectMultiplayerMode = () => {
   }
 
   setGameSelectionState('createRoom');
+};
+
+const selectAttackDex = () => {
+  enterAttackDex();
+  setChallengeMode('free');
+  setGameSelectionState('gen');
 };
 </script>
 
@@ -95,6 +103,15 @@ const selectMultiplayerMode = () => {
         </div>
       </div>
     </div>
+
+    <div class="attackdex-section">
+      <RoundedButton
+        @click="selectAttackDex"
+        primary
+      >
+        {{ t('attackDex') }}
+      </RoundedButton>
+    </div>
   </div>
 </template>
 
@@ -120,6 +137,13 @@ const selectMultiplayerMode = () => {
     gap: 16px;
     padding: 8px 0;
   }
+}
+
+.attackdex-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 0 16px;
 }
 
 .separator {
