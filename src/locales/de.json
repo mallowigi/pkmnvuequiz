@@ -379,6 +379,7 @@
   "megaQuiz": "Mega-Quiz",
   "min": "min",
   "missedNames": "Fehlende Namen:",
+  "moveType": "Move-Art",
   "mode": "Modus",
   "modeCannotChangeInSpecialModeTooltip": "Die Reihenfolge kann im Spezial- oder Mega-Modus nicht geändert werden",
   "modeCannotChangeInTypesModeTooltip": "Die Reihenfolge kann im Typenmodus nicht geändert werden",

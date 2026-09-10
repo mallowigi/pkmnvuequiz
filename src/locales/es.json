@@ -379,6 +379,7 @@
   "megaQuiz": "Cuestionario Mega",
   "min": "min",
   "missedNames": "Nombres que faltaron:",
+  "moveType": "Tipo de Movimiento",
   "mode": "Modo",
   "modeCannotChangeInSpecialModeTooltip": "El orden no se puede cambiar en el modo Especial o Mega",
   "modeCannotChangeInTypesModeTooltip": "El orden no se puede cambiar en modo Tipos",

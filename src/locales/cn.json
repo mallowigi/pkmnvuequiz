@@ -379,6 +379,7 @@
   "megaQuiz": "超级问答",
   "min": "分钟",
   "missedNames": "错过的名字:",
+  "moveType": "招式属性",
   "mode": "模式",
   "modeCannotChangeInSpecialModeTooltip": "在特殊或超级模式中无法更改顺序",
   "modeCannotChangeInTypesModeTooltip": "在属性模式中无法更改顺序",

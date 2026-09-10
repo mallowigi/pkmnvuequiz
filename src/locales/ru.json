@@ -379,6 +379,7 @@
   "megaQuiz": "Мега-викторина",
   "min": "мин",
   "missedNames": "Пропущенные имена:",
+  "moveType": "Тип приёма",
   "mode": "Режим",
   "modeCannotChangeInSpecialModeTooltip": "Порядок нельзя изменить в Специальном или Мега режиме",
   "modeCannotChangeInTypesModeTooltip": "Порядок нельзя изменить в режиме Типы",

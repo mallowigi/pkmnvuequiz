@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const gameModeSchema = z.enum(['full', 'gen', 'special', 'mega', 'types']);
+export const gameModeSchema = z.enum(['full', 'gen', 'special', 'mega', 'types', 'movetype']);
 export const modeSchema = z.enum(['chaos', 'normal', 'order']);
 export const regionBoxSchema = z.enum([
   'alola',

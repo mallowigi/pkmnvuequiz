@@ -379,6 +379,7 @@
   "megaQuiz": "Quiz Méga",
   "min": "min",
   "missedNames": "Noms manqués:",
+  "moveType": "Type de Capacité",
   "mode": "Mode",
   "modeCannotChangeInSpecialModeTooltip": "L'ordre ne peut pas être changé en mode Spécial ou Méga",
   "modeCannotChangeInTypesModeTooltip": "L'ordre ne peut pas être changé en mode Types",

@@ -151,6 +151,8 @@ export const useTranslations = () => {
         return t('gen');
       case 'mega':
         return t('mega');
+      case 'movetype':
+        return t('moveType');
       case 'special':
         return t('special');
       case 'types':

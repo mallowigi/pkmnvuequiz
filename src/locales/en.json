@@ -383,6 +383,7 @@
   "min": "min",
   "missedNames": "Missed names:",
   "mode": "Mode",
+  "moveType": "Move Type",
   "modeCannotChangeInSpecialModeTooltip": "Order cannot be changed in Special or Mega mode",
   "modeCannotChangeInTypesModeTooltip": "Order cannot be changed in Types mode",
   "modeCannotChangeWithCriesShuffleTooltip": "Order cannot be changed in Types mode or when Cries Shuffle is enabled",

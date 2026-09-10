@@ -379,6 +379,7 @@
   "megaQuiz": "メガクイズ",
   "min": "分",
   "missedNames": "逃した名前:",
+  "moveType": "わざタイプ",
   "mode": "モード",
   "modeCannotChangeInSpecialModeTooltip": "スペシャルモードまたはメガモードでは順序を変更できません",
   "modeCannotChangeInTypesModeTooltip": "タイプモードでは順序を変更できません",

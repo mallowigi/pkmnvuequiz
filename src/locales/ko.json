@@ -379,6 +379,7 @@
   "megaQuiz": "메가 퀴즈",
   "min": "분",
   "missedNames": "놓친 이름:",
+  "moveType": "기술 유형",
   "mode": "모드",
   "modeCannotChangeInSpecialModeTooltip": "스페셜 또는 메가 모드에서는 순서를 변경할 수 없습니다",
   "modeCannotChangeInTypesModeTooltip": "타입 모드에서는 순서를 변경할 수 없습니다",

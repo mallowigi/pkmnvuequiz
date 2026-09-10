@@ -379,6 +379,7 @@
   "megaQuiz": "Quiz Mega",
   "min": "min",
   "missedNames": "Nomi mancanti:",
+  "moveType": "Tipo di Mossa",
   "mode": "Modalità",
   "modeCannotChangeInSpecialModeTooltip": "L'ordine non può essere modificato in modalità Speciale o Mega",
   "modeCannotChangeInTypesModeTooltip": "L'ordine non può essere modificato in modalità Tipi",
