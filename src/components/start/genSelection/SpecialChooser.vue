@@ -4,10 +4,12 @@ import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useQuiz } from '@/composables/useQuiz.js';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.js';
 
 const { setGameSelectionState } = useGameFlow();
+const { attackDexState } = useAttackDexState();
 const { getSpecialType, getMegaType } = useCurrentType();
 const { setTypeOrSpecial } = useQuiz();
 const { t } = useI18n();
@@ -23,40 +25,59 @@ const goBack = () => {
 
 <template>
   <div class="type-grid">
-    <!-- Special -->
-    <RoundedButton
-      class="button-type special"
-      @click="setTypeOrSpecial('special')"
-      :style="{ '--bgColor': specialType.bgColor, '--fgColor': '#fff' }"
-    >
-      <img
-        :src="`/assets/types/${specialType.icon}.svg`"
-        :alt="t('special')"
-        class="symbol"
-      />
-      <div class="type-name">{{ t('special') }}</div>
-    </RoundedButton>
+    <template v-if="attackDexState.isAttackDex">
+      <RoundedButton
+        class="button-type movetype"
+        :style="{ '--bgColor': '#333', '--fgColor': '#fff' }"
+      >
+        <div class="type-name">{{ t('moveType') }}</div>
+      </RoundedButton>
 
-    <RoundedButton
-      class="button-type mega"
-      @click="setTypeOrSpecial('mega')"
-      :style="{ '--bgColor': megaType.bgColor, '--fgColor': '#fff' }"
-    >
-      <img
-        :src="`/assets/types/${megaType.icon}.svg`"
-        :alt="t('mega')"
-        class="symbol"
-      />
-      <div class="type-name">{{ t('mega') }}</div>
-    </RoundedButton>
+      <RoundedButton
+        class="button-type back"
+        @click="goBack"
+        :style="{ '--bgColor': '#111', '--fgColor': '#fff' }"
+      >
+        <div>{{ t('back') }}</div>
+      </RoundedButton>
+    </template>
 
-    <RoundedButton
-      class="button-type back"
-      @click="goBack"
-      :style="{ '--bgColor': '#111', '--fgColor': '#fff' }"
-    >
-      <div>{{ t('back') }}</div>
-    </RoundedButton>
+    <template v-else>
+      <!-- Special -->
+      <RoundedButton
+        class="button-type special"
+        @click="setTypeOrSpecial('special')"
+        :style="{ '--bgColor': specialType.bgColor, '--fgColor': '#fff' }"
+      >
+        <img
+          :src="`/assets/types/${specialType.icon}.svg`"
+          :alt="t('special')"
+          class="symbol"
+        />
+        <div class="type-name">{{ t('special') }}</div>
+      </RoundedButton>
+
+      <RoundedButton
+        class="button-type mega"
+        @click="setTypeOrSpecial('mega')"
+        :style="{ '--bgColor': megaType.bgColor, '--fgColor': '#fff' }"
+      >
+        <img
+          :src="`/assets/types/${megaType.icon}.svg`"
+          :alt="t('mega')"
+          class="symbol"
+        />
+        <div class="type-name">{{ t('mega') }}</div>
+      </RoundedButton>
+
+      <RoundedButton
+        class="button-type back"
+        @click="goBack"
+        :style="{ '--bgColor': '#111', '--fgColor': '#fff' }"
+      >
+        <div>{{ t('back') }}</div>
+      </RoundedButton>
+    </template>
   </div>
 </template>
 
@@ -106,6 +127,11 @@ const goBack = () => {
   &.mega {
     grid-row: 1;
     grid-column: 2;
+  }
+
+  &.movetype {
+    grid-row: 1;
+    grid-column: span 2;
   }
 
   &.back {
