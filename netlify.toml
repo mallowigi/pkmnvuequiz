@@ -1,10 +1,11 @@
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+status = 200
+prerender = true
 
 [[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Service-Worker-Allowed = "/"
-    Cache-Control = "no-cache"
+for = "/sw.js"
+[headers.values]
+Service-Worker-Allowed = "/"
+Cache-Control = "public, max-age=31536000, immutable"

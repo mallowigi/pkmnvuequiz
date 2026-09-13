@@ -1,10 +1,61 @@
 <!doctype html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="google-site-verification"
       content="lSWiQFlTgImB9kWtFDfAFYj1GK-U_A83CZ0zo34aYVg"
+    />
+    <meta
+      name="description"
+      content="Test your Pokémon knowledge with the ultimate Pokémon Quiz! Guess all Pokémon from Generation 1 to 9, play by region, type, cries, or challenge friends in real-time."
+    />
+    <link
+      rel="canonical"
+      href="https://pkmnvuequiz.netlify.app/"
+    />
+    <!-- Open Graph / Facebook / Discord -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:url"
+      content="https://pkmnvuequiz.netlify.app/"
+    />
+    <meta
+      property="og:title"
+      content="Pokémon Quiz – Test Your Pokémon Knowledge"
+    />
+    <meta
+      property="og:description"
+      content="Can you name all Pokémon? Play the interactive Pokémon Quiz across all generations, test by cries, silhouette, and compete on leaderboards!"
+    />
+    <meta
+      property="og:image"
+      content="https://pkmnvuequiz.netlify.app/pwa-512x512.png"
+    />
+    <meta
+      property="og:site_name"
+      content="Pokemon Quiz"
+    />
+
+    <!-- Twitter / X -->
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      name="twitter:title"
+      content="Pokémon Quiz – Test Your Pokémon Knowledge"
+    />
+    <meta
+      name="twitter:description"
+      content="Play the interactive Pokémon Quiz across Gen 1–9, cries, and challenge modes!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pkmnvuequiz.netlify.app/pwa-512x512.png"
     />
     <link
       rel="icon"
@@ -17,14 +68,6 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto Condensed"
     />
     <link
       rel="icon"
@@ -53,10 +96,50 @@
       rel="apple-touch-icon"
       href="/apple-touch-icon-180x180.png"
     />
-    <title>Pokemon Quiz</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;700&display=swap"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Pokémon Quiz – Test Your Pokémon Knowledge",
+        "url": "https://pkmnvuequiz.netlify.app",
+        "applicationCategory": "GameApplication",
+        "genre": "Trivia / Quiz Game",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "description": "An interactive Pokémon trivia and guessing game featuring all Pokémon generations, cries, type challenges, and multiplayer rooms.",
+        "inLanguage": ["en", "es", "fr", "de", "it", "ja", "ko", "pt", "ru", "zh"],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <title>Pokémon Quiz – Test Your Pokémon Knowledge</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <noscript>
+        <h1>Pokémon Quiz</h1>
+        <p>
+          Test your Pokémon knowledge by guessing all the Pokémon! Play by region, type, cries, or challenge friends in
+          real-time. Please enable JavaScript to play the game.
+        </p>
+      </noscript>
+    </div>
     <script
       type="module"
       src="/src/main.ts"
