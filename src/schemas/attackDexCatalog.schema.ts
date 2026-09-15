@@ -19,37 +19,34 @@ export const damageCategorySchema = z.enum([
   'variable',
 ]);
 
-export const movePlacementSchema = z.discriminatedUnion('scope', [
+// Flat catalog entry: no nested `placement`/`variants` objects. Only the
+// fields the quiz itself needs are cached here; richer per-language text
+// (description/effect) is fetched live from PokeAPI on demand instead.
+export const attackDexMoveSchema = z.discriminatedUnion('scope', [
   z.object({
+    accuracy: z.number().nullable(),
     box: regionBoxSchema.optional(),
+    category: damageCategorySchema,
     gen: generationSchema,
+    id: z.string().min(1),
+    name: z.string().min(1),
+    power: z.number().nullable(),
+    pp: z.number().nullable(),
     scope: z.literal('standard'),
+    type: typeSchema,
   }),
   z.object({
+    accuracy: z.number().nullable(),
+    category: damageCategorySchema,
+    id: z.string().min(1),
     moveType: moveTypeSchema,
+    name: z.string().min(1),
+    power: z.number().nullable(),
+    pp: z.number().nullable(),
     scope: z.literal('special'),
+    type: typeSchema,
   }),
 ]);
-
-export const moveVariantSchema = z.object({
-  accuracy: z.number().nullable(),
-  apiId: z.number().nullable(),
-  category: damageCategorySchema,
-  description: z.string().nullable(),
-  effect: z.string().nullable(),
-  name: z.string().min(1),
-  power: z.number().nullable(),
-  pp: z.number().nullable(),
-  type: typeSchema,
-});
-
-export const attackDexMoveSchema = z.object({
-  aliases: z.array(z.string()),
-  id: z.string().min(1),
-  name: z.string().min(1),
-  placement: movePlacementSchema,
-  variants: z.array(moveVariantSchema).min(1),
-});
 
 // On-disk shape of `src/data/attacks.json`. `sourceVersion` and
 // `generatedAt` are recorded so a broken/incomplete regeneration is easy to

@@ -3,23 +3,15 @@ import { describe, expect, it } from 'vitest';
 import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
 
 const validMove = {
-  aliases: [],
+  accuracy: 100,
+  category: 'physical' as const,
+  gen: 'gen1' as const,
   id: 'tackle',
   name: 'Tackle',
-  placement: { gen: 'gen1' as const, scope: 'standard' as const },
-  variants: [
-    {
-      accuracy: 100,
-      apiId: 33,
-      category: 'physical' as const,
-      description: 'A physical attack.',
-      effect: 'Inflicts regular damage.',
-      name: 'Tackle',
-      power: 40,
-      pp: 35,
-      type: 'normal' as const,
-    },
-  ],
+  power: 40,
+  pp: 35,
+  scope: 'standard' as const,
+  type: 'normal' as const,
 };
 
 const validCatalog = {
@@ -34,43 +26,31 @@ describe('attackDexCatalog.schema', () => {
     expect(result.success).toBe(true);
   });
 
-  it('accepts a valid special-scope move with a regional box on standard moves', () => {
+  it('accepts a standard move with a regional box and a special-scope move', () => {
     const result = parseAttackDexCatalog({
       ...validCatalog,
       moves: [
+        { ...validMove, box: 'hisui', gen: 'gen8', id: 'wave-crash', name: 'Wave Crash' },
         {
-          ...validMove,
-          id: 'wave-crash',
-          name: 'Wave Crash',
-          placement: { box: 'hisui', gen: 'gen8', scope: 'standard' },
-        },
-        {
-          ...validMove,
+          accuracy: null,
+          category: 'variable',
           id: 'breakneck-blitz',
+          moveType: 'zmove',
           name: 'Breakneck Blitz',
-          placement: { moveType: 'zmove', scope: 'special' },
-          variants: [
-            { ...validMove.variants[0], apiId: 622 },
-            { ...validMove.variants[0], apiId: 623, category: 'special' },
-          ],
+          power: null,
+          pp: 1,
+          scope: 'special',
+          type: 'normal',
         },
       ],
     });
     expect(result.success).toBe(true);
   });
 
-  it('rejects a move with no variants', () => {
-    const result = parseAttackDexCatalog({
-      ...validCatalog,
-      moves: [{ ...validMove, variants: [] }],
-    });
-    expect(result.success).toBe(false);
-  });
-
   it('rejects a special-scope move missing moveType', () => {
     const result = parseAttackDexCatalog({
       ...validCatalog,
-      moves: [{ ...validMove, placement: { scope: 'special' } }],
+      moves: [{ ...validMove, moveType: undefined, scope: 'special' }],
     });
     expect(result.success).toBe(false);
   });
@@ -83,7 +63,7 @@ describe('attackDexCatalog.schema', () => {
   it('rejects an invalid elemental type', () => {
     const result = parseAttackDexCatalog({
       ...validCatalog,
-      moves: [{ ...validMove, variants: [{ ...validMove.variants[0], type: 'shadow' }] }],
+      moves: [{ ...validMove, type: 'shadow' }],
     });
     expect(result.success).toBe(false);
   });

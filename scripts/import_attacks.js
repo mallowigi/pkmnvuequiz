@@ -5,11 +5,13 @@
 // script favors clarity over caching/concurrency machinery.
 //
 // Scope: ordinary standard moves AND Z-Moves/Max Moves/G-Max Moves are all
-// imported. Every move is tagged with a `placement.scope` of `standard` or
-// `special` so the regular game can exclude Special-family moves from its
-// answer pool without having skipped importing them. Only Colosseum/XD
-// Shadow moves (PokeAPI's synthetic `shadow` elemental type) are excluded
-// entirely.
+// imported. Every move is tagged with a `scope` of `standard` or `special`
+// so the regular game can exclude Special-family moves from its answer
+// pool without having skipped importing them. Only Colosseum/XD Shadow
+// moves (PokeAPI's synthetic `shadow` elemental type) are excluded
+// entirely. Catalog entries are kept flat and game-only (no
+// description/effect text, no apiId/aliases) -- richer per-move text is
+// fetched live from PokeAPI when needed, not cached here.
 import { MoveClient } from 'pokenode-ts';
 import fs from 'fs';
 import path from 'path';
@@ -83,94 +85,46 @@ const SIGNATURE_ZMOVE_NAMES = new Set([
 
 // G-Max Moves are absent from PokeAPI entirely (a known, documented source
 // gap -- see AttackDex spec #68). This reviewed, sourced supplement uses
-// stable project-owned ids (prefixed `local-`, `apiId: null`) rather than
-// pretending they came from PokeAPI. Source: Bulbapedia "G-Max Move" page
+// stable project-owned ids (prefixed `local-`) rather than pretending they
+// came from PokeAPI. Source: Bulbapedia "G-Max Move" page
 // (https://bulbapedia.bulbagarden.net/wiki/G-Max_Move), retrieved for this
 // import. Power/category are inherited from whichever base move triggers
 // them (`category: 'variable'`), except the three moves with a fixed base
 // power of 160 regardless of the triggering move.
 const GMAX_SUPPLEMENT = [
-  { effect: 'Inflicts damage for four turns on non-Grass opponents.', name: 'G-Max Vine Lash', type: 'grass' },
-  { effect: 'Inflicts damage for four turns on non-Fire opponents.', name: 'G-Max Wildfire', type: 'fire' },
-  { effect: 'Inflicts damage for four turns on non-Water opponents.', name: 'G-Max Cannonade', type: 'water' },
-  { effect: 'Inflicts poison, paralysis, or sleep on all opponents.', name: 'G-Max Befuddle', type: 'bug' },
-  { effect: 'Paralyzes all opponents.', name: 'G-Max Volt Crash', type: 'electric' },
-  {
-    effect:
-      "Scatters coins on the ground that are picked up afterwards, and confuses all opponents. Value is equal to 100 times the user's level.",
-    name: 'G-Max Gold Rush',
-    type: 'normal',
-  },
-  {
-    effect: 'Pumps up the user and its allies, raising the chance of critical hits by one stage.',
-    name: 'G-Max Chi Strike',
-    type: 'fighting',
-  },
-  { effect: 'Prevents the opponent from being recalled or switched out.', name: 'G-Max Terror', type: 'ghost' },
-  { effect: 'Lowers the Speed of all opponents by two stages.', name: 'G-Max Foam Burst', type: 'water' },
-  {
-    effect: 'Lowers damage from both Physical and Special moves for five turns.',
-    name: 'G-Max Resonance',
-    type: 'ice',
-  },
-  { effect: 'Opponents of the opposite gender of the user become infatuated.', name: 'G-Max Cuddle', type: 'normal' },
-  { effect: "50% chance of restoring the user or an ally's used Berry.", name: 'G-Max Replenish', type: 'normal' },
-  { effect: 'Poisons all opponents.', name: 'G-Max Malodor', type: 'poison' },
-  { effect: 'Makes opponents incapable of using the same move twice in a row.', name: 'G-Max Meltdown', type: 'steel' },
-  {
-    effect: 'Moves can be used regardless of the target Pokemon\u2019s abilities. Power is always 160.',
-    name: 'G-Max Drum Solo',
-    power: 160,
-    type: 'grass',
-  },
-  {
-    effect: 'Moves can be used regardless of the target Pokemon\u2019s abilities. Power is always 160.',
-    name: 'G-Max Fireball',
-    power: 160,
-    type: 'fire',
-  },
-  {
-    effect: 'Moves can be used regardless of the target Pokemon\u2019s abilities. Power is always 160.',
-    name: 'G-Max Hydrosnipe',
-    power: 160,
-    type: 'water',
-  },
-  {
-    effect: 'Removes hazards, screens, and terrain from the opponents\u2019 side of the field.',
-    name: 'G-Max Wind Rage',
-    type: 'flying',
-  },
-  { effect: 'Intensifies gravity for five turns.', name: 'G-Max Gravitas', type: 'psychic' },
-  { effect: "Creates Stealth Rock on the opponents' side of the field.", name: 'G-Max Stonesurge', type: 'water' },
-  { effect: 'Inflicts damage for four turns on non-Rock opponents.', name: 'G-Max Volcalith', type: 'rock' },
-  { effect: 'Lowers the evasion of all opponents by one stage.', name: 'G-Max Tartness', type: 'grass' },
-  { effect: 'Cures the user and its allies of their status conditions.', name: 'G-Max Sweetness', type: 'grass' },
-  { effect: 'Traps the target in Sand Tomb for four to five turns.', name: 'G-Max Sandblast', type: 'ground' },
-  { effect: 'Inflicts poison or paralysis on all opponents.', name: 'G-Max Stun Shock', type: 'electric' },
-  { effect: 'Traps the target in Fire Spin for four to five turns.', name: 'G-Max Centiferno', type: 'fire' },
-  { effect: 'Inflicts confusion on all opponents.', name: 'G-Max Smite', type: 'fairy' },
-  {
-    effect: 'Has a 50% chance of making the target drowsy, causing it to fall asleep at the end of the next turn.',
-    name: 'G-Max Snooze',
-    type: 'dark',
-  },
-  { effect: 'Heals the user and its allies by 1/6 their maximum HP.', name: 'G-Max Finale', type: 'fairy' },
-  {
-    effect: "Scatters sharp spikes around the field, working like Stealth Rock against the target's Steel weakness.",
-    name: 'G-Max Steelsurge',
-    type: 'steel',
-  },
-  { effect: 'Takes 2 PP away from the last move the target used.', name: 'G-Max Depletion', type: 'dragon' },
-  {
-    effect: 'Hits the target even if it is protected by a protection move, including Max Guard.',
-    name: 'G-Max One Blow',
-    type: 'dark',
-  },
-  {
-    effect: 'Hits the target even if it is protected by a protection move, including Max Guard.',
-    name: 'G-Max Rapid Flow',
-    type: 'water',
-  },
+  { name: 'G-Max Vine Lash', type: 'grass' },
+  { name: 'G-Max Wildfire', type: 'fire' },
+  { name: 'G-Max Cannonade', type: 'water' },
+  { name: 'G-Max Befuddle', type: 'bug' },
+  { name: 'G-Max Volt Crash', type: 'electric' },
+  { name: 'G-Max Gold Rush', type: 'normal' },
+  { name: 'G-Max Chi Strike', type: 'fighting' },
+  { name: 'G-Max Terror', type: 'ghost' },
+  { name: 'G-Max Foam Burst', type: 'water' },
+  { name: 'G-Max Resonance', type: 'ice' },
+  { name: 'G-Max Cuddle', type: 'normal' },
+  { name: 'G-Max Replenish', type: 'normal' },
+  { name: 'G-Max Malodor', type: 'poison' },
+  { name: 'G-Max Meltdown', type: 'steel' },
+  { name: 'G-Max Drum Solo', power: 160, type: 'grass' },
+  { name: 'G-Max Fireball', power: 160, type: 'fire' },
+  { name: 'G-Max Hydrosnipe', power: 160, type: 'water' },
+  { name: 'G-Max Wind Rage', type: 'flying' },
+  { name: 'G-Max Gravitas', type: 'psychic' },
+  { name: 'G-Max Stonesurge', type: 'water' },
+  { name: 'G-Max Volcalith', type: 'rock' },
+  { name: 'G-Max Tartness', type: 'grass' },
+  { name: 'G-Max Sweetness', type: 'grass' },
+  { name: 'G-Max Sandblast', type: 'ground' },
+  { name: 'G-Max Stun Shock', type: 'electric' },
+  { name: 'G-Max Centiferno', type: 'fire' },
+  { name: 'G-Max Smite', type: 'fairy' },
+  { name: 'G-Max Snooze', type: 'dark' },
+  { name: 'G-Max Finale', type: 'fairy' },
+  { name: 'G-Max Steelsurge', type: 'steel' },
+  { name: 'G-Max Depletion', type: 'dragon' },
+  { name: 'G-Max One Blow', type: 'dark' },
+  { name: 'G-Max Rapid Flow', type: 'water' },
 ];
 
 const RETRY_ATTEMPTS = 3;
@@ -197,14 +151,6 @@ const slugify = (value) =>
     .replace(/['’]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
-
-const normalizeText = (value) =>
-  value
-    ? value
-        .replace(/[\n\f]+/g, ' ')
-        .replace(/\s{2,}/g, ' ')
-        .trim()
-    : null;
 
 async function withRetry(fn, description) {
   let lastError;
@@ -276,27 +222,10 @@ function pickEnglishName(move) {
   return entry ? entry.name : null;
 }
 
-function pickDescription(move) {
-  const entries = move.flavor_text_entries.filter((entry) => entry.language.name === 'en');
-  if (entries.length === 0) return null;
-  return normalizeText(entries[entries.length - 1].flavor_text);
-}
-
-function pickEffect(move) {
-  const entry = move.effect_entries.find((e) => e.language.name === 'en');
-  if (!entry) return null;
-  const text = entry.effect.replace(/\$effect_chance/g, String(move.effect_chance ?? ''));
-  return normalizeText(text);
-}
-
 function buildVariantFromApiMove(move) {
   return {
     accuracy: move.accuracy,
-    apiId: move.id,
     category: move.damage_class ? move.damage_class.name : 'variable',
-    description: pickDescription(move),
-    effect: pickEffect(move),
-    name: pickEnglishName(move) ?? move.name,
     power: move.power,
     pp: move.pp,
     type: move.type.name,
@@ -306,11 +235,7 @@ function buildVariantFromApiMove(move) {
 function buildVariantFromSupplement(entry) {
   return {
     accuracy: null,
-    apiId: null,
     category: 'variable',
-    description: null,
-    effect: entry.effect,
-    name: entry.name,
     power: entry.power ?? null,
     pp: 10,
     type: entry.type,
@@ -398,13 +323,7 @@ async function run() {
       collisions.forEach((c) => console.warn(`  - ${c}`));
     }
 
-    const moves = Array.from(groups.values()).map((group) => ({
-      aliases: [],
-      id: group.id,
-      name: group.displayName,
-      placement: group.placement,
-      variants: group.variants,
-    }));
+    const moves = Array.from(groups.values()).map(flattenGroup);
 
     moves.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -416,8 +335,8 @@ async function run() {
 
     validateCatalog(catalog);
 
-    console.log(`\nStandard moves: ${moves.filter((m) => m.placement.scope === 'standard').length}`);
-    console.log(`Special moves: ${moves.filter((m) => m.placement.scope === 'special').length}`);
+    console.log(`\nStandard moves: ${moves.filter((m) => m.scope === 'standard').length}`);
+    console.log(`Special moves: ${moves.filter((m) => m.scope === 'special').length}`);
     console.log(`Excluded (Colosseum/XD Shadow or unrecognized): ${excluded.length}`);
 
     fs.writeFileSync(CATALOG_PATH, JSON.stringify(catalog, null, 2) + '\n');
@@ -455,6 +374,35 @@ function addToGroup(groups, collisions, groupKey, displayName, placement, varian
   groups.set(disambiguatedKey, { displayName, id, placement, variants: [variant] });
 }
 
+// Collapses a group's accumulated variants (kept internally only for
+// collision detection, e.g. the physical/special Z-Move pairs) into one
+// flat catalog entry. When a move has more than one variant, they only
+// ever differ by damage category (see grouping notes above), so the flat
+// entry uses `category: 'variable'` -- the same convention already used
+// for Max/G-Max moves whose category depends on the triggering move.
+function flattenGroup(group) {
+  const [first] = group.variants;
+  const category = group.variants.length > 1 ? 'variable' : first.category;
+  const base = {
+    accuracy: first.accuracy,
+    category,
+    id: group.id,
+    name: group.displayName,
+    power: first.power,
+    pp: first.pp,
+    type: first.type,
+  };
+
+  return group.placement.scope === 'standard'
+    ? {
+        ...base,
+        ...(group.placement.box ? { box: group.placement.box } : {}),
+        gen: group.placement.gen,
+        scope: 'standard',
+      }
+    : { ...base, moveType: group.placement.moveType, scope: 'special' };
+}
+
 function placementsMatch(a, b) {
   if (a.scope !== b.scope) return false;
   if (a.scope === 'standard') return a.gen === b.gen;
@@ -468,35 +416,35 @@ function validateCatalog(catalog) {
     'status',
     'variable',
   ]);
-  const moveVariant = z.object({
-    accuracy: z.number().nullable(),
-    apiId: z.number().nullable(),
-    category: damageCategory,
-    description: z.string().nullable(),
-    effect: z.string().nullable(),
-    name: z.string().min(1),
-    power: z.number().nullable(),
-    pp: z.number().nullable(),
-    type: z.string().min(1),
-  });
-  const placement = z.union([
-    z.object({ box: z.string().optional(), gen: z.string(), scope: z.literal('standard') }),
+  const move = z.discriminatedUnion('scope', [
     z.object({
+      accuracy: z.number().nullable(),
+      box: z.string().optional(),
+      category: damageCategory,
+      gen: z.string(),
+      id: z.string().min(1),
+      name: z.string().min(1),
+      power: z.number().nullable(),
+      pp: z.number().nullable(),
+      scope: z.literal('standard'),
+      type: z.string().min(1),
+    }),
+    z.object({
+      accuracy: z.number().nullable(),
+      category: damageCategory,
+      id: z.string().min(1),
       moveType: z.enum([
         'zmove',
         'max',
         'gmax',
       ]),
+      name: z.string().min(1),
+      power: z.number().nullable(),
+      pp: z.number().nullable(),
       scope: z.literal('special'),
+      type: z.string().min(1),
     }),
   ]);
-  const move = z.object({
-    aliases: z.array(z.string()),
-    id: z.string().min(1),
-    name: z.string().min(1),
-    placement,
-    variants: z.array(moveVariant).min(1),
-  });
   const schema = z.object({
     generatedAt: z.string(),
     moves: z.array(move),

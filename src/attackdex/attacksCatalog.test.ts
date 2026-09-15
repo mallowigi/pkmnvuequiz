@@ -54,69 +54,80 @@ describe('attacks.json catalog', () => {
 
   it('classifies every move into exactly one scope, standard xor special', () => {
     for (const move of moves) {
-      if (move.placement.scope === 'standard') {
-        expect(move.placement).not.toHaveProperty('moveType');
+      if (move.scope === 'standard') {
+        expect(move).not.toHaveProperty('moveType');
       } else {
-        expect(move.placement.scope).toBe('special');
+        expect(move.scope).toBe('special');
         expect([
           'zmove',
           'max',
           'gmax',
-        ]).toContain(move.placement.moveType);
+        ]).toContain(move.moveType);
       }
     }
   });
 
   it('includes all three approved Special families with at least one member each', () => {
-    const byMoveType = (type: string) =>
-      moves.filter((m) => m.placement.scope === 'special' && m.placement.moveType === type);
+    const byMoveType = (type: string) => moves.filter((m) => m.scope === 'special' && m.moveType === type);
 
     expect(byMoveType('zmove').length).toBeGreaterThan(0);
     expect(byMoveType('max').length).toBeGreaterThan(0);
     expect(byMoveType('gmax').length).toBeGreaterThan(0);
   });
 
-  it('groups Breakneck Blitz physical/special records into one move with two variants', () => {
+  it('collapses Breakneck Blitz physical/special records into one move with a variable category', () => {
     const move = byId.get('breakneck-blitz');
     expect(move).toBeDefined();
-    expect(move?.placement).toEqual({ moveType: 'zmove', scope: 'special' });
-    expect(move?.variants).toHaveLength(2);
-    expect(move?.variants.map((v) => v.category).sort()).toEqual([
-      'physical',
-      'special',
-    ]);
+    expect(move?.scope).toBe('special');
+    expect(move && move.scope === 'special' ? move.moveType : undefined).toBe('zmove');
+    expect(move?.category).toBe('variable');
   });
 
-  it('marks supplemental G-Max moves with a project-owned id and no PokeAPI apiId', () => {
+  it('marks supplemental G-Max moves with a project-owned id', () => {
     const move = byId.get('local-g-max-wildfire');
     expect(move).toBeDefined();
-    expect(move?.placement).toEqual({ moveType: 'gmax', scope: 'special' });
-    expect(move?.variants[0].apiId).toBeNull();
+    expect(move?.scope).toBe('special');
+    expect(move && move.scope === 'special' ? move.moveType : undefined).toBe('gmax');
   });
 
   it('maps Legends: Arceus-introduced moves to gen8 with a hisui box', () => {
     const move = byId.get('wave-crash');
     expect(move).toBeDefined();
-    expect(move?.placement).toEqual({ box: 'hisui', gen: 'gen8', scope: 'standard' });
+    expect(move?.scope).toBe('standard');
+    expect(move && move.scope === 'standard' ? move.gen : undefined).toBe('gen8');
+    expect(move && move.scope === 'standard' ? move.box : undefined).toBe('hisui');
   });
 
   it('does not tag a Sword/Shield move reused in Legends: Arceus as hisui', () => {
     const move = byId.get('wicked-blow');
     expect(move).toBeDefined();
-    expect(move?.placement).toEqual({ gen: 'gen8', scope: 'standard' });
+    expect(move?.scope).toBe('standard');
+    expect(move && move.scope === 'standard' ? move.gen : undefined).toBe('gen8');
+    expect(move && move.scope === 'standard' ? move.box : undefined).toBeUndefined();
   });
 
   it('preserves genuinely variable power as null rather than coercing to zero', () => {
     const move = byId.get('seismic-toss');
     expect(move).toBeDefined();
-    expect(move?.variants[0].power).toBeNull();
-    expect(move?.variants[0].accuracy).toBe(100);
+    expect(move?.power).toBeNull();
+    expect(move?.accuracy).toBe(100);
   });
 
   it('preserves guaranteed accuracy as null rather than coercing to 100', () => {
     const move = byId.get('aerial-ace');
     expect(move).toBeDefined();
-    expect(move?.variants[0].accuracy).toBeNull();
+    expect(move?.accuracy).toBeNull();
+  });
+
+  it('has no nested placement/variants objects (flat entries only)', () => {
+    for (const move of moves) {
+      expect(move).not.toHaveProperty('placement');
+      expect(move).not.toHaveProperty('variants');
+      expect(move).not.toHaveProperty('aliases');
+      expect(move).not.toHaveProperty('apiId');
+      expect(move).not.toHaveProperty('description');
+      expect(move).not.toHaveProperty('effect');
+    }
   });
 });
 

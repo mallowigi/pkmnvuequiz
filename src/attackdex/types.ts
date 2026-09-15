@@ -18,36 +18,34 @@ export type AttackDexSessionOptions = {
   selection: AttackDexGame;
 };
 
-export type MoveVariant = {
-  accuracy: number | null;
-  apiId: number | null;
-  category: DamageCategory;
-  description: string | null;
-  effect: string | null;
-  name: string;
-  power: number | null;
-  pp: number | null;
-  type: Type;
-};
-
-export type MovePlacement =
+// Catalog entries are flat (no nested `placement`/`variants` objects) since
+// the game only needs the fields below to run a quiz; richer per-language
+// text (description/effect) is fetched live from PokeAPI on demand instead
+// of being cached here (see `AttackInfo`/live-fetch notes in #72).
+export type AttackDexMove =
   | {
+      accuracy: number | null;
       box?: RegionBox;
+      category: DamageCategory;
       gen: Gen;
+      id: string;
+      name: string;
+      power: number | null;
+      pp: number | null;
       scope: 'standard';
+      type: Type;
     }
   | {
+      accuracy: number | null;
+      category: DamageCategory;
+      id: string;
       moveType: MoveType;
+      name: string;
+      power: number | null;
+      pp: number | null;
       scope: 'special';
+      type: Type;
     };
-
-export type AttackDexMove = {
-  aliases: string[];
-  id: string;
-  name: string;
-  placement: MovePlacement;
-  variants: MoveVariant[];
-};
 
 export type MoveStatus = {
   isFound: boolean;
