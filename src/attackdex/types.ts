@@ -1,17 +1,17 @@
-import type { ChallengeMode, Gen, Type } from '@/types.ts';
+import type { ChallengeMode, Gen, RegionBox, Type } from '@/types.ts';
 
 // Named move families exclusive to AttackDex's `movetype` game mode.
 export type MoveType = 'zmove' | 'max' | 'gmax';
 
-export type DamageCategory = 'physical' | 'special' | 'status';
+// `variable` covers Max/G-Max moves whose category is inherited from
+// whichever base move triggered them rather than being fixed by the move
+// itself (see catalog import notes for details).
+export type DamageCategory = 'physical' | 'special' | 'status' | 'variable';
 
 // Mirrors the reused `gen`/`types`/`movetype` game modes. Standard selections
 // reuse the shared gen/type stores; `movetype` always covers every Special
 // family at once, the same way the Pokemon `special` mode has no sub-picker.
-export type AttackDexGame =
-  | { kind: 'gen'; gens: Gen[] }
-  | { kind: 'types'; types: Type[] }
-  | { kind: 'movetype' };
+export type AttackDexGame = { kind: 'gen'; gens: Gen[] } | { kind: 'types'; types: Type[] } | { kind: 'movetype' };
 
 export type AttackDexSessionOptions = {
   challengeMode: ChallengeMode;
@@ -32,6 +32,7 @@ export type MoveVariant = {
 
 export type MovePlacement =
   | {
+      box?: RegionBox;
       gen: Gen;
       scope: 'standard';
     }
