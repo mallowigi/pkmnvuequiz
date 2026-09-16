@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { VERSION } from '@/data/global.ts';
+import { attackDexSchema } from '@/schemas/attackDex.schema.ts';
 import {
   challengeModeSchema,
   gameModeSchema,
@@ -65,6 +66,7 @@ export const touchesSchema = z.object({
 export const saveDataBaseSchema = z.object({
   ...stateSchema.shape,
   ...touchesSchema.shape,
+  attackDexState: attackDexSchema.nullish(),
   autoPause: z.boolean(),
   autoSync: z.boolean(),
   avatar: z.string().nullish(),

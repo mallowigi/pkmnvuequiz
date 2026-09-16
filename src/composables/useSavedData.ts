@@ -7,6 +7,7 @@ import { usePageTitle } from '@/composables/useTitle.ts';
 import { LOCAL_STORAGE_NAME_KEY, LOCAL_STORAGE_KEY, VERSION } from '@/data/global';
 import { i18n } from '@/main.ts';
 import { parseSaveData } from '@/schemas/saveData.schema.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
@@ -91,6 +92,7 @@ export const useSavedData = () => {
     const { touchesState } = useTouches();
     const { bonusState } = useBonus();
     const { skipsState } = useSkips();
+    const { attackDexState } = useAttackDexState();
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
     const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
@@ -112,6 +114,7 @@ export const useSavedData = () => {
       ...state,
       ...settingsState,
       ...touchesState,
+      attackDexState,
       challengeMode: flowState.challengeMode,
       gameSelectionState: null,
       languages: Array.from(settingsState.languages),
@@ -241,7 +244,7 @@ export const useSavedData = () => {
     const { flowState } = useGameFlow();
     if (flowState.isEnded || flowState.isGivenUp) {
       removeAutoSave();
-      deleteUserState();
+      await deleteUserState();
       return;
     }
 
@@ -255,7 +258,7 @@ export const useSavedData = () => {
     sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
 
     if (saveToFirebase) {
-      debouncedSaveToFirebase(savedState);
+      await debouncedSaveToFirebase(savedState);
     }
   };
 
@@ -300,6 +303,7 @@ export const useSavedData = () => {
     const { setTouchesState } = useTouches();
     const { setScore } = useBonus();
     const { setSkips } = useSkips();
+    const { setAttackDexState } = useAttackDexState();
 
     const {
       currentTypes,
@@ -315,6 +319,7 @@ export const useSavedData = () => {
       score,
       skipScore,
       skips,
+      attackDexState,
       version: _version,
       ...statePayload
     } = loadedState as Partial<SaveData>;
@@ -477,6 +482,11 @@ export const useSavedData = () => {
     setSkips({
       skipScore: skipScore ?? 0,
       skips: skips ?? 0,
+    });
+
+    // Attack Dex
+    setAttackDexState({
+      isAttackDex: attackDexState?.isAttackDex ?? false,
     });
 
     showUserMessage(i18n.global.t('quizLoaded'));

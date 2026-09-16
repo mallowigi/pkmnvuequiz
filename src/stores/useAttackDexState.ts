@@ -22,6 +22,10 @@ export const useAttackDexState = defineStore('attackDexState', () => {
     attackDexState.isAttackDex = false;
   };
 
+  const setAttackDexState = (newAttackDexState: AttackDexState) => {
+    attackDexState.isAttackDex = newAttackDexState.isAttackDex;
+  };
+
   const hasSelection = computed(() => {
     const { state } = useState();
 
@@ -70,6 +74,7 @@ export const useAttackDexState = defineStore('attackDexState', () => {
     exitAttackDex,
     getSelection,
     hasSelection,
+    setAttackDexState,
   };
 });
 
