@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { usePkmnData } from '@/stores/usePkmnStore';
 import { useI18n } from 'vue-i18n';
+
+import { useAttackStore } from '@/stores/useAttackStore.ts';
+import { usePkmnData } from '@/stores/usePkmnStore';
 
 const { t } = useI18n();
 
 const { data, loadData } = usePkmnData();
+const { loadData: loadAttackData } = useAttackStore();
 
 onMounted(() => {
   setTimeout(() => {
     loadData();
+    loadAttackData();
   }, 500);
 });
 </script>
