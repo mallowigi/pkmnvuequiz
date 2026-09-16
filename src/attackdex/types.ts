@@ -1,4 +1,4 @@
-import type { ChallengeMode, Gen, RegionBox, Type } from '@/types.ts';
+import type { ChallengeMode, Gen, RegionBox, Translations, Type } from '@/types.ts';
 
 export type MoveType = 'zmove' | 'max' | 'gmax';
 
@@ -63,4 +63,11 @@ export type MoveStatus = {
 export type AttackDexProgress = {
   moves: Record<string, MoveStatus>;
   lastFoundMoveId: string | null;
+};
+
+export type AttackDexData = {
+  error: unknown;
+  isLoaded: boolean;
+  moves: AttackDexMove[] | null;
+  translations: Record<string, Translations> | null;
 };
