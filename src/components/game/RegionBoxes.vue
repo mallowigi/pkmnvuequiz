@@ -2,12 +2,14 @@
 import { computed, nextTick, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import MoveSprite from '@/components/attackdex/MoveSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
 import { boxes } from '@/data/boxes.js';
 import { gens } from '@/data/gens.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
@@ -20,6 +22,7 @@ const { currentBoxState } = useCurrentBox();
 const { currentGenState } = useCurrentGen();
 const { state } = useState();
 const { t } = useI18n();
+const { attackDexState } = useAttackDexState();
 
 const currentBoxes = computed(() => {
   switch (state.gameMode) {
@@ -190,6 +193,14 @@ const multiGenClass = computed(() => {
           :index="index"
         />
       </div>
+    </RoundedBox>
+
+    <!-- Attack Dex stub -->
+    <RoundedBox v-if="attackDexState.isAttackDex">
+      <MoveSprite
+        :move="move"
+        :status="getStatus(move)"
+      />
     </RoundedBox>
   </div>
 </template>
