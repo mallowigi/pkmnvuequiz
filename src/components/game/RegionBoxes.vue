@@ -174,7 +174,6 @@ const multiGenClass = computed(() => {
     :class="[state.gameMode, multiGenClass]"
   >
     <RoundedBox
-      v-if="!attackDexState.isAttackDex"
       v-for="(box, index) in currentBoxes"
       :key="box.id"
       v-motion
@@ -200,24 +199,21 @@ const multiGenClass = computed(() => {
         class="sprite-container"
         ref="boxRefs"
       >
-        <PokemonSprite
-          v-for="(pokemon, index) in getBoxPokemons(box.id)"
-          :key="pokemon.id"
-          :pokemon="pokemon"
-          :status="getStatus(pokemon)"
-          :index="index"
-        />
-      </div>
-    </RoundedBox>
-
-    <!-- Attack Dex -->
-    <RoundedBox v-if="attackDexState.isAttackDex">
-      <div class="sprite-container">
         <MoveSprite
+          v-if="attackDexState.isAttackDex"
           v-for="(move, index) in attackDexMoves"
           :key="move.id"
           :move="move"
           :status="getMoveStatus()"
+          :index="index"
+        />
+
+        <PokemonSprite
+          v-for="(pokemon, index) in getBoxPokemons(box.id)"
+          v-if="!attackDexState.isAttackDex"
+          :key="pokemon.id"
+          :pokemon="pokemon"
+          :status="getStatus(pokemon)"
           :index="index"
         />
       </div>
