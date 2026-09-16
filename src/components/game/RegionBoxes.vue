@@ -2,6 +2,7 @@
 import { computed, nextTick, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type { AttackDexMove, MoveStatus } from '@/attackdex/types.ts';
 import MoveSprite from '@/components/attackdex/MoveSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
@@ -10,6 +11,7 @@ import { boxes } from '@/data/boxes.js';
 import { gens } from '@/data/gens.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
+import { useAttackStore } from '@/stores/useAttackStore.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
@@ -23,6 +25,18 @@ const { currentGenState } = useCurrentGen();
 const { state } = useState();
 const { t } = useI18n();
 const { attackDexState } = useAttackDexState();
+const { data: attackData } = useAttackStore();
+
+const attackDexMoves = computed<AttackDexMove[]>(() => attackData.moves ?? []);
+
+// TODO: replace with a real progress store once AttackDex tracks found/shadowed moves.
+const getMoveStatus = (): MoveStatus => ({
+  isFound: false,
+  isMissed: false,
+  isShadowed: false,
+  lastFoundAt: null,
+  lastShadowedAt: null,
+});
 
 const currentBoxes = computed(() => {
   switch (state.gameMode) {
@@ -160,6 +174,7 @@ const multiGenClass = computed(() => {
     :class="[state.gameMode, multiGenClass]"
   >
     <RoundedBox
+      v-if="!attackDexState.isAttackDex"
       v-for="(box, index) in currentBoxes"
       :key="box.id"
       v-motion
@@ -195,12 +210,17 @@ const multiGenClass = computed(() => {
       </div>
     </RoundedBox>
 
-    <!-- Attack Dex stub -->
+    <!-- Attack Dex -->
     <RoundedBox v-if="attackDexState.isAttackDex">
-      <MoveSprite
-        :move="move"
-        :status="getStatus(move)"
-      />
+      <div class="sprite-container">
+        <MoveSprite
+          v-for="(move, index) in attackDexMoves"
+          :key="move.id"
+          :move="move"
+          :status="getMoveStatus()"
+          :index="index"
+        />
+      </div>
     </RoundedBox>
   </div>
 </template>
