@@ -13,7 +13,7 @@ export const damageCategorySchema = z.enum(['physical', 'special', 'status', 'va
 // Flat catalog entry: no nested `placement`/`variants` objects. Only the
 // fields the quiz itself needs are cached here; richer per-language text
 // (description/effect) is fetched live from PokeAPI on demand instead.
-export const attackDexMoveSchema = z.discriminatedUnion('scope', [
+export const attackSchema = z.discriminatedUnion('scope', [
   z.object({
     accuracy: z.number().nullable(),
     box: regionBoxSchema.optional(),
@@ -45,7 +45,7 @@ export const attackDexMoveSchema = z.discriminatedUnion('scope', [
 // spot and so import reports can note when the catalog was last refreshed.
 export const attackDexCatalogSchema = z.object({
   generatedAt: z.string(),
-  moves: z.array(attackDexMoveSchema),
+  moves: z.array(attackSchema),
   sourceVersion: z.literal(1),
 });
 

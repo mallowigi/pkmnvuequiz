@@ -27,7 +27,7 @@ export type AttackDexSessionOptions = {
   selection: AttackDexGame;
 };
 
-export type AttackDexMove =
+export type Attack =
   | {
       accuracy: number | null;
       box?: RegionBox;
@@ -53,7 +53,7 @@ export type AttackDexMove =
       type: Type;
     };
 
-export type MoveStatus = {
+export type AttackStatus = {
   isFound: boolean;
   isMissed: boolean;
   isShadowed: boolean;
@@ -61,14 +61,9 @@ export type MoveStatus = {
   lastShadowedAt: number | null;
 };
 
-export type AttackDexProgress = {
-  moves: Record<string, MoveStatus>;
-  lastFoundMoveId: string | null;
-};
-
 export type AttackDexData = {
   error: unknown;
   isLoaded: boolean;
-  moves: AttackDexMove[] | null;
+  attacks: Attack[] | null;
   translations: Record<string, Translations> | null;
 };

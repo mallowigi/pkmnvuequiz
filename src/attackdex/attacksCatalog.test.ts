@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import type { AttackDexMove } from '@/attackdex/types.ts';
+import type { Attack } from '@/attackdex/types.ts';
 import attacksFile from '@/data/attacks.json';
-import moveTranslationsFile from '@/data/moveTranslations.json';
+import attackTranslationsFile from '@/data/attackTranslations.json';
 import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
 
 // Contract tests for the checked-in AttackDex move catalog (#72). These
@@ -16,7 +16,7 @@ describe('attacks.json catalog', () => {
     expect(result.success).toBe(true);
   });
 
-  const moves = result.success ? (result.data.moves as AttackDexMove[]) : [];
+  const moves = result.success ? (result.data.moves as Attack[]) : [];
   const byId = new Map(moves.map((m) => [m.id, m]));
 
   it('is non-empty and reasonably close to the known PokeAPI move count', () => {
@@ -68,11 +68,19 @@ describe('attacks.json catalog', () => {
     expect(move?.category).toBe('variable');
   });
 
-  it('marks supplemental G-Max moves with a project-owned id', () => {
-    const move = byId.get('local-g-max-wildfire');
+  it('exposes supplemental G-Max moves under their canonical id', () => {
+    const move = byId.get('g-max-wildfire');
     expect(move).toBeDefined();
     expect(move?.scope).toBe('special');
     expect(move && move.scope === 'special' ? move.moveType : undefined).toBe('gmax');
+  });
+
+  it('keeps every id consistent with its normalized name', () => {
+    const normalize = (str: string) => str.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+
+    for (const move of moves) {
+      expect(normalize(move.id)).toBe(normalize(move.name));
+    }
   });
 
   it('maps Legends: Arceus-introduced moves to gen8 with a hisui box', () => {
@@ -130,8 +138,10 @@ describe('attacks.json catalog', () => {
   });
 });
 
-describe('moveTranslations.json', () => {
-  const translations = (moveTranslationsFile as { translations: Record<string, Record<string, string>> }).translations;
+describe('attackTranslations.json', () => {
+  const translations = (attackTranslationsFile as { translations: Record<string, Record<string, string>> })
+    .translations;
+  const catalogMoves = (attacksFile as { moves: { id: string }[] }).moves;
 
   it('has an English name for every translated move', () => {
     const entries = Object.values(translations);
@@ -147,7 +157,28 @@ describe('moveTranslations.json', () => {
     expect(translations['breakneck-blitz'].en).toBe('Breakneck Blitz');
   });
 
-  it('has no supplemental G-Max entries (no sourced translations available)', () => {
-    expect(translations['local-g-max-wildfire']).toBeUndefined();
+  it('translates every move in the catalog into every supported language', () => {
+    // G-Max moves are absent from PokeAPI and were sourced from Bulbapedia;
+    // this guards against them (or any future addition) regressing to an
+    // untranslated, unguessable state.
+    const locales = ['cn', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'zh'];
+
+    for (const move of catalogMoves) {
+      const entry = translations[move.id];
+      expect(entry, `missing translations for ${move.id}`).toBeDefined();
+
+      for (const locale of locales) {
+        expect(entry[locale], `missing ${locale} for ${move.id}`).toBeTruthy();
+      }
+    }
+  });
+
+  it('distinguishes traditional and simplified Chinese, matching the existing data convention', () => {
+    // `languages.ts` labels cn as Simplified, but all data uses cn for
+    // traditional and zh for simplified. New entries follow the data.
+    expect(translations['pound'].cn).toBe('拍擊');
+    expect(translations['pound'].zh).toBe('拍击');
+    expect(translations['g-max-wildfire'].cn).toBe('超極巨地獄滅焰');
+    expect(translations['g-max-wildfire'].zh).toBe('超极巨地狱灭焰');
   });
 });

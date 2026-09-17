@@ -1,7 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, ref } from 'vue';
 
-import type { AttackDexData, AttackDexMove } from '@/attackdex/types.ts';
+import type { AttackDexData, Attack } from '@/attackdex/types.ts';
 import { useLoadingProgress } from '@/composables/useLoadingProgress.ts';
 import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
 import type { Translations } from '@/types.ts';
@@ -11,13 +11,13 @@ export const useAttackStore = defineStore('attackData', () => {
   const isLoading = ref(false);
 
   const data: AttackDexData = reactive<AttackDexData>({
+    attacks: null,
     error: null,
     isLoaded: false,
-    moves: null,
     translations: null,
   });
 
-  async function loadMoves() {
+  async function loadAttacks() {
     const module = await import('@/data/attacks.json');
     const result = parseAttackDexCatalog(module.default);
 
@@ -25,11 +25,11 @@ export const useAttackStore = defineStore('attackData', () => {
       throw result.error;
     }
 
-    data.moves = result.data.moves as AttackDexMove[];
+    data.attacks = result.data.moves as Attack[];
   }
 
   async function loadTranslations() {
-    const module = await import('@/data/moveTranslations.json');
+    const module = await import('@/data/attackTranslations.json');
     data.translations = module.default.translations as Record<string, Translations>;
   }
 
@@ -46,7 +46,7 @@ export const useAttackStore = defineStore('attackData', () => {
       return;
     }
 
-    const loaders = [loadMoves, loadTranslations];
+    const loaders = [loadAttacks, loadTranslations];
 
     setError(null);
     isLoading.value = true;

@@ -2,8 +2,8 @@
 import { computed, nextTick, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { AttackDexMove, MoveStatus } from '@/attackdex/types.ts';
-import MoveSprite from '@/components/attackdex/MoveSprite.vue';
+import type { Attack, AttackStatus } from '@/attackdex/types.ts';
+import AttackSprite from '@/components/attackdex/AttackSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
@@ -27,10 +27,10 @@ const { t } = useI18n();
 const { attackDexState } = useAttackDexState();
 const { data: attackData } = useAttackStore();
 
-const attackDexMoves = computed<AttackDexMove[]>(() => attackData.moves ?? []);
+const attackDexAttacks = computed<Attack[]>(() => attackData.attacks ?? []);
 
 // TODO: replace with a real progress store once AttackDex tracks found/shadowed moves.
-const getMoveStatus = (): MoveStatus => ({
+const getAttackStatus = (): AttackStatus => ({
   isFound: true,
   isMissed: false,
   isShadowed: false,
@@ -199,12 +199,12 @@ const multiGenClass = computed(() => {
         class="sprite-container"
         ref="boxRefs"
       >
-        <MoveSprite
+        <AttackSprite
           v-if="attackDexState.isAttackDex"
-          v-for="(move, index) in attackDexMoves"
+          v-for="(move, index) in attackDexAttacks"
           :key="move.id"
           :move="move"
-          :status="getMoveStatus()"
+          :status="getAttackStatus()"
           :index="index"
         />
 

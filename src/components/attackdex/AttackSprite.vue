@@ -2,7 +2,7 @@
 import { useIntervalFn, useScroll } from '@vueuse/core';
 import { computed, ref, useTemplateRef, watch, nextTick } from 'vue';
 
-import type { MoveStatus, AttackDexMove, DamageCategory } from '@/attackdex/types.ts';
+import type { AttackStatus, Attack, DamageCategory } from '@/attackdex/types.ts';
 import RevealZoomTransition from '@/components/common/transitions/RevealZoomTransition.vue';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { damageCategories } from '@/data/damageCategories.ts';
@@ -13,8 +13,8 @@ import { useState } from '@/stores/useState.ts';
 import type { Type } from '@/types.ts';
 
 type Props = {
-  move: AttackDexMove;
-  status: MoveStatus;
+  move: Attack;
+  status: AttackStatus;
   index?: number;
 };
 

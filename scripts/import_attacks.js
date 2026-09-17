@@ -1,5 +1,8 @@
+import fs from 'fs';
+import path from 'path';
+
 // Generates the checked-in AttackDex move catalog (`src/data/attacks.json`)
-// and its localized display names (`src/data/moveTranslations.json`) from
+// and its localized display names (`src/data/attackTranslations.json`) from
 // PokeAPI. Run manually with `npm run data:attackdex:import` whenever a new
 // game/generation adds moves -- this is expected to happen rarely, so the
 // script favors clarity over caching/concurrency machinery.
@@ -13,12 +16,10 @@
 // description/effect text, no apiId/aliases) -- richer per-move text is
 // fetched live from PokeAPI when needed, not cached here.
 import { MoveClient } from 'pokenode-ts';
-import fs from 'fs';
-import path from 'path';
 import { z } from 'zod';
 
 const CATALOG_PATH = path.resolve('src/data/attacks.json');
-const TRANSLATIONS_PATH = path.resolve('src/data/moveTranslations.json');
+const TRANSLATIONS_PATH = path.resolve('src/data/attackTranslations.json');
 
 // PokeAPI's generation resource names map 1:1 to our `Gen` ids. Let's Go
 // moves report `generation-vii` and Legends: Arceus moves report
@@ -38,7 +39,7 @@ const GENERATION_MAP = {
 
 // The 18 generic type-based Z-Moves. Each exists in PokeAPI as two records
 // (e.g. `breakneck-blitz--physical` / `breakneck-blitz--special`) that
-// share one English display name and become one AttackDexMove with two
+// share one English display name and become one Attack with two
 // variants.
 const GENERIC_ZMOVE_BASE_NAMES = new Set([
   'breakneck-blitz',
@@ -85,8 +86,9 @@ const SIGNATURE_ZMOVE_NAMES = new Set([
 
 // G-Max Moves are absent from PokeAPI entirely (a known, documented source
 // gap -- see AttackDex spec #68). This reviewed, sourced supplement uses
-// stable project-owned ids (prefixed `local-`) rather than pretending they
-// came from PokeAPI. Source: Bulbapedia "G-Max Move" page
+// ids derived from the move name, matching every other entry, so that
+// `normalizeName(id) === normalizeName(name)` holds across the catalog and
+// translation lookups resolve. Source: Bulbapedia "G-Max Move" page
 // (https://bulbapedia.bulbagarden.net/wiki/G-Max_Move), retrieved for this
 // import. Power/category are inherited from whichever base move triggers
 // them (`category: 'variable'`), except the three moves with a fixed base
@@ -255,10 +257,7 @@ function collectMoveNames(move) {
     ko: 'ko',
     zh: 'zh-hans',
   };
-  for (const [
-    ourLang,
-    apiLang,
-  ] of Object.entries(langMap)) {
+  for (const [ourLang, apiLang] of Object.entries(langMap)) {
     const entry = move.names.find((n) => n.language.name === apiLang);
     if (entry) names[ourLang] = entry.name;
   }
@@ -314,7 +313,7 @@ async function run() {
         placement,
         variant,
         `local:${entry.name}`,
-        `local-${slugify(entry.name)}`,
+        slugify(entry.name),
       );
     }
 
@@ -410,12 +409,7 @@ function placementsMatch(a, b) {
 }
 
 function validateCatalog(catalog) {
-  const damageCategory = z.enum([
-    'physical',
-    'special',
-    'status',
-    'variable',
-  ]);
+  const damageCategory = z.enum(['physical', 'special', 'status', 'variable']);
   const move = z.discriminatedUnion('scope', [
     z.object({
       accuracy: z.number().nullable(),
@@ -433,11 +427,7 @@ function validateCatalog(catalog) {
       accuracy: z.number().nullable(),
       category: damageCategory,
       id: z.string().min(1),
-      moveType: z.enum([
-        'zmove',
-        'max',
-        'gmax',
-      ]),
+      moveType: z.enum(['zmove', 'max', 'gmax']),
       name: z.string().min(1),
       power: z.number().nullable(),
       pp: z.number().nullable(),
