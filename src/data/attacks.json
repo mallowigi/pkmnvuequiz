@@ -9,6 +9,7 @@
       "power": 195,
       "pp": 1,
       "type": "electric",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -64,6 +65,7 @@
       "power": null,
       "pp": 1,
       "type": "poison",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -174,6 +176,7 @@
       "power": null,
       "pp": 1,
       "type": "fighting",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -704,6 +707,7 @@
       "power": null,
       "pp": 1,
       "type": "dark",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -793,6 +797,7 @@
       "power": null,
       "pp": 1,
       "type": "grass",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -958,6 +963,7 @@
       "power": null,
       "pp": 1,
       "type": "normal",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -1167,6 +1173,7 @@
       "power": 210,
       "pp": 1,
       "type": "electric",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -1334,6 +1341,7 @@
       "power": 185,
       "pp": 1,
       "type": "dragon",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -1477,6 +1485,7 @@
       "power": null,
       "pp": 1,
       "type": "rock",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -1532,6 +1541,7 @@
       "power": null,
       "pp": 1,
       "type": "steel",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -1829,6 +1839,7 @@
       "power": null,
       "pp": 1,
       "type": "dragon",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -2557,6 +2568,7 @@
       "power": null,
       "pp": 1,
       "type": "normal",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -3316,6 +3328,7 @@
       "power": 185,
       "pp": 1,
       "type": "psychic",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -3371,6 +3384,7 @@
       "power": null,
       "pp": 1,
       "type": "electric",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -3569,6 +3583,7 @@
       "power": null,
       "pp": 1,
       "type": "fairy",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -4021,6 +4036,7 @@
       "power": null,
       "pp": 1,
       "type": "water",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -4275,6 +4291,7 @@
       "power": null,
       "pp": 1,
       "type": "fire",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -4627,6 +4644,7 @@
       "power": 190,
       "pp": 1,
       "type": "fairy",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -4682,6 +4700,7 @@
       "power": 200,
       "pp": 1,
       "type": "psychic",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -4704,6 +4723,7 @@
       "power": null,
       "pp": 10,
       "type": "bug",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4715,6 +4735,7 @@
       "power": null,
       "pp": 10,
       "type": "water",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4726,6 +4747,7 @@
       "power": null,
       "pp": 10,
       "type": "fire",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4737,6 +4759,7 @@
       "power": null,
       "pp": 10,
       "type": "fighting",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4748,6 +4771,7 @@
       "power": null,
       "pp": 10,
       "type": "normal",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4759,6 +4783,7 @@
       "power": null,
       "pp": 10,
       "type": "dragon",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4770,6 +4795,7 @@
       "power": 160,
       "pp": 10,
       "type": "grass",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4781,6 +4807,7 @@
       "power": null,
       "pp": 10,
       "type": "fairy",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4792,6 +4819,7 @@
       "power": 160,
       "pp": 10,
       "type": "fire",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4803,6 +4831,7 @@
       "power": null,
       "pp": 10,
       "type": "water",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4814,6 +4843,7 @@
       "power": null,
       "pp": 10,
       "type": "normal",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4825,6 +4855,7 @@
       "power": null,
       "pp": 10,
       "type": "psychic",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4836,6 +4867,7 @@
       "power": 160,
       "pp": 10,
       "type": "water",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4847,6 +4879,7 @@
       "power": null,
       "pp": 10,
       "type": "poison",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4858,6 +4891,7 @@
       "power": null,
       "pp": 10,
       "type": "steel",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4869,6 +4903,7 @@
       "power": null,
       "pp": 10,
       "type": "dark",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4880,6 +4915,7 @@
       "power": null,
       "pp": 10,
       "type": "water",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4891,6 +4927,7 @@
       "power": null,
       "pp": 10,
       "type": "normal",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4902,6 +4939,7 @@
       "power": null,
       "pp": 10,
       "type": "ice",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4913,6 +4951,7 @@
       "power": null,
       "pp": 10,
       "type": "ground",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4924,6 +4963,7 @@
       "power": null,
       "pp": 10,
       "type": "fairy",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4935,6 +4975,7 @@
       "power": null,
       "pp": 10,
       "type": "dark",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4946,6 +4987,7 @@
       "power": null,
       "pp": 10,
       "type": "steel",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4957,6 +4999,7 @@
       "power": null,
       "pp": 10,
       "type": "water",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4968,6 +5011,7 @@
       "power": null,
       "pp": 10,
       "type": "electric",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4979,6 +5023,7 @@
       "power": null,
       "pp": 10,
       "type": "grass",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -4990,6 +5035,7 @@
       "power": null,
       "pp": 10,
       "type": "grass",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5001,6 +5047,7 @@
       "power": null,
       "pp": 10,
       "type": "ghost",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5012,6 +5059,7 @@
       "power": null,
       "pp": 10,
       "type": "grass",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5023,6 +5071,7 @@
       "power": null,
       "pp": 10,
       "type": "rock",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5034,6 +5083,7 @@
       "power": null,
       "pp": 10,
       "type": "electric",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5045,6 +5095,7 @@
       "power": null,
       "pp": 10,
       "type": "fire",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5056,6 +5107,7 @@
       "power": null,
       "pp": 10,
       "type": "flying",
+      "gen": "gen8",
       "moveType": "gmax",
       "scope": "special"
     },
@@ -5310,6 +5362,7 @@
       "power": 180,
       "pp": 1,
       "type": "dark",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -5354,6 +5407,7 @@
       "power": 10,
       "pp": 10,
       "type": "flying",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5365,6 +5419,7 @@
       "power": 10,
       "pp": 10,
       "type": "dark",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5376,6 +5431,7 @@
       "power": 100,
       "pp": 10,
       "type": "fire",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5387,6 +5443,7 @@
       "power": 10,
       "pp": 10,
       "type": "bug",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5398,6 +5455,7 @@
       "power": 10,
       "pp": 10,
       "type": "water",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5409,6 +5467,7 @@
       "power": null,
       "pp": 10,
       "type": "normal",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5420,6 +5479,7 @@
       "power": 10,
       "pp": 10,
       "type": "ice",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5431,6 +5491,7 @@
       "power": 10,
       "pp": 10,
       "type": "fighting",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5442,6 +5503,7 @@
       "power": 10,
       "pp": 10,
       "type": "electric",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5453,6 +5515,7 @@
       "power": 10,
       "pp": 10,
       "type": "psychic",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5464,6 +5527,7 @@
       "power": 10,
       "pp": 10,
       "type": "poison",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5475,6 +5539,7 @@
       "power": 10,
       "pp": 10,
       "type": "grass",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5486,6 +5551,7 @@
       "power": 10,
       "pp": 10,
       "type": "ghost",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5497,6 +5563,7 @@
       "power": 10,
       "pp": 10,
       "type": "ground",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5508,6 +5575,7 @@
       "power": 10,
       "pp": 10,
       "type": "rock",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5519,6 +5587,7 @@
       "power": 10,
       "pp": 10,
       "type": "fairy",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5530,6 +5599,7 @@
       "power": 10,
       "pp": 10,
       "type": "steel",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5541,6 +5611,7 @@
       "power": 10,
       "pp": 10,
       "type": "normal",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5552,6 +5623,7 @@
       "power": 10,
       "pp": 10,
       "type": "dragon",
+      "gen": "gen8",
       "moveType": "max",
       "scope": "special"
     },
@@ -5651,6 +5723,7 @@
       "power": 200,
       "pp": 1,
       "type": "ghost",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -6104,6 +6177,7 @@
       "power": null,
       "pp": 1,
       "type": "ghost",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -6225,6 +6299,7 @@
       "power": 195,
       "pp": 1,
       "type": "water",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -6953,6 +7028,7 @@
       "power": 210,
       "pp": 1,
       "type": "normal",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -7604,6 +7680,7 @@
       "power": null,
       "pp": 1,
       "type": "bug",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -7692,6 +7769,7 @@
       "power": 200,
       "pp": 1,
       "type": "steel",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -7846,6 +7924,7 @@
       "power": null,
       "pp": 1,
       "type": "psychic",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -8012,6 +8091,7 @@
       "power": 180,
       "pp": 1,
       "type": "ghost",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -8375,6 +8455,7 @@
       "power": 195,
       "pp": 1,
       "type": "ghost",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -8573,6 +8654,7 @@
       "power": 190,
       "pp": 1,
       "type": "rock",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -8717,6 +8799,7 @@
       "power": 175,
       "pp": 1,
       "type": "electric",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -8905,6 +8988,7 @@
       "power": null,
       "pp": 1,
       "type": "ice",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -8993,6 +9077,7 @@
       "power": null,
       "pp": 1,
       "type": "flying",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -9280,6 +9365,7 @@
       "power": null,
       "pp": 1,
       "type": "ground",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },
@@ -9765,6 +9851,7 @@
       "power": null,
       "pp": 1,
       "type": "fairy",
+      "gen": "gen7",
       "moveType": "zmove",
       "scope": "special"
     },

@@ -34,6 +34,7 @@ describe('attackDexCatalog.schema', () => {
         {
           accuracy: null,
           category: 'variable',
+          gen: 'gen7',
           id: 'breakneck-blitz',
           moveType: 'zmove',
           name: 'Breakneck Blitz',
@@ -51,6 +52,14 @@ describe('attackDexCatalog.schema', () => {
     const result = parseAttackDexCatalog({
       ...validCatalog,
       moves: [{ ...validMove, moveType: undefined, scope: 'special' }],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects a special-scope move missing gen', () => {
+    const result = parseAttackDexCatalog({
+      ...validCatalog,
+      moves: [{ ...validMove, gen: undefined, moveType: 'zmove', scope: 'special' }],
     });
     expect(result.success).toBe(false);
   });

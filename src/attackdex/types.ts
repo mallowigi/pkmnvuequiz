@@ -43,6 +43,7 @@ export type AttackDexMove =
   | {
       accuracy: number | null;
       category: DamageCategory;
+      gen: Gen;
       id: string;
       moveType: MoveType;
       name: string;

@@ -3,21 +3,12 @@ import { z } from 'zod';
 import { generationSchema, regionBoxSchema, typeSchema } from '@/schemas/enums.schema.ts';
 
 // Named move families exclusive to AttackDex's Special Mode (`movetype`).
-export const moveTypeSchema = z.enum([
-  'zmove',
-  'max',
-  'gmax',
-]);
+export const moveTypeSchema = z.enum(['zmove', 'max', 'gmax']);
 
 // `variable` covers Max/G-Max moves whose category is inherited from
 // whichever base move triggered them rather than being fixed by the move
 // itself.
-export const damageCategorySchema = z.enum([
-  'physical',
-  'special',
-  'status',
-  'variable',
-]);
+export const damageCategorySchema = z.enum(['physical', 'special', 'status', 'variable']);
 
 // Flat catalog entry: no nested `placement`/`variants` objects. Only the
 // fields the quiz itself needs are cached here; richer per-language text
@@ -38,6 +29,7 @@ export const attackDexMoveSchema = z.discriminatedUnion('scope', [
   z.object({
     accuracy: z.number().nullable(),
     category: damageCategorySchema,
+    gen: generationSchema,
     id: z.string().min(1),
     moveType: moveTypeSchema,
     name: z.string().min(1),

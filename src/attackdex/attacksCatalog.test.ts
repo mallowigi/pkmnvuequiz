@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import moveTranslationsFile from '@/data/moveTranslations.json';
-import attacksFile from '@/data/attacks.json';
-import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
 import type { AttackDexMove } from '@/attackdex/types.ts';
+import attacksFile from '@/data/attacks.json';
+import moveTranslationsFile from '@/data/moveTranslations.json';
+import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
 
 // Contract tests for the checked-in AttackDex move catalog (#72). These
 // assert properties of the generated data itself -- not the generator
@@ -17,12 +17,7 @@ describe('attacks.json catalog', () => {
   });
 
   const moves = result.success ? (result.data.moves as AttackDexMove[]) : [];
-  const byId = new Map(
-    moves.map((m) => [
-      m.id,
-      m,
-    ]),
-  );
+  const byId = new Map(moves.map((m) => [m.id, m]));
 
   it('is non-empty and reasonably close to the known PokeAPI move count', () => {
     expect(moves.length).toBeGreaterThan(800);
@@ -37,13 +32,7 @@ describe('attacks.json catalog', () => {
     // Colosseum/XD Shadow moves use PokeAPI's synthetic `shadow` elemental
     // type, which isn't part of our Type enum -- schema validity above
     // already proves none slipped through, but assert explicitly by id too.
-    const shadowExclusiveIds = [
-      'shadow-rush',
-      'shadow-blast',
-      'shadow-blitz',
-      'shadow-half',
-      'shadow-hold',
-    ];
+    const shadowExclusiveIds = ['shadow-rush', 'shadow-blast', 'shadow-blitz', 'shadow-half', 'shadow-hold'];
     for (const id of shadowExclusiveIds) {
       expect(byId.has(id)).toBe(false);
     }
@@ -58,11 +47,7 @@ describe('attacks.json catalog', () => {
         expect(move).not.toHaveProperty('moveType');
       } else {
         expect(move.scope).toBe('special');
-        expect([
-          'zmove',
-          'max',
-          'gmax',
-        ]).toContain(move.moveType);
+        expect(['zmove', 'max', 'gmax']).toContain(move.moveType);
       }
     }
   });
@@ -94,7 +79,7 @@ describe('attacks.json catalog', () => {
     const move = byId.get('wave-crash');
     expect(move).toBeDefined();
     expect(move?.scope).toBe('standard');
-    expect(move && move.scope === 'standard' ? move.gen : undefined).toBe('gen8');
+    expect(move?.gen).toBe('gen8');
     expect(move && move.scope === 'standard' ? move.box : undefined).toBe('hisui');
   });
 
@@ -102,8 +87,22 @@ describe('attacks.json catalog', () => {
     const move = byId.get('wicked-blow');
     expect(move).toBeDefined();
     expect(move?.scope).toBe('standard');
-    expect(move && move.scope === 'standard' ? move.gen : undefined).toBe('gen8');
+    expect(move?.gen).toBe('gen8');
     expect(move && move.scope === 'standard' ? move.box : undefined).toBeUndefined();
+  });
+
+  it('assigns every move a generation, including the Special families', () => {
+    for (const move of moves) {
+      expect(move.gen).toBeDefined();
+    }
+
+    // Z-Moves debuted in Gen 7; Max and G-Max Moves both debuted in Gen 8.
+    const gensOf = (type: string) =>
+      new Set(moves.filter((m) => m.scope === 'special' && m.moveType === type).map((m) => m.gen));
+
+    expect(gensOf('zmove')).toEqual(new Set(['gen7']));
+    expect(gensOf('max')).toEqual(new Set(['gen8']));
+    expect(gensOf('gmax')).toEqual(new Set(['gen8']));
   });
 
   it('preserves genuinely variable power as null rather than coercing to zero', () => {
