@@ -29,7 +29,9 @@ export const useAttackDexState = defineStore('attackDexState', () => {
   const hasSelection = computed(() => {
     const { state } = useState();
 
-    if (state.gameMode === 'movetype') return true;
+    // Neither mode has a sub-picker: `movetype` is the whole Special family
+    // and `full` is the whole catalog, so both are always playable.
+    if (state.gameMode === 'movetype' || state.gameMode === 'full') return true;
 
     if (state.gameMode === 'types') {
       const { currentTypeState } = useCurrentType();
@@ -46,6 +48,12 @@ export const useAttackDexState = defineStore('attackDexState', () => {
     if (state.gameMode === 'movetype') {
       return {
         kind: 'movetype',
+      };
+    }
+
+    if (state.gameMode === 'full') {
+      return {
+        kind: 'full',
       };
     }
 

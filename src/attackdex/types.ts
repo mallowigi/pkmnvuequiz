@@ -20,6 +20,9 @@ export type AttackDexGame =
     }
   | {
       kind: 'movetype';
+    }
+  | {
+      kind: 'full';
     };
 
 export type AttackDexSessionOptions = {
