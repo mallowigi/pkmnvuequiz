@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useScroll } from '@vueuse/core';
-import { computed, useTemplateRef, watch, nextTick } from 'vue';
+import { useIntervalFn, useScroll } from '@vueuse/core';
+import { computed, ref, useTemplateRef, watch, nextTick } from 'vue';
 
 import type { MoveStatus, AttackDexMove, DamageCategory } from '@/attackdex/types.ts';
 import RevealZoomTransition from '@/components/common/transitions/RevealZoomTransition.vue';
@@ -57,8 +57,19 @@ const typeImage = computed<string>(() => {
   return `/assets/types/${typeInfo.value.id.toUpperCase()}.svg`;
 });
 
+// Z-Moves can be either physical or special, so we cycle their badge between both icons
+const variableCategories: DamageCategory[] = ['physical', 'special'];
+const variableCategoryIndex = ref(0);
+
+useIntervalFn(() => {
+  variableCategoryIndex.value = (variableCategoryIndex.value + 1) % variableCategories.length;
+}, 3000);
+
 const categoryImage = computed<string>(() => {
-  return `/assets/categories/${categoryInfo.value.id.toUpperCase()}.svg`;
+  const categoryId =
+    categoryInfo.value.id === 'variable' ? variableCategories[variableCategoryIndex.value] : categoryInfo.value.id;
+
+  return `/assets/categories/${categoryId.toUpperCase()}.svg`;
 });
 
 const displayedSprite = computed<DisplayedSprite>(() => {
