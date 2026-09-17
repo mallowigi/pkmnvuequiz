@@ -31,7 +31,7 @@ const attackDexMoves = computed<AttackDexMove[]>(() => attackData.moves ?? []);
 
 // TODO: replace with a real progress store once AttackDex tracks found/shadowed moves.
 const getMoveStatus = (): MoveStatus => ({
-  isFound: false,
+  isFound: true,
   isMissed: false,
   isShadowed: false,
   lastFoundAt: null,
