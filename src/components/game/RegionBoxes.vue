@@ -6,7 +6,6 @@ import AttackSprite from '@/components/attackdex/AttackSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
 import { getGenForBox, useBoxes } from '@/composables/useBoxes.ts';
-import { useTranslations } from '@/composables/useTranslations.ts';
 import { boxes } from '@/data/boxes.js';
 import { gens } from '@/data/gens.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
@@ -24,7 +23,6 @@ const { currentBoxState } = useCurrentBox();
 const { currentGenState } = useCurrentGen();
 const { state } = useState();
 const { t } = useI18n();
-const { getBoxTranslation } = useTranslations();
 const { attackDexState } = useAttackDexState();
 const { getStatus: getAttackStatus, getCurrentGameModeBoxAttacks } = useAttacks();
 
@@ -55,16 +53,6 @@ const getBoxColor = (boxId: SpecialType | RegionBox): string | undefined => {
     return specialTypes[boxId as SpecialType]?.bgColor;
   }
   return regionColorMap[boxId as RegionBox];
-};
-
-// `SpecialType` box ids (e.g. `legendary`) match their locale key directly, but `RegionBox`
-// ids don't always (e.g. `alolaz` needs "Alola (Z-Moves)"), so region boxes go through
-// getBoxTranslation and only fall back to a raw key lookup for special-type boxes.
-const getBoxLabel = (boxId: SpecialType | RegionBox): string => {
-  if (state.gameMode === 'special') {
-    return t(boxId);
-  }
-  return getBoxTranslation(boxId as RegionBox);
 };
 
 function orderByFoundAt(pokemonA: PokemonInfo, pokemonB: PokemonInfo): number {
@@ -206,7 +194,7 @@ const multiGenClass = computed(() => {
       }"
       :style="{ '--region-color': getBoxColor(box.id) }"
     >
-      <span class="region-name">{{ getBoxLabel(box.id) }}</span>
+      <span class="region-name">{{ t(box.id) }}</span>
 
       <div
         class="sprite-container"
