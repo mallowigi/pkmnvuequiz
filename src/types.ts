@@ -391,9 +391,8 @@ export type AttackDexSessionOptions = {
 export type Attack =
   | {
       accuracy: number | null;
-      box?: RegionBox;
+      box: RegionBox;
       category: DamageCategory;
-      gen: Gen;
       id: string;
       name: string;
       power: number | null;
@@ -403,8 +402,8 @@ export type Attack =
     }
   | {
       accuracy: number | null;
+      box: RegionBox;
       category: DamageCategory;
-      gen: Gen;
       id: string;
       moveType: MoveType;
       name: string;

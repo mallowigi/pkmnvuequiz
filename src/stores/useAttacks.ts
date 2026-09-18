@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { getGenForBox } from '@/composables/useBoxes.ts';
 import { useAttackStore } from '@/stores/useAttackStore.ts';
 import type { Attack, AttackStatus, DamageCategory, Gen, Language, MoveType, RegionBox, Type } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
@@ -23,8 +24,11 @@ const attackMaps: AttackMaps = {
   allSpecial: newMap(),
   boxes: {
     alola: newMap(),
+    alolaz: newMap(),
     areazero: newMap(),
     galar: newMap(),
+    galargmax: newMap(),
+    galarmax: newMap(),
     gmax: newMap(),
     hisui: newMap(),
     hoenn: newMap(),
@@ -135,21 +139,19 @@ export const useAttacks = defineStore('attacks', () => {
       if (attack.scope === 'special') {
         upsert(attackMaps.allSpecial, attackKey, attack);
         upsert(attackMaps.moveTypes[attack.moveType], attackKey, attack);
-      } else if (attack.box) {
+      }
+
+      if (attack.box) {
         upsert(attackMaps.boxes[attack.box], attackKey, attack);
       }
 
-      if (attack.gen) {
-        upsert(attackMaps.gens[attack.gen], attackKey, attack);
+      const gen = getGenForBox(attack.box);
+      if (gen) {
+        upsert(attackMaps.gens[gen], attackKey, attack);
       }
 
-      if (attack.type) {
-        upsert(attackMaps.types[attack.type], attackKey, attack);
-      }
-
-      if (attack.category) {
-        upsert(attackMaps.categories[attack.category], attackKey, attack);
-      }
+      upsert(attackMaps.types[attack.type], attackKey, attack);
+      upsert(attackMaps.categories[attack.category], attackKey, attack);
 
       for (const lang in attackMaps.languages) {
         const translations = data.translations![attack.id];

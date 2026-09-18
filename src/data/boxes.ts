@@ -5,6 +5,10 @@ export const boxes: Record<RegionBox, RegionBoxInfo> = {
     id: 'alola',
     name: 'Alola',
   },
+  alolaz: {
+    id: 'alolaz',
+    name: 'Z-Moves (Alola)',
+  },
   areazero: {
     id: 'areazero',
     name: 'Area Zero (Paldea)',
@@ -12,6 +16,14 @@ export const boxes: Record<RegionBox, RegionBoxInfo> = {
   galar: {
     id: 'galar',
     name: 'Galar',
+  },
+  galargmax: {
+    id: 'galargmax',
+    name: 'G-Max Moves (Galar)',
+  },
+  galarmax: {
+    id: 'galarmax',
+    name: 'Max Moves (Galar)',
   },
   gmax: {
     id: 'gmax',

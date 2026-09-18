@@ -45,8 +45,11 @@ const pokemonMaps: PokemonMaps = {
   allSpecials: new Map<string, Array<PokemonInfo>>(),
   boxes: {
     alola: new Map<string, Array<PokemonInfo>>(),
+    alolaz: new Map<string, Array<PokemonInfo>>(),
     areazero: new Map<string, Array<PokemonInfo>>(),
     galar: new Map<string, Array<PokemonInfo>>(),
+    galargmax: new Map<string, Array<PokemonInfo>>(),
+    galarmax: new Map<string, Array<PokemonInfo>>(),
     gmax: new Map<string, Array<PokemonInfo>>(),
     hisui: new Map<string, Array<PokemonInfo>>(),
     hoenn: new Map<string, Array<PokemonInfo>>(),

@@ -4,8 +4,11 @@ export const gameModeSchema = z.enum(['full', 'gen', 'special', 'mega', 'types',
 export const modeSchema = z.enum(['chaos', 'normal', 'order']);
 export const regionBoxSchema = z.enum([
   'alola',
+  'alolaz',
   'areazero',
   'galar',
+  'galargmax',
+  'galarmax',
   'gmax',
   'hisui',
   'hoenn',

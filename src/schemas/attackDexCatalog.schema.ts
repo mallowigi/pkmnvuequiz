@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { generationSchema, regionBoxSchema, typeSchema } from '@/schemas/enums.schema.ts';
+import { regionBoxSchema, typeSchema } from '@/schemas/enums.schema.ts';
 
 // Named move families exclusive to AttackDex's Special Mode (`movetype`).
 export const moveTypeSchema = z.enum(['zmove', 'max', 'gmax']);
@@ -16,9 +16,8 @@ export const damageCategorySchema = z.enum(['physical', 'special', 'status', 'va
 export const attackSchema = z.discriminatedUnion('scope', [
   z.object({
     accuracy: z.number().nullable(),
-    box: regionBoxSchema.optional(),
+    box: regionBoxSchema,
     category: damageCategorySchema,
-    gen: generationSchema,
     id: z.string().min(1),
     name: z.string().min(1),
     power: z.number().nullable(),
@@ -28,8 +27,8 @@ export const attackSchema = z.discriminatedUnion('scope', [
   }),
   z.object({
     accuracy: z.number().nullable(),
+    box: regionBoxSchema,
     category: damageCategorySchema,
-    gen: generationSchema,
     id: z.string().min(1),
     moveType: moveTypeSchema,
     name: z.string().min(1),
