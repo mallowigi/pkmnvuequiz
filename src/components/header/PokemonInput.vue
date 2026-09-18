@@ -76,6 +76,11 @@ const ensureFocus = () => {
 
 // Handle keydown events on the document to allow typing without focusing the input
 const handleKeydown = (e: KeyboardEvent) => {
+  // Ignore all input, including helper shortcuts, while paused/ended or a dialog is open.
+  if (isDisabled.value) {
+    return;
+  }
+
   updateInput(inputRef.value!.value);
 
   const value = inputRef.value?.value || '';
@@ -101,6 +106,10 @@ const handleKeydown = (e: KeyboardEvent) => {
 
 // Listen to types on the document using vueuse
 onStartTyping((e) => {
+  if (isDisabled.value) {
+    return;
+  }
+
   // Cheat!
   if (e.key === '#') {
     activateCheat();
