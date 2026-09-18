@@ -324,6 +324,10 @@ const multiGenClass = computed(() => {
   &.dimmed {
     filter: brightness(0.5) saturate(0.5);
   }
+
+  &:has(.sprite-container:empty) {
+    display: none;
+  }
 }
 
 .region-name {

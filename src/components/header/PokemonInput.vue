@@ -156,7 +156,7 @@ onUnmounted(() => {
     <TextBox
       class="pokemon-input"
       ref="textBoxRef"
-      maxlength="13"
+      maxlength="30"
       @input="handleKeydown"
       autocomplete="off"
     />
