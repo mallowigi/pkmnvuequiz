@@ -1,19 +1,33 @@
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
+import type { Attack, PokemonInfo } from '@/types.ts';
 
 export const useShuffles = () => {
   const { state } = useState();
   const { setShuffledType } = useCurrentType();
   const { setCurrentBox, setCurrentSpecialBox, setCurrentMegaBox } = useCurrentBox();
-  const { getRandomRemainingPokemon } = usePokemons();
+  const { getRandomRemaining, isAttackDex } = useCurrentDex();
 
   const updateShuffles = () => {
     if (!state.withTypeShuffle && !state.withBoxShuffle) return;
 
-    const remainingPokemon = getRandomRemainingPokemon();
-    if (!remainingPokemon) return;
+    const remainingEntry = getRandomRemaining();
+    if (!remainingEntry) return;
+
+    if (isAttackDex()) {
+      if (state.withTypeShuffle) {
+        setShuffledType((remainingEntry as Attack).type);
+      }
+
+      if (state.withBoxShuffle) {
+        setCurrentBox((remainingEntry as Attack).box ?? null);
+      }
+      return;
+    }
+
+    const remainingPokemon = remainingEntry as PokemonInfo;
 
     if (state.withTypeShuffle) {
       let randomType;

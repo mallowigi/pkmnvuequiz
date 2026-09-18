@@ -2,14 +2,14 @@ import { useIntervalFn } from '@vueuse/core';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, ref } from 'vue';
 
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { megaTypes } from '@/data/megaTypes.ts';
 import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useSettings } from '@/stores/useSettings.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState';
-import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo } from '@/types.ts';
+import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo, Attack, PokemonInfo } from '@/types.ts';
 
 type CurrentTypeState = {
   shuffledType: Type | null;
@@ -125,10 +125,16 @@ export const useCurrentType = defineStore('currentType', () => {
   };
 
   const setRandomCurrentType = () => {
-    const { getRandomRemainingPokemon } = usePokemons();
-    const remainingPokemon = getRandomRemainingPokemon();
-    if (!remainingPokemon) return;
+    const { getRandomRemaining, isAttackDex } = useCurrentDex();
+    const remainingEntry = getRandomRemaining();
+    if (!remainingEntry) return;
 
+    if (isAttackDex()) {
+      setShuffledType((remainingEntry as Attack).type);
+      return;
+    }
+
+    const remainingPokemon = remainingEntry as PokemonInfo;
     let randomType;
     if (!remainingPokemon.secondaryType) {
       randomType = remainingPokemon.primaryType;
