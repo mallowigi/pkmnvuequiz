@@ -12,6 +12,7 @@
   "areazero": "Area Zero (Paldea)",
   "atk": "Attacco",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "La modalità multigiocatore non è ancora disponibile nell'AttackDex.",
   "attackDexQuiz": {
     "description": "Prova a nominare tutte le mosse Pokémon, per generazione o per tipo.",
     "familySelection": "Scegli una o piu famiglie speciali.",

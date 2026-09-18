@@ -12,6 +12,7 @@
   "areazero": "エリアゼロ (パルデア)",
   "atk": "こうげき",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "マルチプレイヤーはまだAttackDexで利用できません。",
   "attackDexQuiz": {
     "description": "世代またはタイプごとに、すべてのポケモンのわざの名前を答えましょう。",
     "familySelection": "1つ以上のスペシャル分類を選びます。",

@@ -12,6 +12,7 @@
   "areazero": "Zone Null (Paldea)",
   "atk": "Angriff",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "Der Mehrspielermodus ist im AttackDex noch nicht verfügbar.",
   "attackDexQuiz": {
     "description": "Versuche, jede Pokémon-Attacke nach Generation oder Typ zu benennen.",
     "familySelection": "Waehle eine oder mehrere Spezialfamilien.",

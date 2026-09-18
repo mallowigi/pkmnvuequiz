@@ -12,6 +12,7 @@
   "areazero": "Ареа Зеро (Палдея)",
   "atk": "Атака",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "Многопользовательский режим пока недоступен в AttackDex.",
   "attackDexQuiz": {
     "description": "Постарайтесь назвать все приемы покемонов по поколению или типу.",
     "familySelection": "Выберите одно или несколько специальных семейств.",

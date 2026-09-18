@@ -14,6 +14,7 @@
   "areazero": "Area Zero (Paldea)",
   "atk": "Attack",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "Multiplayer isn't available in the AttackDex yet.",
   "attackDexQuiz": {
     "description": "Try to name every Pokémon move, by generation or by type.",
     "familySelection": "Choose one or more Special families.",

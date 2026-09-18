@@ -12,6 +12,7 @@
   "areazero": "第零区 (帕底亚)",
   "atk": "攻击",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "多人游戏模式在招式图鉴中尚不可用。",
   "attackDexQuiz": {
     "description": "尝试按世代或类型为所有宝可梦招式命名。",
     "familySelection": "选择一个或多个特殊类别。",

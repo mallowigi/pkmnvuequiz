@@ -12,6 +12,7 @@
   "areazero": "Zone Zéro (Paldea)",
   "atk": "Attaque",
   "attackDex": "AttackDex",
+  "attackDexMultiplayerDisabled": "Le mode multijoueur n'est pas encore disponible dans l'AttackDex.",
   "attackDexQuiz": {
     "description": "Essayez de nommer toutes les capacites Pokemon, par generation ou par type.",
     "familySelection": "Choisissez une ou plusieurs familles speciales.",
