@@ -205,6 +205,19 @@ export const useSavedData = () => {
           types: [],
         };
 
+      case 'movetype':
+        return {
+          ...baseState,
+          currentBox: currentBoxState.currentBox ?? null,
+          currentMegaBox: null,
+          currentSpecialBox: null,
+          currentType: null,
+          currentTypes: [],
+          gameMode: 'movetype',
+          gens: [],
+          types: [],
+        };
+
       case 'full':
       default:
         return {

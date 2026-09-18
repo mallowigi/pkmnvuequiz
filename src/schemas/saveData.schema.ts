@@ -148,6 +148,13 @@ export const saveDataSchema = z.discriminatedUnion('gameMode', [
     gens: z.array(generationSchema).max(0).nullish(),
     types: z.array(typeSchema).max(0).nullish(),
   }),
+  saveDataBaseSchema.extend({
+    currentMegaBox: z.null(),
+    currentSpecialBox: z.null(),
+    gameMode: z.literal('movetype'),
+    gens: z.array(generationSchema).max(0).nullish(),
+    types: z.array(typeSchema).max(0).nullish(),
+  }),
 ]);
 
 export const parseSaveData = (input: unknown) => saveDataSchema.safeParse(input);

@@ -200,6 +200,8 @@ export const useQuiz = ({ withDialog = false } = {}) => {
         return capitalize(getGameModeTranslation('special'));
       case 'mega':
         return capitalize(getGameModeTranslation('mega'));
+      case 'movetype':
+        return capitalize(getGameModeTranslation('movetype'));
       default:
         return '';
     }
