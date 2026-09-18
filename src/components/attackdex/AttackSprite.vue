@@ -6,6 +6,7 @@ import RevealZoomTransition from '@/components/common/transitions/RevealZoomTran
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { damageCategories } from '@/data/damageCategories.ts';
 import { pokemonTypes } from '@/data/pokemonTypes.ts';
+import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
@@ -36,6 +37,13 @@ const { state } = useState();
 const { flowState } = useGameFlow();
 const { unknownSprite } = useUnknownSprite();
 const { settingsState } = useSettings();
+const { displayAttackDetails } = useAttackDetails();
+
+const onClick = () => {
+  if (!props.status.isFound || props.status.isShadowed) return;
+
+  displayAttackDetails(props.move);
+};
 
 const spriteDelay = computed<string>(() => {
   const rawDelay = (props.index ?? 0) * 50;
@@ -143,6 +151,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     >
       <div
         :key="displayedSprite.key"
+        @click="onClick"
         class="sprite"
         :class="displayedSprite.kind"
         v-tooltip:bottom="displayedSprite.title ?? null"

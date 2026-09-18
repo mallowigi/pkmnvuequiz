@@ -2,6 +2,7 @@ import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
+import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
@@ -27,6 +28,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   const { resetTimer } = useTimer();
   const { resetBonus } = useBonus();
   const { resetSkips } = useSkips();
+  const { resetAttackDetails } = useAttackDetails();
   const { updateShuffles } = useShuffles();
   const { getCurrentRegions } = useCurrentRegion();
   const { getCurrentTypes } = useCurrentType();
@@ -41,6 +43,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
     resetSkips();
     resetFlowState();
     destroyRoom();
+    resetAttackDetails();
   };
 
   const setFullQuiz = () => {

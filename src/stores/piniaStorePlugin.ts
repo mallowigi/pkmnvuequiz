@@ -19,6 +19,7 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
     'profile',
     'help',
     'pkmnDetails',
+    'attackDetails',
   ];
   if (excludedStores.includes(store.$id)) {
     return;
