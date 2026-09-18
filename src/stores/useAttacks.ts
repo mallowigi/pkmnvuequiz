@@ -1,7 +1,9 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { useAttackStore } from '@/stores/useAttackStore.ts';
 import type { Attack, AttackStatus, DamageCategory, Gen, Language, MoveType, RegionBox, Type } from '@/types.ts';
+import { normalizeName, upsert } from '@/utils/utils.ts';
 
 type AttackMaps = {
   all: Map<string, Array<Attack>>;
@@ -106,8 +108,65 @@ export const useAttacks = defineStore('attacks', () => {
     lastIndex: null,
   });
 
+  const initializeAttackMaps = () => {
+    const { data } = useAttackStore();
+    if (attackMaps.all.size > 0) return;
+
+    if (!data || !data.isLoaded || !data.attacks || !data.translations) {
+      throw new Error('Attack data or translations not loaded');
+    }
+
+    data.attacks.forEach((attack) => {
+      const attackKey = normalizeName(attack.name);
+      if (!attackKey) return;
+
+      upsert(attackMaps.all, attackKey, attack);
+
+      if (!attacksState.attackStatuses.has(attackKey)) {
+        attacksState.attackStatuses.set(attackKey, {
+          isFound: false,
+          isMissed: false,
+          isShadowed: false,
+          lastFoundAt: null,
+          lastShadowedAt: null,
+        });
+      }
+
+      if (attack.scope === 'special') {
+        upsert(attackMaps.allSpecial, attackKey, attack);
+        upsert(attackMaps.moveTypes[attack.moveType], attackKey, attack);
+      } else if (attack.box) {
+        upsert(attackMaps.boxes[attack.box], attackKey, attack);
+      }
+
+      if (attack.gen) {
+        upsert(attackMaps.gens[attack.gen], attackKey, attack);
+      }
+
+      if (attack.type) {
+        upsert(attackMaps.types[attack.type], attackKey, attack);
+      }
+
+      if (attack.category) {
+        upsert(attackMaps.categories[attack.category], attackKey, attack);
+      }
+
+      for (const lang in attackMaps.languages) {
+        const translations = data.translations![attack.id];
+        const translation = translations?.[lang as Language];
+        if (translation) {
+          const translationKey = normalizeName(translation);
+          if (translationKey) {
+            upsert(attackMaps.languages[lang as Language], translationKey, attack);
+          }
+        }
+      }
+    });
+  };
+
   return {
     attacksState,
+    initializeAttackMaps,
   };
 });
 

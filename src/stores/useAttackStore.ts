@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue';
 
 import { useLoadingProgress } from '@/composables/useLoadingProgress.ts';
 import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
+import { useAttacks } from '@/stores/useAttacks.ts';
 import type { Translations, AttackDexData, Attack } from '@/types.ts';
 
 export const useAttackStore = defineStore('attackData', () => {
@@ -41,6 +42,7 @@ export const useAttackStore = defineStore('attackData', () => {
   }
 
   async function loadData() {
+    const { initializeAttackMaps } = useAttacks();
     if (data.isLoaded || isLoading.value) {
       return;
     }
@@ -60,6 +62,7 @@ export const useAttackStore = defineStore('attackData', () => {
       );
 
       setLoaded();
+      initializeAttackMaps();
     } catch (error) {
       console.error('Error loading attack data:', error);
       setError(error);
