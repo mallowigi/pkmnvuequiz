@@ -1,10 +1,21 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
+
 import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 
 const { attackDetailsState } = useAttackDetails();
 
 const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
+
+const imageFailed = ref(false);
+
+watch(
+  () => attackDetailsState.currentAttack,
+  () => {
+    imageFailed.value = false;
+  },
+);
 </script>
 
 <template>
@@ -18,10 +29,11 @@ const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
     >
       <div class="artwork-container">
         <img
-          v-if="attackDetailsState.currentAttack.artwork"
+          v-if="attackDetailsState.currentAttack.artwork && !imageFailed"
           :src="attackDetailsState.currentAttack.artwork"
           :alt="attackDetailsState.currentAttack.name"
           class="artwork"
+          @error="imageFailed = true"
         />
       </div>
     </div>
