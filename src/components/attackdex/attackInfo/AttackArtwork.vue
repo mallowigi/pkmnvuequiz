@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { useImage } from '@vueuse/core';
 
 import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
@@ -8,14 +8,7 @@ const { attackDetailsState } = useAttackDetails();
 
 const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
 
-const imageFailed = ref(false);
-
-watch(
-  () => attackDetailsState.currentAttack,
-  () => {
-    imageFailed.value = false;
-  },
-);
+const { isReady } = useImage({ src: attackDetailsState.currentAttack?.artwork ?? '' });
 </script>
 
 <template>
@@ -29,11 +22,10 @@ watch(
     >
       <div class="artwork-container">
         <img
-          v-if="attackDetailsState.currentAttack.artwork && !imageFailed"
+          v-if="attackDetailsState.currentAttack.artwork && isReady"
           :src="attackDetailsState.currentAttack.artwork"
           :alt="attackDetailsState.currentAttack.name"
           class="artwork"
-          @error="imageFailed = true"
         />
       </div>
     </div>
@@ -59,11 +51,25 @@ watch(
 }
 
 .artwork-container {
-  width: 200px;
-  height: 200px;
+  min-width: 300px;
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+  img {
+    border-radius: 20px;
+  }
+
+  &:hover {
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+    box-shadow: 0 10px 20px var(--type-btn-color, var(--primary));
+    transform: scale(1.05);
+  }
 }
 
 .artwork {
