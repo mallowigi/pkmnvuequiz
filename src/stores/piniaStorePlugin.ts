@@ -12,6 +12,7 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
     'messages',
     'roomMessages',
     'pkmnData',
+    'attackData',
     'firebase',
     'tooltips',
     'credits',

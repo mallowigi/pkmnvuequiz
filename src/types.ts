@@ -1,6 +1,7 @@
 import type { DocumentData } from 'firebase/firestore';
 import type { z } from 'zod';
 
+import { attackProgressSchema } from '@/schemas/attackProgress.schema.ts';
 import type {
   challengeModeSchema,
   gameModeSchema,
@@ -250,7 +251,7 @@ export type PkmnData = {
 
 //region Saved Data
 export type PokemonProgress = z.infer<typeof pokemonProgressSchema>;
-
+export type AttackProgress = z.infer<typeof attackProgressSchema>;
 export type Touches = z.infer<typeof touchesSchema>;
 
 export type SaveData = z.infer<typeof saveDataSchema>;

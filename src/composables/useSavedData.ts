@@ -8,6 +8,7 @@ import { LOCAL_STORAGE_NAME_KEY, LOCAL_STORAGE_KEY, VERSION } from '@/data/globa
 import { i18n } from '@/main.ts';
 import { parseSaveData } from '@/schemas/saveData.schema.ts';
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
+import { useAttacks } from '@/stores/useAttacks.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
@@ -21,7 +22,7 @@ import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useTouches } from '@/stores/useTouches.ts';
-import type { SaveData, SaveDataBase, OwnerState, PokemonProgress, Gen, Type } from '@/types.ts';
+import type { SaveData, SaveDataBase, OwnerState, PokemonProgress, AttackProgress, Gen, Type } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
 
 const ready = ref(false);
@@ -93,6 +94,7 @@ export const useSavedData = () => {
     const { bonusState } = useBonus();
     const { skipsState } = useSkips();
     const { attackDexState } = useAttackDexState();
+    const { attacksState } = useAttacks();
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
     const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
@@ -110,11 +112,27 @@ export const useSavedData = () => {
       }
     });
 
+    const attacksFound: AttackProgress['attacksFound'] = [];
+    const attacksShadowed: AttackProgress['attacksShadowed'] = [];
+
+    attacksState.attackStatuses.forEach((status, name) => {
+      if (status.isFound) {
+        attacksFound.push({ id: name, lastFoundAt: status.lastFoundAt });
+      }
+      if (status.isShadowed) {
+        attacksShadowed.push({ id: name, lastShadowedAt: status.lastShadowedAt });
+      }
+    });
+
     const baseState = {
       ...state,
       ...settingsState,
       ...touchesState,
       attackDexState,
+      attackProgress: {
+        attacksFound,
+        attacksShadowed,
+      },
       challengeMode: flowState.challengeMode,
       gameSelectionState: null,
       languages: Array.from(settingsState.languages),
@@ -304,6 +322,7 @@ export const useSavedData = () => {
     const { setScore } = useBonus();
     const { setSkips } = useSkips();
     const { setAttackDexState } = useAttackDexState();
+    const { attacksState, resetAttacksState, findAttack } = useAttacks();
 
     const {
       currentTypes,
@@ -313,6 +332,7 @@ export const useSavedData = () => {
       currentMegaBox,
       languages,
       pokemonProgress,
+      attackProgress,
       timer,
       gameSelectionState,
       challengeMode,
@@ -325,6 +345,7 @@ export const useSavedData = () => {
     } = loadedState as Partial<SaveData>;
 
     const { pokemonFound, pokemonShadowed, shinyPokemon } = pokemonProgress ?? {};
+    const { attacksFound, attacksShadowed } = attackProgress ?? {};
     const { isLimited, minutes, startTime, elapsed } = timer ?? {};
 
     // Languages
@@ -407,6 +428,51 @@ export const useSavedData = () => {
           isShiny: true,
           lastFoundAt: null,
           lastShadowedAt: null,
+        });
+      }
+    });
+
+    // Attack progress
+    resetAttacksState();
+
+    attacksFound?.forEach((entry) => {
+      const { id: name, lastFoundAt } = entry;
+
+      const found = findAttack(name);
+      const nameToFound = found && found.length > 0 ? normalizeName(found[0].name) : name;
+      const status = attacksState.attackStatuses.get(nameToFound);
+
+      if (status) {
+        status.isFound = true;
+        status.lastFoundAt = lastFoundAt;
+      } else {
+        attacksState.attackStatuses.set(nameToFound, {
+          isFound: true,
+          isMissed: false,
+          isShadowed: false,
+          lastFoundAt,
+          lastShadowedAt: null,
+        });
+      }
+    });
+
+    attacksShadowed?.forEach((entry) => {
+      const { id: name, lastShadowedAt } = entry;
+
+      const found = findAttack(name);
+      const nameToShadow = found && found.length > 0 ? normalizeName(found[0].name) : name;
+      const status = attacksState.attackStatuses.get(nameToShadow);
+
+      if (status) {
+        status.isShadowed = true;
+        status.lastShadowedAt = lastShadowedAt;
+      } else {
+        attacksState.attackStatuses.set(nameToShadow, {
+          isFound: false,
+          isMissed: false,
+          isShadowed: true,
+          lastFoundAt: null,
+          lastShadowedAt,
         });
       }
     });
