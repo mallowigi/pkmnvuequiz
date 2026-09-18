@@ -41,6 +41,7 @@ export type AlertDialogOptions = {
 
 export type Dialog =
   | 'alert'
+  | 'attackArtwork'
   | 'changeName'
   | 'chaos'
   | 'giveup'

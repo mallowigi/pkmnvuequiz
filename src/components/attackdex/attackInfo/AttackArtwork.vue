@@ -3,12 +3,20 @@ import { useImage } from '@vueuse/core';
 
 import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
+import { useDialogs } from '@/stores/useDialogs.ts';
 
 const { attackDetailsState } = useAttackDetails();
+const { setDialog } = useDialogs();
 
 const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
 
 const { isReady } = useImage({ src: attackDetailsState.currentAttack?.artwork ?? '' });
+
+const openArtworkDialog = () => {
+  if (attackDetailsState.currentAttack?.artwork && isReady.value) {
+    setDialog('attackArtwork');
+  }
+};
 </script>
 
 <template>
@@ -26,6 +34,7 @@ const { isReady } = useImage({ src: attackDetailsState.currentAttack?.artwork ??
           :src="attackDetailsState.currentAttack.artwork"
           :alt="attackDetailsState.currentAttack.name"
           class="artwork"
+          @click="openArtworkDialog"
         />
       </div>
     </div>
@@ -75,6 +84,7 @@ const { isReady } = useImage({ src: attackDetailsState.currentAttack?.artwork ??
 .artwork {
   max-width: 100%;
   max-height: 100%;
+  cursor: pointer;
   filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
 }
 </style>

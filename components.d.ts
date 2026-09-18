@@ -15,6 +15,7 @@ declare module 'vue' {
     ArrowIcon: typeof import('./src/components/common/icons/ArrowIcon.vue')['default']
     Artwork: typeof import('./src/components/game/pokemonInfo/Artwork.vue')['default']
     AttackArtwork: typeof import('./src/components/attackdex/attackInfo/AttackArtwork.vue')['default']
+    AttackArtworkDialog: typeof import('./src/components/dialogs/AttackArtworkDialog.vue')['default']
     AttackBasicInfo: typeof import('./src/components/attackdex/attackInfo/AttackBasicInfo.vue')['default']
     AttackDetailsPane: typeof import('./src/components/attackdex/attackInfo/AttackDetailsPane.vue')['default']
     AttackProfile: typeof import('./src/components/attackdex/attackInfo/AttackProfile.vue')['default']
