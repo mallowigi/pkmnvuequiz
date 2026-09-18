@@ -10,12 +10,12 @@ import { boxes } from '@/data/boxes.js';
 import { gens } from '@/data/gens.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
-import { useAttackStore } from '@/stores/useAttackStore.ts';
+import { useAttacks } from '@/stores/useAttacks.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo, RegionBox, SpecialType, AttackStatus, Attack } from '@/types.ts';
+import type { PokemonInfo, RegionBox, SpecialType, Attack } from '@/types.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus, getMegaPokemon } = usePokemons();
@@ -24,18 +24,7 @@ const { currentGenState } = useCurrentGen();
 const { state } = useState();
 const { t } = useI18n();
 const { attackDexState } = useAttackDexState();
-const { data: attackData } = useAttackStore();
-
-const attackDexAttacks = computed<Attack[]>(() => attackData.attacks ?? []);
-
-// TODO: replace with a real progress store once AttackDex tracks found/shadowed moves.
-const getAttackStatus = (): AttackStatus => ({
-  isFound: true,
-  isMissed: false,
-  isShadowed: false,
-  lastFoundAt: null,
-  lastShadowedAt: null,
-});
+const { getStatus: getAttackStatus, getCurrentGameModeBoxAttacks } = useAttacks();
 
 const currentBoxes = computed(() => {
   switch (state.gameMode) {
@@ -103,12 +92,22 @@ const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, Poke
   return result;
 };
 
+const getBoxAttacks = (boxId: SpecialType | RegionBox): Attack[] => {
+  const attacksByName = getCurrentGameModeBoxAttacks(boxId as RegionBox);
+  return Array.from(attacksByName.values()).map((moves) => moves[0]);
+};
+
 const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   const pokemonByName = getCurrentGamePokemon(boxId);
   return Array.from(pokemonByName.values()).map((pokemons) => pokemons[0]);
 };
 
 const isFull = (boxId: SpecialType | RegionBox) => {
+  if (attackDexState.isAttackDex) {
+    const boxAttacks = getBoxAttacks(boxId);
+    return boxAttacks.length > 0 && boxAttacks.every((attack) => getAttackStatus(attack).isFound);
+  }
+
   const pokemons = getBoxPokemons(boxId);
   return pokemons.every((pokemon) => getStatus(pokemon).isFound);
 };
@@ -200,10 +199,10 @@ const multiGenClass = computed(() => {
       >
         <AttackSprite
           v-if="attackDexState.isAttackDex"
-          v-for="(move, index) in attackDexAttacks"
+          v-for="(move, index) in getBoxAttacks(box.id)"
           :key="move.id"
           :move="move"
-          :status="getAttackStatus()"
+          :status="getAttackStatus(move)"
           :index="index"
         />
 

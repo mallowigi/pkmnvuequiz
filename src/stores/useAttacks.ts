@@ -390,6 +390,47 @@ export const useAttacks = defineStore('attacks', () => {
     return result;
   };
 
+  const getTypedBoxAttacks = (types: Type[], boxId: RegionBox): Map<string, Attack[]> => {
+    const boxAttacks = attackMaps.boxes[boxId];
+    if (!boxAttacks) return new Map();
+
+    const result = new Map<string, Attack[]>();
+
+    for (const [key, attacks] of boxAttacks) {
+      const filtered = attacks.filter((attack) => types.includes(attack.type));
+      if (filtered.length > 0) {
+        result.set(key, filtered);
+      }
+    }
+
+    return result;
+  };
+
+  const getCurrentGameModeBoxAttacks = (boxId: RegionBox): Map<string, Attack[]> => {
+    const gameMode = state.gameMode;
+    switch (gameMode) {
+      case 'gen':
+        return getGenAttacks(boxId);
+      case 'types': {
+        const types = getCurrentTypes();
+        if (!types || types.length === 0) {
+          return getGenAttacks(boxId);
+        }
+
+        const typeIds = types.map((type) => type.id as Type);
+        if (typeIds.length === 0) {
+          return getGenAttacks(boxId);
+        }
+
+        return getTypedBoxAttacks(typeIds, boxId);
+      }
+      case 'full':
+        return getGenAttacks(boxId);
+      default:
+        return new Map();
+    }
+  };
+
   const getTypeAttacks = (typeId: Type): Map<string, Attack[]> => {
     return attackMaps.types[typeId] ?? new Map();
   };
@@ -528,6 +569,7 @@ export const useAttacks = defineStore('attacks', () => {
     getAllAttacks,
     getCategoryAttacks,
     getCurrentGameModeAttacks,
+    getCurrentGameModeBoxAttacks,
     getCurrentGenAttacks,
     getCurrentTypeAttacks,
     getGenAttacks,
