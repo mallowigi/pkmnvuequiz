@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n';
 
 import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
 import { useMultiTap } from '@/composables/useMultiTap.ts';
 import { usePokemonInput } from '@/composables/usePokemonInput.ts';
@@ -22,6 +23,7 @@ const { flowState, isInGame } = storeToRefs(gameFlowStore);
 const { updateInput } = useLastInput();
 const { dialogs } = useDialogs();
 const { getGameModeName } = useQuiz();
+const { isAttackDex } = useCurrentDex();
 const { t } = useI18n();
 const { lastQuery } = useVoice();
 
@@ -51,17 +53,21 @@ const inputRef = computed(() => textBoxRef.value?.inputRef ?? null);
 
 const nameAllText = computed(() => {
   const regionOrType = getGameModeName();
+  const entryType = t(isAttackDex() ? 'attack' : 'pokemon');
+
   switch (state.gameMode) {
     case 'gen':
-      return t('nameAll.gen', { name: regionOrType });
+      return t('nameAll.gen', { entryType, name: regionOrType });
     case 'types':
-      return t('nameAll.types', { name: regionOrType });
+      return t('nameAll.types', { entryType, name: regionOrType });
     case 'special':
       return t('nameAll.special', { name: regionOrType });
     case 'mega':
-      return t('nameAll.mega', { name: regionOrType });
+      return t('nameAll.mega');
+    case 'movetype':
+      return t('nameAll.movetype');
     default:
-      return t('nameAll.full');
+      return t('nameAll.full', { entryType });
   }
 });
 

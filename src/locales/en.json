@@ -15,6 +15,7 @@
   "appReadyOffline": "App ready to work offline",
   "areazero": "Area Zero (Paldea)",
   "atk": "Attack",
+  "attack": "moves",
   "attackDex": "AttackDex",
   "attackDexMultiplayerDisabled": "Multiplayer isn't available in the AttackDex yet.",
   "attackDexQuiz": {
@@ -409,11 +410,12 @@
   "multiplayerRecord": "Multiplayer result",
   "mythical": "Mythical",
   "nameAll": {
-    "full": "Name all Pokémon!",
-    "gen": "Name all {name} Pokémon!",
+    "full": "Name all {entryType}!",
+    "gen": "Name all {name} {entryType}!",
     "mega": "Name all Mega Pokémon!",
+    "movetype": "Name all Special moves!",
     "special": "Name all {name} Pokémon!",
-    "types": "Name all {name} Pokémon!"
+    "types": "Name all {name} {entryType}!"
   },
   "nameAllRegionPokemon": "Name all Pokémon!",
   "newContentAvailable": "The app has been updated. Click on the Reload button or refresh to update.",
@@ -445,6 +447,7 @@
   "pink": "Pink",
   "plays": "Plays",
   "poison": "Poison",
+  "pokemon": "Pokémon",
   "pokemongo": "Pokémon GO",
   "power": "Power",
   "pp": "PP",
