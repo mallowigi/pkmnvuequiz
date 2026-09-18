@@ -366,6 +366,8 @@ export type DamageCategory = 'physical' | 'special' | 'status' | 'variable';
 export type DamageCategoryInfo = {
   id: DamageCategory;
   name: string;
+  color: string;
+  fgColor: string;
 };
 
 export type AttackDexGame =
@@ -425,6 +427,7 @@ export type AttackStatus = {
 export type AttackDetails = Attack & {
   description: string;
   effect: string;
+  artwork: string;
 };
 
 export type AttackDexData = {

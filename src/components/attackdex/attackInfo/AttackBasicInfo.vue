@@ -3,8 +3,9 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
+import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
-import { pokemonTypes } from '@/data/pokemonTypes.ts';
+import { damageCategories } from '@/data/damageCategories.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { moveUrl } from '@/utils/utils.ts';
 
@@ -12,16 +13,11 @@ const { t } = useI18n();
 const { getBoxTranslation } = useTranslations();
 const { attackDetailsState } = useAttackDetails();
 
-const styles = computed(() => {
-  const attack = attackDetailsState.currentAttack;
-  const typeInfo = attack && pokemonTypes[attack.type];
+const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
 
-  return {
-    '--primary-type': typeInfo?.lightBgColor ?? 'var(--type-bg-color)',
-    '--primary-type-dark': typeInfo?.darkBgColor ?? 'var(--type-dark-color)',
-    '--primary-type-text': typeInfo?.fgColor ?? 'var(--type-fg-color)',
-    '--type-btn-color': typeInfo?.buttonColor ?? 'var(--primary)',
-  };
+const categoryInfo = computed(() => {
+  const category = attackDetailsState.currentAttack?.category;
+  return category ? damageCategories[category] : null;
 });
 </script>
 
@@ -44,7 +40,12 @@ const styles = computed(() => {
     <!-- Type, Category and Region -->
     <div class="badges">
       <span class="badge type">{{ t(attackDetailsState.currentAttack.type) }}</span>
-      <span class="badge category">{{ t(attackDetailsState.currentAttack.category) }}</span>
+      <span
+        class="badge category"
+        v-if="categoryInfo"
+        :style="{ background: categoryInfo.color, color: categoryInfo.fgColor }"
+        >{{ t(categoryInfo.id) }}</span
+      >
       <span
         class="badge region"
         v-if="attackDetailsState.currentAttack.box"
@@ -102,7 +103,6 @@ const styles = computed(() => {
     }
   }
 
-  &.category,
   &.region {
     background-color: var(--gauge);
     color: var(--text);

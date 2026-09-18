@@ -50,6 +50,9 @@ const { attackDetailsState } = useAttackDetails();
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+
+  rule: 2px dashed var(--type-btn-color, var(--primary));
+  rule-break: intersection;
 }
 
 .detail-item {

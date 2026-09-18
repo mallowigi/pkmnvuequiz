@@ -4,6 +4,7 @@ import { reactive, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { Attack, AttackDetails } from '@/types.ts';
+import { fetchBulbapediaArtwork } from '@/utils/utils.ts';
 
 interface AttackDetailsState {
   currentAttack: AttackDetails | null;
@@ -76,10 +77,16 @@ export const useAttackDetails = defineStore('attackDetails', () => {
   };
 
   const fetchAttack = async (attack: Attack): Promise<AttackDetails> => {
-    const moveData = await api.getMoveByName(attack.id);
+    const articleTitle = `${attack.name.replace(/[\s-]/g, '_')}_(move)`;
+    const [moveData, artwork] = await Promise.all([
+      api.getMoveByName(attack.id),
+      // Artwork is best-effort: never block the whole pane if Bulbapedia is unreachable.
+      fetchBulbapediaArtwork(articleTitle),
+    ]);
 
     const details: AttackDetails = {
       ...attack,
+      artwork,
       description: fetchDescription(moveData),
       effect: fetchEffect(moveData),
     };

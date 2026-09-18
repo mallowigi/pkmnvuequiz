@@ -63,3 +63,29 @@ export const moveUrl = (moveName: string) => {
   const formattedName = moveName.replace(/[\s-]/g, '_');
   return `https://bulbapedia.bulbagarden.net/wiki/${formattedName}_(move)`;
 };
+
+/**
+ * Fetches the representative page image for a Bulbapedia article via the MediaWiki API,
+ * so we don't have to guess the article's image filename convention ourselves.
+ * Returns an empty string when no image is available or the request fails.
+ */
+export const fetchBulbapediaArtwork = async (articleTitle: string): Promise<string> => {
+  try {
+    const params = new URLSearchParams({
+      action: 'query',
+      format: 'json',
+      origin: '*',
+      pithumbsize: '500',
+      prop: 'pageimages',
+      titles: articleTitle,
+    });
+    const response = await fetch(`https://bulbapedia.bulbagarden.net/w/api.php?${params}`);
+    if (!response.ok) return '';
+
+    const data = await response.json();
+    const pages = Object.values(data?.query?.pages ?? {}) as { thumbnail?: { source?: string } }[];
+    return pages[0]?.thumbnail?.source ?? '';
+  } catch {
+    return '';
+  }
+};

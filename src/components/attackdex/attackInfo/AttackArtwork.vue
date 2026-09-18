@@ -1,0 +1,62 @@
+<script setup lang="ts">
+import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
+import { useAttackDetails } from '@/stores/useAttackDetails.ts';
+
+const { attackDetailsState } = useAttackDetails();
+
+const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
+</script>
+
+<template>
+  <div
+    class="pane-header"
+    v-if="attackDetailsState.currentAttack"
+  >
+    <div
+      class="artwork-gradient rad-br-tl"
+      :style="styles"
+    >
+      <div class="artwork-container">
+        <img
+          v-if="attackDetailsState.currentAttack.artwork"
+          :src="attackDetailsState.currentAttack.artwork"
+          :alt="attackDetailsState.currentAttack.name"
+          class="artwork"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.pane-header {
+  padding: 4rem 1.5rem 1rem;
+  text-align: center;
+}
+
+.artwork-gradient {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary-type) 40%, var(--button)) 0%,
+    color-mix(in srgb, var(--primary-type) 40%, var(--button)) 100%
+  );
+  border: 3px solid var(--type-btn-color, var(--primary));
+  padding: 1.5rem;
+  display: inline-block;
+  margin: 0 auto 1rem;
+}
+
+.artwork-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artwork {
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+}
+</style>

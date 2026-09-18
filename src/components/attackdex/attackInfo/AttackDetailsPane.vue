@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import AttackArtwork from '@/components/attackdex/attackInfo/AttackArtwork.vue';
 import AttackBasicInfo from '@/components/attackdex/attackInfo/AttackBasicInfo.vue';
 import AttackProfile from '@/components/attackdex/attackInfo/AttackProfile.vue';
 import Overlay from '@/components/common/Overlay.vue';
@@ -55,6 +56,9 @@ const onAfterLeave = () => {
             class="details-pane-contents"
             v-if="attackDetailsState.currentAttack"
           >
+            <!-- Move Artwork -->
+            <AttackArtwork />
+
             <!-- Name, Type, Category, Region and Description -->
             <AttackBasicInfo />
 
