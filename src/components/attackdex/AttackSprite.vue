@@ -8,6 +8,7 @@ import { damageCategories } from '@/data/damageCategories.ts';
 import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useLanguages } from '@/stores/useLanguages.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Type, AttackStatus, Attack, DamageCategory } from '@/types.ts';
@@ -38,6 +39,7 @@ const { flowState } = useGameFlow();
 const { unknownSprite } = useUnknownSprite();
 const { settingsState } = useSettings();
 const { displayAttackDetails } = useAttackDetails();
+const { getAttackTranslation } = useLanguages();
 
 const onClick = () => {
   if (!props.status.isFound || props.status.isShadowed) return;
@@ -86,7 +88,7 @@ const displayedSprite = computed<DisplayedSprite>(() => {
       categoryImage: categoryImage.value,
       key: 'found',
       kind: 'found',
-      title: props.move.name,
+      title: getAttackTranslation(props.move),
       type: props.move.type,
       typeImage: typeImage.value,
     };

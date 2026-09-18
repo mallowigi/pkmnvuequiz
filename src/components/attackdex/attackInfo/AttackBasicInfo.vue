@@ -7,10 +7,12 @@ import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
 import { damageCategories } from '@/data/damageCategories.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
+import { useLanguages } from '@/stores/useLanguages.ts';
 import { moveUrl } from '@/utils/utils.ts';
 
 const { t } = useI18n();
 const { getBoxTranslation } = useTranslations();
+const { getAttackTranslation } = useLanguages();
 const { attackDetailsState } = useAttackDetails();
 
 const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
@@ -33,7 +35,7 @@ const categoryInfo = computed(() => {
         :href="moveUrl(attackDetailsState.currentAttack.id)"
         target="_blank"
         rel="noopener noreferrer"
-        >{{ attackDetailsState.currentAttack.name }}</a
+        >{{ getAttackTranslation(attackDetailsState.currentAttack) }}</a
       >
     </h2>
 

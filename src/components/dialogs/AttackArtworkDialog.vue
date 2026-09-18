@@ -4,9 +4,11 @@ import { useI18n } from 'vue-i18n';
 import Overlay from '@/components/common/Overlay.vue';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useLanguages } from '@/stores/useLanguages.ts';
 
 const { attackDetailsState } = useAttackDetails();
 const { closeDialog } = useDialogs();
+const { getAttackTranslation } = useLanguages();
 const { t } = useI18n();
 </script>
 
@@ -19,7 +21,7 @@ const { t } = useI18n();
       <img
         v-if="attackDetailsState.currentAttack?.artwork"
         :src="attackDetailsState.currentAttack.artwork"
-        :alt="attackDetailsState.currentAttack.name"
+        :alt="getAttackTranslation(attackDetailsState.currentAttack)"
         class="artwork"
       />
 

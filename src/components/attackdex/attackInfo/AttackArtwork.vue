@@ -4,9 +4,11 @@ import { useImage } from '@vueuse/core';
 import { useAttackTypeStyles } from '@/composables/useAttackTypeStyles.ts';
 import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useLanguages } from '@/stores/useLanguages.ts';
 
 const { attackDetailsState } = useAttackDetails();
 const { setDialog } = useDialogs();
+const { getAttackTranslation } = useLanguages();
 
 const styles = useAttackTypeStyles(attackDetailsState.currentAttack);
 
@@ -32,7 +34,7 @@ const openArtworkDialog = () => {
         <img
           v-if="attackDetailsState.currentAttack.artwork && isReady"
           :src="attackDetailsState.currentAttack.artwork"
-          :alt="attackDetailsState.currentAttack.name"
+          :alt="getAttackTranslation(attackDetailsState.currentAttack)"
           class="artwork"
           @click="openArtworkDialog"
         />
