@@ -1,10 +1,9 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, ref } from 'vue';
 
-import type { AttackDexData, Attack } from '@/attackdex/types.ts';
 import { useLoadingProgress } from '@/composables/useLoadingProgress.ts';
 import { parseAttackDexCatalog } from '@/schemas/attackDexCatalog.schema.ts';
-import type { Translations } from '@/types.ts';
+import type { Translations, AttackDexData, Attack } from '@/types.ts';
 
 export const useAttackStore = defineStore('attackData', () => {
   const { beginLoading, endLoading, reportStep } = useLoadingProgress();

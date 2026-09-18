@@ -2,7 +2,6 @@
 import { computed, nextTick, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { Attack, AttackStatus } from '@/attackdex/types.ts';
 import AttackSprite from '@/components/attackdex/AttackSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
@@ -16,7 +15,7 @@ import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
+import type { PokemonInfo, RegionBox, SpecialType, AttackStatus, Attack } from '@/types.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus, getMegaPokemon } = usePokemons();

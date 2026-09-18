@@ -1,4 +1,4 @@
-import type { DamageCategory, DamageCategoryInfo } from '@/attackdex/types.ts';
+import type { DamageCategoryInfo, DamageCategory } from '@/types.ts';
 
 export const damageCategories: Record<DamageCategory, DamageCategoryInfo> = {
   physical: {

@@ -2,7 +2,6 @@
 import { useIntervalFn, useScroll } from '@vueuse/core';
 import { computed, ref, useTemplateRef, watch, nextTick } from 'vue';
 
-import type { AttackStatus, Attack, DamageCategory } from '@/attackdex/types.ts';
 import RevealZoomTransition from '@/components/common/transitions/RevealZoomTransition.vue';
 import { useUnknownSprite } from '@/composables/useUnknownSprite.ts';
 import { damageCategories } from '@/data/damageCategories.ts';
@@ -10,7 +9,7 @@ import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { Type } from '@/types.ts';
+import type { Type, AttackStatus, Attack, DamageCategory } from '@/types.ts';
 
 type Props = {
   move: Attack;
@@ -58,7 +57,10 @@ const typeImage = computed<string>(() => {
 });
 
 // Z-Moves can be either physical or special, so we cycle their badge between both icons
-const variableCategories: DamageCategory[] = ['physical', 'special'];
+const variableCategories: DamageCategory[] = [
+  'physical',
+  'special',
+];
 const variableCategoryIndex = ref(0);
 
 useIntervalFn(() => {
@@ -137,11 +139,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
-    <RevealZoomTransition
-      appear
-      mode="out-in"
-      v-if="displayedSprite.kind !== 'unknown'"
-    >
+    <RevealZoomTransition appear mode="out-in" v-if="displayedSprite.kind !== 'unknown'">
       <div
         :key="displayedSprite.key"
         class="sprite"
@@ -155,12 +153,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     </RevealZoomTransition>
 
     <!-- Unknown -->
-    <div
-      :key="displayedSprite.key"
-      class="sprite unknown"
-      v-else
-      :style="{ '--bg-img': `url(${unknownSprite})` }"
-    />
+    <div :key="displayedSprite.key" class="sprite unknown" v-else :style="{ '--bg-img': `url(${unknownSprite})` }" />
   </section>
 </template>
 

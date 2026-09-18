@@ -1,10 +1,10 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
 import { computed, reactive } from 'vue';
 
-import type { AttackDexGame } from '@/attackdex/types.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useState } from '@/stores/useState.ts';
+import type { AttackDexGame } from '@/types.ts';
 
 type AttackDexState = {
   isAttackDex: boolean;

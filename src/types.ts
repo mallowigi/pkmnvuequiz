@@ -1,4 +1,3 @@
-import { type User } from 'firebase/auth';
 import type { DocumentData } from 'firebase/firestore';
 import type { z } from 'zod';
 
@@ -139,10 +138,6 @@ export type PokemonInfo = {
   sprites?: string[];
 };
 
-export type UserData = {
-  user: User | null;
-};
-
 export type FinishedGames = {
   full: number;
   chaos: number;
@@ -253,6 +248,7 @@ export type PkmnData = {
   translations: Record<string, Translations> | null;
 };
 
+//region Saved Data
 export type PokemonProgress = z.infer<typeof pokemonProgressSchema>;
 
 export type Touches = z.infer<typeof touchesSchema>;
@@ -276,9 +272,11 @@ export type UserRecord = DocumentData &
     isMultiplayer: boolean;
     numShadows: number;
   };
+//endregion
 
 export const availableLanguages = ['en', 'cn', 'de', 'es', 'fr', 'it', 'jp', 'ko', 'pt', 'ru', 'zh'];
 
+//region Leaderboards
 export type TopTrainer = UserRecord & {
   id: string;
 };
@@ -292,7 +290,9 @@ export type LeaderboardsProps = {
   uid?: string | null;
   caption?: string;
 };
+//endregion
 
+//region Pokemon Info
 export type AbilityInfo = {
   effect: string;
   name: string;
@@ -322,7 +322,9 @@ export type PokemonDetails = PokemonInfo & {
     speed: number;
   };
 };
+//endregion
 
+//region Multiplayer
 export type OwnerState = z.infer<typeof ownerStateSchema>;
 
 export type RoomEnvelope = z.infer<typeof roomEnvelopeSchema>;
@@ -353,3 +355,77 @@ export interface RoomInfo {
 export type RoomOwnerOutcome = 'created' | 'occupied' | 'failed' | 'alreadyOwner';
 
 export type RoomConnectionOutcome = 'created' | 'joined' | 'resumed' | 'invalid' | 'failed';
+//endregion
+
+//region AttackDex
+export type MoveType = 'zmove' | 'max' | 'gmax';
+
+export type DamageCategory = 'physical' | 'special' | 'status' | 'variable';
+
+export type DamageCategoryInfo = {
+  id: DamageCategory;
+  name: string;
+};
+
+export type AttackDexGame =
+  | {
+      kind: 'gen';
+      gens: Gen[];
+    }
+  | {
+      kind: 'types';
+      types: Type[];
+    }
+  | {
+      kind: 'movetype';
+    }
+  | {
+      kind: 'full';
+    };
+
+export type AttackDexSessionOptions = {
+  challengeMode: ChallengeMode;
+  selection: AttackDexGame;
+};
+
+export type Attack =
+  | {
+      accuracy: number | null;
+      box?: RegionBox;
+      category: DamageCategory;
+      gen: Gen;
+      id: string;
+      name: string;
+      power: number | null;
+      pp: number | null;
+      scope: 'standard';
+      type: Type;
+    }
+  | {
+      accuracy: number | null;
+      category: DamageCategory;
+      gen: Gen;
+      id: string;
+      moveType: MoveType;
+      name: string;
+      power: number | null;
+      pp: number | null;
+      scope: 'special';
+      type: Type;
+    };
+
+export type AttackStatus = {
+  isFound: boolean;
+  isMissed: boolean;
+  isShadowed: boolean;
+  lastFoundAt: number | null;
+  lastShadowedAt: number | null;
+};
+
+export type AttackDexData = {
+  error: unknown;
+  isLoaded: boolean;
+  attacks: Attack[] | null;
+  translations: Record<string, Translations> | null;
+};
+//endregion
