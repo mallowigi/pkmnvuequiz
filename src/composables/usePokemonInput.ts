@@ -78,6 +78,13 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const activateNextCry = () => {
+    if (isAttackDex()) {
+      // Attacks have no cry, so mirror the existing disabled-helper feedback.
+      showUserMessage(t('criesHelperDisabled'));
+      clearInput();
+      return;
+    }
+
     if (settingsState.withCriesHelper) {
       const randomPokemon = getRandomPokemon();
       playPokemonCry(randomPokemon?.dexNum ?? 0);
@@ -94,37 +101,43 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     return true;
   };
 
-  const handleAlreadyFound = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (!isAlreadyFound(foundPokemon)) return false;
-    if (isPartOfAnotherPokemon) return true;
+  const handleAlreadyFound = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
+    if (!isAlreadyFound(foundEntries)) return false;
+    if (isPartOfAnother) return true;
 
-    return notifyError(t('alreadyNamed', { name: capitalize(foundPokemon[0].baseName) }));
+    return notifyError(t('alreadyNamed', { name: capitalize(getEntryName(foundEntries[0])) }));
   };
 
-  const handleNotInCurrentGameMode = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (isPokemonInCurrentGameMode(foundPokemon)) return false;
-    if (isPartOfAnotherPokemon) return true;
+  const handleNotInCurrentGameMode = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
+    if (isInCurrentGameMode(foundEntries)) return false;
+    if (isPartOfAnother) return true;
 
-    return notifyError(t('notPartOfGame', { name: capitalize(foundPokemon[0].baseName) }));
+    return notifyError(t('notPartOfGame', { name: capitalize(getEntryName(foundEntries[0])) }));
   };
 
-  const handleWrongOrder = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
+  const handleWrongOrder = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
+    // Attacks have no order concept.
+    if (isAttackDex()) return false;
+
+    const foundPokemon = foundEntries as PokemonInfo[];
     if (state.mode !== 'order' || !isWrongOrder(foundPokemon)) return false;
-    if (isPartOfAnotherPokemon) return true;
+    if (isPartOfAnother) return true;
 
     return notifyError(t('notNextPokemon', { name: capitalize(foundPokemon[0].baseName) }));
   };
 
-  const handleTypeShuffle = (foundPokemon: PokemonInfo[], _isPartOfAnotherPokemon: boolean) => {
+  const handleTypeShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
     if (!state.withTypeShuffle) return false;
 
     const currentType = getShuffledType();
-    const types = new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
+    const types = isAttackDex()
+      ? new Set((foundEntries as Attack[]).map((a) => a.type))
+      : new Set((foundEntries as PokemonInfo[]).flatMap((p) => [p.primaryType, p.secondaryType]));
 
     if (currentType && !types.has(currentType.id)) {
       return notifyError(
         t('notOfType', {
-          name: capitalize(foundPokemon[0].baseName),
+          name: capitalize(getEntryName(foundEntries[0])),
           type: capitalize(t(currentType.id)),
         }),
       );
@@ -133,8 +146,12 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     return false;
   };
 
-  const handleBoxShuffle = (foundPokemon: PokemonInfo[], _isPartOfAnotherPokemon: boolean) => {
+  const handleBoxShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
+    // Attacks have no box shuffle.
+    if (isAttackDex()) return false;
     if (!state.withBoxShuffle) return false;
+
+    const foundPokemon = foundEntries as PokemonInfo[];
     let currentBox: SpecialType | RegionBox | null;
     let boxes: Set<unknown>;
 
@@ -165,16 +182,19 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     return false;
   };
 
-  const handleSuccess = (foundPokemon: PokemonInfo[]) => {
-    addFound(foundPokemon);
+  const handleSuccess = (foundEntries: DexEntry[]) => {
+    addFound(foundEntries);
 
     updateShuffles();
 
-    playPokemonCry(foundPokemon[0].dexNum);
+    // Only the Pokedex plays a cry on success; attacks have none.
+    if (!isAttackDex()) {
+      playPokemonCry((foundEntries[0] as PokemonInfo).dexNum);
+    }
     clearInput();
   };
 
-  const { checkInput } = useQuizInput<PokemonInfo>({
+  const { checkInput } = useQuizInput<DexEntry>({
     commands: [
       {
         isEnabled: () => isDebugMode.value,
@@ -205,8 +225,8 @@ export const usePokemonInput = ({ clearInput }: Props) => {
       handleTypeShuffle,
       handleBoxShuffle,
     ],
-    findEntries: findPokemon,
-    isPartOfAnotherEntry: isInRemaining,
+    findEntries: find,
+    isPartOfAnotherEntry: (value: string) => (isAttackDex() ? false : isInRemaining(value)),
     onRecognized: sendMessage,
     onSuccess: handleSuccess,
   });
