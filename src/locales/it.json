@@ -105,7 +105,9 @@
     "shadowsUsed": "{numShadows} ombre usate",
     "share": "Condividi",
     "shareText": "Ho indovinato {numFound} Pokémon in {elapsed} nel Quiz di {regionOrType}! Il mio punteggio: {score}.\n\nPensi di poter fare di meglio? Prova il Pokémon Quiz e cerca di battere il mio punteggio! {url}",
+    "shareTextAttack": "Ho indovinato {numFound} mosse in {elapsed} nel AttackDex Quiz di {regionOrType}! Il mio punteggio: {score}.\n\nPensi di poter fare di meglio? Prova l'AttackDex Quiz e cerca di battere il mio punteggio! {url}",
     "summary": "Hai indovinato {numFound} Pokémon in {elapsed}!",
+    "summaryAttack": "Hai indovinato {numFound} mosse in {elapsed}!",
     "supporters": "Sostenitori:",
     "wellDone": "Ben fatto!"
   },

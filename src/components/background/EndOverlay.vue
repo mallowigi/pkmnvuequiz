@@ -24,7 +24,7 @@ const { timerState } = useTimer();
 const { t } = useI18n();
 
 const { resetQuiz } = useQuiz();
-const { numFound, numShadows } = useCurrentDex();
+const { numFound, numShadows, isAttackDex } = useCurrentDex();
 const { bonusState } = useBonus();
 const { savedLocale } = useSavedLocale();
 
@@ -65,7 +65,7 @@ const closeOverlay = () => {
         <h1>{{ t('endOverlay.wellDone') }}</h1>
 
         <h2>
-          {{ t('endOverlay.summary', { numFound, elapsed }) }}
+          {{ t(isAttackDex() ? 'endOverlay.summaryAttack' : 'endOverlay.summary', { numFound, elapsed }) }}
         </h2>
 
         <h3>{{ t('score') }}: {{ bonusState.score }}</h3>

@@ -22,7 +22,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare, playMissingno } = usePlaySounds();
   const { removeAutoSave } = useSavedData();
   const { createRecord } = useFirebase();
-  const { showRemaining } = useCurrentDex();
+  const { showRemaining, isAttackDex } = useCurrentDex();
   const { incrementPlays, updateFinishedGames } = useProfile();
   const { toggledMissingno } = useTouches();
   const { resetInput } = useLastInput();
@@ -97,28 +97,25 @@ export const useGameFlow = defineStore('gameFlow', () => {
     // Semaphore to prevent multiple downgrades at the same time
     let isDowngrading = false;
 
-    roomWatcher = watch(
-      [() => ownerOnline.value, () => roomTerminated.value],
-      async ([online, terminated]) => {
-        // Skip if we are the owner or if the owner is still online
-        if ((!terminated && online) || !isJoiner.value || isDowngrading) return;
+    roomWatcher = watch([() => ownerOnline.value, () => roomTerminated.value], async ([online, terminated]) => {
+      // Skip if we are the owner or if the owner is still online
+      if ((!terminated && online) || !isJoiner.value || isDowngrading) return;
 
-        isDowngrading = true;
+      isDowngrading = true;
 
-        try {
-          // Regenerate a new sessionID
-          flowState.sessionId = crypto.randomUUID();
+      try {
+        // Regenerate a new sessionID
+        flowState.sessionId = crypto.randomUUID();
 
-          // Leave room and convert game into local game
-          await leaveRoom(auth.currentUser?.uid ?? '');
+        // Leave room and convert game into local game
+        await leaveRoom(auth.currentUser?.uid ?? '');
 
-          // Resume autosave
-          await autoSave();
-        } finally {
-          isDowngrading = false;
-        }
-      },
-    );
+        // Resume autosave
+        await autoSave();
+      } finally {
+        isDowngrading = false;
+      }
+    });
   };
 
   const startGame = async () => {
@@ -165,8 +162,13 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopGenCycle();
       stopVoice();
       removeAutoSave();
-      createRecord();
-      recordWin();
+
+      // AttackDex profile/cloud/leaderboard publication is gated pending its own tickets.
+      if (!isAttackDex()) {
+        createRecord();
+        recordWin();
+      }
+
       playFanfare();
       resetInput();
       destroyRoom();
@@ -186,7 +188,12 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopTypeCycle();
       stopGenCycle();
       stopVoice();
-      createRecord();
+
+      // AttackDex profile/cloud/leaderboard publication is gated pending its own tickets.
+      if (!isAttackDex()) {
+        createRecord();
+      }
+
       removeAutoSave();
       showRemaining();
       resetInput();

@@ -105,7 +105,9 @@
     "shadowsUsed": "シルエット使用数: {numShadows}",
     "share": "共有",
     "shareText": "{regionOrType}クイズで {numFound} 匹のポケモンを {elapsed} で答えました！スコア: {score}。\n\nもっとうまくできると思いますか？ポケモンのクイズをチェックして、私のスコアを破ってみてください！ {url}",
+    "shareTextAttack": "{regionOrType} AttackDexクイズで {numFound} 個の技を {elapsed} で答えました！スコア: {score}。\n\nもっとうまくできると思いますか？AttackDexクイズをチェックして、私のスコアを破ってみてください！ {url}",
     "summary": "{elapsed} で {numFound} 匹のポケモンを答えました！",
+    "summaryAttack": "{elapsed} で {numFound} 個の技を答えました！",
     "supporters": "サポーター:",
     "wellDone": "よくできました！"
   },

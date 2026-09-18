@@ -107,7 +107,9 @@
     "shadowsUsed": "{numShadows} shadows used",
     "share": "Share",
     "shareText": "I named {numFound} Pokémon in {elapsed} on the {regionOrType} Quiz! My score: {score}.\n\nThink you can do better? Check out the Pokémon Quiz and try to beat my score! {url}",
+    "shareTextAttack": "I named {numFound} moves in {elapsed} on the {regionOrType} AttackDex Quiz! My score: {score}.\n\nThink you can do better? Check out the AttackDex Quiz and try to beat my score! {url}",
     "summary": "You named {numFound} Pokémon in {elapsed}!",
+    "summaryAttack": "You named {numFound} moves in {elapsed}!",
     "supporters": "Supporters:",
     "wellDone": "Well done!"
   },

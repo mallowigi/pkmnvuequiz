@@ -105,7 +105,9 @@
     "shadowsUsed": "использовано теней: {numShadows}",
     "share": "Поделиться",
     "shareText": "Я назвал {numFound} Покемонов за {elapsed} в викторине {regionOrType}! Мой счет: {score}.\n\nДумаете, вы сможете лучше? Загляните в Pokémon Quiz и попробуйте побить мой рекорд! {url}",
+    "shareTextAttack": "Я назвал {numFound} приёмов за {elapsed} в AttackDex викторине {regionOrType}! Мой счет: {score}.\n\nДумаете, вы сможете лучше? Загляните в AttackDex Quiz и попробуйте побить мой рекорд! {url}",
     "summary": "Вы назвали {numFound} Покемонов за {elapsed}!",
+    "summaryAttack": "Вы назвали {numFound} приёмов за {elapsed}!",
     "supporters": "Помощники:",
     "wellDone": "Отлично!"
   },

@@ -105,7 +105,9 @@
     "shadowsUsed": "사용된 그림자: {numShadows}",
     "share": "공유",
     "shareText": "{regionOrType} 퀴즈에서 {elapsed} 만에 {numFound}마리의 포켓몬 이름을 맞히셨습니다! 점수: {score}점.\n\n더 잘할 수 있을 것 같나요? 포켓몬 퀴즈를 확인하고 제 점수를 깨보세요! {url}",
+    "shareTextAttack": "{regionOrType} AttackDex 퀴즈에서 {elapsed} 만에 {numFound}개의 기술 이름을 맞히셨습니다! 점수: {score}점.\n\n더 잘할 수 있을 것 같나요? AttackDex 퀴즈를 확인하고 제 점수를 깨보세요! {url}",
     "summary": "{elapsed} 만에 {numFound}마리의 포켓몬 이름을 맞히셨습니다!",
+    "summaryAttack": "{elapsed} 만에 {numFound}개의 기술 이름을 맞히셨습니다!",
     "supporters": "후원자:",
     "wellDone": "잘하셨습니다!"
   },

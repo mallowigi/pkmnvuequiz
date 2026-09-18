@@ -105,7 +105,9 @@
     "shadowsUsed": "{numShadows} Schatten verwendet",
     "share": "Teilen",
     "shareText": "Ich habe {numFound} Pokémon in {elapsed} beim {regionOrType}-Quiz benannt! Meine Punktzahl: {score}.\n\nGlaubst du, du bist besser? Schau dir das Pokémon-Quiz an und versuche, meine Punktzahl zu schlagen! {url}",
+    "shareTextAttack": "Ich habe {numFound} Attacken in {elapsed} beim {regionOrType}-AttackDex-Quiz benannt! Meine Punktzahl: {score}.\n\nGlaubst du, du bist besser? Schau dir das AttackDex-Quiz an und versuche, meine Punktzahl zu schlagen! {url}",
     "summary": "Du hast {numFound} Pokémon in {elapsed} benannt!",
+    "summaryAttack": "Du hast {numFound} Attacken in {elapsed} benannt!",
     "supporters": "Unterstützer:",
     "wellDone": "Gut gemacht!"
   },

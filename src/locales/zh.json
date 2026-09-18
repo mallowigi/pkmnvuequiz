@@ -105,7 +105,9 @@
     "shadowsUsed": "使用了 {numShadows} 個陰影",
     "share": "分享",
     "shareText": "我在 {regionOrType} 測驗中在 {elapsed} 內命名了 {numFound} 個寶可夢！我的分數：{score}。\n\n覺得你能做得更好嗎？快來挑戰寶可夢測驗，嘗試打破我的紀錄吧！ {url}",
+    "shareTextAttack": "我在 {regionOrType} AttackDex 測驗中在 {elapsed} 內命名了 {numFound} 個招式！我的分數：{score}。\n\n覺得你能做得更好嗎？快來挑戰 AttackDex 測驗，嘗試打破我的紀錄吧！ {url}",
     "summary": "你在 {elapsed} 內命名了 {numFound} 個寶可夢！",
+    "summaryAttack": "你在 {elapsed} 內命名了 {numFound} 個招式！",
     "supporters": "支持者：",
     "wellDone": "做得好！"
   },
