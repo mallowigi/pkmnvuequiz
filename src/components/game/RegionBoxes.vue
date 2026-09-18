@@ -245,6 +245,8 @@ const multiGenClass = computed(() => {
     --col-width: 25vh;
     --sprite-width: 57px;
     --text-padding: 0;
+    align-self: stretch;
+    width: 100%;
   }
 
   &.special {
@@ -288,6 +290,8 @@ const multiGenClass = computed(() => {
     --col-width: 25vh;
     --sprite-width: 62px;
     --text-padding: 10px;
+    align-self: stretch;
+    width: 100%;
   }
 
   .laptop & {
