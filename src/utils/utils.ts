@@ -58,3 +58,8 @@ export const pokemonUrl = (pokemonName: string) => {
   const formattedName = pokemonName.replace(/[\s-]/g, '_');
   return `https://bulbapedia.bulbagarden.net/wiki/${formattedName}_(Pokémon)`;
 };
+
+export const moveUrl = (moveName: string) => {
+  const formattedName = moveName.replace(/[\s-]/g, '_');
+  return `https://bulbapedia.bulbagarden.net/wiki/${formattedName}_(move)`;
+};

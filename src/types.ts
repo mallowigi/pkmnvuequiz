@@ -422,6 +422,11 @@ export type AttackStatus = {
   lastShadowedAt: number | null;
 };
 
+export type AttackDetails = Attack & {
+  description: string;
+  effect: string;
+};
+
 export type AttackDexData = {
   error: unknown;
   isLoaded: boolean;
