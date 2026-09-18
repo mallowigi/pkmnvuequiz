@@ -109,6 +109,10 @@ export type MegaTypeInfo = Omit<TypeInfo, 'id'> & {
   id: MegaType;
 };
 
+export type MoveTypeInfo = Omit<TypeInfo, 'id'> & {
+  id: 'movetype';
+};
+
 export type Gen = z.infer<typeof generationSchema>;
 
 export type GenerationInfo = {

@@ -5,11 +5,12 @@ import { reactive, ref } from 'vue';
 import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { megaTypes } from '@/data/megaTypes.ts';
+import { moveTypeInfo } from '@/data/moveTypes.ts';
 import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState';
-import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo, Attack, PokemonInfo } from '@/types.ts';
+import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo, MoveTypeInfo, Attack, PokemonInfo } from '@/types.ts';
 
 type CurrentTypeState = {
   shuffledType: Type | null;
@@ -99,7 +100,11 @@ export const useCurrentType = defineStore('currentType', () => {
     return megaTypes.mega;
   };
 
-  const getCurrentTypeOrSpecial = (): TypeInfo | SpecialTypeInfo | MegaTypeInfo | null => {
+  const getMoveType = (): MoveTypeInfo => {
+    return moveTypeInfo;
+  };
+
+  const getCurrentTypeOrSpecial = (): TypeInfo | SpecialTypeInfo | MegaTypeInfo | MoveTypeInfo | null => {
     const gameMode = state.gameMode;
 
     if (state.withTypeShuffle) {
@@ -111,6 +116,8 @@ export const useCurrentType = defineStore('currentType', () => {
         return getSpecialType();
       case 'mega':
         return getMegaType();
+      case 'movetype':
+        return getMoveType();
       default:
         return getNextType();
     }
@@ -152,6 +159,7 @@ export const useCurrentType = defineStore('currentType', () => {
     getCurrentTypeOrSpecial,
     getCurrentTypes,
     getMegaType,
+    getMoveType,
     getNextType,
     getSecondaryType,
     getShuffledType,
