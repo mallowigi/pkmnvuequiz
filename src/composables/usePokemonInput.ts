@@ -1,5 +1,7 @@
 import { useI18n } from 'vue-i18n';
 
+import type { DexEntry } from '@/composables/useCurrentDex.ts';
+import { useCurrentDex, getEntryName } from '@/composables/useCurrentDex.ts';
 import { useFeatureFlags } from '@/composables/useFeatureFlags.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useQuizInput } from '@/composables/useQuizInput.ts';
@@ -12,7 +14,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo, SpecialType, RegionBox } from '@/types.ts';
+import type { Attack, PokemonInfo, SpecialType, RegionBox } from '@/types.ts';
 import { capitalize } from '@/utils/utils';
 
 type Props = {
@@ -29,17 +31,17 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { endGame, toggleMissingno } = useGameFlow();
   const { t } = useI18n();
   const {
-    isPokemonInCurrentGameMode,
-    isInRemaining,
+    isInCurrentGameMode,
     addRandomShadow,
-    findPokemon,
+    find,
     addFound,
     isAlreadyFound,
-    getNextOrderedPokemon,
-    isWrongOrder,
     prefillRemaining,
-    getRandomPokemon,
-  } = usePokemons();
+    getRandomRemaining,
+    isAttackDex,
+  } = useCurrentDex();
+  // Pokemon-only helpers with no attack analog (order, prefix matching, cries).
+  const { isInRemaining, getNextOrderedPokemon, isWrongOrder, getRandomPokemon } = usePokemons();
   const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
   const { isDebugMode } = useFeatureFlags();
   const { sendMessage } = useRooms();
@@ -51,7 +53,18 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
   const activateCheat = () => {
     playFanfare();
-    showUserMessage(t('nextPokemon', { name: capitalize(getNextOrderedPokemon()?.baseName ?? '???') }));
+    let nextName = '???';
+
+    if (isAttackDex()) {
+      const nextAttack = getRandomRemaining();
+      if (nextAttack) {
+        nextName = getEntryName(nextAttack);
+      }
+    } else {
+      nextName = getNextOrderedPokemon()?.baseName ?? '???';
+    }
+
+    showUserMessage(t('nextPokemon', { name: capitalize(nextName) }));
     clearInput();
   };
 
