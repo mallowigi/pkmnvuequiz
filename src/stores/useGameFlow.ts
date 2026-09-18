@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate, storeToRefs } from 'pinia';
 import { reactive, computed, watch } from 'vue';
 
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
@@ -12,7 +13,6 @@ import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useTouches } from '@/stores/useTouches.ts';
@@ -22,7 +22,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare, playMissingno } = usePlaySounds();
   const { removeAutoSave } = useSavedData();
   const { createRecord } = useFirebase();
-  const { showRemaining } = usePokemons();
+  const { showRemaining } = useCurrentDex();
   const { incrementPlays, updateFinishedGames } = useProfile();
   const { toggledMissingno } = useTouches();
   const { resetInput } = useLastInput();

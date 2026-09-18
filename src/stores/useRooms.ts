@@ -25,6 +25,7 @@ import { useFirebase } from '@/composables/useFirebase.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { realtimeDb } from '@/firebase.ts';
 import { parseRoomListing, parseOwnerState } from '@/schemas/room.schema.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import type {
@@ -367,6 +368,12 @@ export const useRooms = defineStore('roomMessages', () => {
   };
 
   const joinOrCreateRoom = async (roomId: string, userId: string): Promise<RoomConnectionOutcome> => {
+    const { attackDexState } = useAttackDexState();
+    if (attackDexState.isAttackDex) {
+      showUserMessage(t('attackDexMultiplayerDisabled'), 'warning');
+      return 'failed';
+    }
+
     isJoining.value = true;
     let outcome: RoomConnectionOutcome;
 

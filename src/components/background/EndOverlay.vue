@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { Temporal } from 'temporal-polyfill';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import ShareSocials from '@/components/background/ShareSocials.vue';
 import Overlay from '@/components/common/Overlay.vue';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
 import { useSavedLocale } from '@/composables/useSavedLocale.ts';
 import { donors } from '@/data/donors';
@@ -13,7 +13,6 @@ import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
-import { usePokemons } from '@/stores/usePokemons';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
 
@@ -25,9 +24,8 @@ const { timerState } = useTimer();
 const { t } = useI18n();
 
 const { resetQuiz } = useQuiz();
-const pokemonStore = usePokemons();
+const { numFound, numShadows } = useCurrentDex();
 const { bonusState } = useBonus();
-const { numFound, numShadows } = storeToRefs(pokemonStore);
 const { savedLocale } = useSavedLocale();
 
 const elapsed = computed(() => {

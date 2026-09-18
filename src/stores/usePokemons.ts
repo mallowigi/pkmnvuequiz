@@ -716,6 +716,7 @@ export const usePokemons = defineStore('pokemons', () => {
     numShadows,
     pokemonState,
     prefillRemaining,
+    remaining,
     resetPokemonState,
     setLastPokemon,
     setRandomCurrentPokemon,

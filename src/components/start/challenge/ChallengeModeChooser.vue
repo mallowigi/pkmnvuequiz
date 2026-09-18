@@ -10,7 +10,7 @@ import { useMessages } from '@/stores/useMessages.ts';
 
 const { t } = useI18n();
 const { setGameSelectionState, setChallengeMode } = useGameFlow();
-const { enterAttackDex } = useAttackDexState();
+const { enterAttackDex, attackDexState } = useAttackDexState();
 
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
@@ -27,6 +27,11 @@ const selectChallengeMode = () => {
 };
 
 const selectMultiplayerMode = () => {
+  if (attackDexState.isAttackDex) {
+    showUserMessage(t('attackDexMultiplayerDisabled'), 'warning');
+    return;
+  }
+
   if (!auth.currentUser?.uid) {
     showUserMessage('You must be logged in to join a room.', 'error');
     return;

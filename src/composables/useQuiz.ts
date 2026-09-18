@@ -1,3 +1,4 @@
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
@@ -8,7 +9,6 @@ import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
@@ -23,7 +23,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   const { clearCurrentGens, setCurrentGens, getNextGen } = useCurrentGen();
   const { clearCurrentBox } = useCurrentBox();
   const { clearCurrentTypes, setCurrentTypes, getNextType } = useCurrentType();
-  const { resetPokemonState } = usePokemons();
+  const { switchDex } = useCurrentDex();
   const { resetTimer } = useTimer();
   const { resetBonus } = useBonus();
   const { resetSkips } = useSkips();
@@ -35,7 +35,7 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   const { destroyRoom, roomState } = useRooms();
 
   const resetQuiz = () => {
-    resetPokemonState();
+    switchDex();
     resetTimer();
     resetBonus();
     resetSkips();
