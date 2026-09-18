@@ -57,6 +57,9 @@ export const useCurrentDex = () => {
   const isAlreadyFound = (entries: DexEntry[]) =>
     isAttackDex() ? attacks.isAlreadyFound(entries as Attack[]) : pokemons.isAlreadyFound(entries as PokemonInfo[]);
 
+  const isPartOfAnotherEntry = (value: string) =>
+    isAttackDex() ? attacks.isInRemaining(value) : pokemons.isInRemaining(value);
+
   const prefillRemaining = () => (isAttackDex() ? attacks.prefillRemaining() : pokemons.prefillRemaining());
 
   const addRandomShadow = () => (isAttackDex() ? attacks.addRandomShadow() : pokemons.addRandomShadow());
@@ -85,6 +88,7 @@ export const useCurrentDex = () => {
     isAlreadyFound,
     isAttackDex,
     isInCurrentGameMode,
+    isPartOfAnotherEntry,
     missed,
     numFound,
     numShadows,

@@ -515,6 +515,25 @@ export const useAttacks = defineStore('attacks', () => {
     return attacks.every((attack) => getStatus(attack).isFound);
   };
 
+  const isInRemaining = (attackName: string) => {
+    const attackKey = normalizeName(attackName);
+
+    for (const lang of settingsState.languages) {
+      const languageMap = attackMaps.languages[lang];
+      if (!languageMap) continue;
+
+      for (const [translatedKey, attacks] of languageMap) {
+        if (translatedKey.startsWith(attackKey) && translatedKey !== attackKey) {
+          if (attacks.some((attack) => remaining.value.has(normalizeName(attack.name)))) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
+  };
+
   const findAttack = (input: string) => {
     const attackKey = normalizeName(input);
 
@@ -582,6 +601,7 @@ export const useAttacks = defineStore('attacks', () => {
     initializeAttackMaps,
     isAlreadyFound,
     isAttackInCurrentGameMode,
+    isInRemaining,
     missed,
     numFound,
     numShadows,

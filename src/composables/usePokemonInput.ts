@@ -39,9 +39,10 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     prefillRemaining,
     getRandomRemaining,
     isAttackDex,
+    isPartOfAnotherEntry,
   } = useCurrentDex();
   // Pokemon-only helpers with no attack analog (order, prefix matching, cries).
-  const { isInRemaining, getNextOrderedPokemon, isWrongOrder, getRandomPokemon } = usePokemons();
+  const { getNextOrderedPokemon, isWrongOrder, getRandomPokemon } = usePokemons();
   const { playFanfare, playFailSound, playPokemonCry, playClick } = usePlaySounds();
   const { isDebugMode } = useFeatureFlags();
   const { sendMessage } = useRooms();
@@ -228,7 +229,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
       handleBoxShuffle,
     ],
     findEntries: find,
-    isPartOfAnotherEntry: (value: string) => (isAttackDex() ? false : isInRemaining(value)),
+    isPartOfAnotherEntry: (value: string) => isPartOfAnotherEntry(value),
     onRecognized: sendMessage,
     onSuccess: handleSuccess,
   });
