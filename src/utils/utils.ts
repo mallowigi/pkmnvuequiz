@@ -25,6 +25,17 @@ export const capitalize = (str: string) => {
     .join(' ');
 };
 
+export const slugify = (str: string) => {
+  if (!str) return str;
+  const words = str.split(/[\s_-]+/);
+  return words
+    .map((word) => {
+      const [first, ...rest] = word;
+      return first.toUpperCase() + rest.join('').toLowerCase();
+    })
+    .join('_');
+};
+
 export const upsert = <T>(map: Map<string, T[]>, key: string, value: T) => {
   if (!map.has(key)) {
     map.set(key, []);
@@ -55,12 +66,12 @@ export const abilityUrl = (abilityName: string) => {
 };
 
 export const pokemonUrl = (pokemonName: string) => {
-  const formattedName = pokemonName.replace(/[\s-]/g, '_');
+  const formattedName = slugify(pokemonName);
   return `https://bulbapedia.bulbagarden.net/wiki/${formattedName}_(Pokémon)`;
 };
 
 export const moveUrl = (moveName: string) => {
-  const formattedName = moveName.replace(/[\s-]/g, '_');
+  const formattedName = slugify(moveName);
   return `https://bulbapedia.bulbagarden.net/wiki/${formattedName}_(move)`;
 };
 
