@@ -48,6 +48,15 @@ export const usePlaySounds = () => {
     }, 50);
   };
 
+  const playClick = () => {
+    if (!settingsState.withSound) return;
+
+    soundFile.value = 'assets/sounds/click.wav';
+    setTimeout(() => {
+      play();
+    }, 50);
+  };
+
   const playShiny = (pokemon: PokemonInfo) => {
     if (!settingsState.withSound) return;
 
@@ -82,6 +91,7 @@ export const usePlaySounds = () => {
   };
 
   return {
+    playClick,
     playFailSound,
     playFanfare,
     playMissingno,

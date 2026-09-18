@@ -42,7 +42,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   } = useCurrentDex();
   // Pokemon-only helpers with no attack analog (order, prefix matching, cries).
   const { isInRemaining, getNextOrderedPokemon, isWrongOrder, getRandomPokemon } = usePokemons();
-  const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
+  const { playFanfare, playFailSound, playPokemonCry, playClick } = usePlaySounds();
   const { isDebugMode } = useFeatureFlags();
   const { sendMessage } = useRooms();
 
@@ -187,8 +187,10 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
     updateShuffles();
 
-    // Only the Pokedex plays a cry on success; attacks have none.
-    if (!isAttackDex()) {
+    // The Pokedex plays a cry on success; attacks play a click instead.
+    if (isAttackDex()) {
+      playClick();
+    } else {
       playPokemonCry((foundEntries[0] as PokemonInfo).dexNum);
     }
     clearInput();
