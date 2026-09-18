@@ -26,6 +26,12 @@ This document provides essential context and patterns to help AI agents be produ
   - ALWAYS use the path alias `@/` for imports within `src`.
   - ALWAYS include `.vue` extensions for Vue component imports (e.g. `import GameHeader from '@/components/header/GameHeader.vue'`).
 
+## ⚠️ Git & Commit Policy
+
+- **Never run `git commit` (or `git push`) unless the user explicitly asks for it in that turn.** Make code changes and
+  leave them staged/unstaged in the working tree; the user reviews and commits themselves. This applies for the whole
+  session, not just once — don't assume a prior "ok to commit" carries over to later changes.
+
 ## 🛠 Developer Workflows
 
 - **Node Engine**: Requires Node `^20.19.0` or `>=22.12.0`.

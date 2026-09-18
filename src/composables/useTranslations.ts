@@ -105,15 +105,15 @@ export const useTranslations = () => {
       case 'alola':
         return t('alola');
       case 'alolaz':
-        return `${t('alola')} (${t('zMoves')})`;
+        return t('alolaz');
       case 'areazero':
         return t('areazero');
       case 'galar':
         return t('galar');
       case 'galargmax':
-        return `${t('galar')} (${t('gMaxMoves')})`;
+        return t('galargmax');
       case 'galarmax':
-        return `${t('galar')} (${t('maxMoves')})`;
+        return t('galarmax');
       case 'gmax':
         return t('gmax');
       case 'hisui':
