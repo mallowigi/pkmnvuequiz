@@ -425,6 +425,7 @@ export const useAttacks = defineStore('attacks', () => {
         return getTypedBoxAttacks(typeIds, boxId);
       }
       case 'full':
+      case 'movetype':
         return getGenAttacks(boxId);
       default:
         return new Map();

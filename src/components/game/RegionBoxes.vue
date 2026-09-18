@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import AttackSprite from '@/components/attackdex/AttackSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
-import { useBoxes } from '@/composables/useBoxes.ts';
+import { getGenForBox, useBoxes } from '@/composables/useBoxes.ts';
 import { boxes } from '@/data/boxes.js';
 import { gens } from '@/data/gens.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
@@ -38,11 +38,14 @@ const currentBoxes = computed(() => {
 });
 
 // Maps each RegionBox to the color of the generation it belongs to, so region boxes can be tinted accordingly.
+// Built from `getGenForBox` (rather than each `Gen`'s `boxes` list) so that boxes deliberately excluded from
+// a gen's box list -- the AttackDex move-family boxes (`alolaz`/`galarmax`/`galargmax`) -- are still tinted.
 const regionColorMap: Partial<Record<RegionBox, string>> = {};
-Object.values(gens).forEach((gen) => {
-  gen.boxes.forEach((boxId) => {
-    regionColorMap[boxId] = gen.color;
-  });
+(Object.keys(boxes) as RegionBox[]).forEach((boxId) => {
+  const gen = getGenForBox(boxId);
+  if (gen) {
+    regionColorMap[boxId] = gens[gen].color;
+  }
 });
 
 const getBoxColor = (boxId: SpecialType | RegionBox): string | undefined => {
@@ -267,6 +270,13 @@ const multiGenClass = computed(() => {
     --max-width: 66%;
     --num-cols: 1;
     --sprite-width: 64px;
+    --text-padding: 10px;
+  }
+
+  &.movetype {
+    --max-width: 66%;
+    --num-cols: 1;
+    --sprite-width: 62px;
     --text-padding: 10px;
   }
 

@@ -63,6 +63,10 @@ export const useBoxes = () => {
     });
   };
 
+  const getMoveTypeBoxes = (): RegionBox[] => {
+    return ['alolaz', 'galarmax', 'galargmax'];
+  };
+
   const getCurrentGameModeBoxes = () => {
     switch (state.gameMode) {
       case 'gen':
@@ -73,6 +77,8 @@ export const useBoxes = () => {
         return getCurrentTypeBoxes();
       case 'mega':
         return getMegaBoxes();
+      case 'movetype':
+        return getMoveTypeBoxes();
       default:
         return [];
     }
@@ -84,6 +90,7 @@ export const useBoxes = () => {
     getCurrentGenBoxes,
     getGenForBox,
     getMegaBoxes,
+    getMoveTypeBoxes,
     getSpecialBoxes,
   };
 };
