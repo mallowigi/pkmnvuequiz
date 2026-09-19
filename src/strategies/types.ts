@@ -1,4 +1,5 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
+import type { AttackStatus, PokemonStatus } from '@/types.ts';
 
 export type DexId = 'pokemon' | 'attack';
 
@@ -17,4 +18,22 @@ export type DexStrategy<T = DexEntry> = {
   readonly getEntityType: () => string; // e.g., "Pokémon" or "Attack"
   readonly getSummaryText: () => string; // What we display in EndOverlay
   readonly getShareText: () => string; // What we display in ShareOverlay
+  readonly getNumFound: () => number;
+  readonly getNumShadows: () => number;
+  readonly getRemaining: () => Set<string>;
+  readonly getMissed: () => Set<T>;
+  readonly showRemaining: () => void;
+  readonly showRemainingShadows: () => void;
+  readonly reset: () => void;
+  readonly getRandomRemaining: () => T | null;
+  readonly addFound: (entries: T[]) => void;
+  readonly find: (input: string) => T[] | undefined;
+  readonly findClosest: (input: string) => string | null;
+  readonly getStatus: (entry: T) => PokemonStatus | AttackStatus;
+  readonly isInCurrentGameMode: (entries: T[]) => boolean;
+  readonly isAlreadyFound: (entries: T[]) => boolean;
+  readonly isPartOfAnotherEntry: (value: string) => boolean;
+  readonly prefillRemaining: () => void;
+  readonly addRandomShadow: () => void;
+  readonly getCurrentGameModeEntries: () => Map<string, T[]>;
 };

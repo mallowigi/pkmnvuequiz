@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useAttacks } from '@/stores/useAttacks.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import type { Attack, AttackStatus, PokemonInfo, PokemonStatus } from '@/types.ts';
 
 export type DexEntry = PokemonInfo | Attack;
@@ -18,54 +19,44 @@ export const getEntryName = (entry: DexEntry): string => (isAttackEntry(entry) ?
  */
 export const useCurrentDex = () => {
   const { attackDexState } = useAttackDexState();
+  const strategy = useCurrentStrategy();
   const pokemons = usePokemons();
   const attacks = useAttacks();
 
   const isAttackDex = () => attackDexState.isAttackDex;
 
-  const numFound = computed(() => (isAttackDex() ? attacks.numFound : pokemons.numFound));
-  const numShadows = computed(() => (isAttackDex() ? attacks.numShadows : pokemons.numShadows));
-  const remaining = computed(() => (isAttackDex() ? attacks.remaining : pokemons.remaining));
-  const missed = computed<Set<DexEntry>>(() => (isAttackDex() ? attacks.missed : pokemons.missed));
+  const numFound = computed(() => strategy.value.getNumFound());
+  const numShadows = computed(() => strategy.value.getNumShadows());
+  const remaining = computed(() => strategy.value.getRemaining());
+  const missed = computed<Set<DexEntry>>(() => strategy.value.getMissed());
 
-  const showRemaining = () => (isAttackDex() ? attacks.showRemaining() : pokemons.showRemaining());
+  const showRemaining = () => strategy.value.showRemaining();
 
-  const showRemainingShadows = () => (isAttackDex() ? attacks.showRemainingShadows() : pokemons.showRemainingShadows());
+  const showRemainingShadows = () => strategy.value.showRemainingShadows();
 
-  const reset = () => (isAttackDex() ? attacks.resetAttacksState() : pokemons.resetPokemonState());
+  const reset = () => strategy.value.reset();
 
-  const getRandomRemaining = (): DexEntry | null =>
-    isAttackDex() ? attacks.getRandomRemainingAttack() : pokemons.getRandomRemainingPokemon();
+  const getRandomRemaining = (): DexEntry | null => strategy.value.getRandomRemaining();
 
-  const addFound = (entries: DexEntry[]) =>
-    isAttackDex() ? attacks.addFound(entries as Attack[]) : pokemons.addFound(entries as PokemonInfo[]);
+  const addFound = (entries: DexEntry[]) => strategy.value.addFound(entries);
 
-  const find = (input: string): DexEntry[] | undefined =>
-    isAttackDex() ? attacks.findAttack(input) : pokemons.findPokemon(input);
+  const find = (input: string): DexEntry[] | undefined => strategy.value.find(input);
 
-  const findClosest = (input: string): string | null =>
-    isAttackDex() ? attacks.findClosestAttack(input) : pokemons.findClosestPokemon(input);
+  const findClosest = (input: string): string | null => strategy.value.findClosest(input);
 
-  const getStatus = (entry: DexEntry): PokemonStatus | AttackStatus =>
-    isAttackEntry(entry) ? attacks.getStatus(entry) : pokemons.getStatus(entry);
+  const getStatus = (entry: DexEntry): PokemonStatus | AttackStatus => strategy.value.getStatus(entry);
 
-  const isInCurrentGameMode = (entries: DexEntry[]) =>
-    isAttackDex()
-      ? attacks.isAttackInCurrentGameMode(entries as Attack[])
-      : pokemons.isPokemonInCurrentGameMode(entries as PokemonInfo[]);
+  const isInCurrentGameMode = (entries: DexEntry[]) => strategy.value.isInCurrentGameMode(entries);
 
-  const isAlreadyFound = (entries: DexEntry[]) =>
-    isAttackDex() ? attacks.isAlreadyFound(entries as Attack[]) : pokemons.isAlreadyFound(entries as PokemonInfo[]);
+  const isAlreadyFound = (entries: DexEntry[]) => strategy.value.isAlreadyFound(entries);
 
-  const isPartOfAnotherEntry = (value: string) =>
-    isAttackDex() ? attacks.isInRemaining(value) : pokemons.isInRemaining(value);
+  const isPartOfAnotherEntry = (value: string) => strategy.value.isPartOfAnotherEntry(value);
 
-  const prefillRemaining = () => (isAttackDex() ? attacks.prefillRemaining() : pokemons.prefillRemaining());
+  const prefillRemaining = () => strategy.value.prefillRemaining();
 
-  const addRandomShadow = () => (isAttackDex() ? attacks.addRandomShadow() : pokemons.addRandomShadow());
+  const addRandomShadow = () => strategy.value.addRandomShadow();
 
-  const getCurrentGameModeEntries = (): Map<string, DexEntry[]> =>
-    isAttackDex() ? attacks.getCurrentGameModeAttacks() : pokemons.getCurrentGameModePokemon();
+  const getCurrentGameModeEntries = (): Map<string, DexEntry[]> => strategy.value.getCurrentGameModeEntries();
 
   /**
    * Enforces the one-dex invariant: only the dex about to be played may hold live progress. Called from the game-start
