@@ -31,9 +31,26 @@ const toggleCycleSprites = () => {
 
 <style scoped>
 .cycle-sprites-toggle {
+  padding: 9px 14px 8px;
   min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
+
+  & img {
+    margin: -5px;
+    width: 52px;
+    height: 39px;
+    object-fit: none;
+    object-position: 50% 100%;
+    filter: brightness(0) invert(0.7);
+  }
+
+  &.selected {
+    & img {
+      filter: brightness(0) invert(1);
+    }
+  }
 }
 </style>

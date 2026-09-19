@@ -164,9 +164,7 @@ const toggleSpeak = () => {
           <SoundToggle />
 
           <CycleSpritesToggle />
-        </div>
 
-        <div class="selection-row">
           <CycleTypesToggle />
 
           <CycleRegionsToggle />
