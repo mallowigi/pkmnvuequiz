@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 
+import CloudShareIcon from '@/components/common/icons/CloudShareIcon.vue';
 import CloudUpIcon from '@/components/common/icons/CloudUpIcon.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useFirebase } from '@/composables/useFirebase.ts';
@@ -30,7 +31,7 @@ const toggleAutoSave = () => {
     v-tooltip:top="t('autoSaveTooltip')"
     @click="toggleAutoSave"
   >
-    <CloudUpIcon />
+    <CloudShareIcon />
   </RoundedButton>
 </template>
 

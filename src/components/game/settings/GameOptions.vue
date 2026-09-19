@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AnimatePresence } from 'motion-v';
+import { AnimatePresence, motion } from 'motion-v';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';

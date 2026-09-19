@@ -35,6 +35,7 @@ declare module 'vue' {
     ChangeTimerDialog: typeof import('./src/components/dialogs/ChangeTimerDialog.vue')['default']
     ChartIcon: typeof import('./src/components/common/icons/ChartIcon.vue')['default']
     CloudDownIcon: typeof import('./src/components/common/icons/CloudDownIcon.vue')['default']
+    CloudShareIcon: typeof import('./src/components/common/icons/CloudShareIcon.vue')['default']
     CloudUpIcon: typeof import('./src/components/common/icons/CloudUpIcon.vue')['default']
     ColorChanger: typeof import('./src/components/header/ColorChanger.vue')['default']
     CountdownOverlay: typeof import('./src/components/game/CountdownOverlay.vue')['default']
