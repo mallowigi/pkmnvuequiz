@@ -162,11 +162,11 @@ const toggleSpeak = () => {
           <ScrollIntoViewToggle />
 
           <SoundToggle />
+
+          <CycleSpritesToggle />
         </div>
 
         <div class="selection-row">
-          <CycleSpritesToggle />
-
           <CycleTypesToggle />
 
           <CycleRegionsToggle />

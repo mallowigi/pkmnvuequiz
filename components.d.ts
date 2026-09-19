@@ -44,6 +44,7 @@ declare module 'vue' {
     CriesHotkeyToggle: typeof import('./src/components/game/settings/CriesHotkeyToggle.vue')['default']
     CryIcon: typeof import('./src/components/common/icons/CryIcon.vue')['default']
     CycleRegionsToggle: typeof import('./src/components/game/settings/CycleRegionsToggle.vue')['default']
+    CycleSpritesIcon: typeof import('./src/components/common/icons/CycleSpritesIcon.vue')['default']
     CycleSpritesToggle: typeof import('./src/components/game/settings/CycleSpritesToggle.vue')['default']
     CycleTypesToggle: typeof import('./src/components/game/settings/CycleTypesToggle.vue')['default']
     CyclingSpecial: typeof import('./src/components/start/genSelection/CyclingSpecial.vue')['default']
