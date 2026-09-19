@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { AnimatePresence, motion } from 'motion-v';
+import { AnimatePresence } from 'motion-v';
 import { storeToRefs } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import PauseIcon from '@/components/common/icons/PauseIcon.vue';
@@ -158,6 +158,10 @@ const toggleSpeak = () => {
           <AutoPauseToggle />
 
           <AutoSaveToggle />
+
+          <ScrollIntoViewToggle />
+
+          <SoundToggle />
         </div>
 
         <div class="selection-row">
@@ -166,10 +170,6 @@ const toggleSpeak = () => {
           <CycleTypesToggle />
 
           <CycleRegionsToggle />
-
-          <ScrollIntoViewToggle />
-
-          <SoundToggle />
 
           <LanguagesSelection />
         </div>

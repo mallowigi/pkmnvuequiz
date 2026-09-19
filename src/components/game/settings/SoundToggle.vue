@@ -1,44 +1,56 @@
 <script setup lang="ts">
-import RoundedBox from '@/components/common/RoundedBox.vue';
-import SegmentButton from '@/components/common/SegmentButton.vue';
-import { useMessages } from '@/stores/useMessages.ts';
 import { useI18n } from 'vue-i18n';
+
+import VolumeIcon from '@/components/common/icons/VolumeIcon.vue';
+import RoundedButton from '@/components/common/RoundedButton.vue';
+import { useMessages } from '@/stores/useMessages.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 
 const { settingsState, setSound } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 
-const applySound = (value: boolean) => {
-  if (settingsState.withSound === value) return;
-
-  setSound(value);
-  showUserMessage(t('soundSet', { status: value ? t('enabled') : t('disabled') }));
+const toggleSound = () => {
+  const newValue = !settingsState.withSound;
+  setSound(newValue);
+  showUserMessage(t('soundSet', { status: newValue ? t('enabled') : t('disabled') }));
 };
 </script>
 
 <template>
-  <RoundedBox
+  <RoundedButton
+    class="sound-toggle rad-br-tl"
+    :selected="settingsState.withSound"
     v-game-ended
-    v-tooltip="t('soundTooltip')"
+    v-tooltip:top="t('soundTooltip')"
+    @click="toggleSound"
   >
-    <SegmentButton
-      :active="{
-        left: settingsState.withSound,
-        right: !settingsState.withSound,
-      }"
-      :attached="{
-        right: true,
-      }"
-      @click:left="applySound(true)"
-      @click:right="applySound(false)"
-    >
-      <template #prefix> {{ t('sound') }}: </template>
-
-      <template #left> {{ t('on') }} </template>
-      <template #right> {{ t('off') }} </template>
-    </SegmentButton>
-  </RoundedBox>
+    <VolumeIcon />
+  </RoundedButton>
 </template>
 
-<style scoped></style>
+<style scoped>
+.sound-toggle {
+  padding: 9px 14px 8px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  & img {
+    margin: -5px;
+    width: 52px;
+    height: 39px;
+    object-fit: none;
+    object-position: 50% 100%;
+    filter: brightness(0) invert(0.7);
+  }
+
+  &.selected {
+    & img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+</style>
