@@ -2,127 +2,128 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Helper functions
-    function isSignedIn() {
-      return request.auth != null;
-    }
+	// Helper functions
+	function isSignedIn() {
+	  return request.auth != null;
+	}
 
-    function isOwner(userId) {
-      return isSignedIn() && request.auth.uid == userId;
-    }
+	function isOwner(userId) {
+	  return isSignedIn() && request.auth.uid == userId;
+	}
 
-    // Validation functions
-    function isValidString(val, min, max) {
-      return val is string && val.size() >= min && val.size() <= max;
-    }
+	// Validation functions
+	function isValidString(val, min, max) {
+	  return val is string && val.size() >= min && val.size() <= max;
+	}
 
-    function isValidInt(val, min) {
-      return val is int && val >= min;
-    }
+	function isValidInt(val, min) {
+	  return val is int && val >= min;
+	}
 
-    function isValidGameMode(mode) {
-      return mode in ['full', 'gen', 'special', 'types', 'special', 'mega', 'custom', 'random', 'random-type'];
-    }
+	function isValidGameMode(mode) {
+	  return mode in ['full', 'gen', 'special', 'types', 'special', 'mega', 'custom', 'random', 'random-type'];
+	}
 
-    function isValidGen(gen) {
-      return gen == null || gen in ['gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9'];
-    }
+	function isValidGen(gen) {
+	  return gen == null || gen in ['gen1', 'gen2', 'gen3', 'gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9'];
+	}
 
-    function isValidGens(gens) {
-      return gens == null || (gens is list && gens.size() <= 9);
-    }
+	function isValidGens(gens) {
+	  return gens == null || (gens is list && gens.size() <= 9);
+	}
 
-    function isValidMode(mode) {
-      return mode in ['chaos', 'normal', 'order'];
-    }
+	function isValidMode(mode) {
+	  return mode in ['chaos', 'normal', 'order'];
+	}
 
-    function isValidPokemonProgress(progress) {
-      return progress is map &&
-      progress.pokemonFound is list &&
-      progress.pokemonShadowed is list &&
-      progress.shinyPokemon is list;
-    }
+	function isValidPokemonProgress(progress) {
+	  return progress is map &&
+	  progress.pokemonFound is list &&
+	  progress.pokemonShadowed is list &&
+	  progress.shinyPokemon is list;
+	}
 
-    function isValidLeaderboardRecord(data) {
-      return (data.name == null || isValidString(data.name, 1, 100)) &&
-      // Only enforce a minimum time on actual wins (prevents saving debug mode wins);
-      // gave-up sessions can legitimately end in under 60 seconds.
-      isValidInt(data.time, data.hasGivenUp == true ? 0 : 60) &&
-      isValidInt(data.numFound, 0) &&
-      isValidInt(data.numShadows, 0) &&
-      data.hasGivenUp is bool &&
-      data.isMultiplayer is bool &&
-      isValidGameMode(data.gameMode) &&
-      isValidGens(data.gens) &&
-      isValidMode(data.mode) &&
-      (data.uid == null || data.uid is string) &&
-      isValidPokemonProgress(data.pokemonProgress);
-    }
+	function isValidLeaderboardRecord(data) {
+	  return (data.name == null || isValidString(data.name, 1, 100)) &&
+	  // Only enforce a minimum time on actual wins (prevents saving debug mode wins);
+	  // gave-up sessions can legitimately end in under 60 seconds.
+	  isValidInt(data.time, data.hasGivenUp == true ? 0 : 60) &&
+	  isValidInt(data.numFound, 0) &&
+	  isValidInt(data.numShadows, 0) &&
+	  data.hasGivenUp is bool &&
+	  data.isMultiplayer is bool &&
+	  isValidGameMode(data.gameMode) &&
+	  isValidGens(data.gens) &&
+	  isValidMode(data.mode) &&
+	  (data.uid == null || data.uid is string) &&
+	  isValidPokemonProgress(data.pokemonProgress);
+	}
 
-    function isValidFinishedGames(games) {
-      return games is map &&
-      isValidInt(games.full, 0) &&
-      isValidInt(games.noShadows, 0) &&
-      isValidInt(games.noCries, 0) &&
-      isValidInt(games.chaos, 0) &&
-      isValidInt(games.normal, 0) &&
-      isValidInt(games.order, 0) &&
-      isValidInt(games.special, 0) &&
-      isValidInt(games.mega, 0) &&
-      games.gen is map &&
-      games.types is map;
-    }
+	function isValidFinishedGames(games) {
+	  return games is map &&
+	  isValidInt(games.full, 0) &&
+	  isValidInt(games.noShadows, 0) &&
+	  isValidInt(games.noCries, 0) &&
+	  isValidInt(games.chaos, 0) &&
+	  isValidInt(games.normal, 0) &&
+	  isValidInt(games.order, 0) &&
+	  isValidInt(games.special, 0) &&
+	  isValidInt(games.mega, 0) &&
+	  games.gen is map &&
+	  games.types is map;
+	}
 
-    // Rules for the 'users' collection
-    // Stores the persistent save data for authenticated users
-    match /users/{userId} {
-      allow read, delete: if isOwner(userId);
-      allow write: if isOwner(userId) &&
-      request.resource.data.version is int &&
-      isValidPokemonProgress(request.resource.data.pokemonProgress);
-    }
+	// Rules for the 'users' collection
+	// Stores the persistent save data for authenticated users
+	match /users/{userId} {
+	  allow read, delete: if isOwner(userId);
+	  allow write: if isOwner(userId) &&
+	  request.resource.data.version is int &&
+	  isValidPokemonProgress(request.resource.data.pokemonProgress);
+	}
 
-    // Rules for the 'profiles' collection
-    // Stores lifetime statistics for authenticated users
-    match /profiles/{userId} {
-      allow read: if isOwner(userId);
-      allow write: if isOwner(userId) &&
-      isValidInt(request.resource.data.plays, 0) &&
-      (!('finishedGames' in request.resource.data) || isValidFinishedGames(request.resource.data.finishedGames));
-    }
+	// Rules for the 'profiles' collection
+	// Stores lifetime statistics for authenticated users
+	match /profiles/{userId} {
+	  allow read: if isOwner(userId);
+	  allow write: if isOwner(userId) &&
+	  isValidInt(request.resource.data.plays, 0) &&
+	  (!('finishedGames' in request.resource.data) || isValidFinishedGames(request.resource.data.finishedGames)) &&
+	  (!('attackDexWins' in request.resource.data) || isValidInt(request.resource.data.attackDexWins, 0));
+	}
 
-    // Rules for the 'leaderboards' collection
-    // Stores game results/records
-    match /leaderboards/{recordId} {
-      // Anyone can read the leaderboards
-      allow read: if true;
+	// Rules for the 'leaderboards' collection
+	// Stores game results/records
+	match /leaderboards/{recordId} {
+	  // Anyone can read the leaderboards
+	  allow read: if true;
 
-      // Allow creating a new record
-      allow create: if (
-        // Validation of data integrity
-        isValidLeaderboardRecord(request.resource.data) &&
-        (
-          // For authenticated users: UID in the payload must match the caller
-          (isSignedIn() && request.resource.data.uid == request.auth.uid) ||
-          // For guests: uid must be null (recordId is auto-generated)
-          (!isSignedIn() && request.resource.data.uid == null)
-        )
-      );
+	  // Allow creating a new record
+	  allow create: if (
+		// Validation of data integrity
+		isValidLeaderboardRecord(request.resource.data) &&
+		(
+		  // For authenticated users: UID in the payload must match the caller
+		  (isSignedIn() && request.resource.data.uid == request.auth.uid) ||
+		  // For guests: uid must be null (recordId is auto-generated)
+		  (!isSignedIn() && request.resource.data.uid == null)
+		)
+	  );
 
-      // Only the owner of the record can update or delete it
-      allow update, delete: if isSignedIn() && (
-        recordId == request.auth.uid ||
-        resource.data.uid == request.auth.uid
-      );
+	  // Only the owner of the record can update or delete it
+	  allow update, delete: if isSignedIn() && (
+		recordId == request.auth.uid ||
+		resource.data.uid == request.auth.uid
+	  );
 
-      // Additional safety for update: don't allow changing ownership and validate data
-      allow update: if request.resource.data.uid == resource.data.uid &&
-      isValidLeaderboardRecord(request.resource.data);
-    }
+	  // Additional safety for update: don't allow changing ownership and validate data
+	  allow update: if request.resource.data.uid == resource.data.uid &&
+	  isValidLeaderboardRecord(request.resource.data);
+	}
 
-    // Default deny for everything else
-    match /{path=**} {
-      allow read, write: if false;
-    }
+	// Default deny for everything else
+	match /{path=**} {
+	  allow read, write: if false;
+	}
   }
 }

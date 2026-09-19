@@ -158,6 +158,7 @@ export type FinishedGames = {
 };
 
 export type Profile = {
+  attackDexWins: number;
   plays: number;
   finishedGames: FinishedGames;
 };

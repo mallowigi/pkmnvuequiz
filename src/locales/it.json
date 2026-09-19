@@ -25,6 +25,7 @@
     "notReady": "Il gioco AttackDex non e ancora disponibile.",
     "title": "AttackDex"
   },
+  "attackDexWins": "Vittorie AttackDex",
   "autoPause": "Pausa Automatica:",
   "autoPauseSet": "Pausa Automatica {status}",
   "autoPauseTooltip": "Attiva/Disattiva Pausa Automatica",

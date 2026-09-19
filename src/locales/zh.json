@@ -25,6 +25,7 @@
     "notReady": "AttackDex 遊戲尚未開放。",
     "title": "AttackDex"
   },
+  "attackDexWins": "AttackDex 勝場",
   "autoPause": "自動暫停:",
   "autoPauseSet": "自動暫停 {status}",
   "autoPauseTooltip": "切換自動暫停開/關",

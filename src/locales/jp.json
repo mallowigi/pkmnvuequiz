@@ -25,6 +25,7 @@
     "notReady": "AttackDexのゲームはまだ利用できません。",
     "title": "AttackDex"
   },
+  "attackDexWins": "AttackDexの勝利数",
   "autoPause": "自動一時停止:",
   "autoPauseSet": "自動一時停止 {status}",
   "autoPauseTooltip": "自動一時停止のオン/オフを切り替え",

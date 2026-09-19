@@ -25,6 +25,7 @@
     "notReady": "Игра AttackDex пока недоступна.",
     "title": "AttackDex"
   },
+  "attackDexWins": "Побед в AttackDex",
   "autoPause": "Автоматическая пауза:",
   "autoPauseSet": "Автоматическая пауза {status}",
   "autoPauseTooltip": "Включить/выключить автоматическую паузу",
