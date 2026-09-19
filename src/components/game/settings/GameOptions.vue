@@ -28,6 +28,7 @@ import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { useVoice } from '@/composables/useVoice.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -44,6 +45,7 @@ const { skipsState, useSkip } = useSkips();
 const { isSupported, isListening, toggleVoice } = useVoice();
 const { isOwner } = storeToRefs(useRooms());
 const { roomState } = useRooms();
+const { isAttackDex } = useCurrentDex();
 
 const canSkip = computed(() => {
   if (!state.withBoxShuffle && !state.withTypeShuffle && !state.withCriesShuffle) return false;
@@ -136,7 +138,7 @@ const toggleSpeak = () => {
 
           <TimerSelection />
 
-          <ModeSelection />
+          <ModeSelection v-if="!isAttackDex()" />
 
           <TypeShuffle />
 
@@ -147,13 +149,13 @@ const toggleSpeak = () => {
           class="selection-row"
           v-if="!isChallengeMode && isOwner"
         >
-          <ShinyToggle />
+          <ShinyToggle v-if="!isAttackDex()" />
 
           <SpellingToggle />
 
           <ShadowHotkeyToggle />
 
-          <CriesHotkeyToggle />
+          <CriesHotkeyToggle v-if="!isAttackDex()" />
 
           <AutoPauseToggle />
 
@@ -163,7 +165,7 @@ const toggleSpeak = () => {
 
           <SoundToggle />
 
-          <CycleSpritesToggle />
+          <CycleSpritesToggle v-if="!isAttackDex()" />
 
           <CycleTypesToggle />
 
