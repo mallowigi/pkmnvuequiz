@@ -8,6 +8,7 @@ import { reactive, computed } from 'vue';
 import { getGenForBox } from '@/composables/useBoxes.ts';
 import { useAttackStore } from '@/stores/useAttackStore.ts';
 import { useBonus } from '@/stores/useBonus.ts';
+import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -135,6 +136,7 @@ export const useAttacks = defineStore('attacks', () => {
   const { state, hideShadows } = useState();
   const { getCurrentGens } = useCurrentGen();
   const { getShuffledType, getCurrentTypes } = useCurrentType();
+  const { currentBoxState } = useCurrentBox();
   const { settingsState } = useSettings();
   const { startTimer } = useTimer();
   const { summonedShadow } = useTouches();
@@ -293,6 +295,13 @@ export const useAttacks = defineStore('attacks', () => {
       const typeAttacks = attackMaps.types[currentType.id as Type];
       if (typeAttacks) {
         remainingArray = remainingArray.filter((attack) => typeAttacks.has(attack));
+      }
+    }
+
+    if (state.withBoxShuffle && currentBoxState.currentBox) {
+      const boxAttacks = attackMaps.boxes[currentBoxState.currentBox];
+      if (boxAttacks) {
+        remainingArray = remainingArray.filter((attack) => boxAttacks.has(attack));
       }
     }
 

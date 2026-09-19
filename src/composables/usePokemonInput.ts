@@ -148,9 +148,24 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const handleBoxShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
-    // Attacks have no box shuffle.
-    if (isAttackDex()) return false;
     if (!state.withBoxShuffle) return false;
+
+    if (isAttackDex()) {
+      const foundAttacks = foundEntries as Attack[];
+      const currentBox = currentBoxState.currentBox;
+      const boxes = new Set(foundAttacks.map((a) => a.box));
+
+      if (currentBox && !boxes.has(currentBox)) {
+        return notifyError(
+          t('notInBox', {
+            box: t(currentBox),
+            name: capitalize(getEntryName(foundEntries[0])),
+          }),
+        );
+      }
+
+      return false;
+    }
 
     const foundPokemon = foundEntries as PokemonInfo[];
     let currentBox: SpecialType | RegionBox | null;
