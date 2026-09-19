@@ -1,9 +1,8 @@
 import { computed } from 'vue';
 
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
-import { useAttacks } from '@/stores/useAttacks.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import { useAllStrategies } from '@/strategies/useRegistry.ts';
 import type { Attack, AttackStatus, PokemonInfo, PokemonStatus } from '@/types.ts';
 
 export type DexEntry = PokemonInfo | Attack;
@@ -12,16 +11,10 @@ export const isAttackEntry = (entry: DexEntry): entry is Attack => 'name' in ent
 
 export const getEntryName = (entry: DexEntry): string => (isAttackEntry(entry) ? entry.name : entry.baseName);
 
-/**
- * Routes every dex-facing member to the active dex store (`useAttacks` while the AttackDex is active, otherwise
- * `usePokemons`). It holds no state of its own so it never joins the autosave plugin. Routing is decided at call time
- * so a single setup-time destructure keeps working across dex switches.
- */
 export const useCurrentDex = () => {
   const { attackDexState } = useAttackDexState();
   const strategy = useCurrentStrategy();
-  const pokemons = usePokemons();
-  const attacks = useAttacks();
+  const allStrategies = useAllStrategies();
 
   const isAttackDex = () => attackDexState.isAttackDex;
 
@@ -58,14 +51,8 @@ export const useCurrentDex = () => {
 
   const getCurrentGameModeEntries = (): Map<string, DexEntry[]> => strategy.value.getCurrentGameModeEntries();
 
-  /**
-   * Enforces the one-dex invariant: only the dex about to be played may hold live progress. Called from the game-start
-   * flow, it clears both stores so stale entries from the other dex never leak into counters or end conditions. Must
-   * NOT run from enter/exit AttackDex, which are navigation gestures.
-   */
   const switchDex = () => {
-    pokemons.resetPokemonState();
-    attacks.resetAttacksState();
+    allStrategies.forEach((s) => s.reset());
   };
 
   return {

@@ -11,3 +11,5 @@ export const useStrategyRegistry = (): Record<DexId, DexStrategy> => {
     pokemon: pokemonStrategy,
   };
 };
+
+export const useAllStrategies = (): DexStrategy[] => Object.values(useStrategyRegistry());
