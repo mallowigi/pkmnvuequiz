@@ -5,6 +5,25 @@ type Color = {
   filter?: string;
 };
 
+const LOGO_BASE_HUE = 86;
+
+const generateRandomColor = (): Color => {
+  const hue = Math.floor(Math.random() * 360);
+  const saturation = 54 + Math.floor(Math.random() * 11); // 54-64%, matches the palette above
+  const lightLightness = 51 + Math.floor(Math.random() * 15); // 51-65%
+  const darkLightness = 44 + Math.floor(Math.random() * 8); // 44-51%
+  const filterDegrees = (hue - LOGO_BASE_HUE + 360) % 360;
+
+  return {
+    dark: `hsl(${hue}, ${saturation}%, ${darkLightness}%)`,
+    filter: `hue-rotate(${filterDegrees}deg)`,
+    light: `hsl(${hue}, ${saturation}%, ${lightLightness}%)`,
+    name: 'random',
+  };
+};
+
+const randomColor = generateRandomColor();
+
 export const useColors = () => {
   const colors: Record<string, Color> = {
     blue: {
@@ -42,6 +61,7 @@ export const useColors = () => {
       light: 'hsl(266, 64%, 65%)',
       name: 'purple',
     },
+    random: randomColor,
     red: {
       dark: 'hsl(6 58% 46%)',
       filter: 'hue-rotate(270deg)',
