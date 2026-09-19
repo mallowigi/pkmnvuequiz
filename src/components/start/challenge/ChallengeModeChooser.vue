@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAuth } from '@vueuse/firebase';
 import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
@@ -14,6 +15,7 @@ const { enterAttackDex, attackDexState } = useAttackDexState();
 
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
+const { isAuthenticated } = useAuth(auth);
 const { showUserMessage } = useMessages();
 
 const selectFreeMode = () => {
@@ -87,12 +89,12 @@ const selectAttackDex = () => {
 
         <div
           class="separator"
-          v-if="auth.currentUser?.uid"
+          v-if="isAuthenticated"
         />
 
         <div
           class="side"
-          v-if="auth.currentUser?.uid"
+          v-if="isAuthenticated"
         >
           <RoundedButton
             class="danger-btn"

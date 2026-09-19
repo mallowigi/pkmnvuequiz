@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useAsyncState } from '@vueuse/core';
+import { useAuth } from '@vueuse/firebase';
 import { useI18n } from 'vue-i18n';
 
 import IconButton from '@/components/common/IconButton.vue';
@@ -16,6 +17,7 @@ const { t } = useI18n();
 
 const { saveState, loadState, loadFromFirebase, hasFirebaseData, saveToFirebase } = useSavedData();
 const { auth } = useFirebase();
+const { isAuthenticated } = useAuth(auth);
 const { showUserMessage } = useMessages();
 const { roomState } = useRooms();
 
@@ -63,13 +65,13 @@ const saveToCloud = async () => {
 
       <div
         class="separator"
-        v-if="auth.currentUser"
+        v-if="isAuthenticated"
       />
 
       <IconButton
         @click="loadFromFirebase()"
         v-tooltip="t('loadFromCloudTooltip')"
-        v-if="auth.currentUser"
+        v-if="isAuthenticated"
         :class="{ disabled: !isReady || !state }"
       >
         <CloudDownIcon class="accent-icon" />
@@ -78,7 +80,7 @@ const saveToCloud = async () => {
       <IconButton
         @click="saveToCloud()"
         v-tooltip="t('saveFromCloudTooltip')"
-        v-if="auth.currentUser"
+        v-if="isAuthenticated"
         :class="{ disabled: !isReady || !state }"
       >
         <CloudUpIcon class="accent-icon" />

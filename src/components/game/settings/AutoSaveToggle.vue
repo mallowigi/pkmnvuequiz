@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAuth } from '@vueuse/firebase';
 import { useI18n } from 'vue-i18n';
 
 import CloudShareIcon from '@/components/common/icons/CloudShareIcon.vue';
@@ -13,6 +14,7 @@ const { settingsState, setSaveToCloud } = useSettings();
 const { showUserMessage } = useMessages();
 const { t } = useI18n();
 const { auth } = useFirebase();
+const { isAuthenticated } = useAuth(auth);
 const { roomState } = useRooms();
 
 const toggleAutoSave = () => {
@@ -27,7 +29,7 @@ const toggleAutoSave = () => {
     class="auto-save-toggle rad-br-tl"
     :selected="settingsState.autoSync"
     v-game-ended
-    v-if="auth.currentUser && !roomState.isActive"
+    v-if="isAuthenticated && !roomState.isActive"
     v-tooltip:top="t('autoSaveTooltip')"
     @click="toggleAutoSave"
   >

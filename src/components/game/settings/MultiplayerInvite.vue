@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAuth } from '@vueuse/firebase';
 import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
@@ -10,6 +11,7 @@ const { t } = useI18n();
 const { setDialog } = useDialogs();
 const { showUserMessage } = useMessages();
 const { auth } = useFirebase();
+const { isAuthenticated } = useAuth(auth);
 
 const handleInviteClick = () => {
   if (!auth.currentUser?.uid) {
@@ -25,7 +27,7 @@ const handleInviteClick = () => {
   <RoundedButton
     v-game-ended
     class="multi-toggle rad-br-tl"
-    v-if="auth.currentUser?.uid"
+    v-if="isAuthenticated"
     @click="handleInviteClick"
   >
     {{ t('multiplayerInvite') }}
