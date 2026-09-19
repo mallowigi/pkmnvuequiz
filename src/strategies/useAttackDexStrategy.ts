@@ -1,11 +1,13 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
 import { i18n } from '@/main.ts';
 import { useAttacks } from '@/stores/useAttacks.ts';
+import { useProfile } from '@/stores/useProfile.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams } from '@/strategies/types.ts';
 import type { Attack } from '@/types.ts';
 
 export const useAttackDexStrategy = (): DexStrategy => {
   const attacks = useAttacks();
+  const { incrementAttackDexWins } = useProfile();
 
   const id: DexId = 'attack';
 
@@ -60,6 +62,14 @@ export const useAttackDexStrategy = (): DexStrategy => {
 
   const getCurrentGameModeEntries = (): Map<string, Attack[]> => attacks.getCurrentGameModeAttacks();
 
+  const recordGameEnd = () => {
+    void incrementAttackDexWins();
+  };
+
+  const recordGiveUp = () => {
+    /* no-op */
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -81,6 +91,8 @@ export const useAttackDexStrategy = (): DexStrategy => {
     isInCurrentGameMode,
     isPartOfAnotherEntry,
     prefillRemaining,
+    recordGameEnd,
+    recordGiveUp,
     reset,
     showRemaining,
     showRemainingShadows,

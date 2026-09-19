@@ -47,4 +47,6 @@ export type DexStrategy<T = DexEntry> = {
   readonly prefillRemaining: () => void;
   readonly addRandomShadow: () => void;
   readonly getCurrentGameModeEntries: () => Map<string, T[]>;
+  readonly recordGameEnd: () => void;
+  readonly recordGiveUp: () => void;
 };

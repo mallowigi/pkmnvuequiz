@@ -1,11 +1,15 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
+import { useFirebase } from '@/composables/useFirebase.ts';
 import { i18n } from '@/main.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
+import { useProfile } from '@/stores/useProfile.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams } from '@/strategies/types.ts';
 import type { PokemonInfo } from '@/types.ts';
 
 export const usePokemonDexStrategy = (): DexStrategy => {
   const pokemons = usePokemons();
+  const { createRecord } = useFirebase();
+  const { updateFinishedGames } = useProfile();
 
   const id: DexId = 'pokemon';
 
@@ -60,6 +64,15 @@ export const usePokemonDexStrategy = (): DexStrategy => {
 
   const getCurrentGameModeEntries = (): Map<string, PokemonInfo[]> => pokemons.getCurrentGameModePokemon();
 
+  const recordGameEnd = () => {
+    void createRecord();
+    updateFinishedGames();
+  };
+
+  const recordGiveUp = () => {
+    void createRecord();
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -81,6 +94,8 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     isInCurrentGameMode,
     isPartOfAnotherEntry,
     prefillRemaining,
+    recordGameEnd,
+    recordGiveUp,
     reset,
     showRemaining,
     showRemainingShadows,

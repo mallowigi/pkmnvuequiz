@@ -16,14 +16,15 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useTouches } from '@/stores/useTouches.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import type { GameFlowState, GameSelectionState, ChallengeMode } from '@/types.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare, playMissingno } = usePlaySounds();
   const { removeAutoSave } = useSavedData();
-  const { createRecord } = useFirebase();
-  const { showRemaining, isAttackDex } = useCurrentDex();
-  const { incrementAttackDexWins, incrementPlays, updateFinishedGames } = useProfile();
+  const { showRemaining } = useCurrentDex();
+  const strategy = useCurrentStrategy();
+  const { incrementPlays } = useProfile();
   const { toggledMissingno } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
@@ -147,10 +148,6 @@ export const useGameFlow = defineStore('gameFlow', () => {
     startGenCycle();
   };
 
-  const recordWin = () => {
-    updateFinishedGames();
-  };
-
   const endGame = () => {
     const doEndGame = () => {
       flowState.isEnded = true;
@@ -163,14 +160,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopVoice();
       removeAutoSave();
 
-      // AttackDex leaderboard/multiplayer publication stays gated; only the
-      // profile completion counter tracks AttackDex wins (see #90).
-      if (isAttackDex()) {
-        void incrementAttackDexWins();
-      } else {
-        void createRecord();
-        recordWin();
-      }
+      strategy.value.recordGameEnd();
 
       playFanfare();
       resetInput();
@@ -192,10 +182,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopGenCycle();
       stopVoice();
 
-      // AttackDex profile/cloud/leaderboard publication is gated pending its own tickets.
-      if (!isAttackDex()) {
-        void createRecord();
-      }
+      strategy.value.recordGiveUp();
 
       removeAutoSave();
       showRemaining();
