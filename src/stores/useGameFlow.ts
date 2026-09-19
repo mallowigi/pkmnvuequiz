@@ -23,7 +23,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { removeAutoSave } = useSavedData();
   const { createRecord } = useFirebase();
   const { showRemaining, isAttackDex } = useCurrentDex();
-  const { incrementPlays, updateFinishedGames } = useProfile();
+  const { incrementAttackDexWins, incrementPlays, updateFinishedGames } = useProfile();
   const { toggledMissingno } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
@@ -61,7 +61,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     // Destroy previous room
     if (roomState.isActive) {
       setDialog('deleteRoom', async () => {
-        await destroyRoom();
+        destroyRoom();
         await tryJoinRoom(auth.currentUser?.uid, roomName);
       });
     } else {
@@ -163,9 +163,12 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopVoice();
       removeAutoSave();
 
-      // AttackDex profile/cloud/leaderboard publication is gated pending its own tickets.
-      if (!isAttackDex()) {
-        createRecord();
+      // AttackDex leaderboard/multiplayer publication stays gated; only the
+      // profile completion counter tracks AttackDex wins (see #90).
+      if (isAttackDex()) {
+        void incrementAttackDexWins();
+      } else {
+        void createRecord();
         recordWin();
       }
 
@@ -191,7 +194,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
 
       // AttackDex profile/cloud/leaderboard publication is gated pending its own tickets.
       if (!isAttackDex()) {
-        createRecord();
+        void createRecord();
       }
 
       removeAutoSave();
