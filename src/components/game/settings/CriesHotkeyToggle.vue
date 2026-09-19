@@ -40,6 +40,7 @@ const tooltipMessage = computed(() => {
 
 <style scoped>
 .hotkey-toggle {
+  min-width: 0;
   padding: 9px 14px 8px;
   display: flex;
   justify-content: center;

@@ -32,6 +32,7 @@ const toggle = () => {
 
 <style scoped>
 .spelling-toggle {
+  min-width: 0;
   padding: 9px 14px 8px;
   display: flex;
   justify-content: center;
