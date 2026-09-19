@@ -25,8 +25,10 @@ const { state, isReady } = useAsyncState(() => {
 
 const saveToCloud = async () => {
   if (!isReady.value || !state.value) return;
-  await saveToFirebase();
-  showUserMessage(t('saveToCloudSuccess'));
+  const success = await saveToFirebase();
+  if (success) {
+    showUserMessage(t('saveToCloudSuccess'));
+  }
 };
 </script>
 

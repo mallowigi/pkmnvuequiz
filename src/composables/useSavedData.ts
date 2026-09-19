@@ -646,12 +646,12 @@ export const useSavedData = () => {
     }
   };
 
-  const saveToFirebase = () => {
-    if (roomState.isActive) return;
+  const saveToFirebase = async () => {
+    if (roomState.isActive) return false;
 
     const savedState = getSavedState();
     const { saveUserState } = useFirebase();
-    saveUserState(savedState);
+    return await saveUserState(savedState);
   };
 
   const loadAutoSave = async () => {
