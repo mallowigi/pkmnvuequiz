@@ -1,7 +1,7 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
 import { i18n } from '@/main.ts';
 import { useAttacks } from '@/stores/useAttacks.ts';
-import type { DexStrategy, DexId } from '@/strategies/types.ts';
+import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams } from '@/strategies/types.ts';
 import type { Attack } from '@/types.ts';
 
 export const useAttackDexStrategy = (): DexStrategy => {
@@ -20,9 +20,9 @@ export const useAttackDexStrategy = (): DexStrategy => {
 
   const getEntityType = () => i18n.global.t('attack');
 
-  const getSummaryText = () => i18n.global.t('endOverlay.summaryAttack');
+  const getSummaryText = (params: SummaryTextParams) => i18n.global.t('endOverlay.summaryAttack', params);
 
-  const getShareText = () => i18n.global.t('endOverlay.shareTextAttack');
+  const getShareText = (params: ShareTextParams) => i18n.global.t('endOverlay.shareTextAttack', params);
 
   const getNumFound = () => attacks.numFound;
 

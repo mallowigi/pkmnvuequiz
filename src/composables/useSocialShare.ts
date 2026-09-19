@@ -1,10 +1,9 @@
 import { useShare } from '@vueuse/core';
-import { useI18n } from 'vue-i18n';
 
-import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useQuiz } from '@/composables/useQuiz.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { useBonus } from '@/stores/useBonus.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 type ShareProps = {
   numFound: number;
@@ -12,16 +11,15 @@ type ShareProps = {
 };
 
 export const useSocialShare = () => {
-  const { t } = useI18n();
   const { getGameModeName } = useQuiz();
   const { getTitle } = usePageTitle();
   const { bonusState } = useBonus();
-  const { isAttackDex } = useCurrentDex();
+  const strategy = useCurrentStrategy();
   const { share, isSupported } = useShare();
 
   const getShareText = ({ elapsed, numFound }: ShareProps) => {
     const regionOrType = getGameModeName();
-    return t(isAttackDex() ? 'endOverlay.shareTextAttack' : 'endOverlay.shareText', {
+    return strategy.value.getShareText({
       elapsed,
       numFound,
       regionOrType,

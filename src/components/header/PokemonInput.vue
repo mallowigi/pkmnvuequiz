@@ -6,7 +6,6 @@ import { useI18n } from 'vue-i18n';
 
 import TextBox from '@/components/common/TextBox.vue';
 import LastPokemon from '@/components/header/LastPokemon.vue';
-import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
 import { useMultiTap } from '@/composables/useMultiTap.ts';
 import { usePokemonInput } from '@/composables/usePokemonInput.ts';
@@ -16,6 +15,7 @@ import vEllipsis from '@/directives/ellipsis.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { state } = useState();
 const gameFlowStore = useGameFlow();
@@ -23,7 +23,7 @@ const { flowState, isInGame } = storeToRefs(gameFlowStore);
 const { updateInput } = useLastInput();
 const { dialogs } = useDialogs();
 const { getGameModeName } = useQuiz();
-const { isAttackDex } = useCurrentDex();
+const strategy = useCurrentStrategy();
 const { t } = useI18n();
 const { lastQuery } = useVoice();
 
@@ -53,7 +53,7 @@ const inputRef = computed(() => textBoxRef.value?.inputRef ?? null);
 
 const nameAllText = computed(() => {
   const regionOrType = getGameModeName();
-  const entryType = t(isAttackDex() ? 'attack' : 'pokemon');
+  const entryType = strategy.value.getEntityType();
 
   switch (state.gameMode) {
     case 'gen':

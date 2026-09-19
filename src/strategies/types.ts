@@ -12,12 +12,23 @@ export type DexCapabilities = {
   readonly hasLeaderboards: boolean;
 };
 
+export type SummaryTextParams = {
+  numFound: number;
+  elapsed: string;
+};
+
+export type ShareTextParams = SummaryTextParams & {
+  regionOrType: string;
+  score: number;
+  url: string;
+};
+
 export type DexStrategy<T = DexEntry> = {
   readonly id: DexId;
   readonly capabilities: DexCapabilities;
   readonly getEntityType: () => string; // e.g., "Pokémon" or "Attack"
-  readonly getSummaryText: () => string; // What we display in EndOverlay
-  readonly getShareText: () => string; // What we display in ShareOverlay
+  readonly getSummaryText: (params: SummaryTextParams) => string; // What we display in EndOverlay
+  readonly getShareText: (params: ShareTextParams) => string; // What we display in ShareOverlay
   readonly getNumFound: () => number;
   readonly getNumShadows: () => number;
   readonly getRemaining: () => Set<string>;

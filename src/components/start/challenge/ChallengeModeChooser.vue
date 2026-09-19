@@ -8,10 +8,12 @@ import { useFirebase } from '@/composables/useFirebase.ts';
 import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { t } = useI18n();
 const { setGameSelectionState, setChallengeMode } = useGameFlow();
-const { enterAttackDex, attackDexState } = useAttackDexState();
+const { enterAttackDex } = useAttackDexState();
+const strategy = useCurrentStrategy();
 
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
@@ -29,7 +31,7 @@ const selectChallengeMode = () => {
 };
 
 const selectMultiplayerMode = () => {
-  if (attackDexState.isAttackDex) {
+  if (!strategy.value.capabilities.hasMultiplayer) {
     showUserMessage(t('attackDexMultiplayerDisabled'), 'warning');
     return;
   }

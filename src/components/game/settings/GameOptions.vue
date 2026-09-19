@@ -28,13 +28,13 @@ import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
-import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { useVoice } from '@/composables/useVoice.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { t } = useI18n();
 const { flowState, toggleSettings, pauseGame } = useGameFlow();
@@ -45,7 +45,7 @@ const { skipsState, useSkip } = useSkips();
 const { isSupported, isListening, toggleVoice } = useVoice();
 const { isOwner } = storeToRefs(useRooms());
 const { roomState } = useRooms();
-const { isAttackDex } = useCurrentDex();
+const strategy = useCurrentStrategy();
 
 const canSkip = computed(() => {
   if (!state.withBoxShuffle && !state.withTypeShuffle && !state.withCriesShuffle) return false;
@@ -138,7 +138,7 @@ const toggleSpeak = () => {
 
           <TimerSelection />
 
-          <ModeSelection v-if="!isAttackDex()" />
+          <ModeSelection v-if="strategy.capabilities.hasOrder" />
 
           <TypeShuffle />
 
@@ -149,13 +149,13 @@ const toggleSpeak = () => {
           class="selection-row"
           v-if="!isChallengeMode && isOwner"
         >
-          <ShinyToggle v-if="!isAttackDex()" />
+          <ShinyToggle v-if="strategy.capabilities.hasShiny" />
 
           <SpellingToggle />
 
           <ShadowHotkeyToggle />
 
-          <CriesHotkeyToggle v-if="!isAttackDex()" />
+          <CriesHotkeyToggle v-if="strategy.capabilities.hasCries" />
 
           <AutoPauseToggle />
 
@@ -165,7 +165,7 @@ const toggleSpeak = () => {
 
           <SoundToggle />
 
-          <CycleSpritesToggle v-if="!isAttackDex()" />
+          <CycleSpritesToggle v-if="strategy.capabilities.hasSpriteCycle" />
 
           <CycleTypesToggle />
 

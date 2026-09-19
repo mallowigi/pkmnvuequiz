@@ -15,6 +15,7 @@ import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useState } from '@/stores/useState';
 import { useTimer } from '@/stores/useTimer';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { setGameOver } = useState();
 const { setCurrentGens } = useCurrentGen();
@@ -24,7 +25,8 @@ const { timerState } = useTimer();
 const { t } = useI18n();
 
 const { resetQuiz } = useQuiz();
-const { numFound, numShadows, isAttackDex } = useCurrentDex();
+const { numFound, numShadows } = useCurrentDex();
+const strategy = useCurrentStrategy();
 const { bonusState } = useBonus();
 const { savedLocale } = useSavedLocale();
 
@@ -65,7 +67,7 @@ const closeOverlay = () => {
         <h1>{{ t('endOverlay.wellDone') }}</h1>
 
         <h2>
-          {{ t(isAttackDex() ? 'endOverlay.summaryAttack' : 'endOverlay.summary', { numFound, elapsed }) }}
+          {{ strategy.getSummaryText({ numFound, elapsed }) }}
         </h2>
 
         <h3>{{ t('score') }}: {{ bonusState.score }}</h3>

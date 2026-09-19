@@ -1,7 +1,7 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
 import { i18n } from '@/main.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
-import type { DexStrategy, DexId } from '@/strategies/types.ts';
+import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams } from '@/strategies/types.ts';
 import type { PokemonInfo } from '@/types.ts';
 
 export const usePokemonDexStrategy = (): DexStrategy => {
@@ -20,9 +20,9 @@ export const usePokemonDexStrategy = (): DexStrategy => {
 
   const getEntityType = () => i18n.global.t('pokemon');
 
-  const getSummaryText = () => i18n.global.t('endOverlay.summary');
+  const getSummaryText = (params: SummaryTextParams) => i18n.global.t('endOverlay.summary', params);
 
-  const getShareText = () => i18n.global.t('endOverlay.shareText');
+  const getShareText = (params: ShareTextParams) => i18n.global.t('endOverlay.shareText', params);
 
   const getNumFound = () => pokemons.numFound;
 
