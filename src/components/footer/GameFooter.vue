@@ -2,9 +2,9 @@
 import { useI18n } from 'vue-i18n';
 
 import GitHubIcon from '@/components/common/icons/GitHubIcon.vue';
+import KofiButton from '@/components/common/KofiButton.vue';
 import { useCredits } from '@/stores/useCredits.ts';
 import { useHelp } from '@/stores/useHelp.ts';
-import KofiButton from '@/components/common/KofiButton.vue';
 
 const { toggleShowCredits } = useCredits();
 const { showHelp } = useHelp();
@@ -139,7 +139,7 @@ const { t } = useI18n();
         class="p2 link"
         @click="showHelp"
       >
-        {{ t('help.title') }}
+        {{ t('showHelp') }}
       </p>
     </div>
 
