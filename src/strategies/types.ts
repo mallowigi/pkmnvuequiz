@@ -1,5 +1,5 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
-import type { AttackStatus, PokemonStatus } from '@/types.ts';
+import type { AttackStatus, PokemonStatus, RegionBox, SpecialType, Type } from '@/types.ts';
 
 export type DexId = 'pokemon' | 'attack';
 
@@ -21,6 +21,12 @@ export type ShareTextParams = SummaryTextParams & {
   regionOrType: string;
   score: number;
   url: string;
+};
+
+export type ShuffleBoxes = {
+  box: RegionBox | null;
+  specialBox: SpecialType | null;
+  megaBox: RegionBox | null;
 };
 
 export type DexStrategy<T = DexEntry> = {
@@ -49,4 +55,6 @@ export type DexStrategy<T = DexEntry> = {
   readonly getCurrentGameModeEntries: () => Map<string, T[]>;
   readonly recordGameEnd: () => void;
   readonly recordGiveUp: () => void;
+  readonly getShuffleType: (entry: T) => Type;
+  readonly getShuffleBoxes: (entry: T) => ShuffleBoxes;
 };

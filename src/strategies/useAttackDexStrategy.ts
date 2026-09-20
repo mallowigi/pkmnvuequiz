@@ -2,8 +2,8 @@ import type { DexEntry } from '@/composables/useCurrentDex.ts';
 import { i18n } from '@/main.ts';
 import { useAttacks } from '@/stores/useAttacks.ts';
 import { useProfile } from '@/stores/useProfile.ts';
-import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams } from '@/strategies/types.ts';
-import type { Attack } from '@/types.ts';
+import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
+import type { Attack, Type } from '@/types.ts';
 
 export const useAttackDexStrategy = (): DexStrategy => {
   const attacks = useAttacks();
@@ -70,6 +70,14 @@ export const useAttackDexStrategy = (): DexStrategy => {
     /* no-op */
   };
 
+  const getShuffleType = (entry: DexEntry): Type => (entry as Attack).type;
+
+  const getShuffleBoxes = (entry: DexEntry): ShuffleBoxes => ({
+    box: (entry as Attack).box ?? null,
+    megaBox: null,
+    specialBox: null,
+  });
+
   return {
     addFound,
     addRandomShadow,
@@ -84,6 +92,8 @@ export const useAttackDexStrategy = (): DexStrategy => {
     getRandomRemaining,
     getRemaining,
     getShareText,
+    getShuffleBoxes,
+    getShuffleType,
     getStatus,
     getSummaryText,
     id,

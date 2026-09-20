@@ -10,7 +10,8 @@ import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState';
-import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo, MoveTypeInfo, Attack, PokemonInfo } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo, MoveTypeInfo } from '@/types.ts';
 
 type CurrentTypeState = {
   shuffledType: Type | null;
@@ -132,25 +133,12 @@ export const useCurrentType = defineStore('currentType', () => {
   };
 
   const setRandomCurrentType = () => {
-    const { getRandomRemaining, isAttackDex } = useCurrentDex();
+    const { getRandomRemaining } = useCurrentDex();
+    const strategy = useCurrentStrategy();
     const remainingEntry = getRandomRemaining();
     if (!remainingEntry) return;
 
-    if (isAttackDex()) {
-      setShuffledType((remainingEntry as Attack).type);
-      return;
-    }
-
-    const remainingPokemon = remainingEntry as PokemonInfo;
-    let randomType;
-    if (!remainingPokemon.secondaryType) {
-      randomType = remainingPokemon.primaryType;
-      setShuffledType(randomType);
-      return;
-    }
-
-    randomType = Math.random() < 0.5 ? remainingPokemon.primaryType : remainingPokemon.secondaryType;
-    setShuffledType(randomType);
+    setShuffledType(strategy.value.getShuffleType(remainingEntry));
   };
 
   return {

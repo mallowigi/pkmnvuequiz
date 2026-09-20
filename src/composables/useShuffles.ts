@@ -2,13 +2,14 @@ import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useState } from '@/stores/useState.ts';
-import type { Attack, PokemonInfo } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 export const useShuffles = () => {
   const { state } = useState();
   const { setShuffledType } = useCurrentType();
   const { setCurrentBox, setCurrentSpecialBox, setCurrentMegaBox } = useCurrentBox();
-  const { getRandomRemaining, isAttackDex } = useCurrentDex();
+  const { getRandomRemaining } = useCurrentDex();
+  const strategy = useCurrentStrategy();
 
   const updateShuffles = () => {
     if (!state.withTypeShuffle && !state.withBoxShuffle) return;
@@ -16,33 +17,15 @@ export const useShuffles = () => {
     const remainingEntry = getRandomRemaining();
     if (!remainingEntry) return;
 
-    if (isAttackDex()) {
-      if (state.withTypeShuffle) {
-        setShuffledType((remainingEntry as Attack).type);
-      }
-
-      if (state.withBoxShuffle) {
-        setCurrentBox((remainingEntry as Attack).box ?? null);
-      }
-      return;
-    }
-
-    const remainingPokemon = remainingEntry as PokemonInfo;
-
     if (state.withTypeShuffle) {
-      let randomType;
-      if (!remainingPokemon.secondaryType) {
-        randomType = remainingPokemon.primaryType;
-      } else {
-        randomType = Math.random() < 0.5 ? remainingPokemon.primaryType : remainingPokemon.secondaryType;
-      }
-      setShuffledType(randomType);
+      setShuffledType(strategy.value.getShuffleType(remainingEntry));
     }
 
     if (state.withBoxShuffle) {
-      setCurrentBox(remainingPokemon.box ?? null);
-      setCurrentSpecialBox(remainingPokemon.specialType ?? null);
-      setCurrentMegaBox(remainingPokemon.box ?? null);
+      const { box, specialBox, megaBox } = strategy.value.getShuffleBoxes(remainingEntry);
+      setCurrentBox(box);
+      setCurrentSpecialBox(specialBox);
+      setCurrentMegaBox(megaBox);
     }
   };
 

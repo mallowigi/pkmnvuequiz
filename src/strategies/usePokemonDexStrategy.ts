@@ -3,8 +3,8 @@ import { useFirebase } from '@/composables/useFirebase.ts';
 import { i18n } from '@/main.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
-import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams } from '@/strategies/types.ts';
-import type { PokemonInfo } from '@/types.ts';
+import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
+import type { PokemonInfo, Type } from '@/types.ts';
 
 export const usePokemonDexStrategy = (): DexStrategy => {
   const pokemons = usePokemons();
@@ -73,6 +73,23 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     void createRecord();
   };
 
+  const getShuffleType = (entry: DexEntry): Type => {
+    const pokemon = entry as PokemonInfo;
+    if (!pokemon.secondaryType) return pokemon.primaryType;
+
+    return Math.random() < 0.5 ? pokemon.primaryType : pokemon.secondaryType;
+  };
+
+  const getShuffleBoxes = (entry: DexEntry): ShuffleBoxes => {
+    const pokemon = entry as PokemonInfo;
+
+    return {
+      box: pokemon.box ?? null,
+      megaBox: pokemon.box ?? null,
+      specialBox: pokemon.specialType ?? null,
+    };
+  };
+
   return {
     addFound,
     addRandomShadow,
@@ -87,6 +104,8 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     getRandomRemaining,
     getRemaining,
     getShareText,
+    getShuffleBoxes,
+    getShuffleType,
     getStatus,
     getSummaryText,
     id,

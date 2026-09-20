@@ -2,7 +2,8 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
 import { useCurrentDex } from '@/composables/useCurrentDex.ts';
-import type { RegionBox, SpecialType, PokemonInfo, Attack } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import type { RegionBox, SpecialType } from '@/types.ts';
 
 type CurrentBoxState = {
   currentBox: RegionBox | null;
@@ -36,21 +37,15 @@ export const useCurrentBox = defineStore('currentBox', () => {
   };
 
   const setRandomCurrentBox = () => {
-    const { getRandomRemaining, isAttackDex } = useCurrentDex();
+    const { getRandomRemaining } = useCurrentDex();
+    const strategy = useCurrentStrategy();
     const remainingEntry = getRandomRemaining();
     if (!remainingEntry) return;
 
-    if (isAttackDex()) {
-      setCurrentBox((remainingEntry as Attack).box);
-      return;
-    }
-
-    const remainingPokemon = getRandomRemaining() as PokemonInfo | null;
-    if (!remainingPokemon) return;
-
-    setCurrentBox(remainingPokemon.box ?? null);
-    setCurrentSpecialBox(remainingPokemon.specialType ?? null);
-    setCurrentMegaBox(remainingPokemon.box ?? null);
+    const { box, specialBox, megaBox } = strategy.value.getShuffleBoxes(remainingEntry);
+    setCurrentBox(box);
+    setCurrentSpecialBox(specialBox);
+    setCurrentMegaBox(megaBox);
   };
 
   const getCurrentBoxes = () => {
