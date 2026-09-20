@@ -6,15 +6,13 @@ import { useFeatureFlags } from '@/composables/useFeatureFlags.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useQuizInput } from '@/composables/useQuizInput.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
-import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { Attack, PokemonInfo, SpecialType, RegionBox } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import { capitalize } from '@/utils/utils';
 
 type Props = {
@@ -25,7 +23,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { state } = useState();
   const { settingsState } = useSettings();
   const { getShuffledType } = useCurrentType();
-  const { currentBoxState } = useCurrentBox();
   const { updateShuffles } = useShuffles();
   const { showUserMessage } = useMessages();
   const { endGame, toggleMissingno } = useGameFlow();
@@ -37,13 +34,10 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     addFound,
     isAlreadyFound,
     prefillRemaining,
-    getRandomRemaining,
-    isAttackDex,
     isPartOfAnotherEntry,
   } = useCurrentDex();
-  // Pokemon-only helpers with no attack analog (order, prefix matching, cries).
-  const { getNextOrderedPokemon, isWrongOrder, getRandomPokemon } = usePokemons();
-  const { playFanfare, playFailSound, playPokemonCry, playClick } = usePlaySounds();
+  const strategy = useCurrentStrategy();
+  const { playFanfare, playFailSound } = usePlaySounds();
   const { isDebugMode } = useFeatureFlags();
   const { sendMessage } = useRooms();
 
@@ -54,16 +48,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
   const activateCheat = () => {
     playFanfare();
-    let nextName = '???';
-
-    if (isAttackDex()) {
-      const nextAttack = getRandomRemaining();
-      if (nextAttack) {
-        nextName = getEntryName(nextAttack);
-      }
-    } else {
-      nextName = getNextOrderedPokemon()?.baseName ?? '???';
-    }
+    const nextName = strategy.value.getNextCheatName();
 
     showUserMessage(t('nextPokemon', { name: capitalize(nextName) }));
     clearInput();
@@ -79,19 +64,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const activateNextCry = () => {
-    if (isAttackDex()) {
-      // Attacks have no cry, so mirror the existing disabled-helper feedback.
-      showUserMessage(t('criesHelperDisabled'));
-      clearInput();
-      return;
-    }
-
-    if (settingsState.withCriesHelper) {
-      const randomPokemon = getRandomPokemon();
-      playPokemonCry(randomPokemon?.dexNum ?? 0);
-    } else {
-      showUserMessage(t('criesHelperDisabled'));
-    }
+    strategy.value.activateNextCry();
     clearInput();
   };
 
@@ -117,23 +90,18 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const handleWrongOrder = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
-    // Attacks have no order concept.
-    if (isAttackDex()) return false;
-
-    const foundPokemon = foundEntries as PokemonInfo[];
-    if (state.mode !== 'order' || !isWrongOrder(foundPokemon)) return false;
+    if (!strategy.value.capabilities.hasOrder) return false;
+    if (state.mode !== 'order' || !strategy.value.isWrongOrder(foundEntries)) return false;
     if (isPartOfAnother) return true;
 
-    return notifyError(t('notNextPokemon', { name: capitalize(foundPokemon[0].baseName) }));
+    return notifyError(t('notNextPokemon', { name: capitalize(getEntryName(foundEntries[0])) }));
   };
 
   const handleTypeShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
     if (!state.withTypeShuffle) return false;
 
     const currentType = getShuffledType();
-    const types = isAttackDex()
-      ? new Set((foundEntries as Attack[]).map((a) => a.type))
-      : new Set((foundEntries as PokemonInfo[]).flatMap((p) => [p.primaryType, p.secondaryType]));
+    const types = strategy.value.getEntryTypes(foundEntries);
 
     if (currentType && !types.has(currentType.id)) {
       return notifyError(
@@ -150,52 +118,15 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const handleBoxShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
     if (!state.withBoxShuffle) return false;
 
-    if (isAttackDex()) {
-      const foundAttacks = foundEntries as Attack[];
-      const currentBox = currentBoxState.currentBox;
-      const boxes = new Set(foundAttacks.map((a) => a.box));
+    const violationBox = strategy.value.getShuffleBoxViolation(foundEntries, state.gameMode);
+    if (!violationBox) return false;
 
-      if (currentBox && !boxes.has(currentBox)) {
-        return notifyError(
-          t('notInBox', {
-            box: t(currentBox),
-            name: capitalize(getEntryName(foundEntries[0])),
-          }),
-        );
-      }
-
-      return false;
-    }
-
-    const foundPokemon = foundEntries as PokemonInfo[];
-    let currentBox: SpecialType | RegionBox | null;
-    let boxes: Set<unknown>;
-
-    switch (state.gameMode) {
-      case 'special':
-        currentBox = currentBoxState.currentSpecialBox;
-        boxes = new Set(foundPokemon.map((p) => p.specialType));
-        break;
-      case 'mega':
-        currentBox = currentBoxState.currentMegaBox;
-        boxes = new Set(foundPokemon.map((p) => p.box));
-        break;
-      default:
-        currentBox = currentBoxState.currentBox;
-        boxes = new Set(foundPokemon.map((p) => p.box));
-        break;
-    }
-
-    if (currentBox && !boxes.has(currentBox)) {
-      return notifyError(
-        t('notInBox', {
-          box: t(currentBox),
-          name: capitalize(foundPokemon[0].baseName),
-        }),
-      );
-    }
-
-    return false;
+    return notifyError(
+      t('notInBox', {
+        box: t(violationBox),
+        name: capitalize(getEntryName(foundEntries[0])),
+      }),
+    );
   };
 
   const handleSuccess = (foundEntries: DexEntry[]) => {
@@ -203,12 +134,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
     updateShuffles();
 
-    // The Pokedex plays a cry on success; attacks play a click instead.
-    if (isAttackDex()) {
-      playClick();
-    } else {
-      playPokemonCry((foundEntries[0] as PokemonInfo).dexNum);
-    }
+    strategy.value.playFoundSound(foundEntries[0]);
     clearInput();
   };
 

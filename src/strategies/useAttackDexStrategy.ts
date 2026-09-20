@@ -1,13 +1,19 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { i18n } from '@/main.ts';
 import { useAttacks } from '@/stores/useAttacks.ts';
+import { useCurrentBox } from '@/stores/useCurrentBox.ts';
+import { useMessages } from '@/stores/useMessages.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
-import type { Attack, Type } from '@/types.ts';
+import type { Attack, RegionBox, Type } from '@/types.ts';
 
 export const useAttackDexStrategy = (): DexStrategy => {
   const attacks = useAttacks();
   const { incrementAttackDexWins } = useProfile();
+  const { showUserMessage } = useMessages();
+  const { playClick } = usePlaySounds();
+  const { currentBoxState } = useCurrentBox();
 
   const id: DexId = 'attack';
 
@@ -78,7 +84,35 @@ export const useAttackDexStrategy = (): DexStrategy => {
     specialBox: null,
   });
 
+  const getNextCheatName = (): string => attacks.getRandomRemainingAttack()?.name ?? '???';
+
+  // Attacks have no cry, so mirror the existing disabled-helper feedback.
+  const activateNextCry = () => {
+    showUserMessage(i18n.global.t('criesHelperDisabled'));
+  };
+
+  // Attacks have no order concept.
+  const isWrongOrder = () => false;
+
+  const getEntryTypes = (entries: DexEntry[]): Set<Type | null | undefined> => {
+    const foundAttacks = entries as Attack[];
+    return new Set(foundAttacks.map((a) => a.type));
+  };
+
+  const getShuffleBoxViolation = (entries: DexEntry[]): RegionBox | null => {
+    const foundAttacks = entries as Attack[];
+    const currentBox = currentBoxState.currentBox;
+    const boxes = new Set(foundAttacks.map((a) => a.box));
+
+    if (currentBox && !boxes.has(currentBox)) return currentBox;
+
+    return null;
+  };
+
+  const playFoundSound = () => playClick();
+
   return {
+    activateNextCry,
     addFound,
     addRandomShadow,
     capabilities,
@@ -86,12 +120,15 @@ export const useAttackDexStrategy = (): DexStrategy => {
     findClosest,
     getCurrentGameModeEntries,
     getEntityType,
+    getEntryTypes,
     getMissed,
+    getNextCheatName,
     getNumFound,
     getNumShadows,
     getRandomRemaining,
     getRemaining,
     getShareText,
+    getShuffleBoxViolation,
     getShuffleBoxes,
     getShuffleType,
     getStatus,
@@ -100,6 +137,8 @@ export const useAttackDexStrategy = (): DexStrategy => {
     isAlreadyFound,
     isInCurrentGameMode,
     isPartOfAnotherEntry,
+    isWrongOrder,
+    playFoundSound,
     prefillRemaining,
     recordGameEnd,
     recordGiveUp,
