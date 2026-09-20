@@ -26,6 +26,12 @@ This document provides essential context and patterns to help AI agents be produ
   - ALWAYS use the path alias `@/` for imports within `src`.
   - ALWAYS include `.vue` extensions for Vue component imports (e.g. `import GameHeader from '@/components/header/GameHeader.vue'`).
 
+## ⚠️ Git & Commit Policy
+
+- **Never run `git commit` (or `git push`) unless the user explicitly asks for it in that turn.** Make code changes and
+  leave them staged/unstaged in the working tree; the user reviews and commits themselves. This applies for the whole
+  session, not just once — don't assume a prior "ok to commit" carries over to later changes.
+
 ## 🛠 Developer Workflows
 
 - **Node Engine**: Requires Node `^20.19.0` or `>=22.12.0`.
@@ -50,3 +56,17 @@ This document provides essential context and patterns to help AI agents be produ
 ## 🌐 Localization & Internationalization
 
 Maintain localized JSON files in `src/locales/`. For detailed instructions, scripts, and workflows, refer to the **localization** skill.
+
+## Agent skills
+
+### Issue tracker
+
+Track issues and specs in GitHub Issues. Before creating, reading, or updating tickets, read `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five canonical triage labels. Before triaging or labelling tickets, read `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context repo. Before exploring domain behavior or proposing changes, read `docs/agents/domain.md`.

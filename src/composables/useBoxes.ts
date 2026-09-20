@@ -4,6 +4,20 @@ import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useState } from '@/stores/useState.ts';
+import type { Gen, RegionBox } from '@/types.ts';
+
+const boxToGen: Partial<Record<RegionBox, Gen>> = {
+  alolaz: 'gen7',
+  galargmax: 'gen8',
+  galarmax: 'gen8',
+};
+(Object.keys(gens) as Gen[]).forEach((gen) => {
+  gens[gen].boxes.forEach((box) => {
+    boxToGen[box] = gen;
+  });
+});
+
+export const getGenForBox = (box: RegionBox): Gen | undefined => boxToGen[box];
 
 export const useBoxes = () => {
   const { state } = useState();
@@ -49,6 +63,10 @@ export const useBoxes = () => {
     });
   };
 
+  const getMoveTypeBoxes = (): RegionBox[] => {
+    return ['alolaz', 'galarmax', 'galargmax'];
+  };
+
   const getCurrentGameModeBoxes = () => {
     switch (state.gameMode) {
       case 'gen':
@@ -59,6 +77,8 @@ export const useBoxes = () => {
         return getCurrentTypeBoxes();
       case 'mega':
         return getMegaBoxes();
+      case 'movetype':
+        return getMoveTypeBoxes();
       default:
         return [];
     }
@@ -68,7 +88,9 @@ export const useBoxes = () => {
     getAllBoxes,
     getCurrentGameModeBoxes,
     getCurrentGenBoxes,
+    getGenForBox,
     getMegaBoxes,
+    getMoveTypeBoxes,
     getSpecialBoxes,
   };
 };

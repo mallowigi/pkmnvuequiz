@@ -53,6 +53,7 @@ const initializeFinishedGames = (): FinishedGames => ({
 
 export const useProfile = defineStore('profile', () => {
   const profileState = reactive<Profile>({
+    attackDexWins: 0,
     finishedGames: initializeFinishedGames(),
     plays: 0,
   });
@@ -88,7 +89,12 @@ export const useProfile = defineStore('profile', () => {
 
   const incrementPlays = () => {
     profileState.plays += 1;
-    saveUserProfile({ plays: profileState.plays });
+    void saveUserProfile({ plays: profileState.plays });
+  };
+
+  const incrementAttackDexWins = async () => {
+    profileState.attackDexWins += 1;
+    void saveUserProfile({ attackDexWins: profileState.attackDexWins });
   };
 
   const setProfileState = (profile: Partial<Profile>) => {
@@ -149,11 +155,12 @@ export const useProfile = defineStore('profile', () => {
     }
 
     // Save the updated finished games to the database
-    saveUserProfile({ finishedGames: profileState.finishedGames });
+    void saveUserProfile({ finishedGames: profileState.finishedGames });
   };
 
   return {
     fetchProfile,
+    incrementAttackDexWins,
     incrementPlays,
     initializeFinishedGames,
     profileState,

@@ -8,6 +8,7 @@ import CyclingStarters from '@/components/start/genSelection/CyclingStarters.vue
 import CyclingType from '@/components/start/genSelection/CyclingType.vue';
 import { useQuiz } from '@/composables/useQuiz.js';
 import { gens } from '@/data/gens';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import type { Gen } from '@/types.js';
 
@@ -15,10 +16,17 @@ const activeGens = ref<Set<Gen>>(new Set());
 
 const { t } = useI18n();
 const { setGameSelectionState } = useGameFlow();
+const { attackDexState, exitAttackDex } = useAttackDexState();
 
 const { setFullQuiz, setGenQuiz, setTypeQuiz } = useQuiz();
 
 const goBack = () => {
+  if (attackDexState.isAttackDex) {
+    exitAttackDex();
+    setGameSelectionState('challenge');
+    return;
+  }
+
   setGameSelectionState('new');
 };
 

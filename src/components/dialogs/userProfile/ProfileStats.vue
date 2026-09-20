@@ -27,14 +27,19 @@ const { t } = useI18n();
       <span class="stat-value">{{ totalWins }}</span>
     </RoundedBox>
 
-    <RoundedBox class="stat rad-bl">
+    <RoundedBox class="stat rad">
       <span class="stat-label">{{ t('winsNoShadows') }}</span>
       <span class="stat-value">{{ profileState.finishedGames.noShadows }}</span>
     </RoundedBox>
 
-    <RoundedBox class="stat rad-br">
+    <RoundedBox class="stat rad">
       <span class="stat-label">{{ t('winsNoCries') }}</span>
       <span class="stat-value">{{ profileState.finishedGames.noCries }}</span>
+    </RoundedBox>
+
+    <RoundedBox class="stat attack-dex-wins">
+      <span class="stat-label">{{ t('attackDexWins') }}</span>
+      <span class="stat-value">{{ profileState.attackDexWins }}</span>
     </RoundedBox>
   </div>
 </template>
@@ -45,6 +50,11 @@ const { t } = useI18n();
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
   margin-bottom: 12px;
+}
+
+.attack-dex-wins {
+  grid-column: span 2;
+  border-radius: 3px 3px 20px 20px;
 }
 
 .stat {

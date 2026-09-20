@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import FloatingText from '@/components/header/FloatingText.vue';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 
-const pokemonStore = usePokemons();
-const { numFound } = storeToRefs(pokemonStore);
-const { getCurrentGameModePokemon } = pokemonStore;
+const { numFound, getCurrentGameModeEntries } = useCurrentDex();
 
 const { flowState } = useGameFlow();
 const { bonusState } = useBonus();
@@ -24,7 +21,7 @@ const found = computed(() => {
 const total = computed(() => {
   if (!flowState.isStarted) return '--';
 
-  const pokemons = getCurrentGameModePokemon();
+  const pokemons = getCurrentGameModeEntries();
   return pokemons.size ?? 0;
 });
 </script>

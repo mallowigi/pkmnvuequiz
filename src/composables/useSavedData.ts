@@ -7,6 +7,8 @@ import { usePageTitle } from '@/composables/useTitle.ts';
 import { LOCAL_STORAGE_NAME_KEY, LOCAL_STORAGE_KEY, VERSION } from '@/data/global';
 import { i18n } from '@/main.ts';
 import { parseSaveData } from '@/schemas/saveData.schema.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
+import { useAttacks } from '@/stores/useAttacks.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
@@ -20,7 +22,7 @@ import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useTouches } from '@/stores/useTouches.ts';
-import type { SaveData, SaveDataBase, OwnerState, PokemonProgress, Gen, Type } from '@/types.ts';
+import type { SaveData, SaveDataBase, OwnerState, PokemonProgress, AttackProgress, Gen, Type } from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
 
 const ready = ref(false);
@@ -91,6 +93,8 @@ export const useSavedData = () => {
     const { touchesState } = useTouches();
     const { bonusState } = useBonus();
     const { skipsState } = useSkips();
+    const { attackDexState } = useAttackDexState();
+    const { attacksState } = useAttacks();
 
     const pokemonFound: PokemonProgress['pokemonFound'] = [];
     const pokemonShadowed: PokemonProgress['pokemonShadowed'] = [];
@@ -108,10 +112,27 @@ export const useSavedData = () => {
       }
     });
 
+    const attacksFound: AttackProgress['attacksFound'] = [];
+    const attacksShadowed: AttackProgress['attacksShadowed'] = [];
+
+    attacksState.attackStatuses.forEach((status, name) => {
+      if (status.isFound) {
+        attacksFound.push({ id: name, lastFoundAt: status.lastFoundAt });
+      }
+      if (status.isShadowed) {
+        attacksShadowed.push({ id: name, lastShadowedAt: status.lastShadowedAt });
+      }
+    });
+
     const baseState = {
       ...state,
       ...settingsState,
       ...touchesState,
+      attackDexState,
+      attackProgress: {
+        attacksFound,
+        attacksShadowed,
+      },
       challengeMode: flowState.challengeMode,
       gameSelectionState: null,
       languages: Array.from(settingsState.languages),
@@ -184,6 +205,19 @@ export const useSavedData = () => {
           types: [],
         };
 
+      case 'movetype':
+        return {
+          ...baseState,
+          currentBox: currentBoxState.currentBox ?? null,
+          currentMegaBox: null,
+          currentSpecialBox: null,
+          currentType: null,
+          currentTypes: [],
+          gameMode: 'movetype',
+          gens: [],
+          types: [],
+        };
+
       case 'full':
       default:
         return {
@@ -241,7 +275,7 @@ export const useSavedData = () => {
     const { flowState } = useGameFlow();
     if (flowState.isEnded || flowState.isGivenUp) {
       removeAutoSave();
-      deleteUserState();
+      await deleteUserState();
       return;
     }
 
@@ -255,7 +289,7 @@ export const useSavedData = () => {
     sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedState));
 
     if (saveToFirebase) {
-      debouncedSaveToFirebase(savedState);
+      await debouncedSaveToFirebase(savedState);
     }
   };
 
@@ -300,6 +334,8 @@ export const useSavedData = () => {
     const { setTouchesState } = useTouches();
     const { setScore } = useBonus();
     const { setSkips } = useSkips();
+    const { setAttackDexState } = useAttackDexState();
+    const { attacksState, resetAttacksState, findAttack } = useAttacks();
 
     const {
       currentTypes,
@@ -309,17 +345,20 @@ export const useSavedData = () => {
       currentMegaBox,
       languages,
       pokemonProgress,
+      attackProgress,
       timer,
       gameSelectionState,
       challengeMode,
       score,
       skipScore,
       skips,
+      attackDexState,
       version: _version,
       ...statePayload
     } = loadedState as Partial<SaveData>;
 
     const { pokemonFound, pokemonShadowed, shinyPokemon } = pokemonProgress ?? {};
+    const { attacksFound, attacksShadowed } = attackProgress ?? {};
     const { isLimited, minutes, startTime, elapsed } = timer ?? {};
 
     // Languages
@@ -406,6 +445,51 @@ export const useSavedData = () => {
       }
     });
 
+    // Attack progress
+    resetAttacksState();
+
+    attacksFound?.forEach((entry) => {
+      const { id: name, lastFoundAt } = entry;
+
+      const found = findAttack(name);
+      const nameToFound = found && found.length > 0 ? normalizeName(found[0].name) : name;
+      const status = attacksState.attackStatuses.get(nameToFound);
+
+      if (status) {
+        status.isFound = true;
+        status.lastFoundAt = lastFoundAt;
+      } else {
+        attacksState.attackStatuses.set(nameToFound, {
+          isFound: true,
+          isMissed: false,
+          isShadowed: false,
+          lastFoundAt,
+          lastShadowedAt: null,
+        });
+      }
+    });
+
+    attacksShadowed?.forEach((entry) => {
+      const { id: name, lastShadowedAt } = entry;
+
+      const found = findAttack(name);
+      const nameToShadow = found && found.length > 0 ? normalizeName(found[0].name) : name;
+      const status = attacksState.attackStatuses.get(nameToShadow);
+
+      if (status) {
+        status.isShadowed = true;
+        status.lastShadowedAt = lastShadowedAt;
+      } else {
+        attacksState.attackStatuses.set(nameToShadow, {
+          isFound: false,
+          isMissed: false,
+          isShadowed: true,
+          lastFoundAt: null,
+          lastShadowedAt,
+        });
+      }
+    });
+
     // Timer
     resetTimer();
     setTimerState({
@@ -477,6 +561,11 @@ export const useSavedData = () => {
     setSkips({
       skipScore: skipScore ?? 0,
       skips: skips ?? 0,
+    });
+
+    // Attack Dex
+    setAttackDexState({
+      isAttackDex: attackDexState?.isAttackDex ?? false,
     });
 
     showUserMessage(i18n.global.t('quizLoaded'));
@@ -557,12 +646,12 @@ export const useSavedData = () => {
     }
   };
 
-  const saveToFirebase = () => {
-    if (roomState.isActive) return;
+  const saveToFirebase = async () => {
+    if (roomState.isActive) return false;
 
     const savedState = getSavedState();
     const { saveUserState } = useFirebase();
-    saveUserState(savedState);
+    return await saveUserState(savedState);
   };
 
   const loadAutoSave = async () => {

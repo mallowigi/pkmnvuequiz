@@ -13,6 +13,10 @@ export const gameModes: Record<GameMode, GameModeInfo> = {
     id: 'mega',
     name: 'Mega',
   },
+  movetype: {
+    id: 'movetype',
+    name: 'Move Type',
+  },
   special: {
     id: 'special',
     name: 'Special',

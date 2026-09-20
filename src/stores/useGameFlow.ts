@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate, storeToRefs } from 'pinia';
 import { reactive, computed, watch } from 'vue';
 
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
@@ -12,18 +13,18 @@ import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useTouches } from '@/stores/useTouches.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import type { GameFlowState, GameSelectionState, ChallengeMode } from '@/types.ts';
 
 export const useGameFlow = defineStore('gameFlow', () => {
   const { playFanfare, playMissingno } = usePlaySounds();
   const { removeAutoSave } = useSavedData();
-  const { createRecord } = useFirebase();
-  const { showRemaining } = usePokemons();
-  const { incrementPlays, updateFinishedGames } = useProfile();
+  const { showRemaining } = useCurrentDex();
+  const strategy = useCurrentStrategy();
+  const { incrementPlays } = useProfile();
   const { toggledMissingno } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
@@ -61,7 +62,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     // Destroy previous room
     if (roomState.isActive) {
       setDialog('deleteRoom', async () => {
-        await destroyRoom();
+        destroyRoom();
         await tryJoinRoom(auth.currentUser?.uid, roomName);
       });
     } else {
@@ -97,28 +98,25 @@ export const useGameFlow = defineStore('gameFlow', () => {
     // Semaphore to prevent multiple downgrades at the same time
     let isDowngrading = false;
 
-    roomWatcher = watch(
-      [() => ownerOnline.value, () => roomTerminated.value],
-      async ([online, terminated]) => {
-        // Skip if we are the owner or if the owner is still online
-        if ((!terminated && online) || !isJoiner.value || isDowngrading) return;
+    roomWatcher = watch([() => ownerOnline.value, () => roomTerminated.value], async ([online, terminated]) => {
+      // Skip if we are the owner or if the owner is still online
+      if ((!terminated && online) || !isJoiner.value || isDowngrading) return;
 
-        isDowngrading = true;
+      isDowngrading = true;
 
-        try {
-          // Regenerate a new sessionID
-          flowState.sessionId = crypto.randomUUID();
+      try {
+        // Regenerate a new sessionID
+        flowState.sessionId = crypto.randomUUID();
 
-          // Leave room and convert game into local game
-          await leaveRoom(auth.currentUser?.uid ?? '');
+        // Leave room and convert game into local game
+        await leaveRoom(auth.currentUser?.uid ?? '');
 
-          // Resume autosave
-          await autoSave();
-        } finally {
-          isDowngrading = false;
-        }
-      },
-    );
+        // Resume autosave
+        await autoSave();
+      } finally {
+        isDowngrading = false;
+      }
+    });
   };
 
   const startGame = async () => {
@@ -150,10 +148,6 @@ export const useGameFlow = defineStore('gameFlow', () => {
     startGenCycle();
   };
 
-  const recordWin = () => {
-    updateFinishedGames();
-  };
-
   const endGame = () => {
     const doEndGame = () => {
       flowState.isEnded = true;
@@ -165,8 +159,9 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopGenCycle();
       stopVoice();
       removeAutoSave();
-      createRecord();
-      recordWin();
+
+      strategy.value.recordGameEnd();
+
       playFanfare();
       resetInput();
       destroyRoom();
@@ -186,7 +181,9 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopTypeCycle();
       stopGenCycle();
       stopVoice();
-      createRecord();
+
+      strategy.value.recordGiveUp();
+
       removeAutoSave();
       showRemaining();
       resetInput();

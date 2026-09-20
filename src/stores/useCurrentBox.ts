@@ -1,8 +1,8 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import { usePokemons } from '@/stores/usePokemons.ts';
-import { useState } from '@/stores/useState';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import type { RegionBox, SpecialType } from '@/types.ts';
 
 type CurrentBoxState = {
@@ -12,8 +12,6 @@ type CurrentBoxState = {
 };
 
 export const useCurrentBox = defineStore('currentBox', () => {
-  const { state } = useState();
-
   const currentBoxState = reactive<CurrentBoxState>({
     currentBox: null,
     currentMegaBox: null,
@@ -39,13 +37,15 @@ export const useCurrentBox = defineStore('currentBox', () => {
   };
 
   const setRandomCurrentBox = () => {
-    const { getRandomRemainingPokemon } = usePokemons();
-    const remainingPokemon = getRandomRemainingPokemon();
-    if (!remainingPokemon) return;
+    const { getRandomRemaining } = useCurrentDex();
+    const strategy = useCurrentStrategy();
+    const remainingEntry = getRandomRemaining();
+    if (!remainingEntry) return;
 
-    setCurrentBox(remainingPokemon.box ?? null);
-    setCurrentSpecialBox(remainingPokemon.specialType ?? null);
-    setCurrentMegaBox(remainingPokemon.box ?? null);
+    const { box, specialBox, megaBox } = strategy.value.getShuffleBoxes(remainingEntry);
+    setCurrentBox(box);
+    setCurrentSpecialBox(specialBox);
+    setCurrentMegaBox(megaBox);
   };
 
   const getCurrentBoxes = () => {

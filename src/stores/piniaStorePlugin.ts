@@ -12,12 +12,14 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
     'messages',
     'roomMessages',
     'pkmnData',
+    'attackData',
     'firebase',
     'tooltips',
     'credits',
     'profile',
     'help',
     'pkmnDetails',
+    'attackDetails',
   ];
   if (excludedStores.includes(store.$id)) {
     return;

@@ -2,24 +2,25 @@
 import { computed, nextTick, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import AttackSprite from '@/components/attackdex/AttackSprite.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import PokemonSprite from '@/components/game/PokemonSprite.vue';
-import { useBoxes } from '@/composables/useBoxes.ts';
+import { getGenForBox, useBoxes } from '@/composables/useBoxes.ts';
 import { boxes } from '@/data/boxes.js';
 import { gens } from '@/data/gens.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import type { Attack, AttackStatus, PokemonInfo, PokemonStatus, RegionBox, SpecialType } from '@/types.ts';
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
-const { getCurrentGameModeBoxPokemon, getSpecialTypePokemon, getStatus, getMegaPokemon } = usePokemons();
 const { currentBoxState } = useCurrentBox();
 const { currentGenState } = useCurrentGen();
 const { state } = useState();
 const { t } = useI18n();
+const strategy = useCurrentStrategy();
 
 const currentBoxes = computed(() => {
   switch (state.gameMode) {
@@ -32,12 +33,12 @@ const currentBoxes = computed(() => {
   }
 });
 
-// Maps each RegionBox to the color of the generation it belongs to, so region boxes can be tinted accordingly.
 const regionColorMap: Partial<Record<RegionBox, string>> = {};
-Object.values(gens).forEach((gen) => {
-  gen.boxes.forEach((boxId) => {
-    regionColorMap[boxId] = gen.color;
-  });
+(Object.keys(boxes) as RegionBox[]).forEach((boxId) => {
+  const gen = getGenForBox(boxId);
+  if (gen) {
+    regionColorMap[boxId] = gens[gen].color;
+  }
 });
 
 const getBoxColor = (boxId: SpecialType | RegionBox): string | undefined => {
@@ -45,56 +46,6 @@ const getBoxColor = (boxId: SpecialType | RegionBox): string | undefined => {
     return specialTypes[boxId as SpecialType]?.bgColor;
   }
   return regionColorMap[boxId as RegionBox];
-};
-
-function orderByFoundAt(pokemonA: PokemonInfo, pokemonB: PokemonInfo): number {
-  const statusA = getStatus(pokemonA);
-  const statusB = getStatus(pokemonB);
-
-  if (!statusA.lastFoundAt && statusB.lastFoundAt) {
-    return 1; // pokemonA should come after pokemonB
-  } else if (statusA.lastFoundAt && !statusB.lastFoundAt) {
-    return -1; // pokemonA should come before pokemonB
-  } else if (!statusA.lastFoundAt && !statusB.lastFoundAt) {
-    return 0; // maintain original order
-  } else {
-    return statusA.lastFoundAt! - statusB.lastFoundAt!;
-  }
-}
-
-const getCurrentGamePokemon = (boxId: SpecialType | RegionBox): Map<string, PokemonInfo[]> => {
-  let result;
-
-  switch (state.gameMode) {
-    case 'special':
-      result = getSpecialTypePokemon(boxId as SpecialType);
-      break;
-    case 'mega':
-      result = getMegaPokemon(boxId as RegionBox);
-      break;
-    default:
-      result = getCurrentGameModeBoxPokemon(boxId as RegionBox);
-      break;
-  }
-
-  // Apply chaos mode sorting
-  if (state.mode === 'chaos') {
-    const entries = Array.from(result.entries());
-    entries.sort(([, pokemonsA], [, pokemonsB]) => orderByFoundAt(pokemonsA[0], pokemonsB[0]));
-    return new Map(entries);
-  }
-
-  return result;
-};
-
-const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
-  const pokemonByName = getCurrentGamePokemon(boxId);
-  return Array.from(pokemonByName.values()).map((pokemons) => pokemons[0]);
-};
-
-const isFull = (boxId: SpecialType | RegionBox) => {
-  const pokemons = getBoxPokemons(boxId);
-  return pokemons.every((pokemon) => getStatus(pokemon).isFound);
 };
 
 const isDimmed = (boxId: SpecialType | RegionBox) => {
@@ -171,7 +122,7 @@ const multiGenClass = computed(() => {
       }"
       class="region-box"
       :class="{
-        full: isFull(box.id),
+        full: strategy.isBoxComplete(box.id),
         dimmed: isDimmed(box.id),
       }"
       :style="{ '--region-color': getBoxColor(box.id) }"
@@ -182,11 +133,21 @@ const multiGenClass = computed(() => {
         class="sprite-container"
         ref="boxRefs"
       >
+        <AttackSprite
+          v-if="strategy.id === 'attack'"
+          v-for="(move, index) in strategy.getBoxEntries(box.id) as Attack[]"
+          :key="move.id"
+          :move="move"
+          :status="strategy.getStatus(move) as AttackStatus"
+          :index="index"
+        />
+
         <PokemonSprite
-          v-for="(pokemon, index) in getBoxPokemons(box.id)"
+          v-else
+          v-for="(pokemon, index) in strategy.getBoxEntries(box.id) as PokemonInfo[]"
           :key="pokemon.id"
           :pokemon="pokemon"
-          :status="getStatus(pokemon)"
+          :status="strategy.getStatus(pokemon) as PokemonStatus"
           :index="index"
         />
       </div>
@@ -220,6 +181,8 @@ const multiGenClass = computed(() => {
     --col-width: 25vh;
     --sprite-width: 57px;
     --text-padding: 0;
+    align-self: stretch;
+    width: 100%;
   }
 
   &.special {
@@ -243,6 +206,13 @@ const multiGenClass = computed(() => {
     --text-padding: 10px;
   }
 
+  &.movetype {
+    --max-width: 66%;
+    --num-cols: 1;
+    --sprite-width: 62px;
+    --text-padding: 10px;
+  }
+
   &.multi-gen-2 {
     --max-width: 66%;
     --num-cols: 2;
@@ -263,6 +233,8 @@ const multiGenClass = computed(() => {
     --col-width: 25vh;
     --sprite-width: 62px;
     --text-padding: 10px;
+    align-self: stretch;
+    width: 100%;
   }
 
   .laptop & {
@@ -293,11 +265,15 @@ const multiGenClass = computed(() => {
   }
 
   &.full {
-    box-shadow: 0 0 0 2px var(--type-btn-color, var(--primary)) inset;
+    box-shadow: 0 0 0 3px var(--type-btn-color, var(--primary)) inset;
   }
 
   &.dimmed {
     filter: brightness(0.5) saturate(0.5);
+  }
+
+  &:has(.sprite-container:empty) {
+    display: none;
   }
 }
 

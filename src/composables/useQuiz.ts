@@ -1,6 +1,8 @@
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
+import { useAttackDetails } from '@/stores/useAttackDetails.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
@@ -8,7 +10,6 @@ import { useCurrentRegion } from '@/stores/useCurrentRegion.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
@@ -23,10 +24,11 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   const { clearCurrentGens, setCurrentGens, getNextGen } = useCurrentGen();
   const { clearCurrentBox } = useCurrentBox();
   const { clearCurrentTypes, setCurrentTypes, getNextType } = useCurrentType();
-  const { resetPokemonState } = usePokemons();
+  const { switchDex } = useCurrentDex();
   const { resetTimer } = useTimer();
   const { resetBonus } = useBonus();
   const { resetSkips } = useSkips();
+  const { resetAttackDetails } = useAttackDetails();
   const { updateShuffles } = useShuffles();
   const { getCurrentRegions } = useCurrentRegion();
   const { getCurrentTypes } = useCurrentType();
@@ -35,12 +37,13 @@ export const useQuiz = ({ withDialog = false } = {}) => {
   const { destroyRoom, roomState } = useRooms();
 
   const resetQuiz = () => {
-    resetPokemonState();
+    switchDex();
     resetTimer();
     resetBonus();
     resetSkips();
     resetFlowState();
     destroyRoom();
+    resetAttackDetails();
   };
 
   const setFullQuiz = () => {
@@ -148,6 +151,9 @@ export const useQuiz = ({ withDialog = false } = {}) => {
       case 'mega':
         setGameMode('mega');
         break;
+      case 'movetype':
+        setGameMode('movetype');
+        break;
       default:
         setCurrentTypes([type as Type]);
         setGameMode('types');
@@ -194,6 +200,8 @@ export const useQuiz = ({ withDialog = false } = {}) => {
         return capitalize(getGameModeTranslation('special'));
       case 'mega':
         return capitalize(getGameModeTranslation('mega'));
+      case 'movetype':
+        return capitalize(getGameModeTranslation('movetype'));
       default:
         return '';
     }

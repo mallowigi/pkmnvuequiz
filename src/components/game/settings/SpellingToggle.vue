@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useMessages } from '@/stores/useMessages.js';
-import { useI18n } from 'vue-i18n';
 import { useSettings } from '@/stores/useSettings.ts';
 
 const { settingsState, toggleSpelling } = useSettings();
@@ -22,7 +23,6 @@ const toggle = () => {
     v-game-ended
     :class="{ selected: settingsState.withSpelling }"
   >
-    <span class="hide-mobile">{{ t('spellingHelp') }}</span>
     <img
       src="@/assets/spellcheck.png"
       :alt="t('spellingHelp')"
@@ -32,6 +32,7 @@ const toggle = () => {
 
 <style scoped>
 .spelling-toggle {
+  min-width: 0;
   padding: 9px 14px 8px;
   display: flex;
   justify-content: center;

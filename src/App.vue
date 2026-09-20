@@ -2,6 +2,7 @@
 import { usePreferredDark } from '@vueuse/core';
 import { watchEffect, watch } from 'vue';
 
+import AttackDetailsPane from '@/components/attackdex/attackInfo/AttackDetailsPane.vue';
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
 import EndOverlay from '@/components/background/EndOverlay.vue';
@@ -27,7 +28,6 @@ import ScrollTop from '@/ScrollTop.vue';
 import { useCredits } from '@/stores/useCredits';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useHelp } from '@/stores/useHelp.ts';
-import { usePkmnDetails } from '@/stores/usePkmnDetails.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useState } from '@/stores/useState';
 
@@ -144,6 +144,9 @@ watch(
 
     <!-- Details Pane -->
     <PokemonDetailsPane />
+
+    <!-- Attack Details -->
+    <AttackDetailsPane />
 
     <!-- Mobile Controls -->
     <MobileControls v-if="isMobile" />

@@ -3,14 +3,14 @@ import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
 import { useBonus } from '@/stores/useBonus.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { capitalize } from '@/utils/utils.ts';
 
 const { t } = useI18n();
 const { lastInput } = useLastInput();
-const { findClosestPokemon } = usePokemons();
+const { findClosest } = useCurrentDex();
 const { setSpellCheckerTriggered } = useBonus();
 
 const hintShown = ref(false);
@@ -20,7 +20,7 @@ const toggle = () => {
   hintShown.value = !hintShown.value;
 
   if (hintShown.value && lastInput.value) {
-    hint.value = capitalize(findClosestPokemon(lastInput.value!) || 'not found');
+    hint.value = capitalize(findClosest(lastInput.value!) || 'not found');
     setSpellCheckerTriggered();
   }
 };

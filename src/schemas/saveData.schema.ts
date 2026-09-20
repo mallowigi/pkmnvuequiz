@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 import { VERSION } from '@/data/global.ts';
+import { attackDexSchema } from '@/schemas/attackDex.schema.ts';
+import { attackProgressSchema } from '@/schemas/attackProgress.schema.ts';
 import {
   challengeModeSchema,
   gameModeSchema,
@@ -65,6 +67,11 @@ export const touchesSchema = z.object({
 export const saveDataBaseSchema = z.object({
   ...stateSchema.shape,
   ...touchesSchema.shape,
+  attackDexState: attackDexSchema.nullish(),
+  attackProgress: attackProgressSchema.default({
+    attacksFound: [],
+    attacksShadowed: [],
+  }),
   autoPause: z.boolean(),
   autoSync: z.boolean(),
   avatar: z.string().nullish(),
@@ -138,6 +145,13 @@ export const saveDataSchema = z.discriminatedUnion('gameMode', [
     currentMegaBox: regionBoxSchema.nullish(),
     currentSpecialBox: z.null(),
     gameMode: z.literal('mega'),
+    gens: z.array(generationSchema).max(0).nullish(),
+    types: z.array(typeSchema).max(0).nullish(),
+  }),
+  saveDataBaseSchema.extend({
+    currentMegaBox: z.null(),
+    currentSpecialBox: z.null(),
+    gameMode: z.literal('movetype'),
     gens: z.array(generationSchema).max(0).nullish(),
     types: z.array(typeSchema).max(0).nullish(),
   }),

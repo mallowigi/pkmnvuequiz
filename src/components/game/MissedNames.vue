@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -7,30 +6,27 @@ import RoundedBox from '@/components/common/RoundedBox.vue';
 import Spacer from '@/components/common/Spacer.vue';
 import MissedNamesTransition from '@/components/common/transitions/MissedNamesTransition.vue';
 import { useBoxes } from '@/composables/useBoxes.ts';
+import type { DexEntry } from '@/composables/useCurrentDex.ts';
+import { isAttackEntry, useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useTranslations } from '@/composables/useTranslations.ts';
 import { boxes } from '@/data/boxes.ts';
 import { languages } from '@/data/languages.ts';
+import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useLanguages } from '@/stores/useLanguages.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
-import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { Language, PokemonInfo, RegionBox, SpecialType } from '@/types.ts';
+import type { Language, RegionBox, SpecialType } from '@/types.ts';
 
 const { state } = useState();
 const { getCurrentGameModeBoxes, getSpecialBoxes, getMegaBoxes } = useBoxes();
 const { t } = useI18n();
 const { getLanguageTranslation } = useTranslations();
-const { getTranslation } = useLanguages();
-const { settingsState } = useSettings();
-const pokemonStore = usePokemons();
-const { missed } = storeToRefs(pokemonStore);
+const { getTranslation, getAttackTranslation } = useLanguages();
+const { missed } = useCurrentDex();
 const { data } = usePkmnData();
 
-const currentLanguage = ref<Language | null>(
-  settingsState.languages.size > 0 ? Array.from(settingsState.languages)[0] : null,
-);
+const currentLanguage = ref<Language | null>(null);
 const isAccordionOpen = ref(false);
 
 const sortedLanguages = computed(() => {
@@ -49,6 +45,24 @@ const pokemonSprite = (pokemonId: string) => {
   return data.sprites?.[pokemonId] ?? '';
 };
 
+const attackTypeIcon = (entry: DexEntry) => {
+  if (!isAttackEntry(entry)) return '';
+  return `/assets/types/${pokemonTypes[entry.type].id.toUpperCase()}.svg`;
+};
+
+const attackCategoryIcon = (entry: DexEntry) => {
+  if (!isAttackEntry(entry)) return '';
+  const categoryId = entry.category === 'variable' ? 'physical' : entry.category;
+  return `/assets/categories/${categoryId.toUpperCase()}.svg`;
+};
+
+const entryIcon = (entry: DexEntry) => (isAttackEntry(entry) ? attackTypeIcon(entry) : pokemonSprite(entry.id));
+
+const entryTranslation = (entry: DexEntry) =>
+  isAttackEntry(entry)
+    ? getAttackTranslation(entry, currentLanguage.value)
+    : getTranslation(entry, currentLanguage.value);
+
 const currentBoxes = computed(() => {
   switch (state.gameMode) {
     case 'special':
@@ -60,8 +74,8 @@ const currentBoxes = computed(() => {
   }
 });
 
-const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
-  return Array.from(missed.value).filter((pokemon) => pokemon.box === boxId);
+const getBoxEntries = (boxId: SpecialType | RegionBox): DexEntry[] => {
+  return Array.from(missed.value).filter((entry) => entry.box === boxId);
 };
 </script>
 
@@ -112,15 +126,24 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
           class="missed-section"
         >
           <div
-            v-for="pokemon in getBoxPokemons(box.id)"
-            :key="pokemon.id"
+            v-for="entry in getBoxEntries(box.id)"
+            :key="entry.id"
             class="pokemon"
           >
             <div
-              :style="{ '--bg-img': `url(${pokemonSprite(pokemon.id)})` }"
+              :style="{
+                '--bg-img': `url(${entryIcon(entry)})`,
+                '--category-img': isAttackEntry(entry) ? `url(${attackCategoryIcon(entry)})` : 'none',
+              }"
               class="sprite"
+              :class="{ move: isAttackEntry(entry) }"
             />
-            {{ getTranslation(pokemon, currentLanguage) }}
+            <span
+              class="name"
+              v-tooltip:bottom="entryTranslation(entry)"
+            >
+              {{ entryTranslation(entry) }}
+            </span>
           </div>
         </div>
       </div>
@@ -277,6 +300,7 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
     flex-direction: row;
     align-items: center;
     gap: 18px;
+    max-width: 100%;
   }
 
   &:empty {
@@ -288,12 +312,21 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
   }
 }
 
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+}
+
 .sprite {
   --bg-img: none;
+  --category-img: none;
   width: 28px;
   height: 32px;
   overflow: visible;
   position: relative;
+  flex-shrink: 0;
 
   &:before {
     content: '';
@@ -306,6 +339,33 @@ const getBoxPokemons = (boxId: SpecialType | RegionBox): PokemonInfo[] => {
     background-image: var(--bg-img);
     background-size: auto;
     background-position: bottom center;
+  }
+
+  /* Attacks have no per-move sprite, so missed moves reuse the type/category icons shown on AttackSprite. */
+  &.move:before {
+    width: 32px;
+    height: 32px;
+    background-size: 32px 32px;
+    background-position: center;
+  }
+
+  &.move:after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: -3px;
+    width: 17px;
+    height: 17px;
+    border-radius: 999px;
+    background-color: color-mix(in srgb, var(--button) 85%, transparent);
+    background-image: var(--category-img);
+    background-size: 13px 13px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid color-mix(in srgb, var(--text) 45%, transparent);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 45%);
+    pointer-events: none;
+    z-index: 11;
   }
 }
 </style>

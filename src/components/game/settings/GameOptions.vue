@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AnimatePresence, motion } from 'motion-v';
 import { storeToRefs } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import PauseIcon from '@/components/common/icons/PauseIcon.vue';
@@ -34,6 +34,7 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { t } = useI18n();
 const { flowState, toggleSettings, pauseGame } = useGameFlow();
@@ -44,6 +45,7 @@ const { skipsState, useSkip } = useSkips();
 const { isSupported, isListening, toggleVoice } = useVoice();
 const { isOwner } = storeToRefs(useRooms());
 const { roomState } = useRooms();
+const strategy = useCurrentStrategy();
 
 const canSkip = computed(() => {
   if (!state.withBoxShuffle && !state.withTypeShuffle && !state.withCriesShuffle) return false;
@@ -136,7 +138,7 @@ const toggleSpeak = () => {
 
           <TimerSelection />
 
-          <ModeSelection />
+          <ModeSelection v-if="strategy.capabilities.hasOrder" />
 
           <TypeShuffle />
 
@@ -147,29 +149,27 @@ const toggleSpeak = () => {
           class="selection-row"
           v-if="!isChallengeMode && isOwner"
         >
-          <ShinyToggle />
+          <ShinyToggle v-if="strategy.capabilities.hasShiny" />
 
           <SpellingToggle />
 
           <ShadowHotkeyToggle />
 
-          <CriesHotkeyToggle />
+          <CriesHotkeyToggle v-if="strategy.capabilities.hasCries" />
 
           <AutoPauseToggle />
 
           <AutoSaveToggle />
-        </div>
-
-        <div class="selection-row">
-          <CycleSpritesToggle />
-
-          <CycleTypesToggle />
-
-          <CycleRegionsToggle />
 
           <ScrollIntoViewToggle />
 
           <SoundToggle />
+
+          <CycleSpritesToggle v-if="strategy.capabilities.hasSpriteCycle" />
+
+          <CycleTypesToggle />
+
+          <CycleRegionsToggle />
 
           <LanguagesSelection />
         </div>

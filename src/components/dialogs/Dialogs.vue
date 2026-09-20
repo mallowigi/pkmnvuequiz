@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n';
 
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import AlertDialog from '@/components/dialogs/AlertDialog.vue';
+import AttackArtworkDialog from '@/components/dialogs/AttackArtworkDialog.vue';
 import ChangeTimerDialog from '@/components/dialogs/ChangeTimerDialog.vue';
 import DeleteRoomDialog from '@/components/dialogs/DeleteRoomDialog.vue';
 import GiveUpDialog from '@/components/dialogs/GiveUpDialog.vue';
@@ -66,6 +67,8 @@ const { t } = useI18n();
     <MultiplayerSetup v-if="dialogs.dialog === 'createRoom'" />
 
     <DeleteRoomDialog v-if="dialogs.dialog === 'deleteRoom'" />
+
+    <AttackArtworkDialog v-if="dialogs.dialog === 'attackArtwork'" />
   </FadeTransition>
 </template>
 

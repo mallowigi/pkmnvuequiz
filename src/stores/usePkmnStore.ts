@@ -1,7 +1,7 @@
-import { useNProgress } from '@vueuse/integrations/useNProgress';
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
+import { useLoadingProgress } from '@/composables/useLoadingProgress.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import type { PkmnData, PokemonInfo, Translations } from '@/types';
 
@@ -19,9 +19,8 @@ type PkmnDataState = {
 };
 
 export const usePkmnData = defineStore('pkmnData', () => {
-  const { isLoading, progress } = useNProgress(undefined, {
-    showSpinner: false,
-  });
+  const { beginLoading, endLoading, reportStep } = useLoadingProgress();
+  const isLoading = ref(false);
 
   const data: PkmnData = reactive<PkmnDataState>({
     error: null,
@@ -96,18 +95,15 @@ export const usePkmnData = defineStore('pkmnData', () => {
       loadShinies,
     ];
 
-    let loadedCount = 0;
-
     setError(null);
-    progress.value = 0;
     isLoading.value = true;
+    beginLoading(loaders.length);
 
     try {
       await Promise.all(
         loaders.map(async (loader) => {
           await loader();
-          loadedCount += 1;
-          progress.value = loadedCount / loaders.length;
+          reportStep();
         }),
       );
 
@@ -118,6 +114,7 @@ export const usePkmnData = defineStore('pkmnData', () => {
       setError(error);
     } finally {
       isLoading.value = false;
+      endLoading();
     }
   }
 

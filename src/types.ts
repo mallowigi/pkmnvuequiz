@@ -1,7 +1,7 @@
-import { type User } from 'firebase/auth';
 import type { DocumentData } from 'firebase/firestore';
 import type { z } from 'zod';
 
+import { attackProgressSchema } from '@/schemas/attackProgress.schema.ts';
 import type {
   challengeModeSchema,
   gameModeSchema,
@@ -41,6 +41,7 @@ export type AlertDialogOptions = {
 
 export type Dialog =
   | 'alert'
+  | 'attackArtwork'
   | 'changeName'
   | 'chaos'
   | 'giveup'
@@ -108,6 +109,10 @@ export type MegaTypeInfo = Omit<TypeInfo, 'id'> & {
   id: MegaType;
 };
 
+export type MoveTypeInfo = Omit<TypeInfo, 'id'> & {
+  id: 'movetype';
+};
+
 export type Gen = z.infer<typeof generationSchema>;
 
 export type GenerationInfo = {
@@ -139,10 +144,6 @@ export type PokemonInfo = {
   sprites?: string[];
 };
 
-export type UserData = {
-  user: User | null;
-};
-
 export type FinishedGames = {
   full: number;
   chaos: number;
@@ -157,6 +158,7 @@ export type FinishedGames = {
 };
 
 export type Profile = {
+  attackDexWins: number;
   plays: number;
   finishedGames: FinishedGames;
 };
@@ -253,8 +255,9 @@ export type PkmnData = {
   translations: Record<string, Translations> | null;
 };
 
+//region Saved Data
 export type PokemonProgress = z.infer<typeof pokemonProgressSchema>;
-
+export type AttackProgress = z.infer<typeof attackProgressSchema>;
 export type Touches = z.infer<typeof touchesSchema>;
 
 export type SaveData = z.infer<typeof saveDataSchema>;
@@ -276,9 +279,11 @@ export type UserRecord = DocumentData &
     isMultiplayer: boolean;
     numShadows: number;
   };
+//endregion
 
 export const availableLanguages = ['en', 'cn', 'de', 'es', 'fr', 'it', 'jp', 'ko', 'pt', 'ru', 'zh'];
 
+//region Leaderboards
 export type TopTrainer = UserRecord & {
   id: string;
 };
@@ -292,7 +297,9 @@ export type LeaderboardsProps = {
   uid?: string | null;
   caption?: string;
 };
+//endregion
 
+//region Pokemon Info
 export type AbilityInfo = {
   effect: string;
   name: string;
@@ -322,7 +329,9 @@ export type PokemonDetails = PokemonInfo & {
     speed: number;
   };
 };
+//endregion
 
+//region Multiplayer
 export type OwnerState = z.infer<typeof ownerStateSchema>;
 
 export type RoomEnvelope = z.infer<typeof roomEnvelopeSchema>;
@@ -353,3 +362,84 @@ export interface RoomInfo {
 export type RoomOwnerOutcome = 'created' | 'occupied' | 'failed' | 'alreadyOwner';
 
 export type RoomConnectionOutcome = 'created' | 'joined' | 'resumed' | 'invalid' | 'failed';
+//endregion
+
+//region AttackDex
+export type MoveType = 'zmove' | 'max' | 'gmax';
+
+export type DamageCategory = 'physical' | 'special' | 'status' | 'variable';
+
+export type DamageCategoryInfo = {
+  id: DamageCategory;
+  name: string;
+  color: string;
+  fgColor: string;
+};
+
+export type AttackDexGame =
+  | {
+      kind: 'gen';
+      gens: Gen[];
+    }
+  | {
+      kind: 'types';
+      types: Type[];
+    }
+  | {
+      kind: 'movetype';
+    }
+  | {
+      kind: 'full';
+    };
+
+export type AttackDexSessionOptions = {
+  challengeMode: ChallengeMode;
+  selection: AttackDexGame;
+};
+
+export type Attack =
+  | {
+      accuracy: number | null;
+      box: RegionBox;
+      category: DamageCategory;
+      id: string;
+      name: string;
+      power: number | null;
+      pp: number | null;
+      scope: 'standard';
+      type: Type;
+    }
+  | {
+      accuracy: number | null;
+      box: RegionBox;
+      category: DamageCategory;
+      id: string;
+      moveType: MoveType;
+      name: string;
+      power: number | null;
+      pp: number | null;
+      scope: 'special';
+      type: Type;
+    };
+
+export type AttackStatus = {
+  isFound: boolean;
+  isMissed: boolean;
+  isShadowed: boolean;
+  lastFoundAt: number | null;
+  lastShadowedAt: number | null;
+};
+
+export type AttackDetails = Attack & {
+  description: string;
+  effect: string;
+  artwork: string;
+};
+
+export type AttackDexData = {
+  error: unknown;
+  isLoaded: boolean;
+  attacks: Attack[] | null;
+  translations: Record<string, Translations> | null;
+};
+//endregion

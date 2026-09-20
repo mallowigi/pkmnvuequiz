@@ -2,14 +2,16 @@ import { useIntervalFn } from '@vueuse/core';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, ref } from 'vue';
 
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { megaTypes } from '@/data/megaTypes.ts';
+import { moveTypeInfo } from '@/data/moveTypes.ts';
 import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import { useSettings } from '@/stores/useSettings.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useState } from '@/stores/useState';
-import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import type { Type, TypeInfo, SpecialTypeInfo, MegaTypeInfo, MoveTypeInfo } from '@/types.ts';
 
 type CurrentTypeState = {
   shuffledType: Type | null;
@@ -99,7 +101,11 @@ export const useCurrentType = defineStore('currentType', () => {
     return megaTypes.mega;
   };
 
-  const getCurrentTypeOrSpecial = (): TypeInfo | SpecialTypeInfo | MegaTypeInfo | null => {
+  const getMoveType = (): MoveTypeInfo => {
+    return moveTypeInfo;
+  };
+
+  const getCurrentTypeOrSpecial = (): TypeInfo | SpecialTypeInfo | MegaTypeInfo | MoveTypeInfo | null => {
     const gameMode = state.gameMode;
 
     if (state.withTypeShuffle) {
@@ -111,6 +117,8 @@ export const useCurrentType = defineStore('currentType', () => {
         return getSpecialType();
       case 'mega':
         return getMegaType();
+      case 'movetype':
+        return getMoveType();
       default:
         return getNextType();
     }
@@ -125,19 +133,12 @@ export const useCurrentType = defineStore('currentType', () => {
   };
 
   const setRandomCurrentType = () => {
-    const { getRandomRemainingPokemon } = usePokemons();
-    const remainingPokemon = getRandomRemainingPokemon();
-    if (!remainingPokemon) return;
+    const { getRandomRemaining } = useCurrentDex();
+    const strategy = useCurrentStrategy();
+    const remainingEntry = getRandomRemaining();
+    if (!remainingEntry) return;
 
-    let randomType;
-    if (!remainingPokemon.secondaryType) {
-      randomType = remainingPokemon.primaryType;
-      setShuffledType(randomType);
-      return;
-    }
-
-    randomType = Math.random() < 0.5 ? remainingPokemon.primaryType : remainingPokemon.secondaryType;
-    setShuffledType(randomType);
+    setShuffledType(strategy.value.getShuffleType(remainingEntry));
   };
 
   return {
@@ -146,6 +147,7 @@ export const useCurrentType = defineStore('currentType', () => {
     getCurrentTypeOrSpecial,
     getCurrentTypes,
     getMegaType,
+    getMoveType,
     getNextType,
     getSecondaryType,
     getShuffledType,

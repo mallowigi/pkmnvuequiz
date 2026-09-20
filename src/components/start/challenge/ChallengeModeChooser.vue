@@ -1,19 +1,23 @@
 <script setup lang="ts">
+import { useAuth } from '@vueuse/firebase';
 import { useI18n } from 'vue-i18n';
 
 import RoundedButton from '@/components/common/RoundedButton.vue';
-import MultiplayerInvite from '@/components/game/settings/MultiplayerInvite.vue';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
-import { useDialogs } from '@/stores/useDialogs.ts';
+import { useAttackDexState } from '@/stores/useAttackDexState.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { t } = useI18n();
 const { setGameSelectionState, setChallengeMode } = useGameFlow();
+const { enterAttackDex } = useAttackDexState();
+const strategy = useCurrentStrategy();
 
 const { isMobile } = useAppBreakpoints();
 const { auth } = useFirebase();
+const { isAuthenticated } = useAuth(auth);
 const { showUserMessage } = useMessages();
 
 const selectFreeMode = () => {
@@ -27,12 +31,23 @@ const selectChallengeMode = () => {
 };
 
 const selectMultiplayerMode = () => {
+  if (!strategy.value.capabilities.hasMultiplayer) {
+    showUserMessage(t('attackDexMultiplayerDisabled'), 'warning');
+    return;
+  }
+
   if (!auth.currentUser?.uid) {
     showUserMessage('You must be logged in to join a room.', 'error');
     return;
   }
 
   setGameSelectionState('createRoom');
+};
+
+const selectAttackDex = () => {
+  enterAttackDex();
+  setChallengeMode('free');
+  setGameSelectionState('gen');
 };
 </script>
 
@@ -76,12 +91,12 @@ const selectMultiplayerMode = () => {
 
         <div
           class="separator"
-          v-if="auth.currentUser?.uid"
+          v-if="isAuthenticated"
         />
 
         <div
           class="side"
-          v-if="auth.currentUser?.uid"
+          v-if="isAuthenticated"
         >
           <RoundedButton
             class="danger-btn"
@@ -95,6 +110,31 @@ const selectMultiplayerMode = () => {
             {{ t('multiplayerModeDescription') }}
           </p>
         </div>
+      </div>
+    </div>
+
+    <div class="attackdex-section">
+      <div class="side">
+        <h3
+          v-if="!isMobile"
+          class="attackdex-heading"
+        >
+          {{ t('attackDexQuiz.title') }}
+        </h3>
+
+        <RoundedButton
+          @click="selectAttackDex"
+          primary
+        >
+          {{ t('attackDex') }}
+        </RoundedButton>
+
+        <p
+          v-if="!isMobile"
+          class="description"
+        >
+          {{ t('attackDexQuiz.description') }}
+        </p>
       </div>
     </div>
   </div>
@@ -122,6 +162,17 @@ const selectMultiplayerMode = () => {
     gap: 16px;
     padding: 8px 0;
   }
+}
+
+.attackdex-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 0 16px;
+}
+
+.attackdex-heading {
+  margin: 0;
 }
 
 .separator {

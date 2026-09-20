@@ -15,6 +15,7 @@ import vEllipsis from '@/directives/ellipsis.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useState } from '@/stores/useState.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 
 const { state } = useState();
 const gameFlowStore = useGameFlow();
@@ -22,6 +23,7 @@ const { flowState, isInGame } = storeToRefs(gameFlowStore);
 const { updateInput } = useLastInput();
 const { dialogs } = useDialogs();
 const { getGameModeName } = useQuiz();
+const strategy = useCurrentStrategy();
 const { t } = useI18n();
 const { lastQuery } = useVoice();
 
@@ -51,17 +53,21 @@ const inputRef = computed(() => textBoxRef.value?.inputRef ?? null);
 
 const nameAllText = computed(() => {
   const regionOrType = getGameModeName();
+  const entryType = strategy.value.getEntityType();
+
   switch (state.gameMode) {
     case 'gen':
-      return t('nameAll.gen', { name: regionOrType });
+      return t('nameAll.gen', { entryType, name: regionOrType });
     case 'types':
-      return t('nameAll.types', { name: regionOrType });
+      return t('nameAll.types', { entryType, name: regionOrType });
     case 'special':
       return t('nameAll.special', { name: regionOrType });
     case 'mega':
-      return t('nameAll.mega', { name: regionOrType });
+      return t('nameAll.mega');
+    case 'movetype':
+      return t('nameAll.movetype');
     default:
-      return t('nameAll.full');
+      return t('nameAll.full', { entryType });
   }
 });
 
@@ -76,6 +82,11 @@ const ensureFocus = () => {
 
 // Handle keydown events on the document to allow typing without focusing the input
 const handleKeydown = (e: KeyboardEvent) => {
+  // Ignore all input, including helper shortcuts, while paused/ended or a dialog is open.
+  if (isDisabled.value) {
+    return;
+  }
+
   updateInput(inputRef.value!.value);
 
   const value = inputRef.value?.value || '';
@@ -101,6 +112,10 @@ const handleKeydown = (e: KeyboardEvent) => {
 
 // Listen to types on the document using vueuse
 onStartTyping((e) => {
+  if (isDisabled.value) {
+    return;
+  }
+
   // Cheat!
   if (e.key === '#') {
     activateCheat();
@@ -156,7 +171,7 @@ onUnmounted(() => {
     <TextBox
       class="pokemon-input"
       ref="textBoxRef"
-      maxlength="13"
+      maxlength="30"
       @input="handleKeydown"
       autocomplete="off"
     />

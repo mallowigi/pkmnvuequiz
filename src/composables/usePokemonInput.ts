@@ -1,17 +1,18 @@
 import { useI18n } from 'vue-i18n';
 
+import type { DexEntry } from '@/composables/useCurrentDex.ts';
+import { useCurrentDex, getEntryName } from '@/composables/useCurrentDex.ts';
 import { useFeatureFlags } from '@/composables/useFeatureFlags.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
+import { useQuizInput } from '@/composables/useQuizInput.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
-import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { PokemonInfo, SpecialType, RegionBox } from '@/types.ts';
+import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import { capitalize } from '@/utils/utils';
 
 type Props = {
@@ -22,24 +23,21 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { state } = useState();
   const { settingsState } = useSettings();
   const { getShuffledType } = useCurrentType();
-  const { currentBoxState } = useCurrentBox();
   const { updateShuffles } = useShuffles();
   const { showUserMessage } = useMessages();
   const { endGame, toggleMissingno } = useGameFlow();
   const { t } = useI18n();
   const {
-    isPokemonInCurrentGameMode,
-    isInRemaining,
+    isInCurrentGameMode,
     addRandomShadow,
-    findPokemon,
+    find,
     addFound,
     isAlreadyFound,
-    getNextOrderedPokemon,
-    isWrongOrder,
     prefillRemaining,
-    getRandomPokemon,
-  } = usePokemons();
-  const { playFanfare, playFailSound, playPokemonCry } = usePlaySounds();
+    isPartOfAnotherEntry,
+  } = useCurrentDex();
+  const strategy = useCurrentStrategy();
+  const { playFanfare, playFailSound } = usePlaySounds();
   const { isDebugMode } = useFeatureFlags();
   const { sendMessage } = useRooms();
 
@@ -50,7 +48,9 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
   const activateCheat = () => {
     playFanfare();
-    showUserMessage(t('nextPokemon', { name: capitalize(getNextOrderedPokemon()?.baseName ?? '???') }));
+    const nextName = strategy.value.getNextCheatName();
+
+    showUserMessage(t('nextPokemon', { name: capitalize(nextName) }));
     clearInput();
   };
 
@@ -64,12 +64,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const activateNextCry = () => {
-    if (settingsState.withCriesHelper) {
-      const randomPokemon = getRandomPokemon();
-      playPokemonCry(randomPokemon?.dexNum ?? 0);
-    } else {
-      showUserMessage(t('criesHelperDisabled'));
-    }
+    strategy.value.activateNextCry();
     clearInput();
   };
 
@@ -80,37 +75,38 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     return true;
   };
 
-  const handleAlreadyFound = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (!isAlreadyFound(foundPokemon)) return false;
-    if (isPartOfAnotherPokemon) return true;
+  const handleAlreadyFound = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
+    if (!isAlreadyFound(foundEntries)) return false;
+    if (isPartOfAnother) return true;
 
-    return notifyError(t('alreadyNamed', { name: capitalize(foundPokemon[0].baseName) }));
+    return notifyError(t('alreadyNamed', { name: capitalize(getEntryName(foundEntries[0])) }));
   };
 
-  const handleNotInCurrentGameMode = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (isPokemonInCurrentGameMode(foundPokemon)) return false;
-    if (isPartOfAnotherPokemon) return true;
+  const handleNotInCurrentGameMode = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
+    if (isInCurrentGameMode(foundEntries)) return false;
+    if (isPartOfAnother) return true;
 
-    return notifyError(t('notPartOfGame', { name: capitalize(foundPokemon[0].baseName) }));
+    return notifyError(t('notPartOfGame', { name: capitalize(getEntryName(foundEntries[0])) }));
   };
 
-  const handleWrongOrder = (foundPokemon: PokemonInfo[], isPartOfAnotherPokemon: boolean) => {
-    if (state.mode !== 'order' || !isWrongOrder(foundPokemon)) return false;
-    if (isPartOfAnotherPokemon) return true;
+  const handleWrongOrder = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
+    if (!strategy.value.capabilities.hasOrder) return false;
+    if (state.mode !== 'order' || !strategy.value.isWrongOrder(foundEntries)) return false;
+    if (isPartOfAnother) return true;
 
-    return notifyError(t('notNextPokemon', { name: capitalize(foundPokemon[0].baseName) }));
+    return notifyError(t('notNextPokemon', { name: capitalize(getEntryName(foundEntries[0])) }));
   };
 
-  const handleTypeShuffle = (foundPokemon: PokemonInfo[], _isPartOfAnotherPokemon: boolean) => {
+  const handleTypeShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
     if (!state.withTypeShuffle) return false;
 
     const currentType = getShuffledType();
-    const types = new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
+    const types = strategy.value.getEntryTypes(foundEntries);
 
     if (currentType && !types.has(currentType.id)) {
       return notifyError(
         t('notOfType', {
-          name: capitalize(foundPokemon[0].baseName),
+          name: capitalize(getEntryName(foundEntries[0])),
           type: capitalize(t(currentType.id)),
         }),
       );
@@ -119,91 +115,65 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     return false;
   };
 
-  const handleBoxShuffle = (foundPokemon: PokemonInfo[], _isPartOfAnotherPokemon: boolean) => {
+  const handleBoxShuffle = (foundEntries: DexEntry[], _isPartOfAnother: boolean) => {
     if (!state.withBoxShuffle) return false;
-    let currentBox: SpecialType | RegionBox | null;
-    let boxes: Set<unknown>;
 
-    switch (state.gameMode) {
-      case 'special':
-        currentBox = currentBoxState.currentSpecialBox;
-        boxes = new Set(foundPokemon.map((p) => p.specialType));
-        break;
-      case 'mega':
-        currentBox = currentBoxState.currentMegaBox;
-        boxes = new Set(foundPokemon.map((p) => p.box));
-        break;
-      default:
-        currentBox = currentBoxState.currentBox;
-        boxes = new Set(foundPokemon.map((p) => p.box));
-        break;
-    }
+    const violationBox = strategy.value.getShuffleBoxViolation(foundEntries, state.gameMode);
+    if (!violationBox) return false;
 
-    if (currentBox && !boxes.has(currentBox)) {
-      return notifyError(
-        t('notInBox', {
-          box: t(currentBox),
-          name: capitalize(foundPokemon[0].baseName),
-        }),
-      );
-    }
-
-    return false;
+    return notifyError(
+      t('notInBox', {
+        box: t(violationBox),
+        name: capitalize(getEntryName(foundEntries[0])),
+      }),
+    );
   };
 
-  const handleSuccess = (foundPokemon: PokemonInfo[]) => {
-    addFound(foundPokemon);
+  const handleSuccess = (foundEntries: DexEntry[]) => {
+    addFound(foundEntries);
 
     updateShuffles();
 
-    playPokemonCry(foundPokemon[0].dexNum);
+    strategy.value.playFoundSound(foundEntries[0]);
     clearInput();
-    return true;
   };
 
-  const checkInput = (value: string) => {
-    if (isDebugMode.value) {
-      if (value === 'endGame') {
-        debugEnd();
-        return;
-      }
-
-      if (value === 'prefill') {
-        prefillRemaining();
-        showUserMessage(t('cheatPrefill'));
-        clearInput();
-        return;
-      }
-    }
-
-    if (value === 'missingno') {
-      toggleMissingno(true);
-      clearInput();
-      return;
-    }
-
-    const foundPokemon = findPokemon(value);
-    if (!foundPokemon) {
-      return;
-    }
-
-    sendMessage(value);
-
-    const isPartOfAnotherPokemon = isInRemaining(value);
-
-    const handlers = [
-      () => handleAlreadyFound(foundPokemon, isPartOfAnotherPokemon),
-      () => handleNotInCurrentGameMode(foundPokemon, isPartOfAnotherPokemon),
-      () => handleWrongOrder(foundPokemon, isPartOfAnotherPokemon),
-      () => handleTypeShuffle(foundPokemon, isPartOfAnotherPokemon),
-      () => handleBoxShuffle(foundPokemon, isPartOfAnotherPokemon),
-      () => handleSuccess(foundPokemon),
-    ];
-
-    for (const handle of handlers) {
-      if (handle()) return;
-    }
-  };
+  const { checkInput } = useQuizInput<DexEntry>({
+    commands: [
+      {
+        isEnabled: () => isDebugMode.value,
+        keyword: 'endGame',
+        run: debugEnd,
+      },
+      {
+        isEnabled: () => isDebugMode.value,
+        keyword: 'prefill',
+        run: () => {
+          prefillRemaining();
+          showUserMessage(t('cheatPrefill'));
+          clearInput();
+        },
+      },
+      {
+        keyword: 'missingno',
+        run: () => {
+          toggleMissingno(true);
+          clearInput();
+        },
+      },
+    ],
+    constraints: [
+      handleAlreadyFound,
+      handleNotInCurrentGameMode,
+      handleWrongOrder,
+      handleTypeShuffle,
+      handleBoxShuffle,
+    ],
+    findEntries: find,
+    isPartOfAnotherEntry: (value: string) => isPartOfAnotherEntry(value),
+    onRecognized: sendMessage,
+    onSuccess: handleSuccess,
+  });
 
   return {
     activateCheat,

@@ -137,7 +137,7 @@ export const useFirebase = defineStore('firebase', () => {
     checkOnline('saveUserState');
 
     const user = auth.currentUser;
-    if (!user) return;
+    if (!user) return false;
 
     firebaseState.isSaving = true;
     if (saveTimeout) {
@@ -151,9 +151,11 @@ export const useFirebase = defineStore('firebase', () => {
 
     try {
       await setDoc(doc(db, 'users', user.uid), data);
+      return true;
     } catch (error) {
       firebaseState.isSaving = false;
       showErrorMessage(error, 'Failed to save user state');
+      return false;
     }
   };
 

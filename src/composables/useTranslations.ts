@@ -104,10 +104,16 @@ export const useTranslations = () => {
     switch (boxId) {
       case 'alola':
         return t('alola');
+      case 'alolaz':
+        return t('alolaz');
       case 'areazero':
         return t('areazero');
       case 'galar':
         return t('galar');
+      case 'galargmax':
+        return t('galargmax');
+      case 'galarmax':
+        return t('galarmax');
       case 'gmax':
         return t('gmax');
       case 'hisui':
@@ -151,6 +157,8 @@ export const useTranslations = () => {
         return t('gen');
       case 'mega':
         return t('mega');
+      case 'movetype':
+        return t('moveType');
       case 'special':
         return t('special');
       case 'types':
