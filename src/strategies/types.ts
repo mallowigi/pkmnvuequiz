@@ -66,4 +66,6 @@ export type DexStrategy<T = DexEntry> = {
     gameMode: GameMode | null | undefined,
   ) => RegionBox | SpecialType | null;
   readonly playFoundSound: (entry: T) => void;
+  readonly getBoxEntries: (boxId: RegionBox | SpecialType) => T[];
+  readonly isBoxComplete: (boxId: RegionBox | SpecialType) => boolean;
 };

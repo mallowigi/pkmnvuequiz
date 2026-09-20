@@ -6,7 +6,7 @@ import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
-import type { Attack, RegionBox, Type } from '@/types.ts';
+import type { Attack, RegionBox, SpecialType, Type } from '@/types.ts';
 
 export const useAttackDexStrategy = (): DexStrategy => {
   const attacks = useAttacks();
@@ -111,6 +111,16 @@ export const useAttackDexStrategy = (): DexStrategy => {
 
   const playFoundSound = () => playClick();
 
+  const getBoxEntries = (boxId: RegionBox | SpecialType): Attack[] => {
+    const attacksByName = attacks.getCurrentGameModeBoxAttacks(boxId as RegionBox);
+    return Array.from(attacksByName.values()).map((moves) => moves[0]);
+  };
+
+  const isBoxComplete = (boxId: RegionBox | SpecialType): boolean => {
+    const boxAttacks = getBoxEntries(boxId);
+    return boxAttacks.length > 0 && boxAttacks.every((attack) => attacks.getStatus(attack).isFound);
+  };
+
   return {
     activateNextCry,
     addFound,
@@ -118,6 +128,7 @@ export const useAttackDexStrategy = (): DexStrategy => {
     capabilities,
     find,
     findClosest,
+    getBoxEntries,
     getCurrentGameModeEntries,
     getEntityType,
     getEntryTypes,
@@ -135,6 +146,7 @@ export const useAttackDexStrategy = (): DexStrategy => {
     getSummaryText,
     id,
     isAlreadyFound,
+    isBoxComplete,
     isInCurrentGameMode,
     isPartOfAnotherEntry,
     isWrongOrder,

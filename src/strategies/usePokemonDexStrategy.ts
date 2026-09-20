@@ -7,6 +7,7 @@ import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import { useSettings } from '@/stores/useSettings.ts';
+import { useState } from '@/stores/useState.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
 import type { PokemonInfo, Type, GameMode, RegionBox, SpecialType } from '@/types.ts';
 
@@ -18,6 +19,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
   const { settingsState } = useSettings();
   const { currentBoxState } = useCurrentBox();
   const { playPokemonCry } = usePlaySounds();
+  const { state } = useState();
 
   const id: DexId = 'pokemon';
 
@@ -146,6 +148,48 @@ export const usePokemonDexStrategy = (): DexStrategy => {
 
   const playFoundSound = (entry: DexEntry) => playPokemonCry((entry as PokemonInfo).dexNum);
 
+  const orderByFoundAt = (pokemonA: PokemonInfo, pokemonB: PokemonInfo): number => {
+    const statusA = pokemons.getStatus(pokemonA);
+    const statusB = pokemons.getStatus(pokemonB);
+
+    if (!statusA.lastFoundAt && statusB.lastFoundAt) {
+      return 1; // pokemonA should come after pokemonB
+    } else if (statusA.lastFoundAt && !statusB.lastFoundAt) {
+      return -1; // pokemonA should come before pokemonB
+    } else if (!statusA.lastFoundAt && !statusB.lastFoundAt) {
+      return 0; // maintain original order
+    } else {
+      return statusA.lastFoundAt! - statusB.lastFoundAt!;
+    }
+  };
+
+  const getBoxEntries = (boxId: RegionBox | SpecialType): PokemonInfo[] => {
+    let pokemonByName: Map<string, PokemonInfo[]>;
+
+    switch (state.gameMode) {
+      case 'special':
+        pokemonByName = pokemons.getSpecialTypePokemon(boxId as SpecialType);
+        break;
+      case 'mega':
+        pokemonByName = pokemons.getMegaPokemon(boxId as RegionBox);
+        break;
+      default:
+        pokemonByName = pokemons.getCurrentGameModeBoxPokemon(boxId as RegionBox);
+        break;
+    }
+
+    const entries = Array.from(pokemonByName.values()).map((group) => group[0]);
+
+    if (state.mode === 'chaos') {
+      return [...entries].sort(orderByFoundAt);
+    }
+
+    return entries;
+  };
+
+  const isBoxComplete = (boxId: RegionBox | SpecialType): boolean =>
+    getBoxEntries(boxId).every((pokemon) => pokemons.getStatus(pokemon).isFound);
+
   return {
     activateNextCry,
     addFound,
@@ -153,6 +197,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     capabilities,
     find,
     findClosest,
+    getBoxEntries,
     getCurrentGameModeEntries,
     getEntityType,
     getEntryTypes,
@@ -170,6 +215,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     getSummaryText,
     id,
     isAlreadyFound,
+    isBoxComplete,
     isInCurrentGameMode,
     isPartOfAnotherEntry,
     isWrongOrder,
