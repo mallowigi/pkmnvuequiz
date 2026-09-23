@@ -4,3 +4,5 @@ allowBuilds:
   protobufjs: true
   sharp: true
   vue-demi: true
+minimumReleaseAgeExclude:
+  - prettier@3.9.9
