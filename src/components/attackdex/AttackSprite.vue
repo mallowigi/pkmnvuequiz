@@ -12,6 +12,7 @@ import { useLanguages } from '@/stores/useLanguages.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { Type, AttackStatus, Attack, DamageCategory } from '@/types.ts';
+import { blankifyName } from '@/utils/utils.ts';
 
 type Props = {
   move: Attack;
@@ -67,7 +68,10 @@ const typeImage = computed<string>(() => {
 });
 
 // Z-Moves can be either physical or special, so we cycle their badge between both icons
-const variableCategories: DamageCategory[] = ['physical', 'special'];
+const variableCategories: DamageCategory[] = [
+  'physical',
+  'special',
+];
 const variableCategoryIndex = ref(0);
 
 useIntervalFn(() => {
@@ -100,7 +104,7 @@ const displayedSprite = computed<DisplayedSprite>(() => {
       categoryImage: categoryImage.value,
       key: 'shadowed',
       kind: 'shadowed',
-      title: "What's that Attack?",
+      title: blankifyName(getAttackTranslation(props.move)),
       type: props.move.type,
       typeImage: typeImage.value,
     };
@@ -146,11 +150,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
-    <RevealZoomTransition
-      appear
-      mode="out-in"
-      v-if="displayedSprite.kind !== 'unknown'"
-    >
+    <RevealZoomTransition appear mode="out-in" v-if="displayedSprite.kind !== 'unknown'">
       <div
         :key="displayedSprite.key"
         @click="onClick"
@@ -165,12 +165,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     </RevealZoomTransition>
 
     <!-- Unknown -->
-    <div
-      :key="displayedSprite.key"
-      class="sprite unknown"
-      v-else
-      :style="{ '--type-img': `url(${unknownSprite})` }"
-    />
+    <div :key="displayedSprite.key" class="sprite unknown" v-else :style="{ '--type-img': `url(${unknownSprite})` }" />
   </section>
 </template>
 

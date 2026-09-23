@@ -36,6 +36,17 @@ export const slugify = (str: string) => {
     .join('_');
 };
 
+export const blankifyName = (str: string) => {
+  if (!str) return str;
+  return str
+    .split(' ')
+    .map((word) => {
+      const [first, ...rest] = word;
+      return first.toUpperCase() + rest.map(() => '_').join('');
+    })
+    .join(' ');
+};
+
 export const upsert = <T>(map: Map<string, T[]>, key: string, value: T) => {
   if (!map.has(key)) {
     map.set(key, []);
