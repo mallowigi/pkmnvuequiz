@@ -137,7 +137,7 @@ const isDitto = computed(() => {
 });
 
 const onClick = async () => {
-  if (!props.status.isFound || props.status.isShadowed) return;
+  if (!props.status.isFound) return;
 
   displayPokemonDetails(props.pokemon);
 };

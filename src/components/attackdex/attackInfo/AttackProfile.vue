@@ -65,6 +65,8 @@ const { attackDetailsState } = useAttackDetails();
 .effect {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.3rem;
   margin-top: 1rem;
   text-align: left;

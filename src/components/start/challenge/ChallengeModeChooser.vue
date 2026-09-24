@@ -91,12 +91,12 @@ const selectAttackDex = () => {
 
         <div
           class="separator"
-          v-if="isAuthenticated"
+          v-if="isAuthenticated && !isMobile"
         />
 
         <div
           class="side"
-          v-if="isAuthenticated"
+          v-if="isAuthenticated && !isMobile"
         >
           <RoundedButton
             class="danger-btn"
@@ -115,10 +115,7 @@ const selectAttackDex = () => {
 
     <div class="attackdex-section">
       <div class="side">
-        <h3
-          v-if="!isMobile"
-          class="attackdex-heading"
-        >
+        <h3 class="attackdex-heading">
           {{ t('attackDexQuiz.title') }}
         </h3>
 
@@ -129,10 +126,7 @@ const selectAttackDex = () => {
           {{ t('attackDex') }}
         </RoundedButton>
 
-        <p
-          v-if="!isMobile"
-          class="description"
-        >
+        <p class="description">
           {{ t('attackDexQuiz.description') }}
         </p>
       </div>

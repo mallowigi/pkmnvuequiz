@@ -43,7 +43,7 @@ const { displayAttackDetails } = useAttackDetails();
 const { getAttackTranslation } = useLanguages();
 
 const onClick = () => {
-  if (!props.status.isFound || props.status.isShadowed) return;
+  if (!props.status.isFound) return;
 
   displayAttackDetails(props.move);
 };
@@ -68,10 +68,7 @@ const typeImage = computed<string>(() => {
 });
 
 // Z-Moves can be either physical or special, so we cycle their badge between both icons
-const variableCategories: DamageCategory[] = [
-  'physical',
-  'special',
-];
+const variableCategories: DamageCategory[] = ['physical', 'special'];
 const variableCategoryIndex = ref(0);
 
 useIntervalFn(() => {
@@ -150,7 +147,11 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     :class="{ full: state.gameMode === 'full', missed: props.status.isMissed }"
     :style="{ '--sprite-delay': spriteDelay }"
   >
-    <RevealZoomTransition appear mode="out-in" v-if="displayedSprite.kind !== 'unknown'">
+    <RevealZoomTransition
+      appear
+      mode="out-in"
+      v-if="displayedSprite.kind !== 'unknown'"
+    >
       <div
         :key="displayedSprite.key"
         @click="onClick"
@@ -165,7 +166,12 @@ watch(displayedSprite, (newSprite, oldSprite) => {
     </RevealZoomTransition>
 
     <!-- Unknown -->
-    <div :key="displayedSprite.key" class="sprite unknown" v-else :style="{ '--type-img': `url(${unknownSprite})` }" />
+    <div
+      :key="displayedSprite.key"
+      class="sprite unknown"
+      v-else
+      :style="{ '--type-img': `url(${unknownSprite})` }"
+    />
   </section>
 </template>
 
