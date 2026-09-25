@@ -51,7 +51,10 @@ onMounted(() => {
       <NewGameButtons />
 
       <!-- Save/Load -->
-      <SaveButtons class="save-buttons" />
+      <SaveButtons
+        class="save-buttons"
+        :can-save="false"
+      />
 
       <Spacer />
     </div>

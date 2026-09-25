@@ -28,7 +28,7 @@ const resume = () => resumeGame();
         {{ t('resume') }}
       </RoundedButton>
 
-      <SaveButtons />
+      <SaveButtons :can-save="true" />
     </div>
   </Overlay>
 </template>

@@ -10,20 +10,31 @@ import LoadIcon from '@/components/common/icons/LoadIcon.vue';
 import SaveIcon from '@/components/common/icons/SaveIcon.vue';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
+import { useDialogs } from '@/stores/useDialogs.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 
+const props = defineProps<{
+  canSave: boolean;
+}>();
+
 const { t } = useI18n();
 
-const { saveState, loadState, loadFromFirebase, hasFirebaseData, saveToFirebase } = useSavedData();
+const { saveState, loadState, hasFirebaseData, saveToFirebase } = useSavedData();
 const { auth } = useFirebase();
 const { isAuthenticated } = useAuth(auth);
 const { showUserMessage } = useMessages();
 const { roomState } = useRooms();
+const { setDialog } = useDialogs();
 
 const { state, isReady } = useAsyncState(() => {
   return hasFirebaseData();
 }, false);
+
+const openLoadSaveDialog = () => {
+  if (!isReady.value || !state.value) return;
+  setDialog('loadSave');
+};
 
 const saveToCloud = async () => {
   if (!isReady.value || !state.value) return;
@@ -69,7 +80,7 @@ const saveToCloud = async () => {
       />
 
       <IconButton
-        @click="loadFromFirebase()"
+        @click="openLoadSaveDialog()"
         v-tooltip="t('loadFromCloudTooltip')"
         v-if="isAuthenticated"
         :class="{ disabled: !isReady || !state }"
@@ -80,7 +91,7 @@ const saveToCloud = async () => {
       <IconButton
         @click="saveToCloud()"
         v-tooltip="t('saveFromCloudTooltip')"
-        v-if="isAuthenticated"
+        v-if="isAuthenticated && props.canSave"
         :class="{ disabled: !isReady || !state }"
       >
         <CloudUpIcon class="accent-icon" />
