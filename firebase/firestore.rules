@@ -80,6 +80,17 @@ service cloud.firestore {
 	  allow write: if isOwner(userId) &&
 	  request.resource.data.version is int &&
 	  isValidPokemonProgress(request.resource.data.pokemonProgress);
+
+	  // Rules for the 'saves' subcollection
+	  // Stores one save slot per game session (sessionId), instead of a single
+	  // save per user, so concurrent in-progress games (e.g. in different tabs)
+	  // don't overwrite each other.
+	  match /saves/{sessionId} {
+		allow read, delete: if isOwner(userId);
+		allow write: if isOwner(userId) &&
+		request.resource.data.version is int &&
+		isValidPokemonProgress(request.resource.data.pokemonProgress);
+	  }
 	}
 
 	// Rules for the 'profiles' collection

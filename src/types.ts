@@ -46,6 +46,7 @@ export type Dialog =
   | 'chaos'
   | 'giveup'
   | 'leaderboards'
+  | 'loadSave'
   | 'login'
   | 'normal'
   | 'order'
@@ -279,6 +280,17 @@ export type UserRecord = DocumentData &
     isMultiplayer: boolean;
     numShadows: number;
   };
+
+/** A single cloud save slot, ready to display in the load-from-cloud picker. */
+export type CloudSaveSlot = {
+  sessionId: string;
+  gameMode: GameMode;
+  summary: string;
+  score: number;
+  elapsed: number;
+  updatedAt: number;
+  isCurrent: boolean;
+};
 //endregion
 
 export const availableLanguages = ['en', 'cn', 'de', 'es', 'fr', 'it', 'jp', 'ko', 'pt', 'ru', 'zh'];
