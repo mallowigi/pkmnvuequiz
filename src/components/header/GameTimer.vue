@@ -8,6 +8,7 @@ import { useTimer } from '@/stores/useTimer.ts';
 import { useI18n } from 'vue-i18n';
 import { useSettings } from '@/stores/useSettings.ts';
 import CountdownOverlay from '@/components/game/CountdownOverlay.vue';
+import { formatElapsedTime } from '@/utils/utils.ts';
 
 const { settingsState } = useSettings();
 const { timerState, incElapsed } = useTimer();
@@ -32,12 +33,7 @@ const { pause, resume } = useInterval(1000, {
 const elapsedTime = computed(() => {
   if (!timerState.startTime) return '- - : - - : - -';
 
-  const total = timerState.elapsed ?? 0;
-  const hours = String(Math.floor(total / 3600));
-  const minutes = String(Math.floor((total % 3600) / 60));
-  const seconds = String(total % 60);
-
-  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+  return formatElapsedTime(timerState.elapsed ?? 0);
 });
 
 const visibility = useDocumentVisibility();

@@ -93,3 +93,13 @@ export const getMoveArtworkUrl = (articleTitle: string): string => {
   const params = new URLSearchParams({ title: articleTitle });
   return `https://us-central1-${projectId}.cloudfunctions.net/moveArtwork?${params}`;
 };
+
+/** Formats a duration in seconds as `HH:MM:SS`. */
+export const formatElapsedTime = (totalSeconds: number): string => {
+  const total = Math.max(0, Math.floor(totalSeconds));
+  const hours = String(Math.floor(total / 3600));
+  const minutes = String(Math.floor((total % 3600) / 60));
+  const seconds = String(total % 60);
+
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+};
