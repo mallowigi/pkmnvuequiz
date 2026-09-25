@@ -8,6 +8,7 @@ import ChangeTimerDialog from '@/components/dialogs/ChangeTimerDialog.vue';
 import DeleteRoomDialog from '@/components/dialogs/DeleteRoomDialog.vue';
 import GiveUpDialog from '@/components/dialogs/GiveUpDialog.vue';
 import LeaderBoardsDialog from '@/components/dialogs/LeaderBoardsDialog.vue';
+import LoadSaveDialog from '@/components/dialogs/LoadSaveDialog.vue';
 import LoginDialog from '@/components/dialogs/LoginDialog.vue';
 import ModeDialog from '@/components/dialogs/ModeDialog.vue';
 import ResetDialog from '@/components/dialogs/ResetDialog.vue';
@@ -57,6 +58,8 @@ const { t } = useI18n();
     <ResetDialog v-if="dialogs.dialog === 'reset'" />
 
     <LeaderBoardsDialog v-if="dialogs.dialog === 'leaderboards'" />
+
+    <LoadSaveDialog v-if="dialogs.dialog === 'loadSave'" />
 
     <UserProfileDialog v-if="dialogs.dialog === 'userProfile'" />
 
