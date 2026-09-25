@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import { useFirebase } from '@/composables/useFirebase.ts';
+import { useSaveSlots } from '@/composables/useSaveSlots.ts';
 import { usePageTitle } from '@/composables/useTitle.ts';
 import { LOCAL_STORAGE_NAME_KEY, LOCAL_STORAGE_KEY, VERSION } from '@/data/global';
 import { i18n } from '@/main.ts';
@@ -22,7 +23,16 @@ import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useTouches } from '@/stores/useTouches.ts';
-import type { SaveData, SaveDataBase, OwnerState, PokemonProgress, AttackProgress, Gen, Type } from '@/types.ts';
+import type {
+  SaveData,
+  SaveDataBase,
+  OwnerState,
+  PokemonProgress,
+  AttackProgress,
+  Gen,
+  Type,
+  CloudSaveSlot,
+} from '@/types.ts';
 import { normalizeName } from '@/utils/utils.ts';
 
 const ready = ref(false);
@@ -47,6 +57,7 @@ const debouncedSaveToFirebase = useDebounceFn(
 export const useSavedData = () => {
   const { showUserMessage } = useMessages();
   const { deleteUserState } = useFirebase();
+  const { getSaveSlotSummary } = useSaveSlots();
   const { setTitle } = usePageTitle();
   const { roomState } = useRooms();
 
@@ -275,7 +286,9 @@ export const useSavedData = () => {
     const { flowState } = useGameFlow();
     if (flowState.isEnded || flowState.isGivenUp) {
       removeAutoSave();
-      await deleteUserState();
+      if (flowState.sessionId) {
+        await deleteUserState(flowState.sessionId);
+      }
       return;
     }
 
@@ -611,17 +624,52 @@ export const useSavedData = () => {
   const hasFirebaseData = async () => {
     if (roomState.isActive) return false;
 
-    const { loadUserState } = useFirebase();
-    const userState = await loadUserState();
-    if (!userState) return false;
-    return parseSaveData(userState).success;
+    const { listUserSaves } = useFirebase();
+    const saves = await listUserSaves();
+    return saves.length > 0;
   };
 
-  const loadFromFirebase = async () => {
+  /** Lists the user's cloud save slots as display-ready summaries, most recent first. */
+  const listCloudSaves = async (): Promise<CloudSaveSlot[]> => {
+    if (roomState.isActive) return [];
+
+    const { listUserSaves } = useFirebase();
+    const { flowState } = useGameFlow();
+    const rawSlots = await listUserSaves();
+
+    const slots: CloudSaveSlot[] = [];
+    for (const { sessionId, data, updatedAt } of rawSlots) {
+      const parsedState = parseSaveData(data);
+      if (!parsedState.success) {
+        console.error('Skipping invalid cloud save slot.', sessionId, parsedState.error.issues);
+        continue;
+      }
+
+      const save = parsedState.data;
+      slots.push({
+        elapsed: save.timer.elapsed ?? 0,
+        gameMode: save.gameMode,
+        isCurrent: sessionId === flowState.sessionId,
+        score: save.score,
+        sessionId,
+        summary: getSaveSlotSummary(save),
+        updatedAt,
+      });
+    }
+    return slots;
+  };
+
+  /** Whether the active tab currently has an unfinished game in progress (paused or not). */
+  const hasActiveLocalGame = () => {
+    const { flowState } = useGameFlow();
+    return flowState.isStarted && !flowState.isEnded && !flowState.isGivenUp;
+  };
+
+  const loadFromFirebase = async (sessionId: string) => {
     if (roomState.isActive) return false;
 
     const { loadUserState } = useFirebase();
-    const userState = await loadUserState();
+    const userState = await loadUserState(sessionId);
     if (!userState) {
       return false;
     }
@@ -688,8 +736,10 @@ export const useSavedData = () => {
     autoSave,
     getSavedName,
     getSavedState,
+    hasActiveLocalGame,
     hasFirebaseData,
     hasSavedState,
+    listCloudSaves,
     loadAutoSave,
     loadFromFirebase,
     loadState,
