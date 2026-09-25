@@ -10,14 +10,9 @@ export type RelativeTimeParts =
   | { unit: 'minutesAgo' | 'hoursAgo' | 'daysAgo'; count: number }
   | { unit: 'date'; date: Date };
 
-/** Cloud save slot helpers: pruning selection, mode/relative-time/elapsed-time formatting. */
 export const useSaveSlots = () => {
   const { getGenTranslation, getGameModeTranslation, getTypeTranslation } = useTranslations();
 
-  /**
-   * Given save-slot refs already ordered most-recent-first (e.g. by `updatedAt` desc), returns the ones beyond the slot
-   * cap that should be pruned.
-   */
   const getOldSlots = <T extends SaveSlotRef>(slots: T[], maxSlots: number = MAX_SAVE_SLOTS): T[] => {
     return slots.slice(maxSlots);
   };

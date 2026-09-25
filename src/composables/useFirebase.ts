@@ -10,10 +10,13 @@ import {
   orderBy,
   query,
   setDoc,
+  serverTimestamp,
+  Timestamp,
   where,
   deleteDoc,
   Query,
 } from 'firebase/firestore';
+import type { DocumentData } from 'firebase/firestore';
 import { storeToRefs, acceptHMRUpdate, defineStore } from 'pinia';
 import { reactive } from 'vue';
 
@@ -22,6 +25,7 @@ import { useGithubAuth } from '@/composables/auth/useGithubAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
 import { useXAuth } from '@/composables/auth/useXAuth.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
+import { MAX_SAVE_SLOTS, useSaveSlots } from '@/composables/useSaveSlots.ts';
 import { auth, db } from '@/firebase.ts';
 import { i18n } from '@/main.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -33,6 +37,13 @@ import { useSettings } from '@/stores/useSettings.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import type { UserRecord, SaveData, TopTrainer, LeaderboardsProps } from '@/types.ts';
 
+/** A raw cloud save document, as read back from Firestore, before schema validation. */
+export type RawSaveSlot = {
+  sessionId: string;
+  data: DocumentData;
+  updatedAt: number;
+};
+
 export const useFirebase = defineStore('firebase', () => {
   const { setName, setAvatar } = useSettings();
   const { showUserMessage, showErrorMessage } = useMessages();
@@ -40,6 +51,7 @@ export const useFirebase = defineStore('firebase', () => {
   const { authenticateWithGithub } = useGithubAuth();
   const { authenticateWithFacebook } = useFacebookAuth();
   const { authenticateWithX } = useXAuth();
+  const { getOldSlots } = useSaveSlots();
 
   onAuthStateChanged(auth, async (user) => {
     const { fetchProfile, setProfileState } = useProfile();
@@ -133,11 +145,26 @@ export const useFirebase = defineStore('firebase', () => {
     }
   };
 
+  const getUserSavesCollection = (uid: string) => collection(db, 'users', uid, 'saves');
+
+  /** Deletes the oldest save slots beyond the cap, keeping storage/costs bounded. */
+  const pruneOldSaves = async (uid: string) => {
+    const savesQuery = query(getUserSavesCollection(uid), orderBy('updatedAt', 'desc'));
+    const snapshot = await getDocs(savesQuery);
+    const excess = getOldSlots(snapshot.docs.map((docSnap) => ({ id: docSnap.id, ref: docSnap.ref })));
+    await Promise.all(excess.map((slot) => deleteDoc(slot.ref)));
+  };
+
   const saveUserState = async (data: SaveData) => {
     checkOnline('saveUserState');
 
     const user = auth.currentUser;
     if (!user) return false;
+
+    if (!data.sessionId) {
+      console.warn('No session ID, skipping cloud save');
+      return false;
+    }
 
     firebaseState.isSaving = true;
     if (saveTimeout) {
@@ -150,37 +177,46 @@ export const useFirebase = defineStore('firebase', () => {
     }, 3000);
 
     try {
-      await setDoc(doc(db, 'users', user.uid), data);
-      return true;
+      await setDoc(doc(getUserSavesCollection(user.uid), data.sessionId), {
+        ...data,
+        updatedAt: serverTimestamp(),
+      });
     } catch (error) {
       firebaseState.isSaving = false;
       showErrorMessage(error, 'Failed to save user state');
       return false;
     }
+
+    try {
+      await pruneOldSaves(user.uid);
+    } catch (error) {
+      console.error('Failed to prune old cloud saves:', error);
+    }
+
+    return true;
   };
 
-  const deleteUserState = async () => {
+  const deleteUserState = async (sessionId: string) => {
     checkOnline('deleteUserState');
 
     const user = auth.currentUser;
-    if (!user) return;
+    if (!user || !sessionId) return;
 
     try {
-      await deleteDoc(doc(db, 'users', user.uid));
+      await deleteDoc(doc(getUserSavesCollection(user.uid), sessionId));
     } catch (error) {
       showErrorMessage(error, 'Failed to delete user state');
     }
   };
 
-  const loadUserState = async () => {
+  const loadUserState = async (sessionId: string) => {
     checkOnline('loadUserState');
 
     const user = auth.currentUser;
-    if (!user) return;
+    if (!user) return null;
 
-    const docRef = doc(db, 'users', user.uid);
     try {
-      const docSnap = await getDoc(docRef);
+      const docSnap = await getDoc(doc(getUserSavesCollection(user.uid), sessionId));
 
       if (docSnap.exists()) {
         return docSnap.data();
@@ -189,6 +225,28 @@ export const useFirebase = defineStore('firebase', () => {
       showErrorMessage(error, 'Failed to load user state');
     }
     return null;
+  };
+
+  /** Lists the user's cloud save slots, most recently updated first. */
+  const listUserSaves = async (): Promise<RawSaveSlot[]> => {
+    checkOnline('listUserSaves');
+
+    const user = auth.currentUser;
+    if (!user) return [];
+
+    try {
+      const savesQuery = query(getUserSavesCollection(user.uid), orderBy('updatedAt', 'desc'), limit(MAX_SAVE_SLOTS));
+      const snapshot = await getDocs(savesQuery);
+
+      return snapshot.docs.map((docSnap) => {
+        const data = docSnap.data();
+        const updatedAt = data.updatedAt instanceof Timestamp ? data.updatedAt.toMillis() : Date.now();
+        return { data, sessionId: docSnap.id, updatedAt };
+      });
+    } catch (error) {
+      showErrorMessage(error, 'Failed to list cloud saves');
+      return [];
+    }
   };
 
   const prepareTopTrainersQuery = ({ uid, mode, gameMode, gen, type, limit: queryLimit }: LeaderboardsProps) => {
@@ -287,6 +345,7 @@ export const useFirebase = defineStore('firebase', () => {
     firebaseState,
     getTopTrainers,
     getTopTrainersAsync,
+    listUserSaves,
     loadUserState,
     saveUserState,
     signout,
