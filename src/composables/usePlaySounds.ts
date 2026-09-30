@@ -1,9 +1,25 @@
 import { useSound } from '@vueuse/sound';
+import { Howler } from 'howler';
 import { ref } from 'vue';
 
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import type { PokemonInfo } from '@/types.ts';
+
+// Mobile browsers suspend (or "interrupt") the shared Web Audio AudioContext when the app is
+// backgrounded, e.g. switching to another app, and Howler doesn't resume it automatically once
+// foregrounded again, so every sound silently fails to play. Registered once at module load,
+// regardless of how many components call `usePlaySounds()`.
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+
+    const ctx = Howler.ctx;
+    if (ctx && ctx.state !== 'running') {
+      void ctx.resume();
+    }
+  });
+}
 
 export const usePlaySounds = () => {
   const { settingsState } = useSettings();
