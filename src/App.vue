@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { usePreferredDark } from '@vueuse/core';
-import { watchEffect, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { watchEffect, watch, computed } from 'vue';
 
 import AttackDetailsPane from '@/components/attackdex/attackInfo/AttackDetailsPane.vue';
 import Background from '@/components/background/Background.vue';
@@ -34,6 +35,7 @@ import { useState } from '@/stores/useState';
 
 const { state, setDarkMode } = useState();
 const { flowState } = useGameFlow();
+const { isInGame } = storeToRefs(useGameFlow());
 const { credits } = useCredits();
 const { roomState } = useRooms();
 const typeStyles = useTypeStyles();
@@ -63,6 +65,8 @@ watchEffect(() => {
 
 const isDark = usePreferredDark();
 
+const hasPullToRefresh = computed(() => isMobile && isInGame && !flowState.gameSelectionState);
+
 watch(
   isDark,
   () => {
@@ -88,7 +92,7 @@ watch(
     <OfflineBanner />
 
     <!-- Pull to Refresh (mobile) -->
-    <PullToRefresh />
+    <PullToRefresh v-if="hasPullToRefresh" />
 
     <!-- New Release Reload Prompt-->
     <ReloadPrompt />

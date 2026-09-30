@@ -1,67 +1,53 @@
 <script setup lang="ts">
 import { useSwipe } from '@vueuse/core';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import ArrowIcon from '@/components/common/icons/ArrowIcon.vue';
-import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 
-// Hard cap on how far the indicator is allowed to travel, for a resistance feel.
+// Finger travel required to refresh is independent of the indicator's travel cap.
+const PULL_THRESHOLD = 250;
 const MAX_PULL = 70;
-// Distance (px) the indicator must travel before releasing triggers a refresh.
-// Must stay below MAX_PULL, since pullDistance is clamped to MAX_PULL.
-const PULL_THRESHOLD = 60;
 
-const { isMobile } = useAppBreakpoints();
 const { t } = useI18n();
 
-const pullDistance = ref(0);
-const isReleasable = ref(false);
+const swipeDistance = ref(0);
 const isRefreshing = ref(false);
 
-// Whether the conditions for a pull-to-refresh gesture were met when the swipe started
-// (checked once at swipe start, same as the original touchstart guard).
+const isReleasable = computed(() => swipeDistance.value >= PULL_THRESHOLD);
+
+const pullDistance = computed(() => {
+  return isRefreshing.value ? MAX_PULL : Math.min(MAX_PULL, (swipeDistance.value / PULL_THRESHOLD) * MAX_PULL);
+});
+
 let isEligible = false;
 
 const getScrollTop = () => document.scrollingElement?.scrollTop ?? window.scrollY;
 
-// `passive: false` lets us call preventDefault() from the callbacks below, and a low
-// threshold makes onSwipe fire on virtually every touchmove so we get continuous updates.
-const { lengthY } = useSwipe(window, {
+const { lengthY, direction } = useSwipe(window, {
   onSwipe: (event) => {
     if (!isEligible || isRefreshing.value) return;
 
-    // lengthY is coordsStart.y - coordsEnd.y, so a downward drag is negative.
-    const delta = -lengthY.value;
-    if (delta <= 0) {
-      pullDistance.value = 0;
-      isReleasable.value = false;
-      return;
-    }
+    // VueUse reports downward travel as a negative lengthY.
+    swipeDistance.value = direction.value === 'down' ? Math.max(0, -lengthY.value) : 0;
 
-    // Progressively resist the pull so it doesn't feel like a 1:1 drag.
-    pullDistance.value = Math.min(MAX_PULL, delta / 1.8);
-    isReleasable.value = pullDistance.value >= PULL_THRESHOLD;
-
-    // Prevent the page (and any native browser pull-to-refresh) from scrolling/bouncing
-    // while our own gesture is in control.
-    event.preventDefault();
+    if (swipeDistance.value > 0) event.preventDefault();
   },
-  onSwipeEnd: () => {
+  onSwipeEnd: (event) => {
     if (!isEligible) return;
+    isEligible = false;
 
-    if (isReleasable.value) {
+    if (event.type === 'touchend' && isReleasable.value) {
       isRefreshing.value = true;
-      pullDistance.value = MAX_PULL;
       window.location.reload();
       return;
     }
 
-    pullDistance.value = 0;
+    swipeDistance.value = 0;
   },
-  onSwipeStart: (event) => {
-    // Ignore multi-touch (e.g. pinch) gestures so they can't be misread as a pull-down.
-    isEligible = isMobile.value && !isRefreshing.value && getScrollTop() === 0 && event.touches.length === 1;
+  onSwipeStart: () => {
+    isEligible = !isRefreshing.value && getScrollTop() === 0;
+    swipeDistance.value = 0;
   },
   passive: false,
   threshold: 1,
@@ -70,7 +56,6 @@ const { lengthY } = useSwipe(window, {
 
 <template>
   <div
-    v-if="isMobile"
     class="pull-to-refresh"
     :class="{ visible: pullDistance > 0 }"
     :style="{ transform: `translateY(${pullDistance - MAX_PULL}px)` }"

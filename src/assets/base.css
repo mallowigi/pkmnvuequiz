@@ -94,7 +94,7 @@
 
 .hide-mobile {
   .mobile & {
-    display: none;
+    display: none !important;
   }
 }
 
