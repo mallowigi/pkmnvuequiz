@@ -6,9 +6,9 @@ import ArrowIcon from '@/components/common/icons/ArrowIcon.vue';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 
 // Distance (px) the user must pull down before releasing triggers a refresh.
-const PULL_THRESHOLD = 70;
+const PULL_THRESHOLD = 200;
 // Hard cap on how far the indicator is allowed to travel, for a resistance feel.
-const MAX_PULL = 110;
+const MAX_PULL = 310;
 
 const { isMobile } = useAppBreakpoints();
 const { t } = useI18n();
@@ -23,14 +23,15 @@ let isTracking = false;
 const getScrollTop = () => document.scrollingElement?.scrollTop ?? window.scrollY;
 
 const onTouchStart = (event: TouchEvent) => {
-  if (!isMobile.value || isRefreshing.value || getScrollTop() > 0) return;
+  // Ignore multi-touch (e.g. pinch) gestures so they can't be misread as a pull-down.
+  if (!isMobile.value || isRefreshing.value || getScrollTop() > 0 || event.touches.length !== 1) return;
 
   isTracking = true;
   startY = event.touches[0].clientY;
 };
 
 const onTouchMove = (event: TouchEvent) => {
-  if (!isTracking || isRefreshing.value) return;
+  if (!isTracking || isRefreshing.value || event.touches.length !== 1) return;
 
   const delta = event.touches[0].clientY - startY;
   if (delta <= 0) {

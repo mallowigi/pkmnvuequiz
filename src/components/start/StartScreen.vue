@@ -110,7 +110,6 @@ onMounted(() => {
 
 .mobile {
   .separator,
-  .save-buttons,
   .leaderboards-table {
     display: none;
   }

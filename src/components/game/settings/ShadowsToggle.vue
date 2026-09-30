@@ -27,7 +27,7 @@ const toggle = () => {
 <template>
   <RoundedButton
     v-tooltip="t('shadowsToggleTooltip')"
-    class="rad-br-tl shadows-toggle"
+    class="rad-br-tl shadows-toggle hide-mobile"
     v-game-ended
     :selected="state.withShadows"
     @click="toggle"

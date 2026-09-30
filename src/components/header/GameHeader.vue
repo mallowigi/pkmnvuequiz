@@ -52,7 +52,7 @@ const { height: headerHeight } = useElementSize(headerRef);
 <style scoped>
 .header {
   position: sticky;
-  top: 0;
+  top: 1em;
   z-index: 2;
   display: flex;
   flex-direction: row;
