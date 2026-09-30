@@ -50,9 +50,7 @@ html {
   max-width: 100vw;
   min-height: 100vh;
   scroll-behavior: smooth;
-  /* Removes the ~300ms tap delay and disables pinch-to-zoom, which otherwise triggers the
-     custom pull-to-refresh gesture (single-finger panning is still allowed). */
-  touch-action: pan-x pan-y;
+  touch-action: pan-y;
 
   * {
     box-sizing: border-box;
@@ -65,7 +63,6 @@ body {
   color: var(--text);
   margin: 0;
   min-height: 100%;
-  /* Avoid the browser's native pull-to-refresh fighting with our custom gesture. */
   overscroll-behavior-y: contain;
 }
 
