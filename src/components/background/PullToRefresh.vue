@@ -6,10 +6,11 @@ import { useI18n } from 'vue-i18n';
 import ArrowIcon from '@/components/common/icons/ArrowIcon.vue';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 
-// Distance (px) the user must pull down before releasing triggers a refresh.
-const PULL_THRESHOLD = 500;
 // Hard cap on how far the indicator is allowed to travel, for a resistance feel.
 const MAX_PULL = 70;
+// Distance (px) the indicator must travel before releasing triggers a refresh.
+// Must stay below MAX_PULL, since pullDistance is clamped to MAX_PULL.
+const PULL_THRESHOLD = 60;
 
 const { isMobile } = useAppBreakpoints();
 const { t } = useI18n();
@@ -51,7 +52,7 @@ const { lengthY } = useSwipe(window, {
 
     if (isReleasable.value) {
       isRefreshing.value = true;
-      pullDistance.value = PULL_THRESHOLD;
+      pullDistance.value = MAX_PULL;
       window.location.reload();
       return;
     }
