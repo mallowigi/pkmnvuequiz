@@ -118,6 +118,7 @@ declare module 'vue' {
     ProfilePic: (typeof import('./src/components/header/ProfilePic.vue'))['default'];
     ProfileStatGrid: (typeof import('./src/components/dialogs/userProfile/ProfileStatGrid.vue'))['default'];
     ProfileStats: (typeof import('./src/components/dialogs/userProfile/ProfileStats.vue'))['default'];
+    PullToRefresh: (typeof import('./src/components/background/PullToRefresh.vue'))['default'];
     RecentRoomsTable: (typeof import('./src/components/start/multiplayer/RecentRoomsTable.vue'))['default'];
     RegionBoxes: (typeof import('./src/components/game/RegionBoxes.vue'))['default'];
     ResetDialog: (typeof import('./src/components/dialogs/ResetDialog.vue'))['default'];

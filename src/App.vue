@@ -8,6 +8,7 @@ import Credits from '@/components/background/Credits.vue';
 import EndOverlay from '@/components/background/EndOverlay.vue';
 import Help from '@/components/background/Help.vue';
 import PauseOverlay from '@/components/background/PauseOverlay.vue';
+import PullToRefresh from '@/components/background/PullToRefresh.vue';
 import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import SavingIndicator from '@/components/background/SavingIndicator.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
@@ -85,6 +86,9 @@ watch(
   >
     <!-- Offline Banner-->
     <OfflineBanner />
+
+    <!-- Pull to Refresh (mobile) -->
+    <PullToRefresh />
 
     <!-- New Release Reload Prompt-->
     <ReloadPrompt />
