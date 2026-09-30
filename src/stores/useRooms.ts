@@ -502,13 +502,13 @@ export const useRooms = defineStore('roomMessages', () => {
 
   // region State Management
   const saveOwnerState = async () => {
+    if (!roomState.room || !roomState.isActive) return;
+
     const { auth } = useFirebase();
     if (!auth.currentUser) {
       showUserMessage(t('userNotAuthenticated'), 'error');
       return;
     }
-
-    if (!roomState.room || !roomState.isActive) return;
 
     const ownerId = await getOwnerId();
     // Broadcast the current state to the new user if we are the owner
@@ -652,8 +652,10 @@ export const useRooms = defineStore('roomMessages', () => {
   // endregion
 
   // region Messages
-  /** Broadcast a message to the room. The message will be deleted immediately after being sent */
+  /** Broadcast only in an active room; solo guesses stay local. Delete messages immediately after sending. */
   const sendMessage = async (message: string) => {
+    if (!roomState.room || !roomState.isActive) return;
+
     const { auth } = useFirebase();
     if (!auth.currentUser) {
       showUserMessage(t('userNotAuthenticated'), 'error');
@@ -736,8 +738,10 @@ export const useRooms = defineStore('roomMessages', () => {
   };
 
   const sendEvent = async (event: RoomEvent) => {
+    if (!roomState.room || !roomState.isActive) return;
+
     const userId = auth.currentUser?.uid;
-    if (!roomState.room || !userId) {
+    if (!userId) {
       showUserMessage(t('userNotAuthenticated'), 'error');
       return;
     }
