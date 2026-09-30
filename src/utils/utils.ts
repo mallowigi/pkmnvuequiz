@@ -55,7 +55,8 @@ export const upsert = <T>(map: Map<string, T[]>, key: string, value: T) => {
 };
 
 export const scrollToTop = () => {
-  window.scrollTo({ behavior: 'smooth', top: 0 });
+  const target = document.querySelector<HTMLElement>('.main.touch-layout .game-content') ?? window;
+  target.scrollTo({ behavior: 'smooth', top: 0 });
 };
 
 export const glitchify = (str: string) => {

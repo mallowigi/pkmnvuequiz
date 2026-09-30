@@ -9,6 +9,10 @@ import ArrowIcon from '@/components/common/icons/ArrowIcon.vue';
 const PULL_THRESHOLD = 250;
 const MAX_PULL = 70;
 
+const props = defineProps<{
+  scrollContainer?: HTMLElement | null;
+}>();
+
 const { t } = useI18n();
 
 const swipeDistance = ref(0);
@@ -22,9 +26,9 @@ const pullDistance = computed(() => {
 
 let isEligible = false;
 
-const getScrollTop = () => document.scrollingElement?.scrollTop ?? window.scrollY;
+const getScrollTop = () => props.scrollContainer?.scrollTop ?? document.scrollingElement?.scrollTop ?? window.scrollY;
 
-const { lengthY, direction } = useSwipe(window, {
+const { lengthY, direction } = useSwipe(() => props.scrollContainer ?? window, {
   onSwipe: (event) => {
     if (!isEligible || isRefreshing.value) return;
 

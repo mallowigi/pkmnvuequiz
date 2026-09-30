@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { usePreferredDark } from '@vueuse/core';
+import { useMediaQuery, usePreferredDark } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
-import { watchEffect, watch, computed } from 'vue';
+import { watchEffect, watch, computed, useTemplateRef } from 'vue';
 
 import AttackDetailsPane from '@/components/attackdex/attackInfo/AttackDetailsPane.vue';
 import Background from '@/components/background/Background.vue';
@@ -42,6 +42,9 @@ const typeStyles = useTypeStyles();
 const { helpState } = useHelp();
 
 const { isMobile, isLaptop, isDesktop } = useAppBreakpoints();
+const isTouchLayout = useMediaQuery('(hover: none) and (pointer: coarse)');
+const gameContent = useTemplateRef<HTMLElement>('gameContent');
+const scrollContainer = computed(() => (isTouchLayout.value ? gameContent.value : null));
 
 watchEffect(() => {
   if (typeof document === 'undefined') {
@@ -65,7 +68,7 @@ watchEffect(() => {
 
 const isDark = usePreferredDark();
 
-const hasPullToRefresh = computed(() => isMobile && isInGame && !flowState.gameSelectionState);
+const hasPullToRefresh = computed(() => isTouchLayout.value && isInGame.value && !flowState.gameSelectionState);
 
 watch(
   isDark,
@@ -85,6 +88,7 @@ watch(
       laptop: isLaptop,
       desktop: isDesktop,
       missingno: flowState.missingno,
+      'touch-layout': isTouchLayout,
     }"
     :style="typeStyles"
   >
@@ -92,7 +96,10 @@ watch(
     <OfflineBanner />
 
     <!-- Pull to Refresh (mobile) -->
-    <PullToRefresh v-if="hasPullToRefresh" />
+    <PullToRefresh
+      v-if="hasPullToRefresh"
+      :scroll-container="scrollContainer"
+    />
 
     <!-- New Release Reload Prompt-->
     <ReloadPrompt />
@@ -103,11 +110,13 @@ watch(
     <!-- Header -->
     <GameHeader />
 
-    <!-- Game Contents -->
-    <Game />
-
-    <!-- Footer -->
-    <GameFooter />
+    <div
+      ref="gameContent"
+      class="game-content"
+    >
+      <Game />
+      <GameFooter />
+    </div>
 
     <!-- Credits-->
     <FadeTransition>
@@ -148,7 +157,7 @@ watch(
     <Tooltip />
 
     <!-- Scroll Top -->
-    <ScrollTop />
+    <ScrollTop :scroll-container="scrollContainer" />
 
     <!-- Details Pane -->
     <PokemonDetailsPane />
@@ -171,6 +180,35 @@ watch(
   justify-content: space-between;
 
   &.mobile {
+    padding-bottom: 80px;
+  }
+}
+
+.game-content {
+  display: contents;
+}
+
+.main.touch-layout {
+  height: 100dvh;
+  min-height: 0;
+  padding-bottom: 0;
+  overflow: clip;
+
+  > .header {
+    flex-shrink: 0;
+  }
+
+  .game-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+  }
+
+  &.mobile .game-content {
     padding-bottom: 80px;
   }
 }

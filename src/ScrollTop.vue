@@ -1,22 +1,27 @@
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 import ArrowIcon from '@/components/common/icons/ArrowIcon.vue';
-import { computed } from 'vue';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 
-const { y } = useScroll(window);
+const props = defineProps<{
+  scrollContainer?: HTMLElement | null;
+}>();
+
+const { y } = useScroll(() => props.scrollContainer ?? window);
 const gameFlowStore = useGameFlow();
 const { isInGame } = storeToRefs(gameFlowStore);
 const { dialogs } = useDialogs();
 
 const scrollToTop = () => {
+  const target = props.scrollContainer ?? window;
   if (y.value > 100) {
-    window.scrollTo({ top: 0 });
+    target.scrollTo({ top: 0 });
   } else {
-    window.scrollTo(0, document.body.scrollHeight);
+    target.scrollTo({ top: props.scrollContainer?.scrollHeight ?? document.body.scrollHeight });
   }
 };
 
