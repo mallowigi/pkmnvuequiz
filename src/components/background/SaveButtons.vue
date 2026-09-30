@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAsyncState } from '@vueuse/core';
 import { useAuth } from '@vueuse/firebase';
+import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import IconButton from '@/components/common/IconButton.vue';
@@ -27,9 +28,13 @@ const { showUserMessage } = useMessages();
 const { roomState } = useRooms();
 const { setDialog } = useDialogs();
 
-const { state, isReady } = useAsyncState(() => {
+const { state, isReady, execute } = useAsyncState(() => {
   return hasFirebaseData();
 }, false);
+
+watch(isAuthenticated, () => {
+  void execute();
+});
 
 const openLoadSaveDialog = () => {
   if (!isReady.value || !state.value) return;

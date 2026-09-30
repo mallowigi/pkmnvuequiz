@@ -106,6 +106,10 @@ const cancel = () => {
 </template>
 
 <style scoped>
+.overlay {
+  z-index: 11;
+}
+
 .load-save-dialog {
   display: flex;
   flex-direction: column;
