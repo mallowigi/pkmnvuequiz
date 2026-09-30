@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core';
+
 import DarkModeToggle from '@/components/header/DarkModeToggle.vue';
 import GameTimer from '@/components/header/GameTimer.vue';
 import PokemonCounts from '@/components/header/PokemonCounts.vue';
 import PokemonInput from '@/components/header/PokemonInput.vue';
 import Watermark from '@/components/header/Watermark.vue';
+import { useVisualViewportOffset } from '@/composables/useVisualViewportOffset';
+
+// Keep phone landscape eligible without applying keyboard compensation to desktop.
+const isTouchLayout = useMediaQuery('(hover: none) and (pointer: coarse)');
+const viewportOffset = useVisualViewportOffset(isTouchLayout);
 </script>
 
 <template>
-  <header class="header">
+  <header class="header" :style="viewportOffset > 0 ? { top: `${viewportOffset}px` } : undefined">
     <section class="controls">
       <div class="header-row first">
         <DarkModeToggle class="dark-mode-toggle" />
