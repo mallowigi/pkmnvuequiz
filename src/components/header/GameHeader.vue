@@ -1,34 +1,13 @@
 <script setup lang="ts">
-import { useElementSize } from '@vueuse/core';
-import { useTemplateRef } from 'vue';
-
 import DarkModeToggle from '@/components/header/DarkModeToggle.vue';
 import GameTimer from '@/components/header/GameTimer.vue';
 import PokemonCounts from '@/components/header/PokemonCounts.vue';
 import PokemonInput from '@/components/header/PokemonInput.vue';
 import Watermark from '@/components/header/Watermark.vue';
-import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
-
-const { isMobile } = useAppBreakpoints();
-
-const headerRef = useTemplateRef<HTMLElement>('headerRef');
-// `position: fixed` takes the header out of the document flow, so a spacer of the
-// same (dynamic, wrapping-dependent) height keeps the rest of the page from jumping up.
-const { height: headerHeight } = useElementSize(headerRef);
 </script>
 
 <template>
-  <div
-    v-if="isMobile"
-    class="header-spacer"
-    :style="{ height: `${headerHeight}px` }"
-  />
-
-  <header
-    ref="headerRef"
-    class="header"
-    :class="{ fixed: isMobile }"
-  >
+  <header class="header">
     <section class="controls">
       <div class="header-row first">
         <DarkModeToggle class="dark-mode-toggle" />
@@ -52,20 +31,13 @@ const { height: headerHeight } = useElementSize(headerRef);
 <style scoped>
 .header {
   position: sticky;
-  top: 1em;
+  top: 0;
   z-index: 2;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   padding: 10px;
-
-  &.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
 }
 
 .header-row {
