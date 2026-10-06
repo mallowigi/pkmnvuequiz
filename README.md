@@ -5,6 +5,9 @@ through various game modes and generations.
 
 Link: <https://pkmnvuequiz.netlify.app>
 
+<img width="2118" height="1402" alt="screens" src="https://github.com/user-attachments/assets/a7971e0f-2035-4a82-9b3c-a2eff5e5f896" />
+
+
 ## Features
 
 - **Generation Selection**: Choose specific Pokémon generations to quiz yourself on.
