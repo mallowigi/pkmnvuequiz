@@ -1,7 +1,9 @@
-# Pokémon Quiz (pkmnquiz)
+# Pokémon Quiz Advanced (pkmnvuequiz)
 
 A web-based Pokémon quiz application built with Vue 3 and Vite. Test your Pokémon knowledge by identifying Pokémon
 through various game modes and generations.
+
+Link: <https://pkmnvuequiz.netlify.app>
 
 ## Features
 
