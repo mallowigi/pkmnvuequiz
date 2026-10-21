@@ -121,6 +121,10 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     };
   };
 
+  const getShufflePokemon = (entry: DexEntry): PokemonInfo => entry as PokemonInfo;
+
+  const hasShuffleCry = (_entry: DexEntry): boolean => true;
+
   const getNextCheatName = (): string => pokemons.getNextOrderedPokemon()?.baseName ?? '???';
 
   const activateNextCry = () => {
@@ -236,9 +240,11 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     getShareText,
     getShuffleBoxViolation,
     getShuffleBoxes,
+    getShufflePokemon,
     getShuffleType,
     getStatus,
     getSummaryText,
+    hasShuffleCry,
     id,
     isAlreadyFound,
     isBoxComplete,

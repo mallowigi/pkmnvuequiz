@@ -84,6 +84,10 @@ export const useAttackDexStrategy = (): DexStrategy => {
     specialBox: null,
   });
 
+  const getShufflePokemon = (entry: DexEntry): Attack => entry as Attack;
+
+  const hasShuffleCry = (_entry: DexEntry): boolean => false;
+
   const getNextCheatName = (): string => attacks.getRandomRemainingAttack()?.name ?? '???';
 
   // Attacks have no cry, so mirror the existing disabled-helper feedback.
@@ -141,9 +145,11 @@ export const useAttackDexStrategy = (): DexStrategy => {
     getShareText,
     getShuffleBoxViolation,
     getShuffleBoxes,
+    getShufflePokemon,
     getShuffleType,
     getStatus,
     getSummaryText,
+    hasShuffleCry,
     id,
     isAlreadyFound,
     isBoxComplete,

@@ -1,5 +1,14 @@
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
-import type { AttackStatus, PokemonStatus, RegionBox, SpecialType, Type, GameMode } from '@/types.ts';
+import type {
+  AttackStatus,
+  PokemonStatus,
+  RegionBox,
+  SpecialType,
+  Type,
+  GameMode,
+  PokemonInfo,
+  Attack,
+} from '@/types.ts';
 
 export type DexId = 'pokemon' | 'attack';
 
@@ -57,6 +66,8 @@ export type DexStrategy<T = DexEntry> = {
   readonly recordGiveUp: () => void;
   readonly getShuffleType: (entry: T) => Type;
   readonly getShuffleBoxes: (entry: T) => ShuffleBoxes;
+  readonly getShufflePokemon: (entry: T) => PokemonInfo | Attack;
+  readonly hasShuffleCry: (entry: T) => boolean;
   readonly getNextCheatName: () => string;
   readonly activateNextCry: () => void;
   readonly isWrongOrder: (entries: T[]) => boolean;

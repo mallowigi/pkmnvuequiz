@@ -42,6 +42,7 @@ declare module 'vue' {
     Credits: (typeof import('./src/components/background/Credits.vue'))['default'];
     CreditsIcon: (typeof import('./src/components/common/icons/CreditsIcon.vue'))['default'];
     CriesHotkeyToggle: (typeof import('./src/components/game/settings/CriesHotkeyToggle.vue'))['default'];
+    CriesShuffle: (typeof import('./src/components/game/settings/CriesShuffle.vue'))['default'];
     CryIcon: (typeof import('./src/components/common/icons/CryIcon.vue'))['default'];
     CycleRegionsIcon: (typeof import('./src/components/common/icons/CycleRegionsIcon.vue'))['default'];
     CycleRegionsToggle: (typeof import('./src/components/game/settings/CycleRegionsToggle.vue'))['default'];
