@@ -6,6 +6,7 @@ import BoxShuffle from '@/components/game/settings/BoxShuffle.vue';
 import ModeSelection from '@/components/game/settings/ModeSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import CriesShuffle from '@/components/game/settings/CriesShuffle.vue';
 
 const { t } = useI18n();
 const { setGameSelectionState, setChallengeMode } = useGameFlow();
@@ -34,6 +35,8 @@ const goBack = () => {
       <TypeShuffle />
 
       <BoxShuffle />
+
+      <CriesShuffle />
     </div>
 
     <div class="actions">
@@ -41,10 +44,7 @@ const goBack = () => {
         {{ t('back') }}
       </RoundedButton>
 
-      <RoundedButton
-        primary
-        @click="goNext"
-      >
+      <RoundedButton primary @click="goNext">
         {{ t('next') }}
       </RoundedButton>
     </div>

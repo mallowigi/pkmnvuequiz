@@ -35,6 +35,7 @@ import { useRooms } from '@/stores/useRooms.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import CriesShuffle from '@/components/game/settings/CriesShuffle.vue';
 
 const { t } = useI18n();
 const { flowState, toggleSettings, pauseGame } = useGameFlow();
@@ -79,20 +80,12 @@ const toggleSpeak = () => {
 
       <div>
         <!-- Settings -->
-        <RoundedButton
-          class="settings rad-br-tl"
-          v-tooltip:top="t('toggleSettings')"
-          @click="openSettings"
-        >
+        <RoundedButton class="settings rad-br-tl" v-tooltip:top="t('toggleSettings')" @click="openSettings">
           <SettingsIcon />
         </RoundedButton>
 
         <!-- Pause -->
-        <RoundedButton
-          class="settings rad-br-tl"
-          v-tooltip:top="t('pause')"
-          @click="togglePause"
-        >
+        <RoundedButton class="settings rad-br-tl" v-tooltip:top="t('pause')" @click="togglePause">
           <PauseIcon />
         </RoundedButton>
 
@@ -130,10 +123,7 @@ const toggleSpeak = () => {
         :exit="{ height: 0, opacity: 0 }"
         :transition="{ duration: 0.3, ease: 'easeInOut' }"
       >
-        <div
-          class="selection-row"
-          v-if="!isChallengeMode && isOwner && !roomState.isActive"
-        >
+        <div class="selection-row" v-if="!isChallengeMode && isOwner && !roomState.isActive">
           <GameModeSelection />
 
           <TimerSelection />
@@ -143,12 +133,11 @@ const toggleSpeak = () => {
           <TypeShuffle />
 
           <BoxShuffle />
+
+          <CriesShuffle />
         </div>
 
-        <div
-          class="selection-row"
-          v-if="!isChallengeMode && isOwner"
-        >
+        <div class="selection-row" v-if="!isChallengeMode && isOwner">
           <ShinyToggle v-if="strategy.capabilities.hasShiny" />
 
           <SpellingToggle />
