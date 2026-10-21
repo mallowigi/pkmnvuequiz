@@ -10,6 +10,7 @@ import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
 import type { PokemonInfo, Type, GameMode, RegionBox, SpecialType } from '@/types.ts';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
 
 export const usePokemonDexStrategy = (): DexStrategy => {
   const pokemons = usePokemons();
@@ -18,6 +19,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
   const { showUserMessage } = useMessages();
   const { settingsState } = useSettings();
   const { currentBoxState } = useCurrentBox();
+  const { currentTypeState } = useCurrentType();
   const { playPokemonCry } = usePlaySounds();
   const { state } = useState();
 
@@ -87,7 +89,26 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     const pokemon = entry as PokemonInfo;
     if (!pokemon.secondaryType) return pokemon.primaryType;
 
-    return Math.random() < 0.5 ? pokemon.primaryType : pokemon.secondaryType;
+    const currentTypes = currentTypeState.currentTypes;
+
+    let nextTypes =
+      Math.random() < 0.5
+        ? [
+            pokemon.primaryType,
+            pokemon.secondaryType,
+          ]
+        : [
+            pokemon.secondaryType,
+            pokemon.primaryType,
+          ];
+
+    if (!currentTypes.size) return nextTypes[0];
+
+    if (currentTypes.has(nextTypes[0])) {
+      return nextTypes[0];
+    } else {
+      return nextTypes[1];
+    }
   };
 
   const getShuffleBoxes = (entry: DexEntry): ShuffleBoxes => {
@@ -115,7 +136,12 @@ export const usePokemonDexStrategy = (): DexStrategy => {
 
   const getEntryTypes = (entries: DexEntry[]): Set<Type | null | undefined> => {
     const foundPokemon = entries as PokemonInfo[];
-    return new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
+    return new Set(
+      foundPokemon.flatMap((p) => [
+        p.primaryType,
+        p.secondaryType,
+      ]),
+    );
   };
 
   const getShuffleBoxViolation = (
