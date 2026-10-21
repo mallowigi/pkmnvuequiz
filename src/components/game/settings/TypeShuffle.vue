@@ -39,7 +39,7 @@ const isDisabled = computed(() => {
 
   if (!state.gameMode) return false;
 
-  return ['types'].includes(state.gameMode);
+  return false;
 });
 </script>
 
