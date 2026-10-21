@@ -36,7 +36,7 @@ const goBack = () => {
 
       <BoxShuffle />
 
-      <CriesShuffle />
+      <!--<CriesShuffle />-->
     </div>
 
     <div class="actions">

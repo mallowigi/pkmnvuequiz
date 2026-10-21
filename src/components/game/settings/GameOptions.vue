@@ -134,7 +134,7 @@ const toggleSpeak = () => {
 
           <BoxShuffle />
 
-          <CriesShuffle />
+          <!--<CriesShuffle />-->
         </div>
 
         <div class="selection-row" v-if="!isChallengeMode && isOwner">
