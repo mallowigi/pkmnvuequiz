@@ -27,6 +27,7 @@ import type {
   MegaType,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
+import { useCurrentCry } from '@/stores/useCurrentCry.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -168,7 +169,10 @@ export const usePokemons = defineStore('pokemons', () => {
     const currentGameModePokemon = getCurrentGameModePokemon();
     const result = new Set<PokemonInfo>();
 
-    for (const [name, pokemonInfo] of currentGameModePokemon) {
+    for (const [
+      name,
+      pokemonInfo,
+    ] of currentGameModePokemon) {
       const status = pokemonState.pokemonStatuses.get(name);
       if (status && status.isMissed) {
         result.add(pokemonInfo[0]);
@@ -357,6 +361,11 @@ export const usePokemons = defineStore('pokemons', () => {
       }
     }
 
+    if (state.withCriesShuffle) {
+      const { currentCryState } = useCurrentCry();
+      return currentCryState.currentPokemonCry;
+    }
+
     if (remainingArray.length === 0) return;
 
     let nextPokemon = null;
@@ -446,7 +455,10 @@ export const usePokemons = defineStore('pokemons', () => {
 
     const result = new Map<string, PokemonInfo[]>();
 
-    for (const [key, pokemons] of boxPokemon) {
+    for (const [
+      key,
+      pokemons,
+    ] of boxPokemon) {
       const filtered = pokemons.filter(
         (p) => types.includes(p.primaryType) || (p.secondaryType && types.includes(p.secondaryType)),
       );
@@ -466,7 +478,10 @@ export const usePokemons = defineStore('pokemons', () => {
     for (const boxId of currentGenBoxes) {
       const box = pokemonMaps.boxes[boxId];
       if (box) {
-        for (const [key, pokemons] of box) {
+        for (const [
+          key,
+          pokemons,
+        ] of box) {
           result.set(key, pokemons);
         }
       }
@@ -486,7 +501,10 @@ export const usePokemons = defineStore('pokemons', () => {
     return currentTypes
       .map((type) => getTypePokemon(type.id as Type))
       .reduce((acc, map) => {
-        for (const [key, pokemons] of map) {
+        for (const [
+          key,
+          pokemons,
+        ] of map) {
           if (!acc.has(key)) {
             acc.set(key, []);
           }
@@ -510,7 +528,10 @@ export const usePokemons = defineStore('pokemons', () => {
 
       const result = new Map<string, PokemonInfo[]>();
 
-      for (const [key, pokemons] of boxPokemon) {
+      for (const [
+        key,
+        pokemons,
+      ] of boxPokemon) {
         const filtered = pokemons.filter((p) => p.megaType !== undefined);
         if (filtered.length > 0) {
           result.set(key, filtered);
@@ -584,7 +605,10 @@ export const usePokemons = defineStore('pokemons', () => {
           const currentTypes = getCurrentTypes();
           if (!currentTypes || currentTypes.length === 0) return false;
 
-          const types = [pokemon.primaryType, pokemon.secondaryType].filter(Boolean);
+          const types = [
+            pokemon.primaryType,
+            pokemon.secondaryType,
+          ].filter(Boolean);
           return types.some((type) => currentTypes.some((currentType) => currentType.id === type));
         }
         case 'special':
@@ -606,7 +630,10 @@ export const usePokemons = defineStore('pokemons', () => {
       const languageMap = pokemonMaps.languages[lang];
       if (!languageMap) continue;
 
-      for (const [translatedKey, pokemons] of languageMap) {
+      for (const [
+        translatedKey,
+        pokemons,
+      ] of languageMap) {
         if (translatedKey.startsWith(pokemonKey) && translatedKey !== pokemonKey) {
           if (pokemons.some((p) => remaining.value.has(normalizeName(p.baseName)))) {
             return true;

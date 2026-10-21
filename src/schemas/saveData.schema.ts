@@ -46,6 +46,7 @@ export const settingsSchema = z.object({
 
 export const touchesSchema = z.object({
   boxShuffleClicks: z.number().int().nonnegative(),
+  criesShuffleClicks: z.number().int().nonnegative(),
   shiniesDiscovered: z.number().int().nonnegative(),
   spellingClicks: z.number().int().nonnegative(),
   summonedCries: z.number().int().nonnegative(),
