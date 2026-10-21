@@ -1,8 +1,8 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import { useCurrentDex } from '@/composables/useCurrentDex.ts';
-import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import type { PokemonInfo } from '@/types.ts';
 
 type CurrentCryState = {
@@ -23,13 +23,17 @@ export const useCurrentCry = defineStore('currentCry', () => {
   };
 
   const setRandomCurrentCry = () => {
-    const { getRandomRemaining } = useCurrentDex();
-    const strategy = useCurrentStrategy();
-    const remainingEntry = getRandomRemaining();
-    if (!remainingEntry) return;
+    const { getRandomPokemon } = usePokemons();
+    const { playPokemonCry } = usePlaySounds();
+    const pokemon = getRandomPokemon();
 
-    const pokemon = strategy.value.getShufflePokemon(remainingEntry);
-    setCurrentCry(pokemon as PokemonInfo);
+    if (!pokemon) {
+      clearCurrentCry();
+      return;
+    }
+
+    setCurrentCry(pokemon);
+    playPokemonCry(pokemon.dexNum);
   };
 
   return {

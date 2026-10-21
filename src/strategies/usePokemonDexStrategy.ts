@@ -10,6 +10,7 @@ import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
 import type { PokemonInfo, Type, GameMode, RegionBox, SpecialType } from '@/types.ts';
+import { useCurrentCry } from '@/stores/useCurrentCry.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 
 export const usePokemonDexStrategy = (): DexStrategy => {
@@ -20,6 +21,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
   const { settingsState } = useSettings();
   const { currentBoxState } = useCurrentBox();
   const { currentTypeState } = useCurrentType();
+  const { currentCryState } = useCurrentCry();
   const { playPokemonCry } = usePlaySounds();
   const { state } = useState();
 
@@ -129,7 +131,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
 
   const activateNextCry = () => {
     if (settingsState.withCriesHelper) {
-      const randomPokemon = pokemons.getRandomPokemon();
+      const randomPokemon = state.withCriesShuffle ? currentCryState.currentPokemonCry : pokemons.getRandomPokemon();
       playPokemonCry(randomPokemon?.dexNum ?? 0);
     } else {
       showUserMessage(i18n.global.t('criesHelperDisabled'));

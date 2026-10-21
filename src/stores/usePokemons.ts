@@ -27,7 +27,6 @@ import type {
   MegaType,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
-import { useCurrentCry } from '@/stores/useCurrentCry.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -359,11 +358,6 @@ export const usePokemons = defineStore('pokemons', () => {
           }
           break;
       }
-    }
-
-    if (state.withCriesShuffle) {
-      const { currentCryState } = useCurrentCry();
-      return currentCryState.currentPokemonCry;
     }
 
     if (remainingArray.length === 0) return;
