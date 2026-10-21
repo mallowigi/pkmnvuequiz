@@ -439,6 +439,7 @@
   "notInBox": "{name}은(는) {box}에 없습니다.",
   "notNextPokemon": "{name}은(는) 다음 포켓몬이 아닙니다.",
   "notOfType": "{name}은(는) {type} 타입이 아닙니다.",
+  "notCryPokemon": "{name}은(는) 방금 들은 포켓몬이 아닙니다.",
   "notPartOfGame": "{name}은(는) 이 게임의 일부가 아닙니다.",
   "notRoomOwner": "방장이 아닙니다",
   "nowSaving": "저장 중...",

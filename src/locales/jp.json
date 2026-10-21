@@ -439,6 +439,7 @@
   "notInBox": "{name} は {box} にいません。",
   "notNextPokemon": "{name} は次のポケモンではありません。",
   "notOfType": "{name} は {type} タイプではありません。",
+  "notCryPokemon": "{name} は今聞いた鳴き声のポケモンではありません。",
   "notPartOfGame": "{name} はこのゲームの一部ではありません。",
   "notRoomOwner": "部屋のオーナーではありません",
   "nowSaving": "保存中...",

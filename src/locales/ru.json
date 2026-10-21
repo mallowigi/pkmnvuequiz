@@ -439,6 +439,7 @@
   "notInBox": "{name} не в {box}.",
   "notNextPokemon": "{name} — не следующий покемон.",
   "notOfType": "{name} не относится к типу {type}.",
+  "notCryPokemon": "{name} — не тот покемон, чей крик вы только что услышали.",
   "notPartOfGame": "{name} не является частью этой игры.",
   "notRoomOwner": "Вы не являетесь владельцем комнаты",
   "nowSaving": "Сохранение...",

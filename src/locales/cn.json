@@ -439,6 +439,7 @@
   "notInBox": "{name} 不在 {box} 中。",
   "notNextPokemon": "{name} 不是下一个宝可梦。",
   "notOfType": "{name} 不是 {type} 属性。",
+  "notCryPokemon": "{name} 不是刚才听到的宝可梦。",
   "notPartOfGame": "{name} 不在此游戏中。",
   "notRoomOwner": "你不是房主",
   "nowSaving": "正在保存...",

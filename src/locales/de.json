@@ -439,6 +439,7 @@
   "notInBox": "{name} ist nicht in {box}.",
   "notNextPokemon": "{name} ist nicht das nächste Pokémon.",
   "notOfType": "{name} ist nicht vom Typ {type}.",
+  "notCryPokemon": "{name} ist nicht das Pokémon, das du gerade gehört hast.",
   "notPartOfGame": "{name} ist nicht Teil dieses Spiels.",
   "notRoomOwner": "Du bist nicht der Raumbesitzer",
   "nowSaving": "Wird gespeichert...",
