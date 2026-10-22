@@ -40,7 +40,6 @@ const isDisabled = computed(
     flowState.isGivenUp ||
     flowState.isEnded ||
     state.withTypeShuffle ||
-    state.withCriesShuffle ||
     state.gameMode === 'types' ||
     state.gameMode === 'special' ||
     state.gameMode === 'mega',
@@ -49,9 +48,6 @@ const isDisabled = computed(
 const disabledTooltip = computed(() => {
   if (state.withTypeShuffle) {
     return t('modeCannotChangeWithTypeShuffleTooltip');
-  }
-  if (state.withCriesShuffle) {
-    return t('modeCannotChangeWithCriesShuffleTooltip');
   }
   if (state.gameMode === 'special' || state.gameMode === 'mega') {
     return t('modeCannotChangeInSpecialModeTooltip');

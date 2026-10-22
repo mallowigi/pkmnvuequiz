@@ -21,7 +21,6 @@ export const stateSchema = z.object({
   isDark: z.boolean(),
   mode: modeSchema,
   withBoxShuffle: z.boolean(),
-  withCriesShuffle: z.boolean(),
   withShadows: z.boolean(),
   withTypeShuffle: z.boolean(),
 });
@@ -46,7 +45,6 @@ export const settingsSchema = z.object({
 
 export const touchesSchema = z.object({
   boxShuffleClicks: z.number().int().nonnegative(),
-  criesShuffleClicks: z.number().int().nonnegative(),
   shiniesDiscovered: z.number().int().nonnegative(),
   spellingClicks: z.number().int().nonnegative(),
   summonedCries: z.number().int().nonnegative(),

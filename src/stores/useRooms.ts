@@ -542,7 +542,6 @@ export const useRooms = defineStore('roomMessages', () => {
       types: savedState.types,
       version: savedState.version,
       withBoxShuffle: savedState.withBoxShuffle,
-      withCriesShuffle: savedState.withCriesShuffle,
       withShadows: savedState.withShadows,
       withTypeShuffle: savedState.withTypeShuffle,
     };

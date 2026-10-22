@@ -406,7 +406,6 @@
   "mode": "Mode",
   "modeCannotChangeInSpecialModeTooltip": "L'ordre ne peut pas être changé en mode Spécial ou Méga",
   "modeCannotChangeInTypesModeTooltip": "L'ordre ne peut pas être changé en mode Types",
-  "modeCannotChangeWithCriesShuffleTooltip": "Lordre ne peut pas être changé en mode Types ou lorsque le mélange de cris est activé",
   "modeCannotChangeWithTypeShuffleTooltip": "L'ordre ne peut pas être changé en mode Types ou en mode Type Aleatoire",
   "modeDialog": {
     "chaosCaption": "Activer le mode Chaos (sans ordre prédéfini)",
@@ -439,7 +438,6 @@
   "notInBox": "{name} n'est pas dans {box}.",
   "notNextPokemon": "{name} n'est pas le prochain Pokémon.",
   "notOfType": "{name} n'est pas de type {type}.",
-  "notCryPokemon": "{name} n'est pas le Pokémon que vous venez d'entendre.",
   "notPartOfGame": "{name} ne fait pas partie de ce jeu.",
   "notRoomOwner": "Vous n'êtes pas le propriétaire du salon",
   "nowSaving": "En cours de sauvegarde...",

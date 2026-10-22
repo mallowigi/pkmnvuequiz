@@ -22,7 +22,6 @@ export const ownerStateSchema = saveDataBaseSchema
     types: true,
     version: true,
     withBoxShuffle: true,
-    withCriesShuffle: true,
     withShadows: true,
     withTypeShuffle: true,
   })

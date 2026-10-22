@@ -406,7 +406,6 @@
   "mode": "모드",
   "modeCannotChangeInSpecialModeTooltip": "스페셜 또는 메가 모드에서는 순서를 변경할 수 없습니다",
   "modeCannotChangeInTypesModeTooltip": "타입 모드에서는 순서를 변경할 수 없습니다",
-  "modeCannotChangeWithCriesShuffleTooltip": "타입 모드이거나 울음소리 셔플이 활성화된 경우 순서를 변경할 수 없습니다",
   "modeCannotChangeWithTypeShuffleTooltip": "타입 모드 또는 랜덤 타입이 활성화된 경우 순서를 변경할 수 없습니다",
   "modeDialog": {
     "chaosCaption": "미리 정해진 배치 없이 추측하기 활성화",
@@ -439,7 +438,6 @@
   "notInBox": "{name}은(는) {box}에 없습니다.",
   "notNextPokemon": "{name}은(는) 다음 포켓몬이 아닙니다.",
   "notOfType": "{name}은(는) {type} 타입이 아닙니다.",
-  "notCryPokemon": "{name}은(는) 방금 들은 포켓몬이 아닙니다.",
   "notPartOfGame": "{name}은(는) 이 게임의 일부가 아닙니다.",
   "notRoomOwner": "방장이 아닙니다",
   "nowSaving": "저장 중...",

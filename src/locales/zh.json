@@ -406,7 +406,6 @@
   "mode": "模式",
   "modeCannotChangeInSpecialModeTooltip": "在特殊或超級模式中無法更改順序",
   "modeCannotChangeInTypesModeTooltip": "在屬性模式中無法更改順序",
-  "modeCannotChangeWithCriesShuffleTooltip": "在屬性模式下或啟用叫聲洗牌時，無法更改順序",
   "modeCannotChangeWithTypeShuffleTooltip": "在屬性模式或啟用隨機類型時無法更改順序",
   "modeDialog": {
     "chaosCaption": "启用无预定位置的猜测",
@@ -439,7 +438,6 @@
   "notInBox": "{name} 不在 {box} 中。",
   "notNextPokemon": "{name} 不是下一個寶可夢。",
   "notOfType": "{name} 不是 {type} 屬性。",
-  "notCryPokemon": "{name} 不是剛才聽到的寶可夢。",
   "notPartOfGame": "{name} 不在此遊戲中。",
   "notRoomOwner": "你不是房主",
   "nowSaving": "正在儲存...",

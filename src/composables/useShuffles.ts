@@ -3,24 +3,19 @@ import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useState } from '@/stores/useState.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
-import { useCurrentCry } from '@/stores/useCurrentCry.ts';
 
 export const useShuffles = () => {
   const { state } = useState();
   const { setShuffledType } = useCurrentType();
   const { setCurrentBox, setCurrentSpecialBox, setCurrentMegaBox } = useCurrentBox();
-  const { clearCurrentCry, setRandomCurrentCry } = useCurrentCry();
   const { getRandomRemaining } = useCurrentDex();
   const strategy = useCurrentStrategy();
 
   const updateShuffles = () => {
-    if (!state.withTypeShuffle && !state.withBoxShuffle && !state.withCriesShuffle) return;
+    if (!state.withTypeShuffle && !state.withBoxShuffle) return;
 
     const remainingEntry = getRandomRemaining();
-    if (!remainingEntry) {
-      clearCurrentCry();
-      return;
-    }
+    if (!remainingEntry) return;
 
     if (state.withTypeShuffle) {
       setShuffledType(strategy.value.getShuffleType(remainingEntry));
@@ -31,12 +26,6 @@ export const useShuffles = () => {
       setCurrentBox(box);
       setCurrentSpecialBox(specialBox);
       setCurrentMegaBox(megaBox);
-    }
-
-    if (state.withCriesShuffle && strategy.value.capabilities.hasCries) {
-      setRandomCurrentCry();
-    } else {
-      clearCurrentCry();
     }
   };
 

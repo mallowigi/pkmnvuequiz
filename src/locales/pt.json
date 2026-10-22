@@ -406,7 +406,6 @@
   "mode": "Modo",
   "modeCannotChangeInSpecialModeTooltip": "A ordem não pode ser alterada no modo Especial ou Mega",
   "modeCannotChangeInTypesModeTooltip": "A ordem não pode ser alterada no modo Tipos",
-  "modeCannotChangeWithCriesShuffleTooltip": "A ordem não pode ser alterada no modo Tipos ou quando o Embaralhamento de Gritos está ativado",
   "modeCannotChangeWithTypeShuffleTooltip": "A ordem não pode ser alterada no modo Tipos ou no modo Tipo aleatório",
   "modeDialog": {
     "chaosCaption": "Habilitar adivinhação sem posicionamentos predeterminados",
@@ -439,7 +438,6 @@
   "notInBox": "{name} não está em {box}.",
   "notNextPokemon": "{name} não é o próximo Pokémon.",
   "notOfType": "{name} não é do tipo {type}.",
-  "notCryPokemon": "{name} não é o Pokémon que você acabou de ouvir.",
   "notPartOfGame": "{name} não faz parte deste jogo.",
   "notRoomOwner": "Você não é o dono da sala",
   "nowSaving": "Salvando...",

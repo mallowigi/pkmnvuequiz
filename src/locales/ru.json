@@ -406,7 +406,6 @@
   "mode": "Режим",
   "modeCannotChangeInSpecialModeTooltip": "Порядок нельзя изменить в Специальном или Мега режиме",
   "modeCannotChangeInTypesModeTooltip": "Порядок нельзя изменить в режиме Типы",
-  "modeCannotChangeWithCriesShuffleTooltip": "Порядок нельзя изменить в режиме Types или если включена перетасовка криков",
   "modeCannotChangeWithTypeShuffleTooltip": "Порядок нельзя изменить в режиме Типы или в режиме Случайный тип",
   "modeDialog": {
     "chaosCaption": "Включить угадывание без предопределенных мест",
@@ -439,7 +438,6 @@
   "notInBox": "{name} не в {box}.",
   "notNextPokemon": "{name} — не следующий покемон.",
   "notOfType": "{name} не относится к типу {type}.",
-  "notCryPokemon": "{name} — не тот покемон, чей крик вы только что услышали.",
   "notPartOfGame": "{name} не является частью этой игры.",
   "notRoomOwner": "Вы не являетесь владельцем комнаты",
   "nowSaving": "Сохранение...",

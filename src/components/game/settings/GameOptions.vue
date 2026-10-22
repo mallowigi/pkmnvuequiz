@@ -35,7 +35,6 @@ import { useRooms } from '@/stores/useRooms.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
-import CriesShuffle from '@/components/game/settings/CriesShuffle.vue';
 
 const { t } = useI18n();
 const { flowState, toggleSettings, pauseGame } = useGameFlow();
@@ -49,7 +48,7 @@ const { roomState } = useRooms();
 const strategy = useCurrentStrategy();
 
 const canSkip = computed(() => {
-  if (!state.withBoxShuffle && !state.withTypeShuffle && !state.withCriesShuffle) return false;
+  if (!state.withBoxShuffle && !state.withTypeShuffle) return false;
 
   const numSkips = skipsState.skips;
   if (Number(numSkips) <= 0) return false;
@@ -133,8 +132,6 @@ const toggleSpeak = () => {
           <TypeShuffle />
 
           <BoxShuffle />
-
-          <!--<CriesShuffle />-->
         </div>
 
         <div class="selection-row" v-if="!isChallengeMode && isOwner">

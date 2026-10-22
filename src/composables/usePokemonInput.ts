@@ -6,7 +6,6 @@ import { useFeatureFlags } from '@/composables/useFeatureFlags.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useQuizInput } from '@/composables/useQuizInput.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
-import { useCurrentCry } from '@/stores/useCurrentCry.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
@@ -25,7 +24,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { settingsState } = useSettings();
   const { getShuffledType } = useCurrentType();
   const { updateShuffles } = useShuffles();
-  const { currentCryState } = useCurrentCry();
   const { showUserMessage } = useMessages();
   const { endGame, toggleMissingno } = useGameFlow();
   const { t } = useI18n();
@@ -131,23 +129,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     );
   };
 
-  const handleCryShuffle = (foundEntries: DexEntry[], isPartOfAnother: boolean) => {
-    if (!state.withCriesShuffle) return false;
-    if (!strategy.value.capabilities.hasCries) return false;
-
-    const target = currentCryState.currentPokemonCry;
-    if (!target) return false;
-
-    // If the entry is already found, we don't want to show the "not cry pokemon" message, so we return false here.
-    if (foundEntries.some((entry) => getEntryName(entry) === target.baseName)) return false;
-    if (isPartOfAnother) return true;
-
-    return notifyError(
-      t('notCryPokemon', {
-        name: capitalize(getEntryName(foundEntries[0])),
-      }),
-    );
-  };
 
   const handleSuccess = (foundEntries: DexEntry[]) => {
     addFound(foundEntries);
@@ -188,7 +169,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
       handleWrongOrder,
       handleTypeShuffle,
       handleBoxShuffle,
-      handleCryShuffle,
     ],
     findEntries: find,
     isPartOfAnotherEntry: (value: string) => isPartOfAnotherEntry(value),

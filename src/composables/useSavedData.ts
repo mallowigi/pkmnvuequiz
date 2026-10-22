@@ -537,7 +537,6 @@ export const useSavedData = () => {
       isDark: statePayload.isDark ?? false,
       mode: statePayload.mode ?? 'normal',
       withBoxShuffle: statePayload.withBoxShuffle ?? false,
-      withCriesShuffle: statePayload.withCriesShuffle ?? false,
       withShadows: statePayload.withShadows ?? false,
       withTypeShuffle: statePayload.withTypeShuffle ?? false,
     });

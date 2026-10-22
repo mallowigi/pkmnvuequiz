@@ -6,7 +6,6 @@ import type { Touches } from '@/types';
 export const useTouches = defineStore('touches', () => {
   const touchesState = reactive<Touches>({
     boxShuffleClicks: 0,
-    criesShuffleClicks: 0,
     shiniesDiscovered: 0,
     spellingClicks: 0,
     summonedCries: 0,
@@ -72,12 +71,6 @@ export const useTouches = defineStore('touches', () => {
     }
   };
 
-  const toggledCriesShuffle = (usedCriesShuffle: boolean) => {
-    if (usedCriesShuffle) {
-      touchesState.criesShuffleClicks += 1;
-    }
-  };
-
   const toggledMissingno = () => {
     touchesState.toggledMissingno = true;
   };
@@ -107,7 +100,6 @@ export const useTouches = defineStore('touches', () => {
     toggledAutoPause,
     toggledBoxShuffle,
     toggledCriesHelper,
-    toggledCriesShuffle,
     toggledDisplayShadows,
     toggledInitialsHelper,
     toggledLanguage,

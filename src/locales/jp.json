@@ -406,7 +406,6 @@
   "mode": "モード",
   "modeCannotChangeInSpecialModeTooltip": "スペシャルモードまたはメガモードでは順序を変更できません",
   "modeCannotChangeInTypesModeTooltip": "タイプモードでは順序を変更できません",
-  "modeCannotChangeWithCriesShuffleTooltip": "タイプモードまたは鳴き声シャッフルが有効な場合、順序は変更できません",
   "modeCannotChangeWithTypeShuffleTooltip": "タイプモードまたはランダムタイプ有効時は順序を変更できません",
   "modeDialog": {
     "chaosCaption": "あらかじめ決められた配置なしで推測できるようにする",
@@ -439,7 +438,6 @@
   "notInBox": "{name} は {box} にいません。",
   "notNextPokemon": "{name} は次のポケモンではありません。",
   "notOfType": "{name} は {type} タイプではありません。",
-  "notCryPokemon": "{name} は今聞いた鳴き声のポケモンではありません。",
   "notPartOfGame": "{name} はこのゲームの一部ではありません。",
   "notRoomOwner": "部屋のオーナーではありません",
   "nowSaving": "保存中...",

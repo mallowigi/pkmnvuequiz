@@ -106,7 +106,7 @@ export const useProfile = defineStore('profile', () => {
     const { getCurrentGens } = useCurrentGen();
     const { getCurrentTypes } = useCurrentType();
 
-    const { gameMode, withShadows, withCriesShuffle, mode } = state;
+    const { gameMode, withShadows, mode } = state;
 
     if (!gameMode) return;
 
@@ -149,9 +149,6 @@ export const useProfile = defineStore('profile', () => {
     // More stats if the game was finished without shadows or cries
     if (!withShadows) {
       profileState.finishedGames.noShadows += 1;
-    }
-    if (!withCriesShuffle) {
-      profileState.finishedGames.noCries += 1;
     }
 
     // Save the updated finished games to the database

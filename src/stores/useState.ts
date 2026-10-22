@@ -11,7 +11,6 @@ export const useState = defineStore('state', () => {
     isDark: false,
     mode: 'normal',
     withBoxShuffle: false,
-    withCriesShuffle: false,
     withShadows: false,
     withTypeShuffle: false,
   });
@@ -65,10 +64,6 @@ export const useState = defineStore('state', () => {
     toggledBoxShuffle(withBoxShuffle);
   };
 
-  const setCriesShuffle = (withCriesShuffle: boolean) => {
-    state.withCriesShuffle = withCriesShuffle;
-  };
-
   const setState = (newState: Partial<State>) => {
     Object.assign(state, newState);
   };
@@ -88,7 +83,6 @@ export const useState = defineStore('state', () => {
     hideShadows,
     resetState,
     setBoxShuffle,
-    setCriesShuffle,
     setDarkMode,
     setGameMode,
     setGameOver,
