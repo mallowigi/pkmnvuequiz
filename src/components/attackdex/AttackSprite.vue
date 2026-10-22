@@ -134,7 +134,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   nextTick(() => {
     el.value?.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
+      block: 'start',
     });
   });
 });

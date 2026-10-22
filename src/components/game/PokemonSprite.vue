@@ -148,6 +148,9 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   // Do not scroll if already scrolling or if scrollIntoView is disabled
   if (isScrolling.value || !settingsState.withScrollIntoView) return;
 
+  // With box shuffle, RegionBoxes scrolls to the next active box instead
+  if (state.withBoxShuffle) return;
+
   // Lock scrolling for a bit to allow smooth scroll to finish and prevent jitter
   isScrolling.value = true;
   setTimeout(() => {
@@ -158,7 +161,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
   nextTick(() => {
     el.value?.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
+      block: 'start',
     });
   });
 });
@@ -239,6 +242,7 @@ watch(displayedSprite, (newSprite, oldSprite) => {
 <style scoped>
 .container {
   position: relative;
+  scroll-margin-top: 200px;
 }
 
 .sprite-swap-enter-active,

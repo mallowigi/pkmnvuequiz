@@ -62,7 +62,7 @@ const isDimmed = (boxId: SpecialType | RegionBox) => {
 };
 
 // Scrolling to active box
-const boxRefs = useTemplateRef<HTMLElement[]>('boxRefs');
+const rootRef = useTemplateRef<HTMLElement>('rootRef');
 
 const activeBoxId = computed(() => {
   if (!state.withBoxShuffle) return null;
@@ -80,11 +80,9 @@ const activeBoxId = computed(() => {
 watch(activeBoxId, (newBoxId) => {
   if (!newBoxId) return;
 
-  const index = currentBoxes.value?.findIndex((box) => box.id === newBoxId);
-  if (index === undefined || index === -1) return;
-
+  // Wait for the sprite animations/layout to settle before scrolling
   nextTick(() => {
-    boxRefs.value?.[index]?.scrollIntoView({
+    rootRef.value?.querySelector<HTMLElement>(`[data-box-id="${newBoxId}"]`)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
@@ -104,6 +102,7 @@ const multiGenClass = computed(() => {
 
 <template>
   <div
+    ref="rootRef"
     class="region-boxes"
     :class="[state.gameMode, multiGenClass]"
   >
@@ -121,6 +120,7 @@ const multiGenClass = computed(() => {
         },
       }"
       class="region-box"
+      :data-box-id="box.id"
       :class="{
         full: strategy.isBoxComplete(box.id),
         dimmed: isDimmed(box.id),
@@ -129,10 +129,7 @@ const multiGenClass = computed(() => {
     >
       <span class="region-name">{{ t(box.id) }}</span>
 
-      <div
-        class="sprite-container"
-        ref="boxRefs"
-      >
+      <div class="sprite-container">
         <AttackSprite
           v-if="strategy.id === 'attack'"
           v-for="(move, index) in strategy.getBoxEntries(box.id) as Attack[]"
@@ -292,6 +289,10 @@ const multiGenClass = computed(() => {
   width: 100%;
   height: 100%;
   line-height: 26px;
+}
+
+.region-box {
+  scroll-margin-top: 120px;
 }
 
 .sprite-container > *:has(.shadowed) {
