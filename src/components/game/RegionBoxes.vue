@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, useTemplateRef, watch } from 'vue';
+import { useDraggable } from '@vueuse/core';
+import { computed, nextTick, useTemplateRef, watch, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import AttackSprite from '@/components/attackdex/AttackSprite.vue';
@@ -13,7 +14,18 @@ import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useState } from '@/stores/useState.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
-import type { Attack, AttackStatus, PokemonInfo, PokemonStatus, RegionBox, SpecialType } from '@/types.ts';
+import type {
+  Attack,
+  AttackStatus,
+  PokemonInfo,
+  PokemonStatus,
+  RegionBox,
+  SpecialType,
+  SpecialTypeInfo,
+  RegionBoxInfo,
+} from '@/types.ts';
+
+type BoxesInfo = SpecialTypeInfo[] | RegionBoxInfo[];
 
 const { getCurrentGameModeBoxes, getSpecialBoxes } = useBoxes();
 const { currentBoxState } = useCurrentBox();
@@ -98,6 +110,61 @@ const multiGenClass = computed(() => {
   if (genCount <= 7) return 'multi-gen-3';
   return 'multi-gen-auto';
 });
+
+// region Drag and Drop
+const draggedId = ref<string | null>(null);
+
+const orderedBoxes = ref<BoxesInfo>([]);
+
+watch(
+  currentBoxes,
+  (newBoxes) => {
+    orderedBoxes.value = [...newBoxes] as BoxesInfo;
+  },
+  { immediate: true },
+);
+
+const moveBox = (fromId: string | null, toId: string | null) => {
+  if (!fromId || !toId || fromId === toId) return;
+  // Like in drag and drop, we first remove the moved item from our list
+  const movedItem = orderedBoxes.value.find((box) => box.id === fromId);
+  const restItems = orderedBoxes.value.filter((box) => box.id !== fromId);
+
+  // Then we need to place that item at our location
+  const toIdIndex = orderedBoxes.value.findIndex((box) => box.id === toId);
+
+  const reorderedBoxes = [...restItems.slice(0, toIdIndex), movedItem, ...restItems.slice(toIdIndex)];
+
+  orderedBoxes.value = reorderedBoxes as BoxesInfo;
+};
+
+useDraggable(rootRef, {
+  onEnd: () => {
+    draggedId.value = null;
+  },
+  onMove: (_position, event) => {
+    if (!draggedId.value) return;
+
+    const overId = document.elementFromPoint(event.clientX, event.clientY)?.closest<HTMLElement>('[data-box-id]')
+      ?.dataset.boxId;
+
+    if (overId && overId !== draggedId.value) {
+      moveBox(draggedId.value, overId);
+    }
+  },
+  onStart: (_position, event) => {
+    const target = event.target as HTMLElement;
+    const boxEl = target.closest<HTMLElement>('[data-box-id]');
+
+    // Only the box title acts as drag handle
+    if (!boxEl || !target.closest('.region-name')) return false;
+
+    draggedId.value = boxEl.dataset.boxId ?? null;
+  },
+  pointerTypes: ['mouse'],
+  preventDefault: true,
+});
+// endregion
 </script>
 
 <template>
@@ -107,7 +174,7 @@ const multiGenClass = computed(() => {
     :class="[state.gameMode, multiGenClass]"
   >
     <RoundedBox
-      v-for="(box, index) in currentBoxes"
+      v-for="(box, index) in orderedBoxes"
       :key="box.id"
       v-motion
       :initial="{ opacity: 0, y: 50 }"
@@ -124,6 +191,7 @@ const multiGenClass = computed(() => {
       :class="{
         full: strategy.isBoxComplete(box.id),
         dimmed: isDimmed(box.id),
+        dragging: draggedId === box.id,
       }"
       :style="{ '--region-color': getBoxColor(box.id) }"
     >
@@ -272,11 +340,20 @@ const multiGenClass = computed(() => {
   &:has(.sprite-container:empty) {
     display: none;
   }
+
+  &.dragging {
+    scale: 1.01;
+    filter: opacity(0.8);
+    transition: all 0.2s ease-out;
+    cursor: grabbing;
+    box-shadow: 0 0 0 3px var(--region-color, var(--primary));
+  }
 }
 
 .region-name {
   color: var(--text);
   padding-left: 10px;
+  cursor: grab;
 }
 
 .sprite-container {
