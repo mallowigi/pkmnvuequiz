@@ -131,6 +131,7 @@ const moveBox = (fromId: string | null, toId: string | null) => {
   if (!fromId || !toId || fromId === toId) return;
   // Like in drag and drop, we first remove the moved item from our list
   const movedItem = orderedBoxes.value.find((box) => box.id === fromId);
+  if (!movedItem) return;
   const restItems = orderedBoxes.value.filter((box) => box.id !== fromId);
 
   // Then we need to place that item at our location
@@ -384,8 +385,11 @@ useDraggable(rootRef, {
     z-index: 100;
     scale: 1.01;
     filter: opacity(0.8);
-    transition: all 0.2s ease-out;
+    transition:
+      scale 0.2s ease-out,
+      filter 0.2s ease-out;
     cursor: grabbing;
+    pointer-events: none;
     box-shadow: 0 0 0 3px var(--region-color, var(--primary));
   }
 }
