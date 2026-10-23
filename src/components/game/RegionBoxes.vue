@@ -113,6 +113,9 @@ const multiGenClass = computed(() => {
 
 // region Drag and Drop
 const draggedId = ref<string | null>(null);
+const dragOffset = ref({ x: 0, y: 0 });
+const grabPoint = ref({ x: 0, y: 0 });
+const pointer = ref({ x: 0, y: 0 });
 
 const orderedBoxes = ref<BoxesInfo>([]);
 
@@ -138,18 +141,40 @@ const moveBox = (fromId: string | null, toId: string | null) => {
   orderedBoxes.value = reorderedBoxes as BoxesInfo;
 };
 
+const updateDragOffset = () => {
+  if (!draggedId.value) return;
+
+  const el = rootRef.value?.querySelector(`[data-box-id="${draggedId.value}"]`) as HTMLElement | null;
+  if (!el) return;
+
+  const rect = el.getBoundingClientRect();
+  const layoutLeft = rect.left - dragOffset.value.x;
+  const layoutTop = rect.top - dragOffset.value.y;
+
+  dragOffset.value.x = pointer.value.x - grabPoint.value.x - layoutLeft;
+  dragOffset.value.y = pointer.value.y - grabPoint.value.y - layoutTop;
+};
+
 useDraggable(rootRef, {
   onEnd: () => {
     draggedId.value = null;
+    dragOffset.value.x = 0;
+    dragOffset.value.y = 0;
   },
   onMove: (_position, event) => {
     if (!draggedId.value) return;
+
+    pointer.value.x = event.clientX;
+    pointer.value.y = event.clientY;
 
     const overId = document.elementFromPoint(event.clientX, event.clientY)?.closest<HTMLElement>('[data-box-id]')
       ?.dataset.boxId;
 
     if (overId && overId !== draggedId.value) {
       moveBox(draggedId.value, overId);
+      nextTick(updateDragOffset);
+    } else {
+      updateDragOffset();
     }
   },
   onStart: (_position, event) => {
@@ -158,6 +183,16 @@ useDraggable(rootRef, {
 
     // Only the box title acts as drag handle
     if (!boxEl || !target.closest('.region-name')) return false;
+
+    const rect = boxEl.getBoundingClientRect();
+    grabPoint.value.x = event.clientX - rect.left;
+    grabPoint.value.y = event.clientY - rect.top;
+
+    pointer.value.x = event.clientX;
+    pointer.value.y = event.clientY;
+
+    dragOffset.value.x = 0;
+    dragOffset.value.y = 0;
 
     draggedId.value = boxEl.dataset.boxId ?? null;
   },
@@ -193,7 +228,10 @@ useDraggable(rootRef, {
         dimmed: isDimmed(box.id),
         dragging: draggedId === box.id,
       }"
-      :style="{ '--region-color': getBoxColor(box.id) }"
+      :style="{
+        '--region-color': getBoxColor(box.id),
+        ...(draggedId === box.id ? { translate: `${dragOffset.x}px ${dragOffset.y}px` } : {}),
+      }"
     >
       <span class="region-name">{{ t(box.id) }}</span>
 
@@ -342,6 +380,8 @@ useDraggable(rootRef, {
   }
 
   &.dragging {
+    position: relative;
+    z-index: 100;
     scale: 1.01;
     filter: opacity(0.8);
     transition: all 0.2s ease-out;
