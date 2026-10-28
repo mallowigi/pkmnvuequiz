@@ -4,6 +4,9 @@ import { computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
+import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
+import MorphTransition from '@/components/common/transitions/MorphTransition.vue';
+import MorphTransitionGroup from '@/components/common/transitions/MorphTransitionGroup.vue';
 import { usePkmnDetails } from '@/stores/usePkmnDetails.ts';
 import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useProfile } from '@/stores/useProfile.ts';
@@ -27,10 +30,14 @@ const fetchShinies = async () => {
       }
 
       const pkmnDetails = await fetchPokemon(pokemonInfo, { shiny: true });
+      if (!pkmnDetails) {
+        return undefined;
+      }
+
       return {
-        artwork: pkmnDetails?.artwork || '',
+        artwork: pkmnDetails.artwork || '',
         id: Number(pkmnDetails.dexNum || key),
-        name: pkmnDetails?.baseName || key,
+        name: pkmnDetails.baseName || key,
         pokemonInfo,
       };
     }),
@@ -59,7 +66,11 @@ const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immedi
     {{ t('noShiniesFound') }}
   </div>
 
-  <div class="shiny-grid">
+  <MorphTransitionGroup
+    class="shiny-grid"
+    v-else
+    appear
+  >
     <div
       class="shiny-card"
       v-for="shiny in shinies"
@@ -75,7 +86,7 @@ const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immedi
         loading="lazy"
       />
     </div>
-  </div>
+  </MorphTransitionGroup>
 </template>
 
 <style scoped>
