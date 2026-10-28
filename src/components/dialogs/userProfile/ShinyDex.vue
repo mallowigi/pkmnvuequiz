@@ -69,7 +69,6 @@ const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immedi
   <MorphTransitionGroup
     class="shiny-grid"
     v-else
-    appear
   >
     <div
       class="shiny-card"
@@ -107,7 +106,7 @@ const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immedi
   justify-content: center;
   padding: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
 
   &:hover {
     transform: scale(1.5);
