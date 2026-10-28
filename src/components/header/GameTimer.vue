@@ -41,7 +41,7 @@ const windowFocus = useWindowFocus();
 
 // Stops the interval when the tab is not active
 watch(visibility, (current) => {
-  if (!settingsState.autoPause) {
+  if (!settingsState.autoPause || !isInGame.value) {
     return;
   }
 
@@ -53,7 +53,7 @@ watch(visibility, (current) => {
 });
 
 watch(windowFocus, (isFocused) => {
-  if (!settingsState.autoPause) {
+  if (!settingsState.autoPause || !isInGame.value) {
     return;
   }
 
