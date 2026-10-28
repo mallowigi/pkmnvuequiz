@@ -27,6 +27,7 @@ import type {
   MegaType,
 } from '@/types.ts';
 import { normalizeName, upsert } from '@/utils/utils.ts';
+import { useProfile } from '@/stores/useProfile.ts';
 
 type PokemonMaps = {
   all: Map<string, Array<PokemonInfo>>;
@@ -271,6 +272,7 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const addFound = (pokemons: PokemonInfo[]) => {
     const { endGame } = useGameFlow();
+    const {addShiny} = useProfile();
 
     pokemons.forEach((pokemon) => {
       const normalizedPokemon = normalizeName(pokemon.baseName);
@@ -288,6 +290,7 @@ export const usePokemons = defineStore('pokemons', () => {
           status.isShiny = true;
           addShinyDiscovered();
           playShiny(pokemon);
+          addShiny(normalizedPokemon);
           vibrate(700);
         }
 

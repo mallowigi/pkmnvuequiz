@@ -76,6 +76,7 @@ export const useProfile = defineStore('profile', () => {
     finishedGames: initializeFinishedGames(),
     plays: 0,
     settings: initializeSettings(),
+    shinyDex: {}
   });
 
   const { showErrorMessage } = useMessages();
@@ -135,6 +136,11 @@ export const useProfile = defineStore('profile', () => {
     void saveUserProfile({ settings: serialized as unknown as Settings });
   };
 
+  const addShiny = (pokemonId: string) => {
+    profileState.shinyDex[pokemonId] = true;
+    void saveUserProfile({ shinyDex: profileState.shinyDex });
+  }
+
   const updateFinishedGames = () => {
     const { state } = useState();
     const { getCurrentGens } = useCurrentGen();
@@ -190,6 +196,7 @@ export const useProfile = defineStore('profile', () => {
   };
 
   return {
+    addShiny,
     fetchProfile,
     incrementAttackDexWins,
     incrementPlays,
