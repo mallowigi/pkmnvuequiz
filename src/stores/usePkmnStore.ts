@@ -118,8 +118,17 @@ export const usePkmnData = defineStore('pkmnData', () => {
     }
   }
 
+  function findPokemon(id: string): PokemonInfo | undefined {
+    if (!data.pokemon) {
+      console.warn('Pokemon data is not loaded yet.');
+      return undefined;
+    }
+    return data.pokemon.find((pokemon) => pokemon.id === id);
+  }
+
   return {
     data,
+    findPokemon,
     loadData,
   };
 });

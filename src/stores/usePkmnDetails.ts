@@ -227,6 +227,7 @@ export const usePkmnDetails = defineStore('pkmnDetails', () => {
   return {
     closeDetails,
     displayPokemonDetails,
+    fetchPokemon,
     pkmnDetailsState,
   };
 });
