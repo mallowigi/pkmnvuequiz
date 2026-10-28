@@ -9,8 +9,9 @@ import { usePkmnData } from '@/stores/usePkmnStore.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 
 const { profileState } = useProfile();
-const { fetchPokemon } = usePkmnDetails();
+const { fetchPokemon, displayPokemonDetails } = usePkmnDetails();
 const { findPokemon } = usePkmnData();
+const { t } = useI18n();
 
 const fetchShinies = async () => {
   const shinyDex = profileState.shinyDex;
@@ -26,6 +27,7 @@ const fetchShinies = async () => {
           artwork: '',
           id: key,
           name: key,
+          pokemonInfo,
         };
       }
 
@@ -34,78 +36,88 @@ const fetchShinies = async () => {
         artwork: pkmnDetails?.artwork || '',
         id: key,
         name: pkmnDetails?.baseName || key,
+        pokemonInfo,
       };
     }),
   );
 };
 
-const { state } = useAsyncState(fetchShinies, null, { immediate: true });
+const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immediate: true });
 </script>
 
 <template>
-  <div class="profile-stats">
+  <div
+    v-if="isLoading"
+    class="loading"
+  >
+    {{ t('loadingDetails') }}
+  </div>
+
+  <div
+    v-else-if="!shinies?.length"
+    class="empty"
+  >
+    {{ t('noShiniesFound') }}
+  </div>
+
+  <div class="shiny-grid">
     <div
-      v-for="shiny in state"
+      class="shiny-card"
+      v-for="shiny in shinies"
       :key="shiny.id"
+      @click="shiny.pokemonInfo && displayPokemonDetails(shiny.pokemonInfo)"
     >
-      <RoundedBox class="stat">
-        <div class="stat-label">{{ shiny.name }}</div>
-        <img
-          class="stat-value"
-          :src="shiny.artwork"
-          alt="shiny.name"
-        />
-      </RoundedBox>
+      <img
+        v-if="shiny.artwork"
+        class="shiny-artwork"
+        :src="shiny.artwork"
+        :alt="shiny.name"
+        loading="lazy"
+      />
     </div>
   </div>
 </template>
 
 <style scoped>
-.profile-stats {
+.shiny-grid {
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  gap: 0;
-  margin-bottom: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 4px;
 }
 
-.attack-dex-wins {
-  grid-column: span 2;
-  border-radius: 3px 3px 20px 20px;
-}
-
-.stat {
+.shiny-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  max-height: initial;
-  opacity: 0.8;
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 
-  .mobile & {
-    padding: 8px;
+  &:hover {
+    transform: scale(1.5);
   }
 }
 
-.stat-label {
-  font-size: 14px;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-
-  .mobile & {
-    font-size: 11px;
-    letter-spacing: 1px;
-    line-height: 1.4;
-  }
+.shiny-artwork {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
-.stat-value {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--type-btn-color, var(--primary));
-
-  .mobile & {
-    font-size: 20px;
-  }
+.shiny-name {
+  font-size: 11px;
+  margin-top: 4px;
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 </style>
