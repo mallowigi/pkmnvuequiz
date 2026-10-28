@@ -19,27 +19,26 @@ const fetchShinies = async () => {
     return [];
   }
 
-  return Promise.all(
+  let promises = await Promise.all(
     Object.keys(shinyDex).map(async (key) => {
       const pokemonInfo = findPokemon(key);
       if (!pokemonInfo) {
-        return {
-          artwork: '',
-          id: key,
-          name: key,
-          pokemonInfo,
-        };
+        return undefined;
       }
 
       const pkmnDetails = await fetchPokemon(pokemonInfo, { shiny: true });
       return {
         artwork: pkmnDetails?.artwork || '',
-        id: key,
+        id: Number(pkmnDetails.dexNum || key),
         name: pkmnDetails?.baseName || key,
         pokemonInfo,
       };
     }),
   );
+  return promises.filter(Boolean).sort((a, b) => {
+    if (!a || !b) return 0;
+    return a.id - b.id;
+  });
 };
 
 const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immediate: true });
@@ -64,14 +63,15 @@ const { state: shinies, isLoading } = useAsyncState(fetchShinies, null, { immedi
     <div
       class="shiny-card"
       v-for="shiny in shinies"
-      :key="shiny.id"
-      @click="shiny.pokemonInfo && displayPokemonDetails(shiny.pokemonInfo)"
+      :key="shiny?.id"
+      @click="shiny?.pokemonInfo && displayPokemonDetails(shiny?.pokemonInfo)"
     >
       <img
-        v-if="shiny.artwork"
+        v-tooltip="shiny?.name"
+        v-if="shiny?.artwork"
         class="shiny-artwork"
-        :src="shiny.artwork"
-        :alt="shiny.name"
+        :src="shiny?.artwork"
+        :alt="shiny?.name"
         loading="lazy"
       />
     </div>
