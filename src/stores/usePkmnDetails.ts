@@ -120,15 +120,17 @@ export const usePkmnDetails = defineStore('pkmnDetails', () => {
     speciesData,
     internalInfo,
     abilitiesData,
+    shiny,
   }: {
     pokemonData: Pokemon;
     speciesData: PokemonSpecies;
     internalInfo: PokemonInfo;
     abilitiesData: AbilityInfo[];
+    shiny?: boolean;
   }): PokemonDetails => {
     const { getStatus } = usePokemons();
     const status = getStatus(internalInfo);
-    const isShiny = status.isShiny;
+    const isShiny = shiny ?? status.isShiny;
 
     const pokemonStats = convertStats(pokemonData.stats);
     const description = fetchDescription(speciesData);
@@ -168,7 +170,7 @@ export const usePkmnDetails = defineStore('pkmnDetails', () => {
     );
   };
 
-  const fetchPokemon = async (internalInfo: PokemonInfo) => {
+  const fetchPokemon = async (internalInfo: PokemonInfo, { shiny }: { shiny: boolean } = { shiny: false }) => {
     try {
       // 1. Fetch species data using dex number to get all varieties
       const speciesResponse = await api.getPokemonSpeciesByName(internalInfo.dexNum.toString());
@@ -192,6 +194,7 @@ export const usePkmnDetails = defineStore('pkmnDetails', () => {
         abilitiesData: abilitiesResponse,
         internalInfo,
         pokemonData: pokemonResponse,
+        shiny,
         speciesData: speciesResponse,
       });
       pkmnDetailsState.detailsMap.set(internalInfo.id, response);
