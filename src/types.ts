@@ -162,6 +162,7 @@ export type Profile = {
   attackDexWins: number;
   plays: number;
   finishedGames: FinishedGames;
+  settings: Settings;
 };
 
 export type Bonus = {

@@ -6,8 +6,9 @@ import { auth, db } from '@/firebase.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useMessages } from '@/stores/useMessages.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { FinishedGames, Profile } from '@/types';
+import type { FinishedGames, Profile, Settings } from '@/types';
 
 const initializeFinishedGames = (): FinishedGames => ({
   chaos: 0,
@@ -51,11 +52,30 @@ const initializeFinishedGames = (): FinishedGames => ({
   },
 });
 
+const initializeSettings = (): Settings => ({
+  autoPause: false,
+  autoSync: true,
+  avatar: null,
+  languages: new Set(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
+  name: '',
+  withCriesHelper: false,
+  withCycleRegions: true,
+  withCycleSprites: true,
+  withCycleTypes: true,
+  withInitialsHelper: false,
+  withScrollIntoView: true,
+  withShadowHelper: false,
+  withShinies: false,
+  withSound: true,
+  withSpelling: false,
+});
+
 export const useProfile = defineStore('profile', () => {
   const profileState = reactive<Profile>({
     attackDexWins: 0,
     finishedGames: initializeFinishedGames(),
     plays: 0,
+    settings: initializeSettings(),
   });
 
   const { showErrorMessage } = useMessages();
@@ -98,7 +118,21 @@ export const useProfile = defineStore('profile', () => {
   };
 
   const setProfileState = (profile: Partial<Profile>) => {
+    const { applySettings } = useSettings();
+
     Object.assign(profileState, profile);
+    if (profile.settings) {
+      applySettings(profile.settings);
+    }
+  };
+
+  const updateSettings = (settings: Partial<Settings>) => {
+    Object.assign(profileState.settings, settings);
+    const serialized = {
+      ...profileState.settings,
+      languages: Array.from(profileState.settings.languages),
+    };
+    void saveUserProfile({ settings: serialized as unknown as Settings });
   };
 
   const updateFinishedGames = () => {
@@ -164,6 +198,7 @@ export const useProfile = defineStore('profile', () => {
     saveUserProfile,
     setProfileState,
     updateFinishedGames,
+    updateSettings,
   };
 });
 
