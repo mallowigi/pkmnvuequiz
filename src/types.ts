@@ -53,6 +53,7 @@ export type Dialog =
   | 'reset'
   | 'settings'
   | 'shadows'
+  | 'shinyDex'
   | 'switchQuiz'
   | 'timer'
   | 'userProfile'

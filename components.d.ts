@@ -136,6 +136,7 @@ declare module 'vue' {
     ShadowsDialog: typeof import('./src/components/dialogs/ShadowsDialog.vue')['default']
     ShadowsToggle: typeof import('./src/components/game/settings/ShadowsToggle.vue')['default']
     ShareSocials: typeof import('./src/components/background/ShareSocials.vue')['default']
+    ShinyDexDialog: typeof import('./src/components/dialogs/ShinyDexDialog.vue')['default']
     ShinyToggle: typeof import('./src/components/game/settings/ShinyToggle.vue')['default']
     SkeletonTable: typeof import('./src/components/start/leaderboards/SkeletonTable.vue')['default']
     SkipIcon: typeof import('./src/components/common/icons/SkipIcon.vue')['default']

@@ -19,6 +19,7 @@ import VisualSettingsDialog from '@/components/dialogs/VisualSettingsDialog.vue'
 import MultiplayerSetup from '@/components/start/multiplayer/MultiplayerSetup.vue';
 import { useAlerts } from '@/stores/useAlerts.ts';
 import { useDialogs } from '@/stores/useDialogs';
+import ShinyDexDialog from '@/components/dialogs/ShinyDexDialog.vue';
 
 const { dialogs } = useDialogs();
 const { alertState } = useAlerts();
@@ -62,6 +63,8 @@ const { t } = useI18n();
     <LoadSaveDialog v-if="dialogs.dialog === 'loadSave'" />
 
     <UserProfileDialog v-if="dialogs.dialog === 'userProfile'" />
+
+    <ShinyDexDialog v-if="dialogs.dialog === 'shinyDex'" />
 
     <LoginDialog v-if="dialogs.dialog === 'login'" />
 

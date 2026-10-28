@@ -25,6 +25,11 @@ const openProfile = () => {
   isMenuOpen.value = false;
 };
 
+const openShinyDex = () => {
+  setDialog('shinyDex');
+  isMenuOpen.value = false;
+};
+
 const openLogin = () => {
   setDialog('login');
   isMenuOpen.value = false;
@@ -65,6 +70,14 @@ onKeyStroke('Escape', () => {
         >
           {{ t('userProfile') }}
         </div>
+
+        <div
+            class="menu-item"
+            @click="openShinyDex"
+        >
+          {{ t('shinyDex') }}
+        </div>
+
         <div
           class="menu-item"
           @click="handleLogout"
