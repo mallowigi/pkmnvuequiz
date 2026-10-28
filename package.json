@@ -27,6 +27,7 @@
     "howler": "^2.2.4",
     "motion-v": "^2.8.0",
     "nprogress": "^0.2.0",
+    "oxlint-tsgolint": "^7.0.2005",
     "pinia": "^4.1.0",
     "pokenode-ts": "^5.0.0",
     "temporal-polyfill": "^1.0.6",

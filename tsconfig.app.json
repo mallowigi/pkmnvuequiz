@@ -8,7 +8,6 @@
 
     "ignoreDeprecations": "6.0",
     "types": ["vite-plugin-pwa/vue"],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
