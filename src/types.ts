@@ -165,6 +165,7 @@ export type Profile = {
   finishedGames: FinishedGames;
   settings: Settings;
   shinyDex: Record<string, boolean>;
+  achievements: Record<string, boolean>;
 };
 
 export type Bonus = {

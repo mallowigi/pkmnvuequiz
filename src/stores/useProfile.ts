@@ -72,11 +72,12 @@ const initializeSettings = (): Settings => ({
 
 export const useProfile = defineStore('profile', () => {
   const profileState = reactive<Profile>({
+    achievements: {},
     attackDexWins: 0,
     finishedGames: initializeFinishedGames(),
     plays: 0,
     settings: initializeSettings(),
-    shinyDex: {}
+    shinyDex: {},
   });
 
   const { showErrorMessage } = useMessages();
@@ -139,7 +140,12 @@ export const useProfile = defineStore('profile', () => {
   const addShiny = (pokemonId: string) => {
     profileState.shinyDex[pokemonId] = true;
     void saveUserProfile({ shinyDex: profileState.shinyDex });
-  }
+  };
+
+  const addAchievement = (achievementId: string) => {
+    profileState.achievements[achievementId] = true;
+    void saveUserProfile({ achievements: profileState.achievements });
+  };
 
   const updateFinishedGames = () => {
     const { state } = useState();
@@ -196,6 +202,7 @@ export const useProfile = defineStore('profile', () => {
   };
 
   return {
+    addAchievement,
     addShiny,
     fetchProfile,
     incrementAttackDexWins,

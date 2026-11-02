@@ -58,6 +58,10 @@ export const useSettings = defineStore('settings', () => {
 
   const setLanguages = (languages: Language[]) => {
     settingsState.languages = new Set<Language>(languages);
+    if (languages.length > 0) {
+      settingsState.languages = new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']);
+    }
+
     toggledLanguage();
     updateSettings({ languages: settingsState.languages });
   };
