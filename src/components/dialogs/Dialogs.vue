@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n';
 
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
+import AchievementsDialog from '@/components/dialogs/AchievementsDialog.vue';
 import AlertDialog from '@/components/dialogs/AlertDialog.vue';
 import AttackArtworkDialog from '@/components/dialogs/AttackArtworkDialog.vue';
 import ChangeTimerDialog from '@/components/dialogs/ChangeTimerDialog.vue';
@@ -13,13 +14,13 @@ import LoginDialog from '@/components/dialogs/LoginDialog.vue';
 import ModeDialog from '@/components/dialogs/ModeDialog.vue';
 import ResetDialog from '@/components/dialogs/ResetDialog.vue';
 import ShadowsDialog from '@/components/dialogs/ShadowsDialog.vue';
+import ShinyDexDialog from '@/components/dialogs/ShinyDexDialog.vue';
 import SwitchQuizDialog from '@/components/dialogs/SwitchQuizDialog.vue';
 import UserProfileDialog from '@/components/dialogs/UserProfileDialog.vue';
 import VisualSettingsDialog from '@/components/dialogs/VisualSettingsDialog.vue';
 import MultiplayerSetup from '@/components/start/multiplayer/MultiplayerSetup.vue';
 import { useAlerts } from '@/stores/useAlerts.ts';
 import { useDialogs } from '@/stores/useDialogs';
-import ShinyDexDialog from '@/components/dialogs/ShinyDexDialog.vue';
 
 const { dialogs } = useDialogs();
 const { alertState } = useAlerts();
@@ -75,6 +76,8 @@ const { t } = useI18n();
     <DeleteRoomDialog v-if="dialogs.dialog === 'deleteRoom'" />
 
     <AttackArtworkDialog v-if="dialogs.dialog === 'attackArtwork'" />
+
+    <AchievementsDialog v-if="dialogs.dialog === 'achievements'" />
   </FadeTransition>
 </template>
 

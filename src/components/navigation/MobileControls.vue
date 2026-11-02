@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n';
 import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import HelpIcon from '@/components/common/icons/HelpIcon.vue';
 import SettingsIcon from '@/components/common/icons/SettingsIcon.vue';
+import TrophyIcon from '@/components/common/icons/TrophyIcon.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import ProfilePic from '@/components/header/ProfilePic.vue';
 import { useFirebase } from '@/composables/useFirebase.ts';
@@ -26,6 +27,15 @@ const showLeaderBoards = () => {
     return;
   }
   setDialog('leaderboards');
+};
+
+const showAchievements = () => {
+  hideHelp();
+  if (dialogs.dialog === 'achievements') {
+    setDialog(null);
+    return;
+  }
+  setDialog('achievements');
 };
 
 const toggleHelp = () => {
@@ -65,6 +75,15 @@ const showVisualSettings = () => {
         v-tooltip:top="t('showLeaderBoards')"
       >
         <ChartIcon />
+      </RoundedButton>
+
+      <RoundedButton
+        class="control-btn"
+        :selected="dialogs.dialog === 'achievements'"
+        @click="showAchievements"
+        v-tooltip:top="t('achievements')"
+      >
+        <TrophyIcon />
       </RoundedButton>
 
       <RoundedButton

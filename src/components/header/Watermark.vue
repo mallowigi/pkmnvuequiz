@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import ChartIcon from '@/components/common/icons/ChartIcon.vue';
 import CreditsIcon from '@/components/common/icons/CreditsIcon.vue';
 import HelpIcon from '@/components/common/icons/HelpIcon.vue';
+import TrophyIcon from '@/components/common/icons/TrophyIcon.vue';
 import AvatarMenu from '@/components/header/AvatarMenu.vue';
 import ColorChanger from '@/components/header/ColorChanger.vue';
 import LocaleChanger from '@/components/header/LocaleChanger.vue';
@@ -20,6 +21,10 @@ const showLeaderBoards = () => {
   setDialog('leaderboards');
 };
 
+const showAchievements = () => {
+  setDialog('achievements');
+};
+
 const showCredits = () => {
   toggleShowCredits();
 };
@@ -32,6 +37,12 @@ const showCredits = () => {
         class="hide-laptop"
         @click="showLeaderBoards"
         v-tooltip:bottom="t('showLeaderBoards')"
+      />
+
+      <TrophyIcon
+        class="hide-laptop"
+        @click="showAchievements"
+        v-tooltip:bottom="t('achievements')"
       />
 
       <CreditsIcon

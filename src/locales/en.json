@@ -1,6 +1,7 @@
 {
   "abilities": "Abilities",
   "accuracy": "Accuracy",
+  "achievements": "Achievements",
   "action": "Action",
   "activeUsers": "Active Players",
   "alert": "Alert",
@@ -585,6 +586,5 @@
   "x": "X",
   "yellow": "Yellow",
   "zMoves": "Z-Moves",
-
   "zh": "Chinese (Traditional)"
 }
