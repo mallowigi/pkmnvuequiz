@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AchievementsDialog: typeof import('./src/components/dialogs/AchievementsDialog.vue')['default']
     AlertDialog: typeof import('./src/components/dialogs/AlertDialog.vue')['default']
     ArrowIcon: typeof import('./src/components/common/icons/ArrowIcon.vue')['default']
     Artwork: typeof import('./src/components/game/pokemonInfo/Artwork.vue')['default']
@@ -158,6 +159,7 @@ declare module 'vue' {
     TextBox: typeof import('./src/components/common/TextBox.vue')['default']
     TimerSelection: typeof import('./src/components/game/settings/TimerSelection.vue')['default']
     Tooltip: typeof import('./src/components/background/Tooltip.vue')['default']
+    TrophyIcon: typeof import('./src/components/common/icons/TrophyIcon.vue')['default']
     TypeChooser: typeof import('./src/components/start/genSelection/TypeChooser.vue')['default']
     TypeShuffle: typeof import('./src/components/game/settings/TypeShuffle.vue')['default']
     UserIcon: typeof import('./src/components/common/icons/UserIcon.vue')['default']
