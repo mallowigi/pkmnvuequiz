@@ -2,6 +2,8 @@ import { useProfile } from '@/stores/useProfile.ts';
 // import { useTouches } from '@/stores/useTouches.ts';
 import type { Achievement } from '@/types.ts';
 
+const NOT_UNLOCKED_TIER = 999;
+
 export const useAchievements = () => {
   // const { touchesState } = useTouches();
   const { getTotalWins, addAchievement } = useProfile();
@@ -53,12 +55,12 @@ export const useAchievements = () => {
 
   const getAchievementTier = (achievementId: string): number => {
     const achievement = achievements[achievementId];
-    if (!achievement) return 999;
+    if (!achievement) return NOT_UNLOCKED_TIER;
 
     const { profileState } = useProfile();
-    if (!profileState.achievements) return 999;
+    if (!profileState.achievements) return NOT_UNLOCKED_TIER;
 
-    return profileState.achievements[achievementId] || 999;
+    return profileState.achievements[achievementId] || NOT_UNLOCKED_TIER;
   };
 
   const checkAchievements = () => {
@@ -72,7 +74,6 @@ export const useAchievements = () => {
         if (condition.tier < ownAchievementTier && condition.isSatisfied()) {
           addAchievement(achievement.id, condition.tier);
           // Show a toast or something
-          break;
         }
       }
     });
