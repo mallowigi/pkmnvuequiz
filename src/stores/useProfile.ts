@@ -146,8 +146,8 @@ export const useProfile = defineStore('profile', () => {
     void saveUserProfile({ shinyDex: profileState.shinyDex });
   };
 
-  const addAchievement = (achievementId: string) => {
-    profileState.achievements[achievementId] = true;
+  const addAchievement = (achievementId: string, tier: number) => {
+    profileState.achievements[achievementId] = tier;
     void saveUserProfile({ achievements: profileState.achievements });
   };
 

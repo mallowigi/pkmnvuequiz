@@ -166,7 +166,7 @@ export type Profile = {
   finishedGames: FinishedGames;
   settings: Settings;
   shinyDex: Record<string, boolean>;
-  achievements: Record<string, boolean>;
+  achievements: Record<string, number>;
 };
 
 export type Bonus = {
@@ -263,12 +263,15 @@ export type PkmnData = {
   translations: Record<string, Translations> | null;
 };
 
-//region Achivements
+//region Achievements
+export type AchievementRank = 'bronze' | 'silver' | 'gold' | 'platinum';
+
 export type AchievementCategory = 'counter' | 'timer' | 'score' | 'wins' | 'misc';
 
 export type AchievementCondition = {
-  type: 'bronze' | 'silver' | 'gold';
-  condition: () => boolean;
+  rank: AchievementRank;
+  tier: number;
+  isSatisfied: () => boolean;
 };
 
 export type Achievement = {
