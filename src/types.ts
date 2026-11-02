@@ -264,7 +264,7 @@ export type PkmnData = {
 };
 
 //region Achivements
-export type AchievementCategory = 'counter' | 'timer' | 'score' | 'misc';
+export type AchievementCategory = 'counter' | 'timer' | 'score' | 'wins' | 'misc';
 
 export type AchievementCondition = {
   type: 'bronze' | 'silver' | 'gold';

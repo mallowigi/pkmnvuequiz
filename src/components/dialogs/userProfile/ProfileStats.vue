@@ -5,12 +5,8 @@ import { useI18n } from 'vue-i18n';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import { useProfile } from '@/stores/useProfile.ts';
 
-const { profileState } = useProfile();
-
-const totalWins = computed(() => {
-  const fg = profileState.finishedGames;
-  return fg.chaos + fg.normal + fg.order;
-});
+const { profileState, getTotalWins } = useProfile();
+const totalWins = computed(() => getTotalWins());
 
 const { t } = useI18n();
 </script>

@@ -119,6 +119,10 @@ export const useProfile = defineStore('profile', () => {
     void saveUserProfile({ attackDexWins: profileState.attackDexWins });
   };
 
+  const getTotalWins = () => {
+    return profileState.finishedGames.normal + profileState.finishedGames.chaos + profileState.finishedGames.order;
+  };
+
   const setProfileState = (profile: Partial<Profile>) => {
     const { applySettings } = useSettings();
 
@@ -205,6 +209,7 @@ export const useProfile = defineStore('profile', () => {
     addAchievement,
     addShiny,
     fetchProfile,
+    getTotalWins,
     incrementAttackDexWins,
     incrementPlays,
     initializeFinishedGames,
