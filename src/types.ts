@@ -54,6 +54,7 @@ export type Dialog =
   | 'settings'
   | 'shadows'
   | 'shinyDex'
+  | 'achievements'
   | 'switchQuiz'
   | 'timer'
   | 'userProfile'
@@ -230,6 +231,7 @@ export type Translations = {
   zh: string;
 };
 
+// region Help
 export type HelpSection = {
   id: string;
   title: string;
@@ -246,6 +248,7 @@ export type HelpSubsection = {
   image?: string;
   tips?: string[];
 };
+// endregion
 
 export type PkmnData = {
   error: unknown;
@@ -259,6 +262,23 @@ export type PkmnData = {
   suffixNamings: Record<string, string> | null;
   translations: Record<string, Translations> | null;
 };
+
+//region Achivements
+export type AchievementCategory = 'counter' | 'timer' | 'score' | 'misc';
+
+export type AchievementCondition = {
+  type: 'bronze' | 'silver' | 'gold';
+  condition: () => boolean;
+};
+
+export type Achievement = {
+  id: string;
+  name: string;
+  description: string;
+  category?: AchievementCategory;
+  conditions: AchievementCondition[];
+};
+//endregion
 
 //region Saved Data
 export type PokemonProgress = z.infer<typeof pokemonProgressSchema>;
