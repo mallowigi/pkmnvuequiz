@@ -1,3 +1,5 @@
+import type { Achievement, AchievementConfig } from '@/types.ts';
+
 export const normalizeName = (str: string) => {
   if (!str) return str;
   return str
@@ -95,7 +97,6 @@ export const getMoveArtworkUrl = (articleTitle: string): string => {
   return `https://us-central1-${projectId}.cloudfunctions.net/moveArtwork?${params}`;
 };
 
-/** Formats a duration in seconds as `HH:MM:SS`. */
 export const formatElapsedTime = (totalSeconds: number): string => {
   const total = Math.max(0, Math.floor(totalSeconds));
   const hours = String(Math.floor(total / 3600));
@@ -103,4 +104,33 @@ export const formatElapsedTime = (totalSeconds: number): string => {
   const seconds = String(total % 60);
 
   return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+};
+
+export const createAchievement = (achievement: AchievementConfig): Achievement => {
+  const { id, category, getValue, thresholds, lastTitle, lastDescription } = achievement;
+  const count = Object.entries(thresholds).length;
+
+  return {
+    category,
+    conditions: thresholds.map((threshold, i) => ({
+      isSatisfied: () => getValue() >= threshold.val,
+      tier: count - i,
+    })),
+    get description() {
+      const found = thresholds.find((threshold) => getValue() < threshold.val);
+      return found ? found.description : lastDescription;
+    },
+    id,
+    get name() {
+      const found = thresholds.find((threshold) => getValue() < threshold.val);
+      return found ? found.nextTitle : lastTitle;
+    },
+    get nextStep() {
+      const found = thresholds.find((threshold) => getValue() < threshold.val);
+      return found ? found.val : undefined;
+    },
+    get progress() {
+      return getValue();
+    },
+  };
 };
