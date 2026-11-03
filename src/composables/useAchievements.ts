@@ -47,9 +47,22 @@ export const useAchievements = () => {
           tier: 1,
         },
       ],
-      description: 'Win a total of 10, 50, 100, and 500 games.',
+      get description() {
+        return `Win a total of ${this.nextStep} games.`;
+      },
       id: 'numWins',
       name: 'Number of Wins',
+      get nextStep() {
+        const totalWins = getTotalWins();
+        if (totalWins < 10) return 10;
+        if (totalWins < 50) return 50;
+        if (totalWins < 100) return 100;
+        if (totalWins < 500) return 500;
+        return totalWins; // Already maxed out
+      },
+      get progress() {
+        return getTotalWins();
+      },
     },
   };
 

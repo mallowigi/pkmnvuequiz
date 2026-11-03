@@ -27,7 +27,7 @@ const { profileState } = useProfile();
       <div class="dialog-content">
         <!-- Achievements grid will go here -->
         <RoundedBox
-          class="achievement-box bronze"
+          class="achievement-box"
           :class="profileState.achievements[achievement.id]"
           v-for="achievement in achievements"
           :key="achievement.id"
@@ -39,7 +39,12 @@ const { profileState } = useProfile();
           <div class="achievement-info">
             <h3 class="achievement-title">{{ t(achievement.name) }}</h3>
             <p class="achievement-desc">{{ t(achievement.description) }}</p>
-            <!--<small>{{ achievement.progress }}</small>-->
+            <meter
+              v-if="achievement.progress && achievement.nextStep"
+              :value="achievement.progress"
+              :min="0"
+              :max="achievement.nextStep"
+            />
           </div>
         </RoundedBox>
       </div>
@@ -92,7 +97,7 @@ const { profileState } = useProfile();
   border-radius: 8px;
   text-align: center;
   max-height: 8em;
-  height: 6em;
+  height: 8em;
   border: 2px solid var(--type-btn-color, var(--primary));
 
   &.bronze {

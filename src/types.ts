@@ -278,8 +278,10 @@ export type Achievement = {
   id: string;
   name: string;
   description: string;
-  category?: AchievementCategory;
+  category: AchievementCategory;
   conditions: AchievementCondition[];
+  progress?: number;
+  nextStep?: number;
 };
 //endregion
 
