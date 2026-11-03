@@ -62,11 +62,6 @@ onMounted(() => {
               :max="achievement.nextStep"
               :data-label="`${achievement.progress} / ${achievement.nextStep}`"
             />
-            <!--<small-->
-            <!--  class="achievement-progress"-->
-            <!--  v-if="achievement.nextStep"-->
-            <!--  >{{ achievement.progress }} / {{ achievement.nextStep }}</small-->
-            <!--&gt;-->
           </div>
         </RoundedBox>
       </div>

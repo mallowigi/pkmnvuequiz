@@ -46,7 +46,14 @@ export const useAchievements = () => {
         return `Win a total of ${this.nextStep} games.`;
       },
       id: 'numWins',
-      name: 'Number of Wins',
+      get name() {
+        const totalWins = getTotalWins();
+        if (totalWins < 10) return 'Player';
+        if (totalWins < 50) return 'Aficionado';
+        if (totalWins < 100) return 'Expert';
+        if (totalWins < 500) return 'Master';
+        return 'Professor';
+      },
       get nextStep() {
         const totalWins = getTotalWins();
         if (totalWins < 10) return 10;

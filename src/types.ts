@@ -274,13 +274,13 @@ export type AchievementCondition = {
 };
 
 export type Achievement = {
-  id: string;
-  name: string;
-  description: string;
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
   category: AchievementCategory;
   conditions: AchievementCondition[];
-  progress?: number;
-  nextStep?: number;
+  readonly progress?: number;
+  readonly nextStep?: number;
 };
 //endregion
 
