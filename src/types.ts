@@ -282,6 +282,22 @@ export type Achievement = {
   readonly progress?: number;
   readonly nextStep?: number;
 };
+
+type AchievementThreshold = {
+  readonly val: number;
+  readonly rank: AchievementRank;
+  readonly nextTitle: string;
+  readonly description: string;
+};
+
+export type AchievementConfig = {
+  readonly id: string;
+  readonly category: AchievementCategory;
+  readonly lastTitle: string;
+  readonly lastDescription: string;
+  readonly getValue: () => number;
+  readonly thresholds: AchievementThreshold[];
+};
 //endregion
 
 //region Saved Data
