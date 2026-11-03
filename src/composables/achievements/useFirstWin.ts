@@ -8,11 +8,11 @@ export const useFirstWin = () => {
   const { t } = useI18n({
     messages: {
       cn: {
-        lastDescription: '赢得了你的第一场比赛。',
+        lastDescription: '赢得第一场比赛。',
         lastTitle: '首次获胜',
       },
       de: {
-        lastDescription: 'Gewann dein erstes Spiel.',
+        lastDescription: 'Erstes Spiel gewonnen.',
         lastTitle: 'Erster Sieg',
       },
       en: {
@@ -20,36 +20,36 @@ export const useFirstWin = () => {
         lastTitle: 'First Win',
       },
       es: {
-        lastDescription: 'Ganaste tu primer juego.',
-        lastTitle: 'Primer victoria',
+        lastDescription: 'Primera partida ganada.',
+        lastTitle: 'Primera victoria',
       },
       fr: {
-        lastDescription: 'A remporté votre premier jeu.',
+        lastDescription: 'Première partie remportée.',
         lastTitle: 'Première victoire',
       },
       it: {
-        lastDescription: 'Hai vinto la tua prima partita.',
+        lastDescription: 'Prima partita vinta.',
         lastTitle: 'Prima vittoria',
       },
       jp: {
-        lastDescription: '最初のゲームに勝利しました。',
+        lastDescription: '最初のゲームに勝利。',
         lastTitle: '初勝利',
       },
       ko: {
-        lastDescription: '첫 번째 게임에서 승리했습니다.',
+        lastDescription: '첫 번째 게임 승리.',
         lastTitle: '첫 승리',
       },
       pt: {
-        lastDescription: 'Ganhou o seu primeiro jogo.',
+        lastDescription: 'Primeira partida ganha.',
         lastTitle: 'Primeira vitória',
       },
       ru: {
-        lastDescription: 'Выиграл свою первую игру.',
+        lastDescription: 'Выиграна первая игра.',
         lastTitle: 'Первая победа',
       },
       zh: {
-        lastDescription: '赢得了你的第一场比赛。',
-        lastTitle: '首次获胜',
+        lastDescription: '贏得第一場比賽。',
+        lastTitle: '首次獲勝',
       },
     },
     useScope: 'isolated',

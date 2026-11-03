@@ -51,7 +51,7 @@ onMounted(() => {
             <h3 class="achievement-title">{{ t(achievement.name) }}</h3>
 
             <p class="achievement-desc">
-              <span v-if="achievement.nextStep">Next:</span> {{ t(achievement.description) }}
+              <span v-if="achievement.nextStep">{{ t('next') }}:</span> {{ t(achievement.description) }}
             </p>
 
             <meter
