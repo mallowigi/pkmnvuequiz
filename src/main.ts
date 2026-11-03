@@ -25,7 +25,6 @@ import { capitalize } from '@/utils/utils.ts';
 
 import App from './App.vue';
 
-
 const { savedLocale } = useSavedLocale();
 
 export const i18n = createI18n({
@@ -33,6 +32,7 @@ export const i18n = createI18n({
   locale: savedLocale.value,
   messages: { cn, de, en, es, fr, it, jp, ko, pt, ru, zh },
   modifiers: {
+    // oxlint-disable-next-line typescript/no-base-to-string
     capitalize: (value) => capitalize(value.toString()),
   },
 });
