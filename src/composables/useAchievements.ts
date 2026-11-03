@@ -1,6 +1,6 @@
 import { useProfile } from '@/stores/useProfile.ts';
 // import { useTouches } from '@/stores/useTouches.ts';
-import type { Achievement } from '@/types.ts';
+import type { Achievement, AchievementRank } from '@/types.ts';
 
 const NOT_UNLOCKED_TIER = 999;
 
@@ -11,11 +11,10 @@ export const useAchievements = () => {
   // todo use i18n
   const achievements: Record<string, Achievement> = {
     firstWin: {
-      category: 'wins',
+      category: 'total',
       conditions: [
         {
           isSatisfied: () => getTotalWins() >= 1,
-          rank: 'gold',
           tier: 1,
         },
       ],
@@ -24,26 +23,22 @@ export const useAchievements = () => {
       name: 'First Win',
     },
     numWins: {
-      category: 'counter',
+      category: 'total',
       conditions: [
         {
           isSatisfied: () => getTotalWins() >= 10,
-          rank: 'bronze',
           tier: 4,
         },
         {
           isSatisfied: () => getTotalWins() >= 50,
-          rank: 'silver',
           tier: 3,
         },
         {
           isSatisfied: () => getTotalWins() >= 100,
-          rank: 'gold',
           tier: 2,
         },
         {
           isSatisfied: () => getTotalWins() >= 500,
-          rank: 'platinum',
           tier: 1,
         },
       ],
@@ -92,9 +87,25 @@ export const useAchievements = () => {
     });
   };
 
+  const toRank = (tier: number): AchievementRank | null => {
+    switch (tier) {
+      case 1:
+        return 'platinum';
+      case 2:
+        return 'gold';
+      case 3:
+        return 'silver';
+      case 4:
+        return 'bronze';
+      default:
+        return null;
+    }
+  };
+
   return {
     achievements,
     checkAchievements,
     getAchievementTier,
+    toRank,
   };
 };

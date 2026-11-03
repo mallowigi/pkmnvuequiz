@@ -266,10 +266,9 @@ export type PkmnData = {
 //region Achievements
 export type AchievementRank = 'bronze' | 'silver' | 'gold' | 'platinum';
 
-export type AchievementCategory = 'counter' | 'timer' | 'score' | 'wins' | 'misc';
+export type AchievementCategory = 'total' | 'game' | 'timer' | 'misc';
 
 export type AchievementCondition = {
-  rank: AchievementRank;
   tier: number;
   isSatisfied: () => boolean;
 };
