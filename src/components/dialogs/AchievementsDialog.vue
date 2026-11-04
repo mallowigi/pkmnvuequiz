@@ -167,13 +167,14 @@ onMounted(() => {
   .achievement-title {
     margin: 0;
     line-height: 1.2;
-    font-size: 1em;
+    font-size: 14px;
   }
 
   .achievement-desc {
-    font-size: small;
+    font-size: 12px;
     line-height: 1.4;
     margin: 1em 0 0;
+    line-clamp: 3;
   }
 }
 
