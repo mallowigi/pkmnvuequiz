@@ -8,9 +8,11 @@ type TabInfo = {
   label: string;
 };
 
+// Shared across all consumers so the tabs and the dialog stay in sync
+const activeTab = ref<AchievementCategory>('total');
+
 export const useAchievementTabs = () => {
   const { t } = useI18n();
-  const activeTab = ref<AchievementCategory>('total');
 
   const tabs = computed<TabInfo[]>(() => [
     { id: 'total', label: t('lifetime') },
