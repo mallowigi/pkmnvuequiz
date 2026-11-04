@@ -51,6 +51,7 @@ export const touchesSchema = z.object({
   summonedInitials: z.number().int().nonnegative(),
   summonedShadows: z.number().int().nonnegative(),
   toggledAutoPause: z.boolean(),
+  toggledCheat: z.boolean(),
   toggledCriesHelper: z.boolean(),
   toggledDisplayShadows: z.boolean(),
   toggledInitialsHelper: z.boolean(),

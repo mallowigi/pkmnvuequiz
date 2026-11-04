@@ -12,6 +12,7 @@ export const useTouches = defineStore('touches', () => {
     summonedInitials: 0,
     summonedShadows: 0,
     toggledAutoPause: false,
+    toggledCheat: false,
     toggledCriesHelper: false,
     toggledDisplayShadows: false,
     toggledInitialsHelper: false,
@@ -75,6 +76,10 @@ export const useTouches = defineStore('touches', () => {
     touchesState.toggledMissingno = true;
   };
 
+  const toggledCheat = () => {
+    touchesState.toggledCheat = true;
+  };
+
   const summonedShadow = () => {
     touchesState.summonedShadows += 1;
   };
@@ -99,6 +104,7 @@ export const useTouches = defineStore('touches', () => {
     summonedShadow,
     toggledAutoPause,
     toggledBoxShuffle,
+    toggledCheat,
     toggledCriesHelper,
     toggledDisplayShadows,
     toggledInitialsHelper,

@@ -25,7 +25,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { showRemaining } = useCurrentDex();
   const strategy = useCurrentStrategy();
   const { incrementPlays } = useProfile();
-  const { toggledMissingno } = useTouches();
+  const { toggledMissingno, toggledCheat } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
   const { startTypeCycle, stopTypeCycle } = useCurrentType();
@@ -227,6 +227,10 @@ export const useGameFlow = defineStore('gameFlow', () => {
     toggledMissingno();
   };
 
+  const toggleCheat = () => {
+    toggledCheat();
+  };
+
   const isInGame = computed(() => {
     if (flowState.isEnded || flowState.isGivenUp || flowState.isPaused) return false;
     return flowState.isStarted;
@@ -249,6 +253,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     setFlowState,
     setGameSelectionState,
     startGame,
+    toggleCheat,
     toggleMissingno,
     toggleSettings,
   };

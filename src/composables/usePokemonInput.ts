@@ -25,7 +25,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { getShuffledType } = useCurrentType();
   const { updateShuffles } = useShuffles();
   const { showUserMessage } = useMessages();
-  const { endGame, toggleMissingno } = useGameFlow();
+  const { endGame, toggleMissingno, toggleCheat } = useGameFlow();
   const { t } = useI18n();
   const {
     isInCurrentGameMode,
@@ -51,6 +51,7 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     const nextName = strategy.value.getNextCheatName();
 
     showUserMessage(t('nextPokemon', { name: capitalize(nextName) }));
+    toggleCheat();
     clearInput();
   };
 
@@ -128,7 +129,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
       }),
     );
   };
-
 
   const handleSuccess = (foundEntries: DexEntry[]) => {
     addFound(foundEntries);

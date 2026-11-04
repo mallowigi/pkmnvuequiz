@@ -48,7 +48,7 @@ const debouncedSaveToFirebase = useDebounceFn(
       return;
     }
     const { saveUserState } = useFirebase();
-    saveUserState(savedState);
+    void saveUserState(savedState);
   },
   1000,
   { maxWait: 15000 },
@@ -173,10 +173,7 @@ export const useSavedData = () => {
           currentType: null,
           currentTypes: [],
           gameMode: 'gen',
-          gens: Array.from(currentGenState.gens) as [
-            Gen,
-            ...Gen[],
-          ],
+          gens: Array.from(currentGenState.gens) as [Gen, ...Gen[]],
           types: [],
         };
 
@@ -190,10 +187,7 @@ export const useSavedData = () => {
           currentTypes: Array.from(currentTypeState.currentTypes),
           gameMode: 'types',
           gens: [],
-          types: Array.from(currentTypeState.currentTypes) as [
-            Type,
-            ...Type[],
-          ],
+          types: Array.from(currentTypeState.currentTypes) as [Type, ...Type[]],
         };
 
       case 'special':
@@ -262,10 +256,7 @@ export const useSavedData = () => {
     const link = document.createElement('a');
     link.href = url;
 
-    const [
-      date,
-      time,
-    ] = new Date().toISOString().split('T');
+    const [date, time] = new Date().toISOString().split('T');
     const formatDate = date.replace(/-/g, '_');
     const formatTime = time.replace(/:/g, '_').split('.')[0];
     link.download = `pkmn_quiz_state_${formatDate}_${formatTime}.json`;
@@ -566,6 +557,7 @@ export const useSavedData = () => {
       summonedInitials: statePayload.summonedInitials ?? 0,
       summonedShadows: statePayload.summonedShadows ?? 0,
       toggledAutoPause: statePayload.toggledAutoPause ?? false,
+      toggledCheat: statePayload.toggledCheat ?? false,
       toggledCriesHelper: statePayload.toggledCriesHelper ?? false,
       toggledDisplayShadows: statePayload.toggledDisplayShadows ?? false,
       toggledInitialsHelper: statePayload.toggledInitialsHelper ?? false,
