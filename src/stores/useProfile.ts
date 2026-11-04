@@ -5,12 +5,17 @@ import { reactive } from 'vue';
 import { auth, db } from '@/firebase.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
+import { useTimer } from '@/stores/useTimer.ts';
 import type { FinishedGames, Profile, Settings, Gen, Type } from '@/types';
 
 const initializeFinishedGames = (): FinishedGames => ({
+  bestFullTime: 0,
+  boxShuffle: 0,
+  challenge: 0,
   chaos: 0,
   full: 0,
   gen: {
@@ -30,6 +35,7 @@ const initializeFinishedGames = (): FinishedGames => ({
   normal: 0,
   order: 0,
   special: 0,
+  typeShuffle: 0,
   types: {
     bug: 0,
     dark: 0,
@@ -156,6 +162,30 @@ export const useProfile = defineStore('profile', () => {
     return profileState.finishedGames.full;
   };
 
+  const getTypeShuffleWins = () => {
+    return profileState.finishedGames.typeShuffle;
+  };
+
+  const getBoxShuffleWins = () => {
+    return profileState.finishedGames.boxShuffle;
+  };
+
+  const getChallengeWins = () => {
+    return profileState.finishedGames.challenge;
+  };
+
+  const getBestTimeFull = () => {
+    return profileState.finishedGames.bestFullTime;
+  };
+
+  const getNoShadowWins = () => {
+    return profileState.finishedGames.noShadows;
+  };
+
+  const getNoCriesWins = () => {
+    return profileState.finishedGames.noCries;
+  };
+
   const getHighScore = () => {
     return profileState.highScore;
   };
@@ -199,8 +229,10 @@ export const useProfile = defineStore('profile', () => {
     const { state } = useState();
     const { getCurrentGens } = useCurrentGen();
     const { getCurrentTypes } = useCurrentType();
+    const { flowState } = useGameFlow();
 
-    const { gameMode, withShadows, mode } = state;
+    const { gameMode, withShadows, withTypeShuffle, withBoxShuffle, mode } = state;
+    const { timerState } = useTimer();
 
     if (!gameMode) return;
 
@@ -222,6 +254,14 @@ export const useProfile = defineStore('profile', () => {
     // Increment finished games based on game mode and current state
     if (gameMode === 'full') {
       profileState.finishedGames.full += 1;
+
+      // Track best time for full mode
+      const elapsed = timerState.elapsed;
+      if (elapsed > 0) {
+        if (profileState.finishedGames.bestFullTime === 0 || elapsed < profileState.finishedGames.bestFullTime) {
+          profileState.finishedGames.bestFullTime = elapsed;
+        }
+      }
     } else if (gameMode === 'gen') {
       const gens = getCurrentGens();
 
@@ -245,6 +285,19 @@ export const useProfile = defineStore('profile', () => {
       profileState.finishedGames.noShadows += 1;
     }
 
+    // Track shuffle and challenge mode wins
+    if (withTypeShuffle) {
+      profileState.finishedGames.typeShuffle += 1;
+    }
+
+    if (withBoxShuffle) {
+      profileState.finishedGames.boxShuffle += 1;
+    }
+
+    if (flowState.challengeMode === 'challenge') {
+      profileState.finishedGames.challenge += 1;
+    }
+
     // Save the updated finished games to the database
     void saveUserProfile({ finishedGames: profileState.finishedGames });
   };
@@ -253,15 +306,21 @@ export const useProfile = defineStore('profile', () => {
     addAchievement,
     addShiny,
     fetchProfile,
+    getBestTimeFull,
+    getBoxShuffleWins,
+    getChallengeWins,
     getChaosWins,
     getFullWins,
     getGenWins,
     getHighScore,
     getMegaWins,
+    getNoCriesWins,
+    getNoShadowWins,
     getOrderWins,
     getShinyCount,
     getSpecialWins,
     getTotalWins,
+    getTypeShuffleWins,
     getTypeWins,
     incrementAttackDexWins,
     incrementPlays,

@@ -158,6 +158,10 @@ export type FinishedGames = {
   types: Record<Type, number>;
   noShadows: number;
   noCries: number;
+  typeShuffle: number;
+  boxShuffle: number;
+  challenge: number;
+  bestFullTime: number;
 };
 
 export type Profile = {
