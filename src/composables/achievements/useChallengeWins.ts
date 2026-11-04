@@ -120,6 +120,7 @@ export const useChallengeWins = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 30,
     thresholds: [
       {
         get description() {

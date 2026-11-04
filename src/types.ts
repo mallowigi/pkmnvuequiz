@@ -288,6 +288,7 @@ export type Achievement = {
   conditions: AchievementCondition[];
   readonly progress?: number;
   readonly nextStep?: number;
+  readonly priority: number;
 };
 
 type AchievementThreshold = {
@@ -303,6 +304,7 @@ export type AchievementConfig = {
   readonly lastTitle: string;
   readonly lastDescription: string;
   readonly getValue: () => number;
+  readonly priority: number;
   readonly thresholds: AchievementThreshold[];
 };
 //endregion

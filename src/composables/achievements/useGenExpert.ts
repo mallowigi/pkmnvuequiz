@@ -125,6 +125,7 @@ export function useGenExpert(gen: Gen) {
     get lastTitle() {
       return t('lastTitle', { name });
     },
+    priority: 10,
     thresholds: [
       {
         get description() {

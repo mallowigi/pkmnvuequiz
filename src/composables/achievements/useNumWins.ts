@@ -120,6 +120,7 @@ export const useNumWins = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 5,
     thresholds: [
       {
         get description() {

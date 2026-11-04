@@ -120,6 +120,7 @@ export const useManyShadows = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 10,
     thresholds: [
       {
         get description() {

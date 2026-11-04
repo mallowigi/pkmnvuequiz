@@ -120,6 +120,7 @@ export const useTypeShuffleWins = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 20,
     thresholds: [
       {
         get description() {

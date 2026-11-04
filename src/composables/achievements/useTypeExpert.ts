@@ -125,6 +125,7 @@ export function useTypeExpert(type: Type) {
     get lastTitle() {
       return t('lastTitle', { name });
     },
+    priority: 10,
     thresholds: [
       {
         get description() {

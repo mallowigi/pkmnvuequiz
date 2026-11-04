@@ -65,6 +65,7 @@ export const useFirstShiny = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 1,
     thresholds: [
       {
         get description() {

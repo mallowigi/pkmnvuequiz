@@ -123,6 +123,7 @@ export const useTotalPlayTime = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 5,
     thresholds: [
       {
         get description() {

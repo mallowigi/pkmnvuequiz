@@ -120,6 +120,7 @@ export const useShinyCollector = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 5,
     thresholds: [
       {
         get description() {

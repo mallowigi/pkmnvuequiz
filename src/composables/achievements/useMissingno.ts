@@ -65,6 +65,7 @@ export const useMissingno = () => {
     get lastTitle() {
       return t('title');
     },
+    priority: 30,
     thresholds: [
       {
         get description() {

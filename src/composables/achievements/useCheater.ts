@@ -65,6 +65,7 @@ export const useCheater = () => {
     get lastTitle() {
       return t('title');
     },
+    priority: 10,
     thresholds: [
       {
         get description() {

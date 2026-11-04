@@ -128,6 +128,7 @@ export const useBestTimeFull = () => {
     get lastTitle() {
       return t('lastTitle');
     },
+    priority: 1,
     thresholds: [
       {
         get description() {
