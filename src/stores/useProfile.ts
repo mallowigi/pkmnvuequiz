@@ -207,16 +207,6 @@ export const useProfile = defineStore('profile', () => {
     }
   };
 
-  const addToTotalScore = (score: number) => {
-    profileState.totalScore += score;
-    void saveUserProfile({ totalScore: profileState.totalScore });
-  };
-
-  const addToTotalPlayTime = (seconds: number) => {
-    profileState.totalPlayTime += seconds;
-    void saveUserProfile({ totalPlayTime: profileState.totalPlayTime });
-  };
-
   const setProfileState = (profile: Partial<Profile>) => {
     const { applySettings } = useSettings();
 
@@ -325,8 +315,6 @@ export const useProfile = defineStore('profile', () => {
   return {
     addAchievement,
     addShiny,
-    addToTotalPlayTime,
-    addToTotalScore,
     fetchProfile,
     getBestTimeFull,
     getBoxShuffleWins,

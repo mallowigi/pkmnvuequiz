@@ -1,8 +1,11 @@
+import { useBufferedTotalStats } from '@/composables/useBufferedTotalStats.ts';
 import type { DexEntry } from '@/composables/useCurrentDex.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { i18n } from '@/main.ts';
+import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
+import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
@@ -10,12 +13,13 @@ import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
 import type { PokemonInfo, Type, GameMode, RegionBox, SpecialType } from '@/types.ts';
-import { useCurrentType } from '@/stores/useCurrentType.ts';
 
 export const usePokemonDexStrategy = (): DexStrategy => {
   const pokemons = usePokemons();
   const { createRecord } = useFirebase();
-  const { updateFinishedGames } = useProfile();
+  const { updateFinishedGames, updateHighScore } = useProfile();
+  const { flushTotalStats, stopFlushTimer } = useBufferedTotalStats();
+  const { bonusState } = useBonus();
   const { showUserMessage } = useMessages();
   const { settingsState } = useSettings();
   const { currentBoxState } = useCurrentBox();
@@ -79,6 +83,9 @@ export const usePokemonDexStrategy = (): DexStrategy => {
   const recordGameEnd = () => {
     void createRecord();
     updateFinishedGames();
+    updateHighScore(bonusState.score);
+    flushTotalStats();
+    stopFlushTimer();
   };
 
   const recordGiveUp = () => {
@@ -92,15 +99,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     const currentTypes = currentTypeState.currentTypes;
 
     let nextTypes =
-      Math.random() < 0.5
-        ? [
-            pokemon.primaryType,
-            pokemon.secondaryType,
-          ]
-        : [
-            pokemon.secondaryType,
-            pokemon.primaryType,
-          ];
+      Math.random() < 0.5 ? [pokemon.primaryType, pokemon.secondaryType] : [pokemon.secondaryType, pokemon.primaryType];
 
     if (!currentTypes.size) return nextTypes[0];
 
@@ -140,12 +139,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
 
   const getEntryTypes = (entries: DexEntry[]): Set<Type | null | undefined> => {
     const foundPokemon = entries as PokemonInfo[];
-    return new Set(
-      foundPokemon.flatMap((p) => [
-        p.primaryType,
-        p.secondaryType,
-      ]),
-    );
+    return new Set(foundPokemon.flatMap((p) => [p.primaryType, p.secondaryType]));
   };
 
   const getShuffleBoxViolation = (
