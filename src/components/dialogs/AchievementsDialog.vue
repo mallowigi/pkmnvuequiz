@@ -82,6 +82,7 @@ onMounted(() => {
   --silver: #c0c0c0;
   --gold: #ffd700;
   --platinum: #e5e4e2;
+  --normal: var(--type-btn-color, var(--primary));
 
   display: flex;
   flex-direction: column;
@@ -100,7 +101,7 @@ onMounted(() => {
 .dialog-content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5em;
+  gap: 1em;
   width: 100%;
 }
 
@@ -115,6 +116,8 @@ onMounted(() => {
   text-align: center;
   max-height: 8em;
   height: 8em;
+  opacity: 0.6;
+  --achievement-color: var(--normal);
   border-color: var(--achievement-color);
   background: linear-gradient(
     135deg,
@@ -127,15 +130,19 @@ onMounted(() => {
 
   &.bronze {
     --achievement-color: var(--bronze);
+    opacity: 1;
   }
   &.silver {
     --achievement-color: var(--silver);
+    opacity: 1;
   }
   &.gold {
     --achievement-color: var(--gold);
+    opacity: 1;
   }
   &.platinum {
     --achievement-color: var(--platinum);
+    opacity: 1;
   }
 }
 
