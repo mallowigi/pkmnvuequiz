@@ -23,7 +23,9 @@ const { activeTab } = useAchievementTabs();
 const firstTime = ref(true);
 
 const visibleAchievements = computed(() =>
-  Object.values(achievements).filter((achievement) => achievement.category === activeTab.value),
+  Object.values(achievements)
+    .filter((achievement) => achievement.category === activeTab.value)
+    .sort((a, b) => a.priority - b.priority),
 );
 
 onMounted(() => {

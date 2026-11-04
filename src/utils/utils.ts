@@ -129,6 +129,7 @@ export const createAchievement = (achievement: AchievementConfig): Achievement =
       const found = thresholds.find((threshold) => getValue() < threshold.val);
       return found ? found.val : undefined;
     },
+    priority: achievement.priority ?? 0,
     get progress() {
       return getValue();
     },
