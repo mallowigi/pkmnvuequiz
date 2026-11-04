@@ -111,7 +111,7 @@ onMounted(() => {
   gap: 16px;
   max-width: 800px;
   width: 95%;
-  height: min(80vh, 650px);
+  height: min(80vh, 680px);
 }
 
 .dialog-title,
@@ -132,24 +132,12 @@ onMounted(() => {
   width: 100%;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   align-content: start;
   gap: 1em;
   padding: 4px;
 
   .mobile & {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 700px) and (min-width: 481px) {
-  .dialog-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .dialog-content {
     grid-template-columns: 1fr;
   }
 }
