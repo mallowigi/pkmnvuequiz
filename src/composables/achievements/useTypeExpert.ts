@@ -1,13 +1,14 @@
 import { useI18n } from 'vue-i18n';
 
-import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { Type } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
+import { useTranslations } from '@/composables/useTranslations.ts';
 
 export function useTypeExpert(type: Type) {
   const { getTypeWins } = useProfile();
-  const name = pokemonTypes[type].name;
+  const { getTypeTranslation } = useTranslations();
+  const name = getTypeTranslation(type);
 
   const { t } = useI18n({
     messages: {

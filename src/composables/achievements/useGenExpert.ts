@@ -1,13 +1,14 @@
 import { useI18n } from 'vue-i18n';
 
-import { gens } from '@/data/gens.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { Gen } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
+import { useTranslations } from '@/composables/useTranslations.ts';
 
 export function useGenExpert(gen: Gen) {
   const { getGenWins } = useProfile();
-  const name = gens[gen].name;
+  const { getGenTranslation } = useTranslations();
+  const name = getGenTranslation(gen);
 
   const { t } = useI18n({
     messages: {
