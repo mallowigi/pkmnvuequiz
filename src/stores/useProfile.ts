@@ -8,7 +8,7 @@ import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import type { FinishedGames, Profile, Settings } from '@/types';
+import type { FinishedGames, Profile, Settings, Gen, Type } from '@/types';
 
 const initializeFinishedGames = (): FinishedGames => ({
   chaos: 0,
@@ -75,6 +75,7 @@ export const useProfile = defineStore('profile', () => {
     achievements: {},
     attackDexWins: 0,
     finishedGames: initializeFinishedGames(),
+    highScore: 0,
     plays: 0,
     settings: initializeSettings(),
     shinyDex: {},
@@ -121,6 +122,49 @@ export const useProfile = defineStore('profile', () => {
 
   const getTotalWins = () => {
     return profileState.finishedGames.normal + profileState.finishedGames.chaos + profileState.finishedGames.order;
+  };
+
+  const getShinyCount = () => {
+    return Object.keys(profileState.shinyDex).length;
+  };
+
+  const getChaosWins = () => {
+    return profileState.finishedGames.chaos;
+  };
+
+  const getOrderWins = () => {
+    return profileState.finishedGames.order;
+  };
+
+  const getGenWins = (gen: Gen) => {
+    return profileState.finishedGames.gen[gen] ?? 0;
+  };
+
+  const getTypeWins = (type: Type) => {
+    return profileState.finishedGames.types[type] ?? 0;
+  };
+
+  const getSpecialWins = () => {
+    return profileState.finishedGames.special;
+  };
+
+  const getMegaWins = () => {
+    return profileState.finishedGames.mega;
+  };
+
+  const getFullWins = () => {
+    return profileState.finishedGames.full;
+  };
+
+  const getHighScore = () => {
+    return profileState.highScore;
+  };
+
+  const updateHighScore = (score: number) => {
+    if (score > profileState.highScore) {
+      profileState.highScore = score;
+      void saveUserProfile({ highScore: profileState.highScore });
+    }
   };
 
   const setProfileState = (profile: Partial<Profile>) => {
@@ -209,7 +253,16 @@ export const useProfile = defineStore('profile', () => {
     addAchievement,
     addShiny,
     fetchProfile,
+    getChaosWins,
+    getFullWins,
+    getGenWins,
+    getHighScore,
+    getMegaWins,
+    getOrderWins,
+    getShinyCount,
+    getSpecialWins,
     getTotalWins,
+    getTypeWins,
     incrementAttackDexWins,
     incrementPlays,
     initializeFinishedGames,
@@ -217,6 +270,7 @@ export const useProfile = defineStore('profile', () => {
     saveUserProfile,
     setProfileState,
     updateFinishedGames,
+    updateHighScore,
     updateSettings,
   };
 });
