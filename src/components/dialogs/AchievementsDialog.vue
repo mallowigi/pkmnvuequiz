@@ -11,6 +11,7 @@ import { useAchievements } from '@/composables/useAchievements.ts';
 import { useAchievementTabs } from '@/composables/useAchievementTabs.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useProfile } from '@/stores/useProfile.ts';
+import type { AchievementCategory } from '@/types.ts';
 
 const { closeDialog } = useDialogs();
 const { t } = useI18n();
@@ -28,7 +29,14 @@ const visibleAchievements = computed(() =>
     .sort((a, b) => a.priority - b.priority),
 );
 
-watch(activeTab, () => {
+const TAB_ORDER: AchievementCategory[] = ['total', 'game', 'timer', 'misc'];
+const transitionName = ref<'slide-left' | 'slide-right'>('slide-left');
+
+watch(activeTab, (newTab, oldTab) => {
+  const newIdx = TAB_ORDER.indexOf(newTab);
+  const oldIdx = TAB_ORDER.indexOf(oldTab);
+  transitionName.value = newIdx >= oldIdx ? 'slide-left' : 'slide-right';
+
   if (dialogContentRef.value) {
     dialogContentRef.value.scrollTop = 0;
   }
@@ -56,34 +64,43 @@ onMounted(() => {
         ref="dialogContentRef"
         class="dialog-content"
       >
-        <!-- Achievements grid will go here -->
-        <RoundedBox
-          class="achievement-box"
-          :class="toRank(profileState.achievements[achievement.id])"
-          v-for="achievement in visibleAchievements"
-          :key="achievement.id"
+        <Transition
+          :name="transitionName"
+          mode="out-in"
         >
-          <div class="achievement-icon">
-            <TrophyIcon />
+          <div
+            :key="activeTab"
+            class="achievements-grid"
+          >
+            <RoundedBox
+              class="achievement-box"
+              :class="toRank(profileState.achievements[achievement.id])"
+              v-for="achievement in visibleAchievements"
+              :key="achievement.id"
+            >
+              <div class="achievement-icon">
+                <TrophyIcon />
+              </div>
+
+              <div class="achievement-info">
+                <h3 class="achievement-title">{{ t(achievement.name) }}</h3>
+
+                <p class="achievement-desc">
+                  <span v-if="achievement.nextStep">{{ t('next') }}:</span> {{ t(achievement.description) }}
+                </p>
+
+                <meter
+                  class="achievement-meter"
+                  v-if="achievement.progress && achievement.nextStep"
+                  :value="achievement.progress"
+                  :min="0"
+                  :max="achievement.nextStep"
+                  :data-label="`${achievement.progress} / ${achievement.nextStep}`"
+                />
+              </div>
+            </RoundedBox>
           </div>
-
-          <div class="achievement-info">
-            <h3 class="achievement-title">{{ t(achievement.name) }}</h3>
-
-            <p class="achievement-desc">
-              <span v-if="achievement.nextStep">{{ t('next') }}:</span> {{ t(achievement.description) }}
-            </p>
-
-            <meter
-              class="achievement-meter"
-              v-if="achievement.progress && achievement.nextStep"
-              :value="achievement.progress"
-              :min="0"
-              :max="achievement.nextStep"
-              :data-label="`${achievement.progress} / ${achievement.nextStep}`"
-            />
-          </div>
-        </RoundedBox>
+        </Transition>
       </div>
 
       <RoundedButton
@@ -131,15 +148,41 @@ onMounted(() => {
   min-height: 0;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.achievements-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   align-content: start;
   gap: 1em;
   padding: 4px;
+  width: 100%;
 
   .mobile & {
     grid-template-columns: 1fr;
   }
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.4s ease-in-out;
+}
+
+.slide-left-enter-from {
+  transform: translateX(999px);
+}
+.slide-left-leave-to {
+  transform: translateX(-999px);
+}
+
+.slide-right-enter-from {
+  transform: translateX(-999px);
+}
+.slide-right-leave-to {
+  transform: translateX(999px);
 }
 
 .achievement-box {
