@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { AnimatePresence, motion, type PanInfo } from 'motion-v';
 import { computed, onMounted, ref, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -18,7 +19,7 @@ const { t } = useI18n();
 
 const { achievements, checkAchievements, toRank } = useAchievements();
 const { profileState } = useProfile();
-const { activeTab } = useAchievementTabs();
+const { activeTab, setTab } = useAchievementTabs();
 
 const dialogContentRef = useTemplateRef<HTMLElement>('dialogContentRef');
 const firstTime = ref(true);
@@ -30,17 +31,56 @@ const visibleAchievements = computed(() =>
 );
 
 const TAB_ORDER: AchievementCategory[] = ['total', 'game', 'timer', 'misc'];
-const transitionName = ref<'slide-left' | 'slide-right'>('slide-left');
+const direction = ref<number>(1);
+
+const nextTab = () => {
+  const currentIndex = TAB_ORDER.indexOf(activeTab.value);
+  if (currentIndex < TAB_ORDER.length - 1) {
+    setTab(TAB_ORDER[currentIndex + 1]);
+  }
+};
+
+const prevTab = () => {
+  const currentIndex = TAB_ORDER.indexOf(activeTab.value);
+  if (currentIndex > 0) {
+    setTab(TAB_ORDER[currentIndex - 1]);
+  }
+};
+
+const SWIPE_THRESHOLD = 50;
+
+const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const offset = info.offset.x;
+  const velocity = info.velocity.x;
+
+  if (offset < -SWIPE_THRESHOLD || velocity < -500) {
+    nextTab();
+  } else if (offset > SWIPE_THRESHOLD || velocity > 500) {
+    prevTab();
+  }
+};
 
 watch(activeTab, (newTab, oldTab) => {
   const newIdx = TAB_ORDER.indexOf(newTab);
   const oldIdx = TAB_ORDER.indexOf(oldTab);
-  transitionName.value = newIdx >= oldIdx ? 'slide-left' : 'slide-right';
+  direction.value = newIdx >= oldIdx ? 1 : -1;
 
   if (dialogContentRef.value) {
     dialogContentRef.value.scrollTop = 0;
   }
 });
+
+const gridVariants = {
+  center: {
+    x: 0,
+  },
+  enter: (dir: number) => ({
+    x: dir > 0 ? 999 : -999,
+  }),
+  exit: (dir: number) => ({
+    x: dir > 0 ? -999 : 999,
+  }),
+};
 
 onMounted(() => {
   if (firstTime.value) {
@@ -64,12 +104,23 @@ onMounted(() => {
         ref="dialogContentRef"
         class="dialog-content"
       >
-        <Transition
-          :name="transitionName"
-          mode="out-in"
+        <AnimatePresence
+          :initial="false"
+          :custom="direction"
+          mode="wait"
         >
-          <div
+          <motion.div
             :key="activeTab"
+            :custom="direction"
+            :variants="gridVariants"
+            initial="enter"
+            animate="center"
+            exit="exit"
+            :transition="{ duration: 0.25, ease: 'easeInOut' }"
+            drag="x"
+            :drag-constraints="{ left: 0, right: 0 }"
+            :drag-elastic="0.2"
+            @drag-end="handleDragEnd"
             class="achievements-grid"
           >
             <RoundedBox
@@ -99,8 +150,8 @@ onMounted(() => {
                 />
               </div>
             </RoundedBox>
-          </div>
-        </Transition>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <RoundedButton
@@ -162,27 +213,6 @@ onMounted(() => {
   .mobile & {
     grid-template-columns: 1fr;
   }
-}
-
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: transform 0.4s ease-in-out;
-}
-
-.slide-left-enter-from {
-  transform: translateX(999px);
-}
-.slide-left-leave-to {
-  transform: translateX(-999px);
-}
-
-.slide-right-enter-from {
-  transform: translateX(-999px);
-}
-.slide-right-leave-to {
-  transform: translateX(999px);
 }
 
 .achievement-box {
