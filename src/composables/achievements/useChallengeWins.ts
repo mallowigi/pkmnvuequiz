@@ -9,9 +9,9 @@ export const useChallengeWins = () => {
     messages: {
       cn: {
         bronzeTitle: '挑战者',
-        description: '在挑战模式下完成 {n} 场比赛。',
+        description: '在挑战模式下赢得 {n} 场比赛。',
         goldTitle: '挑战专家',
-        lastDescription: '在挑战模式下完成了超过 500 场比赛。',
+        lastDescription: '在挑战模式下赢得了超过 500 场比赛。',
         lastTitle: 'Nuzlocker',
         platinumTitle: '挑战大师',
         silverTitle: '挑战爱好者',
@@ -44,7 +44,7 @@ export const useChallengeWins = () => {
         silverTitle: 'Entusiasta de desafíos',
       },
       fr: {
-        bronzeTitle: 'Défiant',
+        bronzeTitle: 'Challenger',
         description: 'Remportez {n} parties en mode Défi.',
         goldTitle: 'Expert en défis',
         lastDescription: 'Plus de 500 parties remportées en mode Défi.',
@@ -67,7 +67,7 @@ export const useChallengeWins = () => {
         goldTitle: 'チャレンジエキスパート',
         lastDescription: 'チャレンジモードで500回以上勝利。',
         lastTitle: 'ヌズロッカー',
-        platinumTitle: 'チャレンジャーマスター',
+        platinumTitle: 'チャレンジマスター',
         silverTitle: 'チャレンジ愛好家',
       },
       ko: {
@@ -89,7 +89,7 @@ export const useChallengeWins = () => {
         silverTitle: 'Entusiasta de desafios',
       },
       ru: {
-        bronzeTitle: 'Вызывающий',
+        bronzeTitle: 'Претендент',
         description: 'Выиграйте {n} игр в режиме Испытания.',
         goldTitle: 'Эксперт по испытаниям',
         lastDescription: 'Выиграно более 500 игр в режиме Испытания.',
@@ -99,9 +99,9 @@ export const useChallengeWins = () => {
       },
       zh: {
         bronzeTitle: '挑戰者',
-        description: '在挑戰模式下完成 {n} 場比賽。',
+        description: '在挑戰模式下贏得 {n} 場比賽。',
         goldTitle: '挑戰專家',
-        lastDescription: '在挑戰模式下完成了超過 500 場比賽。',
+        lastDescription: '在挑戰模式下贏得了超過 500 場比賽。',
         lastTitle: 'Nuzlocker',
         platinumTitle: '挑戰大師',
         silverTitle: '挑戰愛好者',

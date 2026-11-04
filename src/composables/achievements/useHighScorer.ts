@@ -44,7 +44,7 @@ export const useHighScorer = () => {
         silverTitle: 'Aficionado de puntos',
       },
       fr: {
-        bronzeTitle: 'Grand score',
+        bronzeTitle: 'Haut score',
         description: 'Atteignez {n} points.',
         goldTitle: 'Expert en points',
         lastDescription: 'Plus de 5000 points atteints.',

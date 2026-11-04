@@ -77,7 +77,7 @@ export const useBestTimeFull = () => {
         lastDescription: '풀 모드 게임을 30분 이내에 완료했습니다.',
         lastTitle: '광속',
         platinumTitle: '플래시',
-        silverTitle: '빠른',
+        silverTitle: '민첩한',
       },
       pt: {
         bronzeTitle: 'Rápido',
@@ -90,9 +90,9 @@ export const useBestTimeFull = () => {
       },
       ru: {
         bronzeTitle: 'Быстрый',
-        description: 'Завершите игру в режиме Full менее чем за {n} минут.',
+        description: 'Завершите игру в полном режиме менее чем за {n} минут.',
         goldTitle: 'Молниеносный',
-        lastDescription: 'Завершена игра в режиме Full менее чем за 30 минут.',
+        lastDescription: 'Завершена игра в полном режиме менее чем за 30 минут.',
         lastTitle: 'Скорость света',
         platinumTitle: 'Вспышка',
         silverTitle: 'Скорый',

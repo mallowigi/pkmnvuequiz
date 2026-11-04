@@ -18,7 +18,7 @@ export const useShinyCollector = () => {
       },
       de: {
         bronzeTitle: 'Shiny-Sammler',
-        description: 'Sammle insgesamt {n} Shiny- Pokémon.',
+        description: 'Sammle insgesamt {n} Shiny-Pokémon.',
         goldTitle: 'Shiny-Meister',
         lastDescription: 'Mehr als 1025 Shiny-Pokémon gesammelt.',
         lastTitle: 'Shiny-Professor',
@@ -72,7 +72,7 @@ export const useShinyCollector = () => {
       },
       ko: {
         bronzeTitle: '빛나는 수집가',
-        description: '총 {n}마의 빛나는 포켓몬을 수집하세요.',
+        description: '총 {n}마리의 빛나는 포켓몬을 수집하세요.',
         goldTitle: '빛나는 마스터',
         lastDescription: '1025마 이상의 빛나는 포켓몬을 수집.',
         lastTitle: '빛나는 박사',

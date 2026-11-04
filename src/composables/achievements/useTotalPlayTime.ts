@@ -80,7 +80,7 @@ export const useTotalPlayTime = () => {
         lastDescription: '총 80시간 동안 플레이했습니다.',
         lastTitle: '타임 마스터',
         platinumTitle: '전설',
-        silverTitle: '정기',
+        silverTitle: '단골',
       },
       pt: {
         bronzeTitle: 'Jogador',
@@ -95,7 +95,7 @@ export const useTotalPlayTime = () => {
         bronzeTitle: 'Игрок',
         description: 'Играйте в общей сложности {n} часов.',
         goldTitle: 'Ветеран',
-        lastDescription: 'Играно в общей сложности 80 часов.',
+        lastDescription: 'Сыграно в общей сложности 80 часов.',
         lastTitle: 'Мастер времени',
         platinumTitle: 'Легенда',
         silverTitle: 'Постоянный',

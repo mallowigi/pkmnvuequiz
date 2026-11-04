@@ -58,7 +58,7 @@ export function useTypeExpert(type: Type) {
         silverTitle: `Connaisseur de {name}`,
       },
       it: {
-        bronzeTitle: `Eretto di {name}`,
+        bronzeTitle: `Studioso di {name}`,
         description: `Completa {n} partite di tipo {name}.`,
         goldTitle: `Esperto di {name}`,
         lastDescription: `Più di 500 partite di tipo {name} completate.`,

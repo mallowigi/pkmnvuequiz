@@ -18,7 +18,7 @@ export const useManyCries = () => {
       },
       de: {
         bronzeTitle: 'Ruf-Experimentator',
-        description: 'Abspielen Sie {n} Rufe in einem Spiel.',
+        description: 'Spiele {n} Rufe in einem Spiel ab.',
         goldTitle: 'Ruf-Experte',
         lastDescription: '100 Rufe in einem Spiel abgespielt.',
         lastTitle: 'Ruf-Experte',
@@ -45,9 +45,9 @@ export const useManyCries = () => {
       },
       fr: {
         bronzeTitle: 'Essayeur de cris',
-        description: 'Jouez {n} cris en une seule partie.',
+        description: 'Écoutez {n} cris en une seule partie.',
         goldTitle: 'Expert en cris',
-        lastDescription: 'Joué 100 cris en une seule partie.',
+        lastDescription: 'Écouté 100 cris en une seule partie.',
         lastTitle: 'Expert en cris',
         platinumTitle: 'Maître des cris',
         silverTitle: 'Passionné de cris',

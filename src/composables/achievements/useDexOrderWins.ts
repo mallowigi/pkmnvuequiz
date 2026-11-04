@@ -53,7 +53,7 @@ export const useDexOrderWins = () => {
         silverTitle: "Connaisseur de l'ordre",
       },
       it: {
-        bronzeTitle: "Eretto dell'ordine",
+        bronzeTitle: "Studioso dell'ordine",
         description: 'Completa {n} partite in modalità ordine.',
         goldTitle: "Esperto dell'ordine",
         lastDescription: 'Più di 500 partite in modalità ordine completate.',

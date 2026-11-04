@@ -40,7 +40,7 @@ export const useMissingno = () => {
         title: 'Missingno.',
       },
       pt: {
-        description: 'Encontrou o código de trapaceira Missingno.',
+        description: 'Encontrou o código de trapaça Missingno.',
         title: 'Missingno.',
       },
       ru: {

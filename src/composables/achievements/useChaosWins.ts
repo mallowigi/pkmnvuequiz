@@ -53,7 +53,7 @@ export const useChaosWins = () => {
         silverTitle: 'Connaisseur du chaos',
       },
       it: {
-        bronzeTitle: 'Eretto del caos',
+        bronzeTitle: 'Studioso del caos',
         description: 'Completa {n} partite in modalità caos.',
         goldTitle: 'Esperto del caos',
         lastDescription: 'Più di 500 partite in modalità caos completate.',

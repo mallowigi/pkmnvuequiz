@@ -53,7 +53,7 @@ export const useFullWins = () => {
         silverTitle: 'Connaisseur Pokémon',
       },
       it: {
-        bronzeTitle: 'Eretto Pokémon',
+        bronzeTitle: 'Studioso Pokémon',
         description: 'Completa {n} partite in modalità completa.',
         goldTitle: 'Esperto Pokémon',
         lastDescription: 'Più di 500 partite in modalità completa completate.',

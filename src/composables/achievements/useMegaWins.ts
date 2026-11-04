@@ -53,7 +53,7 @@ export const useMegaWins = () => {
         silverTitle: 'Connaisseur mega',
       },
       it: {
-        bronzeTitle: 'Eretto mega',
+        bronzeTitle: 'Studioso mega',
         description: 'Completa {n} partite in modalità mega.',
         goldTitle: 'Esperto mega',
         lastDescription: 'Più di 500 partite in modalità mega completate.',

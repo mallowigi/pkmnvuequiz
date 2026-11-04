@@ -58,7 +58,7 @@ export function useGenExpert(gen: Gen) {
         silverTitle: `Connaisseur de {name}`,
       },
       it: {
-        bronzeTitle: `Eretto di {name}`,
+        bronzeTitle: `Studioso di {name}`,
         description: `Completa {n} partite in modalità {name}.`,
         goldTitle: `Esperto di {name}`,
         lastDescription: `Più di 500 partite in modalità {name} completate.`,

@@ -9,9 +9,9 @@ export const useTypeShuffleWins = () => {
     messages: {
       cn: {
         bronzeTitle: '类型尝试者',
-        description: '在类型随机模式下完成 {n} 场比赛。',
+        description: '在类型随机模式下赢得 {n} 场比赛。',
         goldTitle: '类型专家',
-        lastDescription: '在类型随机模式下完成了超过 500 场比赛。',
+        lastDescription: '在类型随机模式下赢得了超过 500 场比赛。',
         lastTitle: '类型洗牌者',
         platinumTitle: '类型大师',
         silverTitle: '类型爱好者',
@@ -66,7 +66,7 @@ export const useTypeShuffleWins = () => {
         description: 'タイプシャッフルモードで{n}回勝利する。',
         goldTitle: 'タイプエキスパート',
         lastDescription: 'タイプシャッフルモードで500回以上勝利。',
-        lastTitle: 'タイプシャッフルer',
+        lastTitle: 'タイプシャッフラー',
         platinumTitle: 'タイプマスター',
         silverTitle: 'タイプ愛好家',
       },
@@ -99,9 +99,9 @@ export const useTypeShuffleWins = () => {
       },
       zh: {
         bronzeTitle: '類型嘗試者',
-        description: '在類型隨機模式下完成 {n} 場比賽。',
+        description: '在類型隨機模式下贏得 {n} 場比賽。',
         goldTitle: '類型專家',
-        lastDescription: '在類型隨機模式下完成了超過 500 場比賽。',
+        lastDescription: '在類型隨機模式下贏得了超過 500 場比賽。',
         lastTitle: '類型洗牌者',
         platinumTitle: '類型大師',
         silverTitle: '類型愛好者',

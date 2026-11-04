@@ -21,7 +21,7 @@ export const useCheater = () => {
       },
       es: {
         description: 'Códigos de trampa activados.',
-        title: 'Hacedor de trampas',
+        title: 'Tramposo',
       },
       fr: {
         description: 'Codes triche activés.',
@@ -40,7 +40,7 @@ export const useCheater = () => {
         title: '치터',
       },
       pt: {
-        description: 'Códigos de trapaceira ativados.',
+        description: 'Códigos de trapaça ativados.',
         title: 'Trapaceiro',
       },
       ru: {

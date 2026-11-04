@@ -9,9 +9,9 @@ export const useBoxShuffleWins = () => {
     messages: {
       cn: {
         bronzeTitle: '箱子尝试者',
-        description: '在箱子随机模式下完成 {n} 场比赛。',
+        description: '在箱子随机模式下赢得 {n} 场比赛。',
         goldTitle: '箱子专家',
-        lastDescription: '在箱子随机模式下完成了超过 500 场比赛。',
+        lastDescription: '在箱子随机模式下赢得了超过 500 场比赛。',
         lastTitle: '箱子洗牌者',
         platinumTitle: '箱子大师',
         silverTitle: '箱子爱好者',
@@ -66,7 +66,7 @@ export const useBoxShuffleWins = () => {
         description: 'ボックスシャッフルモードで{n}回勝利する。',
         goldTitle: 'ボックスエキスパート',
         lastDescription: 'ボックスシャッフルモードで500回以上勝利。',
-        lastTitle: 'ボックスシャッフルer',
+        lastTitle: 'ボックスシャッフラー',
         platinumTitle: 'ボックスマスター',
         silverTitle: 'ボックス愛好家',
       },
@@ -99,9 +99,9 @@ export const useBoxShuffleWins = () => {
       },
       zh: {
         bronzeTitle: '箱子嘗試者',
-        description: '在箱子隨機模式下完成 {n} 場比賽。',
+        description: '在箱子隨機模式下贏得 {n} 場比賽。',
         goldTitle: '箱子專家',
-        lastDescription: '在箱子隨機模式下完成了超過 500 場比賽。',
+        lastDescription: '在箱子隨機模式下贏得了超過 500 場比賽。',
         lastTitle: '箱子洗牌者',
         platinumTitle: '箱子大師',
         silverTitle: '箱子愛好者',

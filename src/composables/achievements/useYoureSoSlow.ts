@@ -18,7 +18,7 @@ export const useYoureSoSlow = () => {
       },
       de: {
         bronzeTitle: 'Langsam',
-        description: 'Spielen Sie {n} Stunden in einem Spiel.',
+        description: 'Spiele {n} Stunden in einem Spiel.',
         goldTitle: 'Marathonläufer',
         lastDescription: '10 Stunden in einem Spiel gespielt.',
         lastTitle: 'Du bist so langsam',
@@ -44,7 +44,7 @@ export const useYoureSoSlow = () => {
         silverTitle: 'Resistente',
       },
       fr: {
-        bronzeTitle: 'Ralentis',
+        bronzeTitle: 'Lambin',
         description: 'Jouez pendant {n} heures en une seule partie.',
         goldTitle: 'Marathonien',
         lastDescription: 'Joué pendant 10 heures en une seule partie.',
@@ -71,7 +71,7 @@ export const useYoureSoSlow = () => {
         silverTitle: '持久',
       },
       ko: {
-        bronzeTitle: '느린',
+        bronzeTitle: '느림보',
         description: '한 게임에서 {n}시간 플레이하세요.',
         goldTitle: '마라톤 러너',
         lastDescription: '한 게임에서 10시간 플레이했습니다.',
@@ -89,10 +89,10 @@ export const useYoureSoSlow = () => {
         silverTitle: 'Resistente',
       },
       ru: {
-        bronzeTitle: 'Медленный',
+        bronzeTitle: 'Тугодум',
         description: 'Играйте {n} часов в одной игре.',
         goldTitle: 'Марафонец',
-        lastDescription: 'Играно 10 часов в одной игре.',
+        lastDescription: 'Сыграно 10 часов в одной игре.',
         lastTitle: 'Ты так медленный',
         platinumTitle: 'Вечный',
         silverTitle: 'Выносливый',
