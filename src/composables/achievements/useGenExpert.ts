@@ -1,9 +1,9 @@
 import { useI18n } from 'vue-i18n';
 
+import { useTranslations } from '@/composables/useTranslations.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { Gen } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
-import { useTranslations } from '@/composables/useTranslations.ts';
 
 export function useGenExpert(gen: Gen) {
   const { getGenWins } = useProfile();
@@ -40,31 +40,31 @@ export function useGenExpert(gen: Gen) {
         silverTitle: `{name} Aficionado`,
       },
       es: {
-        bronzeTitle: `Erudito de {name}`,
+        bronzeTitle: `Erudito {name}`,
         description: `Completa {n} partidas de modo {name}.`,
-        goldTitle: `Experto de {name}`,
+        goldTitle: `Experto {name}`,
         lastDescription: `Más de 500 partidas de modo {name} completadas.`,
-        lastTitle: `Profesor de {name}`,
-        platinumTitle: `Maestro de {name}`,
-        silverTitle: `Aficionado de {name}`,
+        lastTitle: `Profesor {name}`,
+        platinumTitle: `Maestro {name}`,
+        silverTitle: `Aficionado {name}`,
       },
       fr: {
-        bronzeTitle: `Érudit de {name}`,
+        bronzeTitle: `Érudit {name}`,
         description: `Terminez {n} parties en mode {name}.`,
-        goldTitle: `Expert de {name}`,
+        goldTitle: `Expert {name}`,
         lastDescription: `Plus de 500 parties en mode {name} terminées.`,
-        lastTitle: `Professeur de {name}`,
-        platinumTitle: `Maître de {name}`,
-        silverTitle: `Connaisseur de {name}`,
+        lastTitle: `Professeur {name}`,
+        platinumTitle: `Maître {name}`,
+        silverTitle: `Connaisseur {name}`,
       },
       it: {
-        bronzeTitle: `Studioso di {name}`,
+        bronzeTitle: `Studioso {name}`,
         description: `Completa {n} partite in modalità {name}.`,
-        goldTitle: `Esperto di {name}`,
+        goldTitle: `Esperto {name}`,
         lastDescription: `Più di 500 partite in modalità {name} completate.`,
-        lastTitle: `Professore di {name}`,
-        platinumTitle: `Maestro di {name}`,
-        silverTitle: `Appassionato di {name}`,
+        lastTitle: `Professore {name}`,
+        platinumTitle: `Maestro {name}`,
+        silverTitle: `Appassionato {name}`,
       },
       jp: {
         bronzeTitle: `{name}学者`,
@@ -85,13 +85,13 @@ export function useGenExpert(gen: Gen) {
         silverTitle: `{name} 애호가`,
       },
       pt: {
-        bronzeTitle: `Erudito de {name}`,
+        bronzeTitle: `Erudito {name}`,
         description: `Complete {n} partidas no modo {name}.`,
-        goldTitle: `Especialista de {name}`,
+        goldTitle: `Especialista {name}`,
         lastDescription: `Mais de 500 partidas no modo {name} completadas.`,
-        lastTitle: `Professor de {name}`,
-        platinumTitle: `Mestre de {name}`,
-        silverTitle: `Aficionado de {name}`,
+        lastTitle: `Professor {name}`,
+        platinumTitle: `Mestre {name}`,
+        silverTitle: `Aficionado {name}`,
       },
       ru: {
         bronzeTitle: `Ученый {name}`,
