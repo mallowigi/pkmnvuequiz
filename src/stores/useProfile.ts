@@ -85,6 +85,8 @@ export const useProfile = defineStore('profile', () => {
     plays: 0,
     settings: initializeSettings(),
     shinyDex: {},
+    totalPlayTime: 0,
+    totalScore: 0,
   });
 
   const { showErrorMessage } = useMessages();
@@ -190,11 +192,29 @@ export const useProfile = defineStore('profile', () => {
     return profileState.highScore;
   };
 
+  const getTotalScore = () => {
+    return profileState.totalScore;
+  };
+
+  const getTotalPlayTime = () => {
+    return profileState.totalPlayTime;
+  };
+
   const updateHighScore = (score: number) => {
     if (score > profileState.highScore) {
       profileState.highScore = score;
       void saveUserProfile({ highScore: profileState.highScore });
     }
+  };
+
+  const addToTotalScore = (score: number) => {
+    profileState.totalScore += score;
+    void saveUserProfile({ totalScore: profileState.totalScore });
+  };
+
+  const addToTotalPlayTime = (seconds: number) => {
+    profileState.totalPlayTime += seconds;
+    void saveUserProfile({ totalPlayTime: profileState.totalPlayTime });
   };
 
   const setProfileState = (profile: Partial<Profile>) => {
@@ -305,6 +325,8 @@ export const useProfile = defineStore('profile', () => {
   return {
     addAchievement,
     addShiny,
+    addToTotalPlayTime,
+    addToTotalScore,
     fetchProfile,
     getBestTimeFull,
     getBoxShuffleWins,
@@ -319,6 +341,8 @@ export const useProfile = defineStore('profile', () => {
     getOrderWins,
     getShinyCount,
     getSpecialWins,
+    getTotalPlayTime,
+    getTotalScore,
     getTotalWins,
     getTypeShuffleWins,
     getTypeWins,

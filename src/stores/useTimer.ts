@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { useProfile } from '@/stores/useProfile.ts';
 import type { TimerState } from '@/types.ts';
 
 export const useTimer = defineStore('timer', () => {
@@ -13,7 +14,9 @@ export const useTimer = defineStore('timer', () => {
   });
 
   const incElapsed = () => {
+    const { addToTotalPlayTime } = useProfile();
     timerState.elapsed++;
+    addToTotalPlayTime(1);
   };
 
   const save = () => {

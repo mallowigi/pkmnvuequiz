@@ -19,6 +19,8 @@ import { useNoShadowsWins } from '@/composables/achievements/useNoShadowsWins.ts
 import { useNumWins } from '@/composables/achievements/useNumWins.ts';
 import { useShinyCollector } from '@/composables/achievements/useShinyCollector.ts';
 import { useSpecialWins } from '@/composables/achievements/useSpecialWins.ts';
+import { useTotalPlayTime } from '@/composables/achievements/useTotalPlayTime.ts';
+import { useTotalScore } from '@/composables/achievements/useTotalScore.ts';
 import { useTypeExpert } from '@/composables/achievements/useTypeExpert.ts';
 import { useTypeShuffleWins } from '@/composables/achievements/useTypeShuffleWins.ts';
 import { useYoureSoSlow } from '@/composables/achievements/useYoureSoSlow.ts';
@@ -48,6 +50,8 @@ export const useAchievementsRegistry = (): Record<string, Achievement> => {
     perfectGuesser: useNoCriesWins(),
     professor: useDexOrderWins(),
     shinyCollector: useShinyCollector(),
+    totalPlayTime: useTotalPlayTime(),
+    totalScore: useTotalScore(),
     typeShuffler: useTypeShuffleWins(),
     youreSoSlow: useYoureSoSlow(),
   };

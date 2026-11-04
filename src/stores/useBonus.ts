@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { useProfile } from '@/stores/useProfile.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import type { Bonus } from '@/types.ts';
 
@@ -49,6 +50,7 @@ export const useBonus = defineStore('bonus', () => {
 
   const addScore = (isShadowed: boolean) => {
     const { addSkipScore } = useSkips();
+    const { addToTotalScore } = useProfile();
     if (bonusState.spellCheckerTriggered || isShadowed) {
       bonusState.spellCheckerTriggered = false;
       return;
@@ -57,6 +59,7 @@ export const useBonus = defineStore('bonus', () => {
     bonusState.score += bonusState.bonus;
     bonusState.spellCheckerTriggered = false;
     addSkipScore(bonusState.bonus);
+    addToTotalScore(bonusState.bonus);
     startBonusSequence();
   };
 
