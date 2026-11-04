@@ -113,7 +113,7 @@ export const useManyShadows = () => {
   return createAchievement({
     category: 'game',
     getValue: () => touchesState.summonedShadows,
-    id: 'blankMemory',
+    id: 'manyShadows',
     get lastDescription() {
       return t('lastDescription');
     },

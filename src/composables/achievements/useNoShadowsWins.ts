@@ -113,7 +113,7 @@ export const useNoShadowsWins = () => {
   return createAchievement({
     category: 'total',
     getValue: getNoShadowWins,
-    id: 'masterGuesser',
+    id: 'noShadowsWins',
     get lastDescription() {
       return t('lastDescription');
     },

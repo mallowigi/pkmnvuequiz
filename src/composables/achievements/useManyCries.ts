@@ -113,7 +113,7 @@ export const useManyCries = () => {
   return createAchievement({
     category: 'game',
     getValue: () => touchesState.summonedCries,
-    id: 'cryExpert',
+    id: 'manyCries',
     get lastDescription() {
       return t('lastDescription');
     },

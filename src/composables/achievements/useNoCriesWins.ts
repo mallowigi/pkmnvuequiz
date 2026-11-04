@@ -113,7 +113,7 @@ export const useNoCriesWins = () => {
   return createAchievement({
     category: 'total',
     getValue: getNoCriesWins,
-    id: 'perfectGuesser',
+    id: 'noCriesWins',
     get lastDescription() {
       return t('lastDescription');
     },
