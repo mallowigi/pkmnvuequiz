@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useScroll } from '@vueuse/core';
-import { computed, onMounted, ref, useTemplateRef, watch, nextTick } from 'vue';
+import { computed, onMounted, ref, useTemplateRef, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import TrophyIcon from '@/components/common/icons/TrophyIcon.vue';
@@ -20,6 +19,7 @@ const { achievements, checkAchievements, toRank } = useAchievements();
 const { profileState } = useProfile();
 const { activeTab } = useAchievementTabs();
 
+const dialogContentRef = useTemplateRef<HTMLElement>('dialogContentRef');
 const firstTime = ref(true);
 
 const visibleAchievements = computed(() =>
@@ -27,6 +27,12 @@ const visibleAchievements = computed(() =>
     .filter((achievement) => achievement.category === activeTab.value)
     .sort((a, b) => a.priority - b.priority),
 );
+
+watch(activeTab, () => {
+  if (dialogContentRef.value) {
+    dialogContentRef.value.scrollTop = 0;
+  }
+});
 
 onMounted(() => {
   if (firstTime.value) {
@@ -44,9 +50,12 @@ onMounted(() => {
     <div class="prompt achievements-dialog">
       <h2 class="dialog-title">{{ t('achievements') }}</h2>
 
-      <AchievementTabs />
+      <AchievementTabs class="dialog-tabs" />
 
-      <div class="dialog-content">
+      <div
+        ref="dialogContentRef"
+        class="dialog-content"
+      >
         <!-- Achievements grid will go here -->
         <RoundedBox
           class="achievement-box"
@@ -78,6 +87,7 @@ onMounted(() => {
       </div>
 
       <RoundedButton
+        class="dialog-close-btn"
         @click.stop="closeDialog"
         primary
       >
@@ -101,6 +111,13 @@ onMounted(() => {
   gap: 16px;
   max-width: 800px;
   width: 95%;
+  height: min(80vh, 650px);
+}
+
+.dialog-title,
+.dialog-tabs,
+.dialog-close-btn {
+  flex-shrink: 0;
 }
 
 .dialog-title {
@@ -110,10 +127,31 @@ onMounted(() => {
 }
 
 .dialog-content {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-content: start;
   gap: 1em;
-  width: 100%;
+  padding: 4px;
+
+  .mobile & {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) and (min-width: 481px) {
+  .dialog-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 .achievement-box {

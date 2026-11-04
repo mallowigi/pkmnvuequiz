@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { useAchievementTabs } from '@/composables/useAchievementTabs.ts';
 import type { AchievementCategory } from '@/types.ts';
-import { scrollToTop } from '@/utils/utils.ts';
 
 const { activeTab, setTab, tabs } = useAchievementTabs();
 
 const onSelectTab = (tabId: AchievementCategory) => {
   setTab(tabId);
-  scrollToTop();
 };
 </script>
 
