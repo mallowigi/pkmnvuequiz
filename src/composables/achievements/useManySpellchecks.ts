@@ -113,7 +113,7 @@ export const useManySpellchecks = () => {
   return createAchievement({
     category: 'game',
     getValue: () => touchesState.spellingClicks,
-    id: 'spellingClicks',
+    id: 'manySpellchecks',
     get lastDescription() {
       return t('lastDescription');
     },

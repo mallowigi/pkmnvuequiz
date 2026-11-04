@@ -111,7 +111,7 @@ export const useShinyCollector = () => {
   });
 
   return createAchievement({
-    category: 'misc',
+    category: 'total',
     getValue: getShinyCount,
     id: 'shinyCollector',
     get lastDescription() {

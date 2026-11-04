@@ -116,7 +116,7 @@ export function useTypeExpert(type: Type) {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: () => getTypeWins(type),
     id: `typeExpert_${type}`,
     get lastDescription() {

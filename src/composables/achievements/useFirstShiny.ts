@@ -56,7 +56,7 @@ export const useFirstShiny = () => {
   });
 
   return createAchievement({
-    category: 'misc',
+    category: 'total',
     getValue: getShinyCount,
     id: 'firstShiny',
     get lastDescription() {

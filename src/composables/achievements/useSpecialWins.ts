@@ -111,9 +111,9 @@ export const useSpecialWins = () => {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: getSpecialWins,
-    id: 'legendaryCollector',
+    id: 'specialWins',
     get lastDescription() {
       return t('lastDescription');
     },

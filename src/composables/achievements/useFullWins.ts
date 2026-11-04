@@ -111,9 +111,9 @@ export const useFullWins = () => {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: getFullWins,
-    id: 'godOfPokemon',
+    id: 'fullWins',
     get lastDescription() {
       return t('lastDescription');
     },

@@ -111,9 +111,9 @@ export const useHighScorer = () => {
   });
 
   return createAchievement({
-    category: 'misc',
+    category: 'total',
     getValue: getHighScore,
-    id: 'highScorer',
+    id: 'highScore',
     get lastDescription() {
       return t('lastDescription');
     },

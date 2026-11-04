@@ -111,9 +111,9 @@ export const useChaosWins = () => {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: getChaosWins,
-    id: 'encyclopedia',
+    id: 'chaosWins',
     get lastDescription() {
       return t('lastDescription');
     },

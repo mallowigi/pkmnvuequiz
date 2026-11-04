@@ -111,9 +111,9 @@ export const useDexOrderWins = () => {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: getOrderWins,
-    id: 'professor',
+    id: 'dexOrder',
     get lastDescription() {
       return t('lastDescription');
     },

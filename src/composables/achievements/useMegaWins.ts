@@ -111,7 +111,7 @@ export const useMegaWins = () => {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: getMegaWins,
     id: 'megaWins',
     get lastDescription() {

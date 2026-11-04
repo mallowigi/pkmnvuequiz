@@ -46,10 +46,10 @@ export const useTimerElapsed = () => {
       fr: {
         bronzeTitle: 'Ramoloss',
         description: 'Jouez pendant {n} heures en une seule partie.',
-        goldTitle: "Au pas de l’escargot",
+        goldTitle: 'Au pas de l’escargot',
         lastDescription: 'Joué pendant 10 heures en une seule partie.',
         lastTitle: 'Chargement en cours…',
-        platinumTitle: "Au rythme d’un glacier",
+        platinumTitle: 'Au rythme d’un glacier',
         silverTitle: 'À son rythme',
       },
       it: {
@@ -112,7 +112,7 @@ export const useTimerElapsed = () => {
 
   // Timer elapsed is in seconds; thresholds in hours: 4h=14400s, 6h=21600s, 8h=28800s, 10h=36000s
   return createAchievement({
-    category: 'timer',
+    category: 'game',
     getValue: () => timerState.elapsed,
     id: 'timerElapsed',
     get lastDescription() {

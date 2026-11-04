@@ -116,7 +116,7 @@ export function useGenExpert(gen: Gen) {
   });
 
   return createAchievement({
-    category: 'game',
+    category: 'total',
     getValue: () => getGenWins(gen),
     id: `genExpert_${gen}`,
     get lastDescription() {
