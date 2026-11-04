@@ -1,6 +1,10 @@
 {
   "abilities": "Habilidades",
   "accuracy": "Precisión",
+  "inGame": "En partida",
+  "misc": "Varios",
+  "time": "Tiempo",
+  "lifetime": "Acumulados",
   "action": "Acción",
   "activeUsers": "Jugadores activos",
   "alert": "Alerta",

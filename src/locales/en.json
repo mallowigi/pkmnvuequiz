@@ -1,6 +1,10 @@
 {
   "abilities": "Abilities",
   "accuracy": "Accuracy",
+  "inGame": "In-Game",
+  "misc": "Misc",
+  "time": "Time",
+  "lifetime": "Lifetime",
   "achievements": "Achievements",
   "action": "Action",
   "activeUsers": "Active Players",

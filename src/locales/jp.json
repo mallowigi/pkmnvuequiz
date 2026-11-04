@@ -1,6 +1,10 @@
 {
   "abilities": "特性",
   "accuracy": "命中率",
+  "inGame": "ゲーム内",
+  "misc": "その他",
+  "time": "時間",
+  "lifetime": "累計",
   "action": "アクション",
   "activeUsers": "アクティブなプレイヤー",
   "alert": "警告",
