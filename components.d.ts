@@ -12,6 +12,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AchievementsDialog: typeof import('./src/components/dialogs/AchievementsDialog.vue')['default']
+    AchievementTabs: typeof import('./src/components/dialogs/AchievementTabs.vue')['default']
     AlertDialog: typeof import('./src/components/dialogs/AlertDialog.vue')['default']
     ArrowIcon: typeof import('./src/components/common/icons/ArrowIcon.vue')['default']
     Artwork: typeof import('./src/components/game/pokemonInfo/Artwork.vue')['default']

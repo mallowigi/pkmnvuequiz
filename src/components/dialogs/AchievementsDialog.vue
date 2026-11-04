@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { useScroll } from '@vueuse/core';
+import { computed, onMounted, ref, useTemplateRef, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import TrophyIcon from '@/components/common/icons/TrophyIcon.vue';
 import Overlay from '@/components/common/Overlay.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
 import RoundedButton from '@/components/common/RoundedButton.vue';
+import AchievementTabs from '@/components/dialogs/AchievementTabs.vue';
 import { useAchievements } from '@/composables/useAchievements.ts';
+import { useAchievementTabs } from '@/composables/useAchievementTabs.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
-import { useMessages } from '@/stores/useMessages.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 
 const { closeDialog } = useDialogs();
@@ -16,8 +18,13 @@ const { t } = useI18n();
 
 const { achievements, checkAchievements, toRank } = useAchievements();
 const { profileState } = useProfile();
+const { activeTab } = useAchievementTabs();
 
 const firstTime = ref(true);
+
+const visibleAchievements = computed(() =>
+  Object.values(achievements).filter((achievement) => achievement.category === activeTab.value),
+);
 
 onMounted(() => {
   if (firstTime.value) {
@@ -35,12 +42,14 @@ onMounted(() => {
     <div class="prompt achievements-dialog">
       <h2 class="dialog-title">{{ t('achievements') }}</h2>
 
+      <AchievementTabs />
+
       <div class="dialog-content">
         <!-- Achievements grid will go here -->
         <RoundedBox
           class="achievement-box"
           :class="toRank(profileState.achievements[achievement.id])"
-          v-for="achievement in achievements"
+          v-for="achievement in visibleAchievements"
           :key="achievement.id"
         >
           <div class="achievement-icon">
