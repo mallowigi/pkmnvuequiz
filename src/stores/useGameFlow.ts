@@ -14,7 +14,6 @@ import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import { useProfile } from '@/stores/useProfile.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useTouches } from '@/stores/useTouches.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
@@ -149,6 +148,14 @@ export const useGameFlow = defineStore('gameFlow', () => {
     startGenCycle();
   };
 
+  const toggleGame = () => {
+    if (flowState.isPaused) {
+      resumeGame();
+    } else {
+      pauseGame();
+    }
+  };
+
   const endGame = () => {
     const doEndGame = () => {
       flowState.isEnded = true;
@@ -256,6 +263,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
     setGameSelectionState,
     startGame,
     toggleCheat,
+    toggleGame,
     toggleMissingno,
     toggleSettings,
   };
