@@ -99,7 +99,15 @@ service cloud.firestore {
 	  allow read: if isOwner(userId);
 	  allow write: if isOwner(userId) &&
 	  isValidInt(request.resource.data.plays, 0) &&
-	  (!('finishedGames' in request.resource.data) || isValidFinishedGames(request.resource.data.finishedGames)) &&
+	  (!('finishedGames' in request.resource.data) || isValidFinishedGames(request.resource.data.finishedGames));
+	}
+
+	// Rules for the 'globalStats' collection
+	// Stores lifetime statistics for authenticated users
+	match /globalStats/{userId} {
+	  allow read: if isOwner(userId);
+	  allow write: if isOwner(userId) &&
+	  isValidInt(request.resource.data.plays, 0) &&
 	  (!('attackDexWins' in request.resource.data) || isValidInt(request.resource.data.attackDexWins, 0));
 	}
 
