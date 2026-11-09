@@ -46,7 +46,6 @@ const { isMobile, isLaptop, isDesktop } = useAppBreakpoints();
 const isTouchLayout = useMediaQuery('(hover: none) and (pointer: coarse)');
 const gameContent = useTemplateRef<HTMLElement>('gameContent');
 const scrollContainer = computed(() => (isTouchLayout.value ? gameContent.value : null));
-const { checkAchievements } = useAchievements();
 
 watchEffect(() => {
   if (typeof document === 'undefined') {
@@ -79,10 +78,6 @@ watch(
   },
   { immediate: true },
 );
-
-onMounted(() => {
-  checkAchievements({ silent: true });
-});
 </script>
 
 <template>

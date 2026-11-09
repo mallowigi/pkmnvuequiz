@@ -24,6 +24,7 @@ import { useFacebookAuth } from '@/composables/auth/useFacebookAuth.ts';
 import { useGithubAuth } from '@/composables/auth/useGithubAuth.ts';
 import { useGoogleAuth } from '@/composables/auth/useGoogleAuth.ts';
 import { useXAuth } from '@/composables/auth/useXAuth.ts';
+import { useAchievements } from '@/composables/useAchievements.ts';
 import { useSavedData } from '@/composables/useSavedData.ts';
 import { MAX_SAVE_SLOTS, useSaveSlots } from '@/composables/useSaveSlots.ts';
 import { auth, db } from '@/firebase.ts';
@@ -57,12 +58,16 @@ export const useFirebase = defineStore('firebase', () => {
   onAuthStateChanged(auth, async (user) => {
     const { fetchProfile } = useProfile();
     const { fetchStats, setStatsState } = useGlobalStats();
+    const { checkAchievements } = useAchievements();
+
     if (user) {
       await fetchProfile();
       await fetchStats();
     } else {
       setStatsState({ plays: 0 });
     }
+
+    checkAchievements({ silent: true });
   });
 
   const firebaseState = reactive({
