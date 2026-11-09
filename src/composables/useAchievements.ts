@@ -1,4 +1,5 @@
 import { useAchievementsRegistry } from '@/composables/achievements/useAchievementsRegistry.ts';
+import { useMessages } from '@/stores/useMessages.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { AchievementRank } from '@/types.ts';
 
@@ -19,6 +20,8 @@ export const useAchievements = () => {
   };
 
   const checkAchievements = () => {
+    const { showUserMessage } = useMessages();
+
     Object.values(achievements).forEach((achievement) => {
       const ownAchievementTier = getAchievementTier(achievement.id);
       // If the user already has the highest tier for this achievement, no need to check further
@@ -29,6 +32,7 @@ export const useAchievements = () => {
         if (condition.tier < ownAchievementTier && condition.isSatisfied()) {
           addAchievement(achievement.id, condition.tier);
           // Show a toast or something
+          showUserMessage(`Achievement unlocked: ${achievement.name} (Tier ${condition.tier})`);
         }
       }
     });
