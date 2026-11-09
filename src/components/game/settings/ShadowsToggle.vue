@@ -12,7 +12,7 @@ import { useState } from '@/stores/useState.ts';
 const { state, displayShadows } = useState();
 const { setDialog } = useDialogs();
 const { showRemainingShadows } = useCurrentDex();
-const { incrementGameOver } = useGlobalStats();
+const { incrementGameOvers } = useGlobalStats();
 const { t } = useI18n();
 const { isOwner } = storeToRefs(useRooms());
 
@@ -21,7 +21,7 @@ const toggle = () => {
     setDialog('shadows', () => {
       displayShadows();
       showRemainingShadows();
-      incrementGameOver();
+      incrementGameOvers();
     });
   }
 };

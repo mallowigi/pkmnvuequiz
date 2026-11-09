@@ -1,10 +1,10 @@
 import { useI18n } from 'vue-i18n';
 
-import { useProfile } from '@/stores/useProfile.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useTotalScore = () => {
-  const { getTotalScore } = useProfile();
+  const { getTotalScore } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {

@@ -1,8 +1,7 @@
-import { useProfile } from '@/stores/useProfile.ts';
-import type { Profile } from '@/types';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 
 export function useBufferedTotalStats() {
-  const { profileState, saveUserProfile } = useProfile();
+  const { addToTotals } = useGlobalStats();
 
   let batchedScore = 0;
   let batchedPlayTime = 0;
@@ -26,24 +25,10 @@ export function useBufferedTotalStats() {
   };
 
   const flushTotalStats = () => {
-    if (batchedScore === 0 && batchedPlayTime === 0) return;
-
-    profileState.totalScore += batchedScore;
-    profileState.totalPlayTime += batchedPlayTime;
-
-    const stats: Partial<Profile> = {};
-
-    if (batchedScore !== 0) {
-      stats.totalScore = profileState.totalScore;
-    }
-
-    if (batchedPlayTime !== 0) {
-      stats.totalPlayTime = profileState.totalPlayTime;
-    }
+    addToTotals(batchedScore, batchedPlayTime);
 
     batchedScore = 0;
     batchedPlayTime = 0;
-    void saveUserProfile(stats);
   };
 
   const addToTotalScore = (score: number) => {

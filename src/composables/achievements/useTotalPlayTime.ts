@@ -1,13 +1,13 @@
 import { useI18n } from 'vue-i18n';
 
-import { useProfile } from '@/stores/useProfile.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 // Thresholds in seconds: 10h=36000s, 20h=72000s, 40h=144000s, 80h=288000s
 const HOURS_TO_SECONDS = 3600;
 
 export const useTotalPlayTime = () => {
-  const { getTotalPlayTime } = useProfile();
+  const { getTotalPlayTime } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {

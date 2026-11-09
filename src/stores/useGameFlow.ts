@@ -25,8 +25,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { removeAutoSave } = useSavedData();
   const { showRemaining } = useCurrentDex();
   const strategy = useCurrentStrategy();
-  const { incrementPlays } = useProfile();
-  const { incrementGameOvers } = useGlobalStats();
+  const { incrementGameOvers, incrementPlays } = useGlobalStats();
   const { toggledMissingno, toggledCheat } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();

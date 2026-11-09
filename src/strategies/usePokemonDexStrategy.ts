@@ -6,6 +6,7 @@ import { i18n } from '@/main.ts';
 import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
@@ -17,7 +18,8 @@ import type { PokemonInfo, Type, GameMode, RegionBox, SpecialType } from '@/type
 export const usePokemonDexStrategy = (): DexStrategy => {
   const pokemons = usePokemons();
   const { createRecord } = useFirebase();
-  const { updateFinishedGames, updateHighScore } = useProfile();
+  const { updateFinishedGames } = useProfile();
+  const { updateHighScore } = useGlobalStats();
   const { flushTotalStats, stopFlushTimer } = useBufferedTotalStats();
   const { bonusState } = useBonus();
   const { showUserMessage } = useMessages();

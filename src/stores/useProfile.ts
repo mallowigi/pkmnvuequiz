@@ -79,14 +79,9 @@ const initializeSettings = (): Settings => ({
 export const useProfile = defineStore('profile', () => {
   const profileState = reactive<Profile>({
     achievements: {},
-    attackDexWins: 0,
     finishedGames: initializeFinishedGames(),
-    highScore: 0,
-    plays: 0,
     settings: initializeSettings(),
     shinyDex: {},
-    totalPlayTime: 0,
-    totalScore: 0,
   });
 
   const { showErrorMessage } = useMessages();
@@ -116,16 +111,6 @@ export const useProfile = defineStore('profile', () => {
     } catch (error) {
       showErrorMessage(error, 'Failed to save profile');
     }
-  };
-
-  const incrementPlays = () => {
-    profileState.plays += 1;
-    void saveUserProfile({ plays: profileState.plays });
-  };
-
-  const incrementAttackDexWins = async () => {
-    profileState.attackDexWins += 1;
-    void saveUserProfile({ attackDexWins: profileState.attackDexWins });
   };
 
   const getTotalWins = () => {
@@ -186,25 +171,6 @@ export const useProfile = defineStore('profile', () => {
 
   const getNoCriesWins = () => {
     return profileState.finishedGames.noCries;
-  };
-
-  const getHighScore = () => {
-    return profileState.highScore;
-  };
-
-  const getTotalScore = () => {
-    return profileState.totalScore;
-  };
-
-  const getTotalPlayTime = () => {
-    return profileState.totalPlayTime;
-  };
-
-  const updateHighScore = (score: number) => {
-    if (score > profileState.highScore) {
-      profileState.highScore = score;
-      void saveUserProfile({ highScore: profileState.highScore });
-    }
   };
 
   const setProfileState = (profile: Partial<Profile>) => {
@@ -322,26 +288,20 @@ export const useProfile = defineStore('profile', () => {
     getChaosWins,
     getFullWins,
     getGenWins,
-    getHighScore,
     getMegaWins,
     getNoCriesWins,
     getNoShadowWins,
     getOrderWins,
     getShinyCount,
     getSpecialWins,
-    getTotalPlayTime,
-    getTotalScore,
     getTotalWins,
     getTypeShuffleWins,
     getTypeWins,
-    incrementAttackDexWins,
-    incrementPlays,
     initializeFinishedGames,
     profileState,
     saveUserProfile,
     setProfileState,
     updateFinishedGames,
-    updateHighScore,
     updateSettings,
   };
 });

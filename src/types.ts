@@ -165,15 +165,10 @@ export type FinishedGames = {
 };
 
 export type Profile = {
-  attackDexWins: number;
-  plays: number;
   finishedGames: FinishedGames;
   settings: Settings;
   shinyDex: Record<string, boolean>;
   achievements: Record<string, number>;
-  highScore: number;
-  totalScore: number;
-  totalPlayTime: number;
 };
 
 export type Bonus = {

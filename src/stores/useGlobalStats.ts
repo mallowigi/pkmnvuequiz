@@ -7,6 +7,11 @@ import { useMessages } from '@/stores/useMessages.ts';
 import type { Type, SpecialType, MegaType, PokemonInfo } from '@/types.ts';
 
 export type GlobalStats = {
+  attackDexWins: number;
+  highScore: number;
+  plays: number;
+  totalPlayTime: number;
+  totalScore: number;
   totalInvokedShadows: number;
   totalInvokedCries: number;
   totalInvokedSpelling: number;
@@ -19,11 +24,14 @@ export type GlobalStats = {
 };
 
 const initializeStats = (): GlobalStats => ({
+  attackDexWins: 0,
+  highScore: 0,
   maxComboBonus: 0,
   megaFound: {
     gmax: 0,
     mega: 0,
   },
+  plays: 0,
   specialFound: {
     legendary: 0,
     mythical: 0,
@@ -37,6 +45,8 @@ const initializeStats = (): GlobalStats => ({
   totalInvokedShadows: 0,
   totalInvokedSpelling: 0,
   totalMisses: 0,
+  totalPlayTime: 0,
+  totalScore: 0,
   typeFound: {
     bug: 0,
     dark: 0,
@@ -135,6 +145,53 @@ export const useGlobalStats = defineStore('globalStats', () => {
     void saveStats({ totalGameOvers: statsState.totalGameOvers });
   };
 
+  const incrementPlays = () => {
+    statsState.plays += 1;
+    void saveStats({ plays: statsState.plays });
+  };
+
+  const incrementAttackDexWins = () => {
+    statsState.attackDexWins += 1;
+    void saveStats({ attackDexWins: statsState.attackDexWins });
+  };
+
+  const updateHighScore = (score: number) => {
+    if (score > statsState.highScore) {
+      statsState.highScore = score;
+      void saveStats({ highScore: statsState.highScore });
+    }
+  };
+
+  const addToTotals = (score: number, playTime: number) => {
+    if (score === 0 && playTime === 0) return;
+
+    const stats: Partial<GlobalStats> = {};
+
+    if (score !== 0) {
+      statsState.totalScore += score;
+      stats.totalScore = statsState.totalScore;
+    }
+
+    if (playTime !== 0) {
+      statsState.totalPlayTime += playTime;
+      stats.totalPlayTime = statsState.totalPlayTime;
+    }
+
+    void saveStats(stats);
+  };
+
+  const getHighScore = () => {
+    return statsState.highScore;
+  };
+
+  const getTotalScore = () => {
+    return statsState.totalScore;
+  };
+
+  const getTotalPlayTime = () => {
+    return statsState.totalPlayTime;
+  };
+
   const onPokemonFound = (pokemon: PokemonInfo) => {
     const types: Type[] = [pokemon.primaryType];
     if (pokemon.secondaryType) {
@@ -201,18 +258,25 @@ export const useGlobalStats = defineStore('globalStats', () => {
 
   return {
     addComboBonus,
+    addToTotals,
     fetchStats,
+    getHighScore,
+    getTotalPlayTime,
+    getTotalScore,
+    incrementAttackDexWins,
     incrementGameOvers,
     incrementInvokedCries,
     incrementInvokedShadows,
     incrementInvokedSpelling,
     incrementMisses,
+    incrementPlays,
     onPokemonFound,
     resetComboTimer,
     resetSessionStats,
     setStatsState,
     startComboTimer,
     statsState,
+    updateHighScore,
   };
 });
 

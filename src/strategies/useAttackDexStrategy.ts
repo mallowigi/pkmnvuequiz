@@ -3,14 +3,14 @@ import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { i18n } from '@/main.ts';
 import { useAttacks } from '@/stores/useAttacks.ts';
 import { useCurrentBox } from '@/stores/useCurrentBox.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import { useProfile } from '@/stores/useProfile.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
 import type { Attack, RegionBox, SpecialType, Type } from '@/types.ts';
 
 export const useAttackDexStrategy = (): DexStrategy => {
   const attacks = useAttacks();
-  const { incrementAttackDexWins } = useProfile();
+  const { incrementAttackDexWins } = useGlobalStats();
   const { showUserMessage } = useMessages();
   const { playClick } = usePlaySounds();
   const { currentBoxState } = useCurrentBox();
@@ -69,7 +69,7 @@ export const useAttackDexStrategy = (): DexStrategy => {
   const getCurrentGameModeEntries = (): Map<string, Attack[]> => attacks.getCurrentGameModeAttacks();
 
   const recordGameEnd = () => {
-    void incrementAttackDexWins();
+    incrementAttackDexWins();
   };
 
   const recordGiveUp = () => {

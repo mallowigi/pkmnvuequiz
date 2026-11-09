@@ -3,9 +3,11 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import RoundedBox from '@/components/common/RoundedBox.vue';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 
 const { profileState, getTotalWins } = useProfile();
+const { statsState } = useGlobalStats();
 const totalWins = computed(() => getTotalWins());
 
 const { t } = useI18n();
@@ -15,7 +17,7 @@ const { t } = useI18n();
   <div class="profile-stats">
     <RoundedBox class="stat rad-tl">
       <span class="stat-label">{{ t('plays') }}</span>
-      <span class="stat-value">{{ profileState.plays }}</span>
+      <span class="stat-value">{{ statsState.plays }}</span>
     </RoundedBox>
 
     <RoundedBox class="stat rad-tr">
@@ -35,7 +37,7 @@ const { t } = useI18n();
 
     <RoundedBox class="stat attack-dex-wins">
       <span class="stat-label">{{ t('attackDexWins') }}</span>
-      <span class="stat-value">{{ profileState.attackDexWins }}</span>
+      <span class="stat-value">{{ statsState.attackDexWins }}</span>
     </RoundedBox>
   </div>
 </template>

@@ -55,13 +55,13 @@ export const useFirebase = defineStore('firebase', () => {
   const { getOldSlots } = useSaveSlots();
 
   onAuthStateChanged(auth, async (user) => {
-    const { fetchProfile, setProfileState } = useProfile();
-    const { fetchStats } = useGlobalStats();
+    const { fetchProfile } = useProfile();
+    const { fetchStats, setStatsState } = useGlobalStats();
     if (user) {
       await fetchProfile();
       await fetchStats();
     } else {
-      setProfileState({ plays: 0 });
+      setStatsState({ plays: 0 });
     }
   });
 
