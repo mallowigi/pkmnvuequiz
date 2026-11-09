@@ -20,6 +20,7 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
     'help',
     'pkmnDetails',
     'attackDetails',
+    'achievementToasts',
   ];
   if (excludedStores.includes(store.$id)) {
     return;
