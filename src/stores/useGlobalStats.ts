@@ -2,6 +2,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { useAchievements } from '@/composables/useAchievements.ts';
 import { auth, db } from '@/firebase.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import type { Type, SpecialType, MegaType, PokemonInfo } from '@/types.ts';
@@ -72,6 +73,7 @@ const initializeStats = (): GlobalStats => ({
 export const useGlobalStats = defineStore('globalStats', () => {
   const statsState = reactive<GlobalStats>(initializeStats());
   const { showErrorMessage } = useMessages();
+  const { checkAchievements } = useAchievements();
 
   // Session-only combo tracker (not persisted)
   let currentComboBonus = 0;
@@ -230,6 +232,8 @@ export const useGlobalStats = defineStore('globalStats', () => {
     }
 
     void saveStats(toSave);
+
+    checkAchievements();
   };
 
   const startComboTimer = () => {

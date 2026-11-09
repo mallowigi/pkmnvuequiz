@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate, storeToRefs } from 'pinia';
 import { reactive, computed, watch } from 'vue';
 
+import { useAchievements } from '@/composables/useAchievements.ts';
 import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
@@ -157,6 +158,8 @@ export const useGameFlow = defineStore('gameFlow', () => {
   };
 
   const endGame = () => {
+    const { checkAchievements } = useAchievements();
+
     const doEndGame = () => {
       flowState.isEnded = true;
       flowState.isStarted = false;
@@ -169,6 +172,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
       removeAutoSave();
 
       strategy.value.recordGameEnd();
+      checkAchievements();
 
       playFanfare();
       resetInput();
@@ -183,6 +187,8 @@ export const useGameFlow = defineStore('gameFlow', () => {
   };
 
   const giveUp = () => {
+    const { checkAchievements } = useAchievements();
+
     const doGiveUp = () => {
       flowState.isGivenUp = true;
 
@@ -192,6 +198,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
 
       strategy.value.recordGiveUp();
       incrementGameOvers();
+      checkAchievements();
 
       removeAutoSave();
       showRemaining();
