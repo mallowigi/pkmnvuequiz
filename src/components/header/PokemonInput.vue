@@ -83,6 +83,12 @@ const ensureFocus = () => {
 // Handle keydown events on the document to allow typing without focusing the input
 const handleKeydown = (e: KeyboardEvent) => {
   const { toggleGame } = useGameFlow();
+  // if the user presses the escape key
+  if (e.key === 'Escape') {
+    toggleGame();
+    return;
+  }
+
   // Ignore all input, including helper shortcuts, while paused/ended or a dialog is open.
   if (isDisabled.value) {
     return;
@@ -100,12 +106,6 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   if (e.key === '.') {
     activateNextCry();
-    return;
-  }
-
-  // if the user presses the escape key
-  if (e.key === 'Escape') {
-    toggleGame();
     return;
   }
 

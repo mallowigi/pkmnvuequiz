@@ -5,7 +5,7 @@ import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import type { Touches } from '@/types';
 
 export const useTouches = defineStore('touches', () => {
-  const { incrementInvokedShadows, incrementInvokedCries, incrementInvokedSpelling } = useGlobalStats();
+  const { incrementInvokedShadows, incrementInvokedCries } = useGlobalStats();
   const touchesState = reactive<Touches>({
     boxShuffleClicks: 0,
     shiniesDiscovered: 0,

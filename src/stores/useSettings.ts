@@ -28,7 +28,6 @@ export const useSettings = defineStore('settings', () => {
 
   const {
     toggledAutoPause,
-    toggledLanguage,
     toggledShadowHelper,
     toggledSpelling,
     toggledShinyCharm,
@@ -46,6 +45,8 @@ export const useSettings = defineStore('settings', () => {
   };
 
   const toggleLanguage = (language: Language) => {
+    const { toggledLanguage } = useTouches();
+
     if (settingsState.languages.has(language)) {
       settingsState.languages.delete(language);
       updateSettings({ languages: settingsState.languages });
@@ -57,6 +58,7 @@ export const useSettings = defineStore('settings', () => {
   };
 
   const setLanguages = (languages: Language[]) => {
+    const { toggledLanguage } = useTouches();
     settingsState.languages = new Set<Language>(languages);
     if (languages.length > 0) {
       settingsState.languages = new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']);
