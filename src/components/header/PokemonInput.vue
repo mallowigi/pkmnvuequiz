@@ -80,11 +80,25 @@ const ensureFocus = () => {
   inputRef.value?.focus();
 };
 
+// Whether a dialog was open when Escape was pressed (the dialog closes on that same keypress)
+let escapeClosedDialog = false;
+
+const trackEscapeDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    escapeClosedDialog = dialogs.dialog !== null;
+  }
+};
+
 // Handle keydown events on the document to allow typing without focusing the input
 const handleKeydown = (e: KeyboardEvent) => {
   const { toggleGame } = useGameFlow();
   // if the user presses the escape key
   if (e.key === 'Escape') {
+    // Escape was used to close a dialog: don't toggle the game
+    if (escapeClosedDialog) {
+      escapeClosedDialog = false;
+      return;
+    }
     toggleGame();
     return;
   }
@@ -155,10 +169,13 @@ watch(
 // TODO remove this once vueuse adds the isTypedCharValid
 onMounted(() => {
   ensureFocus();
+  // Capture phase so we see the dialog state before the dialog handles Escape and closes
+  window.addEventListener('keydown', trackEscapeDown, true);
   window.addEventListener('keyup', handleKeydown);
 });
 
 onUnmounted(() => {
+  window.removeEventListener('keydown', trackEscapeDown, true);
   window.removeEventListener('keyup', handleKeydown);
 });
 </script>
