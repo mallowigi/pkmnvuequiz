@@ -4,7 +4,6 @@ import { useTouches } from '@/stores/useTouches.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useManySpellchecks = () => {
-  const { touchesState } = useTouches();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -112,7 +111,10 @@ export const useManySpellchecks = () => {
 
   return createAchievement({
     category: 'game',
-    getValue: () => touchesState.spellingClicks,
+    getValue: () => {
+      const { touchesState } = useTouches();
+      return touchesState.spellingClicks;
+    },
     id: 'manySpellchecks',
     get lastDescription() {
       return t('lastDescription');

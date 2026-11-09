@@ -4,7 +4,6 @@ import { useTouches } from '@/stores/useTouches.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useCheater = () => {
-  const { touchesState } = useTouches();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -57,7 +56,10 @@ export const useCheater = () => {
 
   return createAchievement({
     category: 'misc',
-    getValue: () => (touchesState.toggledCheat ? 1 : 0),
+    getValue: () => {
+      const { touchesState } = useTouches();
+      return touchesState.toggledCheat ? 1 : 0;
+    },
     id: 'cheater',
     get lastDescription() {
       return t('description');

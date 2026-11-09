@@ -5,7 +5,6 @@ import type { MegaType } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export function useMegaCatcher(megaType: MegaType) {
-  const { statsState } = useGlobalStats();
   const label = megaType === 'mega' ? 'Mega' : 'G-Max';
   const { t } = useI18n({
     messages: {
@@ -114,7 +113,10 @@ export function useMegaCatcher(megaType: MegaType) {
 
   return createAchievement({
     category: 'pokemon',
-    getValue: () => statsState.megaFound[megaType],
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.megaFound[megaType];
+    },
     id: `megaCatcher_${megaType}`,
     get lastDescription() {
       return t('lastDescription');

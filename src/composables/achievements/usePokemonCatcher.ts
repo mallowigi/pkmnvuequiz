@@ -6,7 +6,6 @@ import type { Type } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export function usePokemonCatcher(type: Type) {
-  const { statsState } = useGlobalStats();
   const { getTypeTranslation } = useTranslations();
   const { t } = useI18n({
     messages: {
@@ -115,7 +114,10 @@ export function usePokemonCatcher(type: Type) {
 
   return createAchievement({
     category: 'pokemon',
-    getValue: () => statsState.typeFound[type],
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.typeFound[type];
+    },
     id: `pokemonCatcher_${type}`,
     get lastDescription() {
       return t('lastDescription', { type: getTypeTranslation(type) });

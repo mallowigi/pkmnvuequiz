@@ -5,7 +5,6 @@ import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useComboBreaker = () => {
-  const { statsState } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -113,7 +112,10 @@ export const useComboBreaker = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.maxComboBonus,
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.maxComboBonus;
+    },
     id: 'comboBreaker',
     get lastDescription() {
       return t('lastDescription');

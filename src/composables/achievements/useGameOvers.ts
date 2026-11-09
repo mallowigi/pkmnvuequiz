@@ -5,7 +5,6 @@ import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useGameOvers = () => {
-  const { statsState } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -113,7 +112,10 @@ export const useGameOvers = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.totalGameOvers,
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.totalGameOvers;
+    },
     id: 'gameOvers',
     get lastDescription() {
       return t('lastDescription');

@@ -4,7 +4,6 @@ import { useTouches } from '@/stores/useTouches.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useManyShadows = () => {
-  const { touchesState } = useTouches();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -112,7 +111,10 @@ export const useManyShadows = () => {
 
   return createAchievement({
     category: 'game',
-    getValue: () => touchesState.summonedShadows,
+    getValue: () => {
+      const { touchesState } = useTouches();
+      return touchesState.summonedShadows;
+    },
     id: 'manyShadows',
     get lastDescription() {
       return t('lastDescription');

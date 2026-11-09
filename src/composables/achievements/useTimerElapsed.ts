@@ -4,7 +4,6 @@ import { useTimer } from '@/stores/useTimer.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useTimerElapsed = () => {
-  const { timerState } = useTimer();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -113,7 +112,10 @@ export const useTimerElapsed = () => {
   // Timer elapsed is in seconds; thresholds in hours: 4h=14400s, 6h=21600s, 8h=28800s, 10h=36000s
   return createAchievement({
     category: 'game',
-    getValue: () => timerState.elapsed,
+    getValue: () => {
+      const { timerState } = useTimer();
+      return timerState.elapsed;
+    },
     id: 'timerElapsed',
     get lastDescription() {
       return t('lastDescription');

@@ -5,7 +5,6 @@ import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useGlobalSpelling = () => {
-  const { statsState } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -113,7 +112,10 @@ export const useGlobalSpelling = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.totalInvokedSpelling,
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.totalInvokedSpelling;
+    },
     id: 'globalSpelling',
     get lastDescription() {
       return t('lastDescription');

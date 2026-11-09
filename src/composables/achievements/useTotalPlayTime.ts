@@ -7,7 +7,6 @@ import { createAchievement } from '@/utils/utils.ts';
 const HOURS_TO_SECONDS = 3600;
 
 export const useTotalPlayTime = () => {
-  const { getTotalPlayTime } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -115,7 +114,10 @@ export const useTotalPlayTime = () => {
 
   return createAchievement({
     category: 'total',
-    getValue: getTotalPlayTime,
+    getValue: () => {
+      const { getTotalPlayTime } = useGlobalStats();
+      return getTotalPlayTime();
+    },
     id: 'totalPlayTime',
     get lastDescription() {
       return t('lastDescription');

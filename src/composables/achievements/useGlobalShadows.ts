@@ -4,7 +4,6 @@ import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useGlobalShadows = () => {
-  const { statsState } = useGlobalStats();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -50,7 +49,7 @@ export const useGlobalShadows = () => {
         lastDescription: 'Invoqué 1000 ombres au total.',
         lastTitle: 'Dieu des ombres',
         platinumTitle: 'Expert en ombres',
-        silverTitle: "Apprenti des ombres",
+        silverTitle: 'Apprenti des ombres',
       },
       it: {
         bronzeTitle: 'Evocatore di ombre',
@@ -112,7 +111,10 @@ export const useGlobalShadows = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.totalInvokedShadows,
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.totalInvokedShadows;
+    },
     id: 'globalShadows',
     get lastDescription() {
       return t('lastDescription');

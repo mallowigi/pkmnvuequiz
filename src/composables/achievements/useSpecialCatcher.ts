@@ -6,7 +6,6 @@ import type { SpecialType } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export function useSpecialCatcher(specialType: SpecialType) {
-  const { statsState } = useGlobalStats();
   const { getSpecialTypeTranslation } = useTranslations();
   const { t } = useI18n({
     messages: {
@@ -115,7 +114,10 @@ export function useSpecialCatcher(specialType: SpecialType) {
 
   return createAchievement({
     category: 'pokemon',
-    getValue: () => statsState.specialFound[specialType],
+    getValue: () => {
+      const { statsState } = useGlobalStats();
+      return statsState.specialFound[specialType];
+    },
     id: `specialCatcher_${specialType}`,
     get lastDescription() {
       return t('lastDescription', { name: getSpecialTypeTranslation(specialType) });

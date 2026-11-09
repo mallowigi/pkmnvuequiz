@@ -4,7 +4,6 @@ import { useTouches } from '@/stores/useTouches.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
 export const useMissingno = () => {
-  const { touchesState } = useTouches();
   const { t } = useI18n({
     messages: {
       cn: {
@@ -57,7 +56,10 @@ export const useMissingno = () => {
 
   return createAchievement({
     category: 'misc',
-    getValue: () => (touchesState.toggledMissingno ? 1 : 0),
+    getValue: () => {
+      const { touchesState } = useTouches();
+      return touchesState.toggledMissingno ? 1 : 0;
+    },
     id: 'missingno',
     get lastDescription() {
       return t('description');
