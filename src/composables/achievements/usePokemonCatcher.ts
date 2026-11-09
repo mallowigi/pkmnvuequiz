@@ -22,7 +22,7 @@ export function usePokemonCatcher(type: Type) {
 
   return createAchievement({
     category: 'pokemon',
-    getValue: () => statsState.pokemonFoundByType[type],
+    getValue: () => statsState.typeFound[type],
     id: `pokemonCatcher_${type}`,
     get lastDescription() {
       return t('lastDescription', { type: t(`type_${type}`) });

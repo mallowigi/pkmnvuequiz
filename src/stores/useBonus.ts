@@ -7,7 +7,7 @@ import { useSkips } from '@/stores/useSkips.ts';
 import type { Bonus } from '@/types.ts';
 
 export const useBonus = defineStore('bonus', () => {
-  const { incrementSpelling, addComboBonus, startComboTimer } = useGlobalStats();
+  const { incrementInvokedSpelling, addComboBonus, startComboTimer } = useGlobalStats();
   const bonusState = reactive<Bonus>({
     bonus: 1,
     score: 0,
@@ -73,7 +73,7 @@ export const useBonus = defineStore('bonus', () => {
 
   const setSpellCheckerTriggered = () => {
     bonusState.spellCheckerTriggered = true;
-    incrementSpelling();
+    incrementInvokedSpelling();
   };
 
   const resetBonus = () => {

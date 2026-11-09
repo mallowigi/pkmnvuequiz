@@ -4,28 +4,40 @@ import { reactive } from 'vue';
 
 import { auth, db } from '@/firebase.ts';
 import { useMessages } from '@/stores/useMessages.ts';
-import type { Type, SpecialType, MegaType } from '@/types.ts';
+import type { Type, SpecialType, MegaType, PokemonInfo } from '@/types.ts';
 
 export type GlobalStats = {
-  totalShadows: number;
-  totalCries: number;
-  totalSpelling: number;
+  totalInvokedShadows: number;
+  totalInvokedCries: number;
+  totalInvokedSpelling: number;
   totalMisses: number;
   totalGameOvers: number;
   maxComboBonus: number;
-  pokemonFoundByType: Record<Type, number>;
-  pokemonFoundBySpecialType: Record<SpecialType, number>;
-  pokemonFoundByMegaType: Record<MegaType, number>;
+  typeFound: Record<Type, number>;
+  specialFound: Record<SpecialType, number>;
+  megaFound: Record<MegaType, number>;
 };
 
 const initializeStats = (): GlobalStats => ({
-  totalShadows: 0,
-  totalCries: 0,
-  totalSpelling: 0,
-  totalMisses: 0,
-  totalGameOvers: 0,
   maxComboBonus: 0,
-  pokemonFoundByType: {
+  megaFound: {
+    gmax: 0,
+    mega: 0,
+  },
+  specialFound: {
+    legendary: 0,
+    mythical: 0,
+    no: 0,
+    paradox: 0,
+    sublegendary: 0,
+    ultrabeast: 0,
+  },
+  totalGameOvers: 0,
+  totalInvokedCries: 0,
+  totalInvokedShadows: 0,
+  totalInvokedSpelling: 0,
+  totalMisses: 0,
+  typeFound: {
     bug: 0,
     dark: 0,
     dragon: 0,
@@ -45,18 +57,6 @@ const initializeStats = (): GlobalStats => ({
     steel: 0,
     water: 0,
   },
-  pokemonFoundBySpecialType: {
-    legendary: 0,
-    mythical: 0,
-    no: 0,
-    paradox: 0,
-    sublegendary: 0,
-    ultrabeast: 0,
-  },
-  pokemonFoundByMegaType: {
-    gmax: 0,
-    mega: 0,
-  },
 });
 
 export const useGlobalStats = defineStore('globalStats', () => {
@@ -75,23 +75,28 @@ export const useGlobalStats = defineStore('globalStats', () => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        const data = docSnap.data() as Partial<GlobalStats>;
-        const merged = { ...initializeStats(), ...data };
-        // Ensure nested records are merged properly
-        merged.pokemonFoundByType = { ...initializeStats().pokemonFoundByType, ...data.pokemonFoundByType };
-        merged.pokemonFoundBySpecialType = {
-          ...initializeStats().pokemonFoundBySpecialType,
-          ...data.pokemonFoundBySpecialType,
-        };
-        merged.pokemonFoundByMegaType = {
-          ...initializeStats().pokemonFoundByMegaType,
-          ...data.pokemonFoundByMegaType,
-        };
-        Object.assign(statsState, merged);
+        setGlobalState(docSnap.data() as GlobalStats);
       }
     } catch (error) {
       showErrorMessage(error, 'Failed to fetch global stats');
     }
+  };
+
+  const setGlobalState = (stats: Partial<GlobalStats>) => {
+    let initialStats = initializeStats();
+    stats.typeFound = {
+      ...initialStats.typeFound,
+      ...stats.typeFound,
+    };
+    stats.specialFound = {
+      ...initialStats.specialFound,
+      ...stats.specialFound,
+    };
+    stats.megaFound = {
+      ...initialStats.megaFound,
+      ...stats.megaFound,
+    };
+    Object.assign(statsState, stats);
   };
 
   const saveStats = async (partial: Partial<GlobalStats>) => {
@@ -105,54 +110,66 @@ export const useGlobalStats = defineStore('globalStats', () => {
     }
   };
 
-  const incrementShadow = () => {
-    statsState.totalShadows += 1;
-    void saveStats({ totalShadows: statsState.totalShadows });
+  const incrementInvokedShadows = () => {
+    statsState.totalInvokedShadows += 1;
+    void saveStats({ totalInvokedShadows: statsState.totalInvokedShadows });
   };
 
-  const incrementCry = () => {
-    statsState.totalCries += 1;
-    void saveStats({ totalCries: statsState.totalCries });
+  const incrementInvokedCries = () => {
+    statsState.totalInvokedCries += 1;
+    void saveStats({ totalInvokedCries: statsState.totalInvokedCries });
   };
 
-  const incrementSpelling = () => {
-    statsState.totalSpelling += 1;
-    void saveStats({ totalSpelling: statsState.totalSpelling });
+  const incrementInvokedSpelling = () => {
+    statsState.totalInvokedSpelling += 1;
+    void saveStats({ totalInvokedSpelling: statsState.totalInvokedSpelling });
   };
 
-  const incrementMiss = () => {
+  const incrementMisses = () => {
     statsState.totalMisses += 1;
     void saveStats({ totalMisses: statsState.totalMisses });
   };
 
-  const incrementGameOver = () => {
+  const incrementGameOvers = () => {
     statsState.totalGameOvers += 1;
     void saveStats({ totalGameOvers: statsState.totalGameOvers });
   };
 
-  const onPokemonFound = (types: Type[], specialType?: SpecialType, megaType?: MegaType) => {
+  const onPokemonFound = (pokemon: PokemonInfo) => {
+    const types: Type[] = [pokemon.primaryType];
+    if (pokemon.secondaryType) {
+      types.push(pokemon.secondaryType);
+    }
+    const { specialType, megaType } = pokemon;
+
     types.forEach((type) => {
-      statsState.pokemonFoundByType[type] += 1;
+      statsState.typeFound[type] += 1;
     });
 
     if (specialType && specialType !== 'no') {
-      statsState.pokemonFoundBySpecialType[specialType] += 1;
+      statsState.specialFound[specialType] += 1;
     }
 
     if (megaType) {
-      statsState.pokemonFoundByMegaType[megaType] += 1;
+      statsState.megaFound[megaType] += 1;
     }
 
     const toSave: Partial<GlobalStats> = {
-      pokemonFoundByType: { ...statsState.pokemonFoundByType },
+      typeFound: {
+        ...statsState.typeFound,
+      },
     };
 
     if (specialType && specialType !== 'no') {
-      toSave.pokemonFoundBySpecialType = { ...statsState.pokemonFoundBySpecialType };
+      toSave.specialFound = {
+        ...statsState.specialFound,
+      };
     }
 
     if (megaType) {
-      toSave.pokemonFoundByMegaType = { ...statsState.pokemonFoundByMegaType };
+      toSave.megaFound = {
+        ...statsState.megaFound,
+      };
     }
 
     void saveStats(toSave);
@@ -183,18 +200,18 @@ export const useGlobalStats = defineStore('globalStats', () => {
   };
 
   return {
-    fetchStats,
-    incrementShadow,
-    incrementCry,
-    incrementSpelling,
-    incrementMiss,
-    incrementGameOver,
-    onPokemonFound,
-    startComboTimer,
     addComboBonus,
+    fetchStats,
+    incrementGameOvers,
+    incrementInvokedCries,
+    incrementInvokedShadows,
+    incrementInvokedSpelling,
+    incrementMisses,
+    onPokemonFound,
     resetComboTimer,
     resetSessionStats,
     setStatsState,
+    startComboTimer,
     statsState,
   };
 });

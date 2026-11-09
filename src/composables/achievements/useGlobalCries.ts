@@ -22,7 +22,7 @@ export const useGlobalCries = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.totalCries,
+    getValue: () => statsState.totalInvokedCries,
     id: 'globalCries',
     get lastDescription() {
       return t('lastDescription');

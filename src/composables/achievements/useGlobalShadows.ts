@@ -21,7 +21,7 @@ export const useGlobalShadows = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.totalShadows,
+    getValue: () => statsState.totalInvokedShadows,
     id: 'globalShadows',
     get lastDescription() {
       return t('lastDescription');

@@ -22,7 +22,7 @@ export const useGlobalSpelling = () => {
 
   return createAchievement({
     category: 'counters',
-    getValue: () => statsState.totalSpelling,
+    getValue: () => statsState.totalInvokedSpelling,
     id: 'globalSpelling',
     get lastDescription() {
       return t('lastDescription');

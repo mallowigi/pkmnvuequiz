@@ -26,7 +26,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { showRemaining } = useCurrentDex();
   const strategy = useCurrentStrategy();
   const { incrementPlays } = useProfile();
-  const { incrementGameOver } = useGlobalStats();
+  const { incrementGameOvers } = useGlobalStats();
   const { toggledMissingno, toggledCheat } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
@@ -185,7 +185,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopVoice();
 
       strategy.value.recordGiveUp();
-      incrementGameOver();
+      incrementGameOvers();
 
       removeAutoSave();
       showRemaining();

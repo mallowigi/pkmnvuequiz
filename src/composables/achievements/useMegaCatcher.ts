@@ -23,7 +23,7 @@ export function useMegaCatcher(megaType: MegaType) {
 
   return createAchievement({
     category: 'pokemon',
-    getValue: () => statsState.pokemonFoundByMegaType[megaType],
+    getValue: () => statsState.megaFound[megaType],
     id: `megaCatcher_${megaType}`,
     get lastDescription() {
       return t('lastDescription');

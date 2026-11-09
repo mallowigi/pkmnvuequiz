@@ -32,7 +32,7 @@ export function useSpecialCatcher(specialType: SpecialType) {
 
   return createAchievement({
     category: 'pokemon',
-    getValue: () => statsState.pokemonFoundBySpecialType[specialType],
+    getValue: () => statsState.specialFound[specialType],
     id: `specialCatcher_${specialType}`,
     get lastDescription() {
       return t('lastDescription');
