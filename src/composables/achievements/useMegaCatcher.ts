@@ -74,9 +74,9 @@ export function useMegaCatcher(megaType: MegaType) {
       },
       ko: {
         bronzeTitle: `${label} 초보자`,
-        description: `{n}마의 ${label} 포켓몬을 찾으세요.`,
+        description: `{n}마리의 ${label} 포켓몬을 찾으세요.`,
         goldTitle: `${label} 전문가`,
-        lastDescription: `10000마의 ${label} 포켓몬을 찾았습니다.`,
+        lastDescription: `10000마리의 ${label} 포켓몬을 찾았습니다.`,
         lastTitle: `${label} 마스터`,
         platinumTitle: `${label} 달인`,
         silverTitle: `${label} 견습생`,
@@ -109,6 +109,7 @@ export function useMegaCatcher(megaType: MegaType) {
         silverTitle: `${label}學徒`,
       },
     },
+    useScope: 'isolated',
   });
 
   return createAchievement({

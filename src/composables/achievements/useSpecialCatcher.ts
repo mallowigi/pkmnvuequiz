@@ -1,123 +1,116 @@
 import { useI18n } from 'vue-i18n';
 
+import { useTranslations } from '@/composables/useTranslations.ts';
 import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import type { SpecialType } from '@/types.ts';
 import { createAchievement } from '@/utils/utils.ts';
 
-const SPECIAL_LABELS: Record<SpecialType, string> = {
-  legendary: 'Legendary',
-  mythical: 'Mythical',
-  no: 'Normal',
-  paradox: 'Paradox',
-  sublegendary: 'Sublegendary',
-  ultrabeast: 'Ultra Beast',
-};
-
 export function useSpecialCatcher(specialType: SpecialType) {
   const { statsState } = useGlobalStats();
-  const label = SPECIAL_LABELS[specialType];
+  const { getSpecialTypeTranslation } = useTranslations();
   const { t } = useI18n({
     messages: {
       cn: {
-        bronzeTitle: `${label}新手`,
-        description: `找到 {n} 只${label}宝可梦。`,
-        goldTitle: `${label}专家`,
-        lastDescription: `找到了 10000 只${label}宝可梦。`,
-        lastTitle: `${label}大师`,
-        platinumTitle: `${label}达人`,
-        silverTitle: `${label}学徒`,
+        bronzeTitle: '{name}新手',
+        description: '找到 {n} 只{name}宝可梦。',
+        goldTitle: '{name}专家',
+        lastDescription: '找到了 10000 只{name}宝可梦。',
+        lastTitle: '{name}大师',
+        platinumTitle: '{name}达人',
+        silverTitle: '{name}学徒',
       },
       de: {
-        bronzeTitle: `${label}-Anfänger`,
-        description: `Finde {n} ${label}-Pokémon.`,
-        goldTitle: `${label}-Spezialist`,
-        lastDescription: `10000 ${label}-Pokémon gefunden.`,
-        lastTitle: `${label}-Meister`,
-        platinumTitle: `${label}-Experte`,
-        silverTitle: `${label}-Lehrling`,
+        bronzeTitle: '{name}-Anfänger',
+        description: 'Finde {n} {name}-Pokémon.',
+        goldTitle: '{name}-Spezialist',
+        lastDescription: '10000 {name}-Pokémon gefunden.',
+        lastTitle: '{name}-Meister',
+        platinumTitle: '{name}-Experte',
+        silverTitle: '{name}-Lehrling',
       },
       en: {
-        bronzeTitle: `${label} Novice`,
-        description: `Find {n} ${label} Pokémon.`,
-        goldTitle: `${label} Specialist`,
-        lastDescription: `Found 10000 ${label} Pokémon.`,
-        lastTitle: `${label} Master`,
-        platinumTitle: `${label} Expert`,
-        silverTitle: `${label} Apprentice`,
+        bronzeTitle: '{name} Novice',
+        description: 'Find {n} {name} Pokémon.',
+        goldTitle: '{name} Specialist',
+        lastDescription: 'Found 10000 {name} Pokémon.',
+        lastTitle: '{name} Master',
+        platinumTitle: '{name} Expert',
+        silverTitle: '{name} Apprentice',
       },
       es: {
-        bronzeTitle: `Novato ${label}`,
-        description: `Encuentra {n} Pokémon ${label}.`,
-        goldTitle: `Especialista ${label}`,
-        lastDescription: `Encontró 10000 Pokémon ${label}.`,
-        lastTitle: `Maestro ${label}`,
-        platinumTitle: `Experto ${label}`,
-        silverTitle: `Aprendiz ${label}`,
+        bronzeTitle: 'Novato {name}',
+        description: 'Encuentra {n} Pokémon {name}.',
+        goldTitle: 'Especialista {name}',
+        lastDescription: 'Encontró 10000 Pokémon {name}.',
+        lastTitle: 'Maestro {name}',
+        platinumTitle: 'Experto {name}',
+        silverTitle: 'Aprendiz {name}',
       },
       fr: {
-        bronzeTitle: `Novice ${label}`,
-        description: `Trouvez {n} Pokémon ${label}.`,
-        goldTitle: `Spécialiste ${label}`,
-        lastDescription: `Trouvé 10000 Pokémon ${label}.`,
-        lastTitle: `Maître ${label}`,
-        platinumTitle: `Expert ${label}`,
-        silverTitle: `Apprenti ${label}`,
+        bronzeTitle: 'Novice {name}',
+        description: 'Trouvez {n} Pokémon {name}.',
+        goldTitle: 'Spécialiste {name}',
+        lastDescription: 'Trouvé 10000 Pokémon {name}.',
+        lastTitle: 'Maître {name}',
+        platinumTitle: 'Expert {name}',
+        silverTitle: 'Apprenti {name}',
       },
       it: {
-        bronzeTitle: `Novizio ${label}`,
-        description: `Trova {n} Pokémon ${label}.`,
-        goldTitle: `Specialista ${label}`,
-        lastDescription: `Trovato 10000 Pokémon ${label}.`,
-        lastTitle: `Maestro ${label}`,
-        platinumTitle: `Esperto ${label}`,
-        silverTitle: `Apprendista ${label}`,
+        bronzeTitle: 'Novizio {name}',
+        description: 'Trova {n} Pokémon {name}.',
+        goldTitle: 'Specialista {name}',
+        lastDescription: 'Trovato 10000 Pokémon {name}.',
+        lastTitle: 'Maestro {name}',
+        platinumTitle: 'Esperto {name}',
+        silverTitle: 'Apprendista {name}',
       },
       jp: {
-        bronzeTitle: `${label}初心者`,
-        description: `{n}匹の${label}ポケモンを見つける。`,
-        goldTitle: `${label}スペシャリスト`,
-        lastDescription: `10000匹の${label}ポケモンを見つけた。`,
-        lastTitle: `${label}マスター`,
-        platinumTitle: `${label}エキスパート`,
-        silverTitle: `${label}見習い`,
+        bronzeTitle: '{name}初心者',
+        description: '{name}のポケモンを{n}匹見つける。',
+        goldTitle: '{name}スペシャリスト',
+        lastDescription: '{name}のポケモンを10000匹見つけた。',
+        lastTitle: '{name}マスター',
+        platinumTitle: '{name}エキスパート',
+        silverTitle: '{name}見習い',
       },
       ko: {
-        bronzeTitle: `${label} 초보자`,
-        description: `{n}마의 ${label} 포켓몬을 찾으세요.`,
-        goldTitle: `${label} 전문가`,
-        lastDescription: `10000마의 ${label} 포켓몬을 찾았습니다.`,
-        lastTitle: `${label} 마스터`,
-        platinumTitle: `${label} 달인`,
-        silverTitle: `${label} 견습생`,
+        bronzeTitle: '{name} 초보자',
+        description: '{name} 포켓몬을 {n}마리 찾으세요.',
+        goldTitle: '{name} 전문가',
+        lastDescription: '{name} 포켓몬을 10000마리 찾았습니다.',
+        lastTitle: '{name} 마스터',
+        platinumTitle: '{name} 달인',
+        silverTitle: '{name} 견습생',
       },
       pt: {
-        bronzeTitle: `Novato ${label}`,
-        description: `Encontre {n} Pokémon ${label}.`,
-        goldTitle: `Especialista ${label}`,
-        lastDescription: `Encontrou 10000 Pokémon ${label}.`,
-        lastTitle: `Mestre ${label}`,
-        platinumTitle: `Especialista ${label}`,
-        silverTitle: `Aprendiz ${label}`,
+        bronzeTitle: 'Novato {name}',
+        description: 'Encontre {n} Pokémon {name}.',
+        goldTitle: 'Especialista {name}',
+        lastDescription: 'Encontrou 10000 Pokémon {name}.',
+        lastTitle: 'Mestre {name}',
+        platinumTitle: 'Especialista {name}',
+        silverTitle: 'Aprendiz {name}',
       },
       ru: {
-        bronzeTitle: `Новичок ${label}`,
-        description: `Найдите {n} ${label} Покемонов.`,
-        goldTitle: `Специалист ${label}`,
-        lastDescription: `Найдено 10000 ${label} Покемонов.`,
-        lastTitle: `Мастер ${label}`,
-        platinumTitle: `Эксперт ${label}`,
-        silverTitle: `Ученик ${label}`,
+        bronzeTitle: 'Новичок ({name})',
+        description: 'Найдите {n} Покемонов ({name}).',
+        goldTitle: 'Специалист ({name})',
+        lastDescription: 'Найдено 10000 Покемонов ({name}).',
+        lastTitle: 'Мастер ({name})',
+        platinumTitle: 'Эксперт ({name})',
+        silverTitle: 'Ученик ({name})',
       },
       zh: {
-        bronzeTitle: `${label}新手`,
-        description: `找到 {n} 隻${label}寶可夢。`,
-        goldTitle: `${label}專家`,
-        lastDescription: `找到了 10000 隻${label}寶可夢。`,
-        lastTitle: `${label}大師`,
-        platinumTitle: `${label}達人`,
-        silverTitle: `${label}學徒`,
+        bronzeTitle: '{name}新手',
+        description: '找到 {n} 隻{name}寶可夢。',
+        goldTitle: '{name}專家',
+        lastDescription: '找到了 10000 隻{name}寶可夢。',
+        lastTitle: '{name}大師',
+        platinumTitle: '{name}達人',
+        silverTitle: '{name}學徒',
       },
     },
+    useScope: 'isolated',
   });
 
   return createAchievement({
@@ -125,49 +118,49 @@ export function useSpecialCatcher(specialType: SpecialType) {
     getValue: () => statsState.specialFound[specialType],
     id: `specialCatcher_${specialType}`,
     get lastDescription() {
-      return t('lastDescription');
+      return t('lastDescription', { name: getSpecialTypeTranslation(specialType) });
     },
     get lastTitle() {
-      return t('lastTitle');
+      return t('lastTitle', { name: getSpecialTypeTranslation(specialType) });
     },
     priority: 5,
     thresholds: [
       {
         get description() {
-          return t('description', { n: 500 });
+          return t('description', { n: 500, name: getSpecialTypeTranslation(specialType) });
         },
         get nextTitle() {
-          return t('bronzeTitle');
+          return t('bronzeTitle', { name: getSpecialTypeTranslation(specialType) });
         },
         rank: 'bronze',
         val: 500,
       },
       {
         get description() {
-          return t('description', { n: 1000 });
+          return t('description', { n: 1000, name: getSpecialTypeTranslation(specialType) });
         },
         get nextTitle() {
-          return t('silverTitle');
+          return t('silverTitle', { name: getSpecialTypeTranslation(specialType) });
         },
         rank: 'silver',
         val: 1000,
       },
       {
         get description() {
-          return t('description', { n: 2000 });
+          return t('description', { n: 2000, name: getSpecialTypeTranslation(specialType) });
         },
         get nextTitle() {
-          return t('goldTitle');
+          return t('goldTitle', { name: getSpecialTypeTranslation(specialType) });
         },
         rank: 'gold',
         val: 2000,
       },
       {
         get description() {
-          return t('description', { n: 10000 });
+          return t('description', { n: 10000, name: getSpecialTypeTranslation(specialType) });
         },
         get nextTitle() {
-          return t('platinumTitle');
+          return t('platinumTitle', { name: getSpecialTypeTranslation(specialType) });
         },
         rank: 'platinum',
         val: 10000,

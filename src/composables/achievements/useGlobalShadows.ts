@@ -90,9 +90,9 @@ export const useGlobalShadows = () => {
       },
       ru: {
         bronzeTitle: 'Призыватель теней',
-        description: 'Призовите {n} теней всего.',
+        description: 'Призовите {n} теней.',
         goldTitle: 'Мастер теней',
-        lastDescription: 'Призвано 1000 теней всего.',
+        lastDescription: 'Призвано 1000 теней.',
         lastTitle: 'Бог теней',
         platinumTitle: 'Эксперт по теням',
         silverTitle: 'Ученик теней',
@@ -107,6 +107,7 @@ export const useGlobalShadows = () => {
         silverTitle: '陰影學徒',
       },
     },
+    useScope: 'isolated',
   });
 
   return createAchievement({

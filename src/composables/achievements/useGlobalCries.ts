@@ -55,11 +55,11 @@ export const useGlobalCries = () => {
       },
       it: {
         bronzeTitle: 'Ascoltatore curioso',
-        description: 'Riproduci {n} grida in totale.',
-        goldTitle: 'Entusiasta delle grida',
-        lastDescription: 'Riprodotta 1000 grida in totale.',
-        lastTitle: 'Professore delle grida',
-        platinumTitle: 'Esperto di grida',
+        description: 'Riproduci {n} versi in totale.',
+        goldTitle: 'Esperto di versi',
+        lastDescription: 'Riprodotto 1000 versi in totale.',
+        lastTitle: 'Professore dei versi',
+        platinumTitle: 'Maestro dei versi',
         silverTitle: 'Ascoltatore attento',
       },
       jp: {
@@ -91,9 +91,9 @@ export const useGlobalCries = () => {
       },
       ru: {
         bronzeTitle: 'Любопытный слушатель',
-        description: 'Воспроизведите {n} криков всего.',
+        description: 'Воспроизведите {n} криков.',
         goldTitle: 'Энтузиаст криков',
-        lastDescription: 'Воспроизведено 1000 криков всего.',
+        lastDescription: 'Воспроизведено 1000 криков.',
         lastTitle: 'Профессор криков',
         platinumTitle: 'Эксперт по крикам',
         silverTitle: 'Внимательный слушатель',
@@ -108,6 +108,7 @@ export const useGlobalCries = () => {
         silverTitle: '敏銳的聽眾',
       },
     },
+    useScope: 'isolated',
   });
 
   return createAchievement({

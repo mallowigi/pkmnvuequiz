@@ -47,7 +47,7 @@ export const useGameOvers = () => {
       fr: {
         bronzeTitle: 'Novice',
         description: 'Abandonnez ou révélez toutes les ombres {n} fois.',
-        goldTitle: 'Abandonneur',
+        goldTitle: 'Défaitiste',
         lastDescription: 'Abandonné ou révélé toutes les ombres 500 fois.',
         lastTitle: 'Tête vide',
         platinumTitle: 'Simplet',
@@ -56,7 +56,7 @@ export const useGameOvers = () => {
       it: {
         bronzeTitle: 'Novizio',
         description: 'Arrenditi o rivela tutte le ombre {n} volte.',
-        goldTitle: 'Arrenditore',
+        goldTitle: 'Disfattista',
         lastDescription: 'Arreso o rivelato tutte le ombre 500 volte.',
         lastTitle: 'Testa vuota',
         platinumTitle: 'Sempliciotto',
@@ -67,8 +67,8 @@ export const useGameOvers = () => {
         description: '{n}回諦めるか全てのシャドウを公開する。',
         goldTitle: '諦め屋',
         lastDescription: '500回諦めたか全てのシャドウを公開した。',
-        lastTitle: '頭の中空空',
-        platinumTitle: '単純人',
+        lastTitle: '頭がからっぽ',
+        platinumTitle: '単細胞',
         silverTitle: '初級者',
       },
       ko: {
@@ -77,7 +77,7 @@ export const useGameOvers = () => {
         goldTitle: '포기꾼',
         lastDescription: '500번 포기하거나 모든 섀도우를 공개했습니다.',
         lastTitle: '빈 머리',
-        platinumTitle: '간단한 사람',
+        platinumTitle: '단순한 사람',
         silverTitle: '입문자',
       },
       pt: {
@@ -91,9 +91,9 @@ export const useGameOvers = () => {
       },
       ru: {
         bronzeTitle: 'Новичок',
-        description: 'Сдавайтесь или раскрывайте все тени {n} раз.',
-        goldTitle: 'Сдающийся',
-        lastDescription: 'Сдался или раскрыл все тени 500 раз.',
+        description: 'Сдайтесь или откройте все тени {n} раз.',
+        goldTitle: 'Капитулянт',
+        lastDescription: 'Сдался или открыл все тени 500 раз.',
         lastTitle: 'Пустая голова',
         platinumTitle: 'Простак',
         silverTitle: 'Начинающий',
@@ -108,6 +108,7 @@ export const useGameOvers = () => {
         silverTitle: '初學者',
       },
     },
+    useScope: 'isolated',
   });
 
   return createAchievement({
