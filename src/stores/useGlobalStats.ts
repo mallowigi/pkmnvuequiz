@@ -233,7 +233,11 @@ export const useGlobalStats = defineStore('globalStats', () => {
 
     void saveStats(toSave);
 
-    checkAchievements();
+    try {
+      checkAchievements();
+    } catch (error) {
+      console.error('Failed to check achievements', error);
+    }
   };
 
   const startComboTimer = () => {

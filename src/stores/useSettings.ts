@@ -36,10 +36,13 @@ export const useSettings = defineStore('settings', () => {
   } = useTouches();
 
   const applySettings = (settings: Partial<Settings>) => {
-    const newSettings = {
-      ...settings,
-      languages: new Set<Language>(settings.languages || []),
-    };
+    const { languages, ...rest } = settings;
+    const newSettings: Partial<Settings> = { ...rest };
+
+    // Never end up with no languages enabled: keep the current ones if the incoming list is missing or empty
+    if (languages && new Set<Language>(languages).size > 0) {
+      newSettings.languages = new Set<Language>(languages);
+    }
 
     Object.assign(settingsState, newSettings);
   };
@@ -60,7 +63,7 @@ export const useSettings = defineStore('settings', () => {
   const setLanguages = (languages: Language[]) => {
     const { toggledLanguage } = useTouches();
     settingsState.languages = new Set<Language>(languages);
-    if (languages.length > 0) {
+    if (languages.length === 0) {
       settingsState.languages = new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']);
     }
 
@@ -149,11 +152,15 @@ export const useSettings = defineStore('settings', () => {
 
   const setSettingsState = (settings: Partial<Settings>) => {
     Object.assign(settingsState, settings);
-    const newSettings = {
-      ...settings,
-      languages: new Set<Language>(settings.languages || []),
-    };
-    updateSettings(newSettings);
+    const { languages, ...rest } = settings;
+    updateSettings(
+      languages
+        ? {
+            ...rest,
+            languages: new Set<Language>(languages),
+          }
+        : rest,
+    );
   };
 
   return {
