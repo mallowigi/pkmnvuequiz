@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMediaQuery, usePreferredDark } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
-import { watchEffect, watch, computed, useTemplateRef } from 'vue';
+import { watchEffect, watch, computed, useTemplateRef, onMounted } from 'vue';
 
 import AttackDetailsPane from '@/components/attackdex/attackInfo/AttackDetailsPane.vue';
 import Background from '@/components/background/Background.vue';
@@ -22,6 +22,7 @@ import PokemonDetailsPane from '@/components/game/pokemonInfo/PokemonDetailsPane
 import GameHeader from '@/components/header/GameHeader.vue';
 import MobileControls from '@/components/navigation/MobileControls.vue';
 import GameSelection from '@/components/start/genSelection/GameSelection.vue';
+import { useAchievements } from '@/composables/useAchievements.ts';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
 import OfflineBanner from '@/OfflineBanner.vue';
@@ -45,6 +46,7 @@ const { isMobile, isLaptop, isDesktop } = useAppBreakpoints();
 const isTouchLayout = useMediaQuery('(hover: none) and (pointer: coarse)');
 const gameContent = useTemplateRef<HTMLElement>('gameContent');
 const scrollContainer = computed(() => (isTouchLayout.value ? gameContent.value : null));
+const { checkAchievements } = useAchievements();
 
 watchEffect(() => {
   if (typeof document === 'undefined') {
@@ -77,6 +79,10 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(() => {
+  checkAchievements({ silent: true });
+});
 </script>
 
 <template>

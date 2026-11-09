@@ -17,12 +17,11 @@ import type { AchievementCategory } from '@/types.ts';
 const { closeDialog } = useDialogs();
 const { t } = useI18n();
 
-const { achievements, checkAchievements, toRank } = useAchievements();
+const { achievements, toRank } = useAchievements();
 const { profileState } = useProfile();
 const { activeTab, setTab } = useAchievementTabs();
 
 const dialogContentRef = useTemplateRef<HTMLElement>('dialogContentRef');
-const firstTime = ref(true);
 
 const visibleAchievements = computed(() =>
   Object.values(achievements)
@@ -81,13 +80,6 @@ const gridVariants = {
     x: dir > 0 ? -999 : 999,
   }),
 };
-
-onMounted(() => {
-  if (firstTime.value) {
-    checkAchievements();
-    firstTime.value = false;
-  }
-});
 </script>
 
 <template>

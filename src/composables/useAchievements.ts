@@ -19,7 +19,7 @@ export const useAchievements = () => {
     return profileState.achievements[achievementId] || NOT_UNLOCKED_TIER;
   };
 
-  const checkAchievements = () => {
+  const checkAchievements = ({ silent = false }: { silent?: boolean } = {}) => {
     const { showUserMessage } = useMessages();
 
     Object.values(achievements).forEach((achievement) => {
@@ -32,7 +32,9 @@ export const useAchievements = () => {
         if (condition.tier < ownAchievementTier && condition.isSatisfied()) {
           addAchievement(achievement.id, condition.tier);
           // Show a toast or something
-          showUserMessage(`Achievement unlocked: ${achievement.name} (Tier ${condition.tier})`);
+          if (!silent) {
+            showUserMessage(`Achievement unlocked: ${achievement.name} (Tier ${condition.tier})`);
+          }
         }
       }
     });
