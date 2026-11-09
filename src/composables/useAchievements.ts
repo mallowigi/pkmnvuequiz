@@ -5,6 +5,21 @@ import type { AchievementRank } from '@/types.ts';
 
 const NOT_UNLOCKED_TIER = 999;
 
+export const toRank = (tier: number): AchievementRank | null => {
+  switch (tier) {
+    case 1:
+      return 'platinum';
+    case 2:
+      return 'gold';
+    case 3:
+      return 'silver';
+    case 4:
+      return 'bronze';
+    default:
+      return null;
+  }
+};
+
 export const useAchievements = () => {
   const { addAchievement } = useProfile();
   const achievements = useAchievementsRegistry();
@@ -38,21 +53,6 @@ export const useAchievements = () => {
         }
       }
     });
-  };
-
-  const toRank = (tier: number): AchievementRank | null => {
-    switch (tier) {
-      case 1:
-        return 'platinum';
-      case 2:
-        return 'gold';
-      case 3:
-        return 'silver';
-      case 4:
-        return 'bronze';
-      default:
-        return null;
-    }
   };
 
   return {

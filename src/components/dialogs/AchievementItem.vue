@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 
 import TrophyIcon from '@/components/common/icons/TrophyIcon.vue';
 import RoundedBox from '@/components/common/RoundedBox.vue';
-import { useAchievements } from '@/composables/useAchievements.ts';
+import { toRank } from '@/composables/useAchievements.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { Achievement } from '@/types.ts';
 
@@ -13,13 +13,12 @@ defineProps<{
 
 const { t } = useI18n();
 const { profileState } = useProfile();
-const { toRank } = useAchievements();
 </script>
 
 <template>
   <RoundedBox
     class="achievement-box"
-    :class="toRank"
+    :class="toRank(profileState.achievements[achievement.id])"
   >
     <div class="achievement-icon">
       <TrophyIcon />
@@ -67,6 +66,26 @@ const { toRank } = useAchievements();
     color-mix(in srgb, var(--achievement-color) 25%, var(--button)) 75%,
     var(--button) 100%
   );
+
+  &.bronze,
+  &.silver,
+  &.gold,
+  &.platinum {
+    opacity: 1;
+  }
+
+  &.bronze {
+    --achievement-color: var(--bronze);
+  }
+  &.silver {
+    --achievement-color: var(--silver);
+  }
+  &.gold {
+    --achievement-color: var(--gold);
+  }
+  &.platinum {
+    --achievement-color: var(--platinum);
+  }
 }
 
 .achievement-info {
