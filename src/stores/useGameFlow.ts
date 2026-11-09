@@ -12,6 +12,7 @@ import { useBonus } from '@/stores/useBonus.ts';
 import { useCurrentGen } from '@/stores/useCurrentGen.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import { useRooms } from '@/stores/useRooms.ts';
@@ -25,6 +26,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { showRemaining } = useCurrentDex();
   const strategy = useCurrentStrategy();
   const { incrementPlays } = useProfile();
+  const { incrementGameOver } = useGlobalStats();
   const { toggledMissingno, toggledCheat } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
@@ -183,6 +185,7 @@ export const useGameFlow = defineStore('gameFlow', () => {
       stopVoice();
 
       strategy.value.recordGiveUp();
+      incrementGameOver();
 
       removeAutoSave();
       showRemaining();

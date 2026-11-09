@@ -18,6 +18,8 @@ export const useAchievementTabs = () => {
     { id: 'total', label: t('lifetime') },
     { id: 'game', label: t('inGame') },
     { id: 'timer', label: t('time') },
+    { id: 'pokemon', label: t('pokemon') },
+    { id: 'counters', label: t('counters') },
     { id: 'misc', label: t('misc') },
   ]);
 

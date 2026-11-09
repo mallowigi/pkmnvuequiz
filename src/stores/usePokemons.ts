@@ -11,6 +11,7 @@ import { useCurrentBox } from '@/stores/useCurrentBox';
 import { useCurrentGen } from '@/stores/useCurrentGen';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { usePkmnData } from '@/stores/usePkmnStore';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState';
@@ -272,7 +273,8 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const addFound = (pokemons: PokemonInfo[]) => {
     const { endGame } = useGameFlow();
-    const {addShiny} = useProfile();
+    const { addShiny } = useProfile();
+    const { onPokemonFound } = useGlobalStats();
 
     pokemons.forEach((pokemon) => {
       const normalizedPokemon = normalizeName(pokemon.baseName);
@@ -283,6 +285,13 @@ export const usePokemons = defineStore('pokemons', () => {
         status.isFound = true;
         status.lastFoundAt = Date.now();
         vibrate(300);
+
+        // Track the types found for achievements
+        const types: Type[] = [pokemon.primaryType];
+        if (pokemon.secondaryType) {
+          types.push(pokemon.secondaryType);
+        }
+        onPokemonFound(types, pokemon.specialType, pokemon.megaType);
 
         const shinyRandom = Math.random();
         const shinyRate = getShinyRate();
@@ -399,11 +408,13 @@ export const usePokemons = defineStore('pokemons', () => {
   };
 
   const showRemaining = () => {
+    const { incrementMiss } = useGlobalStats();
     for (const pokemonStatus of pokemonState.pokemonStatuses.values()) {
       if (!pokemonStatus.isFound) {
         pokemonStatus.isMissed = true;
         pokemonStatus.isFound = true;
         pokemonStatus.lastFoundAt = Date.now();
+        incrementMiss();
       }
     }
   };

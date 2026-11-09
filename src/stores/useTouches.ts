@@ -1,9 +1,11 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import type { Touches } from '@/types';
 
 export const useTouches = defineStore('touches', () => {
+  const { incrementShadow, incrementCry, incrementSpelling } = useGlobalStats();
   const touchesState = reactive<Touches>({
     boxShuffleClicks: 0,
     shiniesDiscovered: 0,
@@ -82,10 +84,12 @@ export const useTouches = defineStore('touches', () => {
 
   const summonedShadow = () => {
     touchesState.summonedShadows += 1;
+    incrementShadow();
   };
 
   const summonedCry = () => {
     touchesState.summonedCries += 1;
+    incrementCry();
   };
 
   const summonedInitials = () => {

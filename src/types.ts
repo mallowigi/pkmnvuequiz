@@ -273,7 +273,7 @@ export type PkmnData = {
 //region Achievements
 export type AchievementRank = 'bronze' | 'silver' | 'gold' | 'platinum';
 
-export type AchievementCategory = 'total' | 'game' | 'timer' | 'misc';
+export type AchievementCategory = 'total' | 'game' | 'timer' | 'misc' | 'pokemon' | 'counters';
 
 export type AchievementCondition = {
   tier: number;

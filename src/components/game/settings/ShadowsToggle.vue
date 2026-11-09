@@ -5,12 +5,14 @@ import { useI18n } from 'vue-i18n';
 import RoundedButton from '@/components/common/RoundedButton.vue';
 import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useDialogs } from '@/stores/useDialogs.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useState } from '@/stores/useState.ts';
 
 const { state, displayShadows } = useState();
 const { setDialog } = useDialogs();
 const { showRemainingShadows } = useCurrentDex();
+const { incrementGameOver } = useGlobalStats();
 const { t } = useI18n();
 const { isOwner } = storeToRefs(useRooms());
 
@@ -19,6 +21,7 @@ const toggle = () => {
     setDialog('shadows', () => {
       displayShadows();
       showRemainingShadows();
+      incrementGameOver();
     });
   }
 };

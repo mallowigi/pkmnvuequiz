@@ -2,10 +2,12 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
 import { useBufferedTotalStats } from '@/composables/useBufferedTotalStats.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useSkips } from '@/stores/useSkips.ts';
 import type { Bonus } from '@/types.ts';
 
 export const useBonus = defineStore('bonus', () => {
+  const { incrementSpelling, addComboBonus, startComboTimer } = useGlobalStats();
   const bonusState = reactive<Bonus>({
     bonus: 1,
     score: 0,
@@ -21,6 +23,7 @@ export const useBonus = defineStore('bonus', () => {
 
   const startBonusSequence = () => {
     clearTimeouts();
+    startComboTimer();
     bonusState.bonus = 5;
 
     timeouts.push(
@@ -60,6 +63,7 @@ export const useBonus = defineStore('bonus', () => {
     bonusState.spellCheckerTriggered = false;
     addSkipScore(bonusState.bonus);
     addToTotalScore(bonusState.bonus);
+    addComboBonus(bonusState.bonus);
     startBonusSequence();
   };
 
@@ -69,6 +73,7 @@ export const useBonus = defineStore('bonus', () => {
 
   const setSpellCheckerTriggered = () => {
     bonusState.spellCheckerTriggered = true;
+    incrementSpelling();
   };
 
   const resetBonus = () => {

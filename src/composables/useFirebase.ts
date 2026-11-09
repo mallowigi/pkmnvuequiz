@@ -29,6 +29,7 @@ import { MAX_SAVE_SLOTS, useSaveSlots } from '@/composables/useSaveSlots.ts';
 import { auth, db } from '@/firebase.ts';
 import { i18n } from '@/main.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
@@ -55,8 +56,10 @@ export const useFirebase = defineStore('firebase', () => {
 
   onAuthStateChanged(auth, async (user) => {
     const { fetchProfile, setProfileState } = useProfile();
+    const { fetchStats } = useGlobalStats();
     if (user) {
       await fetchProfile();
+      await fetchStats();
     } else {
       setProfileState({ plays: 0 });
     }
