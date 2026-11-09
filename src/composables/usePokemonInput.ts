@@ -131,12 +131,14 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   };
 
   const handleSuccess = (foundEntries: DexEntry[]) => {
+    // Clear first so a failure further down can never leave the answer in the input and re-trigger "already named"
+    clearInput();
+
     addFound(foundEntries);
 
     updateShuffles();
 
     strategy.value.playFoundSound(foundEntries[0]);
-    clearInput();
   };
 
   const { checkInput } = useQuizInput<DexEntry>({
