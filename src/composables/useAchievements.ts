@@ -1,5 +1,5 @@
 import { useAchievementsRegistry } from '@/composables/achievements/useAchievementsRegistry.ts';
-import { useMessages } from '@/stores/useMessages.ts';
+import { useAchievementToasts } from '@/stores/useAchievementToasts.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { AchievementRank } from '@/types.ts';
 
@@ -20,7 +20,7 @@ export const useAchievements = () => {
   };
 
   const checkAchievements = ({ silent = false }: { silent?: boolean } = {}) => {
-    const { showUserMessage } = useMessages();
+    const { showAchievement } = useAchievementToasts();
 
     Object.values(achievements).forEach((achievement) => {
       const ownAchievementTier = getAchievementTier(achievement.id);
@@ -33,7 +33,7 @@ export const useAchievements = () => {
           addAchievement(achievement.id, condition.tier);
           // Show a toast or something
           if (!silent) {
-            showUserMessage(`Achievement unlocked: ${achievement.name} (Tier ${condition.tier})`);
+            showAchievement(achievement);
           }
         }
       }
