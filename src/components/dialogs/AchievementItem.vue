@@ -104,11 +104,18 @@ const rank = computed(() => {
 
     .achievement-title {
       font-size: 13px;
+      overflow-wrap: anywhere;
     }
 
     .achievement-desc {
       font-size: 11px;
       margin: 2px 0 0;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
     }
 
     .achievement-icon {

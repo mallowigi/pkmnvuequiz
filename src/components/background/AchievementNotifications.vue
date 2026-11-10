@@ -10,7 +10,7 @@ const { state } = useAchievementToasts();
     <TransitionGroup>
       <AchievementItem
         v-for="toast in state.achievements"
-        :key="`${toast.achievement.id}-${toast.tier}`"
+        :key="toast.uid"
         :achievement="toast.achievement"
         :tier="toast.tier"
       />
