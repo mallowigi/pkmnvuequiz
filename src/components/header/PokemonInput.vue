@@ -27,7 +27,6 @@ const strategy = useCurrentStrategy();
 const { t } = useI18n();
 const { lastQuery } = useVoice();
 
-/** Clears the input field and updates the game flow state with a null input. */
 const clearInput = () => {
   inputRef.value!.value = '';
   updateInput(null);
@@ -45,7 +44,6 @@ useMultiTap({
   onTripleTap: activateNextShadow,
 });
 
-// Reference to the textbox
 const textBoxRef = ref<InstanceType<typeof TextBox> | null>(null);
 
 // We need to access the input element inside the TextBox component, so we use a computed property to get it
@@ -91,8 +89,8 @@ const trackEscapeDown = (e: KeyboardEvent) => {
 
 // Handle keydown events on the document to allow typing without focusing the input
 const handleKeydown = (e: KeyboardEvent) => {
-  const { toggleGame } = useGameFlow();
-  // if the user presses the escape key
+  const { toggleGame, toggleSettings } = useGameFlow();
+
   if (e.key === 'Escape') {
     // Escape was used to close a dialog: don't toggle the game
     if (escapeClosedDialog) {
@@ -111,6 +109,11 @@ const handleKeydown = (e: KeyboardEvent) => {
   updateInput(inputRef.value!.value);
 
   const value = inputRef.value?.value || '';
+
+  if (e.key === '/') {
+    toggleSettings();
+    return;
+  }
 
   // Shadow helper shortcut: ',' key
   if (e.key === ',') {
