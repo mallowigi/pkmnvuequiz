@@ -39,7 +39,12 @@ import { pokemonTypes } from '@/data/pokemonTypes.ts';
 import { specialTypes } from '@/data/specialTypes.ts';
 import type { Achievement, Gen, MegaType, SpecialType, Type } from '@/types.ts';
 
+let cachedRegistry: Record<string, Achievement> | null = null;
+
+// useI18n inside the achievements only works within a component setup, so build once there and reuse from stores.
 export const useAchievementsRegistry = (): Record<string, Achievement> => {
+  if (cachedRegistry) return cachedRegistry;
+
   const achievements: Record<string, Achievement> = {
     blankMemory: useManyShadows(),
     boxShuffler: useBoxShuffleWins(),
@@ -99,5 +104,7 @@ export const useAchievementsRegistry = (): Record<string, Achievement> => {
     achievements[`megaCatcher_${megaType}`] = useMegaCatcher(megaType as MegaType);
   }
 
-  return achievements;
+  // Key by the achievement's own id: profile tiers are stored and looked up by id, and some keys above differ from it.
+  cachedRegistry = Object.fromEntries(Object.values(achievements).map((achievement) => [achievement.id, achievement]));
+  return cachedRegistry;
 };
