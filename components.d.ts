@@ -12,7 +12,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AchievementItem: typeof import('./src/components/dialogs/AchievementItem.vue')['default']
-    AchievementNotification: typeof import('./src/components/AchievementNotification.vue')['default']
+    AchievementNotification: (typeof import('./src/components/background/AchievementNotification.vue'))['default']
+    AchievementNotifications: typeof import('./src/components/background/AchievementNotifications.vue')['default']
     AchievementsDialog: typeof import('./src/components/dialogs/AchievementsDialog.vue')['default']
     AchievementTabs: typeof import('./src/components/dialogs/AchievementTabs.vue')['default']
     AlertDialog: typeof import('./src/components/dialogs/AlertDialog.vue')['default']

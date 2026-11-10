@@ -4,6 +4,8 @@ import { storeToRefs } from 'pinia';
 import { watchEffect, watch, computed, useTemplateRef, onMounted, ref } from 'vue';
 
 import AttackDetailsPane from '@/components/attackdex/attackInfo/AttackDetailsPane.vue';
+import AchievementNotificationss from '@/components/background/AchievementNotifications.vue';
+import AchievementNotifications from '@/components/background/AchievementNotifications.vue';
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
 import EndOverlay from '@/components/background/EndOverlay.vue';
@@ -183,6 +185,9 @@ watch(
 
     <!-- Mobile Controls -->
     <MobileControls v-if="isMobile" />
+
+    <!-- Achievement Notifications -->
+    <AchievementNotifications />
   </main>
 </template>
 
