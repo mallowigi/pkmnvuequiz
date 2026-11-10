@@ -19,6 +19,11 @@ const { state } = useAchievementToasts();
 
 <style scoped>
 .achievement-notification-container {
+  --bronze: #cd7f32;
+  --silver: #c0c0c0;
+  --gold: #ffd700;
+  --platinum: #e5e4e2;
+  --normal: var(--type-btn-color, var(--primary));
   position: fixed;
   top: anchor(--watermark-url bottom, 3rem);
   right: 8px;
