@@ -52,7 +52,7 @@ export const useAchievements = () => {
 
       addAchievement(achievement.id, bestTier);
       if (!silent) {
-        showAchievement(achievement);
+        showAchievement(achievement, bestTier);
       }
     });
   };

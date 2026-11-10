@@ -116,6 +116,15 @@ export const createAchievement = (achievement: AchievementConfig): Achievement =
       isSatisfied: () => getValue() >= threshold.val,
       tier: count - i,
     })),
+    getTierInfo: (tier: number) => {
+      const threshold = thresholds[count - tier];
+      return (
+        threshold && {
+          description: threshold.description,
+          name: threshold.nextTitle,
+        }
+      );
+    },
     get description() {
       const found = thresholds.find((threshold) => getValue() < threshold.val);
       return found ? found.description : lastDescription;

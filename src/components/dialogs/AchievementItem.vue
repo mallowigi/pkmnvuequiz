@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import TrophyIcon from '@/components/common/icons/TrophyIcon.vue';
@@ -7,33 +8,54 @@ import { toRank } from '@/composables/useAchievements.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import type { Achievement } from '@/types.ts';
 
-defineProps<{
+const props = defineProps<{
   achievement: Achievement;
+  tier?: number;
 }>();
 
 const { t } = useI18n();
 const { profileState } = useProfile();
+
+const isNotification = computed(() => {
+  return props.tier !== undefined;
+});
+
+const tierInfo = computed(() => {
+  return props.tier ? props.achievement.getTierInfo(props.tier) : undefined;
+});
+
+const title = computed(() => {
+  return tierInfo?.value?.name ?? props.achievement.name;
+});
+
+const description = computed(() => {
+  return tierInfo?.value?.description ?? props.achievement.description;
+});
+
+const rank = computed(() => {
+  return toRank(props.tier ?? profileState.achievements[props.achievement.id]);
+});
 </script>
 
 <template>
   <RoundedBox
     class="achievement-box"
-    :class="toRank(profileState.achievements[achievement.id])"
+    :class="[rank, { compact: isNotification }]"
   >
     <div class="achievement-icon">
       <TrophyIcon />
     </div>
 
     <div class="achievement-info">
-      <h3 class="achievement-title">{{ t(achievement.name) }}</h3>
+      <h3 class="achievement-title">{{ t(title) }}</h3>
 
       <p class="achievement-desc">
-        <span v-if="achievement.nextStep">{{ t('next') }}:</span> {{ t(achievement.description) }}
+        <span v-if="!isNotification && achievement.nextStep">{{ t('next') }}:</span> {{ t(description) }}
       </p>
 
       <meter
         class="achievement-meter"
-        v-if="achievement.progress && achievement.nextStep"
+        v-if="!isNotification && achievement.progress && achievement.nextStep"
         :value="achievement.progress"
         :min="0"
         :max="achievement.nextStep"
@@ -66,6 +88,33 @@ const { profileState } = useProfile();
     color-mix(in srgb, var(--achievement-color) 25%, var(--button)) 75%,
     var(--button) 100%
   );
+
+  &.compact {
+    height: auto;
+    max-height: none;
+    gap: 8px;
+    padding: 6px 10px;
+    max-width: 280px;
+
+    .achievement-info {
+      padding: 0;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .achievement-title {
+      font-size: 13px;
+    }
+
+    .achievement-desc {
+      font-size: 11px;
+      margin: 2px 0 0;
+    }
+
+    .achievement-icon {
+      transform: scale(0.75);
+    }
+  }
 
   &.bronze,
   &.silver,

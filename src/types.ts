@@ -284,6 +284,12 @@ export type Achievement = {
   readonly progress?: number;
   readonly nextStep?: number;
   readonly priority: number;
+  getTierInfo: (tier: number) => AchievementTierInfo;
+};
+
+export type AchievementTierInfo = {
+  readonly name: string;
+  readonly description: string;
 };
 
 type AchievementThreshold = {
