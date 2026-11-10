@@ -12,6 +12,7 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useProfile } from '@/stores/useProfile.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
+import { useTouches } from '@/stores/useTouches.ts';
 import type { DexStrategy, DexId, SummaryTextParams, ShareTextParams, ShuffleBoxes } from '@/strategies/types.ts';
 import type { PokemonInfo, Type, GameMode, RegionBox, SpecialType } from '@/types.ts';
 
@@ -28,6 +29,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
   const { currentTypeState } = useCurrentType();
   const { playPokemonCry } = usePlaySounds();
   const { state } = useState();
+  const { summonedCry } = useTouches();
 
   const id: DexId = 'pokemon';
 
@@ -132,6 +134,7 @@ export const usePokemonDexStrategy = (): DexStrategy => {
     if (settingsState.withCriesHelper) {
       const randomPokemon = pokemons.getRandomPokemon();
       playPokemonCry(randomPokemon?.dexNum ?? 0);
+      summonedCry();
     } else {
       showUserMessage(i18n.global.t('criesHelperDisabled'));
     }
