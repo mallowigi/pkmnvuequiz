@@ -73,6 +73,15 @@ export const usePlaySounds = () => {
     }, 50);
   };
 
+  const playAchievement = () => {
+    if (!settingsState.withSound) return;
+
+    soundFile.value = 'assets/sounds/gbashiny.mp3';
+    setTimeout(() => {
+      play();
+    }, 50);
+  };
+
   const playShiny = (pokemon: PokemonInfo) => {
     if (!settingsState.withSound) return;
 
@@ -107,6 +116,7 @@ export const usePlaySounds = () => {
   };
 
   return {
+    playAchievement,
     playClick,
     playFailSound,
     playFanfare,

@@ -1,8 +1,20 @@
 <script setup lang="ts">
+import { watch } from 'vue';
+
 import AchievementItem from '@/components/dialogs/AchievementItem.vue';
+import { usePlaySounds } from '@/composables/usePlaySounds.ts';
 import { useAchievementToasts } from '@/stores/useAchievementToasts.ts';
 
 const { state } = useAchievementToasts();
+// useSound only works inside a component, so the sound is triggered here rather than from the store.
+const { playAchievement } = usePlaySounds();
+
+watch(
+  () => state.achievements.length,
+  (length, previous) => {
+    if (length > previous) playAchievement();
+  },
+);
 </script>
 
 <template>
