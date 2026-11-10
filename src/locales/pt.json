@@ -176,6 +176,22 @@
   "hello": "Olá, {name}",
   "help": "Ajuda",
   "helpPopup": {
+    "achievements": {
+      "description": "Desbloqueie conquistas ao atingir marcos: vencer quizzes, fazer pontuações altas, usar menos ajudas e mais! Abra-as pelo menu sob o seu avatar. As conquistas são agrupadas em abas (<em>Total</em>, <em>Jogo</em>, <em>Cronômetro</em> e <em>Diversos</em>); no celular, deslize para trocar de aba.",
+      "ranks": {
+        "description": "Cada conquista tem vários níveis: <b>Bronze</b>, <b>Prata</b>, <b>Ouro</b> e <b>Platina</b>. Continue jogando para melhorá-los! Uma notificação aparece sempre que você desbloqueia ou melhora uma.<br><b>Nota:</b> as conquistas são salvas no seu perfil, então você precisa estar conectado.",
+        "title": "Níveis"
+      },
+      "title": "Conquistas"
+    },
+    "attackDex": {
+      "description": "Você conhece os golpes tão bem quanto os Pokémon? No <b>AttackDex</b>, você nomeia golpes em vez de Pokémon! Escolha-o na tela de seleção de quiz e depois os golpes por geração ou por tipo.<br><b>Diferenças</b>: sem gritos, modos de ordem, shinies, rankings ou multijogador no AttackDex<br><b>Ajudas</b>: a ajuda de sombras e a de ortografia continuam funcionando<br><b>Vitórias</b>: as vitórias do AttackDex são contadas separadamente no seu perfil",
+      "title": "AttackDex"
+    },
+    "dragAndDrop": {
+      "description": "Quer as suas caixas em outra ordem? No computador, segure uma caixa de região pelo <b>título</b> e arraste-a sobre outra caixa para movê-la. As outras caixas se deslocam para abrir espaço.<br><b>Nota:</b> arrastar e soltar só funciona com o mouse, e a ordem é redefinida ao iniciar outro quiz.",
+      "title": "Reorganizar regiões"
+    },
     "gameModes": {
       "challengeMode": {
         "description": "Teste suas habilidades! No <b>Modo Desafio</b>, todas as configurações ficam bloqueadas no início. Você pode personalizar quais dicas estarão disponíveis, mas assim que o jogo começa, nenhuma alteração é permitida. Corra contra o tempo para completar o quiz o mais rápido possível!",
@@ -301,6 +317,10 @@
         },
         "title": "Configurações Visuais"
       }
+    },
+    "shinyDex": {
+      "description": "Cada Pokémon que você encontra tem uma pequena chance de ser <b>shiny</b>! Os Pokémon shiny são salvos no seu perfil e reunidos no <b>ShinyDex</b>, acessível pelo menu sob o seu avatar. Clique em um shiny para ver seus detalhes.<br><b>Modo Desafio</b>: a chance de shiny é dobrada<br><b>Amuleto Shiny</b>: ative-o nas configurações de jogo para multiplicar suas chances por 10<br><b>Entrar</b>: seu ShinyDex só é salvo se você estiver conectado",
+      "title": "ShinyDex"
     },
     "shortcuts": {
       "description": "Use estes atalhos para digitar mais rápido:",

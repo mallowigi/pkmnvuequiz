@@ -176,6 +176,22 @@
   "hello": "Hallo, {name}",
   "help": "Hilfe",
   "helpPopup": {
+    "achievements": {
+      "description": "Schalte Erfolge frei, indem du Meilensteine erreichst: Quiz gewinnen, hohe Punktzahlen erzielen, weniger Hilfen nutzen und mehr! Öffne sie über das Menü unter deinem Avatar. Die Erfolge sind in Tabs gruppiert (<em>Gesamt</em>, <em>Spiel</em>, <em>Timer</em> und <em>Sonstiges</em>); auf dem Handy wischst du, um die Tabs zu wechseln.",
+      "ranks": {
+        "description": "Jeder Erfolg hat mehrere Ränge: <b>Bronze</b>, <b>Silber</b>, <b>Gold</b> und <b>Platin</b>. Spiel weiter, um sie zu verbessern! Bei jeder Freischaltung oder Verbesserung erscheint eine Benachrichtigung.<br><b>Hinweis:</b> Erfolge werden in deinem Profil gespeichert, du musst also angemeldet sein.",
+        "title": "Ränge"
+      },
+      "title": "Erfolge"
+    },
+    "attackDex": {
+      "description": "Kennst du Attacken so gut wie Pokémon? Im <b>AttackDex</b> nennst du Attacken statt Pokémon! Wähle ihn im Quiz-Auswahlbildschirm und dann die Attacken nach Generation oder Typ.<br><b>Unterschiede</b>: keine Schreie, Reihenfolgemodi, Shinys, Bestenlisten oder Mehrspieler im AttackDex<br><b>Hilfen</b>: Schatten-Hilfe und Rechtschreibhilfe funktionieren weiterhin<br><b>Siege</b>: AttackDex-Siege werden in deinem Profil separat gezählt",
+      "title": "AttackDex"
+    },
+    "dragAndDrop": {
+      "description": "Möchtest du deine Boxen anders anordnen? Am Desktop packst du eine Regionsbox an ihrem <b>Titel</b> und ziehst sie über eine andere Box, um sie zu verschieben. Die anderen Boxen rücken zur Seite.<br><b>Hinweis:</b> Drag & Drop ist nur mit der Maus möglich, und die Reihenfolge wird beim Start eines anderen Quiz zurückgesetzt.",
+      "title": "Regionen anordnen"
+    },
     "gameModes": {
       "challengeMode": {
         "description": "Testen deine Fähigkeiten! Im <b>Herausforderungsmodus</b> sind alle Einstellungen zu Beginn gesperrt. Du kannst anpassen, welche Hilfen verfügbar sind, aber sobald das Spiel startet, sind keine Änderungen mehr möglich. Renne gegen die Zeit, um das Quiz so schnell wie möglich abzuschließen!",
@@ -301,6 +317,10 @@
         },
         "title": "Visuelle Einstellungen"
       }
+    },
+    "shinyDex": {
+      "description": "Jedes gefundene Pokémon hat eine kleine Chance, <b>schillernd</b> zu sein! Schillernde Pokémon werden in deinem Profil gespeichert und im <b>ShinyDex</b> gesammelt, erreichbar über das Menü unter deinem Avatar. Klicke auf ein Shiny, um Details zu sehen.<br><b>Herausforderungsmodus</b>: die Shiny-Chance ist verdoppelt<br><b>Schillerndes Amulett</b>: aktiviere es in den Spieleinstellungen, um deine Chancen zu verzehnfachen<br><b>Anmelden</b>: dein ShinyDex wird nur gespeichert, wenn du angemeldet bist",
+      "title": "ShinyDex"
     },
     "shortcuts": {
       "description": "Nutze Tastenkombinationen für eine schnellere Eingabe:",

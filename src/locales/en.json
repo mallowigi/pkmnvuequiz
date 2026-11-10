@@ -176,6 +176,22 @@
   "hello": "Hello, {name}",
   "help": "Help",
   "helpPopup": {
+    "achievements": {
+      "description": "Unlock achievements by reaching milestones: winning quizzes, scoring high, using fewer helpers and more! Open them from the menu under your avatar. Achievements are grouped in tabs (<em>Total</em>, <em>Game</em>, <em>Timer</em> and <em>Misc</em>); on mobile, swipe to switch tabs.",
+      "ranks": {
+        "description": "Each achievement has several ranks: <b>Bronze</b>, <b>Silver</b>, <b>Gold</b> and <b>Platinum</b>. Keep playing to upgrade them! A notification appears whenever you unlock or upgrade one.<br><b>Note:</b> Achievements are saved to your profile, so you need to be signed in.",
+        "title": "Ranks"
+      },
+      "title": "Achievements"
+    },
+    "attackDex": {
+      "description": "Think you know Pokémon <em>moves</em> as well as Pokémon? In the <b>AttackDex</b>, you name moves instead of Pokémon! Pick it from the quiz selection screen, then choose moves by generation or by type.<br><b>Differences</b>: no cries, order modes, shinies, leaderboards or multiplayer in the AttackDex<br><b>Helpers</b>: the Shadow helper and Spelling help still work<br><b>Wins</b>: AttackDex wins are counted separately in your profile",
+      "title": "AttackDex"
+    },
+    "dragAndDrop": {
+      "description": "Want your boxes in a different order? On desktop, grab a region box by its <b>title</b> and drag it over another box to move it. The other boxes shift to make room. <br><b>Note:</b> Drag and drop is only available with a mouse, and the order resets when you start another quiz.",
+      "title": "Rearranging Regions"
+    },
     "gameModes": {
       "challengeMode": {
         "description": "Test your skills! In <b>Challenge Mode</b>, all settings are locked at the start. You can customize which helpers are available, but once the game starts, no changes allowed. Race against time to complete the quiz as fast as possible!",
@@ -301,6 +317,10 @@
         },
         "title": "Visual Settings"
       }
+    },
+    "shinyDex": {
+      "description": "Every Pokémon you find has a small chance of being <b>shiny</b>! Shiny Pokémon are saved to your profile and collected in the <b>ShinyDex</b>, available from the menu under your avatar. Click a shiny to see its details.<br><b>Challenge Mode</b>: the shiny chance is doubled<br><b>Shiny Charm</b>: enable it in the gameplay settings to multiply your chances by 10<br><b>Sign in</b>: your ShinyDex is only saved when you are signed in",
+      "title": "ShinyDex"
     },
     "shortcuts": {
       "description": "If you're stuck, the game provides you with several helpers to assist you in your naming quest. Once you toggle the helper, you can trigger the help anytime you want via keyboard shortcuts or mobile gestures. Try to guess without them!",

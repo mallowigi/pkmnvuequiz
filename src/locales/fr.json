@@ -176,6 +176,22 @@
   "hello": "Bonjour, {name}",
   "help": "Aide",
   "helpPopup": {
+    "achievements": {
+      "description": "Débloque des succès en atteignant des objectifs : gagner des quiz, faire un gros score, utiliser moins d’aides et plus encore ! Ouvre-les depuis le menu sous ton avatar. Les succès sont regroupés en onglets (<em>Total</em>, <em>Jeu</em>, <em>Chrono</em> et <em>Divers</em>) ; sur mobile, balaye pour changer d’onglet.",
+      "ranks": {
+        "description": "Chaque succès a plusieurs rangs : <b>Bronze</b>, <b>Argent</b>, <b>Or</b> et <b>Platine</b>. Continue de jouer pour les améliorer ! Une notification apparaît à chaque déblocage ou amélioration.<br><b>Note :</b> les succès sont enregistrés dans ton profil, tu dois donc être connecté.",
+        "title": "Rangs"
+      },
+      "title": "Succès"
+    },
+    "attackDex": {
+      "description": "Connais-tu les attaques aussi bien que les Pokémon ? Dans l’<b>AttackDex</b>, tu nommes des attaques au lieu de Pokémon ! Choisis-le sur l’écran de sélection du quiz, puis les attaques par génération ou par type.<br><b>Différences</b> : pas de cris, de modes d’ordre, de chromatiques, de classements ni de multijoueur dans l’AttackDex<br><b>Aides</b> : l’aide Ombre et l’aide orthographique fonctionnent toujours<br><b>Victoires</b> : les victoires AttackDex sont comptées séparément dans ton profil",
+      "title": "AttackDex"
+    },
+    "dragAndDrop": {
+      "description": "Envie d’un autre ordre pour tes boîtes ? Sur ordinateur, saisis une boîte de région par son <b>titre</b> et fais-la glisser sur une autre boîte pour la déplacer. Les autres boîtes se décalent pour faire de la place.<br><b>Note :</b> le glisser-déposer n’est disponible qu’à la souris, et l’ordre est réinitialisé quand tu lances un autre quiz.",
+      "title": "Réorganiser les régions"
+    },
     "gameModes": {
       "challengeMode": {
         "description": "Testez vos compétences ! En <b>Mode Défi</b>, tous les paramètres sont verrouillés au départ. Vous pouvez personnaliser les aides disponibles, mais une fois la partie lancée, aucune modification n'est autorisée. Faites une course contre la montre pour terminer le quiz le plus vite possible !",
@@ -301,6 +317,10 @@
         },
         "title": "Paramètres Visuels"
       }
+    },
+    "shinyDex": {
+      "description": "Chaque Pokémon trouvé a une petite chance d’être <b>chromatique</b> ! Les Pokémon chromatiques sont enregistrés dans ton profil et rassemblés dans le <b>ShinyDex</b>, accessible depuis le menu sous ton avatar. Clique sur un chromatique pour voir ses détails.<br><b>Mode Défi</b> : la chance d’obtenir un chromatique est doublée<br><b>Charme Chroma</b> : active-le dans les paramètres de jeu pour multiplier tes chances par 10<br><b>Connexion</b> : ton ShinyDex n’est enregistré que si tu es connecté",
+      "title": "ShinyDex"
     },
     "shortcuts": {
       "description": "Utilisez des raccourcis pour accélérer vos saisies :",

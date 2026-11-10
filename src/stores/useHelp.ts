@@ -240,6 +240,33 @@ export const useHelp = defineStore('help', () => {
         image: '/public/assets/help/leaderboards.png',
         title: t('helpPopup.leaderboards.title'),
       },
+      {
+        description: t('helpPopup.attackDex.description'),
+        id: 'attackDex',
+        title: t('helpPopup.attackDex.title'),
+      },
+      {
+        description: t('helpPopup.dragAndDrop.description'),
+        id: 'dragAndDrop',
+        title: t('helpPopup.dragAndDrop.title'),
+      },
+      {
+        description: t('helpPopup.achievements.description'),
+        id: 'achievements',
+        subsections: [
+          {
+            description: t('helpPopup.achievements.ranks.description'),
+            id: 'ranks',
+            title: t('helpPopup.achievements.ranks.title'),
+          },
+        ],
+        title: t('helpPopup.achievements.title'),
+      },
+      {
+        description: t('helpPopup.shinyDex.description'),
+        id: 'shinyDex',
+        title: t('helpPopup.shinyDex.title'),
+      },
     ];
   };
 

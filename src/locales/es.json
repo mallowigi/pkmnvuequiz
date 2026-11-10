@@ -176,6 +176,22 @@
   "hello": "Hola, {name}",
   "help": "Ayuda",
   "helpPopup": {
+    "achievements": {
+      "description": "¡Desbloquea logros alcanzando hitos: ganar quizzes, conseguir puntuaciones altas, usar menos ayudas y más! Ábrelos desde el menú bajo tu avatar. Los logros se agrupan en pestañas (<em>Total</em>, <em>Juego</em>, <em>Temporizador</em> y <em>Varios</em>); en móvil, desliza para cambiar de pestaña.",
+      "ranks": {
+        "description": "Cada logro tiene varios rangos: <b>Bronce</b>, <b>Plata</b>, <b>Oro</b> y <b>Platino</b>. ¡Sigue jugando para mejorarlos! Aparece una notificación cada vez que desbloqueas o mejoras uno.<br><b>Nota:</b> los logros se guardan en tu perfil, así que debes iniciar sesión.",
+        "title": "Rangos"
+      },
+      "title": "Logros"
+    },
+    "attackDex": {
+      "description": "¿Conoces los movimientos tan bien como a los Pokémon? ¡En el <b>AttackDex</b> nombras movimientos en lugar de Pokémon! Elígelo en la pantalla de selección de quiz y luego los movimientos por generación o por tipo.<br><b>Diferencias</b>: sin gritos, modos de orden, shinies, clasificaciones ni multijugador en el AttackDex<br><b>Ayudas</b>: la ayuda de sombras y la de ortografía siguen funcionando<br><b>Victorias</b>: las victorias del AttackDex se cuentan por separado en tu perfil",
+      "title": "AttackDex"
+    },
+    "dragAndDrop": {
+      "description": "¿Quieres tus cajas en otro orden? En escritorio, agarra una caja de región por su <b>título</b> y arrástrala sobre otra caja para moverla. Las demás cajas se desplazan para hacer sitio.<br><b>Nota:</b> arrastrar y soltar solo funciona con ratón, y el orden se restablece al empezar otro quiz.",
+      "title": "Reorganizar regiones"
+    },
     "gameModes": {
       "challengeMode": {
         "description": "¡Pon a prueba tus habilidades! En el <b>Modo Desafío</b>, todos los ajustes quedan bloqueados al empezar. Puedes personalizar qué ayudas estarán disponibles, pero una vez iniciada la partida no se permiten cambios. ¡Compite contra el reloj para completar el quiz lo antes posible!",
@@ -301,6 +317,10 @@
         },
         "title": "Ajustes Visuales"
       }
+    },
+    "shinyDex": {
+      "description": "¡Cada Pokémon que encuentras tiene una pequeña probabilidad de ser <b>shiny</b>! Los Pokémon shiny se guardan en tu perfil y se reúnen en el <b>ShinyDex</b>, accesible desde el menú bajo tu avatar. Haz clic en un shiny para ver sus detalles.<br><b>Modo Desafío</b>: la probabilidad de shiny se duplica<br><b>Amuleto Iris</b>: actívalo en los ajustes de juego para multiplicar tus probabilidades por 10<br><b>Inicia sesión</b>: tu ShinyDex solo se guarda si has iniciado sesión",
+      "title": "ShinyDex"
     },
     "shortcuts": {
       "description": "Utiliza estos atajos para escribir más rápido:",
