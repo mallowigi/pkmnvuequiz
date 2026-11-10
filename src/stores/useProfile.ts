@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { deleteField, doc, getDoc, setDoc } from 'firebase/firestore';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
@@ -201,6 +201,11 @@ export const useProfile = defineStore('profile', () => {
     void saveUserProfile({ achievements: profileState.achievements });
   };
 
+  const removeAchievement = (achievementId: string) => {
+    delete profileState.achievements[achievementId];
+    void saveUserProfile({ achievements: { [achievementId]: deleteField() } as unknown as Record<string, number> });
+  };
+
   const updateFinishedGames = () => {
     const { state } = useState();
     const { getCurrentGens } = useCurrentGen();
@@ -300,6 +305,7 @@ export const useProfile = defineStore('profile', () => {
     initializeFinishedGames,
     profileState,
     saveUserProfile,
+    removeAchievement,
     setProfileState,
     updateFinishedGames,
     updateSettings,
