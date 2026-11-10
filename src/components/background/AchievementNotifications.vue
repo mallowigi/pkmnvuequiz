@@ -42,15 +42,23 @@ const { state } = useAchievementToasts();
   }
 }
 
-/* Transition animations */
-.v-enter-active,
-.v-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
+/* Keyframes live on the -active classes, which last the whole transition */
+.v-enter-active {
+  animation: slide-in 0.3s ease-out;
+}
+
+.v-leave-active {
+  animation: slide-in 0.3s ease-in reverse;
 }
 </style>

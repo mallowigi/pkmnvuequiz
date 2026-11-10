@@ -90,6 +90,8 @@ const rank = computed(() => {
   );
 
   &.compact {
+    position: relative;
+    overflow: hidden;
     height: auto;
     max-height: none;
     gap: 8px;
@@ -120,6 +122,17 @@ const rank = computed(() => {
 
     .achievement-icon {
       transform: scale(0.75);
+    }
+
+    /* Shimmer: a soft highlight sweeping across for as long as the toast is visible */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.25) 50%, transparent 65%);
+      transform: translateX(-100%);
+      animation: shimmer 2s ease-in-out infinite;
+      pointer-events: none;
     }
   }
 
@@ -200,6 +213,16 @@ const rank = computed(() => {
 .achievement-icon {
   :deep(svg) {
     fill: var(--achievement-color);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(100%);
   }
 }
 </style>
