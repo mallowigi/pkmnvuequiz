@@ -1,3 +1,4 @@
+import { useAttackDexWins } from '@/composables/achievements/useAttackDexWins.ts';
 import { useBestTimeFull } from '@/composables/achievements/useBestTimeFull.ts';
 import { useBoxShuffleWins } from '@/composables/achievements/useBoxShuffleWins.ts';
 import { useChallengeWins } from '@/composables/achievements/useChallengeWins.ts';
@@ -54,6 +55,7 @@ export const useAchievementsRegistry = (): Record<string, Achievement> => {
   if (cachedRegistry) return cachedRegistry;
 
   const achievements: Record<string, Achievement> = {
+    attackDexWins: useAttackDexWins(),
     blankMemory: useManyShadows(),
     boxShuffler: useBoxShuffleWins(),
     cheater: useCheater(),
