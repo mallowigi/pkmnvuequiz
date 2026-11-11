@@ -37,6 +37,7 @@ export function piniaStorePlugin({ store }: PiniaPluginContext) {
     'pkmnDetails',
     'attackDetails',
     'achievementToasts',
+    'wanderers',
   ];
   if (excludedStores.includes(store.$id)) {
     return;
