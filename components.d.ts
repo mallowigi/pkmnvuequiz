@@ -170,6 +170,7 @@ declare module 'vue' {
     VisualSettingsDialog: typeof import('./src/components/dialogs/VisualSettingsDialog.vue')['default']
     VoiceIcon: typeof import('./src/components/common/icons/VoiceIcon.vue')['default']
     VolumeIcon: typeof import('./src/components/common/icons/VolumeIcon.vue')['default']
+    WalkingSprite: typeof import('./src/components/background/WalkingSprite.vue')['default']
     Watermark: typeof import('./src/components/header/Watermark.vue')['default']
     XIcon: typeof import('./src/components/common/icons/XIcon.vue')['default']
     ZoomTransition: typeof import('./src/components/common/transitions/ZoomTransition.vue')['default']

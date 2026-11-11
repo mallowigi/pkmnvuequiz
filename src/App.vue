@@ -16,6 +16,7 @@ import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import SavingIndicator from '@/components/background/SavingIndicator.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
 import Tooltip from '@/components/background/Tooltip.vue';
+import WalkingSprite from '@/components/background/WalkingSprite.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
 import GameFooter from '@/components/footer/GameFooter.vue';
@@ -188,6 +189,8 @@ watch(
 
     <!-- Achievement Notifications -->
     <AchievementNotifications />
+
+    <WalkingSprite />
   </main>
 </template>
 
