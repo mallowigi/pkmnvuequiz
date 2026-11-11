@@ -29,6 +29,7 @@ import { useAchievements } from '@/composables/useAchievements.ts';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
+import { WalkingDirection } from '@/data/wanderingSprites.ts';
 import OfflineBanner from '@/OfflineBanner.vue';
 import ReloadPrompt from '@/ReloadPrompt.vue';
 import ScrollTop from '@/ScrollTop.vue';
@@ -190,7 +191,10 @@ watch(
     <!-- Achievement Notifications -->
     <AchievementNotifications />
 
-    <WalkingSprite />
+    <WalkingSprite
+      :direction="WalkingDirection.Up"
+      :sprite-id="1"
+    />
   </main>
 </template>
 

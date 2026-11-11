@@ -1,14 +1,14 @@
 const SLOWDOWN = 1.5;
 
 export enum WalkingDirection {
-  Down,
+  Down = 0,
+  DownRight = 1,
+  Right = 2,
+  UpRight = 3,
+  Up = 4,
+  UpLeft = 5,
+  Left = 6,
   DownLeft,
-  Left,
-  UpLeft,
-  Up,
-  UpRight,
-  Right,
-  DownRight,
 }
 
 // Taken from AnimData.xml

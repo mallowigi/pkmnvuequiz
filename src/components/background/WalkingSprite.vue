@@ -1,12 +1,31 @@
 <script setup lang="ts">
-import { animatedSprites, getWanderingSprite, getWalkCycleMs } from '@/data/wanderingSprites.ts';
+import { computed } from 'vue';
 
-const animation = animatedSprites[1];
-const sprite = getWanderingSprite(1);
+import { animatedSprites, getWanderingSprite, getWalkCycleMs, WalkingDirection } from '@/data/wanderingSprites.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
+
+const { flowState } = useGameFlow();
+
+const props = defineProps<{
+  spriteId: number;
+  direction: WalkingDirection;
+}>();
+
+const animation = animatedSprites[props.spriteId];
+const sprite = getWanderingSprite(props.spriteId);
 
 const frames = animation.durations.length;
 const sheetWidth = frames * animation.frameWidth;
 const duration = getWalkCycleMs(animation);
+
+const spriteRow = computed(() => {
+  const directionIndex = props.direction;
+  return directionIndex * animation.frameHeight;
+});
+
+const paused = computed(() => {
+  return flowState.gameSelectionState || flowState.isPaused;
+});
 </script>
 
 <template>
@@ -19,6 +38,8 @@ const duration = getWalkCycleMs(animation);
       '--frames': frames,
       '--duration': `${duration}ms`,
       '--sheet-width': `${sheetWidth}px`,
+      '--sprite-row': `${spriteRow}px`,
+      '--paused': paused ? 'paused' : 'running',
     }"
   />
 </template>
@@ -31,6 +52,9 @@ const duration = getWalkCycleMs(animation);
 }
 
 .sprite {
+  background-position-y: calc(-1 * var(--sprite-row));
+  background-repeat: no-repeat;
   animation: walk var(--duration) steps(var(--frames)) infinite;
+  animation-play-state: var(--paused);
 }
 </style>
