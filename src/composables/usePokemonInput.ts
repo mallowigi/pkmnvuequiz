@@ -8,11 +8,14 @@ import { useQuizInput } from '@/composables/useQuizInput.ts';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { useCurrentType } from '@/stores/useCurrentType.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
+import type { Language } from '@/types.ts';
 import { capitalize } from '@/utils/utils';
 
 type Props = {
@@ -40,6 +43,40 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { playFanfare, playFailSound } = usePlaySounds();
   const { isDebugMode } = useFeatureFlags();
   const { sendMessage } = useRooms();
+  const { getMatchedLanguages } = usePokemons();
+  const {
+    incrementGermanNames,
+    incrementFrenchNames,
+    incrementKoreanNames,
+    incrementJapaneseNames,
+    incrementChineseNames,
+  } = useGlobalStats();
+
+  let lastRecognizedInput = '';
+
+  const incrementLanguageCounters = () => {
+    let matchedLanguages = getMatchedLanguages(lastRecognizedInput);
+    matchedLanguages.forEach((lang) => {
+      switch (lang) {
+        case 'cn':
+        case 'zh':
+          incrementChineseNames();
+          break;
+        case 'ja':
+          incrementJapaneseNames();
+          break;
+        case 'ko':
+          incrementKoreanNames();
+          break;
+        case 'de':
+          incrementGermanNames();
+          break;
+        case 'fr':
+          incrementFrenchNames();
+          break;
+      }
+    });
+  };
 
   const debugEnd = () => {
     clearInput();
@@ -136,6 +173,8 @@ export const usePokemonInput = ({ clearInput }: Props) => {
 
     addFound(foundEntries);
 
+    incrementLanguageCounters();
+
     updateShuffles();
 
     strategy.value.playFoundSound(foundEntries[0]);
@@ -174,7 +213,10 @@ export const usePokemonInput = ({ clearInput }: Props) => {
     ],
     findEntries: find,
     isPartOfAnotherEntry: (value: string) => isPartOfAnotherEntry(value),
-    onRecognized: sendMessage,
+    onRecognized: (value: string) => {
+      lastRecognizedInput = value;
+      void sendMessage(value);
+    },
     onSuccess: handleSuccess,
   });
 
