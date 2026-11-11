@@ -26,7 +26,7 @@ const visibleAchievements = computed(() =>
     .sort((a, b) => a.priority - b.priority),
 );
 
-const TAB_ORDER: AchievementCategory[] = ['total', 'game', 'timer', 'misc'];
+const TAB_ORDER: AchievementCategory[] = ['total', 'game', 'pokemon', 'counters', 'timer', 'misc'];
 const direction = ref<number>(1);
 
 const nextTab = () => {
