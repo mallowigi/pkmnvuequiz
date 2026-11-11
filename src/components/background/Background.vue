@@ -2,11 +2,15 @@
 import { computed } from 'vue';
 
 import BackgroundPreload from '@/components/background/BackgroundPreload.vue';
+import WalkingSprite from '@/components/background/WalkingSprite.vue';
+import { WalkingDirection } from '@/data/wanderingSprites.ts';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
+import { useWanderers } from '@/stores/useWanderers.ts';
 
 const { state } = useState();
 const { getCurrentTypeOrSpecial, getSecondaryType } = useCurrentType();
+const { wanderersState } = useWanderers();
 
 const currentType = computed(() => {
   return getCurrentTypeOrSpecial();
@@ -28,6 +32,18 @@ const secondaryType = computed(() => {
   >
     <!-- Preload background images and type icons -->
     <BackgroundPreload />
+
+    <div
+      class="wanderers"
+      v-if="wanderersState.enabled"
+    >
+      <div>
+        <WalkingSprite
+          :direction="WalkingDirection.Up"
+          :sprite-id="1"
+        />
+      </div>
+    </div>
 
     <Transition
       name="fade"
@@ -70,6 +86,34 @@ const secondaryType = computed(() => {
   }
 }
 
+@keyframes wander {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(100vw) translateY(100vh);
+  }
+}
+
+.wanderers {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+
+  & > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: wander 10s linear infinite;
+  }
+}
+
 .background {
   background-image: url(@/assets/background-50-grey.svg);
   background-blend-mode: hard-light;
@@ -82,7 +126,7 @@ const secondaryType = computed(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: -2;
   transition: all 0.2s ease-in-out;
 
   /* Mobile-first approach */

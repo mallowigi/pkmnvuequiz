@@ -1,5 +1,5 @@
-import { reactive } from 'vue';
 import { defineStore, acceptHMRUpdate } from 'pinia';
+import { reactive } from 'vue';
 
 interface WanderersState {
   enabled: boolean;
@@ -7,17 +7,17 @@ interface WanderersState {
 
 /** Session-only state for the decorative Wanderers walking in the background. */
 export const useWanderers = defineStore('wanderers', () => {
-  const state = reactive<WanderersState>({
-    enabled: false,
+  const wanderersState = reactive<WanderersState>({
+    enabled: true,
   });
 
   const toggleWanderers = () => {
-    state.enabled = !state.enabled;
+    wanderersState.enabled = !wanderersState.enabled;
   };
 
   return {
-    state,
     toggleWanderers,
+    wanderersState,
   };
 });
 

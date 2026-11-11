@@ -190,11 +190,6 @@ watch(
 
     <!-- Achievement Notifications -->
     <AchievementNotifications />
-
-    <WalkingSprite
-      :direction="WalkingDirection.Up"
-      :sprite-id="1"
-    />
   </main>
 </template>
 
