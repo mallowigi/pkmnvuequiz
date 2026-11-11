@@ -659,6 +659,16 @@ export const usePokemons = defineStore('pokemons', () => {
     }
   };
 
+  // Languages the input is a name in; empty when it is also the English name (e.g. "Pikachu" is not German).
+  const getMatchedLanguages = (input: string): Language[] => {
+    const pokemonKey = normalizeName(input);
+    if (pokemonMaps.languages.en.has(pokemonKey)) return [];
+
+    return (Object.keys(pokemonMaps.languages) as Language[]).filter((lang) =>
+      pokemonMaps.languages[lang].has(pokemonKey),
+    );
+  };
+
   const getNextOrderedPokemon = () => {
     const head = remainingHead.value;
     if (!head) return null;
@@ -710,6 +720,7 @@ export const usePokemons = defineStore('pokemons', () => {
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
     getLastPokemon,
+    getMatchedLanguages,
     getMegaPokemon,
     getNextOrderedPokemon,
     getRandomPokemon,
