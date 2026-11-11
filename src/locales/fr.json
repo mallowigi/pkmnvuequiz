@@ -1,8 +1,8 @@
 {
   "abilities": "Capacités",
   "accuracy": "Précision",
-  "achievements": "Succès",
   "achievementUnlocked": "Succès débloqué !",
+  "achievements": "Succès",
   "action": "Action",
   "activeUsers": "Joueurs actifs",
   "alert": "Alerte",
@@ -143,7 +143,8 @@
     "privacy": "Politique de Confidentialité",
     "projectBy": "Projet par {charon}. Réécrit avec Vue par {mallowigi}.",
     "resources": "Sources de données: {pokeapi}. Ressources des sprites: {sprites}.",
-    "sprites": "Sprites personnalisés et modifiés réalisés par {artists} ≡ dans le cadre du projet {project}."
+    "sprites": "Sprites personnalisés et modifiés réalisés par {artists} ≡ dans le cadre du projet {project}.",
+    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
   },
   "fr": "Français",
   "freeMode": "Mode Libre",

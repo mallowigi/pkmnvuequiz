@@ -103,6 +103,33 @@ const { t } = useI18n();
     </div>
 
     <div class="footerRow">
+      <!-- Walking sprites -->
+      <i18n-t
+        keypath="footer.walkingSprites"
+        class="p2"
+        tag="p"
+      >
+        <template #spritecollab>
+          <a
+            href="https://github.com/PMDCollab/SpriteCollab"
+            target="_blank"
+            rel="noopener noreferrer"
+            >PMDCollab SpriteCollab</a
+          >
+        </template>
+
+        <template #license>
+          <a
+            href="https://creativecommons.org/licenses/by-nc/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >CC BY-NC 4.0</a
+          >
+        </template>
+      </i18n-t>
+    </div>
+
+    <div class="footerRow">
       <!-- Resources -->
       <i18n-t
         keypath="footer.resources"

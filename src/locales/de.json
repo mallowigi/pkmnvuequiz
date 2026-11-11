@@ -1,8 +1,8 @@
 {
   "abilities": "Fähigkeiten",
   "accuracy": "Genauigkeit",
-  "achievements": "Erfolge",
   "achievementUnlocked": "Errungenschaft freigeschaltet!",
+  "achievements": "Erfolge",
   "action": "Aktion",
   "activeUsers": "Aktive Spieler",
   "alert": "Warnung",
@@ -143,7 +143,8 @@
     "privacy": "Datenschutzrichtlinie",
     "projectBy": "Projekt von {charon}. In Vue umgeschrieben von {mallowigi}.",
     "resources": "Ressource für Daten: {pokeapi}. Ressourcen für Sprites: {sprites}.",
-    "sprites": "Benutzerdefinierte und modifizierte Sprites erstellt von {artists} ≡ als Teil des Projekts {project}."
+    "sprites": "Benutzerdefinierte und modifizierte Sprites erstellt von {artists} ≡ als Teil des Projekts {project}.",
+    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
   },
   "fr": "Französisch",
   "freeMode": "Freier Modus",

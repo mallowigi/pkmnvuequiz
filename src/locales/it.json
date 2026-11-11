@@ -1,8 +1,8 @@
 {
   "abilities": "Abilità",
   "accuracy": "Precisione",
-  "achievements": "Obiettivi",
   "achievementUnlocked": "Obiettivo sbloccato!",
+  "achievements": "Obiettivi",
   "action": "Azione",
   "activeUsers": "Giocatori attivi",
   "alert": "Avviso",
@@ -143,7 +143,8 @@
     "privacy": "Politica sulla Privacy",
     "projectBy": "Progetto di {charon}. Riscritto in Vue da {mallowigi}.",
     "resources": "Risorsa per i dati: {pokeapi}. Risorse per gli sprite: {sprites}.",
-    "sprites": "Sprite personalizzati e modificati realizzati da {artists} ≡ come parte del progetto {project}."
+    "sprites": "Sprite personalizzati e modificati realizzati da {artists} ≡ come parte del progetto {project}.",
+    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
   },
   "fr": "Francese",
   "freeMode": "Modalità Libera",
