@@ -9,6 +9,14 @@ import type { Type, SpecialType, MegaType, PokemonInfo } from '@/types.ts';
 
 export type GlobalStats = {
   attackDexWins: number;
+  chineseNames: number;
+  frenchNames: number;
+  germanNames: number;
+  japaneseNames: number;
+  koreanNames: number;
+  mobilePlays: number;
+  multiplayerPlays: number;
+  timeAttackPlays: number;
   highScore: number;
   plays: number;
   totalPlayTime: number;
@@ -26,6 +34,14 @@ export type GlobalStats = {
 
 const initializeStats = (): GlobalStats => ({
   attackDexWins: 0,
+  chineseNames: 0,
+  frenchNames: 0,
+  germanNames: 0,
+  japaneseNames: 0,
+  koreanNames: 0,
+  mobilePlays: 0,
+  multiplayerPlays: 0,
+  timeAttackPlays: 0,
   highScore: 0,
   maxComboBonus: 0,
   megaFound: {
@@ -152,6 +168,46 @@ export const useGlobalStats = defineStore('globalStats', () => {
     void saveStats({ plays: statsState.plays });
   };
 
+  const incrementChineseNames = () => {
+    statsState.chineseNames += 1;
+    void saveStats({ chineseNames: statsState.chineseNames });
+  };
+
+  const incrementFrenchNames = () => {
+    statsState.frenchNames += 1;
+    void saveStats({ frenchNames: statsState.frenchNames });
+  };
+
+  const incrementGermanNames = () => {
+    statsState.germanNames += 1;
+    void saveStats({ germanNames: statsState.germanNames });
+  };
+
+  const incrementJapaneseNames = () => {
+    statsState.japaneseNames += 1;
+    void saveStats({ japaneseNames: statsState.japaneseNames });
+  };
+
+  const incrementKoreanNames = () => {
+    statsState.koreanNames += 1;
+    void saveStats({ koreanNames: statsState.koreanNames });
+  };
+
+  const incrementMobilePlays = () => {
+    statsState.mobilePlays += 1;
+    void saveStats({ mobilePlays: statsState.mobilePlays });
+  };
+
+  const incrementMultiplayerPlays = () => {
+    statsState.multiplayerPlays += 1;
+    void saveStats({ multiplayerPlays: statsState.multiplayerPlays });
+  };
+
+  const incrementTimeAttackPlays = () => {
+    statsState.timeAttackPlays += 1;
+    void saveStats({ timeAttackPlays: statsState.timeAttackPlays });
+  };
+
   const incrementAttackDexWins = () => {
     statsState.attackDexWins += 1;
     void saveStats({ attackDexWins: statsState.attackDexWins });
@@ -272,6 +328,14 @@ export const useGlobalStats = defineStore('globalStats', () => {
     getTotalPlayTime,
     getTotalScore,
     incrementAttackDexWins,
+    incrementChineseNames,
+    incrementFrenchNames,
+    incrementGermanNames,
+    incrementJapaneseNames,
+    incrementKoreanNames,
+    incrementMobilePlays,
+    incrementMultiplayerPlays,
+    incrementTimeAttackPlays,
     incrementGameOvers,
     incrementInvokedCries,
     incrementInvokedShadows,

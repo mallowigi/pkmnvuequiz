@@ -2,6 +2,7 @@ import { defineStore, acceptHMRUpdate, storeToRefs } from 'pinia';
 import { reactive, computed, watch } from 'vue';
 
 import { useAchievements } from '@/composables/useAchievements.ts';
+import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useCurrentDex } from '@/composables/useCurrentDex.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { useLastInput } from '@/composables/useLastInput.ts';
@@ -16,6 +17,7 @@ import { useDialogs } from '@/stores/useDialogs.ts';
 import { useGlobalStats } from '@/stores/useGlobalStats.ts';
 import { useMessages } from '@/stores/useMessages.ts';
 import { useRooms } from '@/stores/useRooms.ts';
+import { useTimer } from '@/stores/useTimer.ts';
 import { useTouches } from '@/stores/useTouches.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import type { GameFlowState, GameSelectionState, ChallengeMode } from '@/types.ts';
@@ -25,7 +27,15 @@ export const useGameFlow = defineStore('gameFlow', () => {
   const { removeAutoSave } = useSavedData();
   const { showRemaining } = useCurrentDex();
   const strategy = useCurrentStrategy();
-  const { incrementGameOvers, incrementPlays } = useGlobalStats();
+  const {
+    incrementGameOvers,
+    incrementPlays,
+    incrementMobilePlays,
+    incrementTimeAttackPlays,
+    incrementMultiplayerPlays,
+  } = useGlobalStats();
+  const { timerState } = useTimer();
+  const { isMobile } = useAppBreakpoints();
   const { toggledMissingno, toggledCheat } = useTouches();
   const { resetInput } = useLastInput();
   const { resetBonus } = useBonus();
@@ -128,12 +138,18 @@ export const useGameFlow = defineStore('gameFlow', () => {
     flowState.missingno = false;
     flowState.sessionId = crypto.randomUUID();
     incrementPlays();
+
+    if (isMobile.value) incrementMobilePlays();
+    if (timerState.isLimited) incrementTimeAttackPlays();
+
     resetInput();
     resetBonus();
     startTypeCycle();
     startGenCycle();
 
     await initRoom();
+
+    if (roomState.isActive) incrementMultiplayerPlays();
   };
 
   const pauseGame = () => {
