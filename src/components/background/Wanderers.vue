@@ -12,24 +12,12 @@ const { wanderingState, startWandering, resumeWandering, stopWandering } = useWa
 const { flowState } = useGameFlow();
 const visibility = useDocumentVisibility();
 
-const wandererRef = useTemplateRef<HTMLElement>('wandererRef');
-
 // Wanderers only walk when enabled, the game is running and the tab is visible
 const active = computed(() => {
   return wanderersState.enabled && !flowState.isPaused && visibility.value === 'visible';
 });
 
 let started = false;
-
-// Stop mid-leg: freeze the sprite where it currently is instead of at the end of its leg
-const freeze = () => {
-  const rect = wandererRef.value?.getBoundingClientRect();
-  if (rect) {
-    wanderingState.position = { x: rect.x, y: rect.y };
-    wanderingState.legDuration = 0;
-  }
-  stopWandering();
-};
 
 const hidden = computed(() => {
   if (flowState.gameSelectionState || flowState.isPaused) return true;
@@ -46,10 +34,8 @@ onMounted(() => {
   }
 });
 
-watch(active, (isActive) => {
-  if (!isActive) {
-    freeze();
-  } else if (started) {
+watch(active, () => {
+  if (started) {
     resumeWandering();
   } else {
     startWandering();
@@ -60,7 +46,7 @@ watch(active, (isActive) => {
 
 <template>
   <div
-    class="wanderers"
+    class="wanderers hide-mobile"
     v-if="!hidden"
   >
     <div

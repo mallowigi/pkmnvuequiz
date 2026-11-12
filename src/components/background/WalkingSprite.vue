@@ -47,6 +47,7 @@ const paused = computed(() => {
 <template>
   <div
     class="sprite"
+    :class="{ paused: paused }"
     :style="{
       backgroundImage: `url(${sprite})`,
       width: `${animation.frameWidth}px`,
@@ -55,7 +56,6 @@ const paused = computed(() => {
       '--duration': `${duration}ms`,
       '--sheet-width': `${sheetWidth}px`,
       '--sprite-row': `${spriteRow}px`,
-      '--paused': paused ? 'paused' : 'running',
     }"
   />
 </template>
@@ -71,6 +71,9 @@ const paused = computed(() => {
   background-position-y: calc(-1 * var(--sprite-row));
   background-repeat: no-repeat;
   animation: walk var(--duration) steps(var(--frames)) infinite;
-  animation-play-state: var(--paused);
+
+  &.paused {
+    animation: none;
+  }
 }
 </style>
