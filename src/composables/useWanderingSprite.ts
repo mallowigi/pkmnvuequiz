@@ -96,6 +96,13 @@ export const useWanderingSprite = ({ speed = 30, margin = 0 }: { speed?: number;
     });
   };
 
+  const resumeWandering = () => {
+    stopWandering();
+    requestAnimationFrame(() => {
+      loop();
+    });
+  };
+
   const stopWandering = () => {
     clearTimeout(timer);
     wanderingState.isMoving = false;
@@ -106,6 +113,7 @@ export const useWanderingSprite = ({ speed = 30, margin = 0 }: { speed?: number;
   });
 
   return {
+    resumeWandering,
     startWandering,
     stopWandering,
     wanderingState,

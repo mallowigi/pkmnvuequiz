@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import Wanderers from 'src/components/background/Wanderers.vue';
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 import BackgroundPreload from '@/components/background/BackgroundPreload.vue';
-import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
+import Wanderers from '@/components/background/Wanderers.vue';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
-import { useWanderers } from '@/stores/useWanderers.ts';
 
 const { state } = useState();
 const { getCurrentTypeOrSpecial, getSecondaryType } = useCurrentType();

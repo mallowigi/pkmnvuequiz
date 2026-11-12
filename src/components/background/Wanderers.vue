@@ -1,18 +1,39 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { onMounted } from 'vue';
+import { onMounted, useTemplateRef, watch } from 'vue';
 
 import WalkingSprite from '@/components/background/WalkingSprite.vue';
 import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
+import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useWanderers } from '@/stores/useWanderers.ts';
 
 const { wanderersState } = useWanderers();
-const { wanderingState, startWandering } = useWanderingSprite({ margin: 40 });
+const { wanderingState, startWandering, stopWandering } = useWanderingSprite({ margin: 40 });
+const { flowState } = useGameFlow();
+
+const wandererRef = useTemplateRef('wandererRef');
 
 // Start wandering sprites when the component is mounted
 onMounted(() => {
   startWandering();
 });
+
+watch(
+  () => flowState.isPaused,
+  (newVal) => {
+    if (newVal) {
+      // Pause wandering sprites when the game is paused
+      stopWandering();
+      wanderingState.position = {
+        ...wanderingState.position,
+        ...wandererRef.value?.getBoundingClientRect(),
+      };
+      wanderingState.legDuration = 0;
+    } else {
+      // Resume wandering sprites when the game is unpaused
+      startWandering();
+    }
+  },
+);
 </script>
 
 <template>
@@ -21,6 +42,7 @@ onMounted(() => {
     v-if="wanderersState.enabled"
   >
     <div
+      ref="wandererRef"
       :style="{
         transform: `translate(${wanderingState.position.x}px, ${wanderingState.position.y}px)`,
         transition: `transform ${wanderingState.legDuration}ms linear`,
