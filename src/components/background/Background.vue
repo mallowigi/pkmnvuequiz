@@ -53,6 +53,7 @@ onMounted(() => {
         <WalkingSprite
           :direction="wanderingState.direction"
           :sprite-id="1"
+          :moving="wanderingState.isMoving"
         />
       </div>
     </div>

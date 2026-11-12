@@ -10,6 +10,7 @@ const { flowState } = useGameFlow();
 const props = defineProps<{
   spriteId: number;
   direction: WalkingDirection;
+  moving: boolean;
 }>();
 
 const SLOWDOWN = 1.5;
@@ -38,7 +39,8 @@ const spriteRow = computed(() => {
 });
 
 const paused = computed(() => {
-  return flowState.gameSelectionState || flowState.isPaused;
+  if (flowState.gameSelectionState || flowState.isPaused) return true;
+  return !props.moving;
 });
 </script>
 
