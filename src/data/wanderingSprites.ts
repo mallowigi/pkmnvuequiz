@@ -1,4 +1,5 @@
 const SLOWDOWN = 1.5;
+const MIN_LEG_MS = 500;
 
 export enum WalkingDirection {
   Down = 0,
@@ -36,25 +37,32 @@ export const getDirectionFromVector = (dx: number, dy: number): WalkingDirection
   return (directionIndex + 8) % 8;
 };
 
-export const pickTarget = (
-  bounds: { x: number; y: number; width: number; height: number },
-  margin: number,
-  from: { x: number; y: number } = { x: 0, y: 0 },
-  maxLeg: number = 100,
-): { x: number; y: number } => {
-  // First, we pick a random point within the bounds, by taking the margin into account. This ensures that the wanderer doesn't walk outside of the bounds.
-  const minX = Math.max(bounds.x + margin, from.x - maxLeg);
-  const maxX = Math.min(bounds.x + bounds.width - margin, from.x + maxLeg);
-  const randomX = Math.random() * (maxX - minX) + minX;
+type Rectangle = { x: number; y: number; width: number; height: number };
+type Point = { x: number; y: number };
 
-  const minY = Math.max(bounds.y + margin, from.y - maxLeg);
-  const maxY = Math.min(bounds.y + bounds.height - margin, from.y + maxLeg);
-  const randomY = Math.random() * (maxY - minY) + minY;
+const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min;
+
+const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
+
+export const pickTarget = (bounds: Rectangle, margin: number, from: Point, maxLeg: number): Point => {
+  const left = bounds.x + Math.min(margin, bounds.width / 2);
+  const right = bounds.x + bounds.width - Math.min(margin, bounds.width / 2);
+  const top = bounds.y + Math.min(margin, bounds.height / 2);
+  const bottom = bounds.y + bounds.height - Math.min(margin, bounds.height / 2);
+
+  const origin = {
+    x: clamp(from.x, left, right),
+    y: clamp(from.y, top, bottom),
+  };
 
   return {
-    x: randomX,
-    y: randomY,
+    x: randomBetween(Math.max(left, origin.x - maxLeg), Math.min(right, origin.x + maxLeg)),
+    y: randomBetween(Math.max(top, origin.y - maxLeg), Math.min(bottom, origin.y + maxLeg)),
   };
+};
+
+export const getLegDurationMs = (distance: number, speed: number) => {
+  return Math.max((distance / (speed || 30)) * 1000, MIN_LEG_MS);
 };
 
 export const animatedSprites: Record<number, WanderingAnimation> = {
