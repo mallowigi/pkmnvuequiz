@@ -148,3 +148,9 @@ export const createAchievement = (achievement: AchievementConfig): Achievement =
 export const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min;
 
 export const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
+
+export const sample = <T>(array: T[]): T | undefined => {
+  if (array.length === 0) return undefined;
+  const index = Math.floor(Math.random() * array.length);
+  return array[index];
+};

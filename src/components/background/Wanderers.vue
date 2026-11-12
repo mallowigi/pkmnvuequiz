@@ -1,47 +1,59 @@
 <script setup lang="ts">
 import { useDocumentVisibility } from '@vueuse/core';
-import { computed, onMounted, useTemplateRef, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { computed, ref, watch } from 'vue';
 
 import WalkingSprite from '@/components/background/WalkingSprite.vue';
-import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
+import { useCurrentDex } from '@/composables/useCurrentDex.ts';
+import { animatedSprites } from '@/data/wanderingSprites.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
 import { useWanderers } from '@/stores/useWanderers.ts';
+import { sample } from '@/utils/utils.ts';
 
 const { wanderersState } = useWanderers();
-const { wanderingState, startWandering, resumeWandering, stopWandering } = useWanderingSprite({ margin: 40 });
+const { wandererCount } = storeToRefs(useWanderers());
 const { flowState } = useGameFlow();
+const { getCurrentGameModePokemon, pokemonState } = usePokemons();
 const visibility = useDocumentVisibility();
 
-// Wanderers only walk when enabled, the game is running and the tab is visible
+const availableSpriteIds = Object.keys(animatedSprites).map(Number);
+
 const active = computed(() => {
   return wanderersState.enabled && !flowState.isPaused && visibility.value === 'visible';
 });
 
-let started = false;
-
 const hidden = computed(() => {
   if (flowState.gameSelectionState || flowState.isPaused) return true;
-
-  // if (visibility.value !== 'visible') return true;
 
   return !wanderersState.enabled;
 });
 
-onMounted(() => {
-  if (active.value) {
-    startWandering();
-    started = true;
+const getFoundSpriteIds = () => {
+  const ids = new Set<number>();
+  for (const [name, pokemons] of getCurrentGameModePokemon()) {
+    if (pokemonState.pokemonStatuses.get(name)?.isFound && animatedSprites[pokemons[0].dexNum]) {
+      ids.add(pokemons[0].dexNum);
+    }
   }
-});
+  return [...ids];
+};
 
-watch(active, () => {
-  if (started) {
-    resumeWandering();
-  } else {
-    startWandering();
-    started = true;
-  }
-});
+// Only add Wanderers as the count grows, so the existing ones keep walking
+watch(
+  wandererCount,
+  (count) => {
+    while (wanderersState.wanderers.length < count) {
+      const foundIds = getFoundSpriteIds();
+      // TODO: only found Pokémon once all sheets are imported. For now, the sheets are a control group.
+      let items = sample(foundIds.length ? foundIds : availableSpriteIds);
+      if (items) {
+        wanderersState.wanderers.push(items);
+      }
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -49,19 +61,12 @@ watch(active, () => {
     class="wanderers hide-mobile"
     v-if="!hidden"
   >
-    <div
-      ref="wandererRef"
-      :style="{
-        transform: `translate(${wanderingState.position.x}px, ${wanderingState.position.y}px)`,
-        transition: `transform ${wanderingState.legDuration}ms linear`,
-      }"
-    >
-      <WalkingSprite
-        :direction="wanderingState.direction"
-        :sprite-id="1"
-        :moving="wanderingState.isMoving"
-      />
-    </div>
+    <WalkingSprite
+      v-for="(spriteId, index) in wanderersState.wanderers"
+      :key="index"
+      :active="active"
+      :sprite-id="spriteId"
+    />
   </div>
 </template>
 

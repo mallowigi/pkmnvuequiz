@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 
+import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
 import { animatedSprites } from '@/data/wanderingSprites.ts';
-import { useGameFlow } from '@/stores/useGameFlow.ts';
-import { type WanderingAnimation, WalkingDirection } from '@/types.ts';
-
-const { flowState } = useGameFlow();
+import { type WanderingAnimation } from '@/types.ts';
 
 const props = defineProps<{
+  /** National dex number, also the name of the walking sheet */
   spriteId: number;
-  direction: WalkingDirection;
-  moving: boolean;
+  /** Whether the sprite should be walking around */
+  active: boolean;
 }>();
 
 const SLOWDOWN = 1.5;
@@ -33,15 +32,37 @@ const frames = animation.durations.length;
 const sheetWidth = frames * animation.frameWidth;
 const duration = getWalkCycleMs(animation);
 
+// Each sprite wanders on its own. The margin keeps the whole sprite inside the viewport.
+const { wanderingState, startWandering, resumeWandering, stopWandering } = useWanderingSprite({
+  margin: Math.max(animation.frameWidth, animation.frameHeight),
+});
+
+let started = false;
+
+const start = () => {
+  if (started) {
+    resumeWandering();
+  } else {
+    startWandering();
+    started = true;
+  }
+};
+
+onMounted(() => {
+  if (props.active) start();
+});
+
+watch(
+  () => props.active,
+  (isActive) => (isActive ? start() : stopWandering()),
+);
+
 const spriteRow = computed(() => {
-  const directionIndex = props.direction;
+  const directionIndex = wanderingState.direction;
   return directionIndex * animation.frameHeight;
 });
 
-const paused = computed(() => {
-  if (flowState.gameSelectionState || flowState.isPaused) return true;
-  return !props.moving;
-});
+const paused = computed(() => !wanderingState.isMoving);
 </script>
 
 <template>
@@ -49,6 +70,8 @@ const paused = computed(() => {
     class="sprite"
     :class="{ paused: paused }"
     :style="{
+      transform: `translate(${wanderingState.position.x}px, ${wanderingState.position.y}px)`,
+      transition: `transform ${wanderingState.legDuration}ms linear`,
       backgroundImage: `url(${sprite})`,
       width: `${animation.frameWidth}px`,
       height: `${animation.frameHeight}px`,
@@ -68,6 +91,9 @@ const paused = computed(() => {
 }
 
 .sprite {
+  position: absolute;
+  top: 0;
+  left: 0;
   background-position-y: calc(-1 * var(--sprite-row));
   background-repeat: no-repeat;
   animation: walk var(--duration) steps(var(--frames)) infinite;

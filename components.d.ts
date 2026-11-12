@@ -171,7 +171,6 @@ declare module 'vue' {
     VoiceIcon: (typeof import('./src/components/common/icons/VoiceIcon.vue'))['default'];
     VolumeIcon: (typeof import('./src/components/common/icons/VolumeIcon.vue'))['default'];
     WalkingSprite: (typeof import('./src/components/background/WalkingSprite.vue'))['default'];
-    Wanderer: (typeof import('./src/components/background/Wanderer.vue'))['default'];
     Wanderers: (typeof import('./src/components/background/Wanderers.vue'))['default'];
     Watermark: (typeof import('./src/components/header/Watermark.vue'))['default'];
     XIcon: (typeof import('./src/components/common/icons/XIcon.vue'))['default'];
