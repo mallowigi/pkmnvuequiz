@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useMediaQuery, usePreferredDark } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
-import { watchEffect, watch, computed, useTemplateRef, onMounted, ref } from 'vue';
+import { watchEffect, watch, computed, useTemplateRef } from 'vue';
 
 import AttackDetailsPane from '@/components/attackdex/attackInfo/AttackDetailsPane.vue';
-import AchievementNotificationss from '@/components/background/AchievementNotifications.vue';
 import AchievementNotifications from '@/components/background/AchievementNotifications.vue';
 import Background from '@/components/background/Background.vue';
 import Credits from '@/components/background/Credits.vue';
@@ -16,7 +15,6 @@ import RoomMessageOverlay from '@/components/background/RoomMessageOverlay.vue';
 import SavingIndicator from '@/components/background/SavingIndicator.vue';
 import SnackBar from '@/components/background/SnackBar.vue';
 import Tooltip from '@/components/background/Tooltip.vue';
-import WalkingSprite from '@/components/background/WalkingSprite.vue';
 import FadeTransition from '@/components/common/transitions/FadeTransition.vue';
 import Dialogs from '@/components/dialogs/Dialogs.vue';
 import GameFooter from '@/components/footer/GameFooter.vue';
@@ -29,14 +27,12 @@ import { useAchievements } from '@/composables/useAchievements.ts';
 import { useAppBreakpoints } from '@/composables/useAppBreakpoints.ts';
 import { useFirebase } from '@/composables/useFirebase.ts';
 import { TYPE_STYLE_KEYS, useTypeStyles } from '@/composables/useTypeStyles';
-import { WalkingDirection } from '@/data/wanderingSprites.ts';
 import OfflineBanner from '@/OfflineBanner.vue';
 import ReloadPrompt from '@/ReloadPrompt.vue';
 import ScrollTop from '@/ScrollTop.vue';
 import { useCredits } from '@/stores/useCredits';
 import { useGameFlow } from '@/stores/useGameFlow';
 import { useHelp } from '@/stores/useHelp.ts';
-import { useProfile } from '@/stores/useProfile.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useState } from '@/stores/useState';
 

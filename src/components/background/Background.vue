@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 import BackgroundPreload from '@/components/background/BackgroundPreload.vue';
 import WalkingSprite from '@/components/background/WalkingSprite.vue';
-import { WalkingDirection } from '@/data/wanderingSprites.ts';
+import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
 import { useCurrentType } from '@/stores/useCurrentType';
 import { useState } from '@/stores/useState';
 import { useWanderers } from '@/stores/useWanderers.ts';
+import { WalkingDirection } from '@/types.ts';
 
 const { state } = useState();
 const { getCurrentTypeOrSpecial, getSecondaryType } = useCurrentType();
 const { wanderersState } = useWanderers();
+const { wanderingState, startWandering } = useWanderingSprite({ margin: 40 });
 
 const currentType = computed(() => {
   return getCurrentTypeOrSpecial();
@@ -18,6 +20,11 @@ const currentType = computed(() => {
 
 const secondaryType = computed(() => {
   return getSecondaryType();
+});
+
+// Start wandering sprites when the component is mounted
+onMounted(() => {
+  startWandering();
 });
 </script>
 
@@ -37,9 +44,14 @@ const secondaryType = computed(() => {
       class="wanderers"
       v-if="wanderersState.enabled"
     >
-      <div>
+      <div
+        :style="{
+          transform: `translate(${wanderingState.position.x}px, ${wanderingState.position.y}px)`,
+          transition: `transform ${wanderingState.legDuration}ms linear`,
+        }"
+      >
         <WalkingSprite
-          :direction="WalkingDirection.Up"
+          :direction="wanderingState.direction"
           :sprite-id="1"
         />
       </div>
@@ -86,15 +98,6 @@ const secondaryType = computed(() => {
   }
 }
 
-@keyframes wander {
-  from {
-    transform: translateX(0) translateY(0);
-  }
-  to {
-    transform: translateX(100vw) translateY(100vh);
-  }
-}
-
 .wanderers {
   position: fixed;
   top: 0;
@@ -105,13 +108,6 @@ const secondaryType = computed(() => {
   height: 100%;
   z-index: -1;
   pointer-events: none;
-
-  & > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: wander 10s linear infinite;
-  }
 }
 
 .background {

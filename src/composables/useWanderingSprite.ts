@@ -1,5 +1,5 @@
 import { useWindowSize } from '@vueuse/core';
-import { reactive, onUnmounted, computed } from 'vue';
+import { reactive, onUnmounted, computed, nextTick } from 'vue';
 
 import { WalkingDirection, type Point, type Rectangle, type WanderingAnimation } from '@/types.ts';
 import { clamp, randomBetween } from '@/utils/utils.ts';
@@ -42,7 +42,7 @@ const getDirectionFromVector = (dx: number, dy: number): WalkingDirection => {
 };
 
 export const useWanderingSprite = ({ speed = 30, margin = 0 }: { speed?: number; margin?: number } = {}) => {
-  const state = reactive<WanderingSpriteState>({
+  const wanderingState = reactive<WanderingSpriteState>({
     direction: WalkingDirection.Down,
     isMoving: false,
     legDuration: 0,
@@ -54,58 +54,60 @@ export const useWanderingSprite = ({ speed = 30, margin = 0 }: { speed?: number;
   const { height, width } = useWindowSize();
   // The walkable area is the whole window; being computed, it follows window resizes.
   const rect = computed<Rectangle>(() => ({
+    height: height.value,
+    width: width.value,
     x: 0,
     y: 0,
-    width: width.value,
-    height: height.value,
   }));
 
   // The wandering loop: make a sprite walk to a given target, then pick a new target and repeat.
   const loop = () => {
-    const target = pickTarget(rect.value, margin, state.position, 100);
-    const dx = target.x - state.position.x;
-    const dy = target.y - state.position.y;
+    const target = pickTarget(rect.value, margin, wanderingState.position, 100);
+    const dx = target.x - wanderingState.position.x;
+    const dy = target.y - wanderingState.position.y;
     const distance = Math.hypot(dx, dy);
     const direction = getDirectionFromVector(dx, dy);
     const legDurationMs = getLegDurationMs(distance, speed);
 
-    state.direction = direction;
-    state.isMoving = true;
-    state.position = target;
-    state.legDuration = legDurationMs;
+    wanderingState.direction = direction;
+    wanderingState.isMoving = true;
+    wanderingState.position = target;
+    wanderingState.legDuration = legDurationMs;
 
     // Pause in legDurationMs
     timer = setTimeout(() => {
-      state.isMoving = false;
+      wanderingState.isMoving = false;
       // random pause between 1 and 4s
       const pauseMs = Math.random() * 3000 + 1000;
       timer = setTimeout(loop, pauseMs);
     }, legDurationMs);
   };
 
-  const start = () => {
-    stop();
+  const startWandering = () => {
+    stopWandering();
     // take a position at random
-    state.position = {
+    wanderingState.position = {
       x: Math.random() * (rect.value.width - margin * 2) + rect.value.x + margin,
       y: Math.random() * (rect.value.height - margin * 2) + rect.value.y + margin,
     };
 
-    loop();
+    requestAnimationFrame(() => {
+      loop();
+    });
   };
 
-  const stop = () => {
+  const stopWandering = () => {
     clearTimeout(timer);
-    state.isMoving = false;
+    wanderingState.isMoving = false;
   };
 
   onUnmounted(() => {
-    stop();
+    stopWandering();
   });
 
   return {
-    start,
-    state,
-    stop,
+    startWandering,
+    stopWandering,
+    wanderingState,
   };
 };
