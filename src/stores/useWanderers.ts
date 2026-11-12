@@ -1,7 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import { animatedSprites } from '@/data/wanderingSprites.ts';
+import { animatedSprites, loadAnimatedSprites } from '@/data/wanderingSprites.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { sample } from '@/utils/utils.ts';
 
@@ -22,7 +22,8 @@ export const useWanderers = defineStore('wanderers', () => {
     wanderersState.enabled = !wanderersState.enabled;
   };
 
-  const pickWanderer = () => {
+  const pickWanderer = async () => {
+    await loadAnimatedSprites();
     const { getFoundPokemon } = usePokemons();
     const candidates = getFoundPokemon().filter(
       (p) => animatedSprites[p.dexNum] && !wanderersState.wanderers.has(p.dexNum),
@@ -34,19 +35,19 @@ export const useWanderers = defineStore('wanderers', () => {
     }
   };
 
-  const addNewWanderer = () => {
+  const addNewWanderer = async () => {
     const { numFound } = usePokemons();
     if (numFound % NEW_WANDERER_RATE === 0) {
-      pickWanderer();
+      await pickWanderer();
     }
   };
 
-  const addWanderers = () => {
+  const addWanderers = async () => {
     const { numFound } = usePokemons();
     resetWanderers();
 
     for (let i = 0; i < Math.floor(numFound / NEW_WANDERER_RATE); i++) {
-      pickWanderer();
+      await pickWanderer();
     }
   };
 

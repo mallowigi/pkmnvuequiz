@@ -1,157 +1,17 @@
 import { type WanderingAnimation } from '@/types.ts';
 
-// Taken from each species' AnimData.xml (Walk). The sheet is named after the national dex number.
-export const animatedSprites: Record<number, WanderingAnimation> = {
-  1: {
-    durations: [
-      4,
-      4,
-      4,
-      4,
-      4,
-      4,
-    ],
-    frameHeight: 40,
-    frameWidth: 40,
-  },
-  172: {
-    durations: [
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-    ],
-    frameHeight: 48,
-    frameWidth: 32,
-  },
-  255: {
-    durations: [
-      8,
-      8,
-      8,
-      8,
-    ],
-    frameHeight: 32,
-    frameWidth: 24,
-  },
-  321: {
-    durations: [
-      10,
-      8,
-      6,
-      6,
-      8,
-      8,
-      10,
-      8,
-      6,
-      6,
-      6,
-      8,
-    ],
-    frameHeight: 104,
-    frameWidth: 72,
-  },
-  384: {
-    durations: [
-      8,
-      8,
-      6,
-      4,
-      4,
-      4,
-      8,
-      8,
-      6,
-      6,
-      6,
-      6,
-    ],
-    frameHeight: 128,
-    frameWidth: 80,
-  },
-  493: {
-    durations: [
-      8,
-      10,
-      8,
-      10,
-      8,
-      10,
-      8,
-      10,
-    ],
-    frameHeight: 88,
-    frameWidth: 48,
-  },
-  658: {
-    durations: [
-      8,
-      10,
-      8,
-      10,
-    ],
-    frameHeight: 48,
-    frameWidth: 32,
-  },
-  797: {
-    durations: [
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-      6,
-    ],
-    frameHeight: 112,
-    frameWidth: 64,
-  },
-  928: {
-    durations: [
-      6,
-      4,
-      6,
-      4,
-      6,
-      4,
-      6,
-      4,
-    ],
-    frameHeight: 32,
-    frameWidth: 24,
-  },
-  989: {
-    durations: [
-      8,
-      12,
-      8,
-      12,
-    ],
-    frameHeight: 64,
-    frameWidth: 40,
-  },
-  992: {
-    durations: [
-      14,
-      14,
-      14,
-      14,
-    ],
-    frameHeight: 48,
-    frameWidth: 40,
-  },
+/**
+ * Walk animation data per national dex number, filled by `loadAnimatedSprites`.
+ * Generated from each species' AnimData.xml; the sheet is `assets/sprites/walking/<dexNum>.png`.
+ */
+export const animatedSprites: Record<number, WanderingAnimation> = {};
+
+let loading: Promise<void> | null = null;
+
+/** Loads the animation data once, keeping the large JSON out of the initial bundle. */
+export const loadAnimatedSprites = (): Promise<void> => {
+  loading ??= import('@/data/wanderingSprites.json').then((module) => {
+    Object.assign(animatedSprites, module.default);
+  });
+  return loading;
 };

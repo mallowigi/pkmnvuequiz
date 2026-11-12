@@ -1,0 +1,6204 @@
+{ "1": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 40 }, "2": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "3": { "durations": [
+      8,
+      16,
+      8,
+      16
+    ], "frameHeight": 32, "frameWidth": 32 }, "4": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "5": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "6": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "7": { "durations": [
+      12,
+      8,
+      12,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "8": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "9": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 40, "frameWidth": 32 }, "10": { "durations": [
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "11": { "durations": [
+      4,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "12": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "13": { "durations": [
+      8,
+      10,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "14": { "durations": [
+      8,
+      4,
+      4,
+      4,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "15": { "durations": [
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "16": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "17": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "18": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "19": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 48 }, "20": { "durations": [
+      4,
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "21": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "22": { "durations": [
+      4,
+      5,
+      6,
+      4,
+      5,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "23": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "24": { "durations": [
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "25": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "26": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "27": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "28": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "29": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "30": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "31": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "32": { "durations": [
+      6,
+      6,
+      5,
+      6,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "33": { "durations": [
+      6,
+      12,
+      6,
+      12
+    ], "frameHeight": 40, "frameWidth": 40 }, "34": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 48, "frameWidth": 40 }, "35": { "durations": [
+      8,
+      4,
+      8,
+      4,
+      8,
+      4,
+      8,
+      4
+    ], "frameHeight": 40, "frameWidth": 24 }, "36": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "37": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "38": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "39": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "40": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "41": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "42": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "43": { "durations": [
+      8,
+      4,
+      8,
+      6,
+      8,
+      4,
+      8,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "44": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "45": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "46": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 24, "frameWidth": 32 }, "47": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "48": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "49": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "50": { "durations": [
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "51": { "durations": [
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 56 }, "52": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "53": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "54": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 24 }, "55": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "56": { "durations": [
+      8,
+      4,
+      4,
+      4,
+      8,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "57": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "58": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "59": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "60": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "61": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "62": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "63": { "durations": [
+      8,
+      10,
+      8,
+      10,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "64": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 40 }, "65": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "66": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "67": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "68": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "69": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "70": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "71": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "72": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "73": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "74": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "75": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "76": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "77": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "78": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "79": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "80": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "81": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 24 }, "82": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "83": { "durations": [
+      6,
+      12,
+      6,
+      12
+    ], "frameHeight": 32, "frameWidth": 24 }, "84": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "85": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "86": { "durations": [
+      8,
+      6,
+      8,
+      10,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "87": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      10,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "88": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "89": { "durations": [
+      10,
+      8,
+      6,
+      10,
+      8
+    ], "frameHeight": 40, "frameWidth": 48 }, "90": { "durations": [
+      10,
+      6,
+      10,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "91": { "durations": [
+      8,
+      8,
+      8,
+      10,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "92": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 48 }, "93": { "durations": [
+      6,
+      6,
+      6,
+      10,
+      6,
+      6,
+      6,
+      6,
+      10,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "94": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "95": { "durations": [
+      10,
+      14,
+      10,
+      14
+    ], "frameHeight": 112, "frameWidth": 88 }, "96": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "97": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "98": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "99": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "100": { "durations": [
+      6,
+      6,
+      10,
+      4,
+      4,
+      4,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "101": { "durations": [
+      4,
+      4,
+      6,
+      8,
+      6,
+      4,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "102": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "103": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "104": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "105": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "106": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "107": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "108": { "durations": [
+      10,
+      14,
+      10,
+      14
+    ], "frameHeight": 40, "frameWidth": 32 }, "109": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "110": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "111": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "112": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "113": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "114": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "115": { "durations": [
+      16,
+      10,
+      16,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "116": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "117": { "durations": [
+      8,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "118": { "durations": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "119": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "120": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "121": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "122": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "123": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "124": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "125": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "126": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "127": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "128": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "129": { "durations": [
+      6,
+      2,
+      4,
+      6,
+      4,
+      2,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "130": { "durations": [
+      10,
+      14,
+      10,
+      14
+    ], "frameHeight": 128, "frameWidth": 88 }, "131": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 56, "frameWidth": 48 }, "132": { "durations": [
+      10,
+      8,
+      10,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "133": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      6,
+      2,
+      2
+    ], "frameHeight": 48, "frameWidth": 40 }, "134": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "135": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "136": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "137": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "138": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "139": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "140": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "141": { "durations": [
+      6,
+      4,
+      8,
+      4,
+      6,
+      4,
+      8,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "142": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "143": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "144": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 88, "frameWidth": 88 }, "145": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 96, "frameWidth": 56 }, "146": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 96, "frameWidth": 80 }, "147": { "durations": [
+      10,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "148": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 48 }, "149": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "150": { "durations": [
+      12,
+      6,
+      6,
+      12,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 48 }, "151": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "152": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "153": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "154": { "durations": [
+      10,
+      14,
+      10,
+      14
+    ], "frameHeight": 56, "frameWidth": 32 }, "155": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "156": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 24, "frameWidth": 32 }, "157": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "158": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "159": { "durations": [
+      12,
+      10,
+      12,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "160": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "161": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "162": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 64, "frameWidth": 56 }, "163": { "durations": [
+      10,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "164": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "165": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "166": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "167": { "durations": [
+      10,
+      10,
+      10
+    ], "frameHeight": 24, "frameWidth": 32 }, "168": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "169": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "170": { "durations": [
+      10,
+      4,
+      6,
+      8,
+      8,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "171": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "172": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "173": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "174": { "durations": [
+      8,
+      4,
+      4,
+      4,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "175": { "durations": [
+      8,
+      6,
+      8,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "176": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "177": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "178": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "179": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "180": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "181": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "182": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "183": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "184": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "185": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "186": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      10
+    ], "frameHeight": 72, "frameWidth": 40 }, "187": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "188": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "189": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 24 }, "190": { "durations": [
+      8,
+      4,
+      6,
+      4,
+      8,
+      4,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "191": { "durations": [
+      4,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "192": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 48, "frameWidth": 32 }, "193": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "194": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "195": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 40, "frameWidth": 48 }, "196": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "197": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "198": { "durations": [
+      4,
+      4,
+      8,
+      4,
+      4,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "199": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "200": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "201": { "durations": [
+      6,
+      6,
+      5,
+      5,
+      6,
+      6,
+      6,
+      5,
+      5,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "202": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "203": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "204": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "205": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "206": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "207": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      8,
+      4,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 32 }, "208": { "durations": [
+      10,
+      14,
+      10,
+      14
+    ], "frameHeight": 112, "frameWidth": 72 }, "209": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "210": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 24 }, "211": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "212": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "213": { "durations": [
+      14,
+      8,
+      14,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "214": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 32 }, "215": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "216": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "217": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "218": { "durations": [
+      14,
+      8,
+      16,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "219": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 40 }, "220": { "durations": [
+      8,
+      8,
+      8,
+      12
+    ], "frameHeight": 24, "frameWidth": 24 }, "221": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "222": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "223": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "224": { "durations": [
+      10,
+      12,
+      8,
+      16,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "225": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "226": { "durations": [
+      6,
+      6,
+      8,
+      8,
+      6,
+      6,
+      6,
+      8,
+      8,
+      6
+    ], "frameHeight": 72, "frameWidth": 64 }, "227": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 72, "frameWidth": 40 }, "228": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "229": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "230": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 64, "frameWidth": 40 }, "231": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "232": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 40 }, "233": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "234": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "235": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "236": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "237": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "238": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "239": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "240": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "241": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "242": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "243": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "244": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "245": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "246": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "247": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "248": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 40 }, "249": { "durations": [
+      4,
+      4
+    ], "frameHeight": 96, "frameWidth": 80 }, "250": { "durations": [
+      8,
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 112, "frameWidth": 72 }, "251": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "252": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "253": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "254": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "255": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "256": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "257": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "258": { "durations": [
+      4,
+      6,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "259": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "260": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "261": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "262": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "263": { "durations": [
+      6,
+      4,
+      4,
+      2,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 40 }, "264": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 40 }, "265": { "durations": [
+      8,
+      2,
+      4,
+      6,
+      4,
+      2
+    ], "frameHeight": 48, "frameWidth": 32 }, "266": { "durations": [
+      2,
+      2,
+      120
+    ], "frameHeight": 40, "frameWidth": 32 }, "267": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "268": { "durations": [
+      2,
+      2,
+      120
+    ], "frameHeight": 32, "frameWidth": 32 }, "269": { "durations": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ], "frameHeight": 56, "frameWidth": 32 }, "270": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "271": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "272": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "273": { "durations": [
+      8,
+      4,
+      6,
+      4,
+      8,
+      4,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 24 }, "274": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "275": { "durations": [
+      8,
+      4,
+      4,
+      4,
+      8,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "276": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "277": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "278": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "279": { "durations": [
+      10,
+      4,
+      8,
+      10,
+      4,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "280": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "281": { "durations": [
+      1,
+      2,
+      3,
+      3,
+      1,
+      4,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ], "frameHeight": 48, "frameWidth": 32 }, "282": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "283": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "284": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "285": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "286": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "287": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 40 }, "288": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "289": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 32 }, "290": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "291": { "durations": [
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "292": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 24 }, "293": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "294": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "295": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 40 }, "296": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "297": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "298": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 40 }, "299": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "300": { "durations": [
+      4,
+      5,
+      6,
+      6,
+      6,
+      5,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "301": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "302": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "303": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "304": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 24, "frameWidth": 24 }, "305": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "306": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "307": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "308": { "durations": [
+      10,
+      6,
+      6,
+      6,
+      10,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "309": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "310": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "311": { "durations": [
+      6,
+      4,
+      8,
+      4,
+      6,
+      4,
+      8,
+      4
+    ], "frameHeight": 40, "frameWidth": 24 }, "312": { "durations": [
+      6,
+      4,
+      8,
+      4,
+      6,
+      4,
+      8,
+      4
+    ], "frameHeight": 40, "frameWidth": 24 }, "313": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "314": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "315": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 32, "frameWidth": 32 }, "316": { "durations": [
+      8,
+      8,
+      10,
+      8,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "317": { "durations": [
+      10,
+      8,
+      10,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "318": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "319": { "durations": [
+      10,
+      8,
+      8,
+      8,
+      10,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "320": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "321": { "durations": [
+      10,
+      8,
+      6,
+      6,
+      8,
+      8,
+      10,
+      8,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 104, "frameWidth": 72 }, "322": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "323": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "324": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 40 }, "325": { "durations": [
+      4,
+      6,
+      4,
+      6,
+      4,
+      4,
+      4,
+      6,
+      4,
+      6,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 32 }, "326": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "327": { "durations": [
+      10,
+      10,
+      12,
+      14,
+      12,
+      10,
+      10,
+      12,
+      14,
+      12,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "328": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "329": { "durations": [
+      4,
+      6,
+      6,
+      6,
+      4,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "330": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 32 }, "331": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "332": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "333": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "334": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "335": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "336": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "337": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "338": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "339": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "340": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      8,
+      6,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "341": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "342": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "343": { "durations": [
+      6,
+      6,
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "344": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 24 }, "345": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "346": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "347": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "348": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 48 }, "349": { "durations": [
+      8,
+      10,
+      8,
+      10,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "350": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 80, "frameWidth": 72 }, "351": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "352": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "353": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "354": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "355": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "356": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "357": { "durations": [
+      10,
+      14,
+      10,
+      14
+    ], "frameHeight": 56, "frameWidth": 48 }, "358": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      4,
+      4,
+      4,
+      4,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "359": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "360": { "durations": [
+      8,
+      2,
+      10,
+      2,
+      8,
+      2,
+      10,
+      2
+    ], "frameHeight": 40, "frameWidth": 24 }, "361": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "362": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 32 }, "363": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "364": { "durations": [
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 40 }, "365": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 48 }, "366": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "367": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 40 }, "368": { "durations": [
+      14,
+      6,
+      8,
+      8,
+      8,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 48 }, "369": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "370": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "371": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "372": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "373": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 80, "frameWidth": 56 }, "374": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "375": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "376": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 40, "frameWidth": 48 }, "377": { "durations": [
+      8,
+      18,
+      8,
+      18
+    ], "frameHeight": 48, "frameWidth": 32 }, "378": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "379": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "380": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 48 }, "381": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 80, "frameWidth": 64 }, "382": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 72, "frameWidth": 64 }, "383": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 88, "frameWidth": 64 }, "384": { "durations": [
+      8,
+      8,
+      6,
+      4,
+      4,
+      4,
+      8,
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 128, "frameWidth": 80 }, "385": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "386": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "387": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "388": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "389": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "390": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "391": { "durations": [
+      4,
+      4,
+      2,
+      4,
+      6,
+      4,
+      2,
+      2,
+      2
+    ], "frameHeight": 56, "frameWidth": 48 }, "392": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "393": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "394": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "395": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "396": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "397": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "398": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "399": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "400": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "401": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "402": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "403": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "404": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "405": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "406": { "durations": [
+      6,
+      4,
+      6,
+      4,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 32, "frameWidth": 24 }, "407": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "408": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "409": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "410": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "411": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "412": { "durations": [
+      2,
+      2,
+      6,
+      4,
+      2,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "413": { "durations": [
+      8,
+      4,
+      4,
+      4,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "414": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 40 }, "415": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 24 }, "416": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 32 }, "417": { "durations": [
+      6,
+      4,
+      6,
+      4,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 56, "frameWidth": 40 }, "418": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "419": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "420": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "421": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "422": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "423": { "durations": [
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "424": { "durations": [
+      6,
+      4,
+      6,
+      4,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 56, "frameWidth": 40 }, "425": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 24 }, "426": { "durations": [
+      5,
+      3,
+      5,
+      7,
+      9,
+      7,
+      5,
+      5
+    ], "frameHeight": 64, "frameWidth": 32 }, "427": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      6,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "428": { "durations": [
+      6,
+      2,
+      2,
+      4,
+      4,
+      4,
+      4,
+      6,
+      4
+    ], "frameHeight": 64, "frameWidth": 40 }, "429": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 32 }, "430": { "durations": [
+      6,
+      4,
+      4,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "431": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "432": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "433": { "durations": [
+      5,
+      5,
+      7,
+      7,
+      5,
+      5,
+      5,
+      5,
+      5
+    ], "frameHeight": 48, "frameWidth": 40 }, "434": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "435": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "436": { "durations": [
+      6,
+      6,
+      8,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "437": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 24 }, "438": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "439": { "durations": [
+      3,
+      1,
+      5,
+      5,
+      1,
+      3,
+      1,
+      5,
+      5,
+      1
+    ], "frameHeight": 48, "frameWidth": 24 }, "440": { "durations": [
+      6,
+      2,
+      8,
+      4,
+      6,
+      2,
+      8,
+      4
+    ], "frameHeight": 40, "frameWidth": 24 }, "441": { "durations": [
+      8,
+      4,
+      4,
+      4,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "442": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "443": { "durations": [
+      7,
+      7,
+      7,
+      7
+    ], "frameHeight": 40, "frameWidth": 24 }, "444": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "445": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "446": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "447": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "448": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "449": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "450": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "451": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "452": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 48 }, "453": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "454": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "455": { "durations": [
+      6,
+      6,
+      4,
+      4,
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "456": { "durations": [
+      6,
+      6,
+      8,
+      6,
+      6,
+      6,
+      8,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "457": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "458": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 32 }, "459": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "460": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "461": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "462": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "463": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "464": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "465": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "466": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "467": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "468": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6,
+      6,
+      4,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "469": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 40 }, "470": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "471": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "472": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      8,
+      4,
+      4,
+      4
+    ], "frameHeight": 72, "frameWidth": 32 }, "473": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 40, "frameWidth": 48 }, "474": { "durations": [
+      6,
+      6,
+      4,
+      6,
+      6,
+      4,
+      6
+    ], "frameHeight": 64, "frameWidth": 24 }, "475": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "476": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "477": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 72, "frameWidth": 48 }, "478": { "durations": [
+      6,
+      4,
+      8,
+      10,
+      6,
+      4,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "479": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "480": { "durations": [
+      8,
+      8,
+      6,
+      6,
+      8,
+      8,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "481": { "durations": [
+      8,
+      8,
+      6,
+      6,
+      8,
+      8,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "482": { "durations": [
+      8,
+      8,
+      6,
+      6,
+      8,
+      8,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "483": { "durations": [
+      12,
+      14,
+      12,
+      14
+    ], "frameHeight": 104, "frameWidth": 72 }, "484": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 104, "frameWidth": 80 }, "485": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "486": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 72, "frameWidth": 48 }, "487": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 80, "frameWidth": 64 }, "488": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 72, "frameWidth": 48 }, "489": { "durations": [
+      6,
+      2,
+      2,
+      2,
+      4,
+      6,
+      6,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "490": { "durations": [
+      6,
+      6,
+      6,
+      2,
+      6,
+      6,
+      6,
+      2
+    ], "frameHeight": 48, "frameWidth": 40 }, "491": { "durations": [
+      7,
+      7,
+      9,
+      9,
+      9,
+      7,
+      7,
+      7
+    ], "frameHeight": 80, "frameWidth": 40 }, "492": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 24, "frameWidth": 24 }, "493": { "durations": [
+      8,
+      10,
+      8,
+      10,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 88, "frameWidth": 48 }, "494": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 24 }, "495": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "496": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "497": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "498": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "499": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "500": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "501": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "502": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "503": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 48 }, "504": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "505": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "506": { "durations": [
+      4,
+      6,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "507": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "508": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 56, "frameWidth": 56 }, "509": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "510": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "511": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "512": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "513": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "515": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "517": { "durations": [
+      8,
+      10,
+      8,
+      10,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "518": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "519": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "521": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "524": { "durations": [
+      7,
+      9,
+      7,
+      9
+    ], "frameHeight": 32, "frameWidth": 24 }, "525": { "durations": [
+      8,
+      18,
+      8,
+      18
+    ], "frameHeight": 32, "frameWidth": 40 }, "526": { "durations": [
+      15,
+      15,
+      15,
+      15
+    ], "frameHeight": 48, "frameWidth": 40 }, "527": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "528": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "529": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "530": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 40 }, "531": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "532": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "533": { "durations": [
+      8,
+      18,
+      8,
+      18
+    ], "frameHeight": 48, "frameWidth": 48 }, "534": { "durations": [
+      14,
+      14,
+      14,
+      14
+    ], "frameHeight": 48, "frameWidth": 48 }, "535": { "durations": [
+      8,
+      4,
+      4,
+      6,
+      4,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "536": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "537": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "539": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 24 }, "540": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "541": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "542": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "543": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 24, "frameWidth": 32 }, "544": { "durations": [
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "545": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 72, "frameWidth": 64 }, "546": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 24 }, "547": { "durations": [
+      9,
+      12,
+      12,
+      12,
+      9,
+      12,
+      12,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "548": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "549": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 24 }, "550": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "551": { "durations": [
+      7,
+      7,
+      7,
+      7
+    ], "frameHeight": 32, "frameWidth": 32 }, "552": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "553": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 40 }, "554": { "durations": [
+      8,
+      4,
+      8,
+      4,
+      8,
+      4,
+      8,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "555": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "556": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "557": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 24, "frameWidth": 24 }, "559": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "560": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "561": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "562": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "563": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "566": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "567": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "568": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "569": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 48 }, "570": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "571": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 48 }, "572": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "573": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "574": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "575": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "576": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "577": { "durations": [
+      6,
+      6,
+      5,
+      5,
+      6,
+      6,
+      6,
+      5,
+      5,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "578": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "579": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 56 }, "580": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 24 }, "581": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "582": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "583": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 24 }, "584": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 64, "frameWidth": 32 }, "585": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "586": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "587": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "588": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "589": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "590": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "593": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "594": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 24 }, "595": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 16, "frameWidth": 24 }, "596": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "597": { "durations": [
+      6,
+      6,
+      10,
+      4,
+      4,
+      4,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "598": { "durations": [
+      10,
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 48 }, "599": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "600": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "601": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 48 }, "602": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "603": { "durations": [
+      14,
+      6,
+      8,
+      8,
+      8,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 48 }, "604": { "durations": [
+      10,
+      8,
+      8,
+      8,
+      10,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 48 }, "605": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      8,
+      6,
+      6,
+      8
+    ], "frameHeight": 56, "frameWidth": 24 }, "606": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "607": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "608": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "609": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 40 }, "610": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "611": { "durations": [
+      12,
+      10,
+      12,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "612": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "613": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "614": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "615": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 24 }, "617": { "durations": [
+      6,
+      6,
+      7,
+      5,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "619": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "620": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "621": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "622": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "623": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 72, "frameWidth": 48 }, "624": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "625": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 56, "frameWidth": 24 }, "627": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "628": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "629": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "630": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "631": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 48 }, "632": { "durations": [
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "633": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "634": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "635": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 48 }, "636": { "durations": [
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "637": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 48 }, "638": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 64, "frameWidth": 32 }, "639": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 40, "frameWidth": 40 }, "640": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "641": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 72, "frameWidth": 48 }, "642": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 72, "frameWidth": 48 }, "643": { "durations": [
+      8,
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 96, "frameWidth": 88 }, "644": { "durations": [
+      10,
+      10,
+      15,
+      20,
+      10,
+      15
+    ], "frameHeight": 104, "frameWidth": 72 }, "645": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 48 }, "646": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 80, "frameWidth": 80 }, "647": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "648": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 24 }, "649": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "650": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "651": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "652": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "653": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 40 }, "654": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "655": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "656": { "durations": [
+      4,
+      6,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "657": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "658": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "659": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "660": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "661": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "662": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "663": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "664": { "durations": [
+      8,
+      2,
+      4,
+      6,
+      4,
+      2
+    ], "frameHeight": 48, "frameWidth": 24 }, "665": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "666": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 40 }, "667": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "669": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "670": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "671": { "durations": [
+      8,
+      5,
+      5,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "672": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "673": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "674": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "675": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "676": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "677": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "678": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "679": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "680": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "681": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 32 }, "682": { "durations": [
+      4,
+      5,
+      6,
+      4,
+      5,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "684": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 24, "frameWidth": 24 }, "685": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "686": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "687": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 40 }, "688": { "durations": [
+      6,
+      6,
+      10,
+      4,
+      4,
+      4,
+      6,
+      8
+    ], "frameHeight": 56, "frameWidth": 48 }, "689": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "690": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "691": { "durations": [
+      8,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 64, "frameWidth": 40 }, "692": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 40 }, "693": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "694": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "695": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 40 }, "696": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "697": { "durations": [
+      12,
+      15,
+      12,
+      15
+    ], "frameHeight": 72, "frameWidth": 56 }, "698": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "699": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 80, "frameWidth": 48 }, "700": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "701": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "702": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 24 }, "703": { "durations": [
+      4,
+      8,
+      8,
+      8,
+      8,
+      8,
+      4
+    ], "frameHeight": 32, "frameWidth": 24 }, "704": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "705": { "durations": [
+      14,
+      8,
+      16,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "706": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "707": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "708": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "709": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "710": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "711": { "durations": [
+      6,
+      6,
+      8,
+      8,
+      6,
+      6,
+      6,
+      8,
+      8,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "712": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "713": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 56 }, "714": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 72, "frameWidth": 32 }, "715": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "716": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 120, "frameWidth": 64 }, "717": { "durations": [
+      8,
+      6,
+      4,
+      4,
+      6,
+      8
+    ], "frameHeight": 96, "frameWidth": 80 }, "718": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 80, "frameWidth": 64 }, "719": { "durations": [
+      8,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "720": { "durations": [
+      7,
+      7,
+      9,
+      9,
+      9,
+      7,
+      7,
+      7
+    ], "frameHeight": 48, "frameWidth": 32 }, "721": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 64, "frameWidth": 56 }, "722": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "723": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "724": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "725": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 40, "frameWidth": 32 }, "726": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "727": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "728": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 32 }, "729": { "durations": [
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "730": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      10,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 48 }, "731": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 40 }, "734": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 48 }, "736": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 24, "frameWidth": 32 }, "737": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 40 }, "738": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 48 }, "739": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "740": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 48 }, "741": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "742": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 24 }, "743": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "744": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 40 }, "745": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 48 }, "746": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "747": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "748": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "749": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "750": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 64, "frameWidth": 48 }, "751": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "752": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 48, "frameWidth": 48 }, "753": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "754": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "755": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "757": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "758": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 48 }, "759": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 24, "frameWidth": 24 }, "760": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "761": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "762": { "durations": [
+      4,
+      6,
+      4,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "763": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "764": { "durations": [
+      6,
+      6,
+      5,
+      5,
+      6,
+      6,
+      6,
+      5,
+      5,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "766": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "767": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 40 }, "768": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "769": { "durations": [
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "770": { "durations": [
+      10,
+      8,
+      6,
+      10,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "771": { "durations": [
+      8,
+      8,
+      8,
+      12
+    ], "frameHeight": 24, "frameWidth": 24 }, "772": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "773": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 72, "frameWidth": 32 }, "774": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "775": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "776": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 56, "frameWidth": 40 }, "777": { "durations": [
+      8,
+      4,
+      8,
+      4,
+      8,
+      4,
+      8,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "778": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "779": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 40 }, "780": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 64, "frameWidth": 64 }, "781": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 96, "frameWidth": 48 }, "782": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "783": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "784": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "785": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 80, "frameWidth": 48 }, "786": { "durations": [
+      8,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "787": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 72, "frameWidth": 32 }, "788": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 64, "frameWidth": 32 }, "789": { "durations": [
+      4,
+      8,
+      8,
+      8,
+      8,
+      8,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "790": { "durations": [
+      6,
+      6,
+      5,
+      5,
+      6,
+      6,
+      6,
+      5,
+      5,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "791": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 72, "frameWidth": 48 }, "792": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 104, "frameWidth": 80 }, "793": { "durations": [
+      6,
+      10,
+      10,
+      6,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "794": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 72, "frameWidth": 56 }, "795": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 72, "frameWidth": 48 }, "796": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 32 }, "797": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 112, "frameWidth": 64 }, "798": { "durations": [
+      4,
+      6,
+      8,
+      4,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "799": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 88, "frameWidth": 120 }, "800": { "durations": [
+      4,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      4
+    ], "frameHeight": 96, "frameWidth": 72 }, "801": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "802": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "803": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "804": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 48 }, "805": { "durations": [
+      12,
+      14,
+      12,
+      14
+    ], "frameHeight": 96, "frameWidth": 64 }, "806": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 24 }, "807": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 48 }, "808": { "durations": [
+      8,
+      6,
+      8,
+      10,
+      6,
+      6,
+      6,
+      8,
+      6,
+      8,
+      10,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "809": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 56, "frameWidth": 64 }, "810": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "811": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 24 }, "812": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 64, "frameWidth": 48 }, "813": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "814": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "815": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "816": { "durations": [
+      6,
+      10,
+      6,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "817": { "durations": [
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "818": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 56, "frameWidth": 48 }, "819": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "820": { "durations": [
+      10,
+      8,
+      10,
+      8
+    ], "frameHeight": 48, "frameWidth": 48 }, "821": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "822": { "durations": [
+      4,
+      4,
+      8,
+      4,
+      4,
+      8
+    ], "frameHeight": 56, "frameWidth": 32 }, "823": { "durations": [
+      4,
+      5,
+      6,
+      4,
+      5,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "824": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "825": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "826": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 40 }, "827": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 }, "828": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "829": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "830": { "durations": [
+      6,
+      8,
+      8,
+      8,
+      6,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 48 }, "831": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "832": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 48, "frameWidth": 40 }, "833": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "834": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "835": { "durations": [
+      6,
+      4,
+      6,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 48, "frameWidth": 32 }, "836": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "837": { "durations": [
+      6,
+      6,
+      10,
+      4,
+      4,
+      4,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "840": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 24, "frameWidth": 24 }, "841": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 40 }, "842": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 40 }, "843": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 48 }, "844": { "durations": [
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 56 }, "845": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 40 }, "846": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "847": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "848": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 24 }, "849": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 72, "frameWidth": 32 }, "850": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "851": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 64 }, "852": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "853": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 32, "frameWidth": 40 }, "854": { "durations": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "855": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "856": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "857": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "858": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 64, "frameWidth": 56 }, "859": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "860": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "861": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "862": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 64, "frameWidth": 40 }, "863": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "864": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 40 }, "865": { "durations": [
+      6,
+      12,
+      6,
+      12
+    ], "frameHeight": 80, "frameWidth": 40 }, "867": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 24 }, "868": { "durations": [
+      18,
+      18,
+      18,
+      18
+    ], "frameHeight": 40, "frameWidth": 24 }, "869": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "871": { "durations": [
+      9,
+      9,
+      9,
+      9
+    ], "frameHeight": 24, "frameWidth": 24 }, "872": { "durations": [
+      10,
+      10,
+      10
+    ], "frameHeight": 24, "frameWidth": 24 }, "873": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 64, "frameWidth": 48 }, "874": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 88, "frameWidth": 48 }, "875": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 24 }, "876": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 24 }, "877": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 40 }, "878": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 48 }, "879": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 72, "frameWidth": 64 }, "880": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 48, "frameWidth": 56 }, "881": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 32 }, "882": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 64, "frameWidth": 40 }, "883": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "884": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "885": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "886": { "durations": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "887": { "durations": [
+      5,
+      3,
+      5,
+      7,
+      9,
+      7,
+      5,
+      5
+    ], "frameHeight": 80, "frameWidth": 48 }, "888": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 64, "frameWidth": 48 }, "889": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 64, "frameWidth": 48 }, "890": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 120, "frameWidth": 104 }, "891": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "892": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "894": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 72 }, "895": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 88, "frameWidth": 48 }, "896": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 72, "frameWidth": 40 }, "897": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "898": { "durations": [
+      8,
+      8,
+      6,
+      6,
+      8,
+      8,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 24 }, "899": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "900": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 48 }, "901": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 48 }, "902": { "durations": [
+      10,
+      8,
+      8,
+      8,
+      10,
+      8,
+      8,
+      8
+    ], "frameHeight": 72, "frameWidth": 56 }, "903": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "904": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 64, "frameWidth": 40 }, "905": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 72, "frameWidth": 32 }, "906": { "durations": [
+      4,
+      6,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "907": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 24 }, "908": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 64, "frameWidth": 40 }, "909": { "durations": [
+      7,
+      7,
+      7,
+      7
+    ], "frameHeight": 32, "frameWidth": 24 }, "910": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "911": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "912": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 32, "frameWidth": 24 }, "913": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 24 }, "914": { "durations": [
+      6,
+      4,
+      6,
+      4,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 72, "frameWidth": 32 }, "915": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 32, "frameWidth": 24 }, "916": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "917": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "918": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "919": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 32, "frameWidth": 32 }, "920": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "921": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "922": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "923": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "924": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "925": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 40, "frameWidth": 32 }, "926": { "durations": [
+      4,
+      6,
+      4,
+      6,
+      6,
+      4
+    ], "frameHeight": 32, "frameWidth": 32 }, "927": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "928": { "durations": [
+      6,
+      4,
+      6,
+      4,
+      6,
+      4,
+      6,
+      4
+    ], "frameHeight": 32, "frameWidth": 24 }, "930": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 48, "frameWidth": 48 }, "932": { "durations": [
+      6,
+      6,
+      10,
+      4,
+      4,
+      4,
+      6,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "933": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "934": { "durations": [
+      8,
+      18,
+      8,
+      18
+    ], "frameHeight": 64, "frameWidth": 32 }, "935": { "durations": [
+      6,
+      8,
+      6,
+      8
+    ], "frameHeight": 48, "frameWidth": 24 }, "936": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "937": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 32 }, "938": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      8,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "939": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      10
+    ], "frameHeight": 72, "frameWidth": 48 }, "940": { "durations": [
+      6,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 40, "frameWidth": 32 }, "941": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 56, "frameWidth": 40 }, "946": { "durations": [
+      6,
+      6,
+      7,
+      5,
+      6,
+      4,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 24 }, "948": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "951": { "durations": [
+      4,
+      2,
+      2,
+      6,
+      4,
+      2,
+      4,
+      2,
+      2,
+      6,
+      4,
+      2
+    ], "frameHeight": 40, "frameWidth": 24 }, "952": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "953": { "durations": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ], "frameHeight": 24, "frameWidth": 32 }, "955": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 24 }, "957": { "durations": [
+      6,
+      12,
+      6,
+      12
+    ], "frameHeight": 24, "frameWidth": 32 }, "958": { "durations": [
+      6,
+      12,
+      6,
+      12
+    ], "frameHeight": 32, "frameWidth": 32 }, "959": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 96, "frameWidth": 80 }, "960": { "durations": [
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 40 }, "961": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 24, "frameWidth": 32 }, "962": { "durations": [
+      4,
+      5,
+      6,
+      4
+    ], "frameHeight": 56, "frameWidth": 48 }, "963": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      8,
+      6,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "964": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      8,
+      8,
+      6,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "965": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 32 }, "966": { "durations": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ], "frameHeight": 64, "frameWidth": 40 }, "967": { "durations": [
+      8,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 48 }, "968": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 48 }, "969": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 40, "frameWidth": 32 }, "970": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 56, "frameWidth": 40 }, "971": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "972": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 40 }, "974": { "durations": [
+      4,
+      6,
+      6,
+      8,
+      8,
+      8,
+      4,
+      4,
+      4,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      4,
+      4
+    ], "frameHeight": 48, "frameWidth": 40 }, "975": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 64, "frameWidth": 88 }, "976": { "durations": [
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 48, "frameWidth": 48 }, "977": { "durations": [
+      10,
+      8,
+      6,
+      6,
+      8,
+      8,
+      10,
+      8,
+      6,
+      6,
+      6,
+      8
+    ], "frameHeight": 96, "frameWidth": 80 }, "978": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 32, "frameWidth": 32 }, "979": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 72, "frameWidth": 48 }, "980": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 40, "frameWidth": 48 }, "981": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 96, "frameWidth": 56 }, "982": { "durations": [
+      8,
+      6,
+      6,
+      8,
+      6,
+      6
+    ], "frameHeight": 40, "frameWidth": 40 }, "983": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 72, "frameWidth": 48 }, "984": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 48, "frameWidth": 64 }, "985": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 56 }, "987": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 40 }, "988": { "durations": [
+      16,
+      10,
+      16,
+      10
+    ], "frameHeight": 72, "frameWidth": 48 }, "989": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 64, "frameWidth": 40 }, "991": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 40, "frameWidth": 40 }, "992": { "durations": [
+      14,
+      14,
+      14,
+      14
+    ], "frameHeight": 48, "frameWidth": 40 }, "994": { "durations": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 64, "frameWidth": 48 }, "995": { "durations": [
+      10,
+      16,
+      10,
+      16
+    ], "frameHeight": 48, "frameWidth": 40 }, "996": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 24 }, "997": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 48, "frameWidth": 32 }, "998": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "1000": { "durations": [
+      8,
+      12,
+      8,
+      12
+    ], "frameHeight": 56, "frameWidth": 24 }, "1004": { "durations": [
+      8,
+      10,
+      8,
+      10,
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 40 }, "1005": { "durations": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ], "frameHeight": 96, "frameWidth": 64 }, "1006": { "durations": [
+      12,
+      12,
+      12,
+      12
+    ], "frameHeight": 48, "frameWidth": 24 }, "1007": { "durations": [
+      8,
+      14,
+      8,
+      14
+    ], "frameHeight": 80, "frameWidth": 64 }, "1009": { "durations": [
+      10,
+      12,
+      10,
+      12
+    ], "frameHeight": 72, "frameWidth": 72 }, "1010": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 48, "frameWidth": 32 }, "1011": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 40, "frameWidth": 32 }, "1012": { "durations": [
+      10,
+      10,
+      6,
+      6,
+      10,
+      10,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 40 }, "1013": { "durations": [
+      8,
+      8,
+      6,
+      6,
+      8,
+      8,
+      6,
+      6
+    ], "frameHeight": 56, "frameWidth": 24 }, "1015": { "durations": [
+      6,
+      6,
+      6,
+      6
+    ], "frameHeight": 48, "frameWidth": 24 }, "1016": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "1017": { "durations": [
+      10,
+      6,
+      6,
+      8,
+      8,
+      8,
+      4,
+      4,
+      4,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      4,
+      4
+    ], "frameHeight": 72, "frameWidth": 40 }, "1018": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 56, "frameWidth": 40 }, "1019": { "durations": [
+      10,
+      10,
+      10,
+      10
+    ], "frameHeight": 56, "frameWidth": 48 }, "1024": { "durations": [
+      8,
+      10,
+      8,
+      10
+    ], "frameHeight": 32, "frameWidth": 32 }, "1025": { "durations": [
+      6,
+      6,
+      5,
+      5,
+      6,
+      6,
+      6,
+      5,
+      5,
+      6
+    ], "frameHeight": 48, "frameWidth": 32 } }
