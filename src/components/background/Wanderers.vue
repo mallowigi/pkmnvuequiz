@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, useTemplateRef, watch } from 'vue';
+import { useDocumentVisibility } from '@vueuse/core';
+import { computed, onMounted, useTemplateRef, watch } from 'vue';
 
 import WalkingSprite from '@/components/background/WalkingSprite.vue';
 import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
@@ -7,39 +8,60 @@ import { useGameFlow } from '@/stores/useGameFlow.ts';
 import { useWanderers } from '@/stores/useWanderers.ts';
 
 const { wanderersState } = useWanderers();
-const { wanderingState, startWandering, stopWandering } = useWanderingSprite({ margin: 40 });
+const { wanderingState, startWandering, resumeWandering, stopWandering } = useWanderingSprite({ margin: 40 });
 const { flowState } = useGameFlow();
+const visibility = useDocumentVisibility();
 
-const wandererRef = useTemplateRef('wandererRef');
+const wandererRef = useTemplateRef<HTMLElement>('wandererRef');
 
-// Start wandering sprites when the component is mounted
-onMounted(() => {
-  startWandering();
+// Wanderers only walk when enabled, the game is running and the tab is visible
+const active = computed(() => {
+  return wanderersState.enabled && !flowState.isPaused && visibility.value === 'visible';
 });
 
-watch(
-  () => flowState.isPaused,
-  (newVal) => {
-    if (newVal) {
-      // Pause wandering sprites when the game is paused
-      stopWandering();
-      wanderingState.position = {
-        ...wanderingState.position,
-        ...wandererRef.value?.getBoundingClientRect(),
-      };
-      wanderingState.legDuration = 0;
-    } else {
-      // Resume wandering sprites when the game is unpaused
-      startWandering();
-    }
-  },
-);
+let started = false;
+
+// Stop mid-leg: freeze the sprite where it currently is instead of at the end of its leg
+const freeze = () => {
+  const rect = wandererRef.value?.getBoundingClientRect();
+  if (rect) {
+    wanderingState.position = { x: rect.x, y: rect.y };
+    wanderingState.legDuration = 0;
+  }
+  stopWandering();
+};
+
+const hidden = computed(() => {
+  if (flowState.gameSelectionState || flowState.isPaused) return true;
+
+  // if (visibility.value !== 'visible') return true;
+
+  return !wanderersState.enabled;
+});
+
+onMounted(() => {
+  if (active.value) {
+    startWandering();
+    started = true;
+  }
+});
+
+watch(active, (isActive) => {
+  if (!isActive) {
+    freeze();
+  } else if (started) {
+    resumeWandering();
+  } else {
+    startWandering();
+    started = true;
+  }
+});
 </script>
 
 <template>
   <div
     class="wanderers"
-    v-if="wanderersState.enabled"
+    v-if="!hidden"
   >
     <div
       ref="wandererRef"
