@@ -23,6 +23,7 @@ import { useSkips } from '@/stores/useSkips.ts';
 import { useState } from '@/stores/useState.ts';
 import { useTimer } from '@/stores/useTimer.ts';
 import { useTouches } from '@/stores/useTouches.ts';
+import { useWanderers } from '@/stores/useWanderers.ts';
 import type {
   SaveData,
   SaveDataBase,
@@ -173,7 +174,10 @@ export const useSavedData = () => {
           currentType: null,
           currentTypes: [],
           gameMode: 'gen',
-          gens: Array.from(currentGenState.gens) as [Gen, ...Gen[]],
+          gens: Array.from(currentGenState.gens) as [
+            Gen,
+            ...Gen[],
+          ],
           types: [],
         };
 
@@ -187,7 +191,10 @@ export const useSavedData = () => {
           currentTypes: Array.from(currentTypeState.currentTypes),
           gameMode: 'types',
           gens: [],
-          types: Array.from(currentTypeState.currentTypes) as [Type, ...Type[]],
+          types: Array.from(currentTypeState.currentTypes) as [
+            Type,
+            ...Type[],
+          ],
         };
 
       case 'special':
@@ -256,7 +263,10 @@ export const useSavedData = () => {
     const link = document.createElement('a');
     link.href = url;
 
-    const [date, time] = new Date().toISOString().split('T');
+    const [
+      date,
+      time,
+    ] = new Date().toISOString().split('T');
     const formatDate = date.replace(/-/g, '_');
     const formatTime = time.replace(/:/g, '_').split('.')[0];
     link.download = `pkmn_quiz_state_${formatDate}_${formatTime}.json`;
@@ -349,6 +359,7 @@ export const useSavedData = () => {
     const { setSkips } = useSkips();
     const { setAttackDexState } = useAttackDexState();
     const { attacksState, resetAttacksState, findAttack } = useAttacks();
+    const { addWanderers } = useWanderers();
 
     const {
       currentTypes,
@@ -580,6 +591,8 @@ export const useSavedData = () => {
     setAttackDexState({
       isAttackDex: attackDexState?.isAttackDex ?? false,
     });
+
+    addWanderers();
 
     showUserMessage(i18n.global.t('quizLoaded'));
     setTitle();
