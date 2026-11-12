@@ -2,34 +2,50 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive, computed } from 'vue';
 
 import { useCurrentDex } from '@/composables/useCurrentDex.ts';
+import { animatedSprites } from '@/data/wanderingSprites.ts';
+import { usePokemons } from '@/stores/usePokemons.ts';
+import { sample } from '@/utils/utils.ts';
 
 interface WanderersState {
-  wanderers: number[];
+  wanderers: Set<number>;
   enabled: boolean;
 }
 
-// Add a wanderer every 15 found Pokémon, up to a maximum of 10 wanderers.
-const NEW_WANDERER_RATE = 15;
+const NEW_WANDERER_RATE = 1;
 
-/** Session-only state for the decorative Wanderers walking in the background. */
 export const useWanderers = defineStore('wanderers', () => {
   const wanderersState = reactive<WanderersState>({
     enabled: true,
-    wanderers: [],
-  });
-
-  const wandererCount = computed(() => {
-    const { numFound } = useCurrentDex();
-    return Math.floor(numFound.value / NEW_WANDERER_RATE);
+    wanderers: new Set<number>(),
   });
 
   const toggleWanderers = () => {
     wanderersState.enabled = !wanderersState.enabled;
   };
 
+  const addNewWanderer = () => {
+    const { getFoundPokemon, numFound } = usePokemons();
+
+    if (numFound % NEW_WANDERER_RATE === 0) {
+      const candidates = getFoundPokemon().filter(
+        (p) => animatedSprites[p.dexNum] && !wanderersState.wanderers.has(p.dexNum),
+      );
+
+      const pick = sample(candidates);
+      if (pick) {
+        wanderersState.wanderers.add(pick.dexNum);
+      }
+    }
+  };
+
+  const resetWanderers = () => {
+    wanderersState.wanderers.clear();
+  };
+
   return {
+    addNewWanderer,
+    resetWanderers,
     toggleWanderers,
-    wandererCount,
     wanderersState,
   };
 });
