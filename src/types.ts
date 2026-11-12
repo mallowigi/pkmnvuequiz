@@ -29,6 +29,9 @@ import {
 } from '@/schemas/saveData.schema.ts';
 import type { timerStateSchema } from '@/schemas/timer.schema.ts';
 
+export type Rectangle = { x: number; y: number; width: number; height: number };
+export type Point = { x: number; y: number };
+
 export type AlertDialogOptions = {
   title?: string;
   description?: string;
@@ -509,3 +512,23 @@ export type AttackDexData = {
   translations: Record<string, Translations> | null;
 };
 //endregion
+
+// region Animation
+export enum WalkingDirection {
+  Down = 0,
+  DownRight = 1,
+  Right = 2,
+  UpRight = 3,
+  Up = 4,
+  UpLeft = 5,
+  Left = 6,
+  DownLeft,
+}
+
+// Taken from AnimData.xml
+export type WanderingAnimation = {
+  frameWidth: number;
+  frameHeight: number;
+  durations: number[]; // ticks
+};
+// endregion

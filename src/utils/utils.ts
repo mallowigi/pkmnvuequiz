@@ -116,6 +116,10 @@ export const createAchievement = (achievement: AchievementConfig): Achievement =
       isSatisfied: () => getValue() >= threshold.val,
       tier: count - i,
     })),
+    get description() {
+      const found = thresholds.find((threshold) => getValue() < threshold.val);
+      return found ? found.description : lastDescription;
+    },
     getTierInfo: (tier: number) => {
       const threshold = thresholds[count - tier];
       return (
@@ -124,10 +128,6 @@ export const createAchievement = (achievement: AchievementConfig): Achievement =
           name: threshold.nextTitle,
         }
       );
-    },
-    get description() {
-      const found = thresholds.find((threshold) => getValue() < threshold.val);
-      return found ? found.description : lastDescription;
     },
     id,
     get name() {
@@ -144,3 +144,7 @@ export const createAchievement = (achievement: AchievementConfig): Achievement =
     },
   };
 };
+
+export const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min;
+
+export const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));

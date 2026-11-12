@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { animatedSprites, getWanderingSprite, getWalkCycleMs, WalkingDirection } from '@/data/wanderingSprites.ts';
+import { animatedSprites } from '@/data/wanderingSprites.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { type WanderingAnimation, WalkingDirection } from '@/types.ts';
 
 const { flowState } = useGameFlow();
 
@@ -10,6 +11,19 @@ const props = defineProps<{
   spriteId: number;
   direction: WalkingDirection;
 }>();
+
+const SLOWDOWN = 1.5;
+
+const getWalkCycleMs = (animation: WanderingAnimation) => {
+  const sumTicks = animation.durations.reduce((acc, duration) => acc + duration, 0);
+  const milliseconds = sumTicks * (1000 / 60); // Convert ticks to milliseconds (assuming 60 ticks per second)
+
+  return milliseconds * SLOWDOWN;
+};
+
+const getWanderingSprite = (pokemonId: number) => {
+  return `assets/sprites/walking/${pokemonId}.png`;
+};
 
 const animation = animatedSprites[props.spriteId];
 const sprite = getWanderingSprite(props.spriteId);
