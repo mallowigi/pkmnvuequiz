@@ -306,7 +306,7 @@ export const usePokemons = defineStore('pokemons', () => {
     });
 
     setLastPokemon(pokemons[0]);
-    addNewWanderer();
+    void addNewWanderer();
 
     if (remaining.value.size === 0) {
       endGame();
@@ -761,6 +761,7 @@ export const usePokemons = defineStore('pokemons', () => {
     findPokemon,
     getCurrentGameModeBoxPokemon,
     getCurrentGameModePokemon,
+    getFoundPokemon,
     getLastPokemon,
     getMatchedLanguages,
     getMegaPokemon,
@@ -774,7 +775,6 @@ export const usePokemons = defineStore('pokemons', () => {
     isInRemaining,
     isPokemonInCurrentGameMode,
     isWrongOrder,
-    getFoundPokemon,
     missed,
     numFound,
     numShadows,

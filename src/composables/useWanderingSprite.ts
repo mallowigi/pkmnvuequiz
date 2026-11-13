@@ -1,7 +1,7 @@
 import { useWindowSize } from '@vueuse/core';
-import { reactive, onUnmounted, computed, nextTick } from 'vue';
+import { reactive, onUnmounted, computed } from 'vue';
 
-import { WalkingDirection, type Point, type Rectangle, type WanderingAnimation } from '@/types.ts';
+import { WalkingDirection, type Point, type Rectangle } from '@/types.ts';
 import { clamp, randomBetween } from '@/utils/utils.ts';
 
 type WanderingSpriteState = {

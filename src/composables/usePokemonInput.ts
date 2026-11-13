@@ -16,7 +16,6 @@ import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
 import { useWanderers } from '@/stores/useWanderers.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
-import type { Language } from '@/types.ts';
 import { capitalize } from '@/utils/utils';
 
 type Props = {
