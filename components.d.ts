@@ -115,6 +115,7 @@ declare module 'vue' {
     Overlay: (typeof import('./src/components/common/Overlay.vue'))['default'];
     PauseIcon: (typeof import('./src/components/common/icons/PauseIcon.vue'))['default'];
     PauseOverlay: (typeof import('./src/components/background/PauseOverlay.vue'))['default'];
+    PawIcon: (typeof import('./src/components/common/icons/PawIcon.vue'))['default'];
     PokemonCounts: (typeof import('./src/components/header/PokemonCounts.vue'))['default'];
     PokemonDetailsPane: (typeof import('./src/components/game/pokemonInfo/PokemonDetailsPane.vue'))['default'];
     PokemonInput: (typeof import('./src/components/header/PokemonInput.vue'))['default'];
@@ -172,6 +173,7 @@ declare module 'vue' {
     VolumeIcon: (typeof import('./src/components/common/icons/VolumeIcon.vue'))['default'];
     WalkingSprite: (typeof import('./src/components/background/WalkingSprite.vue'))['default'];
     Wanderers: (typeof import('./src/components/background/Wanderers.vue'))['default'];
+    WanderersToggle: (typeof import('./src/components/game/settings/WanderersToggle.vue'))['default'];
     Watermark: (typeof import('./src/components/header/Watermark.vue'))['default'];
     XIcon: (typeof import('./src/components/common/icons/XIcon.vue'))['default'];
     ZoomTransition: (typeof import('./src/components/common/transitions/ZoomTransition.vue'))['default'];
