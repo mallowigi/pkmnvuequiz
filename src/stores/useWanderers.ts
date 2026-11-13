@@ -10,7 +10,7 @@ interface WanderersState {
   enabled: boolean;
 }
 
-const NEW_WANDERER_RATE = 1;
+const NEW_WANDERER_RATE = 15;
 
 export const useWanderers = defineStore('wanderers', () => {
   const wanderersState = reactive<WanderersState>({
