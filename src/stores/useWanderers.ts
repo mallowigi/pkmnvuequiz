@@ -67,7 +67,7 @@ export const useWanderers = defineStore('wanderers', () => {
     resetWanderers,
     wanderersState,
   };
-};);
+});
 
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useWanderers, import.meta.hot));
