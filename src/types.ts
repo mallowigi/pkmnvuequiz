@@ -530,5 +530,6 @@ export type WanderingAnimation = {
   frameWidth: number;
   frameHeight: number;
   durations: number[]; // ticks
+  shiny?: boolean;
 };
 // endregion

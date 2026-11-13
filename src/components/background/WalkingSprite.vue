@@ -6,9 +6,7 @@ import { animatedSprites } from '@/data/wanderingSprites.ts';
 import { type WanderingAnimation } from '@/types.ts';
 
 const props = defineProps<{
-  /** National dex number, also the name of the walking sheet */
-  spriteId: number;
-  /** Whether the sprite should be walking around */
+  spriteId: string;
   active: boolean;
 }>();
 
@@ -21,8 +19,8 @@ const getWalkCycleMs = (animation: WanderingAnimation) => {
   return milliseconds * SLOWDOWN;
 };
 
-const getWanderingSprite = (pokemonId: number) => {
-  return `assets/sprites/walking/${pokemonId}.png`;
+const getWanderingSprite = (spriteKey: string) => {
+  return `assets/sprites/walking/${spriteKey}.png`;
 };
 
 const animation = animatedSprites[props.spriteId];
