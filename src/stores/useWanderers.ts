@@ -1,12 +1,12 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { reactive } from 'vue';
 
-import { animatedSprites, loadAnimatedSprites } from '@/data/wanderingSprites.ts';
+import { animatedSprites, loadAnimatedSprites, toSpriteKey } from '@/data/wanderingSprites.ts';
 import { usePokemons } from '@/stores/usePokemons.ts';
 import { sample } from '@/utils/utils.ts';
 
 interface WanderersState {
-  wanderers: Set<number>;
+  wanderers: Set<string>;
   enabled: boolean;
 }
 
@@ -15,7 +15,7 @@ const NEW_WANDERER_RATE = 1;
 export const useWanderers = defineStore('wanderers', () => {
   const wanderersState = reactive<WanderersState>({
     enabled: true,
-    wanderers: new Set<number>(),
+    wanderers: new Set<string>(),
   });
 
   const toggleWanderers = () => {
@@ -24,14 +24,15 @@ export const useWanderers = defineStore('wanderers', () => {
 
   const pickWanderer = async () => {
     await loadAnimatedSprites();
-    const { getFoundPokemon } = usePokemons();
-    const candidates = getFoundPokemon().filter(
-      (p) => animatedSprites[p.dexNum] && !wanderersState.wanderers.has(p.dexNum),
-    );
+    const { getFoundPokemon, getStatus } = usePokemons();
+    const candidates = getFoundPokemon()
+      .filter((p) => animatedSprites[p.id])
+      .map((p) => toSpriteKey(p.id, getStatus(p).isShiny))
+      .filter((key) => !wanderersState.wanderers.has(key));
 
     const pick = sample(candidates);
     if (pick) {
-      wanderersState.wanderers.add(pick.dexNum);
+      wanderersState.wanderers.add(pick);
     }
   };
 

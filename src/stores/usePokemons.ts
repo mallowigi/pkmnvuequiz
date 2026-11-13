@@ -676,15 +676,14 @@ export const usePokemons = defineStore('pokemons', () => {
 
   const getFoundPokemon = (): PokemonInfo[] => {
     const foundPokemon: PokemonInfo[] = [];
+    const currentGameModePokemon = getCurrentGameModePokemon();
     for (const [
       key,
       status,
     ] of pokemonState.pokemonStatuses) {
       if (status.isFound) {
-        const pokemons = pokemonMaps.all.get(key);
-        if (pokemons && pokemons.length > 0) {
-          foundPokemon.push(pokemons[0]);
-        }
+        // Forms (mega, gigantamax, regional...) follow the current game mode
+        foundPokemon.push(...(currentGameModePokemon.get(key) ?? []));
       }
     }
     return foundPokemon;
