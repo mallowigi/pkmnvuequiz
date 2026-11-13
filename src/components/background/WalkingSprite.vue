@@ -2,7 +2,7 @@
 import { computed, onMounted, watch } from 'vue';
 
 import { useWanderingSprite } from '@/composables/useWanderingSprite.ts';
-import { animatedSprites } from '@/data/wanderingSprites.ts';
+import { getAnimation } from '@/data/wanderingSprites.ts';
 import { type WanderingAnimation } from '@/types.ts';
 
 const props = defineProps<{
@@ -23,7 +23,7 @@ const getWanderingSprite = (spriteKey: string) => {
   return `assets/sprites/walking/${spriteKey}.png`;
 };
 
-const animation = animatedSprites[props.spriteId];
+const animation = getAnimation(props.spriteId)!;
 const sprite = getWanderingSprite(props.spriteId);
 
 const frames = animation.durations.length;
