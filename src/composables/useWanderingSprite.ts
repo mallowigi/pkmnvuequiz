@@ -60,9 +60,7 @@ export const useWanderingSprite = ({ speed = 30, margin = 0 }: { speed?: number;
     y: 0,
   }));
 
-  // The wandering loop: make a sprite walk to a given target, then pick a new target and repeat.
-  const loop = () => {
-    const target = pickTarget(rect.value, margin, wanderingState.position, 100);
+  const walkTo = (target: Point) => {
     const dx = target.x - wanderingState.position.x;
     const dy = target.y - wanderingState.position.y;
     const distance = Math.hypot(dx, dy);
@@ -77,22 +75,58 @@ export const useWanderingSprite = ({ speed = 30, margin = 0 }: { speed?: number;
     // Pause in legDurationMs
     timer = setTimeout(() => {
       wanderingState.isMoving = false;
-      // random pause between 1 and 4s
-      const pauseMs = Math.random() * 3000 + 1000;
-      timer = setTimeout(loop, pauseMs);
+      pauseThenLoop();
     }, legDurationMs);
+  };
+
+  // The wandering loop: walk to a random target, pause for 1 to 4s, then pick a new target and repeat.
+  const pauseThenLoop = () => {
+    timer = setTimeout(loop, Math.random() * 3000 + 1000);
+  };
+
+  const loop = () => {
+    walkTo(pickTarget(rect.value, margin, wanderingState.position, 100));
+  };
+
+  // Picks a random edge: the sprite starts just outside it and walks in by `margin`.
+  const pickEntrance = (): { from: Point; to: Point } => {
+    const { width, height } = rect.value;
+    const inset = Math.min(margin, width / 2, height / 2);
+    const randomX = randomBetween(inset, width - inset);
+    const randomY = randomBetween(inset, height - inset);
+
+    switch (Math.floor(Math.random() * 4)) {
+      case 0:
+        return {
+          from: { x: randomX, y: -margin },
+          to: { x: randomX, y: inset },
+        };
+      case 1:
+        return {
+          from: { x: width + margin, y: randomY },
+          to: { x: width - inset, y: randomY },
+        };
+      case 2:
+        return {
+          from: { x: randomX, y: height + margin },
+          to: { x: randomX, y: height - inset },
+        };
+      default:
+        return {
+          from: { x: -margin, y: randomY },
+          to: { x: inset, y: randomY },
+        };
+    }
   };
 
   const startWandering = () => {
     stopWandering();
-    // take a position at random
-    wanderingState.position = {
-      x: Math.random() * (rect.value.width - margin * 2) + rect.value.x + margin,
-      y: Math.random() * (rect.value.height - margin * 2) + rect.value.y + margin,
-    };
+
+    const { from, to } = pickEntrance();
+    wanderingState.position = from;
 
     requestAnimationFrame(() => {
-      loop();
+      walkTo(to);
     });
   };
 
