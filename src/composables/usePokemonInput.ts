@@ -14,7 +14,6 @@ import { usePokemons } from '@/stores/usePokemons.ts';
 import { useRooms } from '@/stores/useRooms.ts';
 import { useSettings } from '@/stores/useSettings.ts';
 import { useState } from '@/stores/useState.ts';
-import { useWanderers } from '@/stores/useWanderers.ts';
 import { useCurrentStrategy } from '@/strategies/useCurrentStrategy.ts';
 import { capitalize } from '@/utils/utils';
 
@@ -29,7 +28,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
   const { updateShuffles } = useShuffles();
   const { showUserMessage } = useMessages();
   const { endGame, toggleMissingno, toggleCheat } = useGameFlow();
-  const { toggleWanderers } = useWanderers();
   const { t } = useI18n();
   const {
     isInCurrentGameMode,
@@ -194,13 +192,6 @@ export const usePokemonInput = ({ clearInput }: Props) => {
         run: () => {
           prefillRemaining();
           showUserMessage(t('cheatPrefill'));
-          clearInput();
-        },
-      },
-      {
-        keyword: 'mood',
-        run: () => {
-          toggleWanderers();
           clearInput();
         },
       },

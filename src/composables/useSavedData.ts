@@ -558,6 +558,7 @@ export const useSavedData = () => {
       withShinies: statePayload.withShinies ?? false,
       withSound: statePayload.withSound ?? true,
       withSpelling: statePayload.withSpelling ?? false,
+      withWanderers: statePayload.withWanderers ?? true,
     });
 
     setTouchesState({

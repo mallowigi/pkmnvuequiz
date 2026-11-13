@@ -300,7 +300,8 @@
           "cycleTypes": "Alternar rapidamente entre tipos no campo de texto",
           "shinyCharm": "Ativar modo secreto Pokémon Brilhante (Shiny)",
           "sounds": "Ativar ou desativar efeitos sonoros e sons de Pokémon",
-          "sync": "Ativar sincronização na nuvem em tempo real"
+          "sync": "Ativar sincronização na nuvem em tempo real",
+          "wanderers": "<b>Errantes</b>: Mostra Pokémon encontrados passeando ao fundo (mais um a cada 15 Pokémon encontrados)"
         },
         "title": "Opções de Jogo"
       },
@@ -602,6 +603,9 @@
   "variable": "Variável",
   "variousArtists": "vários artistas",
   "visualSettings": "Configurações Visuais",
+  "wanderers": "Errantes:",
+  "wanderersSet": "Errantes {status}",
+  "wanderersTooltip": "Ativar/Desativar Pokémon errantes",
   "water": "Água",
   "weight": "Peso",
   "welcome": "Bem-vindo ao Quiz Pokémon!",

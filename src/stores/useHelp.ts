@@ -166,6 +166,7 @@ export const useHelp = defineStore('help', () => {
               t('helpPopup.settings.gameplay.listItems.cycleSprites'),
               t('helpPopup.settings.gameplay.listItems.cycleRegions'),
               t('helpPopup.settings.gameplay.listItems.cycleTypes'),
+              t('helpPopup.settings.gameplay.listItems.wanderers'),
             ],
             title: t('helpPopup.settings.gameplay.title'),
           },

@@ -300,7 +300,8 @@
           "cycleTypes": "Schnelles Durchschalten von Typen im Eingabefeld",
           "shinyCharm": "Schillerndes Pokémon-Easter-Egg aktivieren",
           "sounds": "Töne und Pokémon-Rufe ein-/ausschalten",
-          "sync": "Echtzeit-Cloud-Synchronisation aktivieren"
+          "sync": "Echtzeit-Cloud-Synchronisation aktivieren",
+          "wanderers": "<b>Streuner</b>: Zeigt gefundene Pokémon, die im Hintergrund umherstreifen (eines mehr pro 15 gefundene Pokémon)"
         },
         "title": "Gameplay-Einstellungen"
       },
@@ -602,6 +603,9 @@
   "variable": "Variabel",
   "variousArtists": "verschiedene Künstler",
   "visualSettings": "Visuelle Einstellungen",
+  "wanderers": "Streuner:",
+  "wanderersSet": "Streuner {status}",
+  "wanderersTooltip": "Streuner ein-/ausschalten",
   "water": "Wasser",
   "weight": "Gewicht",
   "welcome": "Willkommen zum Pokémon-Quiz!",

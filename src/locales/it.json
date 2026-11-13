@@ -300,7 +300,8 @@
           "cycleTypes": "Scorri rapidamente i tipi nella barra di testo",
           "shinyCharm": "Attiva la modalità Pokémon Cromatici (Shiny)",
           "sounds": "Attiva o disattiva effetti sonori e versi",
-          "sync": "Attiva la sincronizzazione cloud in tempo reale"
+          "sync": "Attiva la sincronizzazione cloud in tempo reale",
+          "wanderers": "<b>Vaganti</b>: Mostra i Pokémon trovati che passeggiano sullo sfondo (uno in più ogni 15 Pokémon trovati)"
         },
         "title": "Opzioni di Gioco"
       },
@@ -602,6 +603,9 @@
   "variable": "Variabile",
   "variousArtists": "vari artisti",
   "visualSettings": "Impostazioni visive",
+  "wanderers": "Vaganti:",
+  "wanderersSet": "Vaganti {status}",
+  "wanderersTooltip": "Attiva/Disattiva Pokémon vaganti",
   "water": "Acqua",
   "weight": "Peso",
   "welcome": "Benvenuto nel Quiz Pokémon!",

@@ -74,6 +74,7 @@ const initializeSettings = (): Settings => ({
   withShinies: false,
   withSound: true,
   withSpelling: false,
+  withWanderers: true,
 });
 
 export const useProfile = defineStore('profile', () => {

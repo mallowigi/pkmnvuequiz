@@ -28,6 +28,7 @@ import SoundToggle from '@/components/game/settings/SoundToggle.vue';
 import SpellingToggle from '@/components/game/settings/SpellingToggle.vue';
 import TimerSelection from '@/components/game/settings/TimerSelection.vue';
 import TypeShuffle from '@/components/game/settings/TypeShuffle.vue';
+import WanderersToggle from '@/components/game/settings/WanderersToggle.vue';
 import { useShuffles } from '@/composables/useShuffles.ts';
 import { useVoice } from '@/composables/useVoice.ts';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
@@ -148,6 +149,8 @@ const toggleSpeak = () => {
           <AutoSaveToggle />
 
           <ScrollIntoViewToggle />
+
+          <WanderersToggle />
 
           <SoundToggle />
 

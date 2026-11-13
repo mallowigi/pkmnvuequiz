@@ -41,6 +41,7 @@ export const settingsSchema = z.object({
   withShinies: z.boolean(),
   withSound: z.boolean(),
   withSpelling: z.boolean(),
+  withWanderers: z.boolean().default(true),
 });
 
 export const touchesSchema = z.object({
@@ -108,6 +109,7 @@ export const saveDataBaseSchema = z.object({
   withShinies: z.boolean(),
   withSound: z.boolean(),
   withSpelling: z.boolean(),
+  withWanderers: z.boolean().default(true),
 });
 
 export const saveDataSchema = z.discriminatedUnion('gameMode', [

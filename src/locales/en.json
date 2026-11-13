@@ -300,7 +300,8 @@
           "cycleTypes": "<b>Cycle Types</b>: In multiple type quizzes, automatically cycle through the selected types in the app title and in the current theme and background colors",
           "shinyCharm": "<b>Shiny Charm</b>: Increase the chance of finding shiny Pokémon",
           "sounds": "<b>Sounds</b>: Toggle sound effects on/off",
-          "sync": "<b>Sync</b>: Automatically sync your game state to the cloud"
+          "sync": "<b>Sync</b>: Automatically sync your game state to the cloud",
+          "wanderers": "<b>Wanderers</b>: Show found Pokémon strolling around in the background (one more for every 15 Pokémon found)"
         },
         "title": "Gameplay Settings"
       },
@@ -602,6 +603,9 @@
   "variable": "Variable",
   "variousArtists": "various artists",
   "visualSettings": "Visual Settings",
+  "wanderers": "Wanderers:",
+  "wanderersSet": "Wanderers {status}",
+  "wanderersTooltip": "Toggle Wanderers On/Off",
   "water": "Water",
   "weight": "Weight",
   "welcome": "Welcome to the Pokémon Quiz!",

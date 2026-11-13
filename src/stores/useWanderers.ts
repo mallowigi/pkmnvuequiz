@@ -7,20 +7,14 @@ import { sample } from '@/utils/utils.ts';
 
 interface WanderersState {
   wanderers: Set<string>;
-  enabled: boolean;
 }
 
 const NEW_WANDERER_RATE = 15;
 
 export const useWanderers = defineStore('wanderers', () => {
   const wanderersState = reactive<WanderersState>({
-    enabled: true,
     wanderers: new Set<string>(),
   });
-
-  const toggleWanderers = () => {
-    wanderersState.enabled = !wanderersState.enabled;
-  };
 
   const pickWanderer = async () => {
     await loadAnimatedSprites();
@@ -60,7 +54,6 @@ export const useWanderers = defineStore('wanderers', () => {
     addNewWanderer,
     addWanderers,
     resetWanderers,
-    toggleWanderers,
     wanderersState,
   };
 });

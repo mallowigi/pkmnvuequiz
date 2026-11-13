@@ -300,7 +300,8 @@
           "cycleTypes": "在輸入框中快速切換屬性分類",
           "shinyCharm": "開啟閃光寶可夢彩蛋模式",
           "sounds": "開啟或關閉遊戲音效與叫聲",
-          "sync": "開啟即時雲端同步"
+          "sync": "開啟即時雲端同步",
+          "wanderers": "<b>遊蕩寶可夢</b>：已發現的寶可夢會在背景中閒逛（每發現 15 隻增加一隻）"
         },
         "title": "遊戲選項"
       },
@@ -602,6 +603,9 @@
   "variable": "可變",
   "variousArtists": "多位藝術家",
   "visualSettings": "視覺設定",
+  "wanderers": "遊蕩寶可夢:",
+  "wanderersSet": "遊蕩寶可夢 {status}",
+  "wanderersTooltip": "開啟/關閉遊蕩寶可夢",
   "water": "水",
   "weight": "體重",
   "welcome": "歡迎來到寶可夢問卷！",

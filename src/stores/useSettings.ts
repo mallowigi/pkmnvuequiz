@@ -12,7 +12,15 @@ export const useSettings = defineStore('settings', () => {
     autoPause: false,
     autoSync: true,
     avatar: null,
-    languages: new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']),
+    languages: new Set<Language>([
+      'en',
+      'fr',
+      'de',
+      'ko',
+      'ja',
+      'zh',
+      'cn',
+    ]),
     name: '',
     withCriesHelper: false,
     withCycleRegions: true,
@@ -24,6 +32,7 @@ export const useSettings = defineStore('settings', () => {
     withShinies: false,
     withSound: true,
     withSpelling: false,
+    withWanderers: true,
   });
 
   const {
@@ -64,7 +73,15 @@ export const useSettings = defineStore('settings', () => {
     const { toggledLanguage } = useTouches();
     settingsState.languages = new Set<Language>(languages);
     if (languages.length === 0) {
-      settingsState.languages = new Set<Language>(['en', 'fr', 'de', 'ko', 'ja', 'zh', 'cn']);
+      settingsState.languages = new Set<Language>([
+        'en',
+        'fr',
+        'de',
+        'ko',
+        'ja',
+        'zh',
+        'cn',
+      ]);
     }
 
     toggledLanguage();
@@ -72,7 +89,13 @@ export const useSettings = defineStore('settings', () => {
   };
 
   const resetLanguages = () => {
-    settingsState.languages = new Set<Language>(['en', 'ko', 'ja', 'zh', 'cn']);
+    settingsState.languages = new Set<Language>([
+      'en',
+      'ko',
+      'ja',
+      'zh',
+      'cn',
+    ]);
     updateSettings({ languages: settingsState.languages });
   };
 
@@ -145,6 +168,11 @@ export const useSettings = defineStore('settings', () => {
     updateSettings({ autoPause });
   };
 
+  const setWanderers = (withWanderers: boolean) => {
+    settingsState.withWanderers = withWanderers;
+    updateSettings({ withWanderers });
+  };
+
   const setSaveToCloud = (saveToCloud: boolean) => {
     settingsState.autoSync = saveToCloud;
     updateSettings({ autoSync: settingsState.autoSync });
@@ -176,6 +204,7 @@ export const useSettings = defineStore('settings', () => {
     setScrollIntoView,
     setSettingsState,
     setSound,
+    setWanderers,
     settingsState,
     toggleAutoPause,
     toggleCriesHelper,

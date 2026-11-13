@@ -4,20 +4,22 @@ import { computed } from 'vue';
 
 import WalkingSprite from '@/components/background/WalkingSprite.vue';
 import { useGameFlow } from '@/stores/useGameFlow.ts';
+import { useSettings } from '@/stores/useSettings.ts';
 import { useWanderers } from '@/stores/useWanderers.ts';
 
 const { wanderersState } = useWanderers();
 const { flowState } = useGameFlow();
+const { settingsState } = useSettings();
 const visibility = useDocumentVisibility();
 
 const active = computed(() => {
-  return wanderersState.enabled && !flowState.isPaused && visibility.value === 'visible';
+  return settingsState.withWanderers && !flowState.isPaused && visibility.value === 'visible';
 });
 
 const hidden = computed(() => {
   if (flowState.gameSelectionState || flowState.isPaused) return true;
 
-  return !wanderersState.enabled;
+  return !settingsState.withWanderers;
 });
 </script>
 

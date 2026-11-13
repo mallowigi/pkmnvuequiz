@@ -300,7 +300,8 @@
           "cycleTypes": "入力欄でのタイプ切り替え",
           "shinyCharm": "色違い出現モードの有効化",
           "sounds": "効果音と鳴き声のオン/オフ",
-          "sync": "リアルタイムクラウド同期の有効化"
+          "sync": "リアルタイムクラウド同期の有効化",
+          "wanderers": "<b>さまようポケモン</b>: 見つけたポケモンが背景を歩き回ります（15匹見つけるごとに1匹増えます）"
         },
         "title": "ゲームプレイ設定"
       },
@@ -602,6 +603,9 @@
   "variable": "変動",
   "variousArtists": "様々なアーティスト",
   "visualSettings": "画面設定",
+  "wanderers": "さまようポケモン:",
+  "wanderersSet": "さまようポケモン {status}",
+  "wanderersTooltip": "さまようポケモンのオン/オフ",
   "water": "みず",
   "weight": "重さ",
   "welcome": "ポケモンクイズへようこそ！",

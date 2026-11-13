@@ -300,7 +300,8 @@
           "cycleTypes": "Faire défiler rapidement les types dans la barre de saisie",
           "shinyCharm": "Activer le mode Pokémon Chromatiques (Shiny)",
           "sounds": "Activer ou désactiver les effets sonores et cris",
-          "sync": "Activer la synchronisation cloud en temps réel"
+          "sync": "Activer la synchronisation cloud en temps réel",
+          "wanderers": "<b>Pokémon errants</b> : Affiche des Pokémon trouvés se promenant en arrière-plan (un de plus tous les 15 Pokémon trouvés)"
         },
         "title": "Options de Jeu"
       },
@@ -602,6 +603,9 @@
   "variable": "Variable",
   "variousArtists": "divers artistes",
   "visualSettings": "Paramètres visuels",
+  "wanderers": "Errants :",
+  "wanderersSet": "Pokémon errants {status}",
+  "wanderersTooltip": "Activer/Désactiver les Pokémon errants",
   "water": "Eau",
   "weight": "Poids",
   "welcome": "Bienvenue sur le Quiz Pokémon!",
