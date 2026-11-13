@@ -144,7 +144,7 @@
     "projectBy": "{charon} 的项目。由 {mallowigi} 用 Vue 重写。",
     "resources": "数据资源: {pokeapi}。精灵资源: {sprites}。",
     "sprites": "{artists} ≡ 制作的自定义和修改的精灵，作为 {project} 项目的一部分。",
-    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
+    "walkingSprites": "游荡的精灵来自 {spritecollab} ({license})，© Chunsoft。"
   },
   "fr": "法语",
   "freeMode": "自由模式",

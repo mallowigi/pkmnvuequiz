@@ -144,7 +144,7 @@
     "projectBy": "{charon} 的項目。由 {mallowigi} 用 Vue 重寫。",
     "resources": "數據資源: {pokeapi}。精靈資源: {sprites}。",
     "sprites": "{artists} ≡ 製作的自訂和修改的精靈，作為 {project} 項目的一部分。",
-    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
+    "walkingSprites": "遊蕩的精靈來自 {spritecollab} ({license})，© Chunsoft。"
   },
   "fr": "法語",
   "freeMode": "自由模式",

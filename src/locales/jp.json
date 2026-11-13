@@ -144,7 +144,7 @@
     "projectBy": "{charon} によるプロジェクト。{mallowigi} による Vue での書き直し。",
     "resources": "データのリソース: {pokeapi}。スプライトのリソース: {sprites}。",
     "sprites": "{artists} ≡ によるカスタムおよび変更されたスプライトは、{project} プロジェクトの一部として作成されています。",
-    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
+    "walkingSprites": "さまようスプライト提供: {spritecollab} ({license})、© Chunsoft。"
   },
   "fr": "フランス語",
   "freeMode": "フリーモード",

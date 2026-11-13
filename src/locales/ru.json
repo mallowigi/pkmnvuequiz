@@ -144,7 +144,7 @@
     "projectBy": "Проект {charon}. Переписано на Vue компанией {mallowigi}.",
     "resources": "Ресурс для данных: {pokeapi}. Ресурсы для спрайтов: {sprites}.",
     "sprites": "Пользовательские и модифицированные спрайты, созданные {artists} ≡ как часть проекта {project}.",
-    "walkingSprites": "__MISSING_TRANSLATION__:Walking sprites from {spritecollab} ({license}), © Chunsoft."
+    "walkingSprites": "Бродящие спрайты от {spritecollab} ({license}), © Chunsoft."
   },
   "fr": "Французский",
   "freeMode": "Свободный режим",

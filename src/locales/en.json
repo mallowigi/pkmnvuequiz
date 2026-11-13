@@ -144,7 +144,7 @@
     "projectBy": "Project by {charon}. Rewritten in Vue by {mallowigi}.",
     "resources": "Resource for data: {pokeapi}. Resources for sprites: {sprites}.",
     "sprites": "Custom & modified sprites made by {artists} ≡ as part of the {project} project.",
-    "walkingSprites": "Walking sprites from {spritecollab} ({license}), © Chunsoft."
+    "walkingSprites": "Wandering sprites from {spritecollab} ({license}), © Chunsoft."
   },
   "fr": "French",
   "freeMode": "Free Mode",
